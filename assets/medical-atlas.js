@@ -211,8 +211,14 @@ function svg(id){
 const cache=new Map();
 function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg(id)));return cache.get(id)}
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
- return '<img class="'+cls+'" src="'+src(id)+'" alt="'+String(alt).replace(/[<>"&]/g,'')+'" '
- +(eager?'fetchpriority="high" loading="eager"':'loading="lazy"')+' decoding="async"/>';
+ const safe=ids.includes(id)?id:'qsofa';
+ // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
+ const path=eager&&safe==='qsofa'?'./assets/atlas-hero.jpg':'./assets/atlas-'+safe+'.jpg';
+ const alternative='./icon.svg';
+ const description=String(alt).replace(/[<>"&]/g,'');
+ return '<img class="'+cls+'" src="'+path+'" alt="'+description+'" '
+ +(eager?'fetchpriority="high" loading="eager"':'loading="lazy"')
+ +' decoding="async" onerror="this.onerror=null;this.src=\''+alternative+'\'"/>';
 }
 root.KidBumAtlas=Object.freeze({ids:Object.freeze(ids),anatomy,categoryMap,svg,src,img});
 })(typeof globalThis!=='undefined'?globalThis:this);
