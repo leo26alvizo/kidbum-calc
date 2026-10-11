@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.8**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.9**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 63 calculadoras en 11 categorías.**
+**Total actual: 66 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -318,3 +318,16 @@ Se agregan cinco calculadoras en el módulo independiente `assets/cardiology-mod
 - Wells para TVP y TEP **ya existían**: únicamente se reubicaron a Cardiología conservando motores y fórmulas. Se mantienen las 58 calculadoras previas, la portada, imágenes originales e icono, y modo PWA sin conexión. El nuevo módulo incorpora casos de aceptación y referencias visibles.
 
 Estas herramientas son educativas y no constituyen diagnóstico, alta, prescripción o validación clínica independiente.
+
+
+## KidBum CALC v0.9.9 — Fase 1 de 1.0.0 (monitorización y Guardia)
+
+**Nuevas herramientas:** PaO₂/FiO₂ (P/F), ROX y RASS. **66 calculadoras en 12 categorías.** Nueva categoría «Urgencias y Terapia Intensiva». Las 63 calculadoras originales se conservan, sin cambiar sus motores.
+
+- **PaO₂/FiO₂:** gasometría ARTERIAL en mmHg y FiO₂ introducida en porcentaje (21–100), no fracción. PEEP/CPAP ≥5 confirmada, ausente o desconocida. Resultados son bandas de oxigenación, **no diagnóstico automático de SDRA**; vigilar definición global, imágenes, clínica y soporte. Referencia: https://pmc.ncbi.nlm.nih.gov/articles/PMC10870872/
+- **ROX:** (SpO₂/FiO₂)/FR con FiO₂ en fracción internamente y entrada en porcentaje. Solicita alto flujo y momento 2, 6, 12 u otro. Comparación orientativa con umbrales de Roca 2019; fuera de horas establecidas no emite estrato. No determina intubación ni alta. https://pubmed.ncbi.nlm.nih.gov/30576221/
+- **RASS:** escala ordinal −5 a +4 con observación estructurada, descripción clínica y advertencias; no sustituye evaluación de delirium ni titulación de sedación. https://jamanetwork.com/journals/jama/fullarticle/196696
+- **Modo Guardia inicial:** nueva pantalla accesible desde barra lateral y navegación inferior móvil, agrupa calculadoras existentes en cuatro conjuntos (respiratorio, deterioro, neurología, química/renal). Sin duplicación de cálculos ni almacenamiento de datos sensibles. Las alertas de inestabilidad tienen prioridad sobre resultados.
+- **Seguridad:** rangos explícitos, FiO₂ como porcentaje, controles de contexto, guía/estudio original, rechazo de entradas inválidas y pruebas automatizadas. Se incorpora módulo `assets/critical-module.js` al precaché PWA; las imágenes y el icono originales permanecen.
+
+**Pendientes para versión 1.0.0:** SOFA-2 (tabla 2025), CAM-ICU, KDIGO-LRA, PREVENT-ASCVD 2026 y MELD 3.0; mejora adicional de auditoría clínica y navegación accesible. Objetivo final: **71 calculadoras**. No presentar esta fase como versión final ni producto validado clínicamente.
