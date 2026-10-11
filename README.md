@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.1**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -196,3 +196,11 @@ Las categorías **Hepatología** y **Antropometría** ahora usan el mismo diseñ
 - Comprobación de 105 pruebas de regresión, rutas de las 22 imágenes, caché offline y fallback local.
 
 **Límite científico:** estas composiciones sirven como apoyo visual editorial. Varios recursos reutilizan láminas de anatomía general y muestran símbolos fisiológicos; no son representaciones anatómicas pediátricas validadas ni esquemas para decidir tratamientos. No contienen cifras o rótulos clínicos generados automáticamente. Las recomendaciones clínicas se encuentran exclusivamente en los textos y cálculos verificados de las herramientas.
+
+
+## KidBum CALC v0.8.1 — Icono original del autor
+
+- Se instaló **la imagen exacta proporcionada por el autor**, sin ilustración nueva ni regeneración. Solo se redimensionó para tamaños de icono 192 × 192 y 512 × 512 px.
+- Archivos locales: `kidbum-icon-192-v081.png` y `kidbum-icon-512-v081.png`.
+- Se actualizaron el manifiesto PWA, favicon del navegador, icono Apple y la lista de recursos offline; el nuevo nombre de archivo ayuda a evitar que los teléfonos conserven el icono anterior.
+- **Sin cambios en las 45 calculadoras ni en el motor clínico**. En dispositivos con un acceso directo antiguo, puede ser necesario eliminarlo y volver a instalar la aplicación para actualizar la imagen del lanzador.
