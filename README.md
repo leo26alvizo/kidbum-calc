@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.2**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -24,7 +24,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 4. Abrir la aplicación una vez con conexión para activar la disponibilidad sin conexión.
 
 ## Verificación
-La versión 0.5.0 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
+La versión 0.5.2 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
 
 Las pruebas pueden ampliarse y ejecutarse después de cada actualización; se recomienda confirmar la versión visible en Android y la instalación offline.
 
@@ -57,7 +57,7 @@ Desde cualquier calculadora con resultado válido, pulsa **Analizar con ChatGPT*
 El teléfono abre `https://chatgpt.com/` (en app o navegador según Android). **No** se manda el mensaje por sí solo: el usuario debe pegarlo y enviarlo. No se garantiza abrir automáticamente este proyecto concreto. No incluir identificadores de pacientes. ChatGPT requiere internet; el cálculo sigue siendo local y utilizable sin conexión.
 
 
-## KidBum v0.5.0 — Medical Atlas Editorial
+## KidBum v0.5.2 — Medical Atlas Editorial
 
 Rediseño funcional de la interfaz existente (no maqueta):
 - Portada ilustrada con estilo editorial, alto contraste y tipografía de títulos serif.
@@ -67,8 +67,20 @@ Rediseño funcional de la interfaz existente (no maqueta):
 - Conserva búsquedas, filtros, favoritos, cálculos, referencias, formularios y los tres modos de KidBum AI.
 - Ilustraciones originales vectoriales, almacenadas sin depender de servidores externos, mediante \`assets/medical-atlas.js\` (precache PWA).
 
-**Seguridad de las ilustraciones:** representan conceptos de forma editorial. No se presentan como láminas anatómicas certificadas; se deben verificar antes de cualquier uso docente que dependa de relaciones anatómicas exactas. El sistema fue construido para permitir sustituir cada imagen sin cambiar la lógica médica. Las imágenes conceptuales pictóricas generadas en el proceso de diseño todavía no han sido incorporadas al repositorio.
+**Seguridad de las ilustraciones:** representan conceptos de forma editorial. No se presentan como láminas anatómicas certificadas; se deben verificar antes de cualquier uso docente que dependa de relaciones anatómicas exactas. El sistema fue construido para permitir sustituir cada imagen sin cambiar la lógica médica. Las imágenes pictóricas originales ya están integradas en el repositorio. Son composiciones visuales educativas, pero no han recibido certificación de exactitud anatómica por un especialista.
 
 **Inventario:** ver [las 23 asignaciones gráficas y los pendientes](docs/atlas-inventory.md).
 
 **Pruebas:** el script \`tests/regression.cjs\` (ejecutar \`node tests/regression.cjs\`) verifica que los cálculos y elementos esenciales siguen presentes. La puesta en producción se completa cuando GitHub Pages confirme éxito; esto no implica validación clínica institucional ni prueba de apariencia en todos los dispositivos.
+
+
+### Ajustes v0.5.2
+
+- La portada utiliza una ilustración pictórica distinta de las fichas de cálculo.
+- Las siete categorías reales tienen tarjetas visuales y filtros accesibles antes de la galería.
+- Cada una de las 23 calculadoras carga un archivo `assets/atlas-<id>.jpg` individual. Su `onerror` utiliza el icono local como respaldo.
+- Glasgow presenta opciones de respuesta táctiles con `aria-pressed`, sincronizadas con los desplegables originales, sin modificar el motor matemático.
+- Se optimizó la disposición en móvil de categorías y títulos.
+- Se preserva la integración con ChatGPT, favorito, tema claro/oscuro y todas las fórmulas clínicas.
+
+La apariencia final requiere revisión de interfaz en dispositivos reales y revisión editorial/anatómica. Los activos ilustrativos no son sustitutos de las representaciones validadas de atlas o de recursos diagnósticos.
