@@ -213,7 +213,7 @@ function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
  const safe=ids.includes(id)?id:'qsofa';
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
- const path=eager&&safe==='qsofa'?'./assets/atlas-hero.jpg':'./assets/atlas-'+safe+'.jpg';
+ const path=eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg';
  const alternative='./icon.svg';
  const description=String(alt).replace(/[<>"&]/g,'');
  return '<img class="'+cls+'" src="'+path+'" alt="'+description+'" '
