@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.4.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -24,7 +24,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 4. Abrir la aplicación una vez con conexión para activar la disponibilidad sin conexión.
 
 ## Verificación
-La versión 0.4.0 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
+La versión 0.5.0 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
 
 Las pruebas pueden ampliarse y ejecutarse después de cada actualización; se recomienda confirmar la versión visible en Android y la instalación offline.
 
@@ -55,3 +55,20 @@ Cinco herramientas obstétricas con cálculo local y referencias visibles:
 Desde cualquier calculadora con resultado válido, pulsa **Analizar con ChatGPT**, elige uno de los modos **Guardia**, **Estudio** o **Pase de visita** y confirma con **Copiar y abrir ChatGPT**. El texto preparado incluye la calculadora, datos introducidos, resultado, interpretación preliminar y precauciones. No hay acceso a una API de pago.
 
 El teléfono abre `https://chatgpt.com/` (en app o navegador según Android). **No** se manda el mensaje por sí solo: el usuario debe pegarlo y enviarlo. No se garantiza abrir automáticamente este proyecto concreto. No incluir identificadores de pacientes. ChatGPT requiere internet; el cálculo sigue siendo local y utilizable sin conexión.
+
+
+## KidBum v0.5.0 — Medical Atlas Editorial
+
+Rediseño funcional de la interfaz existente (no maqueta):
+- Portada ilustrada con estilo editorial, alto contraste y tipografía de títulos serif.
+- Siete tarjetas de categorías existentes, con acceso táctil y cantidad real de herramientas por categoría.
+- Vista previa individual para las 23 calculadoras; encabezados anatómicos en cada ficha.
+- Paleta y acabados diferenciados para temas claro y oscuro, responsive para teléfonos y tabletas.
+- Conserva búsquedas, filtros, favoritos, cálculos, referencias, formularios y los tres modos de KidBum AI.
+- Ilustraciones originales vectoriales, almacenadas sin depender de servidores externos, mediante \`assets/medical-atlas.js\` (precache PWA).
+
+**Seguridad de las ilustraciones:** representan conceptos de forma editorial. No se presentan como láminas anatómicas certificadas; se deben verificar antes de cualquier uso docente que dependa de relaciones anatómicas exactas. El sistema fue construido para permitir sustituir cada imagen sin cambiar la lógica médica. Las imágenes conceptuales pictóricas generadas en el proceso de diseño todavía no han sido incorporadas al repositorio.
+
+**Inventario:** ver [las 23 asignaciones gráficas y los pendientes](docs/atlas-inventory.md).
+
+**Pruebas:** el script \`tests/regression.cjs\` (ejecutar \`node tests/regression.cjs\`) verifica que los cálculos y elementos esenciales siguen presentes. La puesta en producción se completa cuando GitHub Pages confirme éxito; esto no implica validación clínica institucional ni prueba de apariencia en todos los dispositivos.
