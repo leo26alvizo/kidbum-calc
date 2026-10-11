@@ -1,4 +1,4 @@
-# KidBum Medical Atlas Editorial — Inventario v0.6.0
+# KidBum Medical Atlas Editorial — Inventario v0.7.0
 
 Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
@@ -76,3 +76,21 @@ Las 12 herramientas añadidas tienen ilustraciones vectoriales originales ligada
 ## Recursos adicionales
 
 Seis tablas WHO LMS originales para ambos sexos `assets/who-{wfa,lhfa,hcfa,bmifa,wfl,wfh}.js`, usando los valores diarios 0–1826 días y rangos de longitud/talla a pasos de 0.1 cm. Todos los recursos se precargan con la PWA. El módulo clínico y los datos están separados de las otras calculadoras.
+
+
+## Pediatría hospitalaria v0.7.0 — 10 ilustraciones adicionales
+
+| Identificador | Herramienta | Recurso editorial |
+|---|---|---|
+| `pedinsensible` | Pérdidas insensibles | Superficie corporal y evaporación |
+| `pedgir` | GIR glucosa IV | Infusión y metabolismo celular |
+| `pedsolutions` | Osmolaridad y solutos | Tubos y partículas de NaCl/dextrosa |
+| `pedvitals` | Signos vitales por edad | Corazón, pulmones y trazado fisiológico |
+| `pedformulavol` | Volumen de fórmula | Anatomía infantil y botella |
+| `pedmilkcal` | Calorías de leche | Leche y energía |
+| `pedfoodcal` | Calorías de alimentos | Macronutrientes y digestión |
+| `pedmaxverify` | Verificador de topes de dosis | Seguridad farmacológica |
+| `pedaccess` | Acceso periférico/central | Anatomía venosa |
+| `pedsupp` | Suplementos infantiles | Crecimiento y nutrición |
+
+Las 10 láminas son **SVG editoriales originales**, asignadas por ID y reproducidas localmente; no se presentan como láminas de anatomía certificadas ni sustituyen las fotografías/atlas originales de las 23 herramientas anteriores. Revisión pictórica anatómica especializada pendiente para los nuevos esquemas.
