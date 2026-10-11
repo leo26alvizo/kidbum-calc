@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.2**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.3**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total: 23 calculadoras.**
+**Total actual: 49 calculadoras (23 iniciales, 22 pediátricas y 4 hospitalarias).**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -212,3 +212,17 @@ Las categorías **Hepatología** y **Antropometría** ahora usan el mismo diseñ
 - Título de portada solicitado: **Calculadora Médica Integtal** (reproducción literal de la indicación del autor).
 - Se conservaron la identidad y los iconos originales del autor, la biblioteca de 45 calculadoras y sus fórmulas.
 - Se actualizó la versión de caché PWA y las pruebas de regresión de textos.
+
+
+## KidBum CALC v0.8.3 — Expansión hospitalaria fase 1
+
+Se incorporaron **Winter, delta ratio, FeNa y FeUrea** en un módulo independiente (`assets/hospital-module.js`) con validación de datos y resultados orientativos. La biblioteca suma **49 calculadoras** en ocho categorías. No se alteraron las fórmulas clínicas anteriores.
+
+- **Winter:** HCO₃⁻ en acidosis metabólica primaria y PaCO₂ arterial observada opcional; fórmula ±2 mmHg.
+- **Delta ratio:** requiere AG elevado, disminución de bicarbonato y referencias del laboratorio. Una cifra aislada no diagnostica trastornos mixtos.
+- **FeNa/FeUrea:** muestras pareadas, unidades concordantes, antecedente de diuréticos y precauciones en ERC, sepsis y UCI. FeUrea exige la misma forma (urea o BUN) y unidad en ambas muestras.
+- Se conservan ilustraciones originales (reutilizadas para tarjetas nuevas), icono aportado por el autor, favoritos, búsqueda y uso sin conexión. Nuevas referencias visibles y pruebas automatizadas.
+
+**Fuentes:** [Merck Manual](https://www.merckmanuals.com/professional/nephrology/acid-base-regulation-and-disorders/acid-base-disorders), [Delta ratio](https://pubmed.ncbi.nlm.nih.gov/19769708/), [Limitaciones del delta ratio](https://pubmed.ncbi.nlm.nih.gov/17699401/), [Kidney360 PRO](https://pubmed.ncbi.nlm.nih.gov/37384887/) y [Kidney360 CON](https://pubmed.ncbi.nlm.nih.gov/37384888/).
+
+**Seguridad:** son herramientas de apoyo, no dispositivos clínicos validados; no sustituyen la valoración presencial ni los protocolos institucionales.

@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.8\.2/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.8\.3/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v082-author-cover/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v083-hospital-phase1/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -65,11 +65,12 @@ for(const kind of ['wfa','lhfa','hcfa','bmifa','wfl','wfh']){
 }
 vm.runInNewContext(fs.readFileSync('assets/pediatric-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/pediatric-ward.js','utf8'),ctx,{timeout:2000});
+vm.runInNewContext(fs.readFileSync('assets/hospital-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
 const t=[
 ['Original anion gap',()=>assert.equal(calc('anion',{na:140,cl:104,hco3:23}).value,13)],
-['Count',()=>assert.equal(ctx.KidBumEngine.list.length,45)],
+['Count',()=>assert.equal(ctx.KidBumEngine.list.length,49)],
 ['Dating 0w0d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-01-01'}).display,'0 sem + 0 d')],
 ['Dating 40w3d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-10-11'}).display,'40 sem + 3 d')],
 ['Date reversed',()=>assert.ok(calc('agfum',{lmp:'2026-10-11',asof:'2026-01-01'}).error)],
@@ -143,7 +144,7 @@ const t=[
 ['Dose limits do not autoauthorize',()=>assert.match(calc('pedmaxverify',{weight:10,dose:100,frequency:4,maxSingle:120,maxDaily:500}).interpretation,/NO equivale/)],
 ['Access review not approval',()=>assert.equal(calc('pedaccess',{context:'highpn'}).display,'Valorar acceso')],
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
-['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length,35)],
+['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
 ['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)],
 ['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
@@ -177,5 +178,31 @@ const t=[
 ['Pediatric graphic remains crisp',()=>assert.match(html,/img\[src\*="\/pediatric\/"\][\s\S]*?filter:none!important/)],
 ['Pediatric WHO data preserved',()=>assert.equal(ctx.KidBumGrowthTables.wfa[0].split(';').length,1827)]
 ];
+const expansionTests=[
+['Hospital offline module',()=>assert.ok(swSource.includes('./assets/hospital-module.js'))],
+['Hospital script tag',()=>assert.ok(html.includes('<script src="./assets/hospital-module.js"></script>'))],
+['Hospital module IDs',()=>assert.equal(ctx.KidBumHospital.ids.length,4)],
+['Winter bicarbonate 12',()=>assert.equal(calc('winter',{hco3:12}).value,26)],
+['Winter respiratory acidosis warning',()=>assert.ok(calc('winter',{hco3:12,paco2:40}).interpretation.includes('acidosis respiratoria'))],
+['Winter respiratory alkalosis warning',()=>assert.ok(calc('winter',{hco3:12,paco2:20}).interpretation.includes('alcalosis respiratoria'))],
+['Winter valid compensation',()=>assert.ok(calc('winter',{hco3:12,paco2:26}).interpretation.includes('dentro del intervalo'))],
+['Winter no metabolic acidosis',()=>assert.ok(calc('winter',{hco3:24}).error)],
+['Winter invalid PaCO2',()=>assert.ok(calc('winter',{hco3:12,paco2:'error'}).error)],
+['Delta ratio 1.2',()=>assert.ok(Math.abs(calc('deltaratio',{ag:24,hco3:14,agref:12,hcoref:24}).value-1.2)<1e-9)],
+['Delta non elevated gap',()=>assert.ok(calc('deltaratio',{ag:10,hco3:14,agref:12,hcoref:24}).error)],
+['Delta zero denominator',()=>assert.ok(calc('deltaratio',{ag:24,hco3:24,agref:12,hcoref:24}).error)],
+['Delta low ratio warning',()=>assert.ok(calc('deltaratio',{ag:18,hco3:10,agref:12,hcoref:24}).interpretation.includes('brecha normal'))],
+['Delta high ratio warning',()=>assert.ok(calc('deltaratio',{ag:45,hco3:17,agref:12,hcoref:24}).interpretation.includes('alcalosis metabólica'))],
+['FeNa reference',()=>assert.ok(Math.abs(calc('fena',{una:20,pna:140,ucr:80,pcr:2,diuretics:'false'}).value-0.35714285714285715)<1e-9)],
+['FeNa zero urine creatinine',()=>assert.ok(calc('fena',{una:20,pna:140,ucr:0,pcr:2,diuretics:'false'}).error)],
+['FeNa missing diuretic status',()=>assert.ok(calc('fena',{una:20,pna:140,ucr:80,pcr:2}).error)],
+['FeUrea reference',()=>assert.equal(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,ureaunit:'urea_mgdl',diuretics:'false'}).value,18.75)],
+['FeUrea unit required',()=>assert.ok(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,diuretics:'false'}).error)],
+['FeUrea no zero denominator',()=>assert.ok(calc('feurea',{ureaU:300,ureaP:0,ucr:80,pcr:2,ureaunit:'urea_mgdl',diuretics:'false'}).error)],
+['FeUrea BUN consistent',()=>assert.equal(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,ureaunit:'bun_mgdl',diuretics:'false'}).value,18.75)],
+['Hospital reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/37384888/'))],
+['Original 45 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumHospital.ids.length,45)]
+];
+t.push(...expansionTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

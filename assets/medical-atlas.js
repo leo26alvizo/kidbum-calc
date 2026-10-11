@@ -11,6 +11,10 @@ const categoryMap=Object.freeze({
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb',
  'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration','pedinsensible','pedgir','pedsolutions','pedvitals','pedformulavol','pedmilkcal','pedfoodcal','pedmaxverify','pedaccess','pedsupp'];
 const anatomy=Object.freeze({
+ winter:'Ventilación respiratoria y bicarbonato',
+ deltaratio:'Equilibrio de aniones y bicarbonato',
+ fena:'Riñones y transporte de sodio',
+ feurea:'Urea y filtración renal',
  anion:'Tubos sanguíneos y moléculas de equilibrio ácido-base',
  osm:'Distribución de agua y solutos del plasma',
  bmi:'Composición corporal y tejidos humanos',
@@ -258,7 +262,8 @@ function svg(id){
 const cache=new Map();
 function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg(id)));return cache.get(id)}
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
- const safe=ids.includes(id)?id:'qsofa';
+ const alias={winter:'anion',deltaratio:'anion',fena:'egfr',feurea:'egfr'};
+ const safe=ids.includes(id)?id:(alias[id]||'qsofa');
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
  const path=safe.startsWith('ped')?'./assets/pediatric/'+safe+'.webp':(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');
  const alternative=safe.startsWith('ped')?src(safe):'./icon.svg';
