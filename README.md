@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.7**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -185,3 +185,14 @@ Se incorporaron, sin generar ilustraciones nuevas, los dos recursos médicos apo
 ### KidBum CALC v0.7.7 — Tarjetas uniformes de Hepatología y Antropometría
 
 Las categorías **Hepatología** y **Antropometría** ahora usan el mismo diseño rectangular destacado y ancho completo de las seis categorías anteriores. Se conservan las ilustraciones locales originales `assets/atlas-fib4.jpg` y `assets/atlas-bmi.jpg`; no se generaron ni sustituyeron recursos gráficos. Se muestra cada imagen sin difuminado ni reducción de opacidad y el texto permanece legible sobre un panel opaco; diseño móvil responsive. El service worker mantiene el funcionamiento sin conexión y usa caché `v077`. Las 45 calculadoras y su lógica médica, favoritos, navegación y crédito de autoría permanecen intactos. Se superaron 102 verificaciones automatizadas de regresión.
+
+
+## KidBum CALC v0.8.0 — 22 láminas pictóricas de Pediatría
+
+- Se integraron **22 ilustraciones WebP individuales de Pediatría**, una por cada herramienta, en `assets/pediatric/<id>.webp`. Cada composición reutiliza ilustraciones anatómicas editoriales originales ya creadas para KidBum y añade un panel científico particular: crecimiento/antropometría, diuresis, balance de agua, nutrición, metabolismo o administración IV.
+- Cada ilustración es local (960×540 px); el conjunto pesa aproximadamente **1.1 MB**, y está íntegramente incluido en el precaché PWA para modo offline.
+- `assets/medical-atlas.js` utiliza cada WebP por identificador estable y conserva su ilustración SVG anterior como **respaldo en caso de error de carga**.
+- Sin cambios en las **45 calculadoras**, dosis, fórmulas, tablas OMS, favoritos, búsqueda, navegación, tema claro/oscuro o integración con ChatGPT. Se verificó que el motor de cálculos sigue idéntico al de v0.7.7.
+- Comprobación de 105 pruebas de regresión, rutas de las 22 imágenes, caché offline y fallback local.
+
+**Límite científico:** estas composiciones sirven como apoyo visual editorial. Varios recursos reutilizan láminas de anatomía general y muestran símbolos fisiológicos; no son representaciones anatómicas pediátricas validadas ni esquemas para decidir tratamientos. No contienen cifras o rótulos clínicos generados automáticamente. Las recomendaciones clínicas se encuentran exclusivamente en los textos y cálculos verificados de las herramientas.
