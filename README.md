@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.4**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.5**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 52 calculadoras (45 originales y 7 nuevas de expansión hospitalaria). Categorías: 10.**
+**Total actual: 54 calculadoras en 11 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -269,3 +269,16 @@ Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014),
 - La tarjeta **Antropometría** conserva el mismo tamaño rectangular destacado y el diseño responsivo de las demás especialidades, con `object-fit:contain` para visualizar completa la figura anatómica.
 - La tarjeta se ve en fondo pergamino, sin filtros. La imagen anterior `assets/atlas-bmi.jpg` permanece en su lugar para los recursos clínicos existentes.
 - La nueva imagen se incluye en la caché offline de la PWA. No se alteraron ninguna de las 52 calculadoras, sus fórmulas, las otras tarjetas ni el icono de la aplicación.
+
+
+## KidBum CALC v0.9.5 — Neurología y Raquimedular, fase 1
+
+- Nueva categoría **Neurología y Raquimedular**: **Glasgow (GCS)** existente, **ABCD² (AIT)** y **Alteplasa (rtPA), referencia de dosis**. Total: **54 calculadoras** y **11 categorías**; no hay una Glasgow duplicada.
+- GCS conserva íntegros el motor anterior, los tres componentes, la condición no evaluable (NT) y sus pruebas originales. Cambia únicamente su asignación de categoría.
+- **ABCD² (0–7)**: edad ≥60, PA inicial ≥140 sistólica o ≥90 diastólica, debilidad unilateral / alteración de habla sin debilidad, duración y diabetes. Exige indicación de síntomas resueltos; se bloquea si el déficit continúa. Un resultado bajo no excluye urgencia ni sirve para alta automática.
+- **Alteplasa IV (rtPA) para EVC isquémico adulto, referencia educativa**: min(peso × 0.9 mg/kg, 90 mg); 10% bolo durante 1 min y 90% infusión durante 60 min posteriores, conforme a la guía AHA/ASA 2026. Solicita confirmación de lectura y no emite orden médica, determina elegibilidad ni sirve para tenecteplasa.
+- Se conserva la imagen de Neurología ya disponible para Escalas Clínicas, sin generar imágenes nuevas, y se precarga el módulo neurológico para uso sin conexión. No se modifica ningún motor clínico previo ni las tarjetas previas.
+- Pendientes: **Hunt y Hess, Fisher (confirmar Fisher original/modificada), NIHSS y ASIA/ISNCSCI**, que requieren mayor revisión y validación. Ninguna herramienta de Cardiología nueva fue agregada.
+- Fuentes: [Johnston y col. 2007 ABCD²](https://pubmed.ncbi.nlm.nih.gov/17258668/), [AHA AIT 2023](https://professional.heart.org/en/science-news/diagnosis-workup-risk-reduction-of-transient-ischemic-attack-in-the-emergency-department-setting), [AHA/ASA EVC isquémico agudo 2026](https://www.ahajournals.org/doi/10.1161/STR.0000000000000513) y [Glasgow oficial](https://www.glasgowcomascale.org/faq/).
+
+**Alcance:** educativo y de verificación aritmética; no certificado como dispositivo clínico ni validado institucionalmente. Requiere evaluación médica presencial y doble verificación de medicamentos según protocolo local.

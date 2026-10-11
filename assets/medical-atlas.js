@@ -6,12 +6,14 @@
 'use strict';
 const categoryMap=Object.freeze({
  'Química clínica':'anion','Antropometría':'bmi','Hemodinámica':'map','Función renal':'egfr',
- 'Cardiología':'map','Gastroenterología':'childpugh',
+ 'Cardiología':'map','Gastroenterología':'childpugh','Neurología y Raquimedular':'gcs',
  'Hepatología':'fib4','Escalas clínicas':'gcs','Ginecología y obstetricia':'agfum','Pediatría':'pedwfa'
 });
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb',
  'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration','pedinsensible','pedgir','pedsolutions','pedvitals','pedformulavol','pedmilkcal','pedfoodcal','pedmaxverify','pedaccess','pedsupp'];
 const anatomy=Object.freeze({
+ abcd2:'Circulación cerebral y evaluación de AIT',
+ alteplaseais:'Circulación cerebral y trombólisis intravenosa',
  qtc:'Electrocardiograma e intervalos QT',
  gbs:'Tracto digestivo superior y hemorragia',
  rcri:'Sistema cardiovascular y riesgo perioperatorio',
@@ -266,7 +268,7 @@ function svg(id){
 const cache=new Map();
 function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg(id)));return cache.get(id)}
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
- const alias={winter:'anion',deltaratio:'anion',fena:'egfr',feurea:'egfr',qtc:'map',gbs:'childpugh',rcri:'map'};
+ const alias={winter:'anion',deltaratio:'anion',fena:'egfr',feurea:'egfr',qtc:'map',gbs:'childpugh',rcri:'map',abcd2:'gcs',alteplaseais:'gcs'};
  const safe=ids.includes(id)?id:(alias[id]||'qsofa');
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
  const path=safe.startsWith('ped')?'./assets/pediatric/'+safe+'.webp':(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');
