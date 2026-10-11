@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.7\.0/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.7\.1/,'Atlas release version must be visible');
 const atlasSource=fs.readFileSync('assets/medical-atlas.js','utf8');
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb','correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
 for(const id of ids)assert.ok(fs.existsSync('assets/atlas-'+id+'.jpg'),'Missing pictorial clinical illustration: '+id);
@@ -16,6 +16,7 @@ for(const art of ['hero','lab','kidney','lungs','brain','liver','obstetrics','va
 assert.match(atlasSource,/assets\/atlas-/,'Atlas library must load local image assets');
 assert.ok(fs.existsSync('assets/portada-atlas-usuario.webp'),'Must preserve author-selected anatomical hero');
 assert.match(atlasSource,/portada-atlas-usuario\.webp/,'Hero must reference author-selected image');
+assert.ok(fs.existsSync('assets/pediatria-portada.webp'),'Missing user-selected Pediatric feature photograph');
 
 assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;
@@ -103,7 +104,10 @@ const t=[
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
 ['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
-['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)]
+['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)],
+['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
+['Pediatric image renders without blur',()=>assert.match(html,/\.atlas-pediatria-photo\{[\s\S]*?filter:none!important/)],
+['Pediatric feature spans mobile category columns',()=>assert.match(html,/atlas-category-card\.atlas-pediatria-feature\{[\s\S]*?grid-column:1\/-1/)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
