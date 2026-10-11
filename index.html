@@ -193,6 +193,133 @@ html.dark .gcs-choice.selected,html.dark .gcs-choice[aria-pressed=true]{backgrou
 }
 @media(min-width:500px) and (max-width:740px){.gcs-option-row{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
+
+
+/* Medical Atlas Editorial v0.5.3 · sharp artwork and independent readable text.
+   No blur, opacity reduction or translucent wash applied to any anatomical image. */
+.hero{
+  isolation:isolate;
+  background:#082536;
+}
+.atlas-hero-art{
+  z-index:0;
+  width:53%;
+  opacity:1!important;
+  background:#e9ded0;
+}
+.atlas-hero-illustration,
+html.dark .atlas-hero-art img{
+  display:block;
+  opacity:1!important;
+  filter:none!important;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:52% 52%;
+}
+.atlas-hero-art:before{
+  content:"";
+  display:block;
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(90deg, #082536 0%,rgba(8,37,54,.90) 8%,rgba(8,37,54,.30) 22%,transparent 34%);
+}
+.hero-copy{
+  position:relative;
+  z-index:2;
+  max-width:67%;
+  background:linear-gradient(90deg,#082536 0%,rgba(8,37,54,.98) 70%,rgba(8,37,54,.88) 84%,transparent 100%);
+}
+.atlas-category-card,
+html.dark .atlas-category-card,
+html.dark .atlas-category-card:nth-child(even){
+  background:#f5eee3;
+}
+.atlas-category-card:nth-child(even){background:#eef3ef}
+.atlas-category-visual{
+  inset:0 0 0 34%;
+  opacity:1!important;
+  z-index:0;
+}
+.atlas-category-visual:before,
+.atlas-category-card:nth-child(even) .atlas-category-visual:before{
+  display:none!important;
+  background:none!important;
+}
+.atlas-category-illustration{
+  width:100%;
+  height:100%;
+  opacity:1!important;
+  filter:none!important;
+  object-fit:cover;
+  object-position:50% 50%;
+}
+.atlas-category-copy{
+  position:relative;
+  z-index:2;
+  max-width:73%;
+  background:linear-gradient(90deg,rgba(249,246,238,.99) 0%,rgba(249,246,238,.98) 64%,rgba(249,246,238,.94) 83%,transparent 100%);
+}
+.atlas-category-card:nth-child(even) .atlas-category-copy{
+  background:linear-gradient(90deg,rgba(241,247,241,.99) 0%,rgba(241,247,241,.98) 64%,rgba(241,247,241,.94) 83%,transparent 100%);
+}
+.atlas-card-illustration{
+  opacity:1!important;
+  filter:none!important;
+}
+.atlas-calc-art{z-index:0;opacity:1!important}
+.atlas-calc-art:before,
+html.dark .atlas-calc-art:before{display:none!important;background:none!important}
+.atlas-calc-illustration{
+  opacity:1!important;
+  filter:none!important;
+  object-fit:cover;
+  object-position:center;
+}
+.atlas-calc-heading .calc-title{
+  position:relative;
+  z-index:2;
+  background:linear-gradient(90deg,rgba(250,244,234,.99) 0%,rgba(250,244,234,.96) 72%,rgba(250,244,234,.15) 100%);
+  border-radius:10px;
+}
+html.dark .atlas-calc-heading .calc-title{
+  background:linear-gradient(90deg,rgba(20,47,63,.99) 0%,rgba(20,47,63,.96) 74%,rgba(20,47,63,.10) 100%);
+}
+@media(max-width:950px){
+  .hero-copy{max-width:69%}
+  .atlas-hero-art{width:53%;opacity:1!important}
+}
+@media(max-width:740px){
+  .hero-copy{
+    max-width:78%;
+    padding:23px 16px 24px 21px;
+    background:linear-gradient(90deg,#082536 0%,rgba(8,37,54,.98) 65%,rgba(8,37,54,.89) 80%,transparent 100%);
+  }
+  .atlas-hero-art{
+    width:53%;
+    opacity:1!important;
+  }
+  .atlas-hero-art:before{background:linear-gradient(90deg,#082536 0%,rgba(8,37,54,.72) 9%,transparent 29%)}
+  .atlas-category-visual{left:36%;opacity:1!important}
+  .atlas-category-copy{max-width:77%}
+  .atlas-calc-art{width:52%;opacity:1!important}
+  .atlas-calc-heading .calc-title{width:72%}
+}
+@media(max-width:420px){
+  .hero{min-height:263px}
+  .hero-copy{max-width:83%}
+  .hero h1{font-size:clamp(24px,6vw,30px)}
+  .atlas-hero-art{width:53%;opacity:1!important}
+  .atlas-hero-art:before{background:linear-gradient(90deg,#082536 0%,rgba(8,37,54,.65) 12%,transparent 26%)}
+  .atlas-category-visual{left:36%;opacity:1!important}
+  .atlas-category-copy{max-width:82%}
+  .atlas-category-illustration{opacity:1!important}
+  .atlas-calc-art{opacity:1!important}
+  .atlas-calc-heading .calc-title{width:76%}
+}
+
   </style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
@@ -201,7 +328,7 @@ html.dark .gcs-choice.selected,html.dark .gcs-choice[aria-pressed=true]{backgrou
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
         <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.5.2</small></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.5.3</small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
       <div class="side-menu" id="nav-menu"></div>
@@ -699,7 +826,7 @@ async function copyPrompt(){
   window.location.assign('https://chatgpt.com/');
  }catch(e){toast('No se pudo copiar. Revisa los permisos del portapapeles.');}
 }
-function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones vectoriales originales de las 23 calculadoras. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 23 calculadoras con fórmulas explícitas y enlaces a fuentes. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.5.2 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones vectoriales originales de las 23 calculadoras. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 23 calculadoras con fórmulas explícitas y enlaces a fuentes. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.5.3 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
 try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
 function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
