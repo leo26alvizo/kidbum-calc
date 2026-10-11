@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.6**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.7**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -180,3 +180,8 @@ Se incorporó la ilustración del sistema nervioso proporcionada por el autor a 
 ### KidBum v0.7.6 — Hemodinámica y Función renal
 
 Se incorporaron, sin generar ilustraciones nuevas, los dos recursos médicos aportados por el autor: **primera imagen cardiopulmonar** en `assets/hemodinamica-portada.webp` para la tarjeta **Hemodinámica** y **segunda imagen renal/urinaria** en `assets/funcion-renal-portada.webp` para la tarjeta **Función renal**. Ambas tarjetas usan los estilos rectangulares anchos de Pediatría y Ginecología, con fondo de texto sólido, imágenes nítidas y adaptación a móviles. Las ilustraciones se optimizaron como WebP (aprox. 169 KB y 166 KB) y son parte del precaché de la PWA (`v076`). No se cambió el motor de las 45 calculadoras, ni favoritos, navegación, modos de ChatGPT o crédito de autoría. Se superaron 95 pruebas de regresión. Las etiquetas anatómicas incluidas en imágenes aportadas son parte del recurso gráfico original y no se presentan como verificaciones clínicas independientes.
+
+
+### KidBum CALC v0.7.7 — Tarjetas uniformes de Hepatología y Antropometría
+
+Las categorías **Hepatología** y **Antropometría** ahora usan el mismo diseño rectangular destacado y ancho completo de las seis categorías anteriores. Se conservan las ilustraciones locales originales `assets/atlas-fib4.jpg` y `assets/atlas-bmi.jpg`; no se generaron ni sustituyeron recursos gráficos. Se muestra cada imagen sin difuminado ni reducción de opacidad y el texto permanece legible sobre un panel opaco; diseño móvil responsive. El service worker mantiene el funcionamiento sin conexión y usa caché `v077`. Las 45 calculadoras y su lógica médica, favoritos, navegación y crédito de autoría permanecen intactos. Se superaron 102 verificaciones automatizadas de regresión.
