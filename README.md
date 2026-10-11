@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.7**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.8**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 58 calculadoras en 11 categorías.**
+**Total actual: 63 calculadoras en 11 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -305,3 +305,16 @@ Referencias: [NINDS NIHSS oficial](https://www.ninds.nih.gov/sites/default/files
 - La tarjeta mantiene las dimensiones de las otras categorías destacadas; se aplica `object-fit: cover` con encuadre centrado en la anatomía cerebral. El diseño de la tarjeta, la portada y el icono de la aplicación se conservan.
 - La fotografía `assets/escalas-clinicas-portada.webp` permanece intacta y sigue utilizándose en la tarjeta «Escalas clínicas».
 - Se actualizó la caché PWA para uso offline y se añadieron pruebas automatizadas de la imagen; se conservan sin alteraciones las 58 calculadoras existentes, sus fórmulas, los demás módulos y tarjetas.
+
+
+## KidBum CALC v0.9.8 — Cardiología (cinco nuevas herramientas)
+
+Se agregan cinco calculadoras en el módulo independiente `assets/cardiology-module.js`: ASCVD Pooled Cohort 2013 (solo histórica), TIMI UA/NSTEMI, TIMI STEMI, CHA₂DS₂-VASc y HAS-BLED. La aplicación alcanza **63 calculadoras**, manteniendo **11 categorías**.
+
+- ASCVD PCE 2013 reproduce las cuatro ecuaciones originales de las cohortes estadounidense (hombres/mujeres, grupos de derivación históricos), con selección explícita y sin inferir atributos personales. **La guía ACC/AHA de 2026 recomienda PREVENT en lugar de PCE para prevención primaria; no usar PCE antigua para decidir estatinas.** Las PCE no están validadas originalmente en población mexicana y pueden descalibrarse. Fuentes: https://pmc.ncbi.nlm.nih.gov/articles/PMC4700825/ y https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia/top-things-to-know
+- TIMI UA/NSTEMI: siete ítems originales, 0–7. TIMI STEMI: ocho grupos ponderados, 0–14; ambos contrastados con guía ACS ACC/AHA 2025. No diagnostican SCA ni retrasan reperfusión. https://www.jacc.org/doi/10.1016/j.jacc.2024.11.009
+- CHA₂DS₂-VASc: 0–9; añade CHA₂DS₂-VA 0–8 sin sexo para comparación con ESC 2024. No ordena anticoagulación ni estima riesgos individuales con porcentajes inventados.
+- HAS-BLED: 0–9 y factores correctibles; función renal y hepática separadas, ≥8 unidades de alcohol y PAS >160, umbral etario >65 años; INR lábil solo para antagonistas vitamina K. No se usa aislado para negar anticoagulación. ACC/AHA 2023 y ESC 2024.
+- Wells para TVP y TEP **ya existían**: únicamente se reubicaron a Cardiología conservando motores y fórmulas. Se mantienen las 58 calculadoras previas, la portada, imágenes originales e icono, y modo PWA sin conexión. El nuevo módulo incorpora casos de aceptación y referencias visibles.
+
+Estas herramientas son educativas y no constituyen diagnóstico, alta, prescripción o validación clínica independiente.
