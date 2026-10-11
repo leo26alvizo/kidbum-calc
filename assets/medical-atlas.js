@@ -260,12 +260,12 @@ function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
  const safe=ids.includes(id)?id:'qsofa';
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
- const path=safe.startsWith('ped')?src(safe):(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');
- const alternative='./icon.svg';
+ const path=safe.startsWith('ped')?'./assets/pediatric/'+safe+'.webp':(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');
+ const alternative=safe.startsWith('ped')?src(safe):'./icon.svg';
  const description=String(alt).replace(/[<>"&]/g,'');
  return '<img class="'+cls+'" src="'+path+'" alt="'+description+'" '
  +(eager?'fetchpriority="high" loading="eager"':'loading="lazy"')
- +' decoding="async" onerror="this.onerror=null;this.src=\''+alternative+'\'"/>';
+ +' decoding="async" onerror="this.onerror=null;this.src='+ (safe.startsWith('ped')?'window.KidBumAtlas.src(\''+safe+'\')':'\'./icon.svg\'') +'"/>';
 }
 root.KidBumAtlas=Object.freeze({ids:Object.freeze(ids),anatomy,categoryMap,svg,src,img});
 })(typeof globalThis!=='undefined'?globalThis:this);
