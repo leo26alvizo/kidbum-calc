@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.9\.0/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.9\.1/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v090-complete-expansion/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v091-cardiologia-image/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -249,5 +249,15 @@ advancedTests.push(
 ['New medical sources displayed',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/33929377/'))]
 );
 t.push(...advancedTests);
+const cardiologiaTests=[
+ ['Original Cardiology image is present',()=>assert.ok(fs.existsSync('assets/cardiologia-portada.jpg'))],
+ ['Original Cardiology image available offline',()=>assert.ok(swSource.includes("'./assets/cardiologia-portada.jpg'"))],
+ ['Cardiology category has identical full width card dimensions',()=>assert.ok(html.includes("c==='Cardiología'?' atlas-gineco-feature atlas-cardiologia-feature'"))],
+ ['Cardiology category uses supplied JPEG',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
+ ['Cardiology image shares photo class of other cards',()=>assert.ok(html.includes('atlas-gineco-photo atlas-cardiologia-photo'))],
+ ['Cardiology preserves no filter and full opacity',()=>assert.match(html,/\.atlas-cardiologia-feature \.atlas-cardiologia-photo\{[\s\S]*?filter:none!important/)],
+ ['All 52 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length,52)]
+];
+t.push(...cardiologiaTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

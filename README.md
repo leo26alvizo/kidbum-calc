@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.1**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -237,3 +237,10 @@ Se incorporaron **QTc (Bazett y Fridericia), Glasgow-Blatchford y RCRI**, sumand
 Se conservaron el icono original, autoría, portada, favoritos, búsqueda, envío por copia a ChatGPT y funcionalidad offline. Nuevas tarjetas reutilizan ilustraciones anteriores sin generar imágenes adicionales. Se amplió batería automatizada; se requiere además validación clínica independiente y pruebas de interfaz Android.
 
 Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014), [ACG 2021](https://pubmed.ncbi.nlm.nih.gov/33929377/), [NHS Glasgow-Blatchford](https://handbook.ggcmedicines.org.uk/guidelines/gastrointestinal-system/glasgow-blatchford-score/), [AHA/ACC 2024](https://www.jacc.org/doi/10.1016/j.jacc.2024.06.013).
+
+
+## KidBum CALC v0.9.1 — Imagen original en tarjeta de Cardiología
+
+- Se añadió **la imagen exacta aportada por el autor** a `assets/cardiologia-portada.jpg`, sin modificar sus píxeles. La foto original tenía codificación JPEG pese al nombre de subida con extensión .webp.
+- La tarjeta destacada de **Cardiología** usa las mismas dimensiones y estructura CSS que las otras tarjetas rectangulares de especialidad. Mantiene el encuadre central sin filtros, con `object-fit: cover` para adaptarse a cualquier pantalla.
+- Recurso local disponible offline en la caché de la PWA; se actualiza la versión del caché y se añaden pruebas de regresión. Las demás tarjetas, el icono, la portada y las 52 calculadoras permanecen iguales.
