@@ -6,10 +6,10 @@
 'use strict';
 const categoryMap=Object.freeze({
  'Química clínica':'anion','Antropometría':'bmi','Hemodinámica':'map','Función renal':'egfr',
- 'Hepatología':'fib4','Escalas clínicas':'gcs','Ginecología y obstetricia':'agfum'
+ 'Hepatología':'fib4','Escalas clínicas':'gcs','Ginecología y obstetricia':'agfum','Pediatría':'pedwfa'
 });
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb',
- 'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
+ 'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration'];
 const anatomy=Object.freeze({
  anion:'Tubos sanguíneos y moléculas de equilibrio ácido-base',
  osm:'Distribución de agua y solutos del plasma',
@@ -33,7 +33,19 @@ const anatomy=Object.freeze({
  fppus:'Ultrasonografía obstétrica',
  bishop:'Cuello uterino y pelvis',
  obshock:'Circulación materno-placentaria',
- gcs:'Cerebro y tronco encefálico'
+ gcs:'Cerebro y tronco encefálico',
+ pedwfa:'Crecimiento ponderal y antropometría infantil',
+ pedlhfa:'Crecimiento lineal y medición de talla',
+ pedhcfa:'Cráneo infantil y medición de perímetro cefálico',
+ pedbmifa:'Composición corporal y crecimiento pediátrico',
+ pedwfl:'Peso relativo a la longitud o talla',
+ pediou:'Riñón y fisiología de producción urinaria infantil',
+ pedbalance:'Intercambio de agua, riñón y fluidoterapia',
+ pedholliday:'Distribución del agua corporal pediátrica',
+ ped421:'Mantenimiento hídrico y flujos por peso',
+ pedneofluids:'Fisiología de líquidos del neonato',
+ pedcorrected:'Prematuridad y cronología del desarrollo',
+ peddehydration:'Cambios de peso y estado de hidratación'
 });
 const P={
   pink:'#d99689',red:'#a94c45',darkred:'#873b3e',blue:'#426d89',teal:'#397b7e',ivory:'#f0d9b7',
@@ -199,6 +211,20 @@ function focus(id){
  if(id==='fppus'){g=uterus(185,22,.62);g+='<rect x="302" y="66" width="172" height="161" rx="9" fill="#354957" stroke="#7e929c" stroke-width="9"/>';g+=ellipse(389,149,59,61,'#70818a','#b7b5ac',2);g+=ellipse(390,124,26,31,'#c3bfb4','#a49b94',1);}
  if(id==='bishop'){g=uterus(261,16,.96);g+=line('M256 215 L256 278','#8b4446',9);g+=ellipse(260,251,24,12,'#c97f72','#8b4945',2);}
  if(id==='gcs'){g=brain();g+=line('M157 215 Q185 244 203 253','#b79a75',3);}
+
+ // Pediatric clinical visuals: distinct original local diagrams, not diagnostic anatomy plates.
+ if(id==='pedwfa'){g=body(212,20,.83);g+=line('M357 50 V241','#397b7e',4);for(let i=0;i<6;i++)g+=line('M349 '+(65+i*33)+' H370','#397b7e',2);g+=ellipse(423,220,60,20,'#d8bd9e','#957f66',2);}
+ if(id==='pedlhfa'){g=body(224,19,.84);g+=line('M361 31 V260 M351 31 H373 M351 260 H373','#397b7e',4);for(let i=0;i<11;i++)g+=line('M361 '+(31+i*23)+' H'+(i%2?374:383),'#7a8791',2);}
+ if(id==='pedhcfa'){g=circle(253,102,88,'#dfb5a2','#a87764',3);g+=path('M182 126 C182 55 315 26 327 113 Q315 170 252 179 Q200 186 182 126Z','#dfb5a2','#a87764',3);g+=line('M180 99 C230 50 291 59 339 111','#3e8d89',8);g+=line('M180 99 C230 50 291 59 339 111','#e9d5bb',3);}
+ if(id==='pedbmifa'){g=body(228,20,.80);g+=ellipse(403,165,61,52,'#e7c1a6','#ab7867',3);g+=path('M384 127 Q422 118 442 165 Q456 204 413 217 Q364 216 366 177Z','#c1876b','#9c6659',2);}
+ if(id==='pedwfl'){g=body(213,24,.79);g+=line('M338 55 L338 258 M327 55 H354 M327 258 H354','#487f86',4);g+=ellipse(410,236,54,19,'#d4a480','#9b7164',2);}
+ if(id==='pediou'){g=kidney(248,39,.81);g+=path('M399 160 C368 197 370 220 399 234 C429 223 428 203 399 160Z','#7daec4','#4f7e91',3);}
+ if(id==='pedbalance'){g=tubes();g+=line('M84 225 H436','#4c7b8b',6);g+=line('M122 205 L122 248 M380 205 L380 248','#4c7b8b',4);g+=ellipse(136,200,50,20,'#d0b08e','#937762',2);g+=ellipse(377,200,50,20,'#a4bbc0','#638c95',2);}
+ if(id==='pedholliday'){g=body(205,28,.82);g+=line('M339 73 V237 M370 100 V237 M401 133 V237','#558e9a',14);g+=line('M339 73 V237 M370 100 V237 M401 133 V237','#b8ddda',5);}
+ if(id==='ped421'){g=body(216,22,.79);g+=line('M343 58 V250','#638d93',9);g+=line('M381 105 V250','#a7bb9c',9);g+=line('M418 157 V250','#c9a782',9);}
+ if(id==='pedneofluids'){g=uterus(228,31,.80);g+=path('M427 128 Q376 180 427 239 Q480 181 427 128Z','#87b0bc','#568390',3);}
+ if(id==='pedcorrected'){g=uterus(184,23,.75);g+=circle(399,138,80,'#e4cbb8','#a7856f',2);g+=line('M399 74 V138 L431 151','#4a7d88',7);g+=circle(399,138,7,'#4a7d88');}
+ if(id==='peddehydration'){g=body(208,21,.83);g+=path('M409 103 C378 151 368 185 409 220 C450 190 450 146 409 103Z','#7ba9b9','#4d8194',3);g+=line('M400 170 Q388 192 410 204','white',3);}
  return g;
 }
 function svg(id){
@@ -213,7 +239,7 @@ function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
  const safe=ids.includes(id)?id:'qsofa';
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
- const path=eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg';
+ const path=safe.startsWith('ped')?src(safe):(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');
  const alternative='./icon.svg';
  const description=String(alt).replace(/[<>"&]/g,'');
  return '<img class="'+cls+'" src="'+path+'" alt="'+description+'" '
