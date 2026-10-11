@@ -7,17 +7,33 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.7\.7/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.8\.0/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v077-8category-cards/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v080-pediatric-pictorial/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
 assert.match(html,/updateViaCache:'none'/,'PWA registration must request fresh worker scripts');
+const pediatricPlateIds=['pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration','pedinsensible','pedgir','pedsolutions','pedvitals','pedformulavol','pedmilkcal','pedfoodcal','pedmaxverify','pedaccess','pedsupp'];
+for(const id of pediatricPlateIds){
+ const plate='assets/pediatric/'+id+'.webp';
+ assert.ok(fs.existsSync(plate),'Missing Pediatric illustrated image: '+id);
+ assert.ok(swSource.includes("'./"+plate+"'"),'PWA must precache Pediatric image '+id);
+}
+assert.equal(pediatricPlateIds.length,22,'Every Pediatric calculator has artwork');
 const atlasSource=fs.readFileSync('assets/medical-atlas.js','utf8');
+const atlasGlobal={};
+vm.runInNewContext(atlasSource,{globalThis:atlasGlobal,window:atlasGlobal},{timeout:2000});
+assert.ok(atlasGlobal.KidBumAtlas,'Atlas library should initialize');
+for(const id of pediatricPlateIds){
+ const markup=atlasGlobal.KidBumAtlas.img(id);
+ assert.ok(markup.includes('./assets/pediatric/'+id+'.webp'),'Use individualized WebP image '+id);
+ assert.ok(markup.includes("window.KidBumAtlas.src('"+id+"')"),'Keep vector backup '+id);
+}
+
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb','correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
 for(const id of ids)assert.ok(fs.existsSync('assets/atlas-'+id+'.jpg'),'Missing pictorial clinical illustration: '+id);
 for(const art of ['hero','lab','kidney','lungs','brain','liver','obstetrics','vascular'])
@@ -145,7 +161,10 @@ const t=[
 ['Hepatology image is unfiltered',()=>assert.match(html,/\.atlas-hepatologia-feature \.atlas-gineco-photo \{[\s\S]*?filter:none!important;opacity:1!important;/)],
 ['Anthropometry image is unfiltered',()=>assert.match(html,/\.atlas-antropometria-feature \.atlas-gineco-photo \{[\s\S]*?filter:none!important;opacity:1!important;/)],
 ['Hepatology imagery cached offline',()=>assert.match(swSource,/'\.\/assets\/atlas-fib4\.jpg'/)],
-['Anthropometry imagery cached offline',()=>assert.match(swSource,/'\.\/assets\/atlas-bmi\.jpg'/)]
+['Anthropometry imagery cached offline',()=>assert.match(swSource,/'\.\/assets\/atlas-bmi\.jpg'/)],
+['Pediatrics pictorial WebP artwork count',()=>assert.equal(pediatricPlateIds.length,22)],
+['Pediatric graphic remains crisp',()=>assert.match(html,/img\[src\*="\/pediatric\/"\][\s\S]*?filter:none!important/)],
+['Pediatric WHO data preserved',()=>assert.equal(ctx.KidBumGrowthTables.wfa[0].split(';').length,1827)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
