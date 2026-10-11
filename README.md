@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.3**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.6.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -24,7 +24,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 4. Abrir la aplicación una vez con conexión para activar la disponibilidad sin conexión.
 
 ## Verificación
-La versión 0.5.3 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
+La versión 0.6.0 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
 
 Las pruebas pueden ampliarse y ejecutarse después de cada actualización; se recomienda confirmar la versión visible en Android y la instalación offline.
 
@@ -93,3 +93,27 @@ La apariencia final requiere revisión de interfaz en dispositivos reales y revi
 - El texto mantiene contraste por medio de un panel y una transición localizada, sin un velo global sobre toda la ilustración.
 - La portada nueva está precargada por la PWA para uso sin conexión.
 - No se alteró el motor de cálculo médico.
+
+
+## KidBum CALC v0.6.0 — Pediatría (12 herramientas)
+
+Se agrega una categoría **Pediatría** sin modificar las 23 funciones clínicas preexistentes. Ahora son **35 calculadoras**.
+
+**Crecimiento OMS 2006, nacimiento a 5 años** (ambos sexos, edad cronológica exacta en días):
+- Peso para edad, longitud/talla para edad, perímetro cefálico para edad, IMC para edad, peso para longitud/talla.
+- Muestran percentil y puntaje Z, más tabla local P3/P10/P25/P50/P75/P90/P97.
+- Fuente original: [WorldHealthOrganization/anthro](https://github.com/WorldHealthOrganization/anthro/tree/master/data-raw/growthstandards), con seis datasets LMS originales precargados offline en `assets/who-*.js`.
+- Para niños prematuros las tablas requieren valoración de edad corregida y referencias específicas; la app impide aplicar automáticamente las curvas con edad cronológica declarada en prematuridad. El peso para la edad por sí solo no diagnostica exceso de grasa u obesidad. La medición de longitud acostado o talla de pie debe corresponder con la edad.
+
+**Hospitalización / hidratación**:
+- Diuresis pediátrica en mL/kg/h, interpretación cautelosa de umbrales por duración y grupo etario.
+- Balance hídrico registrado; ingresos menos egresos en mL y mL/kg.
+- Holliday–Segar (100/50/20 mL/kg/día), regla rápida 4–2–1 (mL/h).
+- Líquidos neonatales: rangos orientativos NICE para recién nacidos a término según día de vida (días 1–28).
+- Edad corregida del prematuro, pérdida de peso porcentual entre mediciones.
+
+**Fuentes principales:** [OMS crecimiento](https://www.who.int/tools/child-growth-standards/standards/weight-for-age), [NICE NG29](https://www.nice.org.uk/guidance/ng29/chapter/recommendations), [AAP 2018 líquidos IV](https://publications.aap.org/pediatrics/article/142/6/e20183083/37529/Clinical-Practice-Guideline-Maintenance), [KDIGO y lesión renal pediátrica](https://pmc.ncbi.nlm.nih.gov/articles/PMC5297493/), [AAP edad corregida](https://www.healthychildren.org/Spanish/ages-stages/baby/preemie/Paginas/Corrected-Age-For-Preemies.aspx).
+
+**Límites y seguridad:** tablas WHO para 0–5 años exclusivamente, no 5–19 años; neonatos prematuros requieren curvas especializadas. Los líquidos son estimaciones o rangos, no órdenes médicas. Monitorizar pérdidas, glucosa, electrolitos y parámetros clínicos según contexto y protocolos institucionales. No hay calculadoras de prescripción farmacológica automática.
+
+**Control técnico:** 52 pruebas de regresión completadas antes del despliegue, incluidas 22 pruebas nuevas de pediatría. Las fórmulas originales de la v0.5.3 se compararon sin cambios en su bloque de código. Esta verificación no constituye certificación ni validación hospitalaria; sigue pendiente prueba de usuario en Android.
