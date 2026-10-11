@@ -7,13 +7,15 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.7\.5/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.7\.6/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v075-escalas-foto/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v076-hemo-renal/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
+assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
+assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
 assert.match(html,/updateViaCache:'none'/,'PWA registration must request fresh worker scripts');
 const atlasSource=fs.readFileSync('assets/medical-atlas.js','utf8');
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb','correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
@@ -27,6 +29,8 @@ assert.ok(fs.existsSync('assets/pediatria-portada.webp'),'Missing user-selected 
 assert.ok(fs.existsSync('assets/ginecologia-portada.webp'),'Missing user-selected Ginecology anatomical illustration');
 assert.ok(fs.existsSync('assets/quimica-clinica-portada.webp'),'Missing user-selected clinical chemistry photograph');
 assert.ok(fs.existsSync('assets/escalas-clinicas-portada.webp'),'Missing author-selected neurological illustration for Clinical Scales');
+assert.ok(fs.existsSync('assets/hemodinamica-portada.webp'),'Missing first cardiopulmonary image for Hemodinámica');
+assert.ok(fs.existsSync('assets/funcion-renal-portada.webp'),'Missing second anatomical renal image for Función renal');
 
 assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;
@@ -128,7 +132,13 @@ const t=[
 ['Do not interrupt active calculations',()=>assert.match(html,/if\(screen!=='calc'\)window\.location\.reload\(\)/)],
 ['Clinical Scales card uses supplied image',()=>assert.match(html,/src="\.\/assets\/escalas-clinicas-portada\.webp"/)],
 ['Clinical Scales card matches featured size',()=>assert.match(html,/atlas-escalas-feature/)],
-['Clinical Scales image unfiltered',()=>assert.match(html,/\.atlas-escalas-photo\{[\s\S]*?filter:none!important;[\s\S]*?opacity:1!important/)]
+['Clinical Scales image unfiltered',()=>assert.match(html,/\.atlas-escalas-photo\{[\s\S]*?filter:none!important;[\s\S]*?opacity:1!important/)],
+['Hemodynamics: first supplied cardiac plate',()=>assert.match(html,/src="\.\/assets\/hemodinamica-portada\.webp"/)],
+['Renal: second supplied kidney plate',()=>assert.match(html,/src="\.\/assets\/funcion-renal-portada\.webp"/)],
+['Hemodynamics featured rectangle',()=>assert.match(html,/c==='Hemodinámica'\?' atlas-gineco-feature atlas-hemodinamica-feature'/)],
+['Renal featured rectangle',()=>assert.match(html,/c==='Función renal'\?' atlas-gineco-feature atlas-renal-feature'/)],
+['Hemodynamics has no visual blurring',()=>assert.match(html,/\.atlas-hemodinamica-photo \{[\s\S]*?filter:none!important;/)],
+['Renal has no visual blurring',()=>assert.match(html,/\.atlas-renal-photo \{[\s\S]*?filter:none!important;/)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
