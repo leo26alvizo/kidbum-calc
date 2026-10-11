@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.2**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.3**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -156,3 +156,8 @@ Se sustituyó la ilustración de categoría de Pediatría por la fotografía pro
 ### Actualización visual v0.7.2 — Ginecología y obstetricia
 
 La tarjeta de **Ginecología y obstetricia** utiliza la ilustración médica aportada directamente por el autor, optimizada sin recorte ni imágenes generadas como `assets/ginecologia-portada.webp`. Su formato rectangular a ancho completo y diseño responsive es equivalente al de la tarjeta de Pediatría. El encuadre de la lámina se adapta con CSS, sin filtros ni desenfoque. El archivo se agrega al precaché de la PWA. No se han cambiado calculadoras, fórmulas, favoritos ni modos de ChatGPT.
+
+
+### Ajuste visual v0.7.3 — Química clínica
+
+La tarjeta de **Química clínica** ocupa el ancho completo de la biblioteca y mantiene las mismas dimensiones que Pediatría y Ginecología. Usa exactamente la fotografía suministrada por el autor en `assets/quimica-clinica-portada.webp` (WebP optimizado, aprox. 151 KB), sin generar imágenes nuevas. La zona de texto tiene un fondo azul claro opaco y el material de laboratorio se muestra nítido, sin filtros de desenfoque. El recurso se precarga mediante `sw.js` para funcionamiento offline. No se modificó la lógica médica ni el contenido de las 45 calculadoras.
