@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.6**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.7**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -297,3 +297,11 @@ Se incorporaron NIHSS, Hunt y Hess, Fisher ORIGINAL y ASIA/AIS guiada. Ya están
 Referencias: [NINDS NIHSS oficial](https://www.ninds.nih.gov/sites/default/files/2025-03/KnowStroke_NIHStrokeScale_March2025_508c.pdf), [AAFP HSA](https://www.aafp.org/afp/2023/1000/nontraumatic-sah-ruptured-intracranial-aneurysm), [Fisher original](https://pmc.ncbi.nlm.nih.gov/articles/PMC3621041/), [ASIA/ISCoS ISNCSCI 2026](https://asia-spinalinjury.org/isncsci-resources/).
 
 **Seguridad:** prueba automatizada aritmética no equivale a validación clínica institucional. Para AIS y NIHSS se necesita exploración presencial de personal capacitado y validación especializada.
+
+
+## KidBum CALC v0.9.7 — Fotografía original de Neurología
+
+- Se cambió exclusivamente la fotografía de la tarjeta destacada «Neurología y Raquimedular» por la imagen enviada por el autor, guardada en `assets/neurologia-portada.jpg` con sus **bytes JPEG originales**, sin regeneración ni recomprimir.
+- La tarjeta mantiene las dimensiones de las otras categorías destacadas; se aplica `object-fit: cover` con encuadre centrado en la anatomía cerebral. El diseño de la tarjeta, la portada y el icono de la aplicación se conservan.
+- La fotografía `assets/escalas-clinicas-portada.webp` permanece intacta y sigue utilizándose en la tarjeta «Escalas clínicas».
+- Se actualizó la caché PWA para uso offline y se añadieron pruebas automatizadas de la imagen; se conservan sin alteraciones las 58 calculadoras existentes, sus fórmulas, los demás módulos y tarjetas.

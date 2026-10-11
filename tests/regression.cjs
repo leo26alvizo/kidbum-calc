@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.9\.6/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.9\.7/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v096-neurology-complete/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v097-neurology-original-image/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -407,5 +407,18 @@ completionTests.push(
  ['NINDS official reference visible',()=>assert.ok(html.includes('https://www.ninds.nih.gov/sites/default/files/2025-03/KnowStroke_NIHStrokeScale_March2025_508c.pdf'))]
 );
 t.push(...completionTests);
+
+const neurologyPhotoTests=[
+ ['New original Neurology JPEG exists',()=>assert.ok(fs.existsSync('assets/neurologia-portada.jpg'))],
+ ['Neurology card uses exact author-uploaded JPEG path',()=>assert.ok(html.includes("c==='Neurología y Raquimedular'?'<img class=\"atlas-category-illustration atlas-gineco-photo atlas-neuro-photo\" src=\"./assets/neurologia-portada.jpg\""))],
+ ['Neurology wide card layout preserved',()=>assert.ok(html.includes("c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature'"))],
+ ['Neurology shares original card photo class',()=>assert.ok(html.includes('atlas-gineco-photo atlas-neuro-photo'))],
+ ['Neurology full photo without filter',()=>assert.match(html,/\.atlas-neuro-feature \.atlas-neuro-photo\{[\s\S]*?object-fit:cover;[\s\S]*?filter:none!important/)],
+ ['Neurology new image cached offline',()=>assert.ok(swSource.includes("'./assets/neurologia-portada.jpg'"))],
+ ['Old Escalas Clínicas image retained',()=>assert.ok(html.includes("c==='Escalas clínicas'?'<img")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
+ ['All 58 clinical calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length,58)],
+ ['Existing original icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+];
+t.push(...neurologyPhotoTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
