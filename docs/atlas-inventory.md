@@ -1,8 +1,8 @@
-# KidBum Medical Atlas Editorial — Inventario v0.5
+# KidBum Medical Atlas Editorial — Inventario v0.5.2
 
 Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
-**Estado:** 23 composiciones vectoriales originales asignadas por ID. Las imágenes son elementos decorativos educativos, NO láminas anatómicas certificadas ni sustitutos de referencias clínicas. Son autónomas y no requieren conexión. Las propuestas pictóricas generadas anteriormente siguen siendo referencias artísticas pendientes de sustitución/validación en el producto.
+**Estado:** 23 ilustraciones pictóricas individuales (`assets/atlas-<id>.jpg`), derivadas de 8 composiciones originales de calidad editorial, todas alojadas en el repositorio y precargadas por la PWA. Se preserva el generador SVG como respaldo para futuros diseños. Son recursos visuales educativos, no láminas anatómicas certificadas.
 
 | ID estable | Calculadora | Categoría en la app | Ilustración específica |
 |---|---|---|---|
@@ -43,12 +43,12 @@ Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
 - No modificar `window.KidBumEngine` para cambios de presentación.
 - Cada ID del motor debe aparecer en `KidBumAtlas.ids` y tener su descripción `anatomy[id]`.
-- Los SVG se generan dentro de `assets/medical-atlas.js` y se convierten a `data:image/svg+xml`, evitando solicitudes de red.
-- La PWA almacena el script del atlas con `sw.js` y presenta un estilo de respaldo si falta.
+- Las 23 imágenes JPG se alojan en `assets/atlas-<id>.jpg`, con rutas proporcionadas por `assets/medical-atlas.js`. El generador SVG sigue disponible para respaldo/editorial.
+- La PWA precarga el script, las 23 ilustraciones individuales y las 8 composiciones originales. Cada imagen de interfaz utiliza `./icon.svg` si no puede cargar el JPG.
 - Los gráficos requieren revisión por anatomista o especialista antes de mostrarse como **representaciones científicamente validadas**.
 - La interfaz preserva el formulario, los avisos de seguridad, referencias, favoritos y modos de análisis con ChatGPT.
 
 ## Pendientes de diseño
 
-- Sustituir progresivamente ciertos SVG editoriales por las ilustraciones pictóricas rasterizadas originales, optimizadas para móviles, cuando estén transferidas al repositorio y revisadas.
+- Hecho: sustitución de los SVG como imagen principal por ilustraciones pictóricas locales. Sigue pendiente la revisión anatómica por especialidad y ajustes artísticos finos.
 - Revisión visual real en Android/iOS/tableta y contraste de accesibilidad mediante dispositivos.
