@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#081b29"/>
+<title>Atlas editorial · KidBum CALC</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;--bg:#f5f3ee;--fg:#142e40;--sub:#567084;--card:#fffdf9}
+@media(prefers-color-scheme:dark){:root{--bg:#081b29;--fg:#ecf1ee;--sub:#bbced7;--card:#122a3d}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg)}
+header{max-width:1100px;margin:0 auto;padding:30px 20px 8px}
+h1{font:700 clamp(28px,4vw,46px)/1.08 Georgia,serif;margin:20px 0 10px}
+.lead{line-height:1.6;color:var(--sub);max-width:780px}
+a{color:inherit}a.back{border:1px solid #5aa8a8;display:inline-block;padding:10px 15px;border-radius:99px;text-decoration:none;font-weight:750}
+main{max-width:1100px;padding:10px 20px 54px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:15px}
+figure{overflow:hidden;margin:0;background:var(--card);border:1px solid #c3c9c9;border-radius:17px;box-shadow:0 3px 12px #0001}
+figure img{display:block;width:100%;aspect-ratio:1.73;object-fit:cover;background:#efdfcf}
+figcaption{padding:14px 15px 18px}
+figcaption h2{font:700 19px/1.13 Georgia,serif;margin:0 0 7px}
+figcaption p{font-size:12px;line-height:1.5;color:var(--sub);margin:0}
+footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
+</style>
+<script src="./assets/medical-atlas.js"></script>
+</head>
+<body>
+<header>
+<a class="back" href="./index.html">← Volver a KidBum CALC</a>
+<h1>Atlas médico editorial</h1>
+<p class="lead">23 ilustraciones originales relacionadas con las calculadoras reales. Recursos de interfaz para apoyar la identificación visual del sistema o proceso; <strong>no son láminas anatómicas certificadas</strong> ni sirven para tomar decisiones clínicas por sí solos.</p>
+</header>
+<main id="gallery" aria-label="Galería visual de las calculadoras"></main>
+<footer>KidBum CALC · Creada por Leonardo Alvizo Velázquez · v0.5</footer>
+<script>
+(function(){
+ const atlas=window.KidBumAtlas;
+ const titles={
+ anion:'Brecha aniónica',osm:'Osmolalidad calculada',bmi:'Índice de masa corporal',bsa:'Superficie corporal',
+ map:'Presión arterial media',shock:'Índice de choque',egfr:'TFG CKD-EPI',cg:'Cockcroft–Gault',
+ fib4:'FIB-4',qsofa:'qSOFA',curb:'CURB-65',correctedna:'Sodio corregido',news2:'NEWS2',
+ wellsdvt:'Wells TVP',wellspe:'Wells EP',perc:'PERC',childpugh:'Child-Pugh',
+ agfum:'Edad gestacional por FUM',fppfum:'FPP por FUM',fppus:'FPP por ultrasonido',bishop:'Bishop clásico',
+ obshock:'Índice de choque obstétrico',gcs:'Glasgow'
+ };
+ if(!atlas){document.getElementById('gallery').textContent='No se pudo cargar el atlas local. Revisa la conexión y vuelve a intentar.';return}
+ document.getElementById('gallery').innerHTML=atlas.ids.map(id=>
+   '<figure>'+atlas.img(id,'',atlas.anatomy[id])+'<figcaption><h2>'+titles[id]+'</h2><p>'+atlas.anatomy[id]+'</p></figcaption></figure>'
+ ).join('');
+})();
+</script>
+</body>
+</html>
