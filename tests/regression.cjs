@@ -7,12 +7,12 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.7\.6/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.7\.7/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v076-hemo-renal/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v077-8category-cards/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -138,7 +138,14 @@ const t=[
 ['Hemodynamics featured rectangle',()=>assert.match(html,/c==='Hemodinámica'\?' atlas-gineco-feature atlas-hemodinamica-feature'/)],
 ['Renal featured rectangle',()=>assert.match(html,/c==='Función renal'\?' atlas-gineco-feature atlas-renal-feature'/)],
 ['Hemodynamics has no visual blurring',()=>assert.match(html,/\.atlas-hemodinamica-photo \{[\s\S]*?filter:none!important;/)],
-['Renal has no visual blurring',()=>assert.match(html,/\.atlas-renal-photo \{[\s\S]*?filter:none!important;/)]
+['Renal has no visual blurring',()=>assert.match(html,/\.atlas-renal-photo \{[\s\S]*?filter:none!important;/)],
+['Hepatology is full-width featured card',()=>assert.match(html,/c==='Hepatología'\?' atlas-gineco-feature atlas-hepatologia-feature'/)],
+['Anthropometry is full-width featured card',()=>assert.match(html,/c==='Antropometría'\?' atlas-gineco-feature atlas-antropometria-feature'/)],
+['Both preserve local atlas JPGs',()=>assert.match(html,/\(c==='Hepatología'\|\|c==='Antropometría'\)\?'atlas-category-illustration atlas-gineco-photo'/)],
+['Hepatology image is unfiltered',()=>assert.match(html,/\.atlas-hepatologia-feature \.atlas-gineco-photo \{[\s\S]*?filter:none!important;opacity:1!important;/)],
+['Anthropometry image is unfiltered',()=>assert.match(html,/\.atlas-antropometria-feature \.atlas-gineco-photo \{[\s\S]*?filter:none!important;opacity:1!important;/)],
+['Hepatology imagery cached offline',()=>assert.match(swSource,/'\.\/assets\/atlas-fib4\.jpg'/)],
+['Anthropometry imagery cached offline',()=>assert.match(swSource,/'\.\/assets\/atlas-bmi\.jpg'/)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
