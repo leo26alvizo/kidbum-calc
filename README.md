@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.1**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.2**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -244,3 +244,11 @@ Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014),
 - Se añadió **la imagen exacta aportada por el autor** a `assets/cardiologia-portada.jpg`, sin modificar sus píxeles. La foto original tenía codificación JPEG pese al nombre de subida con extensión .webp.
 - La tarjeta destacada de **Cardiología** usa las mismas dimensiones y estructura CSS que las otras tarjetas rectangulares de especialidad. Mantiene el encuadre central sin filtros, con `object-fit: cover` para adaptarse a cualquier pantalla.
 - Recurso local disponible offline en la caché de la PWA; se actualiza la versión del caché y se añaden pruebas de regresión. Las demás tarjetas, el icono, la portada y las 52 calculadoras permanecen iguales.
+
+
+## KidBum CALC v0.9.2 — Gastroenterología en tarjeta destacada
+
+- La tarjeta de **Gastroenterología** adopta el mismo tamaño rectangular de ancho completo que Cardiología y las demás especialidades destacadas, también en móvil.
+- Se conserva **exactamente la imagen existente** `assets/atlas-childpugh.jpg` mediante el mapeo `Gastroenterología → childpugh`, sin reemplazar, regenerar ni alterar el archivo.
+- Se reutilizan las clases CSS de tarjeta destacada y fotografía a tamaño completo, sin filtros. Se actualizó el caché PWA para propagar los cambios.
+- Sin cambios en fórmulas, icono, portada, fotografías restantes ni en las 52 calculadoras.
