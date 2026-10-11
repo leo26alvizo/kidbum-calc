@@ -27,10 +27,10 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
 <header>
 <a class="back" href="./index.html">← Volver a KidBum CALC</a>
 <h1>Atlas médico editorial</h1>
-<p class="lead">23 ilustraciones pictóricas originales y adaptadas a las calculadoras reales. Recursos de interfaz para apoyar la identificación visual del sistema o proceso; <strong>no son láminas anatómicas certificadas</strong> ni sirven para tomar decisiones clínicas por sí solos.</p>
+<p class="lead">35 ilustraciones vinculadas a las calculadoras reales: 23 láminas pictóricas y 12 esquemas pediátricos originales en desarrollo editorial. Recursos de interfaz para apoyar la identificación visual del sistema o proceso; <strong>no son láminas anatómicas certificadas</strong> ni sirven para tomar decisiones clínicas por sí solos.</p>
 </header>
 <main id="gallery" aria-label="Galería visual de las calculadoras"></main>
-<footer>KidBum CALC · Creada por Leonardo Alvizo Velázquez · v0.5.2</footer>
+<footer>KidBum CALC · Creada por Leonardo Alvizo Velázquez · v0.6.0</footer>
 <script>
 (function(){
  const atlas=window.KidBumAtlas;
@@ -40,7 +40,13 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
  fib4:'FIB-4',qsofa:'qSOFA',curb:'CURB-65',correctedna:'Sodio corregido',news2:'NEWS2',
  wellsdvt:'Wells TVP',wellspe:'Wells EP',perc:'PERC',childpugh:'Child-Pugh',
  agfum:'Edad gestacional por FUM',fppfum:'FPP por FUM',fppus:'FPP por ultrasonido',bishop:'Bishop clásico',
- obshock:'Índice de choque obstétrico',gcs:'Glasgow'
+ obshock:'Índice de choque obstétrico',gcs:'Glasgow',
+ pedwfa:'Peso para edad · OMS',pedlhfa:'Longitud/talla para edad · OMS',
+ pedhcfa:'Perímetro cefálico para edad · OMS',pedbmifa:'IMC para edad · OMS',
+ pedwfl:'Peso para longitud/talla · OMS',pediou:'Gasto urinario pediátrico',
+ pedbalance:'Balance hídrico pediátrico',pedholliday:'Holliday–Segar',
+ ped421:'Regla 4–2–1',pedneofluids:'Mantenimiento neonatal',
+ pedcorrected:'Edad corregida del prematuro',peddehydration:'Pérdida de peso / posible déficit'
  };
  if(!atlas){document.getElementById('gallery').textContent='No se pudo cargar el atlas local. Revisa la conexión y vuelve a intentar.';return}
  document.getElementById('gallery').innerHTML=atlas.ids.map(id=>
