@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10243b" />
+  <meta name="description" content="KidBum CALC, creada por Leonardo Alvizo Velázquez: calculadoras clínicas sin conexión y sin pagos adicionales." />
+  <meta name="author" content="Leonardo Alvizo Velázquez" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <style>
+:root{color-scheme:light;--ink:#142c43;--ink-soft:#537087;--nav:#10273d;--nav-2:#173750;--accent:#008b8c;--accent-dark:#007577;--accent-pale:#e6f6f3;--bg:#f5f8fa;--surface:#fff;--stroke:#dde7ec;--alert:#8a5620;--alert-bg:#fff8e9;--red:#a53837;--red-bg:#fff1ee;--soft:#eef3f6;--shadow:0 12px 44px rgba(30,67,94,.045);--radius:17px;--font:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);font-size:15px;line-height:1.48}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--accent-dark)}a:hover{text-decoration:underline}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #64bdbb;outline-offset:3px}button:disabled{opacity:.55;cursor:not-allowed}.app-shell{min-height:100vh;display:grid;grid-template-columns:258px minmax(0,1fr)}.sidebar{background:var(--nav);color:#d4e2eb;min-height:100vh;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:30px 17px 20px}.identity{background:none;border:0;color:#fff;display:flex;gap:12px;align-items:center;text-align:left;padding:0 9px 36px;width:100%}.identity-icon{height:43px;width:43px;border:1px solid #317c89;background:#173f50;border-radius:13px;display:grid;place-items:center;color:#89f0d9}.identity strong{display:block;font-size:17px;letter-spacing:.5px}.identity em{font-style:normal;color:#69dfcb}.identity small{display:block;color:#8ba7b9;font-size:11px;margin-top:2px;letter-spacing:.4px}.nav-overline{font-size:10px;letter-spacing:1.8px;font-weight:800;color:#648aa1;margin:4px 14px 13px}.side-menu{display:grid;gap:5px}.side-menu button{display:flex;align-items:center;gap:12px;width:100%;border:1px solid transparent;background:transparent;color:#b9cfda;padding:12px 14px;text-align:left;border-radius:11px;font-weight:600;font-size:13px}.side-menu button .nicon{width:21px;font-size:17px;font-weight:400;text-align:center}.side-menu button:hover{background:#18394f}.side-menu button.current{background:#1c4455;color:#b3fff0;border-color:#326173}.side-bottom{margin-top:auto}.safe-note{border-radius:14px;background:#1b3d50;border:1px solid #2c5368;padding:16px;margin-bottom:25px}.safe-note>span{color:#74dbc2;font-size:19px;display:inline-block;margin-bottom:7px}.safe-note strong{color:#e5f4f8;display:block;font-size:12px}.safe-note p{color:#9db8c9;font-size:11px;margin:7px 0 0;line-height:1.55}.side-meta{padding:5px 9px;font-size:11px;color:#86a4b5;display:flex;gap:8px;align-items:center}.online-dot{height:7px;width:7px;border-radius:50%;background:#51cca8;display:inline-block;flex-shrink:0}.page{min-width:0;display:flex;flex-direction:column;min-height:100vh}.topbar{height:75px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--stroke);background:var(--surface)}.breadcrumb{font-size:12px;display:flex;gap:12px;color:var(--ink-soft);font-weight:700}.crumb-brand{letter-spacing:1px}.crumb-slash{color:#a7b6c4}.top-actions{display:flex;gap:18px;align-items:center}.top-status{font-size:11px;color:var(--ink-soft);display:flex;align-items:center;gap:7px;font-weight:600}.icon-btn{height:35px;width:35px;display:grid;place-items:center;background:var(--surface);border:1px solid var(--stroke);border-radius:10px;color:var(--ink);font-size:20px}#main-content{flex:1;padding:35px min(6%,72px) 62px;max-width:1440px;width:100%;margin:auto}.footer{font-size:10px;color:#8aa0ae;border-top:1px solid var(--stroke);padding:22px 6%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:9px}.footer b{font-weight:600}.eyebrow{font-size:11px;letter-spacing:1.5px;color:var(--accent-dark);font-weight:800;text-transform:uppercase}.hero{padding:36px 41px;background:linear-gradient(115deg,#102b41 8%,#0c4c5b 85%);border-radius:22px;color:white;position:relative;overflow:hidden;display:flex;justify-content:space-between;gap:18px;min-height:206px}.hero:after{content:"";position:absolute;right:-90px;top:-115px;height:330px;width:330px;border:1px solid rgba(170,240,223,.14);border-radius:50%;box-shadow:0 0 0 44px rgba(170,240,223,.045),0 0 0 95px rgba(170,240,223,.03)}.hero-copy{position:relative;z-index:1;max-width:630px}.hero .eyebrow{color:#8cdbc8}.hero h1{font-size:clamp(29px,4vw,44px);line-height:1.13;letter-spacing:-1.5px;margin:10px 0 12px;font-weight:760}.hero p{max-width:490px;color:#c1d9e4;font-size:13px;margin:0}.hero-heart{align-self:center;z-index:1;margin-right:5%;opacity:.8}.hero-heart svg{width:110px;max-width:100%}.quick-stats{display:flex;gap:11px;margin:24px 0 32px;flex-wrap:wrap}.mini-stat{padding:12px 17px;border:1px solid var(--stroke);border-radius:12px;background:var(--surface);display:flex;gap:10px;align-items:center;color:var(--ink-soft);font-size:12px;font-weight:600}.mini-stat strong{font-size:18px;color:var(--ink)}.content-top{display:flex;gap:16px;justify-content:space-between;align-items:flex-end;margin:0 0 16px}.content-top h2,.calc-title h1{font-size:22px;line-height:1.18;letter-spacing:-.6px;margin:4px 0 0}.content-top p{margin:7px 0 0;color:var(--ink-soft);font-size:12px}.search{display:flex;align-items:center;gap:11px;background:var(--surface);border:1px solid var(--stroke);border-radius:12px;padding:13px 16px;max-width:460px;min-width:230px;width:100%;color:var(--ink-soft)}.search input{border:0;outline:0;width:100%;font-size:13px;color:var(--ink);background:transparent}.search input::placeholder{color:#98aebb}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:0 0 20px}.chip{border:1px solid var(--stroke);border-radius:99px;padding:8px 13px;background:var(--surface);color:var(--ink-soft);font-size:11px;font-weight:700}.chip.active{border-color:var(--accent);color:#fff;background:var(--accent)}.calc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.calc-card{position:relative;text-align:left;background:var(--surface);border:1px solid var(--stroke);border-radius:var(--radius);padding:19px;min-height:178px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px;transition:transform .15s,border-color .15s}.calc-card:hover{transform:translateY(-2px);border-color:#9bc9cb}.calc-card .card-icon{height:39px;width:39px;background:#e5f4f2;color:#087c7f;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:18px}.calc-card h3{font-size:14px;letter-spacing:-.2px;margin:0 20px 4px 0;color:var(--ink)}.calc-card p{margin:0;color:var(--ink-soft);font-size:11px}.calc-card-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:auto;font-size:10px;font-weight:700;color:#68909a}.card-arrow{font-size:20px;color:var(--accent)}.fav-toggle{position:absolute;right:12px;top:12px;height:34px;width:34px;border:1px solid transparent;border-radius:9px;background:transparent;color:#a4b3bc;font-size:20px}.fav-toggle:hover{background:var(--soft)}.fav-toggle.starred{color:#d6a32f}.empty-state{border:1px dashed var(--stroke);background:var(--surface);border-radius:15px;padding:35px;text-align:center;color:var(--ink-soft)}.breadcrumb-back{background:none;border:0;color:var(--accent-dark);padding:0;display:inline-flex;gap:8px;align-items:center;font-weight:700;font-size:13px;margin-bottom:23px}.calc-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:25px}.calc-heading .desc{max-width:720px;color:var(--ink-soft);font-size:13px;margin:12px 0 0}.calc-detail-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,.82fr);gap:21px;align-items:start}.panel{border:1px solid var(--stroke);background:var(--surface);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:23px 24px;border-bottom:1px solid var(--stroke)}.panel-head h2{margin:0;font-size:15px}.panel-head small{color:var(--ink-soft);font-size:11px}.panel-body{padding:24px}.field-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.field{min-width:0;display:grid;gap:7px}.field label{font-size:12px;font-weight:700}.field .unit{font-weight:500;color:#8298a7;font-size:10px;margin-left:5px}.control{width:100%;background:var(--surface);border:1px solid #d2e0e6;border-radius:10px;padding:13px 13px;color:var(--ink);outline:0;min-height:46px}.control:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,139,140,.09)}.control::placeholder{color:#adbfc8}.input-info{font-size:10px;color:var(--ink-soft);margin:0}.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:24px}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:11px;padding:11px 15px;background:var(--accent);color:white;font-weight:700;font-size:12px;min-height:43px;text-decoration:none}.btn:hover{background:var(--accent-dark);text-decoration:none}.btn.outline{background:var(--surface);border:1px solid var(--stroke);color:var(--ink)}.btn.outline:hover{background:var(--soft)}.btn.compact{min-height:36px;padding:8px 12px}.result-panel{position:sticky;top:24px}.result-top{background:linear-gradient(150deg,#e9f8f5,#f8fcfb);padding:27px 24px 23px;border-bottom:1px solid #dcece8}.result-top .result-label{color:#538084;font-size:10px;letter-spacing:1.2px;font-weight:800}.result-value{font-size:clamp(30px,3.8vw,47px);font-weight:780;letter-spacing:-2px;line-height:1.2;margin-top:10px;color:#123c48}.result-unit{font-size:12px;color:#538084;letter-spacing:0;margin-left:4px;font-weight:500}.result-interpret{font-size:13px;font-weight:700;margin-top:13px;color:#26555b;line-height:1.5}.result-extra{padding:22px 24px}.result-extra p{font-size:12px;color:var(--ink-soft);margin:5px 0 14px}.result-extra ul{padding-left:18px;color:var(--ink-soft);font-size:11px;line-height:1.7;margin:10px 0}.result-extra li{margin:6px 0}.result-warning{background:var(--alert-bg);border:1px solid #f0dcb3;color:var(--alert);padding:12px 14px;border-radius:11px;font-size:11px;line-height:1.5;margin-bottom:17px}.result-errors{color:var(--red);font-size:11px;line-height:1.6}.result-errors li{margin-bottom:3px}.note-heading{font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;font-weight:800}.citation-panel{margin-top:20px;padding:18px 22px;border-radius:15px;border:1px solid var(--stroke);background:var(--surface)}.citation-panel summary{font-weight:750;font-size:13px;cursor:pointer}.citation-panel p{font-size:11px;color:var(--ink-soft)}.citation-panel a{font-size:11px;display:block;margin:8px 0;overflow-wrap:anywhere}.info-layout{max-width:870px}.info-layout h1{font-size:30px;letter-spacing:-1px}.info-card{background:var(--surface);border:1px solid var(--stroke);border-radius:15px;padding:23px;margin-top:15px}.info-card h3{margin:0 0 11px;font-size:15px}.info-card p,.info-card li{color:var(--ink-soft);font-size:13px;line-height:1.7}.info-card li{margin:7px 0}.tag{background:var(--accent-pale);color:var(--accent-dark);border-radius:100px;font-weight:700;padding:6px 10px;font-size:10px}.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,25px);background:#0f3344;color:#fff;padding:12px 19px;border-radius:11px;font-size:12px;box-shadow:0 6px 30px #061b2530;opacity:0;pointer-events:none;transition:all .2s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}.mobile-nav{display:none}
+html.dark{color-scheme:dark;--bg:#0b1926;--surface:#12283a;--ink:#e3eff5;--ink-soft:#abc0cb;--stroke:#29485c;--soft:#193648;--accent:#1da6a2;--accent-dark:#80d8c9;--accent-pale:#143c43;--alert-bg:#332a20;--alert:#f1bf82;--shadow:none}html.dark .search input{color:#e3eff5}html.dark .calc-card .card-icon{background:#174850;color:#b2f9e8}html.dark .hero{background:linear-gradient(110deg,#183e54,#086070)}html.dark .result-top{background:linear-gradient(150deg,#143d43,#13313e);border-color:#2e535b}html.dark .result-top .result-label,html.dark .result-unit{color:#97c4c5}html.dark .result-value,html.dark .result-interpret{color:#daf3ed}html.dark .control{border-color:#34586a}html.dark .result-warning{border-color:#6c5337}
+@media(max-width:1180px){.calc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.calc-detail-grid{grid-template-columns:1fr}.result-panel{position:static}.hero-heart{display:none}}
+@media(max-width:740px){.app-shell{display:block}.sidebar{display:none}.topbar{height:62px;padding:0 20px}.top-status{display:none}#main-content{padding:23px 18px 105px}.hero{min-height:190px;padding:27px 24px;border-radius:17px}.hero h1{font-size:31px;letter-spacing:-1px}.quick-stats{margin:17px 0 26px;gap:7px}.mini-stat{font-size:10px;padding:9px 10px}.mini-stat strong{font-size:15px}.content-top{display:block}.content-top h2{font-size:21px}.search{margin:15px 0 0;max-width:none}.chips{flex-wrap:nowrap;overflow:auto;white-space:nowrap;padding:4px 0 8px;scrollbar-width:none}.calc-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.calc-card{padding:15px 12px;min-height:171px;gap:11px}.calc-card h3{font-size:12px}.calc-card p{font-size:10px}.calc-card-bottom{font-size:9px}.fav-toggle{right:5px;top:5px}.calc-heading{margin-bottom:17px}.calc-title h1{font-size:25px}.panel-head,.panel-body{padding:19px}.field-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.field label{font-size:11px}.control{padding:11px 9px;font-size:13px}.result-top{padding:25px 21px}.result-extra{padding:20px}.mobile-nav{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;bottom:0;left:0;right:0;z-index:10;background:var(--surface);border-top:1px solid var(--stroke);padding:9px 4px max(9px,env(safe-area-inset-bottom));box-shadow:0 -5px 25px rgba(0,0,0,.03)}.mobile-nav button{border:0;background:none;color:var(--ink-soft);display:grid;justify-items:center;gap:2px;font-size:10px;font-weight:700;padding:5px}.mobile-nav button span{font-size:22px}.mobile-nav button.active{color:var(--accent-dark)}.footer{display:none}.toast{bottom:89px;width:max-content;max-width:90%}}
+@media(max-width:350px){.calc-grid{grid-template-columns:1fr}.calc-card{min-height:130px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Créditos de autoría: visibles también en Android */
+.sidebar-creator{font-size:10px;color:#9db8c9;line-height:1.6;padding:0 10px 13px}.sidebar-creator strong{display:block;color:#d6e8ef;font-weight:650}.hero-creator{display:inline-block;margin-top:12px;padding:7px 11px;border-radius:8px;background:rgba(255,255,255,.11);color:#d4f8f1;font-size:11px;letter-spacing:.1px}.hero-creator strong{font-weight:750;color:#fff}.about-creator{color:var(--accent-dark);font-size:14px;font-weight:550;margin-top:-3px}.about-creator strong{font-weight:750}
+
+  </style>
+  <title>KidBum CALC · Herramientas clínicas</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
+        <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.1.1</small></span>
+      </button>
+      <p class="nav-overline">NAVEGACIÓN</p>
+      <div class="side-menu" id="nav-menu"></div>
+      <div class="side-bottom">
+        <div class="safe-note"><span aria-hidden="true">✚</span><strong>Diseñado para razonar</strong><p>Apoyo educativo y clínico. Nunca sustituye la valoración médica.</p></div>
+        <div class="sidebar-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></div>
+        <div class="side-meta"><span class="online-dot" id="net-dot"></span><span id="net-label">Disponible sin conexión</span></div>
+      </div>
+    </aside>
+
+    <div class="page">
+      <header class="topbar">
+        <div class="breadcrumb"><span class="crumb-brand">KIDBUM</span><span class="crumb-slash">/</span><span id="breadcrumb-label">Inicio</span></div>
+        <div class="top-actions">
+          <span class="top-status"><span class="online-dot"></span>Sin suscripciones</span>
+          <button class="icon-btn" id="theme-btn" aria-label="Cambiar tema" title="Cambiar tema" type="button">◐</button>
+        </div>
+      </header>
+      <main id="main-content" tabindex="-1"></main>
+      <footer class="footer"><span>KidBum CALC <b>0.1.1</b> · Creada por <strong>Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Navegación móvil">
+    <button type="button" data-mobile-nav="home"><span>▦</span>Explorar</button>
+    <button type="button" data-mobile-nav="favorite"><span>☆</span>Favoritos</button>
+    <button type="button" data-mobile-nav="about"><span>ⓘ</span>Acerca de</button>
+  </nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script>
+/* KidBum CALC v0.1 · motor determinista sin red ni telemetría.
+ * Las salidas son cálculos auxiliares, no órdenes ni diagnósticos.
+ */
+(function(root,factory){
+  const api=factory();
+  if(typeof module==='object'&&module.exports)module.exports=api;
+  root.KidBumEngine=api;
+})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  'use strict';
+  function val(x){
+    if(typeof x==='string'){x=x.trim().replace(',', '.'); if(x==='')return NaN;}
+    if(x===null||x===undefined||typeof x==='boolean')return NaN;
+    const n=Number(x);return Number.isFinite(n)?n:NaN;
+  }
+  function valid(n,low,high){return Number.isFinite(n)&&n>=low&&n<=high;}
+  function fields(obj,rules){
+    const errors=[]; const o={};
+    for(const [key,desc] of Object.entries(rules)){
+      const [min,max,label]=desc;const n=val(obj[key]);
+      if(!valid(n,min,max))errors.push(`${label}: dato obligatorio o fuera de rango (${min}–${max}).`);
+      else o[key]=n;
+    }
+    return {o,errors};
+  }
+  function done(v,unit,interpretation='',notes=[],detail=''){
+    if(!Number.isFinite(v))return {error:['Resultado no finito: revisa los datos.']};
+    return {value:v,unit,interpretation,notes,detail};
+  }
+  const calc={
+    anion(o){
+      const f=fields(o,{na:[40,220,'Sodio'],cl:[20,200,'Cloro'],hco3:[1,70,'Bicarbonato']});
+      if(f.errors.length)return {error:f.errors};
+      const v=f.o.na-f.o.cl-f.o.hco3;
+      let notes=['El intervalo de referencia depende del laboratorio y método analítico.','No diagnostica acidosis metabólica sin gasometría/pH y contexto clínico.'];
+      let detail='AG = Na − (Cl + HCO₃).';
+      if(o.alb!==undefined&&String(o.alb).trim()!==''){
+        const a=val(o.alb);
+        if(!valid(a,0.5,7))return {error:['Albúmina: introduce un valor de 0.5 a 7 g/dL o déjala vacía.']};
+        const cv=v+2.5*(4-a);
+        detail+=` AG corregida por albúmina: ${cv.toFixed(1)} mmol/L [AG + 2.5 × (4 − albúmina g/dL)].`;
+        notes.push('La corrección por albúmina es aproximada; no sustituye la evaluación ácido-base.');
+      }else notes.push('Albúmina no disponible: la brecha podría estar infraestimada en hipoalbuminemia.');
+      return done(v,'mmol/L','Brecha aniónica sin potasio.',notes,detail);
+    },
+    osm(o){
+      const f=fields(o,{na:[40,220,'Sodio'],gluc:[1,1500,'Glucosa'],bun:[0,300,'BUN']});
+      if(f.errors.length)return {error:f.errors};
+      const v=2*f.o.na+f.o.gluc/18+f.o.bun/2.8;
+      const ton=2*f.o.na+f.o.gluc/18;
+      return done(v,'mOsm/kg aprox.','Osmolalidad calculada (estimación)', ['No es osmolalidad medida. Si sospechas osmoles no medidos, solicita osmolalidad sérica medida.','Fórmula en unidades convencionales: glucosa y BUN en mg/dL.'],`Tonicidad efectiva calculada: ${ton.toFixed(1)} mOsm/kg aprox. Fórmulas: 2×Na + glucosa/18 + BUN/2.8 y 2×Na + glucosa/18.`);
+    },
+    bmi(o){
+      const f=fields(o,{weight:[1,400,'Peso'],height:[30,250,'Estatura']});
+      if(f.errors.length)return {error:f.errors};
+      const v=f.o.weight/Math.pow(f.o.height/100,2);
+      const txt=v<18.5?'Bajo peso':v<25?'Rango habitual en adultos':v<30?'Sobrepeso':'Obesidad (clasificación IMC de adultos)';
+      return done(v,'kg/m²',txt,['La clasificación citada es para adultos. En niños se requieren curvas de IMC para la edad.','IMC no mide directamente grasa corporal.'],'IMC = peso (kg) / talla (m)².');
+    },
+    bsa(o){
+      const f=fields(o,{weight:[1,400,'Peso'],height:[30,250,'Estatura']});
+      if(f.errors.length)return {error:f.errors};
+      return done(Math.sqrt(f.o.weight*f.o.height/3600),'m²','Superficie corporal estimada — Mosteller',['No utilizar como única base para prescribir fármacos.'],'SC = √(talla cm × peso kg / 3600).');
+    },
+    map(o){
+      const f=fields(o,{sbp:[20,300,'Presión sistólica'],dbp:[10,220,'Presión diastólica']});
+      if(f.errors.length)return {error:f.errors};
+      if(f.o.dbp>f.o.sbp)return {error:['La presión diastólica no puede superar a la sistólica.']};
+      return done((f.o.sbp+2*f.o.dbp)/3,'mmHg','PAM estimada mediante fórmula convencional',['Aproximación: puede variar con frecuencia cardiaca y forma de onda.','Una PAM aislada no describe por sí sola la perfusión tisular.'],'PAM ≈ (PAS + 2×PAD)/3.');
+    },
+    shock(o){
+      const f=fields(o,{hr:[20,260,'Frecuencia cardiaca'],sbp:[20,300,'Presión sistólica']});
+      if(f.errors.length)return {error:f.errors};
+      const v=f.o.hr/f.o.sbp;
+      return done(v,'sin unidad',v>=0.9?'Índice elevado (según contexto)':'Índice sin elevación marcada',['El punto de corte depende de población y escenario; no excluye choque si es bajo.','Interpreta con perfusión, presión, lactato, hemorragia y tendencia.'],'Índice de choque = FC / PAS.');
+    },
+    egfr(o){
+      const f=fields(o,{age:[18,120,'Edad'],scr:[0.1,25,'Creatinina']});
+      if(f.errors.length)return {error:f.errors};
+      if(o.sex!=='female'&&o.sex!=='male')return {error:['Selecciona el sexo empleado por la ecuación CKD-EPI 2021.']};
+      const female=o.sex==='female', k=female?0.7:0.9, alpha=female?-0.241:-0.302;
+      const ratio=f.o.scr/k;
+      const v=142*Math.pow(Math.min(ratio,1),alpha)*Math.pow(Math.max(ratio,1),-1.2)*Math.pow(0.9938,f.o.age)*(female?1.012:1);
+      return done(v,'mL/min/1.73 m²','TFG estimada · CKD-EPI 2021 (creatinina, sin raza)',['Válida para personas adultas con creatinina estandarizada y relativamente estable.','Una sola TFG no diagnostica enfermedad renal crónica; requiere persistencia u otros marcadores.','Para dosificación, verificar recomendaciones del medicamento y considerar desindexación y/o cistatina C.'],'Ecuación CKD-EPI 2021 del NIDDK.');
+    },
+    cg(o){
+      const f=fields(o,{age:[18,120,'Edad'],weight:[15,400,'Peso'],scr:[0.1,25,'Creatinina']});
+      if(f.errors.length)return {error:f.errors};
+      if(o.sex!=='female'&&o.sex!=='male')return {error:['Selecciona sexo empleado en la ecuación histórica.']};
+      const v=(140-f.o.age)*f.o.weight/(72*f.o.scr)*(o.sex==='female'?0.85:1);
+      return done(v,'mL/min','Depuración estimada · Cockcroft–Gault',['Usa el peso introducido; el peso apropiado puede variar según composición corporal y medicamento.','Fórmula antigua, con limitaciones; NKF recomienda preferir TFG estimada moderna para muchas decisiones.','No usar de forma automática como orden de ajuste farmacológico.'],'CrCl = [(140 − edad)×peso kg]/[72×creatinina mg/dL] × 0.85 en mujer.');
+    },
+    fib4(o){
+      const f=fields(o,{age:[18,120,'Edad'],ast:[1,2000,'AST'],alt:[1,2000,'ALT'],plt:[1,1500,'Plaquetas']});
+      if(f.errors.length)return {error:f.errors};
+      const v=f.o.age*f.o.ast/(f.o.plt*Math.sqrt(f.o.alt));
+      let t=v>2.67?'Por encima de 2.67: evaluación adicional':(v>=1.3?'Zona que requiere evaluación adicional según contexto':'Menor de 1.3: menor probabilidad de fibrosis avanzada en el contexto apropiado');
+      if(f.o.age>65)t=v<2?'Menor de 2.0 (punto de corte adaptado >65 años)':'Igual o mayor de 2.0 (evaluación adicional en >65 años)';
+      return done(v,'puntos',t,['Evaluado principalmente para estratificar fibrosis avanzada en enfermedad hepática esteatósica.','No usar en enfermedad aguda; en menores de 35 años tiene baja exactitud.','No sustituye elastografía ni valoración etiológica.'],'FIB-4 = (edad × AST) / (plaquetas × √ALT), plaquetas en 10⁹/L.');
+    },
+    qsofa(o){
+      const f=fields(o,{sbp:[20,300,'Presión sistólica'],rr:[1,100,'Frecuencia respiratoria']});
+      if(f.errors.length)return {error:f.errors};
+      if(o.mental!==true&&o.mental!==false)return {error:['Selecciona explícitamente si existe alteración aguda del estado mental.']};
+      const v=Number(f.o.sbp<=100)+Number(f.o.rr>=22)+Number(o.mental);
+      return done(v,'/ 3 puntos',v>=2?'Dos o más criterios de riesgo pronóstico':'Menos de 2 criterios; NO descarta sepsis',['No usar qSOFA como herramienta única de cribado o para descartar sepsis.','Ante sospecha de sepsis y datos de disfunción orgánica, activar evaluación y protocolos institucionales sin esperar puntuaciones.'],'1 punto: PAS ≤100 mmHg; FR ≥22/min; alteración del estado mental.');
+    },
+    curb(o){
+      const f=fields(o,{age:[18,120,'Edad'],bun:[0,300,'BUN'],rr:[1,100,'FR'],sbp:[20,300,'PAS'],dbp:[10,220,'PAD']});
+      if(f.errors.length)return {error:f.errors};
+      if(f.o.dbp>f.o.sbp)return {error:['La PAD no puede superar la PAS.']};
+      if(o.confusion!==true&&o.confusion!==false)return {error:['Selecciona explícitamente si hay confusión nueva.']};
+      const v=Number(o.confusion)+Number(f.o.bun>19)+Number(f.o.rr>=30)+Number(f.o.sbp<90||f.o.dbp<=60)+Number(f.o.age>=65);
+      const it=v<=1?'Menor puntuación; no equivale a alta segura':v===2?'Puntuación intermedia: considerar valoración hospitalaria':'Puntuación alta: valoración hospitalaria urgente';
+      return done(v,'/ 5 puntos',it,['Aplicable como apoyo en neumonía adquirida en comunidad en adultos.','No sustituye saturación de O₂, comorbilidad, juicio clínico ni protocolos.','BUN >19 mg/dL ≈ urea >7 mmol/L; no mezclar unidades.'],'Confusión nueva + BUN >19 + FR ≥30 + PAS <90 o PAD ≤60 + edad ≥65; 1 punto cada uno.');
+    },
+    gcs(o){
+      const e=val(o.eye),v=val(o.verbal),m=val(o.motor);
+      if(o.eye==='NT'||o.verbal==='NT'||o.motor==='NT')return {value:null,unit:'',interpretation:'Hay un componente no evaluable: NO asignar suma total.',notes:['Registrar por separado E, V, M y causa de NT (p. ej., intubación o edema).','No asignar automáticamente V=1 por intubación.'],detail:`E${o.eye||'—'} V${o.verbal||'—'} M${o.motor||'—'}`};
+      if(!Number.isInteger(e)||e<1||e>4||!Number.isInteger(v)||v<1||v>5||!Number.isInteger(m)||m<1||m>6)return {error:['Selecciona las tres respuestas (ocular 1–4, verbal 1–5, motora 1–6).']};
+      const sum=e+v+m;
+      return done(sum,'/ 15 puntos','Glasgow (E'+e+' V'+v+' M'+m+')',['Reportar siempre los componentes individuales, no solo el total.','Interpretar con sedación, intoxicación, lesiones y evolución.'],'Total = ocular (1–4) + verbal (1–5) + motora (1–6).');
+    }
+  };
+  return Object.freeze({calculate:function(id,data){return calc[id]?calc[id](data||{}):{error:['Calculadora desconocida.']};},list:Object.freeze(Object.keys(calc))});
+});
+
+</script>
+<script>
+(function(){
+'use strict';
+const engine=window.KidBumEngine;
+const refs={
+  anion:[['Revisión clínica de brecha aniónica y albúmina','https://www.ccjm.org/content/90/10/619']],
+  osm:[['Revisión clínica de osmolalidad plasmática','https://pubmed.ncbi.nlm.nih.gov/27343561/']],
+  bmi:[['OMS — obesidad y sobrepeso','https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight']],
+  bsa:[['Fórmula de Mosteller y evaluación','https://pubmed.ncbi.nlm.nih.gov/16546483/']],
+  map:[['Revisión fisiológica de presión arterial media','https://www.ncbi.nlm.nih.gov/books/NBK538226/']],
+  shock:[['Índice de choque — revisión','https://pmc.ncbi.nlm.nih.gov/articles/PMC6698590/']],
+  egfr:[['NIDDK — CKD-EPI 2021 sin raza','https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults']],
+  cg:[['National Kidney Foundation — Cockcroft–Gault y limitaciones','https://www.kidney.org/professionals/kdoqi/cockcroft-gault-equation-estimating-creatinine-clearance']],
+  fib4:[['AASLD — orientación clínica 2023','https://pmc.ncbi.nlm.nih.gov/articles/PMC10735173/']],
+  qsofa:[['Sepsis-3 — definición original','https://jamanetwork.com/journals/jama/fullarticle/2492881'],['Surviving Sepsis Campaign — guías 2026','https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026']],
+  curb:[['CURB-65 — criterios y validación resumidos','https://www.mdcalc.com/calc/324/curb-65-score-pneumonia-severity']],
+  gcs:[['Glasgow Coma Scale — web oficial','https://www.glasgowcomascale.org/faq/']]
+};
+const num=(key,label,unit,min,max,example,extra='')=>({key,label,unit,type:'number',min,max,example,extra});
+const choice=(key,label,options,example)=>({key,label,type:'choice',options,example});
+const yesno=(key,label,example)=>choice(key,label,[['','Selecciona una respuesta'],['false','No'],['true','Sí']],example);
+const defs=[
+{id:'anion',title:'Brecha aniónica',category:'Química clínica',short:'Con corrección opcional por albúmina',symbol:'∑',detail:'Estima la diferencia entre cationes y aniones medidos; no es un diagnóstico aislado.',fields:[num('na','Sodio','mmol/L',40,220,'140'),num('cl','Cloro','mmol/L',20,200,'104'),num('hco3','Bicarbonato','mmol/L',1,70,'23'),{...num('alb','Albúmina','g/dL',.5,7,'2'),optional:true,extra:'Opcional: si no la conoces, deja vacío.'}]},
+{id:'osm',title:'Osmolalidad calculada',category:'Química clínica',short:'Estimación total y tonicidad efectiva',symbol:'≈',detail:'Requiere sodio, glucosa y nitrógeno ureico (BUN) en unidades convencionales.',fields:[num('na','Sodio','mmol/L',40,220,'140'),num('gluc','Glucosa','mg/dL',1,1500,'90'),num('bun','BUN (nitrógeno ureico)','mg/dL',0,300,'14')]},
+{id:'bmi',title:'Índice de masa corporal',category:'Antropometría',short:'IMC y clasificación en adultos',symbol:'◫',detail:'Relaciona peso y talla. Las categorías adultas no son extrapolables a población pediátrica.',fields:[num('weight','Peso','kg',1,400,'70'),num('height','Estatura','cm',30,250,'170')]},
+{id:'bsa',title:'Superficie corporal',category:'Antropometría',short:'Ecuación de Mosteller',symbol:'□',detail:'Estimación antropométrica usada como dato auxiliar en múltiples contextos clínicos.',fields:[num('weight','Peso','kg',1,400,'70'),num('height','Estatura','cm',30,250,'170')]},
+{id:'map',title:'Presión arterial media',category:'Hemodinámica',short:'PAM aproximada',symbol:'↗',detail:'Estimación clásica a partir de presión sistólica y diastólica.',fields:[num('sbp','Presión sistólica','mmHg',20,300,'120'),num('dbp','Presión diastólica','mmHg',10,220,'80')]},
+{id:'shock',title:'Índice de choque',category:'Hemodinámica',short:'Frecuencia cardiaca / PAS',symbol:'⌁',detail:'Indicador sencillo de relación entre frecuencia cardiaca y presión sistólica.',fields:[num('hr','Frecuencia cardiaca','lpm',20,260,'100'),num('sbp','Presión sistólica','mmHg',20,300,'100')]},
+{id:'egfr',title:'TFG estimada CKD-EPI',category:'Función renal',short:'Versión 2021 · adultos · sin raza',symbol:'℞',detail:'Estimación de filtración glomerular con creatinina, edad y coeficiente de sexo de la ecuación.',fields:[num('age','Edad','años',18,120,'50'),num('scr','Creatinina sérica','mg/dL',.1,25,'1'),choice('sex','Sexo de ecuación',[['','Selecciona'],['female','Mujer'],['male','Hombre']],'male')]},
+{id:'cg',title:'Cockcroft–Gault',category:'Función renal',short:'Depuración estimada de creatinina',symbol:'⌬',detail:'Fórmula histórica, aún referida en algunos prospectos; el tipo de peso requiere decisión clínica.',fields:[num('age','Edad','años',18,120,'60'),num('weight','Peso introducido','kg',15,400,'70'),num('scr','Creatinina','mg/dL',.1,25,'1'),choice('sex','Sexo de ecuación',[['','Selecciona'],['female','Mujer'],['male','Hombre']],'female')]},
+{id:'fib4',title:'FIB-4',category:'Hepatología',short:'Estimación de riesgo de fibrosis avanzada',symbol:'⌗',detail:'Estratificación inicial en el contexto adecuado; no aplicar durante enfermedad aguda.',fields:[num('age','Edad','años',18,120,'55'),num('ast','AST / TGO','U/L',1,2000,'40'),num('alt','ALT / TGP','U/L',1,2000,'40'),num('plt','Plaquetas','10⁹/L',1,1500,'200')]},
+{id:'qsofa',title:'qSOFA',category:'Escalas clínicas',short:'Riesgo pronóstico con infección sospechada',symbol:'✚',detail:'Tres variables de riesgo; no usar como único tamizaje ni prueba de exclusión de sepsis.',fields:[num('sbp','Presión sistólica','mmHg',20,300,'95'),num('rr','Frecuencia respiratoria','rpm',1,100,'22'),yesno('mental','Alteración aguda del estado mental','false')]},
+{id:'curb',title:'CURB-65',category:'Escalas clínicas',short:'Gravedad de neumonía comunitaria',symbol:'⊞',detail:'Escala para adultos con neumonía adquirida en la comunidad. Requiere BUN, no urea en mg/dL.',fields:[num('age','Edad','años',18,120,'70'),num('bun','BUN (no urea)','mg/dL',0,300,'20'),num('rr','Frecuencia respiratoria','rpm',1,100,'32'),num('sbp','Presión sistólica','mmHg',20,300,'88'),num('dbp','Presión diastólica','mmHg',10,220,'58'),yesno('confusion','Confusión nueva','true')]},
+{id:'gcs',title:'Glasgow',category:'Escalas clínicas',short:'Ocular + verbal + motora',symbol:'◉',detail:'Registrar siempre los tres componentes, incluyendo NT cuando no sea posible evaluarlos.',fields:[choice('eye','Respuesta ocular',[['','Selecciona'],['4','4 · Espontánea'],['3','3 · Al sonido'],['2','2 · A presión'],['1','1 · Sin respuesta'],['NT','No evaluable (NT)']],'4'),choice('verbal','Respuesta verbal',[['','Selecciona'],['5','5 · Orientada'],['4','4 · Confusa'],['3','3 · Palabras'],['2','2 · Sonidos'],['1','1 · Ninguna'],['NT','No evaluable (NT)']],'5'),choice('motor','Respuesta motora',[['','Selecciona'],['6','6 · Obedece órdenes'],['5','5 · Localiza'],['4','4 · Flexión normal'],['3','3 · Flexión anormal'],['2','2 · Extensión'],['1','1 · Ninguna'],['NT','No evaluable (NT)']],'6')]}
+];
+const categories=['Todas','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología'];
+const main=document.getElementById('main-content');
+let screen='home',category='Todas',search='',id='',faves=loadFaves(),latest=null;
+function loadFaves(){try{const x=JSON.parse(localStorage.getItem('kidbum-favs')||'[]');return Array.isArray(x)?x.filter(y=>defs.some(d=>d.id===y)):[];}catch{return [];}}
+function storePrefs(){try{localStorage.setItem('kidbum-favs',JSON.stringify(faves));}catch{}}
+function el(q){return document.querySelector(q)}
+function enc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3000);}
+function go(page,what=''){screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
+function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
+function renderNav(){const items=[['home','▦','Explorar'],['favorite','☆','Guardadas'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||(s==='home'&&screen==='calc')?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav||b.dataset.mobileNav));document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(b.dataset.mobileNav==='home'&&screen==='calc')||b.dataset.mobileNav===screen));}
+function render(){renderNav();el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='favorite'?'Guardadas':screen==='about'?'Información':'Inicio';if(screen==='about'){renderAbout();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
+function renderHome(full){
+ const list=defs.filter(d=>(screen!=='favorite'||faves.includes(d.id))&&(category==='Todas'||d.category===category)&&(d.title+' '+d.short+' '+d.category).toLowerCase().includes(search.toLowerCase()));
+ const cards=list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><span class="card-icon">${d.symbol}</span><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
+ if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1>Precisión clínica.<br>Sin complicaciones.</h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></div></div><div class="hero-heart" aria-hidden="true"><svg viewBox="0 0 120 100"><path d="M2 55h26l10-30 21 59 18-44 9 15h32" stroke="#a1eee1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></section><div class="quick-stats"><span class="mini-stat"><strong>12</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div class="chips" id="chips"></div><div id="calc-list" class="calc-grid"></div>`;
+ el('#chips').innerHTML=categories.map(c=>`<button type="button" class="chip ${category===c?'active':''}" data-cat="${enc(c)}">${enc(c)}</button>`).join('');
+ el('#calc-list').innerHTML=cards||`<div class="empty-state">${screen==='favorite'?'Todavía no tienes favoritas. Marca ☆ en cualquier calculadora.':'No encontramos coincidencias. Prueba otro término.'}</div>`;
+ document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderHome(false);});
+ document.querySelectorAll('[data-open]').forEach(c=>{c.onclick=e=>{if(e.target.closest('[data-star]'))return;go('calc',c.dataset.open);};c.onkeydown=e=>{if(e.key==='Enter'&&e.target===c)go('calc',c.dataset.open);};});
+ document.querySelectorAll('[data-star]').forEach(b=>b.onclick=e=>{e.stopPropagation();favorite(b.dataset.star);});
+ el('#search-input').oninput=e=>{search=e.target.value;renderHome(false);};
+}
+function renderCalc(){
+ const d=defs.find(x=>x.id===id);latest=null;
+ main.innerHTML=`<button type="button" class="breadcrumb-back" id="back">← Volver a calculadoras</button><div class="calc-heading"><div class="calc-title"><div class="eyebrow">${enc(d.category)} · CALCULADORA CLÍNICA</div><h1>${enc(d.title)}</h1><p class="desc">${enc(d.detail)}</p></div><button type="button" class="btn outline compact" id="star-main">${faves.includes(id)?'★ Guardada':'☆ Guardar'}</button></div><div class="calc-detail-grid"><section class="panel"><div class="panel-head"><h2>01 / Datos necesarios</h2><small>Campos sin datos predeterminados</small></div><div class="panel-body"><div class="field-grid">${d.fields.map(f=>`<div class="field"><label for="f-${f.key}">${enc(f.label)}${f.unit?`<span class="unit">${enc(f.unit)}</span>`:''}</label>${f.type==='number'?`<input id="f-${f.key}" class="control" type="text" inputmode="decimal" placeholder="${f.optional?'Opcional':'Introduce valor'}" aria-required="${!f.optional}" autocomplete="off" />`:`<select class="control" id="f-${f.key}" aria-required="true">${f.options.map(([value,label])=>`<option value="${enc(value)}">${enc(label)}</option>`).join('')}</select>`}${f.extra?`<small class="input-info">${enc(f.extra)}</small>`:''}</div>`).join('')}</div><div class="actions"><button type="button" class="btn outline" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="btn outline" id="reset">↻ Limpiar</button></div><p class="input-info" style="margin-top:18px">No guardamos los datos clínicos introducidos. El ejemplo no representa un paciente real.</p></div></section><aside class="panel result-panel" aria-live="polite"><div class="result-top"><div class="result-label">02 / RESULTADO</div><div class="result-value" id="result-value">—</div><div class="result-interpret" id="result-interp">Completa los campos para calcular.</div></div><div class="result-extra"><div id="result-errors"></div><div id="result-extra" style="display:none"><div class="note-heading">Interpretación y precauciones</div><p id="detail-text"></p><ul id="notes-list"></ul></div><div class="result-warning">⚠ Herramienta de apoyo: no reemplaza juicio clínico, evaluación presencial ni protocolos institucionales.</div><button type="button" id="copy-result" class="btn" disabled>▣ Copiar para analizar en ChatGPT</button><p class="input-info">Solo copia texto cuando tú lo solicitas. No existe conexión automática con ninguna API.</p></div></aside></div><details class="citation-panel"><summary>Fuentes, fórmulas y límites de aplicación</summary><p>Fuentes externas de referencia para revisar los métodos utilizados. Consulta actualizaciones antes de decisiones de alto riesgo.</p>${(refs[d.id]||[]).map(([t,u])=>`<a target="_blank" rel="noopener noreferrer" href="${enc(u)}">${enc(t)} ↗</a>`).join('')}</details>`;
+ el('#back').onclick=()=>go('home');el('#star-main').onclick=()=>favorite(id);el('#example').onclick=()=>{d.fields.forEach(f=>{el('#f-'+f.key).value=f.example||'';});update();toast('Ejemplo ficticio cargado');};el('#reset').onclick=()=>{d.fields.forEach(f=>el('#f-'+f.key).value='');update();};d.fields.forEach(f=>el('#f-'+f.key).addEventListener(f.type==='number'?'input':'change',update));el('#copy-result').onclick=copyPrompt;update();
+}
+function update(){
+ const d=defs.find(x=>x.id===id),data={},missing=[];
+ for(const f of d.fields){const raw=el('#f-'+f.key).value;
+  if(raw===''&&!f.optional)missing.push(f.label);
+  if(f.type==='choice'&&(f.key==='mental'||f.key==='confusion'))data[f.key]=raw===''?undefined:raw==='true';
+  else data[f.key]=raw;
+ }
+ const res=missing.length?{missing}:engine.calculate(id,data);latest=res;
+ const out=el('#result-value'),interp=el('#result-interp'),errors=el('#result-errors'),extra=el('#result-extra'),copy=el('#copy-result');
+ if(res.missing){out.textContent='—';interp.textContent=`Faltan ${res.missing.length} ${res.missing.length===1?'dato':'datos'} para calcular.`;errors.innerHTML='';extra.style.display='none';copy.disabled=true;return;}
+ if(res.error){out.textContent='—';interp.textContent='Corrige los datos para calcular.';errors.innerHTML='<ul class="result-errors">'+res.error.map(s=>`<li>${enc(s)}</li>`).join('')+'</ul>';extra.style.display='none';copy.disabled=true;return;}
+ out.innerHTML=res.value===null?'No evaluable':`${res.value.toLocaleString('es-MX',{maximumFractionDigits:res.value<5?2:1,minimumFractionDigits:res.value%1===0?0:1})}<span class="result-unit">${enc(res.unit)}</span>`;
+ interp.textContent=res.interpretation;errors.innerHTML='';extra.style.display='block';el('#detail-text').textContent=res.detail||'';el('#notes-list').innerHTML=(res.notes||[]).map(t=>`<li>${enc(t)}</li>`).join('');copy.disabled=false;
+}
+async function copyPrompt(){const d=defs.find(x=>x.id===id);if(!latest||latest.error||latest.missing)return;const parts=d.fields.map(f=>{const v=el('#f-'+f.key).value;return `${f.label}: ${v||'no disponible'}${f.unit?' '+f.unit:''}`;});const msg=`KidBum CALC — ${d.title}\nDatos clínicos SIN identificadores:\n${parts.join('\n')}\nResultado: ${latest.value===null?'No evaluable':latest.value.toFixed(2)+' '+latest.unit}\nInterpreta el resultado y sus limitaciones clínicas; señala datos faltantes y signos de alarma. No inventes información ni prescribas sin validación.`;
+ try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(msg);else{const area=document.createElement('textarea');area.value=msg;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();const ok=document.execCommand('copy');area.remove();if(!ok)throw new Error('clipboard');}toast('Copiado. Pega el texto en tu conversación de KidBum.');}catch{toast('No se pudo copiar: selecciona los datos manualmente.');}}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Copiar para ChatGPT» actúa únicamente cuando tú lo pulsas.</li></ul></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 12 calculadoras con fórmulas explícitas y enlaces a fuentes. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.1.1 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
+try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
+function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
+if('serviceWorker'in navigator&&window.location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();
+})();
+
+</script>
+</body>
+</html>
