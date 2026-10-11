@@ -114,7 +114,7 @@ function holliday(o){
  if(!valid(w,.4,200)||!Number.isInteger(days)||!valid(days,28,6574))return {error:['La fórmula se presenta para 28 días a 18 años. Requiere edad en días y peso válidos.']};
  const daily=Math.min(w,10)*100+Math.min(Math.max(w-10,0),10)*50+Math.max(w-20,0)*20;
  return outcome(daily,'mL/24 h','Mantenimiento teórico Holliday–Segar, NO es prescripción',
- ['No utilizar para reanimación, deshidratación, pérdidas persistentes ni para ajustar por sí solo enfermedad grave.','La AAP recomienda líquidos isotónicos en muchos niños de 28 días a 18 años que requieren mantenimiento IV, con excepciones importantes; composición, volumen y monitoreo deben individualizarse.','En pacientes críticos, exceso de ADH, falla renal/cardiaca, hepatopatía y otros escenarios, la necesidad puede ser menor; consultar protocolo y electrólitos.'],
+ ['No utilizar para reanimación, deshidratación, pérdidas persistentes ni para ajustar por sí solo enfermedad grave.','La AAP recomienda líquidos isotónicos en muchos niños de 28 días a 18 años que requieren mantenimiento IV, con excepciones importantes; composición, volumen y monitoreo deben individualizarse.','En pacientes críticos, exceso de ADH, falla renal/cardiaca, hepatopatía y otros escenarios, la necesidad puede ser menor; consultar protocolo y electrólitos.',...(daily>2000?['NICE NG29: rara vez se requieren más de 2,000 mL/día en niñas o 2,500 mL/día en niños; este cálculo no debe extrapolarse como prescripción automática.']:[])],
  'Holliday–Segar: 100 mL/kg/d para primeros 10 kg + 50 mL/kg/d para siguientes 10 kg + 20 mL/kg/d por kg adicional. Volumen teórico/24 = '+daily.toFixed(1)+' mL; equivalente horario exacto='+(daily/24).toFixed(2)+' mL/h.');
 }
 function rule421(o){
@@ -127,7 +127,7 @@ function rule421(o){
 }
 function neonatal(o){
  const w=num(o.weight),day=num(o.day);
- if(!valid(w,.4,8)||!Number.isInteger(day)||!valid(day,1,28))return {error:['Solo recién nacido a término, día de vida 1–28 y peso 0.4–8 kg.']};
+ if(!valid(w,1,8)||!Number.isInteger(day)||!valid(day,1,28))return {error:['Solo recién nacido a término, día de vida 1–28 y peso 1–8 kg.']};
  const band=day===1?[50,60]:day===2?[70,80]:day===3?[80,100]:day===4?[100,120]:[120,150];
  const low=band[0]*w,high=band[1]*w;
  return outcome((low+high)/2,'mL/24 h (punto medio)','Rango de referencia neonatal: '+low.toFixed(1)+'–'+high.toFixed(1)+' mL/24 h',
