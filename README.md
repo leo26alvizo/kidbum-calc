@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.5**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.6**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 54 calculadoras en 11 categorías.**
+**Total actual: 58 calculadoras en 11 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -282,3 +282,18 @@ Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014),
 - Fuentes: [Johnston y col. 2007 ABCD²](https://pubmed.ncbi.nlm.nih.gov/17258668/), [AHA AIT 2023](https://professional.heart.org/en/science-news/diagnosis-workup-risk-reduction-of-transient-ischemic-attack-in-the-emergency-department-setting), [AHA/ASA EVC isquémico agudo 2026](https://www.ahajournals.org/doi/10.1161/STR.0000000000000513) y [Glasgow oficial](https://www.glasgowcomascale.org/faq/).
 
 **Alcance:** educativo y de verificación aritmética; no certificado como dispositivo clínico ni validado institucionalmente. Requiere evaluación médica presencial y doble verificación de medicamentos según protocolo local.
+
+
+## KidBum CALC v0.9.6 — Neurología y Raquimedular completada
+
+Se incorporaron NIHSS, Hunt y Hess, Fisher ORIGINAL y ASIA/AIS guiada. Ya están las siete herramientas solicitadas: Glasgow, ABCD², alteplasa, NIHSS, Hunt-Hess, Fisher y ASIA/AIS. Total **58 calculadoras** en 11 categorías; no se añadieron calculadoras de Cardiología.
+
+- NIHSS: 15 ítems NINDS completos, 0–42 y UN solo en ítems específicos. UN produce total no evaluable, no cero. No decide reperfusión.
+- Hunt-Hess: grado I–V para HSA confirmada, no un puntaje aditivo.
+- Fisher original: grado I–IV según TAC inicial, diferencia explícita con Fisher modificada y bloquea mezcla indeterminada con hemorragia ventricular y sangre subaracnoidea gruesa.
+- ASIA/AIS guiada: requiere ISNCSCI completa y NLI **previamente determinado por un profesional**, evaluación sacra S4–5, DAP, VAC, estado motor >3 segmentos debajo del nivel motor ipsilateral (incluyendo músculos no clave), y músculos clave bajo NLI para C/D. Clasifica de forma orientativa A–E; NT o datos faltantes se rechazan. **No calcula niveles motores/sensitivos, NLI ni ZPP y no sustituye la ISNCSCI 9ª edición 2026.**
+- Módulo offline `assets/neurology-advanced.js`, referencias visibles y nuevas pruebas de regresión; no se alteran motores clínicos previos ni imágenes originales.
+
+Referencias: [NINDS NIHSS oficial](https://www.ninds.nih.gov/sites/default/files/2025-03/KnowStroke_NIHStrokeScale_March2025_508c.pdf), [AAFP HSA](https://www.aafp.org/afp/2023/1000/nontraumatic-sah-ruptured-intracranial-aneurysm), [Fisher original](https://pmc.ncbi.nlm.nih.gov/articles/PMC3621041/), [ASIA/ISCoS ISNCSCI 2026](https://asia-spinalinjury.org/isncsci-resources/).
+
+**Seguridad:** prueba automatizada aritmética no equivale a validación clínica institucional. Para AIS y NIHSS se necesita exploración presencial de personal capacitado y validación especializada.

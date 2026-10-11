@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.9\.5/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.9\.6/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v095-neurology-phase1/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v096-neurology-complete/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -68,11 +68,12 @@ vm.runInNewContext(fs.readFileSync('assets/pediatric-ward.js','utf8'),ctx,{timeo
 vm.runInNewContext(fs.readFileSync('assets/hospital-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/advanced-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/neurology-module.js','utf8'),ctx,{timeout:2000});
+vm.runInNewContext(fs.readFileSync('assets/neurology-advanced.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
 const t=[
 ['Original anion gap',()=>assert.equal(calc('anion',{na:140,cl:104,hco3:23}).value,13)],
-['Count',()=>assert.equal(ctx.KidBumEngine.list.length,54)],
+['Count',()=>assert.equal(ctx.KidBumEngine.list.length,58)],
 ['Dating 0w0d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-01-01'}).display,'0 sem + 0 d')],
 ['Dating 40w3d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-10-11'}).display,'40 sem + 3 d')],
 ['Date reversed',()=>assert.ok(calc('agfum',{lmp:'2026-10-11',asof:'2026-01-01'}).error)],
@@ -146,7 +147,7 @@ const t=[
 ['Dose limits do not autoauthorize',()=>assert.match(calc('pedmaxverify',{weight:10,dose:100,frequency:4,maxSingle:120,maxDaily:500}).interpretation,/NO equivale/)],
 ['Access review not approval',()=>assert.equal(calc('pedaccess',{context:'highpn'}).display,'Valorar acceso')],
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
-['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length,35)],
+['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
 ['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)],
 ['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
@@ -203,7 +204,7 @@ const expansionTests=[
 ['FeUrea no zero denominator',()=>assert.ok(calc('feurea',{ureaU:300,ureaP:0,ucr:80,pcr:2,ureaunit:'urea_mgdl',diuretics:'false'}).error)],
 ['FeUrea BUN consistent',()=>assert.equal(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,ureaunit:'bun_mgdl',diuretics:'false'}).value,18.75)],
 ['Hospital reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/37384888/'))],
-['Original 45 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length,45)]
+['Original 45 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,45)]
 ];
 t.push(...expansionTests);
 
@@ -211,7 +212,7 @@ const advancedTests=[
 ['Advanced module loaded',()=>assert.ok(html.includes('assets/advanced-module.js'))],
 ['Advanced module cached offline',()=>assert.ok(swSource.includes('./assets/advanced-module.js'))],
 ['Advanced module three tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
-['54 calculators in engine',()=>assert.equal(ctx.KidBumEngine.list.length,54)],
+['58 calculators in engine',()=>assert.equal(ctx.KidBumEngine.list.length,58)],
 ['Cardiology category',()=>assert.ok(html.includes("'Cardiología'"))],
 ['Gastroenterology category',()=>assert.ok(html.includes("'Gastroenterología'"))],
 ['New categories shown on home page',()=>assert.ok(html.includes("'Cardiología','Gastroenterología'"))],
@@ -228,7 +229,7 @@ const advancedTests=[
 ['RCRI renal below threshold',()=>assert.equal(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',insulin:'false',scr:1.99}).value,0)],
 ['RCRI all six',()=>assert.equal(calc('rcri',{surgery:'true',ischemia:'true',hf:'true',cvd:'true',insulin:'true',scr:2}).value,6)],
 ['RCRI missing field',()=>assert.ok(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',scr:2}).error)],
-['Previous 49 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length,49)]
+['Previous 49 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,49)]
 ];
 const gbsBase={ureaunit:'urea_mmoll',urea:5,hb:14,hbsex:'male',sbp:120,hr:80,melena:'false',syncope:'false',liver:'false',hf:'false'};
 advancedTests.push(['GBS zero',()=>assert.equal(calc('gbs',gbsBase).value,0)]);
@@ -257,7 +258,7 @@ const cardiologiaTests=[
  ['Cardiology category uses supplied JPEG',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
  ['Cardiology image shares photo class of other cards',()=>assert.ok(html.includes('atlas-gineco-photo atlas-cardiologia-photo'))],
  ['Cardiology preserves no filter and full opacity',()=>assert.match(html,/\.atlas-cardiologia-feature \.atlas-cardiologia-photo\{[\s\S]*?filter:none!important/)],
- ['All previous 52 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length,52)]
+ ['All previous 52 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
 ];
 t.push(...cardiologiaTests);
 
@@ -267,7 +268,7 @@ const gastroCardTests=[
  ['Gastroenterology preserves existing local raster image',()=>assert.ok(atlasGlobal.KidBumAtlas.img('childpugh','atlas-category-illustration atlas-gineco-photo atlas-gastro-photo').includes('./assets/atlas-childpugh.jpg'))],
  ['Gastroenterology card has shared photo class',()=>assert.ok(html.includes('class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo"'))],
  ['Gastroenterology image remains unfiltered',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?filter:none!important/)],
- ['Gastroenterology retains previous 52 calculators',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length,52)],
+ ['Gastroenterology retains previous 52 calculators',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
  ['Existing gastrointestinal raster remains offline cached',()=>assert.ok(swSource.includes("'./assets/atlas-childpugh.jpg'"))]
 ];
 t.push(...gastroCardTests);
@@ -277,7 +278,7 @@ const gastroPhotoTests=[
  ['Gastroenterology remains full-width featured',()=>assert.ok(html.includes("c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature'"))],
  ['Gastroenterology transparent art fully visible',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?object-fit:contain/)],
  ['Gastroenterology image precached',()=>assert.ok(swSource.includes("'./assets/gastroenterologia-portada.webp'"))],
- ['All previous 52 calculators preserved after Gastro photo',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length,52)]
+ ['All previous 52 calculators preserved after Gastro photo',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
 ];
 t.push(...gastroPhotoTests);
 
@@ -288,7 +289,7 @@ const anthropometryPhotoTests=[
  ['Anthropometry uses shared photo styles',()=>assert.ok(html.includes('atlas-gineco-photo atlas-antropometria-photo'))],
  ['Anthropometry photograph displays without cropping',()=>assert.match(html,/\.atlas-antropometria-feature \.atlas-antropometria-photo \{[\s\S]*?object-fit:contain/)],
  ['Anthropometry image available offline',()=>assert.ok(swSource.includes("'./assets/antropometria-portada.jpg'"))],
- ['Original 52 clinical tools preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length,52)],
+ ['Original 52 clinical tools preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
  ['Other category photos retained',()=>assert.ok(html.includes('src="./assets/gastroenterologia-portada.webp"')&&html.includes('src="./assets/cardiologia-portada.jpg"'))]
 ];
 t.push(...anthropometryPhotoTests);
@@ -299,7 +300,7 @@ const neuroPhaseOneTests=[
  ['Neurology category created',()=>assert.ok(html.includes("const categories=['Todas','Neurología y Raquimedular'"))],
  ['Neurology featured wide card',()=>assert.ok(html.includes("c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature'"))],
  ['Neurology uses existing local art',()=>assert.ok(html.includes("atlas-neuro-photo")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
- ['54 unique calculator ids',()=>assert.equal(ctx.KidBumEngine.list.length,54)],
+ ['58 unique calculator ids',()=>assert.equal(ctx.KidBumEngine.list.length,58)],
  ['Two new neuro calculators',()=>assert.equal(ctx.KidBumNeuro.ids.length,2)],
  ['Glasgow no duplicate',()=>assert.equal((html.match(/\{id:'gcs',title:/g)||[]).length,1)],
  ['Glasgow moved to Neuro',()=>assert.ok(html.includes("title:'Glasgow',category:'Neurología y Raquimedular'"))],
@@ -342,5 +343,69 @@ neuroPhaseOneTests.push(
  ['Reference to Johnston 2007',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/17258668/'))]
 );
 t.push(...neuroPhaseOneTests);
+
+const completionTests=[
+ ['NIHSS module is loaded',()=>assert.ok(html.includes('assets/neurology-advanced.js'))],
+ ['NIHSS module precached',()=>assert.ok(swSource.includes("'./assets/neurology-advanced.js'"))],
+ ['58 calculators now registered',()=>assert.equal(ctx.KidBumEngine.list.length,58)],
+ ['Four neurologic advanced tools',()=>assert.equal(ctx.KidBumNeurologyAdvanced.ids.length,4)],
+ ['All previous 54 remain',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumNeurologyAdvanced.ids.length,54)],
+ ['One original Glasgow only',()=>assert.equal((html.match(/\{id:'gcs',title:/g)||[]).length,1)],
+ ['No additional cardiology tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
+ ['NIHSS all default normal',()=>assert.equal(calc('nihss',{confirm:'yes',loca:'0',locb:'0',locc:'0',gaze:'0',visual:'0',face:'0',armL:'0',armR:'0',legL:'0',legR:'0',ataxia:'0',sensory:'0',language:'0',dysarthria:'0',neglect:'0'}).value,0)]
+];
+const NIH={confirm:'yes',loca:'0',locb:'0',locc:'0',gaze:'0',visual:'0',face:'0',armL:'0',armR:'0',legL:'0',legR:'0',ataxia:'0',sensory:'0',language:'0',dysarthria:'0',neglect:'0'};
+const nihMax={loca:'3',locb:'2',locc:'2',gaze:'2',visual:'3',face:'3',armL:'4',armR:'4',legL:'4',legR:'4',ataxia:'2',sensory:'2',language:'3',dysarthria:'2',neglect:'2'};
+completionTests.push(
+ ['NIHSS max 42',()=>assert.equal(calc('nihss',{...NIH,...nihMax}).value,42)],
+ ['NIHSS arm UN no total',()=>assert.equal(calc('nihss',{...NIH,armL:'UN'}).value,null)],
+ ['NIHSS ataxia UN no total',()=>assert.equal(calc('nihss',{...NIH,ataxia:'UN'}).value,null)],
+ ['NIHSS dysarthria UN no total',()=>assert.equal(calc('nihss',{...NIH,dysarthria:'UN'}).value,null)],
+ ['NIHSS visual UN invalid',()=>assert.ok(calc('nihss',{...NIH,visual:'UN'}).error)],
+ ['NIHSS face grade 4 invalid',()=>assert.ok(calc('nihss',{...NIH,face:'4'}).error)],
+ ['NIHSS missing item invalid',()=>assert.ok(calc('nihss',{...NIH,language:''}).error)],
+ ['NIHSS must be examined',()=>assert.ok(calc('nihss',{...NIH,confirm:'no'}).error)],
+ ['NIHSS zero not excluding stroke',()=>assert.ok(calc('nihss',NIH).notes.some(n=>n.toLowerCase().includes('no excluye')))],
+ ['NIHSS UN requires explanation',()=>assert.ok(calc('nihss',{...NIH,armL:'UN'}).notes.some(n=>n.includes('justificar')))]
+);
+for(let grade=1;grade<=5;grade++){
+ completionTests.push(['Hunt-Hess grade '+grade,()=>assert.equal(calc('hunthess',{confirm:'yes',grade:String(grade)}).value,grade)]);
+}
+completionTests.push(
+ ['Hunt-Hess requires confirmed SAH',()=>assert.ok(calc('hunthess',{confirm:'no',grade:'1'}).error)],
+ ['Hunt-Hess missing grade',()=>assert.ok(calc('hunthess',{confirm:'yes',grade:''}).error)]
+);
+for(const [pattern,grade] of [['none',1],['thin',2],['thick',3],['ivhthin',4]]){
+ completionTests.push(['Original Fisher '+grade,()=>assert.equal(calc('fisher',{confirm:'yes',pattern}).value,grade)]);
+}
+completionTests.push(
+ ['Fisher blocks ambiguous thick SAH and IVH',()=>assert.ok(calc('fisher',{confirm:'yes',pattern:'ivhthick'}).error)],
+ ['Fisher blocks uncertain CT',()=>assert.ok(calc('fisher',{confirm:'yes',pattern:'unclear'}).error)],
+ ['Fisher CT exam required',()=>assert.ok(calc('fisher',{confirm:'no',pattern:'thin'}).error)],
+ ['Fisher modified warning',()=>assert.ok(calc('fisher',{confirm:'yes',pattern:'thick'}).notes.some(x=>x.includes('MODIFICADA')))]
+);
+const AIS={exam:'yes',nli:'T12',normal:'no',prior:'no',ltR:'0',ltL:'0',ppR:'0',ppL:'0',dap:'no',vac:'no',motorBeyond3:'no'};
+const roots=['C5','C6','C7','C8','T1','L2','L3','L4','L5','S1'];
+function muscles(value){const values={};for(const side of ['R','L'])for(const root of roots)values['m'+side+root]=value;return values}
+completionTests.push(
+ ['AIS A absent sacral sparing',()=>assert.equal(calc('asiaais',AIS).display,'AIS A')],
+ ['AIS B sensory sacral sparing',()=>assert.equal(calc('asiaais',{...AIS,ltR:'1'}).display,'AIS B')],
+ ['AIS B/C unknown motor sparing prohibited',()=>assert.ok(calc('asiaais',{...AIS,ltR:'1',motorBeyond3:'unknown'}).error)],
+ ['AIS C motor incomplete with low grades',()=>assert.equal(calc('asiaais',{...AIS,ltR:'1',motorBeyond3:'yes',...muscles('1')}).display,'AIS C')],
+ ['AIS D half or more antigravity motor',()=>assert.equal(calc('asiaais',{...AIS,ltR:'1',motorBeyond3:'yes',...muscles('4')}).display,'AIS D')],
+ ['AIS motor incomplete by VAC',()=>assert.equal(calc('asiaais',{...AIS,vac:'yes',...muscles('4')}).display,'AIS D')],
+ ['AIS motor data incomplete prohibited',()=>assert.ok(calc('asiaais',{...AIS,vac:'yes'}).error)],
+ ['AIS motor NT blocked',()=>assert.ok(calc('asiaais',{...AIS,vac:'yes',...muscles('4'),mRL2:'NT'}).error)],
+ ['AIS sacral NT blocked',()=>assert.ok(calc('asiaais',{...AIS,ltR:'NT'}).error)],
+ ['AIS D with prior normal exam',()=>assert.equal(calc('asiaais',{...AIS,nli:'S4-5',normal:'yes',prior:'yes',ltR:'2',ltL:'2',ppR:'2',ppL:'2',dap:'yes',vac:'yes'}).display,'AIS E')],
+ ['AIS E not allowed without prior SCI',()=>assert.ok(calc('asiaais',{...AIS,nli:'S4-5',normal:'yes',prior:'no',ltR:'2',ltL:'2',ppR:'2',ppL:'2',dap:'yes',vac:'yes'}).error)],
+ ['AIS no full assessment blocked',()=>assert.ok(calc('asiaais',{...AIS,exam:'no'}).error)],
+ ['AIS only guided no calculated NLI',()=>assert.ok(calc('asiaais',AIS).notes.some(n=>n.includes('NO calcula')))],
+ ['AIS muscle form has 20 controls',()=>assert.ok(html.includes("const asiaMuscleFields=['R','L'].flatMap"))],
+ ['AIS E visible with correct UI',()=>assert.ok(html.includes("res.value===null?(res.display?enc(res.display):'No evaluable')"))],
+ ['ISNCSCI 2026 reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/42812624/'))],
+ ['NINDS official reference visible',()=>assert.ok(html.includes('https://www.ninds.nih.gov/sites/default/files/2025-03/KnowStroke_NIHStrokeScale_March2025_508c.pdf'))]
+);
+t.push(...completionTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
