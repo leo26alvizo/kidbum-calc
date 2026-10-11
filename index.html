@@ -37,6 +37,116 @@ html.dark{color-scheme:dark;--bg:#0b1926;--surface:#12283a;--ink:#e3eff5;--ink-s
 .mode-privacy{font-size:11px;color:var(--ink-soft);line-height:1.55;margin:10px 0 0}
 .mode-privacy strong{color:var(--ink)}
 
+
+/* KidBum Medical Atlas Editorial v0.5 — UI-only overrides */
+:root{--bg:#f5f3ee;--surface:#fffdf9;--soft:#ede9e1;--ink:#0d283b;--ink-soft:#5c6d79;--stroke:#d9ddd9;--accent:#177f82;--accent-dark:#0d6669;--accent-pale:#e0f1ec;--radius:18px}
+html.dark{--bg:#081b29;--surface:#102b3e;--soft:#17394c;--ink:#f5f3ee;--ink-soft:#bbccd1;--stroke:#294d5c;--accent:#49c5bf;--accent-dark:#8dddd6;--accent-pale:#17494c}
+body{letter-spacing:.04px}
+.hero{padding:0;border:1px solid #254f5b;min-height:275px;border-radius:24px;background:linear-gradient(110deg,#071d2c 0%,#0a3041 48%,#486878 100%);box-shadow:0 18px 34px rgba(6,27,41,.18)}
+.hero:after{display:none}
+.hero-copy{padding:31px 25px 32px 34px;max-width:57%;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.hero .eyebrow{font-size:10px;letter-spacing:2px;color:#8dddd6;font-weight:760;line-height:1.6}
+.hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,3.65vw,48px);line-height:1.04;font-weight:700;letter-spacing:-1.2px;color:#f7f2e9;margin:12px 0 13px}
+.hero h1 br + *{color:#8dddd6}
+.hero p{font-size:13px;line-height:1.65;color:#dce4e3;max-width:440px}
+.hero-creator{padding:9px 12px;margin-top:15px;color:#eaf0f0;background:#23495c;border:1px solid #548397;border-radius:99px;font-size:11px}
+.atlas-hero-art{position:absolute;right:0;top:0;bottom:0;width:50%;display:flex;align-items:stretch;justify-content:center;overflow:hidden}
+.atlas-hero-art:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0b2a3a 0%,transparent 44%)}
+.atlas-hero-illustration{width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.83)}
+.quick-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini-stat{padding:14px 16px;min-width:0;background:var(--surface);border-radius:15px}
+.content-top h2,.calc-title h1{font-family:Georgia,'Times New Roman',serif;font-weight:700;letter-spacing:-.6px}
+.content-top h2{font-size:clamp(25px,3vw,34px)}
+.atlas-category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 22px}
+.atlas-category-grid[hidden]{display:none}
+.atlas-category-card{position:relative;display:flex;align-items:stretch;text-align:left;width:100%;min-height:182px;overflow:hidden;border:1px solid #b7c6c9;border-radius:19px;background:linear-gradient(118deg,#faf0e4 12%,#e3efee 100%);cursor:pointer;color:#0b3042;box-shadow:0 8px 22px rgba(12,43,60,.08);transition:transform .15s,border-color .15s}
+.atlas-category-card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.atlas-category-card:focus-visible,.calc-card:focus-visible,.chip:focus-visible{outline:3px solid #49c5bf;outline-offset:3px}
+.atlas-category-card:nth-child(even){background:linear-gradient(118deg,#e9f1ed,#e0e7ef)}
+.atlas-category-visual{position:absolute;inset:0 0 0 38%;overflow:hidden}
+.atlas-category-visual:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#f9f1e7,transparent 80%)}
+.atlas-category-card:nth-child(even) .atlas-category-visual:before{background:linear-gradient(90deg,#e9f1ed,transparent 80%)}
+.atlas-category-illustration{width:100%;height:100%;object-fit:cover}
+.atlas-category-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;max-width:67%;padding:19px 16px}
+.atlas-category-eyebrow{font-size:9px;font-weight:780;letter-spacing:1.3px;color:#496f77}
+.atlas-category-copy h3{font-family:Georgia,'Times New Roman',serif;font-size:clamp(18px,2vw,25px);line-height:1.12;margin:9px 0 14px;color:#123345}
+.atlas-category-go{display:inline-flex;align-items:center;gap:9px;margin-top:auto;background:#d4e6e4;padding:8px 12px;border-radius:99px;color:#123b4b;font-size:11px;font-weight:760}
+.atlas-category-card:first-child .atlas-category-go{background:#eed6ca;color:#643e3a}
+html.dark .atlas-category-card{border-color:#486b6f}
+.chips{margin:0 0 15px}
+.chip{font-size:12px;border-radius:99px}
+.calc-grid{gap:15px}
+.calc-card{padding:0;border-radius:18px;overflow:hidden;gap:0;min-height:236px}
+.atlas-card-media{height:110px;position:relative;display:block;background:linear-gradient(90deg,#eee1d3,#e2eced);overflow:hidden}
+.atlas-card-illustration{display:block;width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.calc-card:hover .atlas-card-illustration{transform:scale(1.055)}
+.atlas-card-index{position:absolute;left:11px;bottom:9px;background:#133c4d;color:#a9e4dc;border-radius:10px;min-width:28px;padding:7px;font-size:15px;font-weight:750;text-align:center}
+.calc-card>div:not(.atlas-card-media){padding:15px 16px 0}
+.calc-card h3{font-family:Georgia,'Times New Roman',serif;font-size:17px;line-height:1.14}
+.calc-card p{font-size:11px;line-height:1.6}
+.calc-card .card-arrow{color:var(--accent)}
+.calc-card .calc-card-bottom{margin-top:auto;padding:10px 16px 16px}
+.calc-card .fav-toggle{z-index:4;top:10px;right:10px;background:var(--surface)}
+.atlas-calc-heading{position:relative;min-height:194px;display:flex;align-items:center;padding:23px 22px 24px 26px;border-radius:20px;overflow:hidden;border:1px solid var(--stroke);background:linear-gradient(105deg,#f8f0e6,#e6eeeb);color:#153649}
+.atlas-calc-heading .calc-title{position:relative;z-index:2;width:59%;max-width:630px}
+.atlas-calc-heading .calc-title h1{font-size:clamp(27px,3vw,42px);color:#123349;line-height:1.05}
+.atlas-calc-heading .calc-title .eyebrow{font-size:10px;color:#147d7f;letter-spacing:1.5px}
+.atlas-calc-heading .desc{color:#38586c;line-height:1.55;max-width:525px}
+.atlas-calc-art{position:absolute;right:0;top:0;bottom:0;width:48%;display:flex;overflow:hidden}
+.atlas-calc-art:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#f4eee6,transparent 75%)}
+.atlas-calc-illustration{width:100%;height:100%;object-fit:cover}
+.atlas-calc-heading #star-main{position:absolute;top:10px;right:12px;z-index:3;background:rgba(255,255,255,.92);color:#24455a;border-color:#9cb4b8;font-size:11px;padding:7px 10px}
+html.dark .atlas-calc-heading{background:linear-gradient(110deg,#152f3f,#314e56)}
+html.dark .atlas-calc-heading .calc-title h1{color:#f7efe6}
+html.dark .atlas-calc-heading .calc-title .eyebrow{color:#9ae1d9}
+html.dark .atlas-calc-heading .desc{color:#d0dee0}
+html.dark .atlas-calc-art:before{background:linear-gradient(90deg,#193440,transparent 75%)}
+html.dark .atlas-hero-art img{filter:saturate(.85) brightness(.9)}
+html.dark .atlas-category-card{background:linear-gradient(118deg,#eae6dd,#bfd3d8)}
+html.dark .atlas-category-card:nth-child(even){background:linear-gradient(118deg,#e1e8e6,#c5d9df)}
+.result-value{font-family:Georgia,'Times New Roman',serif}
+.panel-head h2{font-family:Georgia,'Times New Roman',serif;font-size:19px}
+.control:focus{outline:2px solid #3badae;outline-offset:1px}
+@media(max-width:950px){.atlas-category-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.atlas-calc-heading{min-height:180px}.hero-copy{max-width:62%}.atlas-hero-art{width:52%}}
+@media(max-width:740px){
+ .hero{min-height:226px;border-radius:20px}
+ .hero-copy{padding:24px 18px 23px 22px;max-width:68%;position:relative;z-index:2}
+ .hero h1{font-size:clamp(26px,6vw,35px);letter-spacing:-.7px}
+ .hero p{font-size:11px;line-height:1.55}
+ .hero .eyebrow{font-size:9px;letter-spacing:1.1px}
+ .atlas-hero-art{display:flex;width:51%;opacity:.75}
+ .atlas-hero-art:before{background:linear-gradient(90deg,#0b2a3a 0%,transparent 80%)}
+ .quick-stats{gap:7px}
+ .mini-stat{padding:8px 6px;flex-direction:column;align-items:center;gap:2px;text-align:center}
+ .atlas-category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .atlas-category-card{min-height:160px}
+ .atlas-category-copy{padding:12px;max-width:74%}
+ .atlas-category-copy h3{font-size:16px}
+ .atlas-category-eyebrow{font-size:8px;letter-spacing:.6px}
+ .atlas-category-go{font-size:10px;padding:8px}
+ .atlas-category-visual{left:28%}
+ .calc-card{min-height:221px}
+ .atlas-card-media{height:99px}
+ .calc-card h3{font-size:16px}
+ .atlas-calc-heading{min-height:199px;padding:22px 15px;border-radius:17px}
+ .atlas-calc-heading .calc-title{width:67%}
+ .atlas-calc-heading .calc-title h1{font-size:28px}
+ .atlas-calc-heading .desc{font-size:11px;margin-top:10px}
+ .atlas-calc-art{width:56%;opacity:.83}
+ .atlas-calc-heading #star-main{font-size:10px;top:7px;right:8px;padding:6px}
+}
+@media(max-width:420px){
+ .atlas-category-grid{grid-template-columns:1fr}
+ .atlas-category-card{min-height:137px}
+ .atlas-category-copy h3{font-size:19px}
+ .hero-copy{max-width:79%}
+ .hero h1{font-size:28px}
+ .atlas-hero-art{opacity:.47}
+ .atlas-calc-heading .calc-title{width:76%}
+ .atlas-calc-art{opacity:.55}
+}
+@media(prefers-reduced-motion:reduce){.calc-card:hover .atlas-card-illustration{transform:none}}
+
   </style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
@@ -45,7 +155,7 @@ html.dark{color-scheme:dark;--bg:#0b1926;--surface:#12283a;--ink:#e3eff5;--ink-s
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
         <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.4.0</small></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.5.0</small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
       <div class="side-menu" id="nav-menu"></div>
@@ -340,10 +450,12 @@ html.dark{color-scheme:dark;--bg:#0b1926;--surface:#12283a;--ink:#e3eff5;--ink-s
 });
 
 </script>
+<script src="./assets/medical-atlas.js" defer="false"></script>
 <script>
 (function(){
 'use strict';
 const engine=window.KidBumEngine;
+const atlas=window.KidBumAtlas||{img:()=>'',anatomy:{},categoryMap:{}};
 const refs={
   anion:[['Revisión clínica de brecha aniónica y albúmina','https://www.ccjm.org/content/90/10/619']],
   osm:[['Revisión clínica de osmolalidad plasmática','https://pubmed.ncbi.nlm.nih.gov/27343561/']],
@@ -421,9 +533,28 @@ function renderNav(){const items=[['home','▦','Explorar'],['favorite','☆','G
 function render(){renderNav();el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='favorite'?'Guardadas':screen==='about'?'Información':'Inicio';if(screen==='about'){renderAbout();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
 function renderHome(full){
  const list=defs.filter(d=>(screen!=='favorite'||faves.includes(d.id))&&(category==='Todas'||d.category===category)&&(d.title+' '+d.short+' '+d.category).toLowerCase().includes(search.toLowerCase()));
- const cards=list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><span class="card-icon">${d.symbol}</span><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
- if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1>Precisión clínica.<br>Sin complicaciones.</h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></div></div><div class="hero-heart" aria-hidden="true"><svg viewBox="0 0 120 100"><path d="M2 55h26l10-30 21 59 18-44 9 15h32" stroke="#a1eee1" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></section><div class="quick-stats"><span class="mini-stat"><strong>23</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div class="chips" id="chips"></div><div id="calc-list" class="calc-grid"></div>`;
+ const cards=list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
+ if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1>Precisión clínica.<br>Sin complicaciones.</h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></div></div><div class="atlas-hero-art" aria-hidden="true">${atlas.img("qsofa","atlas-hero-illustration","",true)}</div></section><div class="quick-stats"><span class="mini-stat"><strong>23</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div id="atlas-categories" class="atlas-category-grid" aria-label="Colecciones médicas ilustradas"></div><div class="chips" id="chips"></div><div id="calc-list" class="calc-grid"></div>`;
  el('#chips').innerHTML=categories.map(c=>`<button type="button" class="chip ${category===c?'active':''}" data-cat="${enc(c)}">${enc(c)}</button>`).join('');
+
+ const featured=screen==='home'&&category==='Todas'&&!search.trim();
+ const catBlock=el('#atlas-categories');
+ catBlock.hidden=!featured;
+ if(featured){
+  const ordered=['Ginecología y obstetricia','Química clínica','Escalas clínicas','Función renal','Hemodinámica','Hepatología','Antropometría'];
+  catBlock.innerHTML=ordered.map(c=>{
+    const count=defs.filter(d=>d.category===c).length;
+    const artId=atlas.categoryMap[c]||'gcs';
+    return `<button type="button" class="atlas-category-card" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
+      <div class="atlas-category-visual">${atlas.img(artId,'atlas-category-illustration',atlas.anatomy[artId])}</div>
+      <div class="atlas-category-copy"><span class="atlas-category-eyebrow">BIBLIOTECA MÉDICA · ${count} HERRAMIENTAS</span><h3>${enc(c)}</h3><span class="atlas-category-go">Ver calculadoras <span aria-hidden="true">→</span></span></div>
+    </button>`;
+  }).join('');
+  catBlock.querySelectorAll('[data-featured]').forEach(button=>{
+    button.onclick=()=>{category=button.dataset.featured;renderHome(false);};
+  });
+ }else catBlock.innerHTML='';
+
  el('#calc-list').innerHTML=cards||`<div class="empty-state">${screen==='favorite'?'Todavía no tienes favoritas. Marca ☆ en cualquier calculadora.':'No encontramos coincidencias. Prueba otro término.'}</div>`;
  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderHome(false);});
  document.querySelectorAll('[data-open]').forEach(c=>{c.onclick=e=>{if(e.target.closest('[data-star]'))return;go('calc',c.dataset.open);};c.onkeydown=e=>{if(e.key==='Enter'&&e.target===c)go('calc',c.dataset.open);};});
@@ -432,7 +563,7 @@ function renderHome(full){
 }
 function renderCalc(){
  const d=defs.find(x=>x.id===id);latest=null;
- main.innerHTML=`<button type="button" class="breadcrumb-back" id="back">← Volver a calculadoras</button><div class="calc-heading"><div class="calc-title"><div class="eyebrow">${enc(d.category)} · CALCULADORA CLÍNICA</div><h1>${enc(d.title)}</h1><p class="desc">${enc(d.detail)}</p></div><button type="button" class="btn outline compact" id="star-main">${faves.includes(id)?'★ Guardada':'☆ Guardar'}</button></div><div class="calc-detail-grid"><section class="panel"><div class="panel-head"><h2>01 / Datos necesarios</h2><small>Campos sin datos predeterminados</small></div><div class="panel-body"><div class="field-grid">${d.fields.map(f=>`<div class="field"><label for="f-${f.key}">${enc(f.label)}${f.unit?`<span class="unit">${enc(f.unit)}</span>`:''}</label>${f.type==='date'?`<input id="f-${f.key}" class="control" type="date" aria-required="${!f.optional}" />`:f.type==='number'?`<input id="f-${f.key}" class="control" type="text" inputmode="decimal" placeholder="${f.optional?'Opcional':'Introduce valor'}" aria-required="${!f.optional}" autocomplete="off" />`:`<select class="control" id="f-${f.key}" aria-required="true">${f.options.map(([value,label])=>`<option value="${enc(value)}">${enc(label)}</option>`).join('')}</select>`}${f.extra?`<small class="input-info">${enc(f.extra)}</small>`:''}</div>`).join('')}</div><div class="actions"><button type="button" class="btn outline" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="btn outline" id="reset">↻ Limpiar</button></div><p class="input-info" style="margin-top:18px">No guardamos los datos clínicos introducidos. El ejemplo no representa un paciente real.</p></div></section><aside class="panel result-panel" aria-live="polite"><div class="result-top"><div class="result-label">02 / RESULTADO</div><div class="result-value" id="result-value">—</div><div class="result-interpret" id="result-interp">Completa los campos para calcular.</div></div><div class="result-extra"><div id="result-errors"></div><div id="result-extra" style="display:none"><div class="note-heading">Interpretación y precauciones</div><p id="detail-text"></p><ul id="notes-list"></ul></div><div class="result-warning">⚠ Herramienta de apoyo: no reemplaza juicio clínico, evaluación presencial ni protocolos institucionales.</div><button type="button" id="open-mode-selector" class="btn" disabled aria-expanded="false" aria-controls="mode-selector">↗ Analizar con ChatGPT</button><div id="mode-selector" class="mode-selector" hidden><p class="mode-title">¿Qué tipo de análisis necesitas?</p><p class="mode-intro">Elige un modo para preparar la solicitud clínica.</p><div class="mode-grid" role="radiogroup" aria-label="Modo de análisis clínico"><label class="mode-option"><input type="radio" name="analysis-mode" value="guardia"/><span><strong>🚑 Guardia</strong><small>Prioridades, signos de alarma, datos faltantes y escalamiento.</small></span></label><label class="mode-option"><input type="radio" name="analysis-mode" value="estudio"/><span><strong>📖 Estudio</strong><small>Fisiopatología, evidencia y enseñanza.</small></span></label><label class="mode-option"><input type="radio" name="analysis-mode" value="pase"/><span><strong>📋 Pase de visita</strong><small>Resumen, problemas activos y pendientes.</small></span></label></div><button type="button" id="copy-result" class="btn" disabled>Copiar y abrir ChatGPT ↗</button><p class="mode-privacy"><strong>Privacidad:</strong> no incluyas identificadores. El mensaje solo se copia; debes pegarlo y enviarlo tú. ChatGPT requiere internet.</p></div><p class="input-info">Elige un modo, prepara el análisis y abre ChatGPT sin API de pago.</p></div></aside></div><details class="citation-panel"><summary>Fuentes, fórmulas y límites de aplicación</summary><p>Fuentes externas de referencia para revisar los métodos utilizados. Consulta actualizaciones antes de decisiones de alto riesgo.</p>${(refs[d.id]||[]).map(([t,u])=>`<a target="_blank" rel="noopener noreferrer" href="${enc(u)}">${enc(t)} ↗</a>`).join('')}</details>`;
+ main.innerHTML=`<button type="button" class="breadcrumb-back" id="back">← Volver a calculadoras</button><div class="calc-heading atlas-calc-heading"><div class="calc-title"><div class="eyebrow">${enc(d.category)} · CALCULADORA CLÍNICA</div><h1>${enc(d.title)}</h1><p class="desc">${enc(d.detail)}</p></div><div class="atlas-calc-art">${atlas.img(id,"atlas-calc-illustration",atlas.anatomy[id])}</div><button type="button" class="btn outline compact" id="star-main">${faves.includes(id)?'★ Guardada':'☆ Guardar'}</button></div><div class="calc-detail-grid"><section class="panel"><div class="panel-head"><h2>01 / Datos necesarios</h2><small>Campos sin datos predeterminados</small></div><div class="panel-body"><div class="field-grid">${d.fields.map(f=>`<div class="field"><label for="f-${f.key}">${enc(f.label)}${f.unit?`<span class="unit">${enc(f.unit)}</span>`:''}</label>${f.type==='date'?`<input id="f-${f.key}" class="control" type="date" aria-required="${!f.optional}" />`:f.type==='number'?`<input id="f-${f.key}" class="control" type="text" inputmode="decimal" placeholder="${f.optional?'Opcional':'Introduce valor'}" aria-required="${!f.optional}" autocomplete="off" />`:`<select class="control" id="f-${f.key}" aria-required="true">${f.options.map(([value,label])=>`<option value="${enc(value)}">${enc(label)}</option>`).join('')}</select>`}${f.extra?`<small class="input-info">${enc(f.extra)}</small>`:''}</div>`).join('')}</div><div class="actions"><button type="button" class="btn outline" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="btn outline" id="reset">↻ Limpiar</button></div><p class="input-info" style="margin-top:18px">No guardamos los datos clínicos introducidos. El ejemplo no representa un paciente real.</p></div></section><aside class="panel result-panel" aria-live="polite"><div class="result-top"><div class="result-label">02 / RESULTADO</div><div class="result-value" id="result-value">—</div><div class="result-interpret" id="result-interp">Completa los campos para calcular.</div></div><div class="result-extra"><div id="result-errors"></div><div id="result-extra" style="display:none"><div class="note-heading">Interpretación y precauciones</div><p id="detail-text"></p><ul id="notes-list"></ul></div><div class="result-warning">⚠ Herramienta de apoyo: no reemplaza juicio clínico, evaluación presencial ni protocolos institucionales.</div><button type="button" id="open-mode-selector" class="btn" disabled aria-expanded="false" aria-controls="mode-selector">↗ Analizar con ChatGPT</button><div id="mode-selector" class="mode-selector" hidden><p class="mode-title">¿Qué tipo de análisis necesitas?</p><p class="mode-intro">Elige un modo para preparar la solicitud clínica.</p><div class="mode-grid" role="radiogroup" aria-label="Modo de análisis clínico"><label class="mode-option"><input type="radio" name="analysis-mode" value="guardia"/><span><strong>🚑 Guardia</strong><small>Prioridades, signos de alarma, datos faltantes y escalamiento.</small></span></label><label class="mode-option"><input type="radio" name="analysis-mode" value="estudio"/><span><strong>📖 Estudio</strong><small>Fisiopatología, evidencia y enseñanza.</small></span></label><label class="mode-option"><input type="radio" name="analysis-mode" value="pase"/><span><strong>📋 Pase de visita</strong><small>Resumen, problemas activos y pendientes.</small></span></label></div><button type="button" id="copy-result" class="btn" disabled>Copiar y abrir ChatGPT ↗</button><p class="mode-privacy"><strong>Privacidad:</strong> no incluyas identificadores. El mensaje solo se copia; debes pegarlo y enviarlo tú. ChatGPT requiere internet.</p></div><p class="input-info">Elige un modo, prepara el análisis y abre ChatGPT sin API de pago.</p></div></aside></div><details class="citation-panel"><summary>Fuentes, fórmulas y límites de aplicación</summary><p>Fuentes externas de referencia para revisar los métodos utilizados. Consulta actualizaciones antes de decisiones de alto riesgo.</p>${(refs[d.id]||[]).map(([t,u])=>`<a target="_blank" rel="noopener noreferrer" href="${enc(u)}">${enc(t)} ↗</a>`).join('')}</details>`;
  el('#back').onclick=()=>go('home');el('#star-main').onclick=()=>favorite(id);el('#example').onclick=()=>{d.fields.forEach(f=>{el('#f-'+f.key).value=f.example||'';});update();toast('Ejemplo ficticio cargado');};el('#reset').onclick=()=>{d.fields.forEach(f=>el('#f-'+f.key).value='');update();};d.fields.forEach(f=>el('#f-'+f.key).addEventListener(f.type==='number'?'input':'change',update));el('#open-mode-selector').onclick=()=>{
   const panel=el('#mode-selector');const open=panel.hidden;
   panel.hidden=!open;
@@ -501,7 +632,7 @@ async function copyPrompt(){
   window.location.assign('https://chatgpt.com/');
  }catch(e){toast('No se pudo copiar. Revisa los permisos del portapapeles.');}
 }
-function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 23 calculadoras con fórmulas explícitas y enlaces a fuentes. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.4.0 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 23 calculadoras con fórmulas explícitas y enlaces a fuentes. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.5.0 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
 try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
 function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
