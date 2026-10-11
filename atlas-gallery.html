@@ -27,10 +27,10 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
 <header>
 <a class="back" href="./index.html">← Volver a KidBum CALC</a>
 <h1>Atlas médico editorial</h1>
-<p class="lead">35 ilustraciones vinculadas a las calculadoras reales: 23 láminas pictóricas y 12 esquemas pediátricos originales en desarrollo editorial. Recursos de interfaz para apoyar la identificación visual del sistema o proceso; <strong>no son láminas anatómicas certificadas</strong> ni sirven para tomar decisiones clínicas por sí solos.</p>
+<p class="lead">45 ilustraciones vinculadas a las calculadoras reales: 23 láminas pictóricas y 12 esquemas pediátricos originales en desarrollo editorial. Recursos de interfaz para apoyar la identificación visual del sistema o proceso; <strong>no son láminas anatómicas certificadas</strong> ni sirven para tomar decisiones clínicas por sí solos.</p>
 </header>
 <main id="gallery" aria-label="Galería visual de las calculadoras"></main>
-<footer>KidBum CALC · Creada por Leonardo Alvizo Velázquez · v0.6.0</footer>
+<footer>KidBum CALC · Creada por Leonardo Alvizo Velázquez · v0.7.0</footer>
 <script>
 (function(){
  const atlas=window.KidBumAtlas;
@@ -46,7 +46,9 @@ footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
  pedwfl:'Peso para longitud/talla · OMS',pediou:'Gasto urinario pediátrico',
  pedbalance:'Balance hídrico pediátrico',pedholliday:'Holliday–Segar',
  ped421:'Regla 4–2–1',pedneofluids:'Mantenimiento neonatal',
- pedcorrected:'Edad corregida del prematuro',peddehydration:'Pérdida de peso / posible déficit'
+ pedcorrected:'Edad corregida del prematuro',peddehydration:'Pérdida de peso / posible déficit',
+ pedinsensible:'Pérdidas insensibles',pedgir:'GIR de glucosa IV',pedsolutions:'Osmolaridad teórica IV',pedvitals:'Signos vitales por edad',
+ pedformulavol:'Volumen de fórmula',pedmilkcal:'Calorías de leche',pedfoodcal:'Calorías de comida',pedmaxverify:'Verificador de dosis máximas',pedaccess:'Revisión de acceso vascular',pedsupp:'Suplementos lactantes'
  };
  if(!atlas){document.getElementById('gallery').textContent='No se pudo cargar el atlas local. Revisa la conexión y vuelve a intentar.';return}
  document.getElementById('gallery').innerHTML=atlas.ids.map(id=>
