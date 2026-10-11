@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.7\.2/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.7\.3/,'Atlas release version must be visible');
 const atlasSource=fs.readFileSync('assets/medical-atlas.js','utf8');
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb','correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
 for(const id of ids)assert.ok(fs.existsSync('assets/atlas-'+id+'.jpg'),'Missing pictorial clinical illustration: '+id);
@@ -18,6 +18,7 @@ assert.ok(fs.existsSync('assets/portada-atlas-usuario.webp'),'Must preserve auth
 assert.match(atlasSource,/portada-atlas-usuario\.webp/,'Hero must reference author-selected image');
 assert.ok(fs.existsSync('assets/pediatria-portada.webp'),'Missing user-selected Pediatric feature photograph');
 assert.ok(fs.existsSync('assets/ginecologia-portada.webp'),'Missing user-selected Ginecology anatomical illustration');
+assert.ok(fs.existsSync('assets/quimica-clinica-portada.webp'),'Missing user-selected clinical chemistry photograph');
 
 assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;
@@ -111,7 +112,10 @@ const t=[
 ['Pediatric feature spans mobile category columns',()=>assert.match(html,/atlas-category-card\.atlas-pediatria-feature\{[\s\S]*?grid-column:1\/-1/)],
 ['Ginecology category uses exact uploaded illustration',()=>assert.match(html,/src="\.\/assets\/ginecologia-portada\.webp"/)],
 ['Ginecology featured card spans full row',()=>assert.match(html,/atlas-category-card\.atlas-gineco-feature\{[\s\S]*?grid-column:1\/-1/)],
-['Ginecology image keeps full opacity and no filter',()=>assert.match(html,/\.atlas-gineco-photo\{[\s\S]*?opacity:1!important;[\s\S]*?filter:none!important/)]
+['Ginecology image keeps full opacity and no filter',()=>assert.match(html,/\.atlas-gineco-photo\{[\s\S]*?opacity:1!important;[\s\S]*?filter:none!important/)],
+['Clinical chemistry uses provided photo',()=>assert.match(html,/src="\.\/assets\/quimica-clinica-portada\.webp"/)],
+['Clinical chemistry matches highlighted card dimensions',()=>assert.match(html,/atlas-quimica-feature/)],
+['Clinical chemistry art is unfiltered',()=>assert.match(html,/\.atlas-quimica-photo\{[\s\S]*?filter:none!important;[\s\S]*?opacity:1!important/)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
