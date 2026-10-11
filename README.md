@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.3**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.4**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -161,3 +161,12 @@ La tarjeta de **Ginecología y obstetricia** utiliza la ilustración médica apo
 ### Ajuste visual v0.7.3 — Química clínica
 
 La tarjeta de **Química clínica** ocupa el ancho completo de la biblioteca y mantiene las mismas dimensiones que Pediatría y Ginecología. Usa exactamente la fotografía suministrada por el autor en `assets/quimica-clinica-portada.webp` (WebP optimizado, aprox. 151 KB), sin generar imágenes nuevas. La zona de texto tiene un fondo azul claro opaco y el material de laboratorio se muestra nítido, sin filtros de desenfoque. El recurso se precarga mediante `sw.js` para funcionamiento offline. No se modificó la lógica médica ni el contenido de las 45 calculadoras.
+
+
+### Corrección de actualización de PWA v0.7.4
+
+Se verificó que las tres fotografías de portada (Pediatría, Ginecología y Química clínica) existían en GitHub Pages; el problema probable era la política anterior de service worker, que servía primero HTML obsoleto desde caché. Ahora `sw.js` solicita online primero el documento HTML y los scripts JavaScript, con almacenamiento local y fallback offline. La app revisa versiones al abrir y al volver a primer plano, y recarga automáticamente solo si no hay una calculadora abierta, evitando interrumpir datos clínicos en curso.
+
+Enlace para forzar nueva carga inicial y evitar entradas obsoletas cache-first: https://leo26alvizo.github.io/kidbum-calc/?v=074. No requiere reinstalación, cuentas ni servicios pagados. Los 45 cálculos y la autoría permanecen intactos.
+
+**Prueba recomendada:** abrir con conexión, comprobar etiqueta v0.7.4 y las tres tarjetas; después probar sin conexión en la PWA instalada. Evitar borrar los datos del sitio salvo que resulte necesario, pues eliminaría favoritos locales.
