@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.1**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -146,3 +146,8 @@ La biblioteca ahora cuenta **45 calculadoras** (23 anteriores + 12 de pediatría
 **Pendientes deliberados por seguridad:** una base de datos de dosis máximas de medicamentos concretos, concentraciones máximas específicas por fármaco, listas exhaustivas de «solo central» y recetas de preparación de mezclas IV necesitan monografías farmacéuticas y validación hospitalaria antes de agregarse. Nunca deducir «seguro por vía periférica» usando un único valor de osmolaridad.
 
 La estimación de pérdidas insensibles es especialmente incierta en neonatos, prematuros, ventilación, fototerapia, quemaduras y fiebre. Los intervalos de PALS son orientativos y no reemplazan percentiles de presión arterial por edad/sexo/talla. Todo resultado requiere supervisión, contexto y protocolos.
+
+
+## KidBum v0.7.1 — Tarjeta principal de Pediatría
+
+Se sustituyó la ilustración de categoría de Pediatría por la fotografía proporcionada por el autor. El recurso está optimizado como `assets/pediatria-portada.webp` (aprox. 68 KB), alojado en el repositorio y precargado por la PWA para uso offline. La tarjeta ocupa el ancho de la biblioteca y separa el texto de la foto, que conserva nitidez y color, sin difuminados. Las 45 calculadoras, tablas OMS, motor clínico y otras categorías permanecen sin cambios. Uso público de la fotografía sujeto a los derechos y autorizaciones correspondientes.
