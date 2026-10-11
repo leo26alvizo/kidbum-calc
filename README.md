@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.6.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -117,3 +117,32 @@ Se agrega una categoría **Pediatría** sin modificar las 23 funciones clínicas
 **Límites y seguridad:** tablas WHO para 0–5 años exclusivamente, no 5–19 años; neonatos prematuros requieren curvas especializadas. Los líquidos son estimaciones o rangos, no órdenes médicas. Monitorizar pérdidas, glucosa, electrolitos y parámetros clínicos según contexto y protocolos institucionales. No hay calculadoras de prescripción farmacológica automática.
 
 **Control técnico:** 52 pruebas de regresión completadas antes del despliegue, incluidas 22 pruebas nuevas de pediatría. Las fórmulas originales de la v0.5.3 se compararon sin cambios en su bloque de código. Esta verificación no constituye certificación ni validación hospitalaria; sigue pendiente prueba de usuario en Android.
+
+
+## KidBum CALC v0.7.0 — Pediatría hospitalaria (10 herramientas adicionales)
+
+La biblioteca ahora cuenta **45 calculadoras** (23 anteriores + 12 de pediatría v0.6 + 10 de ampliación v0.7). El motor original de las 35 previas se mantiene sin modificar. La nueva implementación está aislada en `assets/pediatric-ward.js` y se precarga por la PWA para trabajar sin conexión.
+
+1. **Pérdidas insensibles estimadas** por superficie corporal, rango docente de 300–400 mL/m²/día, sin aplicar automáticamente a neonatos o patologías que modifican evaporación.
+2. **Glucose infusion rate (GIR)** en mg/kg/min para infusión conocida, con notas orientativas por grupo neonatal y diferencia entre aportes y necesidades.
+3. **Osmolaridad teórica de soluciones NaCl y dextrosa** (% p/v final), gramos de glucosa y carga de sodio. Esto no confirma compatibilidad, ruta ni formulación.
+4. **Signos vitales por edad**, rangos FC/FR/PAS/PAD/PAM de tarjeta PALS 2025, no umbrales diagnósticos individuales.
+5. **Volumen medio orientativo de fórmula infantil**, solamente para lactantes sanos a término de 1–11 meses; no reemplaza lactancia a demanda.
+6. **Calorías de leche o fórmula**, por volumen realmente ingerido y densidad declarada en kcal/100 mL.
+7. **Calorías de macronutrientes** (4–4–9), estimación de energía en una comida según gramos aportados.
+8. **Verificador de dosis máximas declaradas**, compara propuesta con máximos aportados por personal clínico desde una fuente específica. NO contiene máximos automáticos ni valida indicación o vía.
+9. **Acceso venoso periférico/central**, ficha de peligros por tipo de solución/fármaco sin autorizar infusión automáticamente.
+10. **Suplementación del lactante**, ficha contextual AAP con vitamina D, hierro y prematuridad; no ordena suplementos ni fortificadores.
+
+### Fuentes y límites críticos
+
+- [NICE NG29 — fluidoterapia pediátrica](https://www.nice.org.uk/guidance/ng29/chapter/recommendations) y referencia docente para [pérdidas insensibles](https://elsevier-elibrary.com/contents/fullcontent/76602/epubcontent_v2/OEBPS/B9780323020404000018.htm).
+- [RCH — GIR neonatal](https://www.rch.org.au/rchcpg/hospital_clinical_guideline_index/Neonatal_Hypoglycaemia/) y [manejo IV neonatal](https://www.rch.org.au/rchcpg/hospital_clinical_guideline_index/Neonatal_and_Infant_Intravenous_Fluid_Management/).
+- [ESPGHAN/ESPEN/ESPR — complicaciones de nutrición parenteral pediátrica](https://www.clinicalnutritionjournal.com/article/S0261-5614%2818%2931175-0/abstract) y [ASPEN — seguridad de PN](https://aspenjournals.onlinelibrary.wiley.com/doi/full/10.1177/0148607114521833). El valor cercano a 900 mOsm/L en PN periférica NO es umbral universal para todos los líquidos/medicamentos ni garantiza seguridad.
+- [PALS 2025 — tarjeta de signos vitales](https://guidelines.redcross.org/wp-content/uploads/2025/12/PALS-Pediatric-Systematic-Assessment.pdf).
+- [AAP — fórmula orientativa](https://www.healthychildren.org/Spanish/tips-tools/ask-the-pediatrician/Paginas/How-much-formula-does-my-baby-need.aspx), [MedlinePlus — energía de fórmulas](https://medlineplus.gov/ency/article/002447.htm), [USDA — Atwater y composición de alimentos](https://fdc.nal.usda.gov/Foundation_Foods_Documentation/).
+- [AAP lactancia 2022](https://publications.aap.org/pediatrics/article/150/1/e2022057988/188347/Policy-Statement-Breastfeeding-and-the-Use-of), [AAP hierro 2026](https://publications.aap.org/pediatrics/article/158/1/e2026077414/207901/).
+
+**Pendientes deliberados por seguridad:** una base de datos de dosis máximas de medicamentos concretos, concentraciones máximas específicas por fármaco, listas exhaustivas de «solo central» y recetas de preparación de mezclas IV necesitan monografías farmacéuticas y validación hospitalaria antes de agregarse. Nunca deducir «seguro por vía periférica» usando un único valor de osmolaridad.
+
+La estimación de pérdidas insensibles es especialmente incierta en neonatos, prematuros, ventilación, fototerapia, quemaduras y fiebre. Los intervalos de PALS son orientativos y no reemplazan percentiles de presión arterial por edad/sexo/talla. Todo resultado requiere supervisión, contexto y protocolos.
