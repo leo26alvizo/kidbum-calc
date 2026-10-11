@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.9\.2/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.9\.3/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v092-gastro-feature/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v093-gastro-original-image/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -264,11 +264,20 @@ const gastroCardTests=[
  ['Gastroenterology card uses full-width featured layout',()=>assert.ok(html.includes("c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature'"))],
  ['Gastroenterology preserves original atlas photo mapping',()=>assert.equal(atlasGlobal.KidBumAtlas.categoryMap['Gastroenterología'],'childpugh')],
  ['Gastroenterology preserves existing local raster image',()=>assert.ok(atlasGlobal.KidBumAtlas.img('childpugh','atlas-category-illustration atlas-gineco-photo atlas-gastro-photo').includes('./assets/atlas-childpugh.jpg'))],
- ['Gastroenterology card has shared photo class',()=>assert.ok(html.includes("'atlas-category-illustration atlas-gineco-photo atlas-gastro-photo'"))],
+ ['Gastroenterology card has shared photo class',()=>assert.ok(html.includes('class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo"'))],
  ['Gastroenterology image remains unfiltered',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?filter:none!important/)],
  ['Gastroenterology retains 52 calculators',()=>assert.equal(ctx.KidBumEngine.list.length,52)],
  ['Existing gastrointestinal raster remains offline cached',()=>assert.ok(swSource.includes("'./assets/atlas-childpugh.jpg'"))]
 ];
 t.push(...gastroCardTests);
+const gastroPhotoTests=[
+ ['Original Gastroenterology author photo exists',()=>assert.ok(fs.existsSync('assets/gastroenterologia-portada.webp'))],
+ ['Gastroenterology photo referenced directly',()=>assert.ok(html.includes('src="./assets/gastroenterologia-portada.webp"'))],
+ ['Gastroenterology remains full-width featured',()=>assert.ok(html.includes("c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature'"))],
+ ['Gastroenterology transparent art fully visible',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?object-fit:contain/)],
+ ['Gastroenterology image precached',()=>assert.ok(swSource.includes("'./assets/gastroenterologia-portada.webp'"))],
+ ['All original 52 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length,52)]
+];
+t.push(...gastroPhotoTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

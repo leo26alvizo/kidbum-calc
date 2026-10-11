@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.2**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.3**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -252,3 +252,12 @@ Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014),
 - Se conserva **exactamente la imagen existente** `assets/atlas-childpugh.jpg` mediante el mapeo `Gastroenterología → childpugh`, sin reemplazar, regenerar ni alterar el archivo.
 - Se reutilizan las clases CSS de tarjeta destacada y fotografía a tamaño completo, sin filtros. Se actualizó el caché PWA para propagar los cambios.
 - Sin cambios en fórmulas, icono, portada, fotografías restantes ni en las 52 calculadoras.
+
+
+## KidBum CALC v0.9.3 — Imagen original del autor para Gastroenterología
+
+- La tarjeta rectangular de **Gastroenterología** muestra exactamente el WebP transparente entregado por el autor, almacenado sin modificaciones como `assets/gastroenterologia-portada.webp`.
+- La tarjeta mantiene las dimensiones destacadas anteriores: mismo ancho completo y mismas medidas responsivas que Cardiología y las otras tarjetas amplias.
+- El estómago se representa completo con `object-fit: contain`, fondo marfil y sin filtros para evitar recortes de la anatomía. No se crea otra ilustración.
+- El recurso se incorpora a la caché PWA para uso sin conexión. Se conserva `assets/atlas-childpugh.jpg` para las ilustraciones clínicas preexistentes y no se modifica ninguna fórmula ni cálculo.
+- Se añade comprobación automatizada del recurso, su caché y las 52 calculadoras actuales.
