@@ -5,7 +5,8 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
-const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]);
+const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
+assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
 assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
 const ctx={};vm.runInNewContext(scripts[0],{globalThis:ctx}, {timeout:2000});
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
@@ -29,7 +30,10 @@ const t=[
 ['NEWS2 regression',()=>assert.equal(calc('news2',{rr:16,spo2:98,sbp:120,hr:70,temp:37,scale:'one',oxygen:'false',conscious:'alert'}).value,0)],
 ['Creator credit',()=>assert.ok(html.includes('Leonardo Alvizo Velázquez'))],
 ['ChatGPT handoff',()=>assert.ok(html.includes("window.location.assign('https://chatgpt.com/')"))],
-['No paid API call',()=>assert.ok(!html.includes('api.openai.com'))]
+['No paid API call',()=>assert.ok(!html.includes('api.openai.com'))],
+['Illustrated calculator card',()=>assert.match(html,/atlas-card-illustration/)],
+['Illustrated calculator header',()=>assert.match(html,/atlas-calc-illustration/)],
+['Illustrated specialty cards',()=>assert.match(html,/atlas-category-card/)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
