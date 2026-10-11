@@ -352,6 +352,12 @@ html.dark .atlas-calc-heading .calc-title{
 .growth-reference td:nth-child(4){background:var(--accent-pale);font-weight:800}
 .growth-reference small{display:block;margin-top:8px;line-height:1.5;color:var(--ink-soft)}
 
+
+/* Pediatrics medical-atlas accent keeps category illustrations readable. */
+.atlas-category-card:has([data-none]){border-color:var(--stroke)}
+.atlas-category-grid .atlas-category-card:first-child{border-color:#87aca3;background:#edf5ed}
+.atlas-category-grid .atlas-category-card:first-child .atlas-category-copy{background:#eff6ec!important}
+.atlas-category-grid .atlas-category-card:first-child .atlas-category-go{background:#bedfd4;color:#153f43}
   </style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
@@ -780,7 +786,7 @@ function renderHome(full){
  const catBlock=el('#atlas-categories');
  catBlock.hidden=!featured;
  if(featured){
-  const ordered=['Ginecología y obstetricia','Química clínica','Escalas clínicas','Función renal','Hemodinámica','Hepatología','Antropometría'];
+  const ordered=['Pediatría','Ginecología y obstetricia','Química clínica','Escalas clínicas','Función renal','Hemodinámica','Hepatología','Antropometría'];
   catBlock.innerHTML=ordered.map(c=>{
     const count=defs.filter(d=>d.category===c).length;
     const artId=atlas.categoryMap[c]||'gcs';
