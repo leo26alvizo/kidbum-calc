@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.5**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.6**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -175,3 +175,8 @@ Enlace para forzar nueva carga inicial y evitar entradas obsoletas cache-first: 
 ### KidBum v0.7.5 — Escalas clínicas
 
 Se incorporó la ilustración del sistema nervioso proporcionada por el autor a la tarjeta principal de **Escalas clínicas**. La imagen se conserva como `assets/escalas-clinicas-portada.webp` (aproximadamente 97 KB, 1536 × 864 px), sin generación de imágenes nuevas. La tarjeta comparte el formato rectangular de ancho completo y tamaños responsive de Pediatría, Ginecología y Química clínica, con panel opaco de texto e imagen nítida sin filtros. Está en el precaché offline de la PWA (v075), con esquema online-first para mantener el HTML actualizado. La lógica de las 45 calculadoras, los favoritos y los modos de ChatGPT permanecen intactos.
+
+
+### KidBum v0.7.6 — Hemodinámica y Función renal
+
+Se incorporaron, sin generar ilustraciones nuevas, los dos recursos médicos aportados por el autor: **primera imagen cardiopulmonar** en `assets/hemodinamica-portada.webp` para la tarjeta **Hemodinámica** y **segunda imagen renal/urinaria** en `assets/funcion-renal-portada.webp` para la tarjeta **Función renal**. Ambas tarjetas usan los estilos rectangulares anchos de Pediatría y Ginecología, con fondo de texto sólido, imágenes nítidas y adaptación a móviles. Las ilustraciones se optimizaron como WebP (aprox. 169 KB y 166 KB) y son parte del precaché de la PWA (`v076`). No se cambió el motor de las 45 calculadoras, ni favoritos, navegación, modos de ChatGPT o crédito de autoría. Se superaron 95 pruebas de regresión. Las etiquetas anatómicas incluidas en imágenes aportadas son parte del recurso gráfico original y no se presentan como verificaciones clínicas independientes.
