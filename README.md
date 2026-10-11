@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.3**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.4**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -261,3 +261,11 @@ Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014),
 - El estómago se representa completo con `object-fit: contain`, fondo marfil y sin filtros para evitar recortes de la anatomía. No se crea otra ilustración.
 - El recurso se incorpora a la caché PWA para uso sin conexión. Se conserva `assets/atlas-childpugh.jpg` para las ilustraciones clínicas preexistentes y no se modifica ninguna fórmula ni cálculo.
 - Se añade comprobación automatizada del recurso, su caché y las 52 calculadoras actuales.
+
+
+## KidBum CALC v0.9.4 — Imagen original en Antropometría
+
+- Se incorporó exactamente la imagen del Hombre de Vitruvio aportada por el autor, guardada en `assets/antropometria-portada.jpg` sin regenerar, borrar ni modificar su contenido.
+- La tarjeta **Antropometría** conserva el mismo tamaño rectangular destacado y el diseño responsivo de las demás especialidades, con `object-fit:contain` para visualizar completa la figura anatómica.
+- La tarjeta se ve en fondo pergamino, sin filtros. La imagen anterior `assets/atlas-bmi.jpg` permanece en su lugar para los recursos clínicos existentes.
+- La nueva imagen se incluye en la caché offline de la PWA. No se alteraron ninguna de las 52 calculadoras, sus fórmulas, las otras tarjetas ni el icono de la aplicación.
