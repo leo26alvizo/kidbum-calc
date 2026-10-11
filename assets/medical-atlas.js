@@ -9,7 +9,7 @@ const categoryMap=Object.freeze({
  'Hepatología':'fib4','Escalas clínicas':'gcs','Ginecología y obstetricia':'agfum','Pediatría':'pedwfa'
 });
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb',
- 'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration'];
+ 'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration','pedinsensible','pedgir','pedsolutions','pedvitals','pedformulavol','pedmilkcal','pedfoodcal','pedmaxverify','pedaccess','pedsupp'];
 const anatomy=Object.freeze({
  anion:'Tubos sanguíneos y moléculas de equilibrio ácido-base',
  osm:'Distribución de agua y solutos del plasma',
@@ -45,7 +45,17 @@ const anatomy=Object.freeze({
  ped421:'Mantenimiento hídrico y flujos por peso',
  pedneofluids:'Fisiología de líquidos del neonato',
  pedcorrected:'Prematuridad y cronología del desarrollo',
- peddehydration:'Cambios de peso y estado de hidratación'
+ peddehydration:'Cambios de peso y estado de hidratación',
+ pedinsensible:'Evaporación cutánea y superficie corporal',
+ pedgir:'Glucosa intravenosa y metabolismo celular',
+ pedsolutions:'Concentraciones de cloruro de sodio y dextrosa',
+ pedvitals:'Corazón y pulmones: signos vitales por edad',
+ pedformulavol:'Alimentación láctea del lactante',
+ pedmilkcal:'Leche y balance energético',
+ pedfoodcal:'Macronutrientes y digestión',
+ pedmaxverify:'Seguridad de medicamento y dosis por peso',
+ pedaccess:'Sistema venoso periférico y central',
+ pedsupp:'Suplementación y nutrición infantil'
 });
 const P={
   pink:'#d99689',red:'#a94c45',darkred:'#873b3e',blue:'#426d89',teal:'#397b7e',ivory:'#f0d9b7',
@@ -225,6 +235,17 @@ function focus(id){
  if(id==='pedneofluids'){g=uterus(228,31,.80);g+=path('M427 128 Q376 180 427 239 Q480 181 427 128Z','#87b0bc','#568390',3);}
  if(id==='pedcorrected'){g=uterus(184,23,.75);g+=circle(399,138,80,'#e4cbb8','#a7856f',2);g+=line('M399 74 V138 L431 151','#4a7d88',7);g+=circle(399,138,7,'#4a7d88');}
  if(id==='peddehydration'){g=body(208,21,.83);g+=path('M409 103 C378 151 368 185 409 220 C450 190 450 146 409 103Z','#7ba9b9','#4d8194',3);g+=line('M400 170 Q388 192 410 204','white',3);}
+
+ if(id==='pedinsensible'){g=body(211,19,.83);for(let i=0;i<6;i++)g+=path('M'+(342+i*21)+' '+(100+i%2*33)+' q-25 -25 0 -44 q25 20 0 44Z','#84adbb','#557e90',1);}
+ if(id==='pedgir'){g=tubes();g+=ellipse(426,182,56,44,'#eed2b4','#a88068',2);for(let i=0;i<5;i++)g+=circle(397+(i%3)*23,164+Math.floor(i/3)*26,9,['#c48373','#85a8b1','#b9b06e'][i%3]);}
+ if(id==='pedsolutions'){g=tubes();g+=line('M348 91 L471 162','#5f8b99',6);for(let i=0;i<7;i++)g+=circle(378+(i%3)*30,130+Math.floor(i/3)*25,7,i%2?'#749ba8':'#d59f8b');}
+ if(id==='pedvitals'){g=lungs(186,23,.7)+heart(385,112,.55);g+=line('M109 258 H149 L164 234 L183 278 L204 244 L220 260 H446','#348c8a',5);}
+ if(id==='pedformulavol'){g=body(174,25,.67);g+=path('M332 92 L402 92 L417 240 Q374 273 326 235Z','#e8dad0','#a08376',3);g+=path('M337 175 H408 L405 233 Q374 246 336 230Z','#e4caab','#aa8b74',1);g+=ellipse(375,91,42,14,'#9fb4c0','#6c8391',2);}
+ if(id==='pedmilkcal'){g=ellipse(235,153,99,108,'#d4e4e1','#6e9895',3);g+=ellipse(235,154,70,85,'#f3e5ce','#bd9b78',2);g+=line('M353 62 V241','#bd8d72',6);for(let i=0;i<6;i++)g+=line('M352 '+(77+i*31)+' H'+(i%2?380:392),'#8c9d98',2);}
+ if(id==='pedfoodcal'){g=liver(160,69,.67);for(let i=0;i<12;i++)g+=circle(340+(i%4)*29,102+Math.floor(i/4)*34,12,['#e4bb7a','#c37e79','#87a9a6'][i%3],'#ae8c7a',1);}
+ if(id==='pedmaxverify'){g=body(179,15,.68);g+=path('M344 82 L444 82 L465 226 L324 226Z','#e2e6e3','#69858a',3);g+=circle(394,132,28,'#bf837b','#9a6666',2);g+=line('M393 119 V146 M381 132 H406','white',5);}
+ if(id==='pedaccess'){g=veins();g+=line('M356 40 V257','#567e98',13);g+=line('M356 148 Q410 139 441 104','#a56c65',5);}
+ if(id==='pedsupp'){g=body(205,20,.78);g+=circle(420,134,64,'#eed5b4','#ac9476',2);g+=path('M390 130 H450 M420 99 V161','#5e8989','none',9);}
  return g;
 }
 function svg(id){
