@@ -1,4 +1,4 @@
-# KidBum Medical Atlas Editorial — Inventario v0.5.2
+# KidBum Medical Atlas Editorial — Inventario v0.6.0
 
 Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
@@ -52,3 +52,27 @@ Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
 - Hecho: sustitución de los SVG como imagen principal por ilustraciones pictóricas locales. Sigue pendiente la revisión anatómica por especialidad y ajustes artísticos finos.
 - Revisión visual real en Android/iOS/tableta y contraste de accesibilidad mediante dispositivos.
+
+
+## Módulo Pediatría 0.6.0 — 12 recursos visuales nuevos
+
+Las 12 herramientas añadidas tienen ilustraciones vectoriales originales ligadas a sus identificadores clínicos en `medical-atlas.js`; los 23 JPG anatómicos anteriores se conservan. Estas nuevas ilustraciones son esquemas editoriales, no placas certificadas, y aún pueden reemplazarse por versiones pictóricas después de revisión anatómica.
+
+| ID | Herramienta | Ilustración vinculada |
+|---|---|---|
+| `pedwfa` | Peso por edad OMS | Silueta infantil y escala de crecimiento |
+| `pedlhfa` | Longitud/talla por edad OMS | Medición de longitud corporal |
+| `pedhcfa` | Perímetro cefálico por edad OMS | Cráneo pediátrico con cinta perimetral |
+| `pedbmifa` | IMC por edad OMS | Tejidos corporales y proporción |
+| `pedwfl` | Peso por longitud/talla | Medición dual de peso y talla |
+| `pediou` | Diuresis pediátrica | Riñones y volumen urinario |
+| `pedbalance` | Balance hídrico | Líquidos de ingresos y pérdidas |
+| `pedholliday` | Holliday–Segar | Volumen de agua por segmentos de peso |
+| `ped421` | Regla 4–2–1 | Flujo horario segmentado |
+| `pedneofluids` | Líquidos del neonato | Neonato y fisiología de líquidos |
+| `pedcorrected` | Edad corregida | Desarrollo prematuro y cronología |
+| `peddehydration` | Cambio de peso | Pérdida de agua y medición de peso |
+
+## Recursos adicionales
+
+Seis tablas WHO LMS originales para ambos sexos `assets/who-{wfa,lhfa,hcfa,bmifa,wfl,wfh}.js`, usando los valores diarios 0–1826 días y rangos de longitud/talla a pasos de 0.1 cm. Todos los recursos se precargan con la PWA. El módulo clínico y los datos están separados de las otras calculadoras.
