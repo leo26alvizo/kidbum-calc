@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.1**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.7.2**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -151,3 +151,8 @@ La estimación de pérdidas insensibles es especialmente incierta en neonatos, p
 ## KidBum v0.7.1 — Tarjeta principal de Pediatría
 
 Se sustituyó la ilustración de categoría de Pediatría por la fotografía proporcionada por el autor. El recurso está optimizado como `assets/pediatria-portada.webp` (aprox. 68 KB), alojado en el repositorio y precargado por la PWA para uso offline. La tarjeta ocupa el ancho de la biblioteca y separa el texto de la foto, que conserva nitidez y color, sin difuminados. Las 45 calculadoras, tablas OMS, motor clínico y otras categorías permanecen sin cambios. Uso público de la fotografía sujeto a los derechos y autorizaciones correspondientes.
+
+
+### Actualización visual v0.7.2 — Ginecología y obstetricia
+
+La tarjeta de **Ginecología y obstetricia** utiliza la ilustración médica aportada directamente por el autor, optimizada sin recorte ni imágenes generadas como `assets/ginecologia-portada.webp`. Su formato rectangular a ancho completo y diseño responsive es equivalente al de la tarjeta de Pediatría. El encuadre de la lámina se adapta con CSS, sin filtros ni desenfoque. El archivo se agrega al precaché de la PWA. No se han cambiado calculadoras, fórmulas, favoritos ni modos de ChatGPT.
