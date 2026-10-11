@@ -481,6 +481,33 @@ html.dark .atlas-calc-heading .calc-title{
  .atlas-category-grid .atlas-gineco-feature .atlas-gineco-photo{object-position:52% 46%}
 }
 
+
+/* Química clínica: misma geometría rectangular que Pediatría y Ginecología. */
+.atlas-category-grid .atlas-category-card.atlas-quimica-feature{
+  background:#edf5f9;
+  border-color:#a9c8d9;
+}
+.atlas-category-grid .atlas-quimica-feature .atlas-category-copy{
+  background:#edf5f9!important;
+}
+.atlas-category-grid .atlas-quimica-feature .atlas-category-copy h3{color:#173b50}
+.atlas-category-grid .atlas-quimica-feature .atlas-category-eyebrow{color:#4c7182}
+.atlas-category-grid .atlas-quimica-feature .atlas-category-go{
+  background:#cce6f0;
+  color:#174b62;
+}
+.atlas-category-grid .atlas-quimica-feature .atlas-quimica-photo{
+  filter:none!important;
+  opacity:1!important;
+  object-position:65% 49%;
+}
+@media(max-width:740px){
+ .atlas-category-grid .atlas-quimica-feature .atlas-quimica-photo{object-position:66% 51%}
+}
+@media(max-width:420px){
+ .atlas-category-grid .atlas-quimica-feature .atlas-quimica-photo{object-position:67% 51%}
+}
+
   </style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
@@ -489,7 +516,7 @@ html.dark .atlas-calc-heading .calc-title{
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
         <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.7.2</small></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.7.3</small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
       <div class="side-menu" id="nav-menu"></div>
@@ -935,8 +962,8 @@ function renderHome(full){
   catBlock.innerHTML=ordered.map(c=>{
     const count=defs.filter(d=>d.category===c).length;
     const artId=atlas.categoryMap[c]||'gcs';
-    return `<button type="button" class="atlas-category-card${c==='Pediatría'?' atlas-pediatria-feature':c==='Ginecología y obstetricia'?' atlas-gineco-feature':''}" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
-      <div class="atlas-category-visual">${c==='Pediatría'?'<img class="atlas-category-illustration atlas-pediatria-photo" src="./assets/pediatria-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Ginecología y obstetricia'?'<img class="atlas-category-illustration atlas-gineco-photo" src="./assets/ginecologia-portada.webp" alt="" loading="lazy" decoding="async" />':atlas.img(artId,'atlas-category-illustration',atlas.anatomy[artId]))}</div>
+    return `<button type="button" class="atlas-category-card${c==='Pediatría'?' atlas-pediatria-feature':c==='Ginecología y obstetricia'?' atlas-gineco-feature':c==='Química clínica'?' atlas-gineco-feature atlas-quimica-feature':''}" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
+      <div class="atlas-category-visual">${c==='Pediatría'?'<img class="atlas-category-illustration atlas-pediatria-photo" src="./assets/pediatria-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Ginecología y obstetricia'?'<img class="atlas-category-illustration atlas-gineco-photo" src="./assets/ginecologia-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Química clínica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-quimica-photo" src="./assets/quimica-clinica-portada.webp" alt="" loading="lazy" decoding="async" />':atlas.img(artId,'atlas-category-illustration',atlas.anatomy[artId])))}</div>
       <div class="atlas-category-copy"><span class="atlas-category-eyebrow">BIBLIOTECA MÉDICA · ${count} HERRAMIENTAS</span><h3>${enc(c)}</h3><span class="atlas-category-go">Ver calculadoras <span aria-hidden="true">→</span></span></div>
     </button>`;
   }).join('');
@@ -1047,7 +1074,7 @@ async function copyPrompt(){
   window.location.assign('https://chatgpt.com/');
  }catch(e){toast('No se pudo copiar. Revisa los permisos del portapapeles.');}
 }
-function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 45 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.7.2 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 45 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.7.3 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
 try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
 function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
