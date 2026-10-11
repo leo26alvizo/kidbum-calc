@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.3**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 49 calculadoras (23 iniciales, 22 pediátricas y 4 hospitalarias).**
+**Total actual: 52 calculadoras (45 originales y 7 nuevas de expansión hospitalaria). Categorías: 10.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -226,3 +226,14 @@ Se incorporaron **Winter, delta ratio, FeNa y FeUrea** en un módulo independien
 **Fuentes:** [Merck Manual](https://www.merckmanuals.com/professional/nephrology/acid-base-regulation-and-disorders/acid-base-disorders), [Delta ratio](https://pubmed.ncbi.nlm.nih.gov/19769708/), [Limitaciones del delta ratio](https://pubmed.ncbi.nlm.nih.gov/17699401/), [Kidney360 PRO](https://pubmed.ncbi.nlm.nih.gov/37384887/) y [Kidney360 CON](https://pubmed.ncbi.nlm.nih.gov/37384888/).
 
 **Seguridad:** son herramientas de apoyo, no dispositivos clínicos validados; no sustituyen la valoración presencial ni los protocolos institucionales.
+
+
+## KidBum CALC v0.9.0 — Expansión hospitalaria completada
+
+Se incorporaron **QTc (Bazett y Fridericia), Glasgow-Blatchford y RCRI**, sumando **52 herramientas en 10 categorías**. Nuevas categorías: Cardiología y Gastroenterología. Motor independiente `assets/advanced-module.js`, sin modificar las fórmulas anteriores.
+
+**QTc:** RR regular obligatorio; QTc por Fridericia en el resultado principal y Bazett en el desglose; alertas en QRS ancho y FC extrema. **GBS:** selecciona urea mmol/L, urea mg/dL o BUN mg/dL; se aplica tabla original de urea mmol/L y se desglosa cada criterio. Un GBS de 0–1 nunca genera indicación automática de alta. **RCRI:** cinco criterios de historial/procedimiento, creatinina sérica numérica para sexto factor; clase I–IV sin porcentaje automático de riesgo.
+
+Se conservaron el icono original, autoría, portada, favoritos, búsqueda, envío por copia a ChatGPT y funcionalidad offline. Nuevas tarjetas reutilizan ilustraciones anteriores sin generar imágenes adicionales. Se amplió batería automatizada; se requiere además validación clínica independiente y pruebas de interfaz Android.
+
+Fuentes: [AHA ECG QT 2009](https://www.jacc.org/doi/10.1016/j.jacc.2008.12.014), [ACG 2021](https://pubmed.ncbi.nlm.nih.gov/33929377/), [NHS Glasgow-Blatchford](https://handbook.ggcmedicines.org.uk/guidelines/gastrointestinal-system/glasgow-blatchford-score/), [AHA/ACC 2024](https://www.jacc.org/doi/10.1016/j.jacc.2024.06.013).

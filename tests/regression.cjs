@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.8\.3/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.9\.0/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v083-hospital-phase1/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v090-complete-expansion/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -66,11 +66,12 @@ for(const kind of ['wfa','lhfa','hcfa','bmifa','wfl','wfh']){
 vm.runInNewContext(fs.readFileSync('assets/pediatric-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/pediatric-ward.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/hospital-module.js','utf8'),ctx,{timeout:2000});
+vm.runInNewContext(fs.readFileSync('assets/advanced-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
 const t=[
 ['Original anion gap',()=>assert.equal(calc('anion',{na:140,cl:104,hco3:23}).value,13)],
-['Count',()=>assert.equal(ctx.KidBumEngine.list.length,49)],
+['Count',()=>assert.equal(ctx.KidBumEngine.list.length,52)],
 ['Dating 0w0d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-01-01'}).display,'0 sem + 0 d')],
 ['Dating 40w3d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-10-11'}).display,'40 sem + 3 d')],
 ['Date reversed',()=>assert.ok(calc('agfum',{lmp:'2026-10-11',asof:'2026-01-01'}).error)],
@@ -144,7 +145,7 @@ const t=[
 ['Dose limits do not autoauthorize',()=>assert.match(calc('pedmaxverify',{weight:10,dose:100,frequency:4,maxSingle:120,maxDaily:500}).interpretation,/NO equivale/)],
 ['Access review not approval',()=>assert.equal(calc('pedaccess',{context:'highpn'}).display,'Valorar acceso')],
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
-['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length,35)],
+['All previous 35 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
 ['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)],
 ['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
@@ -201,8 +202,52 @@ const expansionTests=[
 ['FeUrea no zero denominator',()=>assert.ok(calc('feurea',{ureaU:300,ureaP:0,ucr:80,pcr:2,ureaunit:'urea_mgdl',diuretics:'false'}).error)],
 ['FeUrea BUN consistent',()=>assert.equal(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,ureaunit:'bun_mgdl',diuretics:'false'}).value,18.75)],
 ['Hospital reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/37384888/'))],
-['Original 45 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumHospital.ids.length,45)]
+['Original 45 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length,45)]
 ];
 t.push(...expansionTests);
+
+const advancedTests=[
+['Advanced module loaded',()=>assert.ok(html.includes('assets/advanced-module.js'))],
+['Advanced module cached offline',()=>assert.ok(swSource.includes('./assets/advanced-module.js'))],
+['Advanced module three tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
+['52 calculators in engine',()=>assert.equal(ctx.KidBumEngine.list.length,52)],
+['Cardiology category',()=>assert.ok(html.includes("'Cardiología'"))],
+['Gastroenterology category',()=>assert.ok(html.includes("'Gastroenterología'"))],
+['New categories shown on home page',()=>assert.ok(html.includes("const ordered=['Pediatría','Cardiología','Gastroenterología'"))],
+['QTc Fridericia at HR60',()=>assert.equal(calc('qtc',{qt:400,hr:60,rhythm:'regular',qrs:'narrow'}).value,400)],
+['QTc Bazett shown',()=>assert.ok(calc('qtc',{qt:400,hr:60,rhythm:'regular',qrs:'narrow'}).interpretation.includes('Bazett 400.0'))],
+['QTc at HR100',()=>assert.ok(Math.abs(calc('qtc',{qt:400,hr:100,rhythm:'regular',qrs:'narrow'}).value-400/Math.cbrt(.6))<1e-9)],
+['QTc irregular blocked',()=>assert.ok(calc('qtc',{qt:400,hr:60,rhythm:'irregular',qrs:'narrow'}).error)],
+['QTc wide QRS alert',()=>assert.ok(calc('qtc',{qt:400,hr:60,rhythm:'regular',qrs:'wide'}).notes.some(n=>n.includes('JT')))],
+['QTc >=500 warning',()=>assert.ok(calc('qtc',{qt:600,hr:60,rhythm:'regular',qrs:'narrow'}).notes.some(n=>n.includes('500')))],
+['QTc blank QT rejected',()=>assert.ok(calc('qtc',{qt:'',hr:60,rhythm:'regular',qrs:'narrow'}).error)],
+['QTc missing rhythm rejected',()=>assert.ok(calc('qtc',{qt:400,hr:60,qrs:'narrow'}).error)],
+['RCRI 0',()=>assert.equal(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',insulin:'false',scr:1}).value,0)],
+['RCRI renal threshold',()=>assert.equal(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',insulin:'false',scr:2}).value,1)],
+['RCRI renal below threshold',()=>assert.equal(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',insulin:'false',scr:1.99}).value,0)],
+['RCRI all six',()=>assert.equal(calc('rcri',{surgery:'true',ischemia:'true',hf:'true',cvd:'true',insulin:'true',scr:2}).value,6)],
+['RCRI missing field',()=>assert.ok(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',scr:2}).error)],
+['Previous 49 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumAdvanced.ids.length,49)]
+];
+const gbsBase={ureaunit:'urea_mmoll',urea:5,hb:14,hbsex:'male',sbp:120,hr:80,melena:'false',syncope:'false',liver:'false',hf:'false'};
+advancedTests.push(['GBS zero',()=>assert.equal(calc('gbs',gbsBase).value,0)]);
+for(const [field,value,score] of [['urea',6.5,2],['urea',8,3],['urea',10,4],['urea',25,6],['hb',12,1],['hb',11.9,3],['hb',9.9,6],['sbp',100,1],['sbp',90,2],['sbp',89,3],['hr',100,1]]){
+ advancedTests.push(['GBS boundary '+field+' '+value,()=>assert.equal(calc('gbs',{...gbsBase,[field]:value}).value,score)]);
+}
+for(const [field,score] of [['melena',1],['syncope',2],['liver',2],['hf',2]]){
+ advancedTests.push(['GBS clinical point '+field,()=>assert.equal(calc('gbs',{...gbsBase,[field]:'true'}).value,score)]);
+}
+advancedTests.push(
+['GBS woman Hb11.9',()=>assert.equal(calc('gbs',{...gbsBase,hbsex:'female',hb:11.9}).value,1)],
+['GBS woman Hb12',()=>assert.equal(calc('gbs',{...gbsBase,hbsex:'female',hb:12}).value,0)],
+['GBS BUN conversion',()=>assert.equal(calc('gbs',{...gbsBase,ureaunit:'bun_mgdl',urea:6.5*2.80134}).value,2)],
+['GBS urea mg/dL conversion',()=>assert.equal(calc('gbs',{...gbsBase,ureaunit:'urea_mgdl',urea:8*6.006}).value,3)],
+['GBS 23 maximum',()=>assert.equal(calc('gbs',{...gbsBase,urea:30,hb:8,sbp:80,hr:120,melena:'true',syncope:'true',liver:'true',hf:'true'}).value,23)],
+['GBS missing melena',()=>assert.ok(calc('gbs',{...gbsBase,melena:''}).error)],
+['GBS no automatic discharge',()=>assert.ok(calc('gbs',gbsBase).interpretation.includes('no equivale a indicación automática'))],
+['GBS contributions visible',()=>assert.ok(calc('gbs',gbsBase).detail.includes('PAS'))],
+['New medical sources displayed',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/33929377/'))]
+);
+t.push(...advancedTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
