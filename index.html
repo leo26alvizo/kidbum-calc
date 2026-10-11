@@ -320,6 +320,27 @@ html.dark .atlas-calc-heading .calc-title{
   .atlas-calc-heading .calc-title{width:76%}
 }
 
+
+/* Category split: fully opaque text backing, completely uncoated anatomical plate. */
+.atlas-category-visual{left:45%;opacity:1!important}
+.atlas-category-copy{
+  max-width:62%;
+  background:#f9f6ef!important;
+  border-radius:0 12px 12px 0;
+}
+.atlas-category-card:nth-child(even) .atlas-category-copy{
+  background:#f1f7f1!important;
+}
+@media(max-width:740px){
+ .atlas-category-visual{left:47%;opacity:1!important}
+ .atlas-category-copy{max-width:67%}
+}
+@media(max-width:420px){
+ .atlas-category-visual{left:47%;opacity:1!important}
+ .atlas-category-copy{max-width:69%}
+ .atlas-category-copy h3{font-size:14px;overflow-wrap:break-word}
+}
+
   </style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
