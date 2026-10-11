@@ -2,7 +2,7 @@
 
 **Creada por Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.2**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.5.3**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -24,7 +24,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 4. Abrir la aplicación una vez con conexión para activar la disponibilidad sin conexión.
 
 ## Verificación
-La versión 0.5.2 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
+La versión 0.5.3 usa `index.html` autocontenido. Pasaron 25 comprobaciones del motor, incluidas fechas calendario, años bisiestos, límites de Bishop, índice de choque, casos no válidos y regresión de herramientas previas. El código JavaScript se verificó sintácticamente. Esto no constituye validación clínica institucional.
 
 Las pruebas pueden ampliarse y ejecutarse después de cada actualización; se recomienda confirmar la versión visible en Android y la instalación offline.
 
@@ -57,7 +57,7 @@ Desde cualquier calculadora con resultado válido, pulsa **Analizar con ChatGPT*
 El teléfono abre `https://chatgpt.com/` (en app o navegador según Android). **No** se manda el mensaje por sí solo: el usuario debe pegarlo y enviarlo. No se garantiza abrir automáticamente este proyecto concreto. No incluir identificadores de pacientes. ChatGPT requiere internet; el cálculo sigue siendo local y utilizable sin conexión.
 
 
-## KidBum v0.5.2 — Medical Atlas Editorial
+## KidBum v0.5.3 — Medical Atlas Editorial
 
 Rediseño funcional de la interfaz existente (no maqueta):
 - Portada ilustrada con estilo editorial, alto contraste y tipografía de títulos serif.
@@ -74,7 +74,7 @@ Rediseño funcional de la interfaz existente (no maqueta):
 **Pruebas:** el script \`tests/regression.cjs\` (ejecutar \`node tests/regression.cjs\`) verifica que los cálculos y elementos esenciales siguen presentes. La puesta en producción se completa cuando GitHub Pages confirme éxito; esto no implica validación clínica institucional ni prueba de apariencia en todos los dispositivos.
 
 
-### Ajustes v0.5.2
+### Ajustes v0.5.3
 
 - La portada utiliza una ilustración pictórica distinta de las fichas de cálculo.
 - Las siete categorías reales tienen tarjetas visuales y filtros accesibles antes de la galería.
@@ -84,3 +84,12 @@ Rediseño funcional de la interfaz existente (no maqueta):
 - Se preserva la integración con ChatGPT, favorito, tema claro/oscuro y todas las fórmulas clínicas.
 
 La apariencia final requiere revisión de interfaz en dispositivos reales y revisión editorial/anatómica. Los activos ilustrativos no son sustitutos de las representaciones validadas de atlas o de recursos diagnósticos.
+
+
+### Ajuste de nitidez v0.5.3
+
+- La portada usa exactamente la imagen anatómica seleccionada por el autor, optimizada localmente como \`assets/portada-atlas-usuario.webp\`.
+- Las imágenes anatómicas de portada, categorías y calculadoras se muestran sin reducción de opacidad, filtros de color o desenfoque.
+- El texto mantiene contraste por medio de un panel y una transición localizada, sin un velo global sobre toda la ilustración.
+- La portada nueva está precargada por la PWA para uso sin conexión.
+- No se alteró el motor de cálculo médico.
