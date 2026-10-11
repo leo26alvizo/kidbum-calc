@@ -7,6 +7,14 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
+assert.match(html,/Clinical toolkit · v0\.5\.2/,'Atlas release version must be visible');
+const atlasSource=fs.readFileSync('assets/medical-atlas.js','utf8');
+const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb','correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs'];
+for(const id of ids)assert.ok(fs.existsSync('assets/atlas-'+id+'.jpg'),'Missing pictorial clinical illustration: '+id);
+for(const art of ['hero','lab','kidney','lungs','brain','liver','obstetrics','vascular'])
+  assert.ok(fs.existsSync('assets/atlas-'+art+'.jpg'),'Missing original atlas source: '+art);
+assert.match(atlasSource,/assets\/atlas-/,'Atlas library must load local image assets');
+
 assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
 const ctx={};vm.runInNewContext(scripts[0],{globalThis:ctx}, {timeout:2000});
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
@@ -33,7 +41,12 @@ const t=[
 ['No paid API call',()=>assert.ok(!html.includes('api.openai.com'))],
 ['Illustrated calculator card',()=>assert.match(html,/atlas-card-illustration/)],
 ['Illustrated calculator header',()=>assert.match(html,/atlas-calc-illustration/)],
-['Illustrated specialty cards',()=>assert.match(html,/atlas-category-card/)]
+['Illustrated specialty cards',()=>assert.match(html,/atlas-category-card/)],
+['Clinical atlas 23 JPG',()=>assert.equal(ids.length,23)],
+['Glasgow touch selection',()=>assert.match(html,/data-gcs-value/)],
+['Glasgow still uses underlying select',()=>assert.match(html,/gcs-native-select/)],
+['Mobile two-column specialty cards',()=>assert.match(html,/atlas-category-grid\{grid-template-columns:repeat\(2/)],
+['Legacy formulas not modified',()=>assert.equal(calc('gcs',{eye:'4',verbal:'5',motor:'6'}).value,15)]
 ];
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
