@@ -1,4 +1,4 @@
-# KidBum Medical Atlas Editorial — Inventario v0.7.0
+# KidBum Medical Atlas Editorial — Inventario v0.8.0
 
 Fuente: `index.html` y `assets/medical-atlas.js` de KidBum CALC.
 
@@ -94,3 +94,12 @@ Seis tablas WHO LMS originales para ambos sexos `assets/who-{wfa,lhfa,hcfa,bmifa
 | `pedsupp` | Suplementos infantiles | Crecimiento y nutrición |
 
 Las 10 láminas son **SVG editoriales originales**, asignadas por ID y reproducidas localmente; no se presentan como láminas de anatomía certificadas ni sustituyen las fotografías/atlas originales de las 23 herramientas anteriores. Revisión pictórica anatómica especializada pendiente para los nuevos esquemas.
+
+
+## Actualización v0.8.0 · Recursos pediátricos pictóricos
+
+Los 22 gráficos pediátricos ya están implementados como `assets/pediatric/<id>.webp` y precargados por el service worker. Están basados en composiciones originales existentes de KidBum y diagramas superpuestos relacionados con cada calculadora; las láminas SVG anteriores se mantienen como respaldo local. 
+
+La indicación "pendiente de ilustración" en secciones históricas del documento se refiere al estado anterior a v0.8.0. Los recursos actuales son editoriales, no material científico anatómico validado. Deben revisarse en una iteración posterior junto con los usuarios y especialistas.
+
+Los 22 identificadores están documentados por las 12 herramientas iniciales de Pediatría y las 10 añadidas en Pediatría hospitalaria, listadas arriba. Cada uno posee archivo WebP propio y referencia estable en `medical-atlas.js`.
