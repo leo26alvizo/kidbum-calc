@@ -1,8 +1,8 @@
 # KidBum CALC 🩺
 
-**Creada por Leonardo Alvizo Velázquez.**
+**Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.1**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.8.2**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -204,3 +204,11 @@ Las categorías **Hepatología** y **Antropometría** ahora usan el mismo diseñ
 - Archivos locales: `kidbum-icon-192-v081.png` y `kidbum-icon-512-v081.png`.
 - Se actualizaron el manifiesto PWA, favicon del navegador, icono Apple y la lista de recursos offline; el nuevo nombre de archivo ayuda a evitar que los teléfonos conserven el icono anterior.
 - **Sin cambios en las 45 calculadoras ni en el motor clínico**. En dispositivos con un acceso directo antiguo, puede ser necesario eliminarlo y volver a instalar la aplicación para actualizar la imagen del lanzador.
+
+
+## KidBum CALC v0.8.2 — Autoría y título de portada
+
+- Créditos actualizados a **Teniente Pasante de Medicina Leonardo Alvizo Velázquez** en las pantallas de la app, la galería y los metadatos.
+- Título de portada solicitado: **Calculadora Médica Integtal** (reproducción literal de la indicación del autor).
+- Se conservaron la identidad y los iconos originales del autor, la biblioteca de 45 calculadoras y sus fórmulas.
+- Se actualizó la versión de caché PWA y las pruebas de regresión de textos.

@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.8\.1/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.8\.2/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v081-original-icon/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v082-author-cover/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -85,7 +85,10 @@ const t=[
 ['Obstetric shock index',()=>assert.equal(calc('obshock',{hr:100,sbp:100}).value,1)],
 ['Invalid SBP',()=>assert.ok(calc('obshock',{hr:100,sbp:0}).error)],
 ['NEWS2 regression',()=>assert.equal(calc('news2',{rr:16,spo2:98,sbp:120,hr:70,temp:37,scale:'one',oxygen:'false',conscious:'alert'}).value,0)],
-['Creator credit',()=>assert.ok(html.includes('Leonardo Alvizo Velázquez'))],
+['Creator credit',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
+['Cover main title',()=>assert.ok(html.includes('atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integtal</span>'))],
+['Manifest creator',()=>assert.ok(manifest.description.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
+['Creator across page',()=>assert.equal(html.split('Teniente Pasante de Medicina Leonardo Alvizo Velázquez').length-1,6)],
 ['ChatGPT handoff',()=>assert.ok(html.includes("window.location.assign('https://chatgpt.com/')"))],
 ['No paid API call',()=>assert.ok(!html.includes('api.openai.com'))],
 ['Illustrated calculator card',()=>assert.match(html,/atlas-card-illustration/)],
