@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.12**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.13**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,16 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## PWA v0.10.13 — Inicio inmediato sin esperar datos móviles
+
+Se corrigió un defecto de experiencia PWA: el service worker anterior usaba una estrategia **online-first sin límite de espera** para HTML y JavaScript, por lo que una red móvil intermitente podía bloquear el inicio incluso cuando existían recursos locales. Ahora **HTML, motor clínico y módulos clave salen primero del caché local**, sin solicitar datos ni esperar una conexión para responder. Los recursos sin caché tienen un límite de espera de 6.5 segundos.
+
+Cada versión nueva se descarga como un grupo de archivos críticos durante la instalación del service worker; solo después de completar la descarga reemplaza la versión anterior, sin mezclar HTML y módulos clínicos. El registro ocurre inmediatamente, sin esperar ilustraciones. «Buscar actualización» solicita una comprobación con límite de tiempo y ya no fuerza una navegación de red que podía provocar `ERR_TIMED_OUT`. Los archivos ilustrativos continúan en caché bajo demanda.
+
+**Limitación:** un visitante nuevo, sin versión previa en caché y con GitHub Pages inaccesible, aún necesitará conexión para instalarla. Para corregir el service worker antiguo en un teléfono, es necesario abrir la v0.10.13 al menos una vez con conexión estable (preferentemente Wi-Fi). Luego podrá arrancar desde el caché incluso con datos lentos o temporalmente desconectados.
+
+Pruebas automatizadas: `node tests/pwa-cellular.cjs`. No se modificaron las 68 calculadoras, los dos módulos orales de dosificación de referencia ni el seguimiento de Umami.
 
 ## Farmacología pediátrica v0.10.12 — Primera fase de cálculo condicionado
 
