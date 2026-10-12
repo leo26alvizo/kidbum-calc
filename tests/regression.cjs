@@ -476,6 +476,23 @@ completionTests.push(['ROX and RASS decline non-assessed clinical context',()=>{
  }
 }]);
 
+// Every real form's example must reach a result through the SAME data
+// conversion used by update(), including boolean mental/confusion fields.
+for(const definition of actualClinicalDefs){
+ completionTests.push(['All form examples calculate: '+definition.id,()=>{
+  const data={};
+  for(const f of definition.fields){
+   const raw=f.example||'';
+   if(f.type==='choice'&&(f.key==='mental'||f.key==='confusion'))data[f.key]=raw===''?undefined:raw==='true';
+   else data[f.key]=raw;
+  }
+  const result=ctx.KidBumEngine.calculate(definition.id,data);
+  assert.equal(result.error,undefined,'Clinical form must calculate: '+definition.id+' '+(result.error||[]).join('; '));
+  assert.equal(result.missing,undefined,'Example must be complete: '+definition.id);
+  assert.ok(result.value!==undefined||result.display!==undefined,'Example must return result: '+definition.id);
+ }]);
+}
+
 t.push(...completionTests);
 
 const neurologyPhotoTests=[
