@@ -100,7 +100,7 @@ let contradictoryPressureChecks=0;
 for(const id of ['abcd2','map','curb']){
  const def=defs.find(d=>d.id===id);
  const data={...formInput(def),sbp:'80',dbp:'120'};
- assert.ok(guard(def,data)?.error,'Form must block contradictory BP: '+id);
+ assert.ok(validate(def,data)?.error,'Form must block contradictory BP: '+id);
  assert.ok(calc(id,data).error,'Engine must block contradictory BP: '+id);
  contradictoryPressureChecks++;
 }
