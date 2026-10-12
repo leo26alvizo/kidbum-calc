@@ -45,7 +45,7 @@ const context={
  atlas:{img:()=>'<img alt="">',anatomy:{},categoryMap:{}},
  categories:['Todas','Pediatría'],
  enc:s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
- el(selector){return elements[selector]||(elements[selector]={innerHTML:'',hidden:false,onclick:null,oninput:null});},
+ el(selector){return elements[selector]||(elements[selector]={innerHTML:'',hidden:false,onclick:null,oninput:null,querySelectorAll:()=>[]});},
  document:{querySelectorAll:(selector)=>selector==='[data-pharma-open]'?[cardButton]:[]},
  go(page){context.route=page;}
 };
