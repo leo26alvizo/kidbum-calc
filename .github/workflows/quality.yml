@@ -19,3 +19,5 @@ jobs:
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
         run: node tests/analytics.cjs
+      - name: Pediatric pharmacy placement and safety
+        run: node tests/pediatric-pharmacy.cjs
