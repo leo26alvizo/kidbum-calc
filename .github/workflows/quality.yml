@@ -23,3 +23,5 @@ jobs:
         run: node tests/pediatric-pharmacy.cjs
       - name: Pediatric oral dose safety and arithmetic
         run: node tests/pediatric-drug-doses.cjs
+      - name: Mobile data and offline startup
+        run: node tests/pwa-cellular.cjs
