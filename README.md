@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.7**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.8**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,10 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Seguridad P0 v0.10.8 — Datos contradictorios
+
+Se agrega rechazo explícito de presión arterial diastólica superior a la sistólica en el motor ABCD² y en la validación común de todos los formularios que requieren ambas presiones. Se conserva la verificación existente en PAM y CURB-65. Se prueban los tres escenarios tanto en interfaz como en motor. No se modificaron ecuaciones.
 
 ## Seguridad P0 v0.10.7 — Bloqueos clínicos
 
