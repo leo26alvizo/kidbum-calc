@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.11" />
+  <meta name="kidbum-app-version" content="0.10.12" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -367,6 +367,22 @@ html.dark .atlas-calc-heading .calc-title{
 .pharma-not-ready{font-size:12px;font-weight:800;color:var(--alert)}
 @media(max-width:1060px){.pharma-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:740px){.pharma-grid{grid-template-columns:1fr}.pharma-reference{padding:17px}}
+
+
+/* Guarded oral-dose reference only; responsive, no data persistence. */
+.pharma-dose-form{border:1px solid var(--stroke);background:var(--surface);border-radius:18px;padding:21px;margin:20px 0}
+.pharma-dose-form h2{font-family:Georgia,'Times New Roman',serif;margin:0 0 10px}
+.pharma-dose-form .pharma-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.pharma-dose-form label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:720;color:var(--ink)}
+.pharma-dose-form label input,.pharma-dose-form label select{width:100%;min-width:0;padding:12px;border:1px solid var(--stroke);border-radius:10px;background:var(--bg);color:var(--ink)}
+.pharma-dose-form .pharma-checks{margin-top:15px;display:grid;gap:10px}
+.pharma-dose-form .pharma-checks label{max-width:800px}
+.pharma-dose-form .pharma-results{margin-top:14px;padding:15px;border-radius:13px;background:var(--soft);border:1px solid var(--stroke);line-height:1.6}
+.pharma-dose-form .pharma-results strong{display:block;font-size:16px}
+.pharma-dose-form .pharma-calculation{font-variant-numeric:tabular-nums}
+.pharma-dose-form .pharma-results[hidden]{display:none}
+.pharma-dose-form .pharma-source{font-size:12px;color:var(--ink-soft);margin:14px 0 0}
+@media(max-width:740px){.pharma-dose-form .pharma-fields{grid-template-columns:1fr}.pharma-dose-form{padding:17px}}
 
 /* Pediatric clinical reference tables, touch-friendly and offline */
 .growth-reference{margin:14px 0 20px;padding:13px 12px;background:var(--soft);border:1px solid var(--stroke);border-radius:14px}
@@ -822,6 +838,7 @@ html.dark .atlas-calc-heading .calc-title{
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <!-- Clinical modules bundled in original execution order for fast mobile startup. -->
 <script src="./assets/startup-bundle.js"></script>
+<script src="./assets/pediatric-pharma.js"></script>
 <script>
 /* KidBum CALC v0.1 · motor determinista sin red ni telemetría.
  * Las salidas son cálculos auxiliares, no órdenes ni diagnósticos.
@@ -1353,22 +1370,88 @@ function renderHome(full){
  el('#search-input').oninput=e=>{search=e.target.value;renderHome(false);};
 }
 function renderPharma(){
+ const flags={
+  paracetamol:[
+   ['allergy','¿Alergia o reacción grave al paracetamol?'],
+   ['liver','¿Enfermedad hepática grave o falla hepática?'],
+   ['other','¿Otros productos con paracetamol NO incluidos en el total de 24 h?']
+  ],
+  ibuprofeno:[
+   ['allergy','¿Alergia a ibuprofeno u otros AINE?'],
+   ['kidney','¿Insuficiencia renal o enfermedad renal relevante?'],
+   ['dehydration','¿Deshidratación, vómitos importantes o hipovolemia?'],
+   ['varicella','¿Varicela sospechada o confirmada?'],
+   ['bleeding','¿Sangrado digestivo, úlcera activa o trastorno hemorrágico?'],
+   ['asthma','¿Asma con seguridad de AINE no revisada?']
+  ]
+ };
+ const meds={paracetamol:{strength:'160/5',label:'160 mg/5 mL',doses:[10,15],interval:6},
+             ibuprofeno:{strength:'100/5',label:'100 mg/5 mL',doses:[5,10],interval:8}};
  const cards=pediatricPharma.map(m=>'<article class="pharma-reference">'+
   '<span class="pharma-type">'+enc(m.type)+'</span><h2>'+enc(m.name)+'</h2>'+
-  '<p><strong>Presentaciones del inventario:</strong> '+enc(m.forms)+'. Verificar la formulación comercial actual.</p>'+
-  '<p><strong>Antes de habilitar la dosis debe comprobarse:</strong></p>'+
+  '<p><strong>Presentaciones en el inventario:</strong> '+enc(m.forms)+'. Comprobar siempre la etiqueta y la formulación real.</p>'+
   '<ul>'+m.checks.map(c=>'<li>'+enc(c)+'</li>').join('')+'</ul>'+
-  '<p class="pharma-not-ready">Dosis no habilitada · en revisión clínica</p></article>').join('');
+  '<p class="pharma-not-ready">'+(m.name==='Amoxicilina'?'Cálculo no habilitado: requiere indicación antibiótica concreta.':'Referencia oral disponible con filtros clínicos y límites conservadores.')+'</p></article>').join('');
  main.innerHTML='<button type="button" class="breadcrumb-back" id="pharma-back">← Volver a Pediatría</button>'+
- '<section class="pharma-intro"><span class="eyebrow">PEDIATRÍA · FARMACOLOGÍA</span>'+
- '<h1>Farmacología pediátrica</h1>'+
- '<p>Catálogo inicial junto a las 22 calculadoras pediátricas. Las presentaciones mencionadas en el material proporcionado requieren validación independiente de dosis, concentraciones y límites clínicos.</p></section>'+
- '<div class="pharma-safety-banner" role="note"><strong>⚠ Módulo en revisión clínica.</strong> Todavía no calcula mg/kg ni convierte a mL, gotas o disparos. No utilizar como prescripción ni como referencia para administrar medicamentos.</div>'+
- '<div class="pharma-grid">'+cards+'</div>'+
- '<section class="info-card"><h2>Próximo paso: validación individual</h2>'+
- '<p>Verificar para cada fármaco indicación, edad, peso, vía, dosis máxima, frecuencia, función renal o hepática, contraindicaciones y concentración comercial. Activar los cálculos uno por uno solo después de pasar pruebas de seguridad.</p>'+
- '<p><strong>Material de partida:</strong> Calculadora Pediátrica AnetteB, archivo aportado al proyecto; no es una monografía clínica validada.</p></section>';
+  '<section class="pharma-intro"><span class="eyebrow">PEDIATRÍA · FARMACOLOGÍA</span><h1>Farmacología pediátrica</h1>'+
+  '<p>Referencias por peso, únicamente para paracetamol e ibuprofeno orales en niños de 2 a menos de 12 años (8–40 kg), con evaluación médica y una concentración específica verificada en el frasco. Amoxicilina sigue en revisión.</p></section>'+
+  '<div class="pharma-safety-banner" role="note"><strong>⚠ Seguridad farmacológica.</strong> El número calculado no es una orden médica. No utilizar en menores de 2 años, peso fuera de 8–40 kg, condiciones especiales, embarazo, insuficiencia orgánica o si hay información desconocida. No se guardan datos del paciente.</div>'+
+  '<div class="pharma-grid">'+cards+'</div>'+
+  '<section class="pharma-dose-form" aria-label="Cálculo condicionado de dosis pediátrica oral">'+
+  '<h2>Referencia de dosis oral por peso</h2>'+
+  '<p class="input-info">Rangos y límites conservadores para fiebre con malestar o dolor. Hay que confirmar todos los datos antes de calcular. No se calculan gotas ni otras formulaciones.</p>'+
+  '<div class="pharma-fields">'+
+   '<label>Medicamento<select id="pfx-med"><option value="">Selecciona</option><option value="paracetamol">Paracetamol oral</option><option value="ibuprofeno">Ibuprofeno oral</option></select></label>'+
+   '<label>Indicación valorada<select id="pfx-indication"><option value="">Selecciona</option><option value="pain">Dolor</option><option value="fever">Malestar por fiebre</option></select></label>'+
+   '<label>Edad exacta (meses)<input id="pfx-age" type="number" min="24" max="143" step="1" inputmode="numeric" placeholder="Ej. 36" autocomplete="off"></label>'+
+   '<label>Peso actual (kg)<input id="pfx-weight" type="number" min="8" max="40" step="any" inputmode="decimal" placeholder="Ej. 15" autocomplete="off"></label>'+
+   '<label>Dosis de referencia (mg/kg/toma)<select id="pfx-dose"><option value="">Selecciona medicamento</option></select></label>'+
+   '<label>Concentración que indica el frasco<select id="pfx-strength"><option value="">Selecciona medicamento</option></select></label>'+
+   '<label>Dosis recibidas en últimas 24 h (número)<input id="pfx-count" type="number" min="0" step="1" inputmode="numeric" placeholder="0 si ninguna" autocomplete="off"></label>'+
+   '<label>Total recibido del mismo fármaco en 24 h (mg)<input id="pfx-prior" type="number" min="0" step="any" inputmode="decimal" placeholder="0 si ninguna" autocomplete="off"></label>'+
+   '<label>Horas desde última dosis (si hubo alguna)<input id="pfx-hours" type="number" min="0" max="24" step="any" inputmode="decimal" placeholder="Ej. 8" autocomplete="off"></label>'+
+   '<label>¿Coinciden principio activo, vía ORAL y concentración de etiqueta?<select id="pfx-label"><option value="">Confirmar</option><option value="yes">Sí, verifiqué el frasco</option><option value="no">No / No sé</option></select></label>'+
+   '<label>¿La dosis elegida está revisada por personal médico?<select id="pfx-clinician"><option value="">Confirmar</option><option value="yes">Sí, se revisó el caso</option><option value="no">No / Pendiente</option></select></label>'+
+  '</div>'+
+  '<div id="pfx-checks" class="pharma-checks" aria-live="polite"></div>'+
+  '<div class="actions"><button type="button" id="pfx-calculate" class="btn">Verificar cálculo de referencia</button><button type="button" id="pfx-reset" class="btn outline">Limpiar datos</button></div>'+
+  '<div id="pfx-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
+  '<p class="pharma-source">Fuentes revisadas: <a href="https://www.censia.salud.gob.mx/contenidos/descargas/vacunas/Lineamientos_de_Vac_25_10_13_media.pdf" target="_blank" rel="noopener noreferrer">CENSIA / Secretaría de Salud</a>, <a href="https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx" target="_blank" rel="noopener noreferrer">AAP · Paracetamol</a>, <a href="https://www.rch.org.au/clinicalguide/guideline_index/Acute_pain_management/" target="_blank" rel="noopener noreferrer">RCH · Dolor agudo</a> y <a href="https://www.nhs.uk/medicines/ibuprofen-for-children/" target="_blank" rel="noopener noreferrer">NHS · Ibuprofeno</a>. Límites seleccionados con criterio conservador, no extrapolar.</p>'+
+  '</section>'+
+  '<section class="info-card"><h2>Amoxicilina · pendiente</h2><p>La dosis depende de la indicación, la edad, alergias, función renal y resistencia local. La otitis media aguda y otras infecciones requieren esquemas distintos; no se generará una pauta antibiótica genérica.</p><p><strong>Material inicial:</strong> PDF «Calculadora Pediátrica AnetteB» proporcionado en el proyecto, no validado por sí mismo.</p></section>';
  el('#pharma-back').onclick=()=>{category='Pediatría';search='';go('home');};
+ const field=n=>el('#pfx-'+n);
+ const result=field('result');
+ const val=n=>field(n)?.value||'';
+ function resetResult(){result.hidden=true;result.textContent='';}
+ function updateMedication(){
+  const med=meds[val('med')];
+  field('dose').innerHTML='<option value="">Selecciona</option>'+(med?med.doses.map(n=>'<option value="'+n+'">'+n+' mg/kg/toma</option>').join(''):'');
+  field('strength').innerHTML='<option value="">Selecciona</option>'+(med?'<option value="'+med.strength+'">'+med.label+' · solo esta presentación</option>':'');
+  field('checks').innerHTML=(flags[val('med')]||[]).map(([key,label])=>'<label>'+enc(label)+'<select id="pfx-'+key+'"><option value="">Selecciona</option><option value="no">No, se descartó</option><option value="yes">Sí / no descartado</option></select></label>').join('');
+  resetResult();
+ }
+ field('med').onchange=updateMedication;
+ field('calculate').onclick=()=>{
+  const selected=val('med'),data={
+   indication:val('indication'),ageMonths:val('age'),weightKg:val('weight'),
+   doseMgKg:val('dose'),strength:val('strength'),
+   doses24h:val('count'),totalMg24h:val('prior'),
+   hoursSinceLast:val('hours'),verifiedLabel:val('label'),clinician:val('clinician')
+  };
+  (flags[selected]||[]).forEach(([key])=>data[key]=val(key));
+  const out=window.KidBumPediatricPharma?.calculate(selected,data);
+  result.hidden=false;
+  if(!out||!out.ok){result.textContent='⚠ '+(out?.error||'Motor no disponible. Abre de nuevo la aplicación con conexión para actualizar.');return;}
+  const fmt=n=>Number(n.toFixed(2)).toLocaleString('es-MX',{maximumFractionDigits:2});
+  result.innerHTML='<strong>'+enc(out.drug)+' · solo referencia aritmética</strong>'+
+    '<p class="pharma-calculation">'+enc(fmt(out.mgPerDose))+' mg/toma = '+enc(fmt(out.mlPerDose))+' mL/toma teóricos ('+enc(out.concentration)+').</p>'+
+    '<p>'+enc(fmt(out.weightKg))+' kg × '+enc(fmt(out.mgKgPerDose))+' mg/kg = '+enc(fmt(out.mgPerDose))+' mg; concentración = '+enc(fmt(out.mgPerMl))+' mg/mL.</p>'+
+    '<p>Esquema de referencia: intervalo mínimo '+enc(out.intervalHours)+' h, hasta '+enc(out.maxDoses24h)+' tomas/24 h; límite conservador '+enc(fmt(out.maxMg24h))+' mg/24 h. Total hipotético con esta toma: '+enc(fmt(out.prospectiveMg24h))+' mg/24 h.</p>'+
+    '<p><strong>NO es prescripción.</strong> El volumen mostrado no está redondeado a una jeringa específica: verificar graduación, tolerancia, indicación y dosis final con el equipo tratante antes de administrar.</p>';
+ };
+ field('reset').onclick=()=>renderPharma();
+ document.querySelectorAll('.pharma-dose-form input,.pharma-dose-form select').forEach(node=>node.addEventListener('input',resetResult));
 }
 function syncGcsOptions(){
  if(id!=='gcs')return;
