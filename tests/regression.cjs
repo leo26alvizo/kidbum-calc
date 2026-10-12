@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.10\.0/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.10\.1/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v0100-critical-sofa2-camicu/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v0101-original-urgencias/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -572,5 +572,19 @@ phase2.push(
  ['CAM-ICU no sedative orders',()=>assert.ok(calc('camicu',cam0).notes.some(n=>n.includes('no indicar fármacos')||n.includes('No indicar fármacos')))]
 );
 t.push(...phase2);
+
+const urgenciasOriginalTests=[
+ ['User-original Urgencias JPEG exists',()=>assert.ok(fs.existsSync('assets/urgencias-portada.jpg'))],
+ ['Urgencias image assigned to correct card',()=>assert.ok(html.includes("c==='Urgencias y Terapia Intensiva'?'<img class=\"atlas-category-illustration atlas-gineco-photo atlas-urgencias-photo\" src=\"./assets/urgencias-portada.jpg\""))],
+ ['Urgencias uses same featured rectangular dimensions',()=>assert.ok(html.includes("c==='Urgencias y Terapia Intensiva'?' atlas-gineco-feature atlas-urgencias-feature'"))],
+ ['Urgencias original photo displayed fully',()=>assert.ok(html.includes('object-fit:contain;object-position:50% 50%'))],
+ ['Urgencias image no visual filters',()=>assert.ok(html.includes('filter:none!important'))],
+ ['Original JPG is available offline',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'"))],
+ ['Other clinical feature photos preserved',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"')&&html.includes('src="./assets/neurologia-portada.jpg"'))],
+ ['Previous 68 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['Modo Guardia retained',()=>assert.ok(html.includes('data-mobile-nav="guard"'))],
+ ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+];
+t.push(...urgenciasOriginalTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

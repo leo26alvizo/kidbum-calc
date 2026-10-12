@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.0**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.1**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -342,3 +342,8 @@ Estas herramientas son educativas y no constituyen diagnóstico, alta, prescripc
 Referencias: https://jamanetwork.com/journals/jama/fullarticle/2840822 (Ranzani et al, JAMA 2025); https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2840786 (consenso); https://www.vumc.org/cvicu/sites/default/files/2020-02/CAM-ICU-flowsheet.pdf (Vanderbilt).
 
 **Advertencia:** suma guiada de criterios de SOFA-2 y tamizaje CAM-ICU requieren capacitación y valoración presencial. Pruebas automatizadas NO equivalen a validación clínica independiente.
+
+
+## KidBum CALC v0.10.1 — Foto original de Urgencias
+
+Se añadió la imagen exacta enviada por el usuario en assets/urgencias-portada.jpg (1536 × 864; 231685 bytes), sin cambios de píxeles ni generación nueva. La tarjeta Urgencias y Terapia Intensiva usa la misma clase atlas-gineco-feature y las mismas dimensiones que las otras tarjetas destacadas. Su fotografía se muestra completa con object-fit:contain, sin filtros ni recortes. Se incluye el recurso en la caché PWA. Las 68 calculadoras, las demás imágenes y el Modo Guardia no cambian.
