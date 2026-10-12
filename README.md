@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.8**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.9**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,14 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Analítica opcional v0.10.9 — Integración preparada, NO activada
+
+Se incorporó el módulo local `assets/analytics.js` para conectar en el futuro Umami Cloud mediante el identificador público de sitio (`data-website-id`). El identificador no está configurado, por lo que **la versión 0.10.9 no transmite estadísticas a Umami**.
+
+Cuando se configure, registrará únicamente visitas generales, aperturas desde pantalla de inicio en Android/iOS y señales de aceptación de instalación disponibles en algunos navegadores (principalmente Android). Nunca registra campos, resultados ni nombres de calculadoras. Respeta Do Not Track, excluye parámetros/fragmentos de URL y permite desactivar la medición desde «Acerca de». La analítica no afecta el modo sin conexión.
+
+El panel privado vive en la cuenta Umami Cloud del administrador. Los visitantes y las aperturas son estimaciones, no descargas exactas ni personas identificadas. Pruebas automáticas: `node tests/analytics.cjs`.
 
 ## Seguridad P0 v0.10.8 — Datos contradictorios
 
