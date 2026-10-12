@@ -7,7 +7,7 @@ const context={};context.window=context;context.globalThis=context;
 vm.runInNewContext(js,context,{timeout:5000});
 const e=context.KidBumPediatricPharma;
 assert.ok(e&&typeof e.calculate==='function');
-assert.deepEqual(Array.from(e.supported),['paracetamol','ibuprofeno']);
+assert.deepEqual(Array.from(e.supported),['paracetamol','ibuprofeno','amoxicilina_oma']);
 const para={ageMonths:'36',weightKg:'15',doseMgKg:'15',strength:'160/5',
  indication:'pain',verifiedLabel:'yes',clinician:'yes',
  doses24h:'0',totalMg24h:'0',hoursSinceLast:'',
@@ -87,11 +87,65 @@ for(const id of ['paracetamol','ibuprofeno']){
   reject(id,{...d,[key]:value},'contraindication');
  }
 }
+
+// Restricted AOM regimen; all inputs are fictitious and physician-confirmed.
+const aom={
+ ageMonths:'36',weightKg:'15',diagnosis:'aom_confirmed',treatmentChoice:'yes',
+ clinician:'yes',oralFeasible:'yes',plainAmoxicillin:'yes',
+ verifiedLabel:'yes',strength:'400/5',dailyMgKg:'90',
+ allergy:'no',renal:'no',amox30:'no',conjunctivitis:'no',
+ nonresponsive:'no',treatmentFailure:'no',complicated:'no',highRisk:'no'
+};
+function passAom(data,mgDay,mgDose,ml){
+ const r=e.calculate('amoxicilina_oma',data);
+ assert.equal(r.ok,true,r.error||'AOM should calculate');
+ approx(r.mgPerDay,mgDay);approx(r.mgPerDose,mgDose);approx(r.mlPerDose,ml);
+ assert.equal(r.intervalHours,12);
+ assert.equal(r.concentration,'400 mg/5 mL');
+ assert.equal(r.maxMgPerDose,1000);cases++;
+}
+function rejectAom(data,code){
+ const r=e.calculate('amoxicilina_oma',data);
+ assert.equal(r.ok,false,'AOM should block: '+JSON.stringify(data));
+ assert.equal(r.code,code,'Unexpected block: '+JSON.stringify(r));
+ assert.equal(r.mgPerDose,undefined);
+ assert.equal(r.mlPerDose,undefined);cases++;
+}
+passAom(aom,1350,675,8.4375);
+passAom({...aom,dailyMgKg:'80'},1200,600,7.5);
+passAom({...aom,weightKg:'20'},1800,900,11.25);
+rejectAom({...aom,weightKg:'30'},'limit');
+rejectAom({...aom,weightKg:'40'},'limit');
+for(const ageMonths of ['','23','144','36.5','NaN','Infinity',undefined])
+ rejectAom({...aom,ageMonths},'age');
+for(const weightKg of ['','7.9','40.1','NaN','Infinity',undefined])
+ rejectAom({...aom,weightKg},'weight');
+for(const dailyMgKg of ['','20','45','10','0',undefined])
+ rejectAom({...aom,dailyMgKg},'dose');
+for(const [key,invalid,code] of [
+ ['diagnosis','no','diagnosis'],['treatmentChoice','no','treatmentChoice'],
+ ['clinician','no','clinician'],['oralFeasible','no','oralFeasible'],
+ ['plainAmoxicillin','no','plainAmoxicillin'],['verifiedLabel','no','verifiedLabel'],
+ ['strength','400/57','strength']
+]){
+ rejectAom({...aom,[key]:invalid},code);
+ rejectAom({...aom,[key]:''},code);
+}
+for(const key of ['allergy','renal','amox30','conjunctivitis',
+ 'nonresponsive','treatmentFailure','complicated','highRisk']){
+ for(const value of ['','yes','unknown',undefined])
+  rejectAom({...aom,[key]:value},'precaution');
+}
+rejectAom({...aom,diagnosis:'pharyngitis'},'diagnosis');
+rejectAom({...aom,strength:'250/5'},'strength');
+rejectAom({...aom,strength:'600/5'},'strength');
+
 const html=fs.readFileSync('index.html','utf8');
 assert.ok(html.includes('<script src="./assets/pediatric-pharma.js"></script>'),'Safe drug engine loaded in browser');
 assert.ok(html.includes('window.KidBumPediatricPharma?.calculate(selected,data)'),'UI connects to drug engine');
 assert.ok(!html.includes('pfx-amoxicilina'),'Amoxicillin is not an available dosing choice');
-assert.ok(html.includes('Dosis no habilitada')||html.includes('Cálculo no habilitado'),'Unreviewed drugs must be disabled');
+assert.ok(html.includes("calculate('amoxicilina_oma',data)"),'AOM form uses guarded engine');
+assert.ok(html.includes('No emplear para sinusitis, faringitis, neumonía ni otras infecciones.'),'Scope must be explicit');
 assert.ok(!js.includes('localStorage')&&!js.includes('fetch('),'No patient data persistence or transmission');
 assert.equal(vm.runInNewContext(js+'\ntrue;',context,{timeout:5000}),true);
-console.log('Pediatric pharmacology safety tests PASSED:',cases,'positive/blocked cases; 2 oral medicines; no antibiotic dosing');
+console.log('Pediatric pharmacology safety tests PASSED:',cases,'positive/blocked cases; analgesics and AOM-only antibiotic');
