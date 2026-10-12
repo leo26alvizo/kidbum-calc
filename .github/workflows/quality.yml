@@ -17,3 +17,5 @@ jobs:
         run: node tests/regression.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
+      - name: Analytics privacy and installation checks
+        run: node tests/analytics.cjs
