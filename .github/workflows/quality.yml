@@ -21,3 +21,5 @@ jobs:
         run: node tests/analytics.cjs
       - name: Pediatric pharmacy placement and safety
         run: node tests/pediatric-pharmacy.cjs
+      - name: Pediatric oral dose safety and arithmetic
+        run: node tests/pediatric-drug-doses.cjs
