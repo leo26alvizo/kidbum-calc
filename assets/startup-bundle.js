@@ -764,6 +764,16 @@ function calculate(id,d){
   }
   // Asistente de AIS basado en evaluación ISNCSCI COMPLETA suministrada por profesional.
   // No determina niveles sensoriales/motores ni ZPP, ni sustituye hoja original ASIA/ISCoS.
+  /* Reject invalid supplied motor values, even when AIS A/B/E does not use
+     them. Omitted non-applicable fields remain optional. */
+  const motorGradeOptions=['0','1','2','3','4','5','NT'];
+  if(x.motorBeyond3!==undefined&&x.motorBeyond3!=='')
+    pick(x.motorBeyond3,'Motor >3 niveles',['yes','no','unknown']);
+  for(const side of ['R','L'])for(const segment of motorRoots){
+    const motorKey='m'+side+segment;
+    if(x[motorKey]!==undefined&&x[motorKey]!=='')
+      pick(x[motorKey],side+' '+segment+' fuerza muscular',motorGradeOptions);
+  }
   pick(x.exam,'Exploración completa ISNCSCI',['yes','no']);
   if(x.exam!=='yes')return fail('Se requiere examen ISNCSCI completo y NLI establecido por profesional. La herramienta no calcula nivel neurológico ni reemplaza la hoja de 2026.');
   const nli=pick(x.nli,'Nivel neurológico único (NLI)',levels);
