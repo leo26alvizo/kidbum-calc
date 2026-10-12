@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.11**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.12**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,18 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Farmacología pediátrica v0.10.12 — Primera fase de cálculo condicionado
+
+Se activa una referencia matemática de dos fármacos orales exclusivamente dentro de la tarjeta **Pediatría → Farmacología pediátrica**, conservando 68 calculadoras previas:
+
+- **Paracetamol oral**, 10 o 15 mg/kg/toma, presentación **160 mg/5 mL**, intervalo de referencia **6 horas**, no más de **4 administraciones/24 h** ni **60 mg/kg/24 h** para esta fase. Únicamente en 24–143 meses y peso 8–40 kg.
+- **Ibuprofeno oral**, 5 o 10 mg/kg/toma, presentación **100 mg/5 mL**, intervalo de referencia **8 horas**, no más de **3 administraciones/24 h** ni **30 mg/kg/24 h** para esta fase. Únicamente en 24–143 meses y peso 8–40 kg.
+- **Amoxicilina sigue sin cálculo**: es imprescindible validar la indicación específica, dosis máxima, función renal, alergias y duración para evitar uso antibiótico inapropiado.
+
+El usuario debe confirmar concentración exacta de la etiqueta, supervisión clínica, historia de dosis en las últimas 24 horas y ausencia de precauciones/contraindicaciones relevantes. Cualquier dato indispensable ausente, edad/peso fuera de rango, dosis previa incompatible o límite superado **bloquea el resultado**. El cálculo entrega mg y mL teóricos, sin redondeo automático a dispositivos de administración ni emitir órdenes. No se incluyen gotas.
+
+Fuentes externas de contraste: CENSIA Secretaría de Salud (documento de referencia), AAP HealthyChildren 2026, Royal Children's Hospital Melbourne (actualización octubre 2024) y NHS. El PDF de AnetteB sirve únicamente como inventario inicial: sus números no se copian sin validar. Véase `docs/pharma-oral-v0.10.12.md`. Se ejecutan `node tests/pediatric-drug-doses.cjs` y las pruebas previas en GitHub Actions. No equivale a aprobación institucional ni registro de dispositivo médico.
 
 ## Pediatría v0.10.11 — Farmacología integrada dentro de la categoría
 
