@@ -19,6 +19,10 @@ const defs=vm.runInNewContext(html.slice(begin,end)+'\ndefs;',{}, {timeout:5000}
 assert.equal(root.KidBumEngine.list.length,defs.length,'Every form must have an engine registration');
 assert.ok(defs.length>=68,'Do not silently remove the original calculators');
 const calc=(id,data)=>root.KidBumEngine.calculate(id,data);
+const start=html.indexOf('function validateClinicalInputs(');
+const stop=html.indexOf('function update(){',start);
+assert.ok(start>0&&stop>start,'Clinical form guard must exist');
+const validate=vm.runInNewContext(html.slice(start,stop)+'\nvalidateClinicalInputs;',{}, {timeout:5000});
 function formInput(def){
  const data={};
  for(const field of def.fields){
@@ -33,11 +37,12 @@ function good(result){
   &&(result.value!==undefined||result.display!==undefined)
   &&(result.value===undefined||result.value===null||Number.isFinite(result.value));
 }
-let normal=0,invalid=0,conditional=0,arithmetic=0;
+let normal=0,invalid=0,arithmetic=0;
 const coverage={};
 for(const def of defs){
  const base=formInput(def);
  const first=calc(def.id,base);
+ assert.equal(validate(def,base),null,'Valid example blocked by shared form guard: '+def.id);
  assert.ok(good(first),'Example does not yield a valid result: '+def.id+' '+JSON.stringify(first));
  normal++;coverage[def.category]=(coverage[def.category]||0)+1;
  for(const field of def.fields){
@@ -52,16 +57,13 @@ for(const def of defs){
    attempts.push(['invalidOption','__INVALID_OPTION__']);
   }
   for(const [kind,wrongValue] of attempts){
-   // AIS A is determined by absent sacral preservation; motor inputs are not
-   // read in that branch. Flag for hardening instead of a false test failure.
-   if(def.id==='asiaais'&&kind==='invalidOption'
-      &&(field.key==='motorBeyond3'||/^m[RL](C[5-8]|T1|L[2-5]|S1)$/.test(field.key))){
-    conditional++;
-    continue;
-   }
-   const result=calc(def.id,{...base,[field.key]:wrongValue});
+   const data={...base,[field.key]:wrongValue};
+   const pre=validate(def,data);
+   assert.ok(pre&&(pre.error||pre.missing),
+    'Invalid input passed shared form guard: '+def.id+'.'+field.key+' / '+kind);
+   const result=calc(def.id,data);
    assert.ok(result&&Array.isArray(result.error)&&result.error.length>0,
-    'Invalid input accepted: '+def.id+'.'+field.key+' / '+kind);
+    'Invalid input accepted by engine: '+def.id+'.'+field.key+' / '+kind);
    invalid++;
   }
  }
@@ -95,7 +97,7 @@ for(const [id,key] of [['rox','hfno'],['rass','assessed']]){
 }
 console.log('KidBum CALC functional safety audit: PASSED');
 console.log(JSON.stringify({
- calculators:normal,invalidInputsRejected:invalid,conditionalAisInputsDeferred:conditional,
+ calculators:normal,invalidInputsRejected:invalid,conditionalAisInputsDeferred:0,
  independentArithmeticChecks:arithmetic,totalExecuted:normal+invalid+arithmetic+2,
  categories:coverage
 },null,2));
