@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.12" \/>/,'Release version is defined centrally');
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.13" \/>/,'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
@@ -24,10 +24,10 @@ for(const path of manifest.icons.map(x=>x.src)) {
  assert.ok(swSource.includes("'./"+path+"'"),'PWA must precache icon '+path);
 }
 assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original author image');
-assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
-assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
-assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v01012-pediatric-pharma-guarded/,'New PWA cache must be distinguishable');
+assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
+assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
+assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
+assert.match(swSource,/kidbum-calc-v01013-fast-offline/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -686,9 +686,11 @@ const mobileLoadingTests=[
  ['Startup bundle contains all WHO tables unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/who-bmifa.js','utf8')))],
  ['Startup bundle contains cardiology and ICU modules unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/cardiology-module.js','utf8'))&&fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/critical-advanced.js','utf8')))],
  ['Fast install preloads core only',()=>assert.ok(swSource.includes('cache.addAll(CORE_ASSETS)')&&!swSource.includes('cache.addAll(ASSETS)'))],
- ['Core includes startup clinical bundle and atlas',()=>assert.ok(swSource.includes("'./assets/startup-bundle.js','./assets/medical-atlas.js'"))],
- ['Large illustrations stay available for on-demand cache',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'")&&swSource.includes("caches.match(req).then(cached=>cached||fetch(req)"))],
+ ['Core includes startup clinical bundle and atlas',()=>assert.ok(swSource.includes("'./assets/startup-bundle.js'")&&swSource.includes("'./assets/medical-atlas.js'"))],
+ ['Large illustrations stay available for on-demand cache',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'")&&swSource.includes("const cached=await cache.match(req)"))],
  ['Initial service worker claim never reloads page',()=>assert.ok(html.includes('const initiallyControlled=Boolean(navigator.serviceWorker.controller)')&&!html.includes('window.location.reload()'))],
+ ['Registration no longer waits for images',()=>assert.ok(!html.includes("window.addEventListener('load',()=>{"))],
+ ['Manual update keeps current clinical session',()=>assert.ok(!html.includes('window.location.assign(url.toString())'))],
  ['No duplicate immediate registration update',()=>assert.ok(!html.includes('.then(reg=>reg.update()).catch('))],
  ['Update check throttled',()=>assert.ok(html.includes('60*60*1000'))],
  ['No scripts or fonts loaded from external CDN',()=>assert.ok(!html.includes('<script src="https://'))],
