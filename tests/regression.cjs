@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.10\.1/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.10\.2/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v0101-original-urgencias/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v0102-faster-mobile-core/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -152,7 +152,7 @@ const t=[
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
 ['All previous 35 preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
-['Ward module included',()=>assert.match(html,/assets\/pediatric-ward\.js/)],
+['Ward module preserved and bundled',()=>assert.ok(fs.existsSync('assets/pediatric-ward.js')&&html.includes('src="./assets/startup-bundle.js"'))],
 ['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
 ['Pediatric image renders without blur',()=>assert.match(html,/\.atlas-pediatria-photo\{[\s\S]*?filter:none!important/)],
 ['Pediatric feature spans mobile category columns',()=>assert.match(html,/atlas-category-card\.atlas-pediatria-feature\{[\s\S]*?grid-column:1\/-1/)],
@@ -163,7 +163,7 @@ const t=[
 ['Clinical chemistry matches highlighted card dimensions',()=>assert.match(html,/atlas-quimica-feature/)],
 ['Clinical chemistry art is unfiltered',()=>assert.match(html,/\.atlas-quimica-photo\{[\s\S]*?filter:none!important;[\s\S]*?opacity:1!important/)],
 ['Version update check on return',()=>assert.match(html,/visibilitychange/)],
-['Do not interrupt active calculations',()=>assert.match(html,/if\(screen!=='calc'\)window\.location\.reload\(\)/)],
+['Do not force page reload on update or first install',()=>assert.ok(!html.includes('window.location.reload()'))],
 ['Clinical Scales card uses supplied image',()=>assert.match(html,/src="\.\/assets\/escalas-clinicas-portada\.webp"/)],
 ['Clinical Scales card matches featured size',()=>assert.match(html,/atlas-escalas-feature/)],
 ['Clinical Scales image unfiltered',()=>assert.match(html,/\.atlas-escalas-photo\{[\s\S]*?filter:none!important;[\s\S]*?opacity:1!important/)],
@@ -186,7 +186,7 @@ const t=[
 ];
 const expansionTests=[
 ['Hospital offline module',()=>assert.ok(swSource.includes('./assets/hospital-module.js'))],
-['Hospital script tag',()=>assert.ok(html.includes('<script src="./assets/hospital-module.js"></script>'))],
+['Hospital module in startup bundle',()=>assert.ok(fs.existsSync('assets/hospital-module.js')&&html.includes('<script src="./assets/startup-bundle.js"></script>'))],
 ['Hospital module IDs',()=>assert.equal(ctx.KidBumHospital.ids.length,4)],
 ['Winter bicarbonate 12',()=>assert.equal(calc('winter',{hco3:12}).value,26)],
 ['Winter respiratory acidosis warning',()=>assert.ok(calc('winter',{hco3:12,paco2:40}).interpretation.includes('acidosis respiratoria'))],
@@ -212,7 +212,7 @@ const expansionTests=[
 t.push(...expansionTests);
 
 const advancedTests=[
-['Advanced module loaded',()=>assert.ok(html.includes('assets/advanced-module.js'))],
+['Advanced module loaded via core bundle',()=>assert.ok(html.includes('assets/startup-bundle.js'))],
 ['Advanced module cached offline',()=>assert.ok(swSource.includes('./assets/advanced-module.js'))],
 ['Advanced module three tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
 ['58 calculators in engine',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
@@ -298,7 +298,7 @@ const anthropometryPhotoTests=[
 t.push(...anthropometryPhotoTests);
 
 const neuroPhaseOneTests=[
- ['Neurology module loaded in HTML',()=>assert.ok(html.includes('<script src="./assets/neurology-module.js"></script>'))],
+ ['Neurology module bundled',()=>assert.ok(html.includes('<script src="./assets/startup-bundle.js"></script>'))],
  ['Neurology module cached offline',()=>assert.ok(swSource.includes("'./assets/neurology-module.js'"))],
  ['Neurology category created',()=>assert.ok(html.includes("const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular'"))],
  ['Neurology featured wide card',()=>assert.ok(html.includes("c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature'"))],
@@ -348,7 +348,7 @@ neuroPhaseOneTests.push(
 t.push(...neuroPhaseOneTests);
 
 const completionTests=[
- ['NIHSS module is loaded',()=>assert.ok(html.includes('assets/neurology-advanced.js'))],
+ ['NIHSS module included in bundle',()=>assert.ok(html.includes('assets/startup-bundle.js'))],
  ['NIHSS module precached',()=>assert.ok(swSource.includes("'./assets/neurology-advanced.js'"))],
  ['58 calculators now registered',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
  ['Four neurologic advanced tools',()=>assert.equal(ctx.KidBumNeurologyAdvanced.ids.length,4)],
@@ -425,7 +425,7 @@ const neurologyPhotoTests=[
 t.push(...neurologyPhotoTests);
 
 const cardiologyTests=[
- ['Cardiology module linked',()=>assert.ok(html.includes('<script src="./assets/cardiology-module.js"></script>'))],
+ ['Cardiology module bundled',()=>assert.ok(html.includes('<script src="./assets/startup-bundle.js"></script>'))],
  ['Cardiology module available offline',()=>assert.ok(swSource.includes("'./assets/cardiology-module.js'"))],
  ['Five new cardiology tools',()=>assert.equal(ctx.KidBumCardio.ids.length,5)],
  ['63 calculators total',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
@@ -491,7 +491,7 @@ cardiologyTests.push(
 t.push(...cardiologyTests);
 
 const phase1=[
-['New script linked',()=>assert.ok(html.includes('src="./assets/critical-module.js"'))],
+['Original critical script bundled',()=>assert.ok(html.includes('src="./assets/startup-bundle.js"'))],
 ['New script offline',()=>assert.ok(swSource.includes("'./assets/critical-module.js'"))],
 ['68 calculators in total',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
 ['Original 63 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length,63)],
@@ -532,7 +532,7 @@ phase1.push(
 t.push(...phase1);
 
 const phase2=[
- ['Advanced ICU module script',()=>assert.ok(html.includes('src="./assets/critical-advanced.js"'))],
+ ['Advanced ICU module bundled',()=>assert.ok(html.includes('src="./assets/startup-bundle.js"'))],
  ['Advanced ICU module offline precache',()=>assert.ok(swSource.includes("'./assets/critical-advanced.js'"))],
  ['Total 68 calculators',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
  ['Original 66 calculators unchanged',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumCriticalAdvanced.ids.length,66)],
@@ -586,5 +586,33 @@ const urgenciasOriginalTests=[
  ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...urgenciasOriginalTests);
+
+const mobileLoadingTests=[
+ ['Only 1 critical clinical startup network request',()=>assert.equal((html.match(/<script src="\.\/assets\/startup-bundle\.js"/g)||[]).length,1)],
+ ['No original WHO blocking script requests',()=>assert.ok(!html.includes('<script src="./assets/who-wfa.js"></script>'))],
+ ['Original clinical module files remain in repository',()=>assert.ok(fs.existsSync('assets/pediatric-module.js')&&fs.existsSync('assets/critical-advanced.js'))],
+ ['Startup bundle exists',()=>assert.ok(fs.existsSync('assets/startup-bundle.js'))],
+ ['Startup bundle contains all WHO tables unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/who-bmifa.js','utf8')))],
+ ['Startup bundle contains cardiology and ICU modules unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/cardiology-module.js','utf8'))&&fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/critical-advanced.js','utf8')))],
+ ['Fast install preloads core only',()=>assert.ok(swSource.includes('cache.addAll(CORE_ASSETS)')&&!swSource.includes('cache.addAll(ASSETS)'))],
+ ['Core includes startup clinical bundle and atlas',()=>assert.ok(swSource.includes("'./assets/startup-bundle.js','./assets/medical-atlas.js'"))],
+ ['Large illustrations stay available for on-demand cache',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'")&&swSource.includes("caches.match(req).then(cached=>cached||fetch(req)"))],
+ ['Initial service worker claim never reloads page',()=>assert.ok(html.includes('const initiallyControlled=Boolean(navigator.serviceWorker.controller)')&&!html.includes('window.location.reload()'))],
+ ['No duplicate immediate registration update',()=>assert.ok(!html.includes('.then(reg=>reg.update()).catch('))],
+ ['Update check throttled',()=>assert.ok(html.includes('60*60*1000'))],
+ ['No scripts or fonts loaded from external CDN',()=>assert.ok(!html.includes('<script src="https://'))],
+ ['Medical calculations unchanged at 68',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['Original Neurologia photo preserved',()=>assert.ok(html.includes('src="./assets/neurologia-portada.jpg"'))],
+ ['Original Urgencias photo preserved',()=>assert.ok(html.includes('src="./assets/urgencias-portada.jpg"'))],
+ ['Offline core still includes app metadata',()=>assert.ok(swSource.includes("'./manifest.webmanifest'"))]
+];
+t.push(...mobileLoadingTests);
+
+const loadingFailureTests=[
+ ['Clinical bundle failure triggers visible alert',()=>assert.ok(html.includes('La aplicación no terminó de cargar'))],
+ ['Clinical bundle failure allows user-initiated retry',()=>assert.ok(html.includes('id="retry-kidbum-load"')&&html.includes("retry.onclick=()=>location.reload()"))],
+ ['Clinical bundle failure prevents partial calculators',()=>assert.ok(html.includes("if(!window.KidBumPediatrics||!window.KidBumCardio||!window.KidBumCriticalAdvanced)"))]
+];
+t.push(...loadingFailureTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

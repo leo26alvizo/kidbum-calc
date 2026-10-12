@@ -765,7 +765,7 @@ html.dark .atlas-calc-heading .calc-title{
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
         <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.10.1</small></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.10.2</small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
       <div class="side-menu" id="nav-menu"></div>
@@ -785,7 +785,7 @@ html.dark .atlas-calc-heading .calc-title{
         </div>
       </header>
       <main id="main-content" tabindex="-1"></main>
-      <footer class="footer"><span>KidBum CALC <b>0.10.1</b> · Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
+      <footer class="footer"><span>KidBum CALC <b>0.10.2</b> · Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
     </div>
   </div>
   <nav class="mobile-nav" aria-label="Navegación móvil">
@@ -795,21 +795,8 @@ html.dark .atlas-calc-heading .calc-title{
     <button type="button" data-mobile-nav="about"><span>ⓘ</span>Acerca de</button>
   </nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-<script src="./assets/who-wfa.js"></script>
-<script src="./assets/who-lhfa.js"></script>
-<script src="./assets/who-hcfa.js"></script>
-<script src="./assets/who-bmifa.js"></script>
-<script src="./assets/who-wfl.js"></script>
-<script src="./assets/who-wfh.js"></script>
-<script src="./assets/pediatric-module.js"></script>
-<script src="./assets/pediatric-ward.js"></script>
-<script src="./assets/hospital-module.js"></script>
-<script src="./assets/advanced-module.js"></script>
-<script src="./assets/neurology-module.js"></script>
-<script src="./assets/neurology-advanced.js"></script>
-<script src="./assets/cardiology-module.js"></script>
-<script src="./assets/critical-module.js"></script>
-<script src="./assets/critical-advanced.js"></script>
+<!-- Clinical modules bundled in original execution order for fast mobile startup. -->
+<script src="./assets/startup-bundle.js"></script>
 <script>
 /* KidBum CALC v0.1 · motor determinista sin red ni telemetría.
  * Las salidas son cálculos auxiliares, no órdenes ni diagnósticos.
@@ -1081,6 +1068,16 @@ html.dark .atlas-calc-heading .calc-title{
 <script>
 (function(){
 'use strict';
+/* Fail closed if mobile connectivity interrupts the clinical bundle. */
+if(!window.KidBumPediatrics||!window.KidBumCardio||!window.KidBumCriticalAdvanced){
+ const place=document.getElementById('main-content');
+ if(place){
+  place.innerHTML='<section class="panel" role="alert" style="padding:24px"><h1>La aplicación no terminó de cargar</h1><p>Comprueba tu señal de datos móviles y vuelve a intentar. Abre el enlace en Chrome o Safari si llegaste desde WhatsApp. No se han cargado todas las calculadoras.</p><button type="button" id="retry-kidbum-load" class="chip">Reintentar carga</button></section>';
+  const retry=document.getElementById('retry-kidbum-load');
+  if(retry)retry.onclick=()=>location.reload();
+ }
+ return;
+}
 const engine=window.KidBumEngine;
 const atlas=window.KidBumAtlas||{img:()=>'',anatomy:{},categoryMap:{}};
 const refs={
@@ -1414,24 +1411,28 @@ async function copyPrompt(){
   window.location.assign('https://chatgpt.com/');
  }catch(e){toast('No se pudo copiar. Revisa los permisos del portapapeles.');}
 }
-function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 68 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.10.1 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 68 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.10.2 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
 try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
 function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
 /* Check for new PWA versions whenever the application is opened.
    The clinical form is never forcibly reloaded while a calculation is open. */
 if('serviceWorker'in navigator&&window.location.protocol!=='file:'){
- let reloadedForUpdate=false;
+ /* On first installation the browser claims the page: do NOT reload on cellular.
+    Existing users see a nonblocking notice when an actual update takes control. */
+ const initiallyControlled=Boolean(navigator.serviceWorker.controller);
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-   if(reloadedForUpdate||!navigator.onLine)return;
-   reloadedForUpdate=true;
-   if(screen!=='calc')window.location.reload();
-   else toast('Actualización disponible. Recarga cuando termines tu cálculo.');
+   if(initiallyControlled)toast('Versión actualizada. Cuando te convenga, vuelve a abrir la aplicación.');
  });
- const checkNewVersion=()=>navigator.serviceWorker.getRegistration().then(reg=>reg&&reg.update()).catch(()=>{});
+ let lastVersionCheck=Date.now();
+ const checkNewVersion=()=>{
+   const now=Date.now();
+   if(now-lastVersionCheck<60*60*1000)return;
+   lastVersionCheck=now;
+   navigator.serviceWorker.getRegistration().then(reg=>reg&&reg.update()).catch(()=>{});
+ };
  window.addEventListener('load',()=>{
-   navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'})
-      .then(reg=>reg.update()).catch(()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+   navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{});
  });
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkNewVersion();});
 }

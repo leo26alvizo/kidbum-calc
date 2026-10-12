@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.1**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.2**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -347,3 +347,15 @@ Referencias: https://jamanetwork.com/journals/jama/fullarticle/2840822 (Ranzani 
 ## KidBum CALC v0.10.1 — Foto original de Urgencias
 
 Se añadió la imagen exacta enviada por el usuario en assets/urgencias-portada.jpg (1536 × 864; 231685 bytes), sin cambios de píxeles ni generación nueva. La tarjeta Urgencias y Terapia Intensiva usa la misma clase atlas-gineco-feature y las mismas dimensiones que las otras tarjetas destacadas. Su fotografía se muestra completa con object-fit:contain, sin filtros ni recortes. Se incluye el recurso en la caché PWA. Las 68 calculadoras, las demás imágenes y el Modo Guardia no cambian.
+
+
+## KidBum CALC v0.10.2 — Arranque optimizado para datos móviles
+
+- La vista inicial ahora solicita **un paquete clínico `assets/startup-bundle.js` en vez de 15 archivos JavaScript encadenados**. Las fuentes individuales originales siguen disponibles en `assets/` y se concatenan sin modificar algoritmos ni datos OMS.
+- El *service worker* deja de descargar en la primera visita las ~89 entradas del inventario de recursos. Instala únicamente la estructura, el motor clínico y el atlas visual. Las imágenes se descargan y guardan en caché cuando se solicitan; no necesariamente todas estarán disponibles sin conexión tras una sola visita.
+- Al instalarse la PWA por primera vez ya **no recarga la página automáticamente**; tampoco la recarga al actualizar, evitando descargas duplicadas y evitando interrumpir cálculos activos. Si hay una actualización, indica que la nueva versión se verá al volver a abrir.
+- Reduce comprobaciones de actualización al volver del segundo plano a un máximo aproximado de una por hora; mantiene `updateViaCache:'none'` y la estrategia de consulta en red con respaldo de caché.
+- Se preservan **68 calculadoras, 12 categorías, todas las imágenes originales, créditos, iconos y Modo Guardia**. Los módulos individuales siguen en el repositorio para auditoría.
+- Si una persona no puede abrir el sitio con datos, pedir probar Chrome/Safari fuera del navegador de WhatsApp, verificar permiso de datos de navegador y disponibilidad de red. El funcionamiento real en redes celulares debe validarse externamente; las pruebas automatizadas no permiten simular la cobertura del operador.
+
+Para mantener el paquete tras cambios en los módulos, ejecutar `node scripts/build-startup.cjs` y confirmar las pruebas antes de publicar.
