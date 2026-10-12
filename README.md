@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.3**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.4**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,10 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Corrección v0.10.4 — Formularios de escalas clínicas
+
+Se corrigió la correspondencia de los valores «Sí/No» entre interfaz y motor en NIHSS, Hunt-Hess, Fisher original, ASIA/AIS, SOFA-2 y CAM-ICU. Anteriormente, la interfaz transmitía `true/false` donde estos módulos requerían `yes/no`, por lo que se rechazaban respuestas válidas. Se añadió una prueba de regresión de contrato interfaz-motor y se conservan las fórmulas originales. Las pruebas automatizadas no sustituyen validación clínica independiente ni pruebas en dispositivos reales.
 
 ## Publicación en GitHub Pages
 
