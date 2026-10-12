@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.10\.4/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.10\.5/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v0104-clinical-form/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v0105-rox-rass/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -411,7 +411,7 @@ completionTests.push(
 );
 // Validate the actual UI field contract, not just calls directly to the clinical engines.
 const clinicalUiContracts=[
- ['sofa2','confirm'],['camicu','assessed'],
+ ['sofa2','confirm'],['camicu','assessed'],['rox','hfno'],['rass','assessed'],
  ['nihss','confirm'],['hunthess','confirm'],['fisher','confirm'],
  ['asiaais','exam'],['asiaais','normal'],['asiaais','prior']
 ];
@@ -445,23 +445,36 @@ const actualClinicalDefs=vm.runInNewContext(html.slice(clinicalDefsStart,clinica
 const bundledCtx={};bundledCtx.window=bundledCtx;bundledCtx.globalThis=bundledCtx;
 vm.runInNewContext(fs.readFileSync('assets/startup-bundle.js','utf8'),bundledCtx,{timeout:8000});
 const publishedNeuro=bundledCtx.KidBumNeurologyAdvanced;
+const publishedCritical=bundledCtx.KidBumCritical;
 assert.ok(publishedNeuro,'Production bundle should register the neurologic module');
+assert.ok(publishedCritical,'Production bundle should register the critical care module');
 for(const [calcId,expectedValue,expectedDisplay] of [
- ['nihss',0,null],['hunthess',2,null],['fisher',3,null],['asiaais',null,'AIS A']
+ ['nihss',0,null],['hunthess',2,null],['fisher',3,null],['asiaais',null,'AIS A'],
+ ['rox',7.36,null],['rass',0,null]
 ]){
  completionTests.push(['Form example produces clinical result: '+calcId,()=>{
   const def=actualClinicalDefs.find(x=>x.id===calcId);
   assert.ok(def,'Actual form definition should exist: '+calcId);
   const input=Object.fromEntries(def.fields.map(field=>[field.key,field.example||'']));
   assert.ok(def.fields.every(field=>field.optional||input[field.key]!==''),'No missing required fields: '+calcId);
-  for(const compute of [ctx.KidBumEngine.calculate,publishedNeuro.calculate]){
+  for(const compute of [ctx.KidBumEngine.calculate,(calcId==='rox'||calcId==='rass'?publishedCritical:publishedNeuro).calculate]){
    const result=compute(calcId,input);
    assert.equal(result.error,undefined,'No calculation error: '+calcId);
-   assert.equal(result.value,expectedValue,'Expected example score: '+calcId);
+   if(calcId==='rox')assert.ok(Math.abs(result.value-expectedValue)<1e-9,'Expected ROX = 7.36');
+   else assert.equal(result.value,expectedValue,'Expected example score: '+calcId);
    if(expectedDisplay!==null)assert.equal(result.display,expectedDisplay,'Expected example label: '+calcId);
   }
  }]);
 }
+
+completionTests.push(['ROX and RASS decline non-assessed clinical context',()=>{
+ for(const [calcId,fieldKey] of [['rox','hfno'],['rass','assessed']]){
+  const def=actualClinicalDefs.find(x=>x.id===calcId);
+  const values=Object.fromEntries(def.fields.map(f=>[f.key,f.example||'']));
+  values[fieldKey]='no';
+  assert.ok(ctx.KidBumEngine.calculate(calcId,values).error,'No examination context must block: '+calcId);
+ }
+}]);
 
 t.push(...completionTests);
 
