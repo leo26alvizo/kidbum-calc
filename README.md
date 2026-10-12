@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.4**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.5**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,10 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Corrección v0.10.5 — ROX y RASS
+
+Se resolvió el mismo conflicto de opciones «Sí/No» (`true/false` frente a `yes/no`) en los formularios de ROX y RASS. Se añadieron regresiones con los formularios reales y el módulo crítico empaquetado: ROX = 7.36 con SpO₂ 92%, FiO₂ 50% y FR 25, y RASS = 0 con paciente alerta y tranquilo. Las opciones de contexto no elegible siguen bloqueando interpretaciones inválidas. Las fórmulas clínicas no fueron modificadas.
 
 ## Corrección v0.10.4 — Formularios de escalas clínicas
 
