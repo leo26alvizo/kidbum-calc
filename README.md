@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.10**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.11**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,14 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Pediatría v0.10.11 — Farmacología integrada dentro de la categoría
+
+La tarjeta **Farmacología pediátrica** aparece al lado de las 22 calculadoras existentes al abrir la categoría «Pediatría» (también se puede localizar mediante búsqueda). **No se ha creado una decimotercera categoría principal ni una calculadora número 69**; las 68 fórmulas anteriores permanecen intactas.
+
+La nueva pantalla contiene fichas de trabajo iniciales de **paracetamol, ibuprofeno y amoxicilina**, basadas en el inventario del PDF «Calculadora Pediátrica AnetteB» facilitado al proyecto. Incluye presentaciones generales y comprobaciones pendientes: no genera dosis, frecuencias ni conversiones mg/mL, porque el material todavía requiere validación independiente y existen discrepancias en otras entradas del PDF. Las fichas están marcadas «en revisión clínica». No son órdenes ni prescripciones.
+
+Se incluyeron pruebas de ubicación, navegación, retorno a Pediatría, búsqueda, favoritos, mensajes de seguridad e inventario inalterado (`node tests/pediatric-pharmacy.cjs`). La aplicación permanece utilizable sin conexión; no se modifica el seguimiento de Umami.
 
 ## Analítica v0.10.10 — Activada en Umami Cloud
 
