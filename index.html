@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.12" />
+  <meta name="kidbum-app-version" content="0.10.13" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1603,14 +1603,25 @@ function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyeb
  }
  const refresh=el('#check-kidbum-update');
  if(refresh)refresh.onclick=async()=>{
-  if(!navigator.onLine){toast('Conéctate a Internet para actualizar.');return;}
-  refresh.disabled=true;refresh.textContent='Comprobando actualización…';
+  if(!navigator.onLine){toast('Sin conexión: la versión guardada sigue disponible.');return;}
+  refresh.disabled=true;refresh.textContent='Buscando versión nueva…';
   try{
-   if('serviceWorker' in navigator){const registration=await navigator.serviceWorker.getRegistration();if(registration)await registration.update();}
-  }catch(err){/* Reload still retrieves the HTML via network-first, even if worker update fails. */}
-  const url=new URL(window.location.href);
-  url.searchParams.set('actualizar',String(Date.now()));
-  window.location.assign(url.toString());
+   if(!('serviceWorker' in navigator))throw Error('Navegador sin soporte PWA');
+   const registration=await Promise.race([
+    navigator.serviceWorker.getRegistration(),
+    new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),6500))
+   ]);
+   if(!registration)throw Error('Sin registro local');
+   await Promise.race([
+    registration.update(),
+    new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),6500))
+   ]);
+   toast('Comprobación realizada. Si hay actualización, cierra y reabre KidBum.');
+  }catch(err){
+   toast('No se pudo comprobar la versión. Puedes seguir usando la copia guardada.');
+  }finally{
+   refresh.disabled=false;refresh.textContent='↻ Buscar actualización';
+  }
  };
 }
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
@@ -1632,9 +1643,8 @@ if('serviceWorker'in navigator&&window.location.protocol!=='file:'){
    lastVersionCheck=now;
    navigator.serviceWorker.getRegistration().then(reg=>reg&&reg.update()).catch(()=>{});
  };
- window.addEventListener('load',()=>{
-   navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{});
- });
+ /* Register without waiting for slow images to finish loading. */
+ navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkNewVersion();});
 }
 render();
