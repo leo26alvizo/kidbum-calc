@@ -1,0 +1,19 @@
+name: KidBum quality checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  clinical-functional-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show Node version
+        run: node --version
+      - name: Existing regression checks
+        run: node tests/regression.cjs
+      - name: Defensive functional audit
+        run: node tests/safety-audit.cjs
