@@ -10,7 +10,57 @@ const choices=Object.freeze({
  ibuprofeno:Object.freeze({label:'Ibuprofeno oral',strengthMg:100,strengthMl:5,doseChoices:[5,10],intervalHours:8,maxDoses24h:3,maxMgKg24h:30,maxMgPerDose:400,checks:['allergy','kidney','dehydration','varicella','bleeding','asthma']})
 });
 const fail=(code,message)=>({ok:false,code,error:message});
+
+/* Amoxicillin high dose is ONLY for otoscopically confirmed AOM when a
+   clinician decided on antibiotics. AAP/IMSS: 80–90 mg/kg/day q12 h.
+   UCSF: max 1000 mg/dose; DO NOT silently cap if exceeded. */
+function calcAmoxicillinAom(x){
+ const numeric=v=>typeof v==='string'&&/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(v.trim())&&Number.isFinite(Number(v));
+ if(!numeric(x.ageMonths)||!Number.isInteger(Number(x.ageMonths))||Number(x.ageMonths)<24||Number(x.ageMonths)>143)
+  return fail('age','Solo en niños de 24 a 143 meses; otros casos requieren valoración individual.');
+ if(!numeric(x.weightKg)||Number(x.weightKg)<8||Number(x.weightKg)>40)
+  return fail('weight','Peso fuera del intervalo revisado (8–40 kg).');
+ const required=[
+  ['diagnosis','aom_confirmed','El diagnóstico de OMA debe confirmarse mediante valoración y otoscopia.'],
+  ['treatmentChoice','yes','Debe confirmarse la indicación médica de antibiótico tras valorar la observación.'],
+  ['clinician','yes','Falta la revisión de la pauta por personal médico.'],
+  ['oralFeasible','yes','No se confirmó la posibilidad de administración oral.'],
+  ['plainAmoxicillin','yes','Confirma amoxicilina SOLA, sin clavulanato.'],
+  ['verifiedLabel','yes','Verifica la concentración y la etiqueta del frasco.'],
+  ['strength','400/5','Solo disponible para suspensión de amoxicilina sola 400 mg/5 mL.']
+ ];
+ for(const [key,expected,message] of required)
+  if(x[key]!==expected)return fail(key,message);
+ const contraindications=[
+  ['allergy','alergia a penicilinas u otros betalactámicos'],
+  ['renal','disfunción renal o ajuste renal requerido'],
+  ['amox30','amoxicilina en los últimos 30 días'],
+  ['conjunctivitis','conjuntivitis purulenta concomitante'],
+  ['nonresponsive','OMA recurrente sin respuesta a amoxicilina'],
+  ['treatmentFailure','falla del tratamiento antibiótico inicial'],
+  ['complicated','signos de complicación o enfermedad sistémica grave'],
+  ['highRisk','inmunosupresión u otras circunstancias especiales']
+ ];
+ for(const [key,reason] of contraindications)
+  if(x[key]!=='no')return fail('precaution','No se puede calcular sin descartar '+reason+'.');
+ if(!numeric(x.dailyMgKg)||![80,90].includes(Number(x.dailyMgKg)))
+  return fail('dose','Solo se admiten 80 o 90 mg/kg por DÍA divididos cada 12 horas.');
+ const ageMonths=Number(x.ageMonths),weightKg=Number(x.weightKg),dailyMgKg=Number(x.dailyMgKg);
+ const mgPerDay=weightKg*dailyMgKg,mgPerDose=mgPerDay/2,mgPerMl=80,maxMgPerDose=1000;
+ if(mgPerDose>maxMgPerDose)
+  return fail('limit','La dosis supera 1000 mg por toma. Es necesaria individualización; no se reduce automáticamente.');
+ const mlPerDose=mgPerDose/mgPerMl;
+ if(!Number.isFinite(mlPerDose)||mlPerDose<=0)return fail('arithmetic','No fue posible verificar la conversión.');
+ return Object.freeze({
+  ok:true,id:'amoxicilina_oma',drug:'Amoxicilina oral sola · otitis media aguda',
+  ageMonths,weightKg,dailyMgKg,mgPerDay,mgPerDose,mlPerDose,mgPerMl,
+  concentration:'400 mg/5 mL',intervalHours:12,maxMgPerDose,
+  caution:'Referencia aritmética, NO una orden médica. Solo en OMA confirmada con indicación documentada; no determina duración ni sustituye la selección de tratamiento o la validación del volumen administrable.'
+ });
+}
+
 function calc(id,input){
+ if(id==='amoxicilina_oma')return calcAmoxicillinAom(input||{});
  const med=choices[id];
  if(!med)return fail('unreviewed','Este medicamento aún no tiene un cálculo habilitado.');
  const x=input||{};
@@ -53,5 +103,5 @@ function calc(id,input){
   caution:'Referencia aritmética, NO una orden médica. Verificar presentación, indicación, límites, tratamiento concomitante y dosificación final antes de administrar.'
  });
 }
-root.KidBumPediatricPharma=Object.freeze({calculate:calc,supported:Object.freeze(Object.keys(choices))});
+root.KidBumPediatricPharma=Object.freeze({calculate:calc,supported:Object.freeze([...Object.keys(choices),'amoxicilina_oma'])});
 })(typeof window!=='undefined'?window:globalThis);
