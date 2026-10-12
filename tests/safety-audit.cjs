@@ -95,9 +95,18 @@ for(const [id,key] of [['rox','hfno'],['rass','assessed']]){
  assert.ok(calc(id,{...formInput(def),[key]:'no'}).error,
   'Clinical context must block calculation: '+id);
 }
+/* Cross-field safety: systolic pressure cannot be lower than diastolic. */
+let contradictoryPressureChecks=0;
+for(const id of ['abcd2','map','curb']){
+ const def=defs.find(d=>d.id===id);
+ const data={...formInput(def),sbp:'80',dbp:'120'};
+ assert.ok(guard(def,data)?.error,'Form must block contradictory BP: '+id);
+ assert.ok(calc(id,data).error,'Engine must block contradictory BP: '+id);
+ contradictoryPressureChecks++;
+}
 console.log('KidBum CALC functional safety audit: PASSED');
 console.log(JSON.stringify({
  calculators:normal,invalidInputsRejected:invalid,conditionalAisInputsDeferred:0,
- independentArithmeticChecks:arithmetic,totalExecuted:normal+invalid+arithmetic+2,
+ independentArithmeticChecks:arithmetic,contradictoryPressureChecks,totalExecuted:normal+invalid+arithmetic+2+contradictoryPressureChecks,
  categories:coverage
 },null,2));
