@@ -57,8 +57,11 @@ assert.equal(typeof cardButton.onclick,'function');
 cardButton.onclick();
 assert.equal(context.route,'pharma','Click opens the pharmacy module');
 vm.runInNewContext('renderPharma();',context,{timeout:5000});
-assert.ok(main.innerHTML.includes('Módulo en revisión clínica')||main.innerHTML.includes('Módulo en revisión clínica'.toLowerCase())||main.innerHTML.includes('Módulo en revisión clínica.'),'The clinical safety notice is visible');
-assert.ok(main.innerHTML.includes('Todavía no calcula mg/kg ni convierte a mL'),'No unreviewed dose computation');
+assert.ok(main.innerHTML.includes('Seguridad farmacológica'),'The clinical safety notice is visible');
+assert.ok(main.innerHTML.includes('Cálculo no habilitado: requiere indicación antibiótica concreta.'),
+ 'Amoxicillin must remain disabled pending diagnosis-specific clinical review');
+assert.ok(main.innerHTML.includes('Referencia de dosis oral por peso'),'Two oral analgesics now offer guarded calculation');
+assert.ok(main.innerHTML.includes('pfx-med'),'Pharmacy form is present');
 for(const d of catalog)assert.ok(main.innerHTML.includes(d.name),'Medication displayed: '+d.name);
 assert.equal(typeof elements['#pharma-back'].onclick,'function');
 elements['#pharma-back'].onclick();
