@@ -435,6 +435,34 @@ for(const [calcId,fieldKey] of clinicalUiContracts){
  }]);
 }
 
+// End-to-end contract regression: example values from the REAL UI definitions,
+// executed against the installed application's bundled neurologic engine.
+// This guards against yes/no mismatches missed by engine-only tests.
+const clinicalDefsStart=html.indexOf('const dateInput=');
+const clinicalDefsEnd=html.indexOf('const categories=',clinicalDefsStart);
+assert.ok(clinicalDefsStart>0&&clinicalDefsEnd>clinicalDefsStart,'Clinical UI definitions available');
+const actualClinicalDefs=vm.runInNewContext(html.slice(clinicalDefsStart,clinicalDefsEnd)+'\ndefs;',{}, {timeout:3000});
+const bundledCtx={};bundledCtx.window=bundledCtx;bundledCtx.globalThis=bundledCtx;
+vm.runInNewContext(fs.readFileSync('assets/startup-bundle.js','utf8'),bundledCtx,{timeout:8000});
+const publishedNeuro=bundledCtx.KidBumNeurologyAdvanced;
+assert.ok(publishedNeuro,'Production bundle should register the neurologic module');
+for(const [calcId,expectedValue,expectedDisplay] of [
+ ['nihss',0,null],['hunthess',2,null],['fisher',3,null],['asiaais',null,'AIS A']
+]){
+ completionTests.push(['Form example produces clinical result: '+calcId,()=>{
+  const def=actualClinicalDefs.find(x=>x.id===calcId);
+  assert.ok(def,'Actual form definition should exist: '+calcId);
+  const input=Object.fromEntries(def.fields.map(field=>[field.key,field.example||'']));
+  assert.ok(def.fields.every(field=>field.optional||input[field.key]!==''),'No missing required fields: '+calcId);
+  for(const compute of [ctx.KidBumEngine.calculate,publishedNeuro.calculate]){
+   const result=compute(calcId,input);
+   assert.equal(result.error,undefined,'No calculation error: '+calcId);
+   assert.equal(result.value,expectedValue,'Expected example score: '+calcId);
+   if(expectedDisplay!==null)assert.equal(result.display,expectedDisplay,'Expected example label: '+calcId);
+  }
+ }]);
+}
+
 t.push(...completionTests);
 
 const neurologyPhotoTests=[
