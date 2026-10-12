@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
+  <meta name="kidbum-app-version" content="0.10.6" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -769,7 +770,7 @@ html.dark .atlas-calc-heading .calc-title{
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
         <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v0.10.5</small></span>
+        <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v<span class="kidbum-version"></span></small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
       <div class="side-menu" id="nav-menu"></div>
@@ -789,7 +790,7 @@ html.dark .atlas-calc-heading .calc-title{
         </div>
       </header>
       <main id="main-content" tabindex="-1"></main>
-      <footer class="footer"><span>KidBum CALC <b>0.10.5</b> · Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
+      <footer class="footer"><span>KidBum CALC <b class="kidbum-version"></b> · Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
     </div>
   </div>
   <nav class="mobile-nav" aria-label="Navegación móvil">
@@ -1265,6 +1266,9 @@ choice('position','Posición cervical',[['','Selecciona'],['0','Posterior (0)'],
 ];
 const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología'];
 const main=document.getElementById('main-content');
+/* The meta tag is the single release-version source for sidebar, footer and About. */
+const APP_VERSION=document.querySelector('meta[name="kidbum-app-version"]')?.content||'desconocida';
+document.querySelectorAll('.kidbum-version').forEach(node=>{node.textContent=APP_VERSION;});
 let screen='home',category='Todas',search='',id='',faves=loadFaves(),latest=null;
 let calcOrigin='home';
 function loadFaves(){try{const x=JSON.parse(localStorage.getItem('kidbum-favs')||'[]');return Array.isArray(x)?x.filter(y=>defs.some(d=>d.id===y)):[];}catch{return [];}}
@@ -1416,7 +1420,19 @@ async function copyPrompt(){
   window.location.assign('https://chatgpt.com/');
  }catch(e){toast('No se pudo copiar. Revisa los permisos del portapapeles.');}
 }
-function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Instalar en iPhone o iPad (Safari)</h3><ol><li>Abre <strong>KidBum CALC</strong> en Safari, preferentemente fuera del navegador interno de WhatsApp.</li><li>En Safari, toca <strong>Compartir</strong> (o Menú de página → Compartir) y después <strong>Agregar a Inicio</strong>.</li><li>Activa <strong>Abrir como app web</strong> si aparece esa opción y toca <strong>Agregar</strong>.</li><li>Inicia KidBum desde su icono de inicio y ábrela al menos una vez con Internet para preparar sus archivos esenciales sin conexión.</li></ol><p>Funciona con datos móviles o Wi-Fi. Las ilustraciones que todavía no se hayan abierto pueden necesitar conexión. No requiere App Store.</p></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 68 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalación gratuita</h3><p>Descarga el archivo ZIP, ábrelo y consulta el archivo LEEME.md. Para convertirla en aplicación instalable y con carga sin conexión mediante service worker, publícala en un servidor HTTPS compatible (por ejemplo, GitHub Pages bajo las condiciones de su plan gratuito). Abrir index.html directamente funciona sin necesidad de instalar nada, pero el service worker no se activa con file://.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC 0.10.3 · 11 de octubre de 2026. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p></div></div>`;}
+function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyebrow">ACERCA DEL PROYECTO</div><h1>Medicina clara. Tecnología útil.</h1><p class="about-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></p><p style="color:var(--ink-soft);max-width:700px">KidBum CALC es una biblioteca clínica preliminar diseñada para uso educativo, con cálculos transparentes y sin servicios externos de pago.</p><div class="info-card"><h3>Privacidad y funcionamiento</h3><ul><li>Todas las fórmulas se ejecutan en el dispositivo; la app no envía datos a servidores.</li><li>Solo se guardan localmente el tema y tus calculadoras favoritas; los datos introducidos se pierden al cerrar o recargar.</li><li>Después de instalarla desde una web segura, su caché permite cargar la interfaz sin conexión.</li><li>El botón «Analizar con ChatGPT» primero permite seleccionar Guardia, Estudio o Pase de visita, luego copia un mensaje estructurado y abre ChatGPT. Debes pegarlo y enviarlo tú; no se transmiten datos automáticamente.</li></ul></div><div class="info-card"><h3>Instalar en iPhone o iPad (Safari)</h3><ol><li>Abre <strong>KidBum CALC</strong> en Safari, preferentemente fuera del navegador interno de WhatsApp.</li><li>En Safari, toca <strong>Compartir</strong> (o Menú de página → Compartir) y después <strong>Agregar a Inicio</strong>.</li><li>Activa <strong>Abrir como app web</strong> si aparece esa opción y toca <strong>Agregar</strong>.</li><li>Inicia KidBum desde su icono de inicio y ábrela al menos una vez con Internet para preparar sus archivos esenciales sin conexión.</li></ol><p>Funciona con datos móviles o Wi-Fi. Las ilustraciones que todavía no se hayan abierto pueden necesitar conexión. No requiere App Store.</p></div><div class="info-card"><h3>Atlas médico editorial</h3><p>La aplicación incluye ilustraciones editoriales personalizadas para las calculadoras y recursos pediátricos adicionales. Son recursos visuales de apoyo, no láminas anatómicas certificadas.</p><p><a href="./atlas-gallery.html" style="color:var(--accent-dark);font-weight:750">Revisar galería completa de ilustraciones ↗</a></p></div><div class="info-card"><h3>Alcance clínico de esta versión</h3><p>Incluye 68 calculadoras con fórmulas explícitas y enlaces a fuentes. La sección pediátrica distingue cálculos de referencia, orientación de acceso vascular y verificaciones aritméticas: NO emite órdenes de líquidos ni medicamentos. Se muestran límites de aplicación y alertas. No ha sido sometida a validación institucional ni sustituye un dispositivo médico regulado.</p></div><div class="info-card"><h3>Instalar en Android (Chrome)</h3><ol><li>Abre KidBum CALC en Chrome y espera a que cargue.</li><li>Toca el menú <strong>⋮</strong> y elige <strong>Instalar aplicación</strong> o <strong>Agregar a pantalla de inicio</strong>.</li><li>Confirma y abre KidBum desde el icono creado, al menos una vez con Internet.</li></ol><p>No necesita descargar ZIP ni publicar archivos por separado.</p></div><div class="info-card"><h3>Versión y mantenimiento</h3><p>KidBum CALC <strong>${enc(APP_VERSION)}</strong>. Las fuentes deben revisarse periódicamente; las guías clínicas y puntos de corte pueden actualizarse.</p><p>Si acabas de recibir una actualización, puedes buscar la versión más reciente sin perder favoritos ni preferencias.</p><button type="button" id="check-kidbum-update" class="btn outline">↻ Buscar actualización</button></div></div>`;
+ const refresh=el('#check-kidbum-update');
+ if(refresh)refresh.onclick=async()=>{
+  if(!navigator.onLine){toast('Conéctate a Internet para actualizar.');return;}
+  refresh.disabled=true;refresh.textContent='Comprobando actualización…';
+  try{
+   if('serviceWorker' in navigator){const registration=await navigator.serviceWorker.getRegistration();if(registration)await registration.update();}
+  }catch(err){/* Reload still retrieves the HTML via network-first, even if worker update fails. */}
+  const url=new URL(window.location.href);
+  url.searchParams.set('actualizar',String(Date.now()));
+  window.location.assign(url.toString());
+ };
+}
 el('#brand-home').onclick=()=>go('home');el('#theme-btn').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}};
 try{if(localStorage.getItem('kidbum-theme')==='dark')document.documentElement.classList.add('dark');}catch{}
 function updateNetwork(){const online=navigator.onLine;el('#net-dot').style.background=online?'#51cca8':'#e4bc77';el('#net-label').textContent=online?'Sin conexión requerida':'Sin conexión · disponible';}window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);updateNetwork();
