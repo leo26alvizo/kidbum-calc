@@ -58,8 +58,15 @@ cardButton.onclick();
 assert.equal(context.route,'pharma','Click opens the pharmacy module');
 vm.runInNewContext('renderPharma();',context,{timeout:5000});
 assert.ok(main.innerHTML.includes('Seguridad farmacológica'),'The clinical safety notice is visible');
-assert.ok(main.innerHTML.includes('Cálculo no habilitado: requiere indicación antibiótica concreta.'),
- 'Amoxicillin must remain disabled pending diagnosis-specific clinical review');
+assert.ok(main.innerHTML.includes('Amoxicilina oral · solo otitis media aguda (OMA)'),
+ 'Amoxicillin limited to otoscopically confirmed AOM');
+assert.ok(main.innerHTML.includes('No emplear para sinusitis, faringitis, neumonía ni otras infecciones.'),
+ 'No generic antibiotic calculator');
+assert.ok(main.innerHTML.includes('id="pfa-result"'),
+ 'Separate antibiotic result container');
+assert.ok(main.innerHTML.includes('80 mg/kg/día')&&main.innerHTML.includes('90 mg/kg/día'),
+ 'Daily dose must be labeled per day rather than per administration');
+assert.ok(main.innerHTML.includes('no calcula')===false,'Obsolete blanket no-calculation warning is not shown');
 assert.ok(main.innerHTML.includes('Referencia de dosis oral por peso'),'Two oral analgesics now offer guarded calculation');
 assert.ok(main.innerHTML.includes('pfx-med'),'Pharmacy form is present');
 for(const d of catalog)assert.ok(main.innerHTML.includes(d.name),'Medication displayed: '+d.name);
