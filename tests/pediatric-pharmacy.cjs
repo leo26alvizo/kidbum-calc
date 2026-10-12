@@ -82,7 +82,7 @@ const aomValid={
  complicated:'no',highRisk:'no'
 };
 for(const [k,v] of Object.entries(aomValid))
- elements['#pfa-'+k].value=v;
+ context.el('#pfa-'+k).value=v;
 assert.equal(typeof elements['#pfa-calculate'].onclick,'function','Antibiotic calculation button connected');
 elements['#pfa-calculate'].onclick();
 assert.equal(elements['#pfa-result'].hidden,false);
