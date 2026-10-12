@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.10\.3/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.10\.4/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v0103-apple-pwa/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v0104-clinical-form/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -409,6 +409,32 @@ completionTests.push(
  ['ISNCSCI 2026 reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/42812624/'))],
  ['NINDS official reference visible',()=>assert.ok(html.includes('https://www.ninds.nih.gov/sites/default/files/2025-03/KnowStroke_NIHStrokeScale_March2025_508c.pdf'))]
 );
+// Validate the actual UI field contract, not just calls directly to the clinical engines.
+const clinicalUiContracts=[
+ ['sofa2','confirm'],['camicu','assessed'],
+ ['nihss','confirm'],['hunthess','confirm'],['fisher','confirm'],
+ ['asiaais','exam'],['asiaais','normal'],['asiaais','prior']
+];
+completionTests.push(['Clinical yes/no UI helper yields values recognized by calculation engines',()=>{
+ const match=html.match(/const yesnoClinical=([^\n;]+);/);
+ assert.ok(match,'Missing dedicated yes/no adapter');
+ const factory=vm.runInNewContext('('+match[1]+')',{
+  choice:(key,label,options,example)=>({key,label,options,example})
+ },{timeout:2000});
+ assert.equal(factory('confirm','Exam','true').example,'yes');
+ assert.equal(factory('prior','Previous','false').example,'no');
+ assert.equal(factory('confirm','Exam','true').options.find(x=>x[0]==='yes')[1],'Sí');
+ assert.equal(factory('confirm','Exam','true').options.find(x=>x[0]==='no')[1],'No');
+}]);
+for(const [calcId,fieldKey] of clinicalUiContracts){
+ completionTests.push(['Clinical UI accepts real engine value '+calcId+'.'+fieldKey,()=>{
+  const definitionLine=html.split('\n').find(line=>line.includes("{id:'"+calcId+"',title:"));
+  assert.ok(definitionLine,'Definition missing: '+calcId);
+  assert.ok(definitionLine.includes("yesnoClinical('"+fieldKey+"',"),
+    'UI option value disagrees with engine: '+calcId+'.'+fieldKey);
+ }]);
+}
+
 t.push(...completionTests);
 
 const neurologyPhotoTests=[
