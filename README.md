@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.13**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.14**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -15,6 +15,18 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 
 **Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
+
+## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
+
+Se agrega a la misma tarjeta de Pediatría una **referencia matemática de amoxicilina oral SOLO para otitis media aguda clínicamente confirmada**, sin crear categorías principales ni alterar las 68 calculadoras originales. La indicación y pauta deben decidirlas previamente un médico. La calculadora no diagnostica ni prescribe.
+
+Referencia respaldada por IMSS/AAP: **80–90 mg/kg/DÍA, dividido en 2 tomas cada 12 horas**. Única presentación admitida: **amoxicilina SOLA suspensión 400 mg/5 mL**, verificada en el frasco. Población de esta versión: 24–143 meses y 8–40 kg. Máximo conservador de **1000 mg por toma** (UCSF); si se excede, bloquea sin reducir automáticamente la dosis.
+
+Bloqueos obligatorios: diagnóstico no confirmado, sin decisión de tratar tras valorar observación, alergia betalactámica, función renal comprometida, amoxicilina en 30 días previos, conjuntivitis purulenta, enfermedad recurrente no respondedora, falla de tratamiento, complicaciones, inmunosupresión, falta de tolerancia oral, formulación distinta o falta de revisión médica. La duración del tratamiento **no se calcula**. Para cualquier otro diagnóstico la conversión antibiótica está deshabilitada.
+
+Pruebas: `node tests/pediatric-drug-doses.cjs` (cálculo y bloqueos), pruebas anteriores de `Pediatría`, `regression`, auditoría de 68 herramientas, arranque offline y analítica. No se envían datos del paciente ni se modifica la recolección de Umami.
+
+Fuentes y limitaciones: `docs/pharma-amoxicillin-aom-v0.10.14.md`. La tabla de AnetteB se usó para elegir qué medicamento revisar, no como validación independiente. El motor es apoyo educativo de aritmética clínica, no una receta aprobada.
 
 ## PWA v0.10.13 — Inicio inmediato sin esperar datos móviles
 
