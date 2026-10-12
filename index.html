@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.6" />
+  <meta name="kidbum-app-version" content="0.10.7" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1359,6 +1359,39 @@ document.querySelectorAll('input[name="analysis-mode"]').forEach(r=>r.addEventLi
 }));
 el('#copy-result').onclick=copyPrompt;update();
 }
+function validateClinicalInputs(definition,data){
+ const missing=[],errors=[];
+ for(const field of definition.fields){
+  const value=data[field.key];
+  if(value===undefined||value===null||value===''){
+   if(!field.optional)missing.push(field.label);
+   continue;
+  }
+  if(field.type==='choice'){
+   const valid=(field.key==='mental'||field.key==='confusion')
+     ? typeof value==='boolean':field.options.some(([option])=>option===value);
+   if(!valid)errors.push(field.label+': elige una respuesta válida.');
+  }else if(field.type==='number'){
+   const normalized=String(value).trim().replace(',','.');
+   const number=Number(normalized);
+   if(!/^\+?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)||
+     !Number.isFinite(number)||number<field.min||number>field.max)
+    errors.push(field.label+': valor inválido; rango '+field.min+'–'+field.max+(field.unit?' '+field.unit:'')+'.');
+  }else if(field.type==='date'){
+   const match=typeof value==='string'? /^(\d{4})-(\d{2})-(\d{2})$/.exec(value):null;
+   let valid=false;
+   if(match){
+    const date=new Date(0);
+    date.setUTCFullYear(Number(match[1]),Number(match[2])-1,Number(match[3]));
+    valid=date.toISOString().slice(0,10)===value;
+   }
+   if(!valid)errors.push(field.label+': fecha calendario no válida.');
+  }
+ }
+ if(missing.length)return {missing};
+ if(errors.length)return {error:errors};
+ return null;
+}
 function update(){
  const d=defs.find(x=>x.id===id),data={},missing=[];
  for(const f of d.fields){const raw=el('#f-'+f.key).value;
@@ -1366,7 +1399,7 @@ function update(){
   if(f.type==='choice'&&(f.key==='mental'||f.key==='confusion'))data[f.key]=raw===''?undefined:raw==='true';
   else data[f.key]=raw;
  }
- const res=missing.length?{missing}:engine.calculate(id,data);latest=res;
+ const res=validateClinicalInputs(d,data)||engine.calculate(id,data);latest=res;
  const out=el('#result-value'),interp=el('#result-interp'),errors=el('#result-errors'),extra=el('#result-extra'),copy=el('#copy-result'),selectBtn=el('#open-mode-selector'),panel=el('#mode-selector');
  if(res.missing){out.textContent='—';interp.textContent=`Faltan ${res.missing.length} ${res.missing.length===1?'dato':'datos'} para calcular.`;errors.innerHTML='';extra.style.display='none';copy.disabled=true;selectBtn.disabled=true;panel.hidden=true;selectBtn.setAttribute('aria-expanded','false');return;}
  if(res.error){out.textContent='—';interp.textContent='Corrige los datos para calcular.';errors.innerHTML='<ul class="result-errors">'+res.error.map(s=>`<li>${enc(s)}</li>`).join('')+'</ul>';extra.style.display='none';copy.disabled=true;selectBtn.disabled=true;panel.hidden=true;selectBtn.setAttribute('aria-expanded','false');return;}
