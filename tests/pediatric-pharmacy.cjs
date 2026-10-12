@@ -70,6 +70,28 @@ assert.ok(main.innerHTML.includes('no calcula')===false,'Obsolete blanket no-cal
 assert.ok(main.innerHTML.includes('Referencia de dosis oral por peso'),'Two oral analgesics now offer guarded calculation');
 assert.ok(main.innerHTML.includes('pfx-med'),'Pharmacy form is present');
 for(const d of catalog)assert.ok(main.innerHTML.includes(d.name),'Medication displayed: '+d.name);
+// Test the ACTUAL form handler against the clinical motor, not only regex.
+const moduleContext={};moduleContext.window=moduleContext;moduleContext.globalThis=moduleContext;
+vm.runInNewContext(fs.readFileSync('assets/pediatric-pharma.js','utf8'),moduleContext,{timeout:2000});
+context.window=moduleContext;
+const aomValid={
+ ageMonths:'36',weightKg:'15',diagnosis:'aom_confirmed',treatmentChoice:'yes',
+ clinician:'yes',oralFeasible:'yes',plainAmoxicillin:'yes',verifiedLabel:'yes',
+ strength:'400/5',dailyMgKg:'90',allergy:'no',renal:'no',amox30:'no',
+ conjunctivitis:'no',nonresponsive:'no',treatmentFailure:'no',
+ complicated:'no',highRisk:'no'
+};
+for(const [k,v] of Object.entries(aomValid))
+ elements['#pfa-'+k].value=v;
+assert.equal(typeof elements['#pfa-calculate'].onclick,'function','Antibiotic calculation button connected');
+elements['#pfa-calculate'].onclick();
+assert.equal(elements['#pfa-result'].hidden,false);
+assert.ok(elements['#pfa-result'].innerHTML.includes('675'),'Correct mg/dose shown');
+assert.ok(elements['#pfa-result'].innerHTML.includes('8.438'),'Unrounded math displayed with readable precision');
+elements['#pfa-amox30'].value='yes';
+elements['#pfa-calculate'].onclick();
+assert.ok(elements['#pfa-result'].textContent.includes('⚠'),'Recent amoxicillin must block UI result');
+
 assert.equal(typeof elements['#pharma-back'].onclick,'function');
 elements['#pharma-back'].onclick();
 assert.equal(context.category,'Pediatría','Back returns to Pediatrics, not a new category');
