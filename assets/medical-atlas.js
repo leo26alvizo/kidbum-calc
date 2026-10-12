@@ -12,6 +12,8 @@ const categoryMap=Object.freeze({
 const ids=['anion','osm','bmi','bsa','map','shock','egfr','cg','fib4','qsofa','curb',
  'correctedna','news2','wellsdvt','wellspe','perc','childpugh','agfum','fppfum','fppus','bishop','obshock','gcs','pedwfa','pedlhfa','pedhcfa','pedbmifa','pedwfl','pediou','pedbalance','pedholliday','ped421','pedneofluids','pedcorrected','peddehydration','pedinsensible','pedgir','pedsolutions','pedvitals','pedformulavol','pedmilkcal','pedfoodcal','pedmaxverify','pedaccess','pedsupp'];
 const anatomy=Object.freeze({
+ sofa2:'Sistemas orgánicos e insuficiencia multiorgánica',
+ camicu:'Evaluación cognitiva y delirium en terapia intensiva',
  pafi:'Intercambio gaseoso alveolar y PaO₂/FiO₂',
  rox:'Oxigenación de alto flujo y trabajo respiratorio',
  rass:'Evaluación de sedación y agitación en terapia intensiva',
@@ -280,7 +282,7 @@ function svg(id){
 const cache=new Map();
 function src(id){if(!cache.has(id))cache.set(id,'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg(id)));return cache.get(id)}
 function img(id,cls='atlas-img',alt='Ilustración médica editorial',eager=false){
- const alias={winter:'anion',deltaratio:'anion',fena:'egfr',feurea:'egfr',qtc:'map',gbs:'childpugh',rcri:'map',abcd2:'gcs',alteplaseais:'gcs',nihss:'gcs',hunthess:'gcs',fisher:'gcs',asiaais:'gcs',ascvdpce:'map',timinstemi:'map',timistemi:'map',chadsvasc:'map',hasbled:'map',pafi:'news2',rox:'news2',rass:'news2'};
+ const alias={winter:'anion',deltaratio:'anion',fena:'egfr',feurea:'egfr',qtc:'map',gbs:'childpugh',rcri:'map',abcd2:'gcs',alteplaseais:'gcs',nihss:'gcs',hunthess:'gcs',fisher:'gcs',asiaais:'gcs',ascvdpce:'map',timinstemi:'map',timistemi:'map',chadsvasc:'map',hasbled:'map',pafi:'news2',rox:'news2',rass:'news2',sofa2:'news2',camicu:'gcs'};
  const safe=ids.includes(id)?id:(alias[id]||'qsofa');
  // Hero image is a separately composed atlas illustration. Each individual calculator has its own raster plate.
  const path=safe.startsWith('ped')?'./assets/pediatric/'+safe+'.webp':(eager&&safe==='qsofa'?'./assets/portada-atlas-usuario.webp':'./assets/atlas-'+safe+'.jpg');

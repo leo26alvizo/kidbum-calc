@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.9.9**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.0**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -13,7 +13,7 @@ Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 66 calculadoras en 12 categorías.**
+**Total actual: 68 calculadoras en 12 categorías.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Publicación en GitHub Pages
@@ -331,3 +331,14 @@ Estas herramientas son educativas y no constituyen diagnóstico, alta, prescripc
 - **Seguridad:** rangos explícitos, FiO₂ como porcentaje, controles de contexto, guía/estudio original, rechazo de entradas inválidas y pruebas automatizadas. Se incorpora módulo `assets/critical-module.js` al precaché PWA; las imágenes y el icono originales permanecen.
 
 **Pendientes para versión 1.0.0:** SOFA-2 (tabla 2025), CAM-ICU, KDIGO-LRA, PREVENT-ASCVD 2026 y MELD 3.0; mejora adicional de auditoría clínica y navegación accesible. Objetivo final: **71 calculadoras**. No presentar esta fase como versión final ni producto validado clínicamente.
+
+
+## KidBum CALC v0.10.0 — Fase 2 de 1.0.0, SOFA-2 y CAM-ICU
+
+- **SOFA-2 (JAMA 2025)**: selección explícita de los seis dominios (cerebro, respiratorio, cardiovascular, hígado, riñón y hemostasia), 0–4 por órgano, total 0–24, sin asumir que faltantes equivalen a normal. Se presentan criterios de la tabla 2 publicada y se exige validación del contexto adulto/UCI. No sustituye SOFA 1996, ni diagnostica sepsis ni predice mortalidad individual. Atención especial a soporte respiratorio avanzado, dosis vasopresoras combinadas, soporte mecánico, TRR y datos preexistentes.
+- **CAM-ICU (Vanderbilt)**: RASS −4/−5 es no evaluable; rasgo 1 cambio agudo, rasgo 2 inatención (>2 errores en diez letras), rasgo 3 RASS distinto de 0 y rasgo 4 pensamiento desorganizado (>1 error entre cuatro preguntas y orden). Positivo si 1 Y 2 Y (3 O 4); no se informa resultado si faltan pruebas necesarias. No prescribe medicamentos ni reemplaza evaluación médica.
+- Integración en Modo Guardia, uso local sin conexión, desgloses y pruebas de consistencia. **Total: 68 calculadoras en 12 categorías.** Las 66 anteriores quedan intactas.
+
+Referencias: https://jamanetwork.com/journals/jama/fullarticle/2840822 (Ranzani et al, JAMA 2025); https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2840786 (consenso); https://www.vumc.org/cvicu/sites/default/files/2020-02/CAM-ICU-flowsheet.pdf (Vanderbilt).
+
+**Advertencia:** suma guiada de criterios de SOFA-2 y tamizaje CAM-ICU requieren capacitación y valoración presencial. Pruebas automatizadas NO equivalen a validación clínica independiente.
