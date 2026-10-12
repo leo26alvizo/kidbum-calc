@@ -1,14 +1,14 @@
 # KidBum CALC — activar estadísticas de uso con Umami Cloud
 
-**Estado actual:** el módulo está preparado pero desactivado; la constante `WEBSITE_ID` de `assets/analytics.js` está vacía. No se hacen solicitudes a servidores externos de analítica hasta completar la configuración.
+**Estado actual:** Umami Cloud se encuentra configurado desde KidBum Calc v0.10.10 con el ID público del sitio. No hay credenciales administrativas en el repositorio. Las estadísticas se registran cuando el navegador permite el seguimiento, el dispositivo tiene conexión y el usuario no lo ha desactivado.
 
 ## Activación
 
 1. Entra a https://cloud.umami.is/ y registra una cuenta propia. Selecciona el plan gratuito Hobby si está disponible.
 2. En el panel Umami, añade un sitio llamado **KidBum CALC** con dominio **leo26alvizo.github.io** (sin la ruta `/kidbum-calc/`).
 3. En los ajustes del sitio, localiza **Tracking code** y copia únicamente el valor público de `data-website-id` (UUID). El script esperado para Umami Cloud es `https://cloud.umami.is/script.js`.
-4. Sustituye el valor vacío de `const WEBSITE_ID='';` dentro de `assets/analytics.js` por ese UUID público, manteniendo las comillas. **Nunca compartas contraseñas, API keys, tokens o cookies de acceso.**
-5. Publica y comprueba el contador en Umami después de visitar la web desde un navegador sin Do Not Track ni bloqueo de analítica. La aplicación continúa funcionando sin estadísticas cuando el servicio está bloqueado o no hay conexión.
+4. **Completado en v0.10.10:** el identificador público quedó configurado en `assets/analytics.js`. **Nunca compartas contraseñas, API keys, tokens o cookies de acceso.**
+5. Abre KidBum Calc en un navegador sin Do Not Track ni bloqueo de analítica; después consulta **Descripción general**, **Eventos** y **Tiempo real** en Umami. La aplicación continúa funcionando sin estadísticas cuando el servicio está bloqueado o no hay conexión.
 
 ## Eventos medidos
 
@@ -32,4 +32,4 @@ Se ejecutan automáticamente:
 - `node tests/safety-audit.cjs`
 - `node tests/analytics.cjs`
 
-Estas pruebas comprueban que la analítica no se activa sin configurar el sitio, respeta las opciones de privacidad y no altera el funcionamiento clínico. Para activar posteriormente el seguimiento, actualizar la constante del ID y aumentar la versión/caché de la PWA después de pasar las pruebas.
+Estas pruebas comprueban que el seguimiento se activa únicamente en producción, que respeta el control de privacidad y que los pageviews y eventos eliminan campos ajenos a la lista permitida. Los cálculos clínicos no cambian.
