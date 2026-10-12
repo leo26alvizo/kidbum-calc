@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.13" />
+  <meta name="kidbum-app-version" content="0.10.14" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1391,10 +1391,10 @@ function renderPharma(){
   '<span class="pharma-type">'+enc(m.type)+'</span><h2>'+enc(m.name)+'</h2>'+
   '<p><strong>Presentaciones en el inventario:</strong> '+enc(m.forms)+'. Comprobar siempre la etiqueta y la formulación real.</p>'+
   '<ul>'+m.checks.map(c=>'<li>'+enc(c)+'</li>').join('')+'</ul>'+
-  '<p class="pharma-not-ready">'+(m.name==='Amoxicilina'?'Cálculo no habilitado: requiere indicación antibiótica concreta.':'Referencia oral disponible con filtros clínicos y límites conservadores.')+'</p></article>').join('');
+  '<p class="pharma-not-ready">'+(m.name==='Amoxicilina'?'Solo OMA confirmada: referencia de dosis condicionada, no receta.':'Referencia oral disponible con filtros clínicos y límites conservadores.')+'</p></article>').join('');
  main.innerHTML='<button type="button" class="breadcrumb-back" id="pharma-back">← Volver a Pediatría</button>'+
   '<section class="pharma-intro"><span class="eyebrow">PEDIATRÍA · FARMACOLOGÍA</span><h1>Farmacología pediátrica</h1>'+
-  '<p>Referencias por peso, únicamente para paracetamol e ibuprofeno orales en niños de 2 a menos de 12 años (8–40 kg), con evaluación médica y una concentración específica verificada en el frasco. Amoxicilina sigue en revisión.</p></section>'+
+  '<p>Referencias por peso para paracetamol e ibuprofeno orales, y cálculo condicionado de amoxicilina oral exclusivamente para otitis media aguda confirmada. Población inicial de 24–143 meses y 8–40 kg, según restricciones específicas. No sustituye la valoración médica.</p></section>'+
   '<div class="pharma-safety-banner" role="note"><strong>⚠ Seguridad farmacológica.</strong> El número calculado no es una orden médica. No utilizar en menores de 2 años, peso fuera de 8–40 kg, condiciones especiales, embarazo, insuficiencia orgánica o si hay información desconocida. No se guardan datos del paciente.</div>'+
   '<div class="pharma-grid">'+cards+'</div>'+
   '<section class="pharma-dose-form" aria-label="Cálculo condicionado de dosis pediátrica oral">'+
@@ -1418,7 +1418,29 @@ function renderPharma(){
   '<div id="pfx-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
   '<p class="pharma-source">Fuentes revisadas: <a href="https://www.censia.salud.gob.mx/contenidos/descargas/vacunas/Lineamientos_de_Vac_25_10_13_media.pdf" target="_blank" rel="noopener noreferrer">CENSIA / Secretaría de Salud</a>, <a href="https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx" target="_blank" rel="noopener noreferrer">AAP · Paracetamol</a>, <a href="https://www.rch.org.au/clinicalguide/guideline_index/Acute_pain_management/" target="_blank" rel="noopener noreferrer">RCH · Dolor agudo</a> y <a href="https://www.nhs.uk/medicines/ibuprofen-for-children/" target="_blank" rel="noopener noreferrer">NHS · Ibuprofeno</a>. Límites seleccionados con criterio conservador, no extrapolar.</p>'+
   '</section>'+
-  '<section class="info-card"><h2>Amoxicilina · pendiente</h2><p>La dosis depende de la indicación, la edad, alergias, función renal y resistencia local. La otitis media aguda y otras infecciones requieren esquemas distintos; no se generará una pauta antibiótica genérica.</p><p><strong>Material inicial:</strong> PDF «Calculadora Pediátrica AnetteB» proporcionado en el proyecto, no validado por sí mismo.</p></section>';
+  '<section class="pharma-dose-form" aria-label="Amoxicilina para otitis media aguda solamente">'+
+  '<h2>Amoxicilina oral · solo otitis media aguda (OMA)</h2>'+
+  '<p class="input-info"><strong>Uso restringido.</strong> Confirmar OMA mediante evaluación y otoscopia; decidir previamente si corresponde observación o antibiótico. Esta herramienta NO diagnostica OMA ni determina duración, pauta definitiva o elección de antibiótico. Si existen señales de gravedad, derivar y valorar presencialmente.</p>'+
+  '<div class="pharma-fields">'+
+   '<label>Diagnóstico clínico<select id="pfa-diagnosis"><option value="">Selecciona</option><option value="aom_confirmed">OMA confirmada por personal médico con otoscopia</option><option value="unknown">No confirmado / otro diagnóstico</option></select></label>'+
+   '<label>Decisión de usar antibiótico<select id="pfa-treatmentChoice"><option value="">Selecciona</option><option value="yes">Sí, se valoró observación y se decidió tratar</option><option value="no">No / aún no decidido</option></select></label>'+
+   '<label>Edad exacta (meses)<input id="pfa-ageMonths" type="number" min="24" max="143" step="1" inputmode="numeric" autocomplete="off" placeholder="Ej. 36"></label>'+
+   '<label>Peso actual (kg)<input id="pfa-weightKg" type="number" min="8" max="40" step="any" inputmode="decimal" autocomplete="off" placeholder="Ej. 15"></label>'+
+   '<label>Referencia elegida por el médico (mg/kg/DÍA)<select id="pfa-dailyMgKg"><option value="">Selecciona</option><option value="80">80 mg/kg/día, en dos tomas</option><option value="90">90 mg/kg/día, en dos tomas</option></select></label>'+
+   '<label>Concentración exacta del frasco<select id="pfa-strength"><option value="">Selecciona</option><option value="400/5">Amoxicilina sola 400 mg/5 mL</option><option value="other">Otra / no confirmada</option></select></label>'+
+   '<label>¿Se confirmó amoxicilina SOLA (sin clavulanato)?<select id="pfa-plainAmoxicillin"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / no sé</option></select></label>'+
+   '<label>¿Se verificó etiqueta y vía oral?<select id="pfa-verifiedLabel"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / no sé</option></select></label>'+
+   '<label>¿El paciente tolera medicación por vía oral?<select id="pfa-oralFeasible"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / no sé</option></select></label>'+
+   '<label>¿Se revisó el esquema con un médico?<select id="pfa-clinician"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / pendiente</option></select></label>'+
+  '</div>'+
+  '<div id="pfa-checks" class="pharma-checks">'+
+   '<p><strong>Condiciones que requieren otro abordaje.</strong> Responde cada una. Si la respuesta es Sí o no puede descartarse, el resultado se bloquea.</p>'+
+  '</div>'+
+  '<div class="actions"><button type="button" class="btn" id="pfa-calculate">Verificar referencia para OMA</button><button type="button" class="btn outline" id="pfa-reset">Limpiar datos</button></div>'+
+  '<div id="pfa-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
+  '<p class="pharma-source">Fuentes: <a href="https://gpc.salud.gob.mx/DDIMBE/DDIMBE/ContenidoGuia?DocumentoID=3061" target="_blank" rel="noopener noreferrer">Guía mexicana IMSS-496-21</a>, <a href="https://publications.aap.org/pediatrics/article/131/3/e964/30912/The-Diagnosis-and-Management-of-Acute-Otitis-Media" target="_blank" rel="noopener noreferrer">AAP · OMA</a>, <a href="https://idmp.ucsf.edu/content/acute-otitis-media" target="_blank" rel="noopener noreferrer">UCSF · dosis y máximo</a>. No emplear para sinusitis, faringitis, neumonía ni otras infecciones.</p>'+
+  '</section>'+
+  '<section class="info-card"><h2>Uso adecuado de antibióticos</h2><p>Muchas OMA pueden observarse inicialmente; esta calculadora no decide si indicar antibiótico. En alergia a betalactámicos, conjuntivitis purulenta, amoxicilina en los últimos 30 días, falla terapéutica, enfermedad renal o complicaciones, debe individualizarse el tratamiento. La duración tampoco se calcula automáticamente.</p><p><strong>Inventario de origen:</strong> PDF «Calculadora Pediátrica AnetteB», aportado al proyecto, no validado por sí mismo.</p></section>';
  el('#pharma-back').onclick=()=>{category='Pediatría';search='';go('home');};
  const field=n=>el('#pfx-'+n);
  const result=field('result');
@@ -1452,6 +1474,42 @@ function renderPharma(){
  };
  field('reset').onclick=()=>renderPharma();
  document.querySelectorAll('.pharma-dose-form input,.pharma-dose-form select').forEach(node=>node.addEventListener('input',resetResult));
+ /* Independent antibiotic form. Never read or reuse analgesic form inputs. */
+ const aomFlags=[
+  ['allergy','¿Alergia a penicilinas u otros betalactámicos?'],
+  ['renal','¿Disfunción renal o posibilidad de requerir ajuste renal?'],
+  ['amox30','¿Amoxicilina recibida durante los últimos 30 días?'],
+  ['conjunctivitis','¿Conjuntivitis purulenta asociada?'],
+  ['nonresponsive','¿OMA recurrente sin respuesta previa a amoxicilina?'],
+  ['treatmentFailure','¿Fracaso de tratamiento antibiótico inicial?'],
+  ['complicated','¿Datos sistémicos de gravedad, mastoiditis u otra complicación?'],
+  ['highRisk','¿Inmunosupresión u otra condición clínica de riesgo especial?']
+ ];
+ const aomChecks=el('#pfa-checks');
+ aomChecks.innerHTML='<p><strong>Factores que cambian el manejo.</strong> Si es Sí o desconocido, no se calcula.</p>'+
+  aomFlags.map(([key,label])=>'<label>'+enc(label)+
+  '<select id="pfa-'+key+'"><option value="">Selecciona</option><option value="no">No, descartado</option><option value="yes">Sí / no se puede descartar</option></select></label>').join('');
+ const aomField=key=>el('#pfa-'+key);
+ const aomResult=aomField('result');
+ const cleanAom=()=>{aomResult.hidden=true;aomResult.textContent='';};
+ aomField('calculate').onclick=()=>{
+  const keys=['ageMonths','weightKg','diagnosis','treatmentChoice','clinician',
+   'oralFeasible','plainAmoxicillin','verifiedLabel','strength','dailyMgKg'];
+  const data={};
+  for(const key of keys)data[key]=aomField(key)?.value||'';
+  for(const [key] of aomFlags)data[key]=aomField(key)?.value||'';
+  const answer=window.KidBumPediatricPharma?.calculate('amoxicilina_oma',data);
+  aomResult.hidden=false;
+  if(!answer?.ok){aomResult.textContent='⚠ '+(answer?.error||'No fue posible cargar el motor farmacológico actualizado.');return;}
+  const fmt=n=>Number(n.toFixed(3)).toLocaleString('es-MX',{maximumFractionDigits:3});
+  aomResult.innerHTML='<strong>'+enc(answer.drug)+' · referencia matemática, NO prescripción</strong>'+
+    '<p class="pharma-calculation">'+enc(fmt(answer.mgPerDay))+' mg/día ÷ 2 = '+enc(fmt(answer.mgPerDose))+' mg/toma = '+enc(fmt(answer.mlPerDose))+' mL teóricos/toma ('+enc(answer.concentration)+').</p>'+
+    '<p>'+enc(fmt(answer.weightKg))+' kg × '+enc(fmt(answer.dailyMgKg))+' mg/kg/DÍA = '+enc(fmt(answer.mgPerDay))+' mg/día; concentración '+enc(fmt(answer.mgPerMl))+' mg/mL. Intervalo de referencia entre tomas: 12 h.</p>'+
+    '<p><strong>No indica duración ni volumen redondeado.</strong> Verificar dispositivo medidor, diagnóstico, antecedentes, criterios de derivación y pauta elegida con el médico antes de administrar.</p>';
+ };
+ aomField('reset').onclick=()=>renderPharma();
+ document.querySelectorAll('#pfa-checks select,.pharma-dose-form #pfa-diagnosis,.pharma-dose-form #pfa-treatmentChoice,.pharma-dose-form input[id^="pfa-"],.pharma-dose-form select[id^="pfa-"]')
+  .forEach(node=>{node.addEventListener('change',cleanAom);node.addEventListener('input',cleanAom);});
 }
 function syncGcsOptions(){
  if(id!=='gcs')return;
