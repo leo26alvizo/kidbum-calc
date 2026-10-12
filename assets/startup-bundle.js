@@ -620,6 +620,7 @@ function calculate(id,input){
   const diabetes=select(x.diabetes,'Diabetes mellitus',['true','false']);
   const resolved=select(x.resolved,'Resolución del cuadro',['true','false']);
   for(const f of [age,sbp,dbp,feature,duration,diabetes,resolved])if(f.error)return f;
+  if(dbp.value>sbp.value)return error('La presión diastólica no puede superar a la sistólica. Verifica ambos valores antes de puntuar ABCD².');
   if(resolved.value!=='true')return error('ABCD2 solo corresponde a un AIT clínicamente sospechado con síntomas resueltos. Déficit persistente: activar evaluación urgente de EVC.');
   const a=age.value>=60?1:0;
   const bp=sbp.value>=140||dbp.value>=90?1:0;
