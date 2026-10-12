@@ -4,18 +4,19 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const assert=require('node:assert/strict');
 const source=fs.readFileSync('assets/analytics.js','utf8');
-const enabledSource=source.replace("const WEBSITE_ID='';",
- "const WEBSITE_ID='e676c9b4-11e4-4ef1-a4d7-87001773e9f2';");
-assert.notEqual(enabledSource,source,'Umami configuration has a clear insertion point');
+const SITE_ID='988ef93d-af5f-4370-9b81-769efcb0cb3d';
+assert.ok(source.includes("const WEBSITE_ID='"+SITE_ID+"';"),'Official Umami site ID configured');
+const disabledSource=source.replace("const WEBSITE_ID='"+SITE_ID+"';","const WEBSITE_ID='';");
+assert.notEqual(disabledSource,source,'Can simulate safe disabled mode');
 const html=fs.readFileSync('index.html','utf8');
 const sw=fs.readFileSync('sw.js','utf8');
 assert.ok(html.includes('<script src="./assets/analytics.js"></script>'));
 assert.ok(sw.includes("'./assets/analytics.js'"));
-assert.ok(!html.includes('data-website-id="e676c9b4-11e4-4ef1-a4d7-87001773e9f2"'),
- 'Tests must never activate a fake analytics ID in production');
+assert.ok(!html.includes('data-website-id="'+SITE_ID+'"'),
+ 'Only the privacy-controlled local module activates Umami');
 assert.ok(html.includes('kidbum-analytics-optout'),'Users can disable analytics');
 assert.ok(html.includes('Los datos clínicos introducidos'),'Disclosure covers clinical information');
-function launch({enabled=false,hostname='leo26alvizo.github.io',dnt='0',
+function launch({enabled=true,hostname='leo26alvizo.github.io',dnt='0',
  optedOut=false,online=true,standalone=false,ios=false}={}){
  const scripts=[],events={},sent=[],storage=new Map();
  if(optedOut)storage.set('kidbum-analytics-optout','1');
@@ -36,10 +37,10 @@ function launch({enabled=false,hostname='leo26alvizo.github.io',dnt='0',
   umami:{track:name=>sent.push(name)}
  };
  root.window=root;root.globalThis=root;
- vm.runInNewContext(enabled?enabledSource:source,root,{timeout:2000});
+ vm.runInNewContext(enabled?source:disabledSource,root,{timeout:2000});
  return {root,scripts,events,sent,storage};
 }
-let x=launch();assert.equal(x.root.KidBumAnalytics.isConfigured(),false);
+let x=launch({enabled:false});assert.equal(x.root.KidBumAnalytics.isConfigured(),false);
 assert.equal(x.scripts.length,0,'No third-party script before setup');
 x=launch({enabled:true});
 assert.equal(x.root.KidBumAnalytics.isConfigured(),true);
@@ -59,12 +60,31 @@ assert.deepEqual(x.sent,['kidbum_open_browser','kidbum_install_android']);
 const safe=x.root.kidbumAnalyticsBeforeSend('event',{
  name:'kidbum_open_app',url:'/kidbum-calc/?paciente=123#secreto',
  title:'paciente',referrer:'https://example.org/patient/123',
- data:{weight:70},website:'e676c9b4-11e4-4ef1-a4d7-87001773e9f2'
+ data:{weight:70},website:SITE_ID,patientId:'protected'
 });
 assert.equal(safe.url,'/kidbum-calc/');
 assert.equal(safe.title,'KidBum CALC');
 assert.equal(safe.referrer,undefined);
 assert.equal(safe.data,undefined);
+assert.equal(safe.patientId,undefined);
+assert.equal(safe.website,SITE_ID);
+assert.equal(safe.name,'kidbum_open_app');
+const pageview=x.root.kidbumAnalyticsBeforeSend('event',{
+ website:SITE_ID,url:'/kidbum-calc/?patient=123#consultation',
+ referrer:'https://example.org/private',title:'Patient Name',
+ data:{diagnosis:'private'},id:'private-identifier',
+ hostname:'leo26alvizo.github.io',language:'es-MX',screen:'1920x1080'
+});
+assert.ok(pageview,'Normal pageviews must be counted');
+assert.equal(pageview.name,undefined,'Pageviews have no event name');
+assert.equal(pageview.url,'/kidbum-calc/');
+assert.equal(pageview.title,'KidBum CALC');
+assert.equal(pageview.referrer,undefined);
+assert.equal(pageview.data,undefined);
+assert.equal(pageview.id,undefined);
+assert.equal(pageview.language,'es-MX');
+assert.equal(pageview.screen,'1920x1080');
+assert.equal(x.root.kidbumAnalyticsBeforeSend('identify',{website:SITE_ID}),false);
 assert.equal(x.root.kidbumAnalyticsBeforeSend('event',{name:'calculation_result',value:123}),false);
 x=launch({enabled:true,standalone:true});
 x.scripts[0].onload();assert.deepEqual(x.sent,['kidbum_open_app']);
@@ -83,4 +103,4 @@ x=launch({enabled:true});
 assert.equal(x.root.KidBumAnalytics.setOptOut(true),true);
 assert.equal(x.storage.get('kidbum-analytics-optout'),'1');
 assert.equal(x.root.location.reloaded,true);
-console.log('KidBum analytics: privacy, installation-event and no-configuration checks PASSED');
+console.log('KidBum analytics: live configuration, privacy, pageview and installation checks PASSED');
