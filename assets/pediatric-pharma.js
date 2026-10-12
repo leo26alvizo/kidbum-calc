@@ -26,6 +26,7 @@ function calc(id,input){
  for(const key of med.checks){
   if(x[key]!=='no')return fail('contraindication','El cálculo está bloqueado por una contraindicación, precaución o antecedente no descartado ('+key+').');
  }
+ if(x.doses24h===undefined||String(x.doses24h).trim()===''||x.totalMg24h===undefined||String(x.totalMg24h).trim()==='')return fail('history','Documenta explícitamente dosis previas y mg totales en las últimas 24 horas (0 si ninguno).');
  if(!Number.isInteger(count)||count<0||count>med.maxDoses24h)return fail('history','Introduce el número documentado de dosis en las últimas 24 horas.');
  if(!Number.isFinite(mgPrior)||mgPrior<0||mgPrior>100000)return fail('history','Introduce la cantidad total en mg recibida durante las últimas 24 horas; 0 únicamente si ninguna.');
  if(count===0&&mgPrior!==0)return fail('history','Los antecedentes son incompatibles: hay mg previos, pero cero administraciones.');
