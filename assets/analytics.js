@@ -1,11 +1,11 @@
 /* KidBum CALC — optional privacy-conscious Umami Cloud analytics.
- * No network requests are made until WEBSITE_ID is configured.
- * Website IDs are public tracker identifiers, never API credentials.
+ * Script loads only when WEBSITE_ID is valid, on the production host, online,
+ * and the visitor has not opted out or enabled Do Not Track.
  * This module must never read clinical form fields or result values.
  */
 (function(root){
 'use strict';
-const WEBSITE_ID=''; // Paste the public data-website-id from Umami Cloud.
+const WEBSITE_ID='988ef93d-af5f-4370-9b81-769efcb0cb3d'; // Public Umami Cloud site identifier (not an API key).
 const TRACKER_URL='https://cloud.umami.is/script.js';
 const PRODUCTION_HOST='leo26alvizo.github.io';
 const OPT_OUT_KEY='kidbum-analytics-optout';
@@ -51,11 +51,18 @@ if(!eligible||!root.document||!root.navigator?.onLine)return;
  * No clinical fields, results, calculator names, search terms or identifiers.
  */
 root.kidbumAnalyticsBeforeSend=function(type,payload){
- if(!payload||typeof payload!=='object')return false;
- if(type==='event'&&!EVENTS.includes(payload.name))return false;
- const safe={...payload,url:SAFE_PATH,title:'KidBum CALC'};
- delete safe.referrer;
- delete safe.data;
+ /* In Umami, both a normal pageview (no name) and a named custom event
+    use type=event. Never block legitimate anonymous pageviews. */
+ if(type!=='event'||!payload||typeof payload!=='object')return false;
+ const name=payload.name;
+ if(name!==undefined&&!EVENTS.includes(name))return false;
+ /* Explicit allowlist, never copy arbitrary browser/patient fields.
+    Umami needs website, hostname and URL, and accepts language/screen. */
+ const safe={website:WEBSITE_ID,hostname:PRODUCTION_HOST,
+  url:SAFE_PATH,title:'KidBum CALC'};
+ if(typeof payload.language==='string')safe.language=payload.language.slice(0,16);
+ if(typeof payload.screen==='string')safe.screen=payload.screen.slice(0,24);
+ if(name!==undefined)safe.name=name;
  return safe;
 };
 function trackEvent(name){
