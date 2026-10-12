@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.10" />
+  <meta name="kidbum-app-version" content="0.10.11" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -347,6 +347,26 @@ html.dark .atlas-calc-heading .calc-title{
  .atlas-category-copy h3{font-size:14px;overflow-wrap:break-word}
 }
 
+
+
+/* Farmacología pediátrica is a review-only card INSIDE Pediatrics. */
+.ped-pharma-tile{border:1px solid var(--accent);background:var(--surface)}
+.ped-pharma-tile .atlas-card-media{background:#e9f3ec}
+.ped-pharma-tile .pharma-review-badge{position:absolute;top:10px;right:10px;background:var(--surface);color:var(--ink);border:1px solid var(--stroke);padding:7px 8px;font-size:10px;font-weight:750;border-radius:10px}
+.ped-pharma-tile .calc-card-bottom span:first-child{color:var(--accent-dark)}
+.pharma-intro{margin:15px 0 20px}
+.pharma-intro h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(28px,4vw,42px);margin:10px 0}
+.pharma-intro p{color:var(--ink-soft);line-height:1.65;max-width:820px}
+.pharma-safety-banner{background:var(--alert-bg);border:1px solid var(--alert);padding:16px 18px;border-radius:14px;margin:18px 0 24px;line-height:1.6}
+.pharma-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0}
+.pharma-reference{background:var(--surface);border:1px solid var(--stroke);border-radius:16px;padding:20px}
+.pharma-reference h2{font-family:Georgia,'Times New Roman',serif;font-size:20px;margin:8px 0}
+.pharma-reference p{color:var(--ink-soft);font-size:13px;line-height:1.6}
+.pharma-reference .pharma-type{font-weight:750;font-size:11px;color:var(--accent-dark)}
+.pharma-reference ul{padding-left:19px;font-size:13px;line-height:1.7}
+.pharma-not-ready{font-size:12px;font-weight:800;color:var(--alert)}
+@media(max-width:1060px){.pharma-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:740px){.pharma-grid{grid-template-columns:1fr}.pharma-reference{padding:17px}}
 
 /* Pediatric clinical reference tables, touch-friendly and offline */
 .growth-reference{margin:14px 0 20px;padding:13px 12px;background:var(--soft);border:1px solid var(--stroke);border-radius:14px}
@@ -1265,6 +1285,8 @@ choice('position','Posición cervical',[['','Selecciona'],['0','Posterior (0)'],
 {id:'pedsupp',title:'Suplementos del lactante · ficha de revisión',category:'Pediatría',short:'Vitamina D, hierro y fortificación: contexto',symbol:'+',detail:'Consideraciones generales AAP, sin prescribir automáticamente ni calcular una dosis individual.',fields:[num('months','Edad','meses',0,11,'5'),choice('feeding','Tipo de alimentación',[['','Selecciona'],['breast','Lactancia materna'],['mixed','Mixta'],['formula','Fórmula']],'breast'),choice('preterm','¿Antecedente de prematuridad?',[['','Selecciona'],['true','Sí'],['false','No']],'false')]},
 {id:'gcs',title:'Glasgow',category:'Neurología y Raquimedular',short:'Ocular + verbal + motora',symbol:'◉',detail:'Registrar siempre los tres componentes, incluyendo NT cuando no sea posible evaluarlos.',fields:[choice('eye','Respuesta ocular',[['','Selecciona'],['4','4 · Espontánea'],['3','3 · Al sonido'],['2','2 · A presión'],['1','1 · Sin respuesta'],['NT','No evaluable (NT)']],'4'),choice('verbal','Respuesta verbal',[['','Selecciona'],['5','5 · Orientada'],['4','4 · Confusa'],['3','3 · Palabras'],['2','2 · Sonidos'],['1','1 · Ninguna'],['NT','No evaluable (NT)']],'5'),choice('motor','Respuesta motora',[['','Selecciona'],['6','6 · Obedece órdenes'],['5','5 · Localiza'],['4','4 · Flexión normal'],['3','3 · Flexión anormal'],['2','2 · Extensión'],['1','1 · Ninguna'],['NT','No evaluable (NT)']],'6')]}
 ];
+/* Non-calculator, pediatric-only reference catalog. Dosing disabled pending verification. */
+const pediatricPharma=[{"name":"Paracetamol","type":"Analgésico y antipirético","forms":"Gotas, jarabes y supositorios","checks":["Edad y peso actual","Presentación y concentración exactas","Función hepática y otros productos con paracetamol"]},{"name":"Ibuprofeno","type":"Antiinflamatorio no esteroideo (AINE)","forms":"Suspensiones pediátricas","checks":["Edad y peso actual","Hidratación y función renal","Contraindicaciones y concentración verificada"]},{"name":"Amoxicilina","type":"Antibiótico betalactámico","forms":"Suspensiones orales","checks":["Indicación clínica concreta","Alergia a betalactámicos","Función renal, pauta y concentración real"]}];
 const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología'];
 const main=document.getElementById('main-content');
 /* The meta tag is the single release-version source for sidebar, footer and About. */
@@ -1279,8 +1301,8 @@ function enc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3000);}
 function go(page,what=''){if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
 function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
-function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||(screen==='calc'&&s===calcOrigin)?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav||b.dataset.mobileNav));document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
-function render(){renderNav();el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':'Inicio';if(screen==='guard'){renderGuard();return;}if(screen==='about'){renderAbout();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
+function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav||b.dataset.mobileNav));document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
+function render(){renderNav();el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':'Inicio';if(screen==='guard'){renderGuard();return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
 
 /* Acceso rápido exclusivo, no duplica calculadoras ni mantiene fichas de pacientes. */
 const guardGroups=[
@@ -1297,7 +1319,11 @@ function renderGuard(){
 
 function renderHome(full){
  const list=defs.filter(d=>(screen!=='favorite'||faves.includes(d.id))&&(category==='Todas'||d.category===category)&&(d.title+' '+d.short+' '+d.category).toLowerCase().includes(search.toLowerCase()));
- const cards=list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
+  /* Un módulo de referencia adicional, sin modificar el inventario de 68 calculadoras. */
+ const pharmaQuery='farmacología pediátrica medicamentos paracetamol ibuprofeno amoxicilina';
+ const showPharma=screen==='home'&&(category==='Pediatría'||category==='Todas'&&Boolean(search.trim()))&&pharmaQuery.includes(search.trim().toLowerCase());
+ const pharmaCard=showPharma?"<article class=\"calc-card ped-pharma-tile\" data-pharma-open role=\"button\" tabindex=\"0\" aria-label=\"Abrir Farmacología Pediátrica, módulo en revisión\"><div class=\"atlas-card-media\"><img class=\"atlas-card-illustration\" src=\"./assets/pediatria-portada.webp\" alt=\"\" loading=\"lazy\" decoding=\"async\"/><span class=\"atlas-card-index\">Rx</span><span class=\"pharma-review-badge\">En revisión</span></div><div><h3>Farmacología pediátrica</h3><p>Paracetamol, ibuprofeno y amoxicilina · catálogo inicial, sin dosis automáticas</p></div><div class=\"calc-card-bottom\"><span>Pediatría · módulo adicional</span><span class=\"card-arrow\">→</span></div></article>":'';
+ const cards=pharmaCard+list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
  if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1><span class="atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integtal</span></h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></div></div><div class="atlas-hero-art" aria-hidden="true">${atlas.img("qsofa","atlas-hero-illustration","",true)}</div></section><div class="quick-stats"><span class="mini-stat"><strong>68</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div class="chips" id="chips"></div><div id="atlas-categories" class="atlas-category-grid" aria-label="Colecciones médicas ilustradas"></div><div id="calc-list" class="calc-grid"></div>`;
  el('#chips').innerHTML=categories.map(c=>`<button type="button" class="chip ${category===c?'active':''}" data-cat="${enc(c)}">${enc(c)}</button>`).join('');
 
@@ -1311,7 +1337,7 @@ function renderHome(full){
     const artId=atlas.categoryMap[c]||'gcs';
     return `<button type="button" class="atlas-category-card${c==='Pediatría'?' atlas-pediatria-feature':c==='Urgencias y Terapia Intensiva'?' atlas-gineco-feature atlas-urgencias-feature':c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature':c==='Cardiología'?' atlas-gineco-feature atlas-cardiologia-feature':c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature':c==='Ginecología y obstetricia'?' atlas-gineco-feature':c==='Química clínica'?' atlas-gineco-feature atlas-quimica-feature':c==='Escalas clínicas'?' atlas-gineco-feature atlas-escalas-feature':c==='Hemodinámica'?' atlas-gineco-feature atlas-hemodinamica-feature':c==='Función renal'?' atlas-gineco-feature atlas-renal-feature':c==='Hepatología'?' atlas-gineco-feature atlas-hepatologia-feature':c==='Antropometría'?' atlas-gineco-feature atlas-antropometria-feature':''}" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
       <div class="atlas-category-visual">${c==='Urgencias y Terapia Intensiva'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-urgencias-photo" src="./assets/urgencias-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Neurología y Raquimedular'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-neuro-photo" src="./assets/neurologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Antropometría'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-antropometria-photo" src="./assets/antropometria-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Gastroenterología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo" src="./assets/gastroenterologia-portada.webp" alt="" loading="lazy" decoding="async" />':c==='Cardiología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-cardiologia-photo" src="./assets/cardiologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Pediatría'?'<img class="atlas-category-illustration atlas-pediatria-photo" src="./assets/pediatria-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Ginecología y obstetricia'?'<img class="atlas-category-illustration atlas-gineco-photo" src="./assets/ginecologia-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Química clínica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-quimica-photo" src="./assets/quimica-clinica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Escalas clínicas'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-escalas-photo" src="./assets/escalas-clinicas-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Hemodinámica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-hemodinamica-photo" src="./assets/hemodinamica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Función renal'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-renal-photo" src="./assets/funcion-renal-portada.webp" alt="" loading="lazy" decoding="async" />':atlas.img(artId,c==='Gastroenterología'?'atlas-category-illustration atlas-gineco-photo atlas-gastro-photo':(c==='Hepatología'||c==='Antropometría')?'atlas-category-illustration atlas-gineco-photo':'atlas-category-illustration',atlas.anatomy[artId]))))))}</div>
-      <div class="atlas-category-copy"><span class="atlas-category-eyebrow">BIBLIOTECA MÉDICA · ${count} HERRAMIENTAS</span><h3>${enc(c)}</h3><span class="atlas-category-go">Ver calculadoras <span aria-hidden="true">→</span></span></div>
+      <div class="atlas-category-copy"><span class="atlas-category-eyebrow">BIBLIOTECA MÉDICA · ${count} CALCULADORAS${c==='Pediatría'?' + FARMACOLOGÍA':''}</span><h3>${enc(c)}</h3><span class="atlas-category-go">Ver calculadoras <span aria-hidden="true">→</span></span></div>
     </button>`;
   }).join('');
   catBlock.querySelectorAll('[data-featured]').forEach(button=>{
@@ -1321,9 +1347,28 @@ function renderHome(full){
 
  el('#calc-list').innerHTML=cards||`<div class="empty-state">${screen==='favorite'?'Todavía no tienes favoritas. Marca ☆ en cualquier calculadora.':'No encontramos coincidencias. Prueba otro término.'}</div>`;
  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderHome(false);});
+ document.querySelectorAll('[data-pharma-open]').forEach(c=>{c.onclick=()=>go('pharma');c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go('pharma');}};});
  document.querySelectorAll('[data-open]').forEach(c=>{c.onclick=e=>{if(e.target.closest('[data-star]'))return;go('calc',c.dataset.open);};c.onkeydown=e=>{if(e.key==='Enter'&&e.target===c)go('calc',c.dataset.open);};});
  document.querySelectorAll('[data-star]').forEach(b=>b.onclick=e=>{e.stopPropagation();favorite(b.dataset.star);});
  el('#search-input').oninput=e=>{search=e.target.value;renderHome(false);};
+}
+function renderPharma(){
+ const cards=pediatricPharma.map(m=>'<article class="pharma-reference">'+
+  '<span class="pharma-type">'+enc(m.type)+'</span><h2>'+enc(m.name)+'</h2>'+
+  '<p><strong>Presentaciones del inventario:</strong> '+enc(m.forms)+'. Verificar la formulación comercial actual.</p>'+
+  '<p><strong>Antes de habilitar la dosis debe comprobarse:</strong></p>'+
+  '<ul>'+m.checks.map(c=>'<li>'+enc(c)+'</li>').join('')+'</ul>'+
+  '<p class="pharma-not-ready">Dosis no habilitada · en revisión clínica</p></article>').join('');
+ main.innerHTML='<button type="button" class="breadcrumb-back" id="pharma-back">← Volver a Pediatría</button>'+
+ '<section class="pharma-intro"><span class="eyebrow">PEDIATRÍA · FARMACOLOGÍA</span>'+
+ '<h1>Farmacología pediátrica</h1>'+
+ '<p>Catálogo inicial junto a las 22 calculadoras pediátricas. Las presentaciones mencionadas en el material proporcionado requieren validación independiente de dosis, concentraciones y límites clínicos.</p></section>'+
+ '<div class="pharma-safety-banner" role="note"><strong>⚠ Módulo en revisión clínica.</strong> Todavía no calcula mg/kg ni convierte a mL, gotas o disparos. No utilizar como prescripción ni como referencia para administrar medicamentos.</div>'+
+ '<div class="pharma-grid">'+cards+'</div>'+
+ '<section class="info-card"><h2>Próximo paso: validación individual</h2>'+
+ '<p>Verificar para cada fármaco indicación, edad, peso, vía, dosis máxima, frecuencia, función renal o hepática, contraindicaciones y concentración comercial. Activar los cálculos uno por uno solo después de pasar pruebas de seguridad.</p>'+
+ '<p><strong>Material de partida:</strong> Calculadora Pediátrica AnetteB, archivo aportado al proyecto; no es una monografía clínica validada.</p></section>';
+ el('#pharma-back').onclick=()=>{category='Pediatría';search='';go('home');};
 }
 function syncGcsOptions(){
  if(id!=='gcs')return;
