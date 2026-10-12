@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/Clinical toolkit · v0\.10\.2/,'Atlas release version must be visible');
+assert.match(html,/Clinical toolkit · v0\.10\.3/,'Atlas release version must be visible');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -20,7 +20,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/navigation=req\.mode==='navigate'/,'Navigation must use fresh HTML first');
 assert.match(swSource,/fetch\(req,\{cache:'no-store'\}\)/,'Bypass stale HTTP-cache for HTML and JS');
 assert.match(swSource,/caches\.match\(req,\{ignoreSearch:navigation\}\)/,'Navigation must preserve offline fallback');
-assert.match(swSource,/kidbum-calc-v0102-faster-mobile-core/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v0103-apple-pwa/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -614,5 +614,19 @@ const loadingFailureTests=[
  ['Clinical bundle failure prevents partial calculators',()=>assert.ok(html.includes("if(!window.KidBumPediatrics||!window.KidBumCardio||!window.KidBumCriticalAdvanced)"))]
 ];
 t.push(...loadingFailureTests);
+
+const appleSupportTests=[
+ ['Apple standalone mode meta',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-capable" content="yes" />'))],
+ ['Apple standalone title',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-title" content="KidBum CALC" />'))],
+ ['Apple safe status bar',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-status-bar-style" content="default" />'))],
+ ['Original iPhone home icon still selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./kidbum-icon-192-v081.png" />'))],
+ ['Manifest standalone preserved',()=>assert.ok(manifest.display==='standalone')],
+ ['iPhone install guide in About page',()=>assert.ok(html.includes('Instalar en iPhone o iPad (Safari)')&&html.includes('Agregar a Inicio'))],
+ ['iOS app opened via Safari outside WhatsApp',()=>assert.ok(html.includes('navegador interno de WhatsApp'))],
+ ['iOS safe area preserved',()=>assert.ok(html.includes('env(safe-area-inset-bottom)'))],
+ ['No duplicate clinical tools',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['Android clinical icon preserved',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+];
+t.push(...appleSupportTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');

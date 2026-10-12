@@ -2,7 +2,7 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.2**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.3**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
@@ -359,3 +359,15 @@ Se añadió la imagen exacta enviada por el usuario en assets/urgencias-portada.
 - Si una persona no puede abrir el sitio con datos, pedir probar Chrome/Safari fuera del navegador de WhatsApp, verificar permiso de datos de navegador y disponibilidad de red. El funcionamiento real en redes celulares debe validarse externamente; las pruebas automatizadas no permiten simular la cobertura del operador.
 
 Para mantener el paquete tras cambios en los módulos, ejecutar `node scripts/build-startup.cjs` y confirmar las pruebas antes de publicar.
+
+
+## KidBum CALC v0.10.3 — Compatibilidad de instalación en Apple
+
+- Confirmado que el sitio PWA dispone de HTTPS por GitHub Pages, manifiesto `display:standalone`, icono Apple existente, viewport adaptable y caché de funcionamiento sin conexión.
+- Añadidas etiquetas específicas de Safari iOS/iPadOS `apple-mobile-web-app-capable`, `apple-mobile-web-app-status-bar-style` y `apple-mobile-web-app-title`. El icono original de 192×192 no se modifica.
+- Las instrucciones oficiales de instalación para iPhone/iPad aparecen en **Información**: Safari → Compartir → Agregar a Inicio → activar «Abrir como app web» → Agregar.
+- El usuario puede usar Wi-Fi o datos celulares; solo el contenido ya descargado puede funcionar sin conexión. La primera visita requiere conexión para preparar el motor y precaché esencial.
+- Se mantienen 68 calculadoras, 12 categorías, Modo Guardia, diseño de Android y todas las imágenes originales. No se requiere App Store ni paquete nativo.
+- No se ha realizado una prueba física en iPhone/iPad. Debe comprobarse en Safari real antes de afirmar plena compatibilidad entre versiones de iOS.
+
+Referencias: https://support.apple.com/es-mx/guide/iphone/iphea86e5236/ios y https://developer.apple.com/library/archive/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html.
