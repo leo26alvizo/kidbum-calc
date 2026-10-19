@@ -10,7 +10,7 @@ const end=html.indexOf('const categories=',start);
 assert.ok(start>0&&end>start,'Clinical definitions must exist');
 const data=vm.runInNewContext(html.slice(start,end)+'\n({defs,pediatricPharma});',{}, {timeout:5000});
 const defs=data.defs,catalog=data.pediatricPharma;
-assert.equal(defs.length,68,'Pharmacy is not a 69th calculator');
+assert.equal(defs.length,70,'Pharmacy review card is not an additional calculator; two APACHE II modes were added');
 assert.equal(defs.filter(d=>d.category==='Pediatría').length,22,'All pediatric calculators preserved');
 assert.equal(catalog.length,3,'First review cohort remains small');
 assert.deepEqual(Array.from(catalog,x=>x.name),['Paracetamol','Ibuprofeno','Amoxicilina']);
@@ -105,4 +105,4 @@ assert.ok(elements['#calc-list'].innerHTML.includes('data-pharma-open'),'Pharmac
 context.screen='favorite';context.category='Pediatría';context.search='';
 vm.runInNewContext('renderHome(false);',context,{timeout:5000});
 assert.ok(!elements['#calc-list'].innerHTML.includes('data-pharma-open'),'Review catalog does not change favorite calculator list');
-console.log('Pediatric pharmacy: placement, routing, search, safety and 68-calculator inventory PASSED');
+console.log('Pediatric pharmacy: placement, routing, search, safety and 70-calculator inventory PASSED');
