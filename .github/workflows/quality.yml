@@ -25,3 +25,5 @@ jobs:
         run: node tests/pediatric-drug-doses.cjs
       - name: Mobile data and offline startup
         run: node tests/pwa-cellular.cjs
+      - name: APACHE II score and example audit
+        run: node tests/apache2.cjs
