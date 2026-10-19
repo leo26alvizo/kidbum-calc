@@ -885,7 +885,7 @@ html.dark .atlas-calc-heading .calc-title{
     apache2quick(o){
       const keys=["temp","map","hr","rr","oxygen","ph","na","k","cr","hct","wbc","gcs","age","chronic"];
       const errors=[],parts={};
-      for(const key of keys){const raw=o[key];if(raw===''||raw===null||raw===undefined||!/^\\d+$/.test(String(raw)))errors.push('Selecciona '+key+'.');else parts[key]=Number(raw);}
+      for(const key of keys){const raw=o[key];if(raw===''||raw===null||raw===undefined||!/^\d+$/.test(String(raw)))errors.push('Selecciona '+key+'.');else parts[key]=Number(raw);}
       if(!['yes','no'].includes(o.arf))errors.push('Confirma si existe lesión renal aguda.');
       if(errors.length)return {error:errors};
       const total=Object.values(parts).reduce((a,b)=>a+b,0)+(o.arf==='yes'?parts.cr:0);
