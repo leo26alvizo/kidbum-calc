@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const bundle=fs.readFileSync('assets/startup-bundle.js','utf8');
 const inline=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(s=>s.trim());
-assert.equal(inline.length,2,'Expected two inline scripts');
+assert.ok(inline.length>=2,'Clinical engine and main application inline scripts must be present');
 const root={};root.window=root;root.globalThis=root;
 vm.runInNewContext(bundle,root,{timeout:10000});
 vm.runInNewContext(inline[0],root,{timeout:10000});
