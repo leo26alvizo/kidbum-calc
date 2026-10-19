@@ -21,7 +21,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 68 calculadoras en 12 categorías.**
+**Total actual: 70 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
