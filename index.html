@@ -882,6 +882,39 @@ html.dark .atlas-calc-heading .calc-title{
     return {display:iso.slice(8,10)+'/'+iso.slice(5,7)+'/'+iso.slice(0,4),iso};
   }
   const calc={
+    apache2(o){
+      const rules={age:[18,120,'Edad'],temp:[20,45,'Temperatura central'],map:[0,250,'PAM'],hr:[0,260,'Frecuencia cardíaca'],rr:[0,100,'Frecuencia respiratoria'],fio2:[0.21,1,'FiO₂ (fracción 0.21–1)'],ph:[6.5,8,'pH arterial'],na:[90,210,'Sodio'],k:[1,10,'Potasio'],cr:[0.1,20,'Creatinina'],hct:[5,80,'Hematocrito'],wbc:[0.1,150,'Leucocitos'],gcs:[3,15,'Glasgow']};
+      const f=fields(o,rules);if(f.errors.length)return {error:f.errors};
+      const a=f.o;
+      if(!Number.isInteger(a.gcs)||!Number.isInteger(a.age))return {error:['Edad y Glasgow deben ser números enteros.']};
+      if(!['no','elective','emergency','nonoperative'].includes(o.chronic))return {error:['Selecciona el estado de enfermedad crónica grave previo al ingreso.']};
+      if(!['true','false'].includes(o.arf))return {error:['Indica si existe insuficiencia renal aguda.']};
+      const oxy=val(a.fio2>=0.5?o.aagrad:o.pao2);
+      if(!valid(oxy,0,1000))return {error:[a.fio2>=0.5?'Introduce gradiente A–a en mmHg (FiO₂ ≥0.50).':'Introduce PaO₂ en mmHg (FiO₂ <0.50).']};
+      const score={};
+      score.temp=a.temp>=41||a.temp<30?4:a.temp>=39||a.temp<32?3:a.temp>=38.5||a.temp<34?1:a.temp<36?1:0;
+      if(a.temp>=32&&a.temp<34)score.temp=2;
+      score.map=a.map>=160||a.map<50?4:a.map>=130?3:a.map>=110||a.map<70?2:0;
+      score.hr=a.hr>=180||a.hr<40?4:a.hr>=140||a.hr<55?3:a.hr>=110||a.hr<70?2:0;
+      score.rr=a.rr>=50||a.rr<=5?4:a.rr>=35||a.rr<10?3:a.rr>=25||a.rr<12?1:0;
+      if(a.rr>=6&&a.rr<=9)score.rr=2;
+      score.oxygen=a.fio2>=0.5?(oxy>=500?4:oxy>=350?3:oxy>=200?2:0):(oxy<55?4:oxy<=60?3:oxy<=70?1:0);
+      score.ph=a.ph>=7.7||a.ph<7.15?4:a.ph>=7.6||a.ph<7.25?3:a.ph>=7.5||a.ph<7.33?2:0;
+      if(a.ph>=7.5&&a.ph<7.6)score.ph=1;
+      score.na=a.na>=180||a.na<=110?4:a.na>=160||a.na<120?3:a.na>=155||a.na<130?2:a.na>=150?1:0;
+      score.k=a.k>=7||a.k<2.5?4:a.k>=6?3:a.k>=5.5||a.k<3?2:a.k<3.5?1:0;
+      score.cr=(a.cr>=3.5?4:a.cr>=2?3:a.cr>=1.5||a.cr<0.6?2:0)*(o.arf==='true'?2:1);
+      score.hct=a.hct>=60||a.hct<20?4:a.hct>=50||a.hct<30?2:a.hct>=46?1:0;
+      score.wbc=a.wbc>=40||a.wbc<1?4:a.wbc>=20||a.wbc<3?2:a.wbc>=15?1:0;
+      score.gcs=15-a.gcs;
+      const aps=Object.values(score).reduce((x,y)=>x+y,0);
+      const agepoints=a.age>=75?6:a.age>=65?5:a.age>=55?3:a.age>=45?2:0;
+      const chronicpoints=o.chronic==='no'?0:o.chronic==='elective'?2:5;
+      const total=aps+agepoints+chronicpoints;
+      if(total>71)return {error:['Puntuación fuera del máximo publicado (71); verifica datos y clasificación.']};
+      const labels={temp:'Temperatura',map:'PAM',hr:'FC',rr:'FR',oxygen:'Oxigenación',ph:'pH',na:'Na',k:'K',cr:'Creatinina',hct:'Hematocrito',wbc:'Leucocitos',gcs:'Glasgow'};
+      return done(total,'/ 71 puntos','Gravedad fisiológica estimada en UCI; mayor puntuación implica mayor gravedad',['Aplicar solo a adultos en UCI: seleccionar el peor valor fisiológico de las primeras 24 horas, no combinar mediciones arbitrarias.','No deducir mortalidad individual desde el puntaje aislado; la predicción calibrada depende de diagnóstico, cohorte y contexto.','La duplicación de los puntos de creatinina se aplica en insuficiencia renal aguda. Enfermedad crónica grave debe anteceder al ingreso.'],'Fisiología '+aps+' + edad '+agepoints+' + salud crónica '+chronicpoints+'. Desglose: '+Object.entries(score).map(([k,v])=>labels[k]+' '+v).join('; ')+'.');
+    },
     anion(o){
       const f=fields(o,{na:[40,220,'Sodio'],cl:[20,200,'Cloro'],hco3:[1,70,'Bicarbonato']});
       if(f.errors.length)return {error:f.errors};
@@ -1156,6 +1189,7 @@ const refs={
   egfr:[['NIDDK — CKD-EPI 2021 sin raza','https://www.niddk.nih.gov/research-funding/research-programs/kidney-clinical-research-epidemiology/laboratory/glomerular-filtration-rate-equations/adults']],
   cg:[['National Kidney Foundation — Cockcroft–Gault y limitaciones','https://www.kidney.org/professionals/kdoqi/cockcroft-gault-equation-estimating-creatinine-clearance']],
   fib4:[['AASLD — orientación clínica 2023','https://pmc.ncbi.nlm.nih.gov/articles/PMC10735173/']],
+  apache2:[['APACHE II — tabla original adaptada, Merck Manual','https://www.merckmanuals.com/professional/multimedia/table/acute-physiologic-assessment-and-chronic-health-evaluation-apache-ii-scoring-system'],['Knaus et al. Critical Care Medicine 1985;13:818–829','https://pubmed.ncbi.nlm.nih.gov/3928249/']],
   qsofa:[['Sepsis-3 — definición original','https://jamanetwork.com/journals/jama/fullarticle/2492881'],['Surviving Sepsis Campaign — guías 2026','https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026']],
   curb:[['CURB-65 — criterios y validación resumidos','https://www.mdcalc.com/calc/324/curb-65-score-pneumonia-severity']],
 
@@ -1225,6 +1259,7 @@ const sofaGrades={
 };
 const sofaFields=sofagroups.map(([key,label])=>choice(key,label,[['','Selecciona según valoración médica'],...sofaGrades[key].map((v,i)=>[String(i),i+' · '+v])],'0'));
 const defs=[
+{id:'apache2',title:'APACHE II · gravedad en UCI',category:'Urgencias y Terapia Intensiva',short:'12 variables fisiológicas, edad y salud crónica · 0–71',symbol:'A2',detail:'Adultos en UCI: utilizar los peores valores documentados en las primeras 24 horas. No predice por sí solo mortalidad individual. En FiO₂ ≥0.5 utiliza gradiente A–a, en FiO₂ <0.5 utiliza PaO₂.',fields:[num('age','Edad','años',18,120,'62'),num('temp','Temperatura central','°C',20,45,'38.6'),num('map','Presión arterial media','mmHg',0,250,'65'),num('hr','Frecuencia cardíaca','lpm',0,260,'112'),num('rr','Frecuencia respiratoria','rpm',0,100,'28'),num('fio2','FiO₂ en fracción (ej. 0.21 o 0.60)','0.21–1',0.21,1,'0.21'),num('pao2','PaO₂ (solo si FiO₂ <0.50)','mmHg',0,1000,'65','Deja vacío cuando FiO₂ ≥0.50.'),num('aagrad','Gradiente alveoloarterial A–a (solo si FiO₂ ≥0.50)','mmHg',0,1000,'','Calcula el gradiente con los datos gasométricos y presión barométrica apropiada; deja vacío si FiO₂ <0.50.'),num('ph','pH arterial','',6.5,8,'7.30'),num('na','Sodio','mmol/L',90,210,'140'),num('k','Potasio','mmol/L',1,10,'4.2'),num('cr','Creatinina','mg/dL',0.1,20,'1.9'),yesno('arf','¿Insuficiencia renal aguda?','false'),num('hct','Hematocrito','%',5,80,'34'),num('wbc','Leucocitos','10³/µL',0.1,150,'14'),num('gcs','Glasgow','3–15',3,15,'14'),choice('chronic','Insuficiencia orgánica grave o inmunocompromiso previo al ingreso',[['','Selecciona'],['no','No'],['elective','Sí, posoperatorio electivo (+2)'],['emergency','Sí, posoperatorio urgente (+5)'],['nonoperative','Sí, no operado (+5)']],'no')]},
 {id:'sofa2',title:'SOFA-2 · disfunción orgánica (2025)',category:'Urgencias y Terapia Intensiva',short:'Seis dominios JAMA 2025 · 0–24',symbol:'S2',detail:'SOFA-2, no el SOFA original. Selección manual de los seis grados documentados en la tabla JAMA 2025, con atención al soporte avanzado, fármacos vasoactivos y TRR. No sumar si falta evaluar un órgano.',fields:[choice('adult','Población de evaluación',[['','Selecciona'],['yes','Adulto críticamente enfermo en contexto UCI'],['no','Pediátrico / fuera de población validada']],'yes'),yesnoClinical('confirm','¿Se revisaron las seis categorías con la tabla SOFA-2 2025 y sus notas?','true'),...sofaFields]},
 {id:'camicu',title:'CAM-ICU · tamizaje de delirium',category:'Urgencias y Terapia Intensiva',short:'RASS + inicio agudo + atención + pensamiento',symbol:'CAM',detail:'CAM-ICU de Vanderbilt. Comprobar primero RASS (−4/−5 no evaluable). Rasgo 1 + 2 + (3 o 4) indica tamizaje positivo, no una orden de tratamiento.',fields:[yesnoClinical('assessed','¿Se aplicó CAM-ICU presencial y de forma estructurada?','true'),choice('rass','Nivel RASS observado',[['','Selecciona'],...['-5','-4','-3','-2','-1','0','1','2','3','4'].map(v=>[v,v])],'0'),choice('acute','Rasgo 1: cambio mental agudo o fluctuación en 24 h',[['','Selecciona'],['yes','Sí'],['no','No']],'yes'),choice('attention','Rasgo 2: errores en prueba de 10 letras (SAVEAHAART)',[['','Selecciona'],...Array.from({length:11},(_,i)=>[String(i),i+' errores']),['NT','No evaluable']],'3'),choice('thinking','Rasgo 4: errores de pensamiento (4 preguntas y orden de dedos). Solo necesario si rasgos 1 y 2 positivos y RASS 0',[['','Selecciona'],...Array.from({length:6},(_,i)=>[String(i),i+' errores']),['NT','No evaluable']],'2')]},
 {id:'pafi',title:'Relación PaO₂/FiO₂ (P/F)',category:'Urgencias y Terapia Intensiva',short:'Oxigenación arterial · fracción inspirada de O₂',symbol:'P/F',detail:'Usar PaO₂ de gasometría arterial y FiO₂ en PORCENTAJE, ej. 40. Las bandas por gravedad solo son aplicables al SDRA si se cumplen los demás criterios, incluido soporte y contexto.',fields:[num('pao2','PaO₂ ARTERIAL','mmHg',20,650,'80'),num('fio2','FiO₂ administrada (PORCENTAJE, no fracción)','%',21,100,'40'),choice('peep','¿PEEP/CPAP ≥5 cmH₂O confirmado?',[['','Selecciona'],['yes','Sí'],['no','No'],['unknown','Desconocido / no documentado']],'yes')]},
