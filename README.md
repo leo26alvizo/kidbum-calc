@@ -2,9 +2,17 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.14**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.19**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## APACHE II v0.10.19 — Corrección de ejemplo ficticio y revisión de puntuación
+
+Se reparó **Cargar ejemplo ficticio** en APACHE II, modo rápido: el formulario tenía vacías todas las selecciones de puntuación, de modo que no podía generar un resultado. Ahora el ejemplo del modo rápido está completo y corresponde al mismo caso del modo preciso; **ambos deben mostrar 15/71 puntos**.
+
+Se reforzó el cálculo rápido para aceptar exclusivamente las puntuaciones válidas en la tabla APACHE II de cada variable, con bloqueo de entradas imposibles. La verificación independiente (tabla APACHE II del Manual Merck, adaptada de Knaus et al., *Crit Care Med*. 1985;13:818–829) cubre extremos y puntos de corte de los componentes fisiológicos, oxigenación, bicarbonato/pH, edad, Glasgow, salud crónica y duplicación de creatinina por lesión renal aguda. Los valores de referencia deben ser los peores documentados durante las primeras 24 h de UCI en adultos; no inferir mortalidad individual a partir de la suma.
+
+Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha sido modificada.
 
 ## Contenido
 
