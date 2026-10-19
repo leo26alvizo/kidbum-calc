@@ -916,6 +916,13 @@ html.dark .atlas-calc-heading .calc-title{
           errors.push('Selecciona un intervalo válido para '+key+'.');
         else parts[key]=value;
       }
+      for(const key of ['ph','hco3']){
+        const raw=o[key];
+        if(raw!==undefined&&raw!==null&&raw!==''){
+          if(!/^\d+$/.test(String(raw))||!allowed[key].includes(Number(raw)))
+            errors.push('Intervalo ácido-base inválido en '+key+'.');
+        }
+      }
       if(!['yes','no'].includes(o.arf))errors.push('Confirma si existe lesión renal aguda.');
       if(errors.length)return {error:errors};
       const total=Object.values(parts).reduce((a,b)=>a+b,0)+(o.arf==='yes'?parts.cr:0);
@@ -926,6 +933,15 @@ html.dark .atlas-calc-heading .calc-title{
       const rules={age:[18,120,'Edad'],temp:[20,45,'Temperatura central'],map:[0,250,'PAM'],hr:[0,260,'Frecuencia cardíaca'],rr:[0,100,'Frecuencia respiratoria'],fio2:[0.21,1,'FiO₂ (fracción 0.21–1)'],na:[90,210,'Sodio'],k:[1,10,'Potasio'],cr:[0.1,20,'Creatinina'],hct:[5,80,'Hematocrito'],wbc:[0.1,150,'Leucocitos'],gcs:[3,15,'Glasgow']};
       const f=fields(o,rules);if(f.errors.length)return {error:f.errors};
       const a=f.o;
+      /* Reject invalid supplied optional values even when another
+         oxygen/acid-base method is active. Do not assign points to them. */
+      for(const [key,lo,hi] of [['pao2',0,1000],['aagrad',0,1000],['ph',6.5,8],['hco3',1,100]]){
+        const raw=o[key];
+        if(raw!==undefined&&raw!==null&&raw!==''){
+          const n=val(raw);
+          if(!valid(n,lo,hi))return {error:['Valor inválido en campo '+key+'.']};
+        }
+      }
       if(!Number.isInteger(a.gcs)||!Number.isInteger(a.age))return {error:['Edad y Glasgow deben ser números enteros.']};
       if(!['no','elective','emergency','nonoperative'].includes(o.chronic))return {error:['Selecciona el estado de enfermedad crónica grave previo al ingreso.']};
       if(!['true','false'].includes(o.arf))return {error:['Indica si existe insuficiencia renal aguda.']};
