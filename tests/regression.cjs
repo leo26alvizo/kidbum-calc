@@ -80,10 +80,18 @@ vm.runInNewContext(fs.readFileSync('assets/cardiology-module.js','utf8'),ctx,{ti
 vm.runInNewContext(fs.readFileSync('assets/critical-module.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(fs.readFileSync('assets/critical-advanced.js','utf8'),ctx,{timeout:2000});
 vm.runInNewContext(scripts[0],ctx,{timeout:2000});
+/* These historical preservation tests predate two new APACHE II calculators.
+   Check the original 68 separately AND verify both new IDs exist. */
+const clinicalIds=ctx.KidBumEngine.list;
+assert.equal(clinicalIds.length,70,'Total actual: 68 original + two APACHE II modes');
+assert.ok(clinicalIds.includes('apache2')&&clinicalIds.includes('apache2quick'),'Both APACHE modes present');
+const legacyCalculatorCount=clinicalIds.filter(id=>id!=='apache2'&&id!=='apache2quick').length;
+assert.equal(legacyCalculatorCount,68,'Original 68 calculator IDs preserved');
+
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
 const t=[
 ['Original anion gap',()=>assert.equal(calc('anion',{na:140,cl:104,hco3:23}).value,13)],
-['Count',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
+['Count',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
 ['Dating 0w0d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-01-01'}).display,'0 sem + 0 d')],
 ['Dating 40w3d',()=>assert.equal(calc('agfum',{lmp:'2026-01-01',asof:'2026-10-11'}).display,'40 sem + 3 d')],
 ['Date reversed',()=>assert.ok(calc('agfum',{lmp:'2026-10-11',asof:'2026-01-01'}).error)],
@@ -157,7 +165,7 @@ const t=[
 ['Dose limits do not autoauthorize',()=>assert.match(calc('pedmaxverify',{weight:10,dose:100,frequency:4,maxSingle:120,maxDaily:500}).interpretation,/NO equivale/)],
 ['Access review not approval',()=>assert.equal(calc('pedaccess',{context:'highpn'}).display,'Valorar acceso')],
 ['Infant supplement reference not prescription',()=>assert.match(calc('pedsupp',{months:5,feeding:'breast',preterm:'false'}).interpretation,/no es prescripción/)],
-['All previous 35 preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,35)],
+['All previous 35 preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumWard.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,35)],
 ['Mobile reference tables',()=>assert.match(html,/res.table.title/)],
 ['Ward module preserved and bundled',()=>assert.ok(fs.existsSync('assets/pediatric-ward.js')&&html.includes('src="./assets/startup-bundle.js"'))],
 ['Pediatric feature uses supplied photo',()=>assert.match(html,/src="\.\/assets\/pediatria-portada\.webp"/)],
@@ -214,7 +222,7 @@ const expansionTests=[
 ['FeUrea no zero denominator',()=>assert.ok(calc('feurea',{ureaU:300,ureaP:0,ucr:80,pcr:2,ureaunit:'urea_mgdl',diuretics:'false'}).error)],
 ['FeUrea BUN consistent',()=>assert.equal(calc('feurea',{ureaU:300,ureaP:40,ucr:80,pcr:2,ureaunit:'bun_mgdl',diuretics:'false'}).value,18.75)],
 ['Hospital reference visible',()=>assert.ok(html.includes('https://pubmed.ncbi.nlm.nih.gov/37384888/'))],
-['Original 45 preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,45)]
+['Original 45 preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumHospital.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,45)]
 ];
 t.push(...expansionTests);
 
@@ -222,7 +230,7 @@ const advancedTests=[
 ['Advanced module loaded via core bundle',()=>assert.ok(html.includes('assets/startup-bundle.js'))],
 ['Advanced module cached offline',()=>assert.ok(swSource.includes('./assets/advanced-module.js'))],
 ['Advanced module three tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
-['58 calculators in engine',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
+['58 calculators in engine',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
 ['Cardiology category',()=>assert.ok(html.includes("'Cardiología'"))],
 ['Gastroenterology category',()=>assert.ok(html.includes("'Gastroenterología'"))],
 ['New categories shown on home page',()=>assert.ok(html.includes("'Cardiología','Gastroenterología'"))],
@@ -239,7 +247,7 @@ const advancedTests=[
 ['RCRI renal below threshold',()=>assert.equal(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',insulin:'false',scr:1.99}).value,0)],
 ['RCRI all six',()=>assert.equal(calc('rcri',{surgery:'true',ischemia:'true',hf:'true',cvd:'true',insulin:'true',scr:2}).value,6)],
 ['RCRI missing field',()=>assert.ok(calc('rcri',{surgery:'false',ischemia:'false',hf:'false',cvd:'false',scr:2}).error)],
-['Previous 49 preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,49)]
+['Previous 49 preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumAdvanced.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,49)]
 ];
 const gbsBase={ureaunit:'urea_mmoll',urea:5,hb:14,hbsex:'male',sbp:120,hr:80,melena:'false',syncope:'false',liver:'false',hf:'false'};
 advancedTests.push(['GBS zero',()=>assert.equal(calc('gbs',gbsBase).value,0)]);
@@ -268,7 +276,7 @@ const cardiologiaTests=[
  ['Cardiology category uses supplied JPEG',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
  ['Cardiology image shares photo class of other cards',()=>assert.ok(html.includes('atlas-gineco-photo atlas-cardiologia-photo'))],
  ['Cardiology preserves no filter and full opacity',()=>assert.match(html,/\.atlas-cardiologia-feature \.atlas-cardiologia-photo\{[\s\S]*?filter:none!important/)],
- ['All previous 52 calculators preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
+ ['All previous 52 calculators preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
 ];
 t.push(...cardiologiaTests);
 
@@ -278,7 +286,7 @@ const gastroCardTests=[
  ['Gastroenterology preserves existing local raster image',()=>assert.ok(atlasGlobal.KidBumAtlas.img('childpugh','atlas-category-illustration atlas-gineco-photo atlas-gastro-photo').includes('./assets/atlas-childpugh.jpg'))],
  ['Gastroenterology card has shared photo class',()=>assert.ok(html.includes('class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo"'))],
  ['Gastroenterology image remains unfiltered',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?filter:none!important/)],
- ['Gastroenterology retains previous 52 calculators',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
+ ['Gastroenterology retains previous 52 calculators',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
  ['Existing gastrointestinal raster remains offline cached',()=>assert.ok(swSource.includes("'./assets/atlas-childpugh.jpg'"))]
 ];
 t.push(...gastroCardTests);
@@ -288,7 +296,7 @@ const gastroPhotoTests=[
  ['Gastroenterology remains full-width featured',()=>assert.ok(html.includes("c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature'"))],
  ['Gastroenterology transparent art fully visible',()=>assert.match(html,/\.atlas-gastro-feature \.atlas-gastro-photo \{[\s\S]*?object-fit:contain/)],
  ['Gastroenterology image precached',()=>assert.ok(swSource.includes("'./assets/gastroenterologia-portada.webp'"))],
- ['All previous 52 calculators preserved after Gastro photo',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
+ ['All previous 52 calculators preserved after Gastro photo',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)]
 ];
 t.push(...gastroPhotoTests);
 
@@ -299,7 +307,7 @@ const anthropometryPhotoTests=[
  ['Anthropometry uses shared photo styles',()=>assert.ok(html.includes('atlas-gineco-photo atlas-antropometria-photo'))],
  ['Anthropometry photograph displays without cropping',()=>assert.match(html,/\.atlas-antropometria-feature \.atlas-antropometria-photo \{[\s\S]*?object-fit:contain/)],
  ['Anthropometry image available offline',()=>assert.ok(swSource.includes("'./assets/antropometria-portada.jpg'"))],
- ['Original 52 clinical tools preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
+ ['Original 52 clinical tools preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeuro.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,52)],
  ['Other category photos retained',()=>assert.ok(html.includes('src="./assets/gastroenterologia-portada.webp"')&&html.includes('src="./assets/cardiologia-portada.jpg"'))]
 ];
 t.push(...anthropometryPhotoTests);
@@ -310,7 +318,7 @@ const neuroPhaseOneTests=[
  ['Neurology category created',()=>assert.ok(html.includes("const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular'"))],
  ['Neurology featured wide card',()=>assert.ok(html.includes("c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature'"))],
  ['Neurology uses existing local art',()=>assert.ok(html.includes("atlas-neuro-photo")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
- ['58 unique calculator ids',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
+ ['58 unique calculator ids',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
  ['Two new neuro calculators',()=>assert.equal(ctx.KidBumNeuro.ids.length,2)],
  ['Glasgow no duplicate',()=>assert.equal((html.match(/\{id:'gcs',title:/g)||[]).length,1)],
  ['Glasgow moved to Neuro',()=>assert.ok(html.includes("title:'Glasgow',category:'Neurología y Raquimedular'"))],
@@ -357,9 +365,9 @@ t.push(...neuroPhaseOneTests);
 const completionTests=[
  ['NIHSS module included in bundle',()=>assert.ok(html.includes('assets/startup-bundle.js'))],
  ['NIHSS module precached',()=>assert.ok(swSource.includes("'./assets/neurology-advanced.js'"))],
- ['58 calculators now registered',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
+ ['58 calculators now registered',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
  ['Four neurologic advanced tools',()=>assert.equal(ctx.KidBumNeurologyAdvanced.ids.length,4)],
- ['All previous 54 remain',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,54)],
+ ['All previous 54 remain',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length-ctx.KidBumNeurologyAdvanced.ids.length,54)],
  ['One original Glasgow only',()=>assert.equal((html.match(/\{id:'gcs',title:/g)||[]).length,1)],
  ['No additional cardiology tools',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
  ['NIHSS all default normal',()=>assert.equal(calc('nihss',{confirm:'yes',loca:'0',locb:'0',locc:'0',gaze:'0',visual:'0',face:'0',armL:'0',armR:'0',legL:'0',legR:'0',ataxia:'0',sensory:'0',language:'0',dysarthria:'0',neglect:'0'}).value,0)]
@@ -510,7 +518,7 @@ const neurologyPhotoTests=[
  ['Neurology full photo without filter',()=>assert.match(html,/\.atlas-neuro-feature \.atlas-neuro-photo\{[\s\S]*?object-fit:cover;[\s\S]*?filter:none!important/)],
  ['Neurology new image cached offline',()=>assert.ok(swSource.includes("'./assets/neurologia-portada.jpg'"))],
  ['Old Escalas Clínicas image retained',()=>assert.ok(html.includes("c==='Escalas clínicas'?'<img")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
- ['All 58 previous calculators preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
+ ['All 58 previous calculators preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
  ['Existing original icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...neurologyPhotoTests);
@@ -519,8 +527,8 @@ const cardiologyTests=[
  ['Cardiology module bundled',()=>assert.ok(html.includes('<script src="./assets/startup-bundle.js"></script>'))],
  ['Cardiology module available offline',()=>assert.ok(swSource.includes("'./assets/cardiology-module.js'"))],
  ['Five new cardiology tools',()=>assert.equal(ctx.KidBumCardio.ids.length,5)],
- ['63 calculators total',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
- ['Existing 58 preserved',()=>assert.equal((ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
+ ['63 calculators total',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length),63)],
+ ['Existing 58 preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
  ['Wells DVT appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellsdvt',title:'Wells para TVP',category:'Cardiología'"))],
  ['Wells PE appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellspe',title:'Wells para embolia pulmonar',category:'Cardiología'"))],
  ['Original cardiology photograph remains',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
@@ -584,8 +592,8 @@ t.push(...cardiologyTests);
 const phase1=[
 ['Original critical script bundled',()=>assert.ok(html.includes('src="./assets/startup-bundle.js"'))],
 ['New script offline',()=>assert.ok(swSource.includes("'./assets/critical-module.js'"))],
-['68 calculators in total',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
-['Original 63 preserved',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length,63)],
+['68 calculators in total',()=>assert.equal(legacyCalculatorCount,68)],
+['Original 63 preserved',()=>assert.equal(legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length,63)],
 ['Three critical tools',()=>assert.equal(ctx.KidBumCritical.ids.length,3)],
 ['Urgencias category visible',()=>assert.ok(html.includes('Urgencias y Terapia Intensiva'))],
 ['Guardia navigation',()=>assert.ok(html.includes('data-mobile-nav="guard"'))],
@@ -625,8 +633,8 @@ t.push(...phase1);
 const phase2=[
  ['Advanced ICU module bundled',()=>assert.ok(html.includes('src="./assets/startup-bundle.js"'))],
  ['Advanced ICU module offline precache',()=>assert.ok(swSource.includes("'./assets/critical-advanced.js'"))],
- ['Total 68 calculators',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
- ['Original 66 calculators unchanged',()=>assert.equal(ctx.KidBumEngine.list.length-ctx.KidBumCriticalAdvanced.ids.length,66)],
+ ['Total 68 calculators',()=>assert.equal(legacyCalculatorCount,68)],
+ ['Original 66 calculators unchanged',()=>assert.equal(legacyCalculatorCount-ctx.KidBumCriticalAdvanced.ids.length,66)],
  ['Phase 2 adds exactly two',()=>assert.equal(ctx.KidBumCriticalAdvanced.ids.length,2)],
  ['SOFA-2 and CAM-ICU in catalog',()=>assert.ok(html.includes("{id:'sofa2'")&&html.includes("{id:'camicu'"))],
  ['SOFA-2 and CAM-ICU accessible in Guardia',()=>assert.ok(html.includes("ids:['pafi','rox','rass','camicu','sofa2','news2']"))],
@@ -672,7 +680,7 @@ const urgenciasOriginalTests=[
  ['Urgencias image no visual filters',()=>assert.ok(html.includes('filter:none!important'))],
  ['Original JPG is available offline',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'"))],
  ['Other clinical feature photos preserved',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"')&&html.includes('src="./assets/neurologia-portada.jpg"'))],
- ['Previous 68 calculators preserved',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['Previous 68 calculators preserved',()=>assert.equal(legacyCalculatorCount,68)],
  ['Modo Guardia retained',()=>assert.ok(html.includes('data-mobile-nav="guard"'))],
  ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
@@ -694,7 +702,7 @@ const mobileLoadingTests=[
  ['No duplicate immediate registration update',()=>assert.ok(!html.includes('.then(reg=>reg.update()).catch('))],
  ['Update check throttled',()=>assert.ok(html.includes('60*60*1000'))],
  ['No scripts or fonts loaded from external CDN',()=>assert.ok(!html.includes('<script src="https://'))],
- ['Medical calculations unchanged at 68',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['Medical calculations unchanged at 68',()=>assert.equal(legacyCalculatorCount,68)],
  ['Original Neurologia photo preserved',()=>assert.ok(html.includes('src="./assets/neurologia-portada.jpg"'))],
  ['Original Urgencias photo preserved',()=>assert.ok(html.includes('src="./assets/urgencias-portada.jpg"'))],
  ['Offline core still includes app metadata',()=>assert.ok(swSource.includes("'./manifest.webmanifest'"))]
@@ -717,7 +725,7 @@ const appleSupportTests=[
  ['iPhone install guide in About page',()=>assert.ok(html.includes('Instalar en iPhone o iPad (Safari)')&&html.includes('Agregar a Inicio'))],
  ['iOS app opened via Safari outside WhatsApp',()=>assert.ok(html.includes('navegador interno de WhatsApp'))],
  ['iOS safe area preserved',()=>assert.ok(html.includes('env(safe-area-inset-bottom)'))],
- ['No duplicate clinical tools',()=>assert.equal(ctx.KidBumEngine.list.length,68)],
+ ['No duplicate clinical tools',()=>assert.equal(legacyCalculatorCount,68)],
  ['Android clinical icon preserved',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...appleSupportTests);
