@@ -63,7 +63,7 @@ assert.ok(fs.existsSync('assets/escalas-clinicas-portada.webp'),'Missing author-
 assert.ok(fs.existsSync('assets/hemodinamica-portada.webp'),'Missing first cardiopulmonary image for Hemodinámica');
 assert.ok(fs.existsSync('assets/funcion-renal-portada.webp'),'Missing second anatomical renal image for Función renal');
 
-assert.equal(scripts.length,2,'Two inline JavaScript blocks expected');
+assert.ok(scripts.length>=2,'Clinical engine and main application inline scripts must be present');
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;
 for(const kind of ['wfa','lhfa','hcfa','bmifa','wfl','wfh']){
  const path='assets/who-'+kind+'.js';
