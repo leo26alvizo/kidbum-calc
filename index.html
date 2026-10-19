@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.17" />
+  <meta name="kidbum-app-version" content="0.10.18" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -798,7 +798,20 @@ html.dark .atlas-calc-heading .calc-title{
 .atlas-category-grid .atlas-urgencias-feature .atlas-category-visual{background:#d4dfe3}
 .atlas-category-grid .atlas-urgencias-feature .atlas-urgencias-photo{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 50%;opacity:1!important;filter:none!important}
 
-  </style>
+  
+/* Calculadora convencional accesible desde la barra superior */
+.kb-basic-trigger{border:1px solid var(--stroke);background:var(--surface);color:var(--ink);border-radius:12px;padding:9px 13px;font-weight:750;cursor:pointer;white-space:nowrap}
+.kb-basic-backdrop[hidden]{display:none}.kb-basic-backdrop{position:fixed;inset:0;background:rgba(3,12,30,.74);z-index:9999;display:flex;align-items:flex-start;justify-content:center;padding:clamp(18px,8vh,80px) 12px;overflow:auto}
+.kb-basic-panel{background:var(--surface);border:1px solid var(--stroke);border-radius:20px;width:min(100%,380px);padding:18px;box-shadow:0 22px 70px #0005;color:var(--ink)}
+.kb-basic-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:15px}.kb-basic-head h2{font-size:1.15rem;margin:0}
+.kb-basic-close{border:1px solid var(--stroke);border-radius:9px;background:var(--soft);color:var(--ink);padding:7px 11px;cursor:pointer}
+.kb-basic-screen{background:var(--bg);border:1px solid var(--stroke);border-radius:12px;padding:16px;text-align:right;font-size:2rem;min-height:79px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.kb-basic-history{font-size:.75rem;color:var(--ink-soft);min-height:16px}
+.kb-basic-keys{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:14px}
+.kb-basic-keys button{border:1px solid var(--stroke);border-radius:12px;min-height:55px;background:var(--bg);color:var(--ink);font-weight:760;font-size:1.1rem;cursor:pointer}
+.kb-basic-keys button[data-key="="]{background:linear-gradient(100deg,#117e99,#2454db);color:white}
+.kb-basic-keys button[data-key="C"],.kb-basic-keys button[data-key="⌫"]{color:var(--red)}
+</style>
   <title>KidBum CALC · Herramientas clínicas</title>
 </head>
 <body>
@@ -820,7 +833,7 @@ html.dark .atlas-calc-heading .calc-title{
     <div class="page">
       <header class="topbar">
         <div class="breadcrumb"><span class="crumb-brand">KIDBUM</span><span class="crumb-slash">/</span><span id="breadcrumb-label">Inicio</span></div>
-        <div class="top-actions">
+        <div class="top-actions"><button type="button" class="kb-basic-trigger" id="kb-basic-open" title="Calculadora convencional">🧮 Calc</button>
           <span class="top-status"><span class="online-dot"></span>Sin suscripciones</span>
           <button class="icon-btn" id="theme-btn" aria-label="Cambiar tema" title="Cambiar tema" type="button">◐</button>
         </div>
@@ -1776,5 +1789,54 @@ render();
 })();
 
 </script>
-</body>
+
+<div class="kb-basic-backdrop" id="kb-basic-modal" hidden>
+ <section class="kb-basic-panel" role="dialog" aria-modal="true" aria-labelledby="kb-basic-title">
+  <div class="kb-basic-head"><h2 id="kb-basic-title">🧮 Calculadora rápida</h2><button type="button" class="kb-basic-close" id="kb-basic-close" aria-label="Cerrar calculadora">✕</button></div>
+  <div class="kb-basic-screen" aria-live="polite"><div class="kb-basic-history" id="kb-basic-history"></div><div id="kb-basic-display">0</div></div>
+  <div class="kb-basic-keys" id="kb-basic-keys"><button type="button" data-key="C" aria-label="C">C</button><button type="button" data-key="⌫" aria-label="⌫">⌫</button><button type="button" data-key="%" aria-label="%">%</button><button type="button" data-key="÷" aria-label="÷">÷</button><button type="button" data-key="7" aria-label="7">7</button><button type="button" data-key="8" aria-label="8">8</button><button type="button" data-key="9" aria-label="9">9</button><button type="button" data-key="×" aria-label="×">×</button><button type="button" data-key="4" aria-label="4">4</button><button type="button" data-key="5" aria-label="5">5</button><button type="button" data-key="6" aria-label="6">6</button><button type="button" data-key="−" aria-label="−">−</button><button type="button" data-key="1" aria-label="1">1</button><button type="button" data-key="2" aria-label="2">2</button><button type="button" data-key="3" aria-label="3">3</button><button type="button" data-key="+" aria-label="+">+</button><button type="button" data-key="±" aria-label="±">±</button><button type="button" data-key="0" aria-label="0">0</button><button type="button" data-key="." aria-label=".">.</button><button type="button" data-key="=" aria-label="=">=</button></div>
+  <p class="input-info">Operaciones básicas · cálculo local · no conserva datos</p>
+ </section>
+</div><script>
+(function(){
+ const modal=document.getElementById('kb-basic-modal'),display=document.getElementById('kb-basic-display'),hist=document.getElementById('kb-basic-history'),trigger=document.getElementById('kb-basic-open');
+ let left=null,op=null,current='0',fresh=false,lastFocus=null;
+ function show(){display.textContent=current;hist.textContent=left===null?'':left+' '+(op||'');}
+ function reset(){left=null;op=null;current='0';fresh=false;show();}
+ function compute(a,b,o){return o==='+'?a+b:o==='−'?a-b:o==='×'?a*b:o==='÷'?(b===0?NaN:a/b):b;}
+ function fmt(n){if(!Number.isFinite(n))return 'Error';return String(Number(n.toPrecision(12)));}
+ function key(k){
+   if(k==='C'){reset();return;}
+   if(k==='⌫'){if(fresh){current='0';fresh=false;}else current=current.length>1?current.slice(0,-1):'0';show();return;}
+   if(k==='±'){if(current!=='0'&&current!=='Error')current=current.startsWith('-')?current.slice(1):'-'+current;show();return;}
+   if(k==='%'){current=fmt(Number(current)/100);fresh=false;show();return;}
+   if('0123456789.'.includes(k)&&k.length===1){
+     if(current==='Error')reset();
+     if(fresh){current='0';fresh=false;}
+     if(k==='.'&&current.includes('.'))return;
+     if(current.replace(/[^0-9]/g,'').length>=13)return;
+     current=k==='.'?current+'.':current==='0'?k:current+k;show();return;
+   }
+   if(['+','−','×','÷'].includes(k)){
+     if(current==='Error')return;
+     if(op&&left!==null&&!fresh){current=fmt(compute(left,Number(current),op));if(current==='Error'){left=null;op=null;show();return;}}
+     left=Number(current);op=k;fresh=true;show();return;
+   }
+   if(k==='='&&op&&left!==null){let a=left,b=Number(current);current=fmt(compute(a,b,op));left=null;op=null;fresh=true;show();}
+ }
+ document.getElementById('kb-basic-keys').addEventListener('click',e=>{const btn=e.target.closest('button[data-key]');if(btn)key(btn.dataset.key);});
+ function close(){modal.hidden=true;if(lastFocus)lastFocus.focus();}
+ trigger.addEventListener('click',()=>{lastFocus=document.activeElement;modal.hidden=false;document.getElementById('kb-basic-close').focus();});
+ document.getElementById('kb-basic-close').addEventListener('click',close);
+ modal.addEventListener('click',e=>{if(e.target===modal)close();});
+ document.addEventListener('keydown',e=>{
+  if(modal.hidden)return;
+  if(e.key==='Escape'){close();return;}
+  if(e.key==='Tab'){const nodes=[...modal.querySelectorAll('button')];if(e.shiftKey&&document.activeElement===nodes[0]){e.preventDefault();nodes.at(-1).focus();}else if(!e.shiftKey&&document.activeElement===nodes.at(-1)){e.preventDefault();nodes[0].focus();}return;}
+  const map={'Enter':'=','Backspace':'⌫','Delete':'C','*':'×','/':'÷','-':'−','+':'+'};
+  const k=map[e.key]||e.key;if('0123456789.'.includes(k)&&k.length===1||['=','⌫','C','×','÷','−','+','%'].includes(k)){e.preventDefault();key(k);}
+ });
+ show();
+})();
+</script></body>
 </html>
