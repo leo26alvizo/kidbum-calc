@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.14" \/>/,'Release version is defined centrally');
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.19" \/>/,'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
@@ -27,7 +27,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
 assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
 assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
-assert.match(swSource,/kidbum-calc-v01014-amoxicillin-aom/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v01019-apache-audit/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
