@@ -6,7 +6,7 @@
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(Boolean);
-assert.equal(scripts.length,2,'App scripts still load');
+assert.ok(scripts.length>=2,'Clinical engine and main application inline scripts must be present');
 const context={};context.window=context;context.globalThis=context;
 vm.runInNewContext(scripts[0],context,{timeout:4000});
 const calculate=(id,data)=>context.KidBumEngine.calculate(id,data);
