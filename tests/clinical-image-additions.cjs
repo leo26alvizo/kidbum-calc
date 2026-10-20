@@ -116,7 +116,7 @@ for(const [age,sex,expectedScore,expectedClass] of [
  count++;
 }
 for(const [age,sex,positive,expectedScore,expectedClass] of [
- [45,'female','nursing',45,'II'],
+ [45,'female','nursing',45,'I'],
  [45,'male','neoplasm',75,'III'],
  [100,'male','neoplasm',130,'IV'],
  [101,'male','neoplasm',131,'V']
@@ -124,6 +124,19 @@ for(const [age,sex,positive,expectedScore,expectedClass] of [
  const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:String(age),sex,[positive]:'yes'});
  assert.equal(r.value,expectedScore,'PSI weighted boundary '+age+'/'+positive);
  assert.ok(r.interpretation.includes('clase '+expectedClass),'PSI weighted class '+age+'/'+positive);
+ count++;
+}
+// Original Fine step 1 excludes only age >50, five diseases and five exam findings.
+// Institutional residence, blood tests and radiography contribute points in step 2,
+// but cannot automatically disqualify a patient from class I.
+for(const positive of ['nursing','ph','bun','na','glucose','hct','oxygen','effusion']){
+ const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:'45',sex:'male',[positive]:'yes'});
+ assert.ok(r.interpretation.includes('clase I'),'Fine step-one class I preserved for '+positive);
+ count++;
+}
+for(const positive of ['neoplasm','liver','chf','cva','renal','psiConfusion','tachypnea','hypotension','temperature','pulse']){
+ const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:'45',sex:'male',[positive]:'yes'});
+ assert.ok(!r.interpretation.includes('clase I'),'Fine step-one disqualified by '+positive);
  count++;
 }
 // Adult burn calculation at the ABA inclusion threshold; never output an infusion rate.
