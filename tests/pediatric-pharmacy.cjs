@@ -11,7 +11,7 @@ assert.ok(start>0&&end>start,'Clinical definitions must exist');
 const data=vm.runInNewContext(html.slice(start,end)+'\n({defs,pediatricPharma});',{}, {timeout:5000});
 const defs=data.defs,catalog=data.pediatricPharma;
 assert.equal(defs.length,84,'Pharmacy review card remains non-calculator alongside 84 clinical tools');
-assert.equal(defs.filter(d=>d.category==='Pediatría').length,22,'All pediatric calculators preserved');
+assert.equal(defs.filter(d=>d.category==='Pediatría').length,24,'All pediatric calculators preserved');
 assert.equal(catalog.length,3,'First review cohort remains small');
 assert.deepEqual(Array.from(catalog,x=>x.name),['Paracetamol','Ibuprofeno','Amoxicilina']);
 for(const item of catalog){
