@@ -96,4 +96,53 @@ invalid('pedmathdose',{basis:'actual',referenceWeight:'25'});
 for(const id of ['apache2','sofa2','qsofa','curb','bmi','bsa','ped421','pedholliday','pedmaxverify'])
  assert.ok(e.list.includes(id),'Preserved existing calculator: '+id);
 assert.ok(!defs.some(d=>/Peso ideal \+ Dosis pediátrica/i.test(d.title)),'No false pediatric ideal weight recommendation');
+
+// Boundary regression: PSI/PORT classification transitions must not drift.
+const noPORT=Object.fromEntries([
+ 'nursing','neoplasm','liver','chf','cva','renal','psiConfusion',
+ 'tachypnea','hypotension','temperature','pulse','ph','bun','na',
+ 'glucose','hct','oxygen','effusion'
+].map(k=>[k,'no']));
+for(const [age,sex,expectedScore,expectedClass] of [
+ [50,'male',50,'I'],[51,'male',51,'II'],
+ [50,'female',40,'I'],[51,'female',41,'II'],
+ [70,'male',70,'II'],[71,'male',71,'III'],
+ [90,'male',90,'III'],[91,'male',91,'IV'],
+ [120,'male',120,'IV']
+]){
+ const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:String(age),sex});
+ assert.equal(r.value,expectedScore,'PSI score boundary '+age+'/'+sex);
+ assert.ok(r.interpretation.includes('clase '+expectedClass),'PSI class boundary '+age+'/'+sex);
+ count++;
+}
+for(const [age,sex,positive,expectedScore,expectedClass] of [
+ [45,'female','nursing',45,'II'],
+ [45,'male','neoplasm',75,'III'],
+ [100,'male','neoplasm',130,'IV'],
+ [101,'male','neoplasm',131,'V']
+]){
+ const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:String(age),sex,[positive]:'yes'});
+ assert.equal(r.value,expectedScore,'PSI weighted boundary '+age+'/'+positive);
+ assert.ok(r.interpretation.includes('clase '+expectedClass),'PSI weighted class '+age+'/'+positive);
+ count++;
+}
+// Adult burn calculation at the ABA inclusion threshold; never output an infusion rate.
+for(const [scheme,expected] of [['parkland4',5600],['aba2',2800]]){
+ const r=valid('parklandburn',{weight:'70',tbsa:'20',hours:'7.5',scheme},expected);
+ assert.ok(!r.interpretation.includes('mL/h'),'Burn estimate must never prescribe an hourly rate');
+}
+invalid('parklandburn',{tbsa:'19.99'});
+// Devine's 60-inch anchor: historical adult reference, not a pediatric ideal-weight formula.
+valid('devineibw',{height:'152.4',sex:'male'},50);
+valid('devineibw',{height:'152.4',sex:'female'},45.5);
+// Dose exactly at both clinician-supplied maximums is arithmetic equality, not approval.
+const exact=e.calculate('pedmathdose',{
+ ...testData.pedmathdose,weight:'20',dose:'10',times:'3',maxDose:'200',maxDay:'600'
+});
+assert.equal(exact.value,200);
+assert.ok(exact.interpretation.includes('no es prescripción'));
+count++;
+invalid('pedmathdose',{weight:'20',dose:'10',times:'3',maxDose:'199.99',maxDay:'600'});
+invalid('pedmathdose',{weight:'20',dose:'10',times:'3',maxDose:'200',maxDay:'599.99'});
+
 console.log('Seven clinical image calculators PASSED: '+count+' independent boundary and safety cases; all 84 calculators retained.');
