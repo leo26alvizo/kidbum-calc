@@ -31,3 +31,5 @@ jobs:
         run: node tests/electrolytes.cjs
       - name: Adult urinary output and KDIGO threshold safety
         run: node tests/urine-output-adult.cjs
+      - name: Reference image — seven new clinical calculators
+        run: node tests/clinical-image-additions.cjs
