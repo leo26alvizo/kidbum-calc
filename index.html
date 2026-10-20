@@ -1198,7 +1198,7 @@ html.dark .atlas-calc-heading .calc-title{
       const cls=lowRisk?'I':score<=70?'II':score<=90?'III':score<=130?'IV':'V';
       return done(score,'puntos PORT','PSI / PORT · clase '+cls+' (la clase I requiere criterios de bajo riesgo completos).',
        ['Score para neumonía adquirida en la comunidad en ADULTOS, no confirma diagnóstico ni decide egreso/ingreso por sí solo.',
-        'No se asigna valor normal a exploraciones o pruebas desconocidas. Evaluar SpO₂, contexto social, comorbilidad, oxígeno, juicio clínico y descompensación.',
+        'No se asigna valor normal a exploraciones o pruebas desconocidas. La clase I no garantiza alta: la hipoxemia, necesidad de oxígeno, inestabilidad y barreras para seguimiento requieren evaluación independiente de la clase.',
         'La clase I usa el filtro del paso 1 (edad ≤50, sin las cinco comorbilidades ni los cinco hallazgos físicos de riesgo), independiente de institucionalización y hallazgos de laboratorio/radiografía; los datos de paso 2 se conservan y muestran para evaluación clínica.'],
        'Puntos iniciales por edad y categoría: '+Math.max(0,f.o.age-(o.sex==='female'?10:0))+
        '. Hallazgos positivos: '+(selected.length?selected.join(', '):'ninguno')+'. Puntuación '+score+', clase '+cls+'.');
