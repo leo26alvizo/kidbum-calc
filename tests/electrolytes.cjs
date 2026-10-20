@@ -6,6 +6,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const html=fs.readFileSync('index.html','utf8');
 const blocks=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(m=>m[1]).filter(Boolean);
 const ctx={};ctx.window=ctx;ctx.globalThis=ctx;
+vm.runInNewContext(fs.readFileSync('assets/startup-bundle.js','utf8'),ctx,{timeout:10000});
 vm.runInNewContext(blocks[0],ctx,{timeout:5000});
 const engine=ctx.KidBumEngine;
 const a=html.indexOf('const dateInput='),b=html.indexOf('const categories=',a);
