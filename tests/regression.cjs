@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.20" \/>/,'Release version is defined centrally');
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.21" \/>/,'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
@@ -27,7 +27,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
 assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
 assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
-assert.match(swSource,/kidbum-calc-v01020-electrolytes/,'New PWA cache must be distinguishable');
+assert.match(swSource,/kidbum-calc-v01021-adult-urine-output/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
@@ -83,11 +83,12 @@ vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 /* These historical preservation tests predate two new APACHE II calculators.
    Check the original 68 separately AND verify both new IDs exist. */
 const clinicalIds=ctx.KidBumEngine.list;
-assert.equal(clinicalIds.length,76,'Total actual: original 68, two APACHE II modes and six electrolyte tools');
+assert.equal(clinicalIds.length,77,'Total actual: original 68, two APACHE II modes, six electrolyte tools and adult urinary output');
 assert.ok(clinicalIds.includes('apache2')&&clinicalIds.includes('apache2quick'),'Both APACHE modes present');
 const newElectrolyteIds=['nadeficit','freewater','correctedca','osmgap','potassiumreview','bicarbdef'];
 for(const id of newElectrolyteIds)assert.ok(clinicalIds.includes(id),'New electrolyte engine must be present: '+id);
-const legacyCalculatorCount=clinicalIds.filter(id=>!['apache2','apache2quick',...newElectrolyteIds].includes(id)).length;
+assert.ok(clinicalIds.includes('urineoutputadult'),'Adult urine output must be available in renal section');
+const legacyCalculatorCount=clinicalIds.filter(id=>!['apache2','apache2quick','urineoutputadult',...newElectrolyteIds].includes(id)).length;
 assert.equal(legacyCalculatorCount,68,'Original 68 calculator IDs preserved');
 
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
