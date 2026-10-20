@@ -2,9 +2,22 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.20**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.21**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Función renal v0.10.21 — Gasto urinario en adultos
+
+Se incorpora **Gasto urinario en adultos**, categoría **Función renal**, conservando la calculadora pediátrica independiente y las otras 76 herramientas.
+
+- Fórmula: gasto urinario promedio = orina total medida (mL) / [peso (kg) × duración consecutiva (h)], resultado en **mL/kg/h** y promedio complementario en mL/h.
+- Requiere edad adulta documentada (18–120 años), peso entre 20–300 kg, periodo medido continuo de 1–24 horas y confirmación de recolección completa.
+- Ejemplo ficticio 210 mL, 70 kg, 8 horas = **0.375 mL/kg/h**, promedio **26.3 mL/h**.
+- Alertas orientativas según **KDIGO 2012**, guía vigente mientras la actualización 2026 está en revisión: umbral <0.5 mL/kg/h ≥6 horas, alertas para periodos ≥12 horas, <0.3 durante 24 h y anuria ≥12 h.
+- El promedio agregado **no basta para confirmar continuidad de oliguria en cada intervalo ni estadificar LRA**. Deben revisarse la serie horaria, creatinina y contexto.
+- No prescribe líquidos, diuréticos, ni terapia de reemplazo renal.
+
+Pruebas automáticas `node tests/urine-output-adult.cjs`, con datos ficticios, puntos de corte exactos, anuria, intervalos insuficientes, entradas inválidas y preservación del catálogo.
 
 ## Nefrología y electrólitos v0.10.20 — Seis referencias incorporadas
 
@@ -32,7 +45,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 76 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
+**Total actual: 77 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
