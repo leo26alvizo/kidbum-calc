@@ -53,7 +53,7 @@ invalid('sofa1',{gcs:'5'});
 invalid('sofa1',{reviewed:'no'});
 valid('psiport',{},95,'IV');
 const allNo=Object.fromEntries([
- 'nursing','neoplasm','liver','chf','cva','renal','confusion',
+ 'nursing','neoplasm','liver','chf','cva','renal','psiConfusion',
  'tachypnea','hypotension','temperature','pulse','ph','bun','na',
  'glucose','hct','oxygen','effusion'
 ].map(k=>[k,'no']));
