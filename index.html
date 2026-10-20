@@ -971,6 +971,93 @@ html.dark .atlas-calc-heading .calc-title{
       const labels={temp:'Temperatura',map:'PAM',hr:'FC',rr:'FR',oxygen:'Oxigenación',ph:o.acidmode==='ph'?'pH':'Bicarbonato venoso',na:'Na',k:'K',cr:'Creatinina',hct:'Hematocrito',wbc:'Leucocitos',gcs:'Glasgow'};
       return done(total,'/ 71 puntos','Gravedad fisiológica estimada en UCI; mayor puntuación implica mayor gravedad',['Aplicar solo a adultos en UCI: seleccionar el peor valor fisiológico de las primeras 24 horas, documentar el peor valor de cada variable durante esa ventana.','No deducir mortalidad individual desde el puntaje aislado; la predicción calibrada depende de diagnóstico, cohorte y contexto.','La duplicación de los puntos de creatinina se aplica en insuficiencia renal aguda. Enfermedad crónica grave debe anteceder al ingreso.'],'Fisiología '+aps+' + edad '+agepoints+' + salud crónica '+chronicpoints+'. Desglose: '+Object.entries(score).map(([k,v])=>labels[k]+' '+v).join('; ')+'.');
     },
+
+    /* Electrolyte references: mathematical results only, never fluid or drug orders. */
+    nadeficit(o){
+      const f=fields(o,{weight:[20,250,'Peso'],na:[110,134.9,'Sodio actual'],target:[112,140,'Sodio objetivo cercano']});
+      if(f.errors.length)return {error:f.errors};
+      if(!['0.4','0.45','0.5','0.6'].includes(o.tbwfactor))return {error:['Selecciona explícitamente un factor de agua corporal total apropiado al contexto.']};
+      if(o.checked!=='yes')return {error:['Confirma valoración clínica, ausencia de síntomas neurológicos graves y que es solo un cálculo educativo.']};
+      const delta=f.o.target-f.o.na;
+      if(delta<=0||delta>6)return {error:['El objetivo debe superar al Na actual sin exceder un incremento teórico de 6 mmol/L. No indica velocidad ni tratamiento.']};
+      const tbw=f.o.weight*Number(o.tbwfactor),eq=tbw*delta;
+      return done(eq,'mmol teóricos','Diferencia teórica de contenido de sodio, NO una necesidad de infusión.',
+       ['En hiponatremia el problema suele involucrar exceso de agua: esta ecuación no predice cuánto Na administrar ni el ascenso real del Na sérico.',
+        'Si hay convulsiones, coma, confusión significativa u otra gravedad, priorizar protocolo de urgencia; no usar esta herramienta para decidir terapia.',
+        'La corrección excesiva causa lesión neurológica. Monitorizar Na seriado, pérdidas de agua y potasio; no usar como pauta de corrección.'],
+       'ACT estimada = '+tbw.toFixed(2)+' L. Diferencia = '+delta.toFixed(1)+' mmol/L. ACT × diferencia = '+eq.toFixed(1)+' mmol (aproximación no terapéutica).');
+    },
+    freewater(o){
+      const f=fields(o,{weight:[20,250,'Peso'],na:[145.1,190,'Sodio corregido/interpretado']});
+      if(f.errors.length)return {error:f.errors};
+      if(!['0.4','0.45','0.5','0.6'].includes(o.tbwfactor))return {error:['Selecciona un factor de agua corporal total de acuerdo con la situación clínica.']};
+      if(o.verified!=='yes')return {error:['Confirma hipernatremia, interpretación del Na y valoración del estado de volumen.']};
+      const tbw=f.o.weight*Number(o.tbwfactor);
+      const liters=tbw*(f.o.na/140-1);
+      return done(liters,'L estimados','Déficit aproximado de agua libre con objetivo matemático Na 140.',
+        ['NO es un volumen a administrar ni un plan de corrección: añadir pérdidas continuas, causas, balance, volemia y reevaluación.',
+         'La hipovolemia/choque requiere estabilización prioritaria y decisiones individualizadas de fluidos.',
+         'Las variaciones de Na pueden diferir sustancialmente de la fórmula; controlar Na y glucosa seriados según contexto.'],
+        'ACT = '+tbw.toFixed(2)+' L; déficit ≈ ACT × ('+f.o.na+'/140 − 1).');
+    },
+    correctedca(o){
+      const f=fields(o,{ca:[3,16,'Calcio total'],alb:[0.5,6,'Albúmina']});
+      if(f.errors.length)return {error:f.errors};
+      if(o.context!=='reviewed')return {error:['Confirma que comprendes que el calcio ajustado NO sustituye al calcio ionizado.']};
+      const estimate=f.o.ca+0.8*(4-f.o.alb);
+      return done(estimate,'mg/dL (aprox.)','Fórmula histórica de calcio total ajustado por albúmina — baja fiabilidad clínica.',
+        ['No representa calcio ionizado, ni debe emplearse para diagnosticar o tratar hipocalcemia/hipercalcemia.',
+         'En pacientes hospitalizados, enfermos críticos y enfermedad renal, las fórmulas ajustadas pueden clasificar erróneamente el estado del calcio: solicitar calcio ionizado si importa clínicamente.',
+         'Interpretar además pH, fosfato y condiciones preanalíticas.'],
+        'Calcio ajustado = Ca total '+f.o.ca+' + 0.8 × (4 − albúmina '+f.o.alb+'). No sustituye la medición de Ca ionizado.');
+    },
+    osmgap(o){
+      const f=fields(o,{measured:[200,450,'Osmolalidad medida'],na:[90,190,'Sodio'],gluc:[0,2000,'Glucosa'],bun:[0,300,'BUN']});
+      if(f.errors.length)return {error:f.errors};
+      if(!['absent','measured'].includes(o.ethanolMode))return {error:['Especifica si el etanol está descartado o se midió simultáneamente.']};
+      if(o.sameSample!=='yes')return {error:['Confirma muestras simultáneas y unidades de laboratorio verificadas.']};
+      let ethanol=0;
+      if(o.ethanolMode==='measured'){
+        const n=val(o.ethanol);
+        if(!valid(n,0,600))return {error:['Introduce etanol medido de 0 a 600 mg/dL.']};
+        ethanol=n;
+      }else if(o.ethanol!==undefined&&String(o.ethanol).trim()!=='')return {error:['No mezcles un valor de etanol con la opción “etanol descartado”.']};
+      const calculated=2*f.o.na+f.o.gluc/18+f.o.bun/2.8+ethanol/3.7;
+      const gap=f.o.measured-calculated;
+      return done(gap,'mOsm/kg aprox.','Brecha osmolal = osmolalidad medida − calculada.',
+       ['Un valor alto puede deberse a osmoles no medidos: evaluar alcoholes tóxicos si la historia clínica lo sugiere, sin retrasar atención urgente.',
+        'Una brecha normal NO descarta intoxicación por metanol o etilenglicol; depende del tiempo y del metabolismo.',
+        'El aporte del etanol (÷3.7) es una estimación publicada; distintas ecuaciones y métodos de laboratorio cambian el intervalo de referencia.'],
+       'Calculada = 2×Na + glucosa/18 + BUN/2.8'+(o.ethanolMode==='measured'?' + etanol/3.7':'')+' = '+calculated.toFixed(1)+'. Medida = '+f.o.measured+'; brecha = '+gap.toFixed(1)+'.');
+    },
+    potassiumreview(o){
+      const f=fields(o,{k:[1.5,8.5,'Potasio sérico']});
+      if(f.errors.length)return {error:f.errors};
+      if(!['yes','no','unknown'].includes(o.ecg))return {error:['Indica si se dispone de ECG y si hay alteraciones asociadas.']};
+      if(o.verified!=='yes')return {error:['Confirma potasio sérico reciente y unidades mmol/L.']};
+      const k=f.o.k;
+      const category=k<2.5?'Hipopotasemia grave':k<3?'Hipopotasemia moderada':k<3.5?'Hipopotasemia leve':k<=5?'Potasio dentro del intervalo habitual':k<6?'Hiperpotasemia': 'Hiperpotasemia potencialmente grave';
+      const urgent=k<2.5||k>=6||o.ecg==='yes';
+      return done(k,'mmol/L',category+(urgent?' · valoración urgente':''),[
+       'NO se puede deducir el déficit corporal total de potasio ni indicar una reposición segura desde la concentración sérica aislada.',
+       'Antes de corregir valorar ECG, función renal, diuresis, magnesio, equilibrio ácido-base, pérdidas y desplazamientos transcelulares.',
+       urgent?'Potasio extremo o cambios ECG: evaluación urgente presencial, monitorización y protocolo institucional.':'No calcular reposición automática ni ritmo de infusión; requiere prescripción individualizada.'
+      ],'Potasio sérico medido '+k+' mmol/L. Herramienta de evaluación, NO calculadora de dosis de KCl.');
+    },
+    bicarbdef(o){
+      const f=fields(o,{weight:[20,250,'Peso'],hco3:[3,20,'Bicarbonato'],target:[4,22,'Objetivo teórico'],ph:[6.8,7.35,'pH arterial']});
+      if(f.errors.length)return {error:f.errors};
+      if(!['0.3','0.5'].includes(o.factor))return {error:['Selecciona la fracción de distribución explícita.']};
+      if(o.confirm!=='yes')return {error:['Solo en acidosis metabólica primaria corroborada; se requiere valoración médica.']};
+      const delta=f.o.target-f.o.hco3;
+      if(delta<=0||delta>8)return {error:['El objetivo debe superar HCO₃⁻ actual en no más de 8 mmol/L para esta referencia matemática.']};
+      const theoretical=f.o.weight*Number(o.factor)*delta;
+      return done(theoretical,'mmol teóricos','Diferencia matemática de bicarbonato, NO indicación de administrar bicarbonato.',
+       ['La mayoría de acidosis metabólicas requieren tratar la causa; el beneficio de bicarbonato depende de pH, contexto, ventilación, sodio, potasio y función renal.',
+        'No utilizar para convertir en ampollas, bolos o infusión. La fracción de distribución es variable y la estimación puede ser inexacta.',
+        'Si existe acidemia grave, choque, hiperkalemia o falla renal, escalar y vigilar gasometría y electrólitos según protocolo.'],
+       'Peso '+f.o.weight+' kg × coeficiente '+o.factor+' × ΔHCO₃⁻ '+delta.toFixed(1)+' mmol/L = '+theoretical.toFixed(1)+' mmol teóricos (no pauta terapéutica).');
+    },
     anion(o){
       const f=fields(o,{na:[40,220,'Sodio'],cl:[20,200,'Cloro'],hco3:[1,70,'Bicarbonato']});
       if(f.errors.length)return {error:f.errors};
