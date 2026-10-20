@@ -139,6 +139,12 @@ for(const positive of ['neoplasm','liver','chf','cva','renal','psiConfusion','ta
  assert.ok(!/· clase I(?![IVX])/.test(r.interpretation),'Fine step-one disqualified by '+positive);
  count++;
 }
+// Even a step-one class I patient with a positive oxygen flag must not be
+// represented as automatically suitable for outpatient treatment.
+const hypox=e.calculate('psiport',{...testData.psiport,...noPORT,age:'45',sex:'male',oxygen:'yes'});
+assert.ok(/· clase I(?![IVX])/.test(hypox.interpretation));
+assert.ok(hypox.notes.some(x=>/hipoxemia/i.test(x)),'Low-risk label must not mask hypoxemia safety warning');
+count++;
 // Adult burn calculation at the ABA inclusion threshold; never output an infusion rate.
 for(const [scheme,expected] of [['parkland4',5600],['aba2',2800]]){
  const r=valid('parklandburn',{weight:'70',tbsa:'20',hours:'7.5',scheme},expected);
