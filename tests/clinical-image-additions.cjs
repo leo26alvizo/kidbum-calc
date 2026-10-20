@@ -131,12 +131,12 @@ for(const [age,sex,positive,expectedScore,expectedClass] of [
 // but cannot automatically disqualify a patient from class I.
 for(const positive of ['nursing','ph','bun','na','glucose','hct','oxygen','effusion']){
  const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:'45',sex:'male',[positive]:'yes'});
- assert.ok(r.interpretation.includes('clase I'),'Fine step-one class I preserved for '+positive);
+ assert.ok(/clase I(?![IVX])/.test(r.interpretation),'Fine step-one class I preserved for '+positive);
  count++;
 }
 for(const positive of ['neoplasm','liver','chf','cva','renal','psiConfusion','tachypnea','hypotension','temperature','pulse']){
  const r=e.calculate('psiport',{...testData.psiport,...noPORT,age:'45',sex:'male',[positive]:'yes'});
- assert.ok(!r.interpretation.includes('clase I'),'Fine step-one disqualified by '+positive);
+ assert.ok(!/clase I(?![IVX])/.test(r.interpretation),'Fine step-one disqualified by '+positive);
  count++;
 }
 // Adult burn calculation at the ABA inclusion threshold; never output an infusion rate.
