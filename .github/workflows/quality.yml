@@ -29,3 +29,5 @@ jobs:
         run: node tests/apache2.cjs
       - name: Renal and electrolyte calculations and safety
         run: node tests/electrolytes.cjs
+      - name: Adult urinary output and KDIGO threshold safety
+        run: node tests/urine-output-adult.cjs
