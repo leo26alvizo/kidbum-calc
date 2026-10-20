@@ -33,3 +33,5 @@ jobs:
         run: node tests/urine-output-adult.cjs
       - name: Reference image — seven new clinical calculators
         run: node tests/clinical-image-additions.cjs
+      - name: SNNOOP10 headache flags and offline safety
+        run: node tests/snnoop10.cjs
