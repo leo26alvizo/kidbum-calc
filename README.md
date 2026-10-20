@@ -2,9 +2,20 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.19**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.20**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Nefrología y electrólitos v0.10.20 — Seis referencias incorporadas
+
+Se añadieron seis tarjetas con datos de ejemplo reales de prueba (ficticios), cálculos locales y validación de unidades:
+- **Función renal**: déficit teórico de sodio (hiponatremia), déficit de agua libre (hipernatremia) y evaluación de potasio sérico sin dosificación automática de KCl.
+- **Química clínica**: calcio total ajustado por albúmina (fórmula histórica de baja fiabilidad), brecha osmolal sérica (requiere osmolalidad medida) y diferencia teórica de bicarbonato.
+- Ya disponibles, sin duplicar: CKD-EPI 2021, Cockcroft–Gault, FeNa, FeUrea, brecha aniónica, sodio corregido por glucosa y osmolalidad calculada.
+
+**Seguridad:** no se generan pautas, ritmos de infusión, soluciones, ampollas ni dosis de reposición. El potasio sérico no refleja un déficit corporal cuantificable. Los déficits de sodio/agua/bicarbonato son modelos con límites estrictos, sin equivalencia directa a tratamiento. Calcio ajustado no sustituye calcio ionizado. La brecha osmolal no descarta intoxicaciones si es normal. Revisar `docs/electrolytes-v0.10.20.md` para referencias y limitaciones.
+
+Prueba automática independiente `node tests/electrolytes.cjs` y auditoría integral de campos, junto con regresión de las 70 herramientas preexistentes.
 
 ## APACHE II v0.10.19 — Corrección de ejemplo ficticio y revisión de puntuación
 
@@ -21,7 +32,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 70 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
+**Total actual: 76 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
