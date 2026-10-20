@@ -80,7 +80,7 @@ valid('apgar',{appearance:'0',pulse:'0',grimace:'0',activity:'0',respiration:'0'
 valid('apgar',{appearance:'2',activity:'2'},10);
 invalid('apgar',{minute:'3'});
 invalid('apgar',{pulse:'10'});
-valid('devineibw',{},73,'Devine');
+valid('devineibw',{},73,'Peso teórico');
 valid('devineibw',{sex:'female'},68.5);
 invalid('devineibw',{age:'17'});
 invalid('devineibw',{height:'140'});
