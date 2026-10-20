@@ -1163,6 +1163,120 @@ html.dark .atlas-calc-heading .calc-title{
       if(f.o.age>65)t=v<2?'Menor de 2.0 (punto de corte adaptado >65 años)':'Igual o mayor de 2.0 (evaluación adicional en >65 años)';
       return done(v,'puntos',t,['Evaluado principalmente para estratificar fibrosis avanzada en enfermedad hepática esteatósica.','No usar en enfermedad aguda; en menores de 35 años tiene baja exactitud.','No sustituye elastografía ni valoración etiológica.'],'FIB-4 = (edad × AST) / (plaquetas × √ALT), plaquetas en 10⁹/L.');
     },
+
+    sofa1(o){
+      const keys=['resp','platelets','liver','cardio','gcs','renal'];
+      const points={},errors=[];
+      for(const key of keys){
+        const v=o[key];
+        if(!['0','1','2','3','4'].includes(v))errors.push('Selecciona un grado 0–4 documentado para '+key+'.');
+        else points[key]=Number(v);
+      }
+      if(o.reviewed!=='yes')errors.push('Confirma que se utilizaron las condiciones originales de SOFA, no las de SOFA-2.');
+      if(errors.length)return {error:errors};
+      const sum=keys.reduce((n,k)=>n+points[k],0);
+      return done(sum,'/ 24 puntos','SOFA clásico (1996) · disfunción orgánica, no diagnóstico aislado de sepsis.',
+       ['SOFA-1 difiere de SOFA-2 de 2025: NO intercambiar puntuaciones ni umbrales.',
+        'Para Sepsis-3 se requiere infección sospechada o documentada y cambio agudo de SOFA ≥2 respecto al estado basal; aquí no se presupone basal de cero.',
+        'Registrar peores valores documentados y soporte durante un mismo periodo de 24 h; soporte respiratorio y vasopresor tienen definiciones precisas. No sustituye valoración en UCI.'],
+       keys.map(k=>k+': '+points[k]).join(' + ')+' = '+sum+'. Grados seleccionados por personal clínico a partir de la tabla original.');
+    },
+    psiport(o){
+      const f=fields(o,{age:[18,120,'Edad']});
+      if(f.errors.length)return {error:f.errors};
+      if(!Number.isInteger(f.o.age))return {error:['Edad en años completos.']};
+      if(!['male','female'].includes(o.sex))return {error:['Selecciona la categoría de sexo requerida por la escala original.']};
+      if(o.diagnosis!=='yes')return {error:['Requiere neumonía adquirida en la comunidad previamente diagnosticada en adulto.']};
+      const keys=['nursing','neoplasm','liver','chf','cva','renal','confusion','tachypnea','hypotension','temperature','pulse','ph','bun','na','glucose','hct','oxygen','effusion'];
+      const weights={nursing:10,neoplasm:30,liver:20,chf:10,cva:10,renal:10,confusion:20,tachypnea:20,hypotension:20,temperature:15,pulse:10,ph:30,bun:20,na:20,glucose:10,hct:10,oxygen:10,effusion:10};
+      for(const key of keys)if(!['yes','no'].includes(o[key]))return {error:['Registra presencia o ausencia confirmada de '+key+'. No imputar normal si falta dato.']};
+      let score=Math.max(0,f.o.age-(o.sex==='female'?10:0));
+      const selected=keys.filter(k=>o[k]==='yes');
+      for(const key of selected)score+=weights[key];
+      const lowRisk=f.o.age<=50&&selected.length===0;
+      const cls=lowRisk?'I':score<=70?'II':score<=90?'III':score<=130?'IV':'V';
+      return done(score,'puntos PORT','PSI / PORT · clase '+cls+' (la clase I requiere criterios de bajo riesgo completos).',
+       ['Score para neumonía adquirida en la comunidad en ADULTOS, no confirma diagnóstico ni decide egreso/ingreso por sí solo.',
+        'No se asigna valor normal a exploraciones o pruebas desconocidas. Evaluar SpO₂, contexto social, comorbilidad, oxígeno, juicio clínico y descompensación.',
+        'La clase I utiliza filtro clínico de bajo riesgo; la puntuación numérica por sí sola no define la clase I.'],
+       'Puntos iniciales por edad y categoría: '+Math.max(0,f.o.age-(o.sex==='female'?10:0))+
+       '. Hallazgos positivos: '+(selected.length?selected.join(', '):'ninguno')+'. Puntuación '+score+', clase '+cls+'.');
+    },
+    parklandburn(o){
+      const f=fields(o,{age:[18,120,'Edad'],weight:[20,250,'Peso'],tbsa:[20,80,'Superficie corporal quemada'],hours:[0,24,'Horas transcurridas desde quemadura']});
+      if(f.errors.length)return {error:f.errors};
+      if(!Number.isInteger(f.o.age))return {error:['Edad adulta en años completos.']};
+      if(!['parkland4','aba2'].includes(o.scheme))return {error:['Selecciona explícitamente fórmula histórica o referencia ABA.']};
+      if(o.verified!=='yes')return {error:['Confirma porcentaje de quemadura de espesor parcial/profundo; no incluir eritema superficial.']};
+      const coefficient=o.scheme==='parkland4'?4:2;
+      const result=coefficient*f.o.weight*f.o.tbsa;
+      return done(result,'mL teóricos/24 h',o.scheme==='parkland4'?'Parkland clásica (4 mL/kg/%SCQ), fórmula histórica':'Referencia inicial ABA 2024 (2 mL/kg/%SCQ)',
+       ['NO es una orden de fluidos ni un ritmo de infusión. El tiempo se cuenta desde la QUEMADURA, no desde la llegada al hospital.',
+        'Parkland clásica reparte teóricamente 50% en primeras 8 h y 50% en 16 h siguientes; la guía ABA 2024 prefiere considerar inicio a 2 mL/kg/%SCQ para adultos con ≥20% SCQ.',
+        'Titulación y tratamiento dependen de perfusión, diuresis y protocolo de quemados; evitar sobrecarga de fluidos. Valorar lesión inhalatoria y centro de quemados.'],
+       coefficient+' mL × '+f.o.weight+' kg × '+f.o.tbsa+'% SCQ = '+result+' mL en 24 h (modelo). Tiempo desde lesión: '+f.o.hours+' h. No calcula infusión restante ni tasa automática.');
+    },
+    aldrete(o){
+      const names=['activity','breathing','circulation','consciousness','oxygen'];
+      for(const key of names)if(!['0','1','2'].includes(o[key]))return {error:['Completa el criterio '+key+' (0–2).']};
+      if(o.checked!=='yes')return {error:['Se necesita evaluación postanestésica presencial con presión basal y oxigenoterapia documentadas.']};
+      const points=names.map(k=>Number(o[k]));
+      const score=points.reduce((a,b)=>a+b,0);
+      return done(score,'/ 10 puntos','Aldrete modificado · seguimiento postanestésico, NO autorización automática de alta.',
+       ['La puntuación ≥9 se usa como referencia en algunos protocolos, pero no garantiza alta segura.',
+        'Revisar dolor, náuseas, sangrado, temperatura, complicaciones, situación basal y criterios institucionales.',
+        'La categoría de oxigenación 2 presupone SpO₂ >92% en aire ambiente; 1 requiere suplemento de oxígeno para mantener >90%.'],
+       names.map((k,i)=>k+': '+points[i]).join('; ')+'.');
+    },
+    apgar(o){
+      const names=['appearance','pulse','grimace','activity','respiration'];
+      for(const key of names)if(!['0','1','2'].includes(o[key]))return {error:['Completa '+key+' (0–2 puntos).']};
+      if(!['1','5','10','15','20'].includes(o.minute))return {error:['Registra minuto de vida (1, 5, 10, 15 o 20).']};
+      const vals=names.map(k=>Number(o[k])),total=vals.reduce((a,b)=>a+b,0);
+      const category=total>=7?'7–10 puntos':total>=4?'4–6 puntos':'0–3 puntos';
+      return done(total,'/ 10 puntos','Apgar a los '+o.minute+' minutos · '+category,
+       ['La reanimación neonatal debe comenzar cuando esté indicada: no esperar a obtener Apgar.',
+        'No confirma asfixia ni predice desenlace neurológico individual; la interpretación a 1 minuto difiere de la de 5 minutos.',
+        'Documentar maniobras de reanimación simultáneas; si a los 5 minutos es <7, repetir cada 5 minutos hasta los 20 minutos según protocolo.'],
+       names.map((k,i)=>k+': '+vals[i]).join('; ')+'.');
+    },
+    devineibw(o){
+      const f=fields(o,{age:[18,120,'Edad'],height:[152.4,220,'Talla']});
+      if(f.errors.length)return {error:f.errors};
+      if(!Number.isInteger(f.o.age))return {error:['Edad en años completos.']};
+      if(!['male','female'].includes(o.sex))return {error:['Selecciona el parámetro de sexo usado por la ecuación Devine.']};
+      const inches=f.o.height/2.54;
+      const base=o.sex==='male'?50:45.5;
+      const weight=base+2.3*(inches-60);
+      return done(weight,'kg · peso de referencia Devine','Peso teórico para adultos, NO objetivo de peso ni indicación de dosis.',
+       ['Devine no está validada como fórmula universal de peso ideal en pediatría; no aplicar a menores de 18 años.',
+        'La elección entre peso real, ideal, ajustado u otro para prescribir depende del fármaco, indicación y protocolo.',
+        'La fórmula usa categorías históricas de sexo como parámetro, no describe composición corporal individual.'],
+       base+' kg + 2.3 kg × (talla '+f.o.height+' cm / 2.54 − 60) = '+weight.toFixed(2)+' kg.');
+    },
+    pedmathdose(o){
+      const f=fields(o,{age:[12,215,'Edad en meses'],weight:[3,100,'Peso actual'],dose:[0.01,100,'Dosis de referencia'],maxDose:[0.01,5000,'Máximo por toma'],maxDay:[0.01,20000,'Máximo por día'],times:[1,6,'Administraciones por día']});
+      if(f.errors.length)return {error:f.errors};
+      if(!Number.isInteger(f.o.age)||!Number.isInteger(f.o.times))return {error:['Edad en meses y número diario de administraciones deben ser enteros.']};
+      if(!['actual','reference'].includes(o.basis))return {error:['Selecciona peso medido o referencia médica validada.']};
+      if(o.prescribed!=='yes'||o.units!=='mgkgdose')return {error:['Confirma prescripción clínica previa y que los límites corresponden a mg/kg/TOMA, mg/TOMA y mg/DÍA.']};
+      let weight=f.o.weight;
+      if(o.basis==='reference'){
+        const ref=val(o.referenceWeight);
+        if(!valid(ref,3,100))return {error:['Introduce el peso de referencia específicamente indicado para el medicamento. No existe fórmula universal pediátrica de peso ideal.']};
+        weight=ref;
+      }else if(o.referenceWeight!==undefined&&String(o.referenceWeight).trim()!==''){
+        return {error:['No incluyas peso de referencia si seleccionaste peso medido.']};
+      }
+      const perDose=weight*f.o.dose,perDay=perDose*f.o.times;
+      if(perDose>f.o.maxDose||perDay>f.o.maxDay)return {error:['La pauta matemática supera el límite por toma o por día documentado por el médico. No se reduce automáticamente.']};
+      return done(perDose,'mg teóricos/toma','Comprobación aritmética de una pauta ya indicada · no es prescripción.',
+       ['Requiere monografía vigente específica para fármaco, indicación, edad, vía, función renal/hepática, alergias e interacciones. No elige pauta ni recomienda medicamentos.',
+        'Nunca utilizar un peso ideal pediátrico genérico; cuando se indica peso de referencia, debe documentarse por el médico para ESE medicamento.',
+        'NO convertir a mL, gotas, ampollas, frecuencia o redondeos administrables sin concentración exacta y validación farmacéutica.'],
+       'Peso de cálculo '+weight+' kg × '+f.o.dose+' mg/kg/TOMA = '+perDose.toFixed(3)+' mg/toma. '+
+       f.o.times+' tomas/día → '+perDay.toFixed(3)+' mg/día teóricos, límites declarados '+f.o.maxDose+' mg/toma y '+f.o.maxDay+' mg/día.');
+    },
     qsofa(o){
       const f=fields(o,{sbp:[20,300,'Presión sistólica'],rr:[1,100,'Frecuencia respiratoria']});
       if(f.errors.length)return {error:f.errors};
