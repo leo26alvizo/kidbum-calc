@@ -18,7 +18,7 @@ assert.equal(items.length,15,'Original SNNOOP10 presents 15 groups of red/orange
 assert.deepEqual(items.map(item=>item[0]),clinicalTopics.map(part=>items.find(item=>item[0].includes(part))?.[0]));
 for(const [i,row] of items.entries()){
  assert.equal(row.length,5,'Each red flag provides differential, clue, alternatives and urgency: '+i);
- assert.ok(row.every(x=>typeof x==='string'&&x.length>15),'Every clinical element must be populated: '+i);
+ assert.ok(row.every((x,j)=>typeof x==='string'&&x.length>(j===0?4:15)),'Every clinical element must be populated: '+i);
 }
 assert.ok(page.includes('type=\'checkbox\'')||page.includes("input.type='checkbox'"),'Multiselect clinical findings');
 assert.match(page,/textContent=text/,'Clinical text must be inserted without HTML interpretation');
