@@ -2,9 +2,25 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.21**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.22**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Nuevas referencias clínicas v0.10.22 — Imagen de cuidados críticos, reanimación y pediatría
+
+Se incorporaron **7 herramientas nuevas** sin duplicar las ya disponibles, conservando 12 categorías y todas las 77 herramientas anteriores:
+
+1. **SOFA clásico (1996)** — Urgencias y Terapia Intensiva, 6 componentes 0–4, total 0–24; diferente de SOFA-2 (2025). Puntuaciones seleccionadas a partir de la tabla original por personal clínico.
+2. **PSI / PORT para neumonía adquirida en comunidad** — Escalas clínicas: adultos, evaluación explícita de antecedentes, hallazgos físicos y datos de laboratorio, clases I–V; no recomienda alta automática.
+3. **Parkland clásica** — Urgencias y Terapia Intensiva: muestra fórmula histórica 4 mL/kg/%SCQ frente al modelo inicial 2 mL/kg/%SCQ de la guía ABA 2024, solo para ≥20% SCQ adultos. No indica litros a infundir ni ritmos.
+4. **Aldrete modificado** — Escalas clínicas: cinco dominios de 0–2, total 0–10. No autoriza egreso postanestésico.
+5. **Apgar** — Pediatría: cinco dominios de 0–2 con minuto específico. No debe demorar maniobras de reanimación.
+6. **Devine, peso de referencia en adultos** — Antropometría: no aplicar a niños ni utilizar automáticamente como peso de dosificación.
+7. **Verificador matemático de pauta pediátrica** — Pediatría: el médico proporciona la dosis por toma, máximos por toma y por día y, si corresponde, un peso de referencia documentado para ESE fármaco. No existe peso ideal pediátrico universal; no se genera dosis farmacológica prescrita ni conversión a mL.
+
+**Ya existían y no se duplicaron**: APACHE II, qSOFA, CURB-65, IMC, BSA, mantenimiento pediátrico Holliday–Segar y 4–2–1. El PSI y SOFA clásico sí son independientes.
+
+Pruebas: `node tests/clinical-image-additions.cjs`; sin afectar auditoría, farmacología, nefrología ni caché PWA. Fuentes y límites están en `docs/clinical-image-v0.10.22.md`.
 
 ## Función renal v0.10.21 — Gasto urinario en adultos
 
@@ -45,7 +61,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 77 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
+**Total actual: 84 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
