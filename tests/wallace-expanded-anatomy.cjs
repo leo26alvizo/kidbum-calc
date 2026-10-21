@@ -8,5 +8,5 @@ assert.match(s,/button\.style\.left=\(posterior\?\(x-50\)\*2:x\*2\)/);
 assert.match(s,/button\.style\.setProperty\('--spot-w',w\*2\+'%'\)/);
 assert.match(s,/function selectView\(view\)/);assert.match(s,/setupHotspots\(\);selectView\('front'\)/);
 assert.match(s,/addEventListener\('error'/);assert.match(s,/aria-pressed/);
-assert.match(sw,/large-anatomy/);
+assert.match(sw,/large-anatomy/);assert.match(s,/id="hd-image"/);assert.match(s,/URL\.createObjectURL\(file\)/);assert.match(s,/Math\.abs\(probe\.naturalWidth\/probe\.naturalHeight-4\/3\)/);assert.match(s,/Solo en esta sesi[oó]n/);
 console.log('Large anterior/posterior anatomical views and remapped hotspots: PASS');
