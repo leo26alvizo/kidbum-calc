@@ -2104,7 +2104,9 @@ function renderAbout(){main.innerHTML=`<div class="info-layout"><div class="eyeb
     registration.update(),
     new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),6500))
    ]);
-   toast('Comprobación realizada. Si hay actualización, cierra y reabre KidBum.');
+   toast('Comprobación terminada. Actualizando pantalla…');
+   /* Explicit user action: reload only after the update check, never during clinical calculation. */
+   window.location.reload();
   }catch(err){
    toast('No se pudo comprobar la versión. Puedes seguir usando la copia guardada.');
   }finally{
