@@ -37,3 +37,5 @@ jobs:
         run: node tests/snnoop10.cjs
       - name: Clinical documentation editor and local PDF safety
         run: node tests/documentacion.cjs
+      - name: Pediatric history eighteen sections and local PDF
+        run: node tests/historia-pediatria.cjs
