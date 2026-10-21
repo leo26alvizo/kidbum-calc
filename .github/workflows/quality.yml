@@ -53,3 +53,5 @@ jobs:
         run: node tests/clinical-premium-ui.cjs
       - name: Adult Wallace rule of nines
         run: node tests/wallace-adults.cjs
+      - name: Wallace anatomical image hotspots
+        run: node tests/wallace-hotspots.cjs
