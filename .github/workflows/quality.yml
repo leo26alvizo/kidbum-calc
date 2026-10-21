@@ -39,3 +39,5 @@ jobs:
         run: node tests/documentacion.cjs
       - name: Pediatric history eighteen sections and local PDF
         run: node tests/historia-pediatria.cjs
+      - name: Documentation theme inheritance and pediatric selectors
+        run: node tests/docs-theme-selectors.cjs
