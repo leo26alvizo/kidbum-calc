@@ -35,3 +35,5 @@ jobs:
         run: node tests/clinical-image-additions.cjs
       - name: SNNOOP10 headache flags and offline safety
         run: node tests/snnoop10.cjs
+      - name: Clinical documentation editor and local PDF safety
+        run: node tests/documentacion.cjs
