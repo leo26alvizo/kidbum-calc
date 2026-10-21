@@ -57,3 +57,5 @@ jobs:
         run: node tests/wallace-hotspots.cjs
       - name: Wallace anatomy image file integrity
         run: node tests/wallace-image-integrity.cjs
+      - name: Wallace enlarged anatomical views
+        run: node tests/wallace-expanded-anatomy.cjs
