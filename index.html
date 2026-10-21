@@ -846,6 +846,7 @@ html.dark .atlas-calc-heading .calc-title{
     <button type="button" data-mobile-nav="home"><span>▦</span>Explorar</button>
     <button type="button" data-mobile-nav="guard"><span>✚</span>Guardia</button>
     <button type="button" data-mobile-nav="favorite"><span>☆</span>Favoritos</button>
+    <button type="button" data-mobile-nav="docs"><span>▤</span>Historias</button>
     <button type="button" data-mobile-nav="about"><span>ⓘ</span>Acerca de</button>
   </nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
@@ -1746,9 +1747,9 @@ function storePrefs(){try{localStorage.setItem('kidbum-favs',JSON.stringify(fave
 function el(q){return document.querySelector(q)}
 function enc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3000);}
-function go(page,what=''){if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
+function go(page,what=''){if(page==='docs'){window.location.assign('./documentacion.html');return;}if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
 function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
-function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav||b.dataset.mobileNav));document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
+function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['docs','▤','Documentación clínica'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav||b.dataset.mobileNav));document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
 function render(){renderNav();el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':'Inicio';if(screen==='guard'){renderGuard();return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
 
 /* Acceso rápido exclusivo, no duplica calculadoras ni mantiene fichas de pacientes. */
