@@ -49,3 +49,5 @@ jobs:
         run: node tests/mobile-home-breadcrumb.cjs
       - name: PWA refresh and home navigation
         run: node tests/pwa-refresh-navigation.cjs
+      - name: Clinical workspace premium UI safety
+        run: node tests/clinical-premium-ui.cjs

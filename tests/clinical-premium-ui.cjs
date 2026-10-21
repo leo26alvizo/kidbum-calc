@@ -1,0 +1,13 @@
+'use strict';const fs=require('node:fs'),assert=require('node:assert/strict');
+const main=fs.readFileSync('documentacion.html','utf8'),ped=fs.readFileSync('historia-pediatria.html','utf8'),sw=fs.readFileSync('sw.js','utf8');
+for(const phrase of ['kb-hero','kb-dashboard','kb-service-symbol','kb-service-meta','kb-topline','kb-side','SERVICES','function renderServices','window.print()','[PENDIENTE]'])assert.ok(main.includes(phrase),'Missing main item '+phrase);
+for(const phrase of ['pediatric-hero','TEMPLATE','clinical-subgroup','window.print()','[PENDIENTE]'])assert.ok(ped.includes(phrase),'Missing pediatric item '+phrase);
+assert.match(main,/localStorage\.getItem\('kidbum-theme'\)/);
+assert.match(ped,/localStorage\.getItem\('kidbum-theme'\)/);
+assert.match(main,/@media print/);assert.match(ped,/@media print/);
+assert.match(sw,/clinical-premium-ui/);
+const m=ped.match(/const TEMPLATE=(\[[\s\S]*?\]);\s*let step=/);assert.ok(m);
+const sections=JSON.parse(m[1]);assert.equal(sections.length,18);assert.equal(sections.reduce((n,s)=>n+s.fields.length,0),277);
+assert.match(main,/name==='Pediatría'/);assert.match(main,/historia-pediatria\.html/);
+assert.ok(!/\bfetch\(|\bXMLHttpRequest\b|indexedDB/.test(main+ped),'No added clinical data transmission or persistence');
+console.log('Premium clinical workspace PASS: preserved 18 sections, 277 fields, theme, privacy, routing and print PDF');
