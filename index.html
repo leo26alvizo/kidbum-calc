@@ -1796,6 +1796,7 @@ function renderHome(full){
 
  el('#calc-list').innerHTML=cards||`<div class="empty-state">${screen==='favorite'?'Todavía no tienes favoritas. Marca ☆ en cualquier calculadora.':'No encontramos coincidencias. Prueba otro término.'}</div>`;
  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderHome(false);});
+ document.querySelectorAll('[data-wallace-open]').forEach(c=>{const open=()=>window.location.assign('./wallace-adultos.html');c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});
  document.querySelectorAll('[data-pharma-open]').forEach(c=>{c.onclick=()=>go('pharma');c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go('pharma');}};});
  document.querySelectorAll('[data-open]').forEach(c=>{c.onclick=e=>{if(e.target.closest('[data-star]'))return;go('calc',c.dataset.open);};c.onkeydown=e=>{if(e.key==='Enter'&&e.target===c)go('calc',c.dataset.open);};});
  document.querySelectorAll('[data-star]').forEach(b=>b.onclick=e=>{e.stopPropagation();favorite(b.dataset.star);});
