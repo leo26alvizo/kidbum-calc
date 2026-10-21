@@ -43,3 +43,5 @@ jobs:
         run: node tests/docs-theme-selectors.cjs
       - name: Pediatric mobile collapsible groups
         run: node tests/pediatric-mobile-groups.cjs
+      - name: Oculomotor simulator navigation
+        run: node tests/ocular-simulator-link.cjs
