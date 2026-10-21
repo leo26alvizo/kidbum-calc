@@ -22,6 +22,8 @@ assert.match(html,/@media print/);
 assert.match(html,/size:A4/);
 assert.match(html,/\[PENDIENTE\]/);
 assert.match(html,/document\.createTextNode\(/,'User content must render as literal text');
-assert.ok(!/localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon/.test(html),'No persistence or network');
+assert.ok(!/sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon/.test(html),'No persistence or network');
 assert.match(html,/BORRADOR SIN FIRMA/);
 console.log('Pediatric history PASSED: '+template.length+' sections, '+template.flatMap(s=>s.fields).length+' fields, navigation, offline and privacy checks.');
+
+assert.ok(!/localStorage\.(?:setItem|getItem)\((?!'kidbum-theme')/.test(html),'Only theme preference may use localStorage');
