@@ -1,0 +1,12 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs');const s=fs.readFileSync('wallace-adultos.html','utf8');const sw=fs.readFileSync('sw.js','utf8');
+assert.match(s,/id="show-front"/);assert.match(s,/id="show-back"/);assert.match(s,/id="show-both"/);
+assert.match(s,/data-anatomy-view="front"/);assert.match(s,/data-anatomy-view="back"/);
+assert.match(s,/aspect-ratio:2\/3/);assert.match(s,/\.anatomy-img\{[^}]*width:200%/);
+assert.match(s,/\.anatomy-img\.posterior\{left:-100%\}/);
+assert.match(s,/button\.style\.left=\(posterior\?\(x-50\)\*2:x\*2\)/);
+assert.match(s,/button\.style\.setProperty\('--spot-w',w\*2\+'%'\)/);
+assert.match(s,/function selectView\(view\)/);assert.match(s,/setupHotspots\(\);selectView\('front'\)/);
+assert.match(s,/addEventListener\('error'/);assert.match(s,/aria-pressed/);
+assert.match(sw,/large-anatomy/);
+console.log('Large anterior/posterior anatomical views and remapped hotspots: PASS');
