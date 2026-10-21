@@ -9,7 +9,7 @@ const ASSETS=['./','./index.html','./snnoop10.html','./documentacion.html','./hi
    page (index.html has the same contents but costs another ~180 KB per update).
    Lazy load illustrations and reference material as requested. */
 const CORE_ASSETS=['./index.html','./manifest.webmanifest','./icon.svg',
- './kidbum-icon-192-v081.png','./assets/startup-bundle.js',
+ './kidbum-icon-192-v081.png','./assets/wallace-adultos.webp','./assets/startup-bundle.js',
  './assets/medical-atlas.js','./assets/analytics.js','./assets/pediatric-pharma.js'];
 const SHELL_URL=new URL('./index.html',self.registration.scope).href;
 const NETWORK_DEADLINE_MS=6500;
