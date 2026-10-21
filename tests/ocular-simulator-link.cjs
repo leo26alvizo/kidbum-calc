@@ -1,0 +1,12 @@
+'use strict';
+const fs=require('fs'),assert=require('assert');
+const html=fs.readFileSync('index.html','utf8'), sw=fs.readFileSync('sw.js','utf8');
+const sn=html.indexOf('SNNOOP10: banderas rojas de cefalea');
+const sim=html.indexOf('Simulador de pares craneales oculomotores');
+assert.ok(sn>0&&sim>sn&&sim-sn<600,'Simulator link appears directly under SNNOOP10');
+const before=html.slice(sim-260,sim+80);
+assert.ok(before.includes('https://nerviosoculares.docramiro.workers.dev/'),'Exact external URL present');
+assert.ok(before.includes('rel="noopener noreferrer"'),'External link protected');
+assert.ok(before.includes('target="_blank"'),'Opens in separate tab');
+assert.ok(sw.includes('-ocular-link'),'PWA cache invalidated');
+console.log('Simulator shortcut and PWA cache: PASS');
