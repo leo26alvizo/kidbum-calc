@@ -47,3 +47,5 @@ jobs:
         run: node tests/ocular-simulator-link.cjs
       - name: Mobile Inicio breadcrumb navigation
         run: node tests/mobile-home-breadcrumb.cjs
+      - name: PWA refresh and home navigation
+        run: node tests/pwa-refresh-navigation.cjs
