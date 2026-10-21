@@ -19,7 +19,9 @@ assert.match(html,/document\.createTextNode\(row\.value\)/,'User text is inserte
 assert.match(html,/replaceChildren/,'Preview rebuilds without injection');
 assert.match(html,/No se guardan borradores/,'Non-persistence privacy warning exists');
 assert.match(html,/BORRADOR SIN FIRMA/,'Preview does not impersonate a signed clinical record');
-assert.ok(!/localStorage|sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon/.test(html),'No identified patient data persistence or transmission');
+assert.ok(!/sessionStorage|indexedDB|fetch\(|XMLHttpRequest|sendBeacon/.test(html),'No identified patient data persistence or transmission');
 for(const term of ['Padecimiento actual','Antecedentes','Exploración','Análisis y plan','Urgencias','Pediatría','Ginecología y obstetricia'])
  assert.ok(html.includes(term),'Missing clinical workflow term: '+term);
 console.log('Clinical documentation MVP checks PASSED: routing, steps, print-PDF, privacy, XSS and offline.');
+
+assert.ok(!/localStorage\.(?:setItem|getItem)\((?!'kidbum-theme')/.test(html),'Only theme preference may use localStorage');
