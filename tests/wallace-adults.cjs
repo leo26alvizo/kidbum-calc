@@ -3,5 +3,5 @@ const match=h.match(/const REGIONS=(\[[\s\S]*?\]);\s*const selected=/);assert.ok
 assert.equal(regions.filter(r=>r.pct===4.5).length,6);assert.equal(regions.filter(r=>r.pct===9).length,8);assert.equal(regions.find(r=>r.id==='perineum').pct,1);
 assert.match(h,/aria-pressed/);assert.match(h,/navigator\.clipboard\.writeText/);assert.match(h,/function snapshot/);assert.match(h,/espesor parcial o total/i);assert.match(h,/superficiales \(primer grado\)/i);
 assert.match(index,/data-wallace-open/);assert.match(index,/location\.assign\('\.\/wallace-adultos\.html'\)/);assert.match(index,/category==='Urgencias y Terapia Intensiva'/);
-assert.match(sw,/'\.\/wallace-adultos\.html'/);assert.match(sw,/'\.\/assets\/wallace-adultos\.webp'/);assert.match(sw,/clinical-premium-ui-wallace9/);assert.match(h,/src="\.\/assets\/wallace-adultos\.webp"/);assert.match(h,/kidbum-theme/);
+assert.match(sw,/'\.\/wallace-adultos\.html'/);assert.match(sw,/'\.\/assets\/wallace-adultos\.webp'/);assert.match(sw,/clinical-premium-ui-wallace9/);assert.match(h,/src="\.\/assets\/wallace-adultos\.webp(?:\?[^"]*)?"/);assert.match(h,/kidbum-theme/);
 assert.ok(!/\bfetch\(|XMLHttpRequest|indexedDB/.test(h),'No patient data transmissions');console.log('Adult Wallace PASS: 15 segments, 100% anatomy, copy, offline photo, Urgencias card and safety notes');
