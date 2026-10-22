@@ -63,3 +63,5 @@ jobs:
         run: node tests/wallace-original-hd.cjs
       - name: Wallace card image and clean calculator
         run: node tests/wallace-cover-clean.cjs
+      - name: Cardiopulmonary score regression tests
+        run: node tests/cardioembolia-scores.cjs
