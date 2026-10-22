@@ -65,3 +65,5 @@ jobs:
         run: node tests/wallace-cover-clean.cjs
       - name: Cardiopulmonary score regression tests
         run: node tests/cardioembolia-scores.cjs
+      - name: Dynamic calculator catalog counts
+        run: node tests/catalog-counts.cjs
