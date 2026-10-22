@@ -30,3 +30,7 @@ assert.match(index,/href="\.\/snnoop10\.html"/,'Module discoverable in home libr
 assert.match(sw,/'\.\/snnoop10\.html'/,'Precache the module for offline use');
 assert.match(sw,/20261020-snnoop10/,'Rotate cache when adding new HTML');
 console.log('SNNOOP10 checks PASSED: 15 independent flags, descriptions, multi-selection, bibliographic reference and offline cache.');
+
+// The approved anatomical cover must be present before deployment.
+assert.ok(fs.existsSync('assets/snnoop10-portada.jpg'),'Falta la fotografía original assets/snnoop10-portada.jpg; no publicar portada vacía.');
+assert.match(page,/url\('\.\/assets\/snnoop10-portada\.jpg'\)/);
