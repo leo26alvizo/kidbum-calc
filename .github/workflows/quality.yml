@@ -61,3 +61,5 @@ jobs:
         run: node tests/wallace-expanded-anatomy.cjs
       - name: Wallace original image default and fallback
         run: node tests/wallace-original-hd.cjs
+      - name: Wallace card image and clean calculator
+        run: node tests/wallace-cover-clean.cjs
