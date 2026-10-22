@@ -69,3 +69,5 @@ jobs:
         run: node tests/catalog-counts.cjs
       - name: Cardio scale card artwork
         run: node tests/cardio-card-images.cjs
+      - name: Card imagery and SNNOOP10 theme regressions
+        run: node tests/cardio-images-snnoop-theme.cjs
