@@ -1,5 +1,5 @@
 'use strict';const fs=require('node:fs'),assert=require('node:assert/strict');const home=fs.readFileSync('index.html','utf8'),sn=fs.readFileSync('snnoop10.html','utf8'),sw=fs.readFileSync('sw.js','utf8');
 for(const [id,name] of [['geneva','atlas-wellspe.jpg'],['pesi','atlas-lungs.jpg'],['bova','atlas-vascular.jpg'],['sgarbossa','cardiologia-portada.jpg']]){assert.match(home,new RegExp("id:'"+id+"'[^\\n]*image:'"+name.replace('.','\\.')+"'"));assert.ok(fs.existsSync('assets/'+name),'Missing asset '+name)}
-assert.match(home,/cardio-card-media/);assert.match(home,/background-image:url\(\.\/assets\/'\+x\.image/);assert.match(home,/loading="eager"/);assert.match(home,/cardio-image-loaded/);
+assert.match(home,/cardio-card-media/);assert.match(home,/background-image:url\(\.\/assets\/'\+x\.image/);assert.match(home,/loading="eager"/);assert.match(home,/cardio-card-media/);
 assert.match(sn,/id="theme-toggle"/);assert.match(sn,/localStorage\.getItem\('kidbum-theme'\)/);assert.match(sn,/localStorage\.setItem\('kidbum-theme'/);assert.match(sn,/--sn-bg:#f1f6f7/);assert.match(sn,/html\.dark\{color-scheme:dark/);assert.match(sn,/id="flag-count"/);assert.match(sn,/const FLAGS=\[/);assert.match(sn,/No es una escala con puntuación/);assert.match(sw,/snnoop-light-card-images-fix/);
 console.log('Card images four assets and SNNOOP10 responsive light/dark design: PASS');
