@@ -41,7 +41,7 @@ const elements={};
 const cardButton={dataset:{},onclick:null,onkeydown:null};
 const main={innerHTML:''};
 const context={
- defs,pediatricPharma:catalog,main,screen:'home',category:'Pediatría',search:'',faves:[],
+ defs,pediatricPharma:catalog,calculatorCount:(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+(cat==='Todas'||cat==='Urgencias y Terapia Intensiva'?5:0),main,screen:'home',category:'Pediatría',search:'',faves:[],
  atlas:{img:()=>'<img alt="">',anatomy:{},categoryMap:{}},
  categories:['Todas','Pediatría'],
  enc:s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),
