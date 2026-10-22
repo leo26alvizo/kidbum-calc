@@ -67,3 +67,5 @@ jobs:
         run: node tests/cardioembolia-scores.cjs
       - name: Dynamic calculator catalog counts
         run: node tests/catalog-counts.cjs
+      - name: Cardio scale card artwork
+        run: node tests/cardio-card-images.cjs
