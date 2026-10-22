@@ -1,0 +1,10 @@
+'use strict';const fs=require('node:fs'),assert=require('node:assert/strict');const s=fs.readFileSync('wallace-adultos.html','utf8');assert.equal((s.match(/src="\.\/assets\/wallace-adultos-original-HD\.png/g)||[]).length,2);assert.match(s,/function revertToBackup\(\)/);assert.match(s,/BACKUP_SOURCE/);assert.match(s,/Imagen original HD todavía no instalada/);assert.match(s,/document\.querySelectorAll\('\.anatomy-img'\)/);console.log('HD prioritized with safe low-resolution fallback; PNG asset must be uploaded before HD can be confirmed.');
+const crypto=require('node:crypto'),path=require('node:path');
+const original=path.resolve('assets/wallace-adultos-original-HD.png');
+assert.ok(fs.existsSync(original),'Missing original HD PNG. Upload the exact source image before merging.');
+const bytes=fs.readFileSync(original);
+assert.equal(bytes.toString('hex',0,8),'89504e470d0a1a0a','Must be a real PNG');
+assert.equal(bytes.readUInt32BE(16),4344,'Preserve original width');
+assert.equal(bytes.readUInt32BE(20),3258,'Preserve original height');
+assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),'ed8cb8503ef44eccf40039ed6e13c3030af0bc692cea10c3fe16f09132ca73de','Original PNG must match the supplied source byte for byte');
+console.log('Original HD PNG: verified pixel dimensions and SHA-256; safe to publish.');
