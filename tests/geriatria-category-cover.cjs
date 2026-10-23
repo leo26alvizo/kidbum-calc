@@ -16,6 +16,9 @@ const catalog=source.slice(source.indexOf('const externalCalculators='),source.i
 const geriatricEntries=[...catalog.matchAll(/\{id:'([^']+)',category:'Geriatría',href:'\.\/expansion-20\.html#([^']+)',image:'([^']+)'\}/g)];
 assert.deepEqual(geriatricEntries.map(x=>x[1]),['at4','frailty'],'Geriatrics opens the 4AT and CFS tools');
 assert.equal(geriatricEntries.length,2);
+const newEntries=[...catalog.matchAll(/\\{id:'([^']+)',category:'Geriatría',href:'\\.\\/geriatria-escalas\\.html#([^']+)',image:'([^']+)'\\}/g)];
+assert.equal(newEntries.length,8,'Eight additional Geriatrics calculators are linked');
+assert.equal(newEntries.length+geriatricEntries.length,10,'Geriatrics features 10 calculators');
 assert.match(source,/data-featured="\$\{enc\(c\)\}"/);
 assert.match(source,/category=button\.dataset\.featured;renderHome\(false\)/,'Card opens filter by category');
 assert.equal(image.toString('ascii',0,4),'RIFF');
@@ -26,4 +29,4 @@ const gitHash=crypto.createHash('sha1').update(Buffer.from('blob '+image.length+
 assert.equal(gitHash,'63a8779a1319f5201801bf30d5cc6db3a0227990','Uploaded Geriatrics portrait must match original optimized bytes exactly');
 assert.match(cache,/'\.\/assets\/geriatria-portada\.webp'/,'Image available offline through the PWA');
 assert.match(cache,/geriatria-home-card-v1/,'Cache is refreshed');
-console.log('Geriatrics home card PASS: portrait integrity, 2 calculator dynamic link, category styling, offline');
+console.log('Geriatrics home card PASS: portrait integrity, 10 calculator dynamic links, category styling, offline');
