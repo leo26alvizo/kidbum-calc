@@ -601,7 +601,7 @@ const phase1=[
 ['Original 63 preserved',()=>assert.equal(legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length,63)],
 ['Three critical tools',()=>assert.equal(ctx.KidBumCritical.ids.length,3)],
 ['Urgencias category visible',()=>assert.ok(html.includes('Urgencias y Terapia Intensiva'))],
-['Guardia navigation',()=>assert.ok(html.includes('data-mobile-nav="guard"'))],
+['Mobile Inicio replaces Guardia navigation',()=>assert.ok(html.includes('data-mobile-nav="home"')&&!html.includes('data-mobile-nav="guard"'))],
 ['Guardia route',()=>assert.ok(html.includes("if(screen==='guard'){renderGuard();return;}"))],
 ['Guardia links',()=>assert.ok(html.includes('button.dataset.guardOpen'))],
 ['Original icon',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
@@ -686,7 +686,7 @@ const urgenciasOriginalTests=[
  ['Original JPG is available offline',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'"))],
  ['Other clinical feature photos preserved',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"')&&html.includes('src="./assets/neurologia-portada.jpg"'))],
  ['Previous 68 calculators preserved',()=>assert.equal(legacyCalculatorCount,68)],
- ['Modo Guardia retained',()=>assert.ok(html.includes('data-mobile-nav="guard"'))],
+ ['Modo Guardia retained in desktop sidebar',()=>assert.ok(html.includes("['guard','✚','Modo Guardia']")&&html.includes("if(screen==='guard'){renderGuard();return;}"))],
  ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...urgenciasOriginalTests);
