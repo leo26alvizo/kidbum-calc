@@ -79,3 +79,5 @@ jobs:
         run: node tests/expansion-20.cjs
       - name: Required fictitious clinical examples on all standalone tools
         run: node tests/fictitious-examples-26.cjs
+      - name: Geriatrics category portrait and navigation
+        run: node tests/geriatria-category-cover.cjs

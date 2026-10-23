@@ -737,6 +737,32 @@ html.dark .atlas-calc-heading .calc-title{
 }
 
 
+/* Geriatría: retrato original facilitado por el autor, sin degradados ni filtros.
+   Igual geometría y contador dinámico que las demás tarjetas de especialidad. */
+.atlas-category-grid .atlas-category-card.atlas-geriatria-feature{
+ background:#f4efe7;
+ border-color:#c8beb1;
+}
+.atlas-category-grid .atlas-geriatria-feature .atlas-category-copy{
+ background:#f4efe7!important;
+}
+.atlas-category-grid .atlas-geriatria-feature .atlas-category-visual{
+ background:#f4efe7;
+}
+.atlas-category-grid .atlas-geriatria-feature .atlas-geriatria-photo{
+ display:block;
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ object-position:50% 31%;
+ opacity:1!important;
+ filter:none!important;
+}
+.atlas-category-grid .atlas-geriatria-feature .atlas-category-go{
+ background:#e9d8c8;
+ color:#543d35;
+}
+
 /* Antropometría: Vitruvio original del autor, sin recortes ni filtros.
    El diseño ancho y la altura heredan la tarjeta destacada compartida. */
 .atlas-category-grid .atlas-antropometria-feature .atlas-category-visual {
@@ -1823,12 +1849,12 @@ function renderHome(full){
  const catBlock=el('#atlas-categories');
  catBlock.hidden=!featured;
  if(featured){
-  const ordered=['Pediatría','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Ginecología y obstetricia','Química clínica','Escalas clínicas','Función renal','Hemodinámica','Hepatología','Antropometría'];
+  const ordered=['Pediatría','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Geriatría','Ginecología y obstetricia','Química clínica','Escalas clínicas','Función renal','Hemodinámica','Hepatología','Antropometría'];
   catBlock.innerHTML=ordered.map(c=>{
     const count=calculatorCount(c);
     const artId=atlas.categoryMap[c]||'gcs';
-    return `<button type="button" class="atlas-category-card${c==='Pediatría'?' atlas-pediatria-feature':c==='Urgencias y Terapia Intensiva'?' atlas-gineco-feature atlas-urgencias-feature':c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature':c==='Cardiología'?' atlas-gineco-feature atlas-cardiologia-feature':c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature':c==='Ginecología y obstetricia'?' atlas-gineco-feature':c==='Química clínica'?' atlas-gineco-feature atlas-quimica-feature':c==='Escalas clínicas'?' atlas-gineco-feature atlas-escalas-feature':c==='Hemodinámica'?' atlas-gineco-feature atlas-hemodinamica-feature':c==='Función renal'?' atlas-gineco-feature atlas-renal-feature':c==='Hepatología'?' atlas-gineco-feature atlas-hepatologia-feature':c==='Antropometría'?' atlas-gineco-feature atlas-antropometria-feature':''}" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
-      <div class="atlas-category-visual">${c==='Urgencias y Terapia Intensiva'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-urgencias-photo" src="./assets/urgencias-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Neurología y Raquimedular'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-neuro-photo" src="./assets/neurologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Antropometría'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-antropometria-photo" src="./assets/antropometria-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Gastroenterología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo" src="./assets/gastroenterologia-portada.webp" alt="" loading="lazy" decoding="async" />':c==='Cardiología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-cardiologia-photo" src="./assets/cardiologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Pediatría'?'<img class="atlas-category-illustration atlas-pediatria-photo" src="./assets/pediatria-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Ginecología y obstetricia'?'<img class="atlas-category-illustration atlas-gineco-photo" src="./assets/ginecologia-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Química clínica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-quimica-photo" src="./assets/quimica-clinica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Escalas clínicas'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-escalas-photo" src="./assets/escalas-clinicas-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Hemodinámica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-hemodinamica-photo" src="./assets/hemodinamica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Función renal'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-renal-photo" src="./assets/funcion-renal-portada.webp" alt="" loading="lazy" decoding="async" />':atlas.img(artId,c==='Gastroenterología'?'atlas-category-illustration atlas-gineco-photo atlas-gastro-photo':(c==='Hepatología'||c==='Antropometría')?'atlas-category-illustration atlas-gineco-photo':'atlas-category-illustration',atlas.anatomy[artId]))))))}</div>
+    return `<button type="button" class="atlas-category-card${c==='Pediatría'?' atlas-pediatria-feature':c==='Urgencias y Terapia Intensiva'?' atlas-gineco-feature atlas-urgencias-feature':c==='Neurología y Raquimedular'?' atlas-gineco-feature atlas-neuro-feature':c==='Cardiología'?' atlas-gineco-feature atlas-cardiologia-feature':c==='Gastroenterología'?' atlas-gineco-feature atlas-gastro-feature':c==='Geriatría'?' atlas-gineco-feature atlas-geriatria-feature':c==='Ginecología y obstetricia'?' atlas-gineco-feature':c==='Química clínica'?' atlas-gineco-feature atlas-quimica-feature':c==='Escalas clínicas'?' atlas-gineco-feature atlas-escalas-feature':c==='Hemodinámica'?' atlas-gineco-feature atlas-hemodinamica-feature':c==='Función renal'?' atlas-gineco-feature atlas-renal-feature':c==='Hepatología'?' atlas-gineco-feature atlas-hepatologia-feature':c==='Antropometría'?' atlas-gineco-feature atlas-antropometria-feature':''}" data-featured="${enc(c)}" aria-label="Abrir ${enc(c)}: ${count} calculadoras">
+      <div class="atlas-category-visual">${c==='Urgencias y Terapia Intensiva'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-urgencias-photo" src="./assets/urgencias-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Neurología y Raquimedular'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-neuro-photo" src="./assets/neurologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Antropometría'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-antropometria-photo" src="./assets/antropometria-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Gastroenterología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-gastro-photo" src="./assets/gastroenterologia-portada.webp" alt="" loading="lazy" decoding="async" />':c==='Cardiología'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-cardiologia-photo" src="./assets/cardiologia-portada.jpg" alt="" loading="lazy" decoding="async" />':c==='Geriatría'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-geriatria-photo" src="./assets/geriatria-portada.webp" alt="Retrato artístico de un hombre mayor" loading="lazy" decoding="async" />':c==='Pediatría'?'<img class="atlas-category-illustration atlas-pediatria-photo" src="./assets/pediatria-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Ginecología y obstetricia'?'<img class="atlas-category-illustration atlas-gineco-photo" src="./assets/ginecologia-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Química clínica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-quimica-photo" src="./assets/quimica-clinica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Escalas clínicas'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-escalas-photo" src="./assets/escalas-clinicas-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Hemodinámica'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-hemodinamica-photo" src="./assets/hemodinamica-portada.webp" alt="" loading="lazy" decoding="async" />':(c==='Función renal'?'<img class="atlas-category-illustration atlas-gineco-photo atlas-renal-photo" src="./assets/funcion-renal-portada.webp" alt="" loading="lazy" decoding="async" />':atlas.img(artId,c==='Gastroenterología'?'atlas-category-illustration atlas-gineco-photo atlas-gastro-photo':(c==='Hepatología'||c==='Antropometría')?'atlas-category-illustration atlas-gineco-photo':'atlas-category-illustration',atlas.anatomy[artId]))))))}</div>
       <div class="atlas-category-copy"><span class="atlas-category-eyebrow">BIBLIOTECA MÉDICA · ${count} CALCULADORAS${c==='Pediatría'?' + FARMACOLOGÍA':''}</span><h3>${enc(c)}</h3><span class="atlas-category-go">Ver calculadoras <span aria-hidden="true">→</span></span></div>
     </button>`;
   }).join('');
