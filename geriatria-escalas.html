@@ -123,7 +123,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
  const analysis=KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>last?({
   title:active.title,result:last.display,interpretation:last.interpretation,details:last.detail,warning:active.warning
  }):null});
- function refreshAi(){analysis.update?.()}
+ function refreshAi(){analysis.setReady(Boolean(last))}
  const oldRender=render;
  render=function(){oldRender();refreshAi()};
  select(decodeURIComponent(location.hash.replace(/^#/,'')));
