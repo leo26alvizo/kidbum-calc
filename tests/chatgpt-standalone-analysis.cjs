@@ -19,7 +19,7 @@ for(const path of files){
  assert.match(html,/<div id="kb-ai-mount"><\/div>/,path+' mount');
  assert.match(html,/src="\.\/assets\/chatgpt-analysis\.js"/,path+' library');
  assert.match(html,/KidBumAnalysis\.attach\(/,path+' actual handler');
- assert.match(html,/\.setReady\(true\)/,path+' enables on result');
+ assert.match(html,/\.setReady\((?:true|total>0)\)/,path+' enables on result');
  assert.match(html,/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
  for(const match of html.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g)){if(match[1].trim())new vm.Script(match[1],{filename:path})}
 }
