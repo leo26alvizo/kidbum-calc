@@ -69,6 +69,7 @@ function evaluate(tool,input){
  const values={};
  for(const f of model.fields){
   const raw=input[f.key];
+  if(model.id==='tug'&&f.key==='seconds'&&String(input.status)==='unable'){values.seconds=null;continue;}
   if(raw===undefined||raw===null||String(raw).trim()==='')return null;
   if(f.type==='choice'){
    if(!f.options.some(([v])=>v===String(raw)))return null;
@@ -81,7 +82,7 @@ function evaluate(tool,input){
  }
  if(model.id==='tug'){
   if(values.status==='done'&&(!Number.isFinite(values.seconds)||values.seconds<=0))return null;
-  if(values.status==='unable'&&values.seconds!==0) return null;
+  if(values.status==='unable'&&values.seconds!==null) return null;
  }
  return model.calculate(values);
 }
