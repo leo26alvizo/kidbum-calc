@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html','expansion-20.html'];
+const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html','expansion-20.html','geriatria-escalas.html'];
 const shared=fs.readFileSync('assets/chatgpt-analysis.js','utf8');new vm.Script(shared);
 const window={};const doc={};
 vm.runInNewContext(shared,{window,document:doc});
@@ -19,14 +19,14 @@ for(const path of files){
  assert.match(html,/<div id="kb-ai-mount"><\/div>/,path+' mount');
  assert.match(html,/src="\.\/assets\/chatgpt-analysis\.js"/,path+' library');
  assert.match(html,/KidBumAnalysis\.attach\(/,path+' actual handler');
- assert.match(html,/\.setReady\((?:true|total>0)\)/,path+' enables on result');
- assert.match(html,/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
+ assert.match(html,path==='geriatria-escalas.html'?/\.setReady\(Boolean\(last\)\)/:/\.setReady\((?:true|total>0)\)/,path+' enables on result');
+ assert.match(html,path==='geriatria-escalas.html'?/\.setReady\(Boolean\(last\)\)/:/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
  for(const match of html.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g)){if(match[1].trim())new vm.Script(match[1],{filename:path})}
 }
 const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-selector"/);assert.match(index,/function buildAnalysisPrompt/);
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/chatgpt-analysis\.js'/);assert.match(sw,/chatgpt-external-restored/);
 const reg=index.slice(index.indexOf('const externalCalculators='),index.indexOf('const calculatorCount='));
 const paths=[...reg.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(paths.length,26,'twenty-six standalone calculators');
+assert.equal(paths.length,34,'thirty-four standalone calculators');
 for(const path of new Set(paths))assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
-console.log('Standalone ChatGPT analysis PASS: 26 calculators, 4 pages, privacy, completion gating, themes, offline.');
+console.log('Standalone ChatGPT analysis PASS: 34 calculators, 5 pages, privacy, completion gating, themes, offline.');

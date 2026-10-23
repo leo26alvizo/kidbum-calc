@@ -2,9 +2,20 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.22**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.23**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Geriatría v0.10.23 — ocho nuevas herramientas para valoración geriátrica integral
+
+La categoría de Geriatría ahora incluye **10 herramientas**, conservando **4AT** (delirium) y **Clinical Frailty Scale** (CFS, interpretación mediante guía oficial) y agregando:
+
+- **Katz** (0–6), **Barthel clásico** (0–100) y **Lawton-Brody** (0–8, 8 tareas independientemente del sexo) para ABVD/AIVD.
+- **FRAIL** (0–5) para fragilidad y **SARC-F** (0–10, tamiz positivo ≥4) para riesgo de sarcopenia.
+- **MNA®-SF** (0–14) como sumador de las puntuaciones A–F obtenidas con la hoja oficial autorizada; no reproduce el instrumento ni concede licencia.
+- **Timed Up and Go** (3 metros; ≥12 s como criterio orientativo de CDC STEADI; permite registrar prueba no completada) y **SPPB** (0–12, sumador de dominios evaluados mediante el protocolo NIA).
+
+Todas las pruebas requieren datos documentados, incluyen ejemplos ficticios, referencias, advertencias y cálculo local. No emiten diagnósticos ni órdenes clínicas y se precargan para uso sin conexión. Pruebas: `node tests/geriatria-scales.cjs` y `node tests/offline-110.cjs`.
 
 ## Nuevas referencias clínicas v0.10.22 — Imagen de cuidados críticos, reanimación y pediatría
 
@@ -61,7 +72,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 84 calculadoras en 12 categorías (incluye ambos modos APACHE II).**
+**Total actual: 118 calculadoras y herramientas en 13 categorías: 84 integradas y 34 independientes.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico

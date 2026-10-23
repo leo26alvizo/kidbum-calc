@@ -25,7 +25,7 @@ jobs:
         run: node tests/pediatric-drug-doses.cjs
       - name: Mobile data and offline startup
         run: node tests/pwa-cellular.cjs
-      - name: First-launch airplane mode for all 110 calculators
+      - name: First-launch airplane mode for all 118 calculators
         run: node tests/offline-110.cjs
       - name: APACHE II score and example audit
         run: node tests/apache2.cjs
@@ -83,3 +83,5 @@ jobs:
         run: node tests/fictitious-examples-26.cjs
       - name: Geriatrics category portrait and navigation
         run: node tests/geriatria-category-cover.cjs
+      - name: Geriatrics functional, nutrition and frailty scales
+        run: node tests/geriatria-scales.cjs
