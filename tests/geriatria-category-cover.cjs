@@ -16,7 +16,7 @@ const catalog=source.slice(source.indexOf('const externalCalculators='),source.i
 const geriatricEntries=[...catalog.matchAll(/\{id:'([^']+)',category:'Geriatría',href:'\.\/expansion-20\.html#([^']+)',image:'([^']+)'\}/g)];
 assert.deepEqual(geriatricEntries.map(x=>x[1]),['at4','frailty'],'Geriatrics opens the 4AT and CFS tools');
 assert.equal(geriatricEntries.length,2);
-const newEntries=[...catalog.matchAll(/\\{id:'([^']+)',category:'Geriatría',href:'\\.\\/geriatria-escalas\\.html#([^']+)',image:'([^']+)'\\}/g)];
+const newEntries=[...catalog.matchAll(/\{id:'([^']+)',category:'Geriatría',href:'\.\/geriatria-escalas\.html#([^']+)',image:'([^']+)'\}/g)];
 assert.equal(newEntries.length,8,'Eight additional Geriatrics calculators are linked');
 assert.equal(newEntries.length+geriatricEntries.length,10,'Geriatrics features 10 calculators');
 assert.match(source,/data-featured="\$\{enc\(c\)\}"/);
