@@ -25,6 +25,8 @@ jobs:
         run: node tests/pediatric-drug-doses.cjs
       - name: Mobile data and offline startup
         run: node tests/pwa-cellular.cjs
+      - name: First-launch airplane mode for all 110 calculators
+        run: node tests/offline-110.cjs
       - name: APACHE II score and example audit
         run: node tests/apache2.cjs
       - name: Renal and electrolyte calculations and safety
