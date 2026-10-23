@@ -7,7 +7,7 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.23" \/>/,'Release version is defined centrally');
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.24" \/>/,'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
