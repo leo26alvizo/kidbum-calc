@@ -77,3 +77,5 @@ jobs:
         run: node tests/chatgpt-standalone-analysis.cjs
       - name: Twenty additional clinical scores and safety tests
         run: node tests/expansion-20.cjs
+      - name: Required fictitious clinical examples on all standalone tools
+        run: node tests/fictitious-examples-26.cjs

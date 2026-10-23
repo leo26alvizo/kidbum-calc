@@ -44,15 +44,15 @@ p{margin:8px 0}p.muted,.hint{color:var(--muted);font-size:.9rem}
 <div class="panel" id="browse"><label for="tool-picker" class="count">Herramienta clínica</label><select id="tool-picker" aria-label="Seleccionar calculadora"></select><span class="count" id="pos"></span></div>
 <header class="hero" id="hero"><div class="eyebrow" id="specialty"></div><h1 id="title">Calculadoras clínicas</h1><p id="subtitle"></p></header>
 <div class="layout"><section class="panel"><h2>01 / Hallazgos clínicos</h2><p class="hint" id="intro">Responde todos los parámetros medidos; no se presumen valores normales.</p><div id="variants" class="variants" role="group" aria-label="Variantes de la escala"></div><div id="fields"></div></section>
-<section class="panel"><h2>02 / Resultado e interpretación</h2><div class="output" aria-live="polite" role="status"><div id="score" class="result-big">Completa la evaluación</div><p id="interpretation">Sin datos evaluados.</p><p id="detail"></p></div><div class="actions"><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div><div id="kb-ai-mount"></div><p class="notice" id="caution"></p><p class="hint">Referencia clínica: <a id="source" target="_blank" rel="noopener noreferrer">Ver metodología y criterios</a></p><p id="official-wrap" class="notice" hidden><strong>Cálculo oficial requerido:</strong> este asistente no fabrica porcentajes. <a id="official" target="_blank" rel="noopener noreferrer">Abrir fuente/calculadora original ↗</a>.</p><p class="hint">KidBum ofrece apoyo educativo y de cálculo para personal médico. No sustituye valoración presencial, protocolos ni supervisión del equipo tratante.</p></section></div>
+<section class="panel"><h2>02 / Resultado e interpretación</h2><div class="output" aria-live="polite" role="status"><div id="score" class="result-big">Completa la evaluación</div><p id="interpretation">Sin datos evaluados.</p><p id="detail"></p></div><div class="actions"><button type="button" class="secondary" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div><p id="example-note" class="hint" hidden>🧪 Caso totalmente ficticio para practicar. Los datos no pertenecen a ningún paciente real. Revisa las limitaciones del método antes de aplicarlo clínicamente.</p><div id="kb-ai-mount"></div><p class="notice" id="caution"></p><p class="hint">Referencia clínica: <a id="source" target="_blank" rel="noopener noreferrer">Ver metodología y criterios</a></p><p id="official-wrap" class="notice" hidden><strong>Cálculo oficial requerido:</strong> este asistente no fabrica porcentajes. <a id="official" target="_blank" rel="noopener noreferrer">Abrir fuente/calculadora original ↗</a>.</p><p class="hint">KidBum ofrece apoyo educativo y de cálculo para personal médico. No sustituye valoración presencial, protocolos ni supervisión del equipo tratante.</p></section></div>
 </main>
-<script src="./assets/expansion-20.js"></script><script src="./assets/chatgpt-analysis.js"></script>
+<script src="./assets/expansion-20.js"></script><script src="./assets/fictitious-examples.js"></script><script src="./assets/chatgpt-analysis.js"></script>
 <script>
 'use strict';
 const tools=KidBum20.tools,by=id=>document.getElementById(id);
 let active=tools[0],variant='',values={},answer=null;
 function select(id){
- const t=tools.find(t=>t.id===id)||tools[0];active=t;variant=t.variants?Object.keys(t.variants)[0]:'';values={};answer=null;
+ const t=tools.find(t=>t.id===id)||tools[0];active=t;variant=t.variants?Object.keys(t.variants)[0]:'';values={};answer=null;by('example-note').hidden=true;
  by('tool-picker').value=t.id;by('pos').textContent=(tools.indexOf(t)+1)+' / 20';
  by('title').textContent=t.title;by('subtitle').textContent=t.short;
  by('specialty').textContent=t.cat.toUpperCase()+' · KIDBUM CALC';
@@ -60,7 +60,7 @@ function select(id){
  by('caution').textContent=t.warning;by('source').href=t.source;
  by('official-wrap').hidden=!t.official;if(t.official)by('official').href=t.official;
  const root=by('variants');root.replaceChildren();if(t.variants){for(const [key,model] of Object.entries(t.variants)){
-  const b=document.createElement('button');b.className='variant';b.type='button';b.textContent=model.label;b.setAttribute('aria-pressed',String(key===variant));b.onclick=()=>{variant=key;values={};drawVariants();drawFields();render()};b.dataset.variant=key;root.append(b);
+  const b=document.createElement('button');b.className='variant';b.type='button';b.textContent=model.label;b.setAttribute('aria-pressed',String(key===variant));b.onclick=()=>{variant=key;values={};by('example-note').hidden=true;drawVariants();drawFields();render()};b.dataset.variant=key;root.append(b);
  }}
  drawFields();render();try{history.replaceState(null,'','#'+t.id)}catch{}
 }
@@ -102,6 +102,14 @@ function render(){
  by('score').textContent=answer.display;by('interpretation').textContent=answer.interpretation;by('detail').textContent=answer.details;
  by('copy').disabled=false;ai.setReady(true);
 }
+by('example').onclick=()=>{
+ const data=KidBumFictitiousExamples.twenty(active.id,variant),fields=KidBum20.active(active,variant).fields;
+ if(!data||!fields.every(f=>{
+  if(!Object.prototype.hasOwnProperty.call(data,f.key))return false;
+  return f.type==='choice'?f.options.some(([v])=>String(v)===String(data[f.key])):Number.isFinite(Number(data[f.key]))&&Number(data[f.key])>=f.min&&Number(data[f.key])<=f.max;
+ })){by('interpretation').textContent='No hay un ejemplo ficticio completo y válido para esta variante.';return}
+ values=data;drawFields();render();by('example-note').hidden=false;
+};
 by('reset').onclick=()=>select(active.id);
 by('tool-picker').onchange=e=>select(e.target.value);
 for(const t of tools){const opt=document.createElement('option');opt.value=t.id;opt.textContent=t.title;by('tool-picker').append(opt)}

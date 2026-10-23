@@ -83,10 +83,10 @@ legend{font-weight:800;font-size:1.04rem;padding:0 0 9px}
 <div id="formula">Selecciona un hallazgo en cada criterio.</div>
 </div>
 <div class="actions">
-<button class="secondary" id="reset" type="button">Reiniciar</button>
+<button class="secondary" id="example" type="button">↗ Cargar ejemplo ficticio</button><button class="secondary" id="reset" type="button">Reiniciar</button>
 <button class="primary" id="copy" type="button" disabled>Copiar resultado</button>
 </div>
-<div id="kb-ai-mount"></div>
+<p class="muted" id="example-note" hidden>🧪 Ejemplo ficticio para practicar Capurro. No es información de un recién nacido real.</p><div id="kb-ai-mount"></div>
 <p class="muted" style="margin-top:15px">Estimación orientativa, con error clínico aproximado de 1–2 semanas según condiciones y método. No sustituye la datación obstétrica, la valoración neonatal ni Ballard cuando sea más apropiado.</p>
 </section>
 <section class="sources">
@@ -96,7 +96,7 @@ legend{font-weight:800;font-size:1.04rem;padding:0 0 9px}
 </section>
 </div>
 </main>
-<script src="./assets/chatgpt-analysis.js"></script><script>
+<script src="./assets/chatgpt-analysis.js"></script><script src="./assets/fictitious-examples.js"></script><script>
 'use strict';
 const CAPURRO_FIELDS={
  ear:{label:'Forma del pabellón auricular',options:[[0,'Aplanada, sin incurvación'],[8,'Parte del borde superior incurvada'],[16,'Todo el borde superior incurvado'],[24,'Pabellón totalmente incurvado']]},
@@ -161,8 +161,13 @@ function renderResult(){
  copyText='Capurro '+(mode==='somatic'?'somático':'somático-neurológico')+'\n'+score.points+' puntos + '+method.constant+' = '+score.days+' días\n'+score.weeks+' semanas + '+score.remainingDays+' días\n'+score.classification+' (NOM-007-SSA2-2016). Estimación clínica.';
  $('copy').disabled=false;capurroAi.setReady(true);
 }
-function chooseMode(m){if(!CAPURRO_MODES[m])return;mode=m;selections={};document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));$('mode-note').textContent=m==='neuro'?'Para RN clínicamente estable, sin alteración neuromuscular, generalmente después de 12 horas de vida. Si existe disfunción neurológica, considera el método exclusivamente somático.':'Emplea cinco datos somáticos cuando los signos neurológicos no sean valorables o exista disfunción neurológica; no equivale a una valoración neurológica completa.';renderFields();renderResult()}
+function chooseMode(m){if(!CAPURRO_MODES[m])return;mode=m;selections={};$('example-note').hidden=true;document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));$('mode-note').textContent=m==='neuro'?'Para RN clínicamente estable, sin alteración neuromuscular, generalmente después de 12 horas de vida. Si existe disfunción neurológica, considera el método exclusivamente somático.':'Emplea cinco datos somáticos cuando los signos neurológicos no sean valorables o exista disfunción neurológica; no equivale a una valoración neurológica completa.';renderFields();renderResult()}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
+$('example').addEventListener('click',()=>{
+ const data=KidBumFictitiousExamples.forCapurro(mode);
+ if(!data||!CAPURRO_MODES[mode].keys.every(k=>CAPURRO_FIELDS[k].options.some(x=>x[0]===data[k])))return;
+ selections=data;renderFields();renderResult();$('example-note').hidden=false;
+});
 $('reset').addEventListener('click',()=>chooseMode(mode));
 $('copy').addEventListener('click',async()=>{if(!copyText)return;try{await navigator.clipboard.writeText(copyText);$('copy').textContent='✓ Copiado'}catch{$('copy').textContent='No se pudo copiar'}});
 function syncTheme(dark){document.documentElement.classList.toggle('dark',dark);$('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro';try{localStorage.setItem('kidbum-theme',dark?'dark':'light')}catch{}}
