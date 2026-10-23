@@ -1,10 +1,13 @@
 'use strict';const fs=require('node:fs'),assert=require('node:assert/strict');
 const page=fs.readFileSync('index.html','utf8');
-assert.doesNotMatch(page,/data-mobile-nav="home"/,'Remove Explore from lower mobile bar');
+assert.match(page,/<button type="button" data-mobile-nav="home" aria-label="Ir al inicio de KidBum"><svg[^>]*viewBox="0 0 24 24"/,'Bottom Inicio button uses an accessible house icon');
+assert.doesNotMatch(page,/data-mobile-nav="guard"/,'Remove Guardia from the lower mobile bar');
+assert.match(page,/if\(target==='home'\)\{category='Todas';search='';\}go\(target\)/,'Inicio must clear category and search filters before navigating');
+assert.match(page,/const target=b\.dataset\.nav\|\|b\.dataset\.mobileNav/,'New button must use the existing navigation handler');
 assert.match(page,/id="breadcrumb-home"[^>]*>Inicio<\/button>/,'Inicio is clickable');
 assert.match(page,/el\('#breadcrumb-home'\)\.onclick=\(\)=>go\('home'\)/,'Inicio returns to home');
 assert.match(page,/grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/,'Four tabs fit a mobile row');
-for(const tab of ['guard','favorite','docs','about'])assert.match(page,new RegExp('data-mobile-nav="'+tab+'"'),'Keep '+tab);
+for(const tab of ['home','favorite','docs','about'])assert.match(page,new RegExp('data-mobile-nav="'+tab+'"'),'Keep '+tab);
 assert.match(page,/el\('#breadcrumb-current'\)\.hidden=screen==='home'/,'Current-page breadcrumb hides on home');
 assert.match(page,/breadcrumb-home:focus-visible/,'Keyboard accessible home control');
-console.log('Mobile home breadcrumb navigation PASSED');
+console.log('Mobile Inicio bottom tab, icon, reset and breadcrumb navigation PASSED');
