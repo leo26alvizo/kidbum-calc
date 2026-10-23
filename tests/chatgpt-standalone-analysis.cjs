@@ -7,7 +7,7 @@ vm.runInNewContext(shared,{window,document:doc});
 const data={title:'Capurro somático',result:'40 semanas y 0 días',interpretation:'A término',details:'Puntuación completa',warning:'Revisar datación prenatal'};
 for(const mode of ['guardia','estudio','pase']){
  const message=window.KidBumAnalysis.buildPrompt(data,mode);
- assert.match(message,/Capurro somático/);assert.match(message,/40 semanas/);assert.match(message,/No supongas antecedentes/);assert.match(message,/sin identificadores/i);
+ assert.match(message,/Capurro somático/);assert.match(message,/40 semanas/);assert.match(message,/No supongas antecedentes/);assert.match(message,/no incluye identificadores/i);
 }
 assert.throws(()=>window.KidBumAnalysis.buildPrompt({title:'Capurro'},'estudio'));
 assert.throws(()=>window.KidBumAnalysis.buildPrompt(data,'not-real'));
