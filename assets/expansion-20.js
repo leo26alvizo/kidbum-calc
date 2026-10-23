@@ -36,12 +36,12 @@ const T=[
  },kind:'pecarn'},
 {id:'silverman',title:'Silverman-Andersen · dificultad respiratoria neonatal',cat:'Pediatría',image:'pediatria-portada.webp',short:'Cinco componentes · 0 a 10 puntos',source:sources.silverman,warning:'La hipoxemia y la necesidad de soporte respiratorio se valoran de forma independiente. Si existe compromiso vital, la atención no debe esperar la puntuación.',
 fields:[
-S('chest','Movimientos toracoabdominales',[[0,'Sincronizados'],[1,'Tórax inmóvil, abdomen se mueve'],[2,'Disociación toracoabdominal/paradójicos']]),
+S('chest','Movimientos toracoabdominales',[[0,'Sincronizados'],[1,'Desfase del tórax durante inspiración'],[2,'Disociación toracoabdominal/paradójicos']]),
 S('intercostal','Tiraje intercostal',[[0,'Ausente'],[1,'Discreto'],[2,'Marcado']]),
 S('xiphoid','Retracción xifoidea',[[0,'Ausente'],[1,'Discreta'],[2,'Acentuada']]),
 S('nasal','Aleteo nasal',[[0,'Ausente'],[1,'Discreto'],[2,'Acentuado']]),
 S('grunt','Quejido espiratorio',[[0,'Ausente'],[1,'Solo audible con estetoscopio'],[2,'Audible a distancia']])
-],kind:'sum',cutoffs:[[0,'Sin signos clínicos en esta escala'],[3,'Dificultad respiratoria leve'],[5,'Dificultad respiratoria moderada'],[10,'Dificultad respiratoria grave']]},
+],kind:'sum',cutoffs:[[0,'Sin signos clínicos en esta escala'],[3,'Dificultad respiratoria leve'],[6,'Dificultad respiratoria moderada'],[10,'Dificultad respiratoria grave']]},
 {id:'ballard',title:'Ballard modificado · edad gestacional',cat:'Pediatría',image:'pediatria-portada.webp',short:'12 criterios · suma y conversión a semanas',source:sources.ballard,warning:'Escribe exclusivamente puntuaciones asignadas mediante la TABLA OFICIAL; esta calculadora no presume madurez por el número aislado. El examen requiere entrenamiento; confirmar con datación obstétrica.',
 fields:['Postura','Ventana cuadrada','Retroceso de brazo','Ángulo poplíteo','Signo de la bufanda','Talón-oreja','Piel','Lanugo','Superficie plantar','Mama','Ojo/oreja','Genitales'].map((name,i)=>N('b'+i,name,-2,5,'puntos',1)),
 kind:'ballard'},
@@ -103,7 +103,7 @@ variants:{
 {id:'meows',title:'MEOWS · alerta obstétrica',cat:'Ginecología y obstetricia',image:'atlas-obstetrics.jpg',short:'Semáforo obstétrico explícito: señales rojas/amarillas',source:sources.meows,warning:'Los umbrales varían por adaptación local; versión informativa basada en tabla publicada de MEOWS. Una alerta roja o dos amarillas requieren valoración/escalamiento, aun sin suma total.',
 fields:[N('temp','Temperatura',30,43,'°C'),N('sbp','Presión sistólica',40,260,'mmHg'),N('dbp','Presión diastólica',20,170,'mmHg'),N('hr','Frecuencia cardíaca',20,240,'lpm'),N('rr','Frecuencia respiratoria',4,65,'rpm'),Y('neuro','Alteración del estado mental'),Y('bleed','Sangrado obstétrico anormal')],
 kind:'meows'},
-{id:'fullpiers',title:'fullPIERS · preeclampsia',cat:'Ginecología y obstetricia',image:'ginecologia-portada.webp',short:'Reúne seis predictores; riesgo oficial externo',source:sources.fullpiers,official:'https://pre-empt.obgyn.ubc.ca/home-page/past-projects/fullPIERS/',warning:'La probabilidad a 48 h depende de un modelo de regresión validado con interacciones no disponibles aquí: NO estimar porcentajes inventados. Preeclampsia con datos graves exige valoración obstétrica urgente sin esperar cálculo.',
+{id:'fullpiers',title:'fullPIERS · preeclampsia',cat:'Ginecología y obstetricia',image:'ginecologia-portada.webp',short:'Reúne seis predictores; riesgo oficial externo',source:sources.fullpiers,official:'https://pre-empt.obgyn.ubc.ca/home-page/past-projects/fullPIERS/',warning:'La probabilidad a 48 h depende de un modelo de regresión validado con interacciones no disponibles aquí: NO estimar porcentajes inventados. El formulario local muestra creatinina en mg/dL; la página oficial puede solicitar µmol/L: usa su opción de unidades imperiales o convierte explícitamente (1 mg/dL ≈88.4 µmol/L). Preeclampsia con datos graves exige valoración obstétrica urgente sin esperar cálculo.',
 fields:[N('ga','Semanas gestacionales',20,44,'semanas'),N('spo2','Saturación de oxígeno',50,100,'%'),N('platelet','Plaquetas',1,1000,'×10⁹/L'),N('creatinine','Creatinina',0.1,15,'mg/dL'),N('ast','AST',1,3000,'U/L'),Y('chest','Dolor torácico o disnea')],
 kind:'reference'},
 {id:'at4',title:'4AT · tamizaje de delirium',cat:'Geriatría',image:'escalas-clinicas-portada.webp',short:'4 dominios, puntuación 0 a 12',source:sources.at4,warning:'Tamizaje, no diagnóstico de delirium. La sospecha clínica debe motivar evaluación de causas reversibles y comparación con estado basal.',
