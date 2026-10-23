@@ -75,3 +75,5 @@ jobs:
         run: node tests/capurro-neonatal.cjs
       - name: ChatGPT analysis for standalone calculators
         run: node tests/chatgpt-standalone-analysis.cjs
+      - name: Twenty additional clinical scores and safety tests
+        run: node tests/expansion-20.cjs

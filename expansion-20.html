@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0e4553"><title>20 nuevas calculadoras clínicas | KidBum CALC</title>
+<style>
+:root{color-scheme:light;--bg:#edf3f4;--card:#fff;--ink:#133542;--muted:#59727c;--border:#cde0e3;--wash:#eaf6f4;--accent:#087d87;--accentText:#fff}
+html.dark{color-scheme:dark;--bg:#091b29;--card:#142c3e;--ink:#edf7fa;--muted:#b8d0dc;--border:#35576c;--wash:#1a3d4b;--accent:#7cdee2;--accentText:#112733}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1000px;margin:auto;padding:16px 14px 70px}a{color:var(--accent)}
+nav{display:flex;justify-content:space-between;gap:14px;align-items:center;margin-bottom:15px}
+nav a{text-decoration:none;font-weight:850}button,select,input{font:inherit}
+button{cursor:pointer}nav button,.secondary{border:1px solid var(--border);border-radius:11px;background:var(--card);color:var(--ink);padding:10px 14px;font-weight:750}
+.hero{position:relative;overflow:hidden;isolation:isolate;background:#103e4f;color:#fff;border-radius:23px;padding:clamp(24px,5vw,42px);min-height:220px;display:flex;flex-direction:column;justify-content:end;box-shadow:0 12px 28px #071e281c}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,26,40,.95),rgba(5,39,51,.85) 60%,rgba(8,54,66,.45)),var(--art) center/cover;z-index:-1}
+.eyebrow{color:#acece6;font-weight:850;font-size:.75rem;letter-spacing:.16em}
+h1{font-size:clamp(2rem,5.2vw,3.2rem);line-height:1.12;letter-spacing:-.04em;margin:10px 0}
+.hero p{color:#e4f6f4;max-width:650px;margin:0;font-size:.96rem}
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:15px;margin-top:18px}
+section.panel{padding:clamp(16px,3vw,25px);border:1px solid var(--border);background:var(--card);border-radius:18px;box-shadow:0 6px 24px #0b283210}
+h2{font-size:1.2rem;margin:0 0 10px}
+p{margin:8px 0}p.muted,.hint{color:var(--muted);font-size:.9rem}
+.variants{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}
+.variant{border:1px solid var(--border);padding:10px 14px;background:var(--card);color:var(--ink);border-radius:11px;font-weight:800}
+.variant[aria-pressed=true]{border:2px solid var(--accent);padding:9px 13px;background:var(--wash)}
+.field{border-top:1px solid var(--border);padding:15px 0;display:grid;gap:8px}
+.field label{font-size:.95rem;font-weight:750}
+.field select,.field input{border:1px solid var(--border);border-radius:11px;background:var(--card);padding:12px;color:var(--ink);max-width:100%;width:100%;min-height:47px}
+.field input:focus-visible,.field select:focus-visible,.variant:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.field small{color:var(--muted);font-size:.78rem}
+.output{border-radius:15px;background:var(--wash);padding:20px;margin:10px 0 15px}
+.result-big{font-size:clamp(1.4rem,4.4vw,2.25rem);font-weight:850;line-height:1.22}
+.output p{margin:9px 0;color:var(--ink)}#detail{font-size:.87rem;color:var(--muted)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.primary{border:1px solid var(--accent);background:var(--accent);color:var(--accentText);border-radius:11px;padding:11px 15px;font-weight:850;min-height:44px}
+.primary:disabled{opacity:.55;cursor:not-allowed}
+.notice{background:var(--wash);border-left:4px solid var(--accent);padding:14px;border-radius:11px;font-size:.9rem}
+#browse{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#browse select{border:1px solid var(--border);background:var(--card);color:var(--ink);padding:11px;border-radius:12px;max-width:100%}
+.count{color:var(--muted);font-size:.85rem;font-weight:800}
+#source{overflow-wrap:anywhere}
+@media(min-width:820px){.layout{grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)}.wide{grid-column:1 / -1}}
+@media print{nav,.actions,#browse,#kb-ai-mount{display:none}section.panel{box-shadow:none;break-inside:avoid}}
+</style></head><body><main>
+<nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<div class="panel" id="browse"><label for="tool-picker" class="count">Herramienta clínica</label><select id="tool-picker" aria-label="Seleccionar calculadora"></select><span class="count" id="pos"></span></div>
+<header class="hero" id="hero"><div class="eyebrow" id="specialty"></div><h1 id="title">Calculadoras clínicas</h1><p id="subtitle"></p></header>
+<div class="layout"><section class="panel"><h2>01 / Hallazgos clínicos</h2><p class="hint" id="intro">Responde todos los parámetros medidos; no se presumen valores normales.</p><div id="variants" class="variants" role="group" aria-label="Variantes de la escala"></div><div id="fields"></div></section>
+<section class="panel"><h2>02 / Resultado e interpretación</h2><div class="output" aria-live="polite" role="status"><div id="score" class="result-big">Completa la evaluación</div><p id="interpretation">Sin datos evaluados.</p><p id="detail"></p></div><div class="actions"><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div><div id="kb-ai-mount"></div><p class="notice" id="caution"></p><p class="hint">Referencia clínica: <a id="source" target="_blank" rel="noopener noreferrer">Ver metodología y criterios</a></p><p id="official-wrap" class="notice" hidden><strong>Cálculo oficial requerido:</strong> este asistente no fabrica porcentajes. <a id="official" target="_blank" rel="noopener noreferrer">Abrir fuente/calculadora original ↗</a>.</p><p class="hint">KidBum ofrece apoyo educativo y de cálculo para personal médico. No sustituye valoración presencial, protocolos ni supervisión del equipo tratante.</p></section></div>
+</main>
+<script src="./assets/expansion-20.js"></script><script src="./assets/chatgpt-analysis.js"></script>
+<script>
+'use strict';
+const tools=KidBum20.tools,by=id=>document.getElementById(id);
+let active=tools[0],variant='',values={},answer=null;
+function select(id){
+ const t=tools.find(t=>t.id===id)||tools[0];active=t;variant=t.variants?Object.keys(t.variants)[0]:'';values={};answer=null;
+ by('tool-picker').value=t.id;by('pos').textContent=(tools.indexOf(t)+1)+' / 20';
+ by('title').textContent=t.title;by('subtitle').textContent=t.short;
+ by('specialty').textContent=t.cat.toUpperCase()+' · KIDBUM CALC';
+ by('hero').style.setProperty('--art',"url('./assets/"+t.image+"')");
+ by('caution').textContent=t.warning;by('source').href=t.source;
+ by('official-wrap').hidden=!t.official;if(t.official)by('official').href=t.official;
+ const root=by('variants');root.replaceChildren();if(t.variants){for(const [key,model] of Object.entries(t.variants)){
+  const b=document.createElement('button');b.className='variant';b.type='button';b.textContent=model.label;b.setAttribute('aria-pressed',String(key===variant));b.onclick=()=>{variant=key;values={};drawVariants();drawFields();render()};b.dataset.variant=key;root.append(b);
+ }}
+ drawFields();render();try{history.replaceState(null,'','#'+t.id)}catch{}
+}
+function drawVariants(){document.querySelectorAll('.variant').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.variant===variant)))}
+function drawFields(){
+ const f=KidBum20.active(active,variant).fields,root=by('fields');root.replaceChildren();
+ for(const field of f){
+  const row=document.createElement('div');row.className='field';
+  const label=document.createElement('label');label.textContent=field.label;label.htmlFor='f-'+field.key;
+  let ctl=field.type==='choice'?document.createElement('select'):document.createElement('input');
+  ctl.id=label.htmlFor;if(field.type==='choice'){
+   const blank=document.createElement('option');blank.value='';blank.textContent='Selecciona un hallazgo';ctl.append(blank);
+   for(const [v,text] of field.options){const opt=document.createElement('option');opt.value=String(v);opt.textContent=text;ctl.append(opt)}
+  }else{ctl.type='number';ctl.min=field.min;ctl.max=field.max;ctl.step=field.step;ctl.inputMode='decimal';ctl.placeholder='Dato medido ('+field.min+'–'+field.max+')'}
+  ctl.value=values[field.key]??'';ctl.addEventListener('input',()=>{values[field.key]=ctl.value;render()});
+  row.append(label,ctl);
+  if(field.unit){const unit=document.createElement('small');unit.textContent=field.unit;row.append(unit)}
+  root.append(row);
+ }
+}
+const ai=KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>{
+ if(!answer)return null;
+ return {
+  title:active.title,result:answer.display,
+  interpretation:answer.interpretation,
+  details:answer.details+' | Variante: '+(active.variants?KidBum20.active(active,variant).label:'única'),
+  warning:active.warning
+ };
+}});
+function render(){
+ answer=KidBum20.evaluate(active,values,variant);const fields=KidBum20.active(active,variant).fields;
+ const completed=fields.filter(f=>values[f.key]!==''&&values[f.key]!==undefined).length;
+ if(!answer){
+  by('score').textContent='Evaluación incompleta';
+  by('interpretation').textContent='Faltan '+(fields.length-completed)+' de '+fields.length+' criterios. No asumir ausencia de un signo que no se examinó.';
+  by('detail').textContent='Ninguna puntuación válida hasta completar el formulario.';
+  by('copy').disabled=true;ai.setReady(false);return;
+ }
+ by('score').textContent=answer.display;by('interpretation').textContent=answer.interpretation;by('detail').textContent=answer.details;
+ by('copy').disabled=false;ai.setReady(true);
+}
+by('reset').onclick=()=>select(active.id);
+by('tool-picker').onchange=e=>select(e.target.value);
+for(const t of tools){const opt=document.createElement('option');opt.value=t.id;opt.textContent=t.title;by('tool-picker').append(opt)}
+by('copy').onclick=async()=>{
+ if(!answer)return;
+ const text=[active.title,answer.display,answer.interpretation,answer.details,active.warning].join('\n');
+ try{await navigator.clipboard.writeText(text);by('copy').textContent='✓ Copiado'}catch{by('copy').textContent='No se pudo copiar'}
+};
+function theme(dark){document.documentElement.classList.toggle('dark',dark);by('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro';try{localStorage.setItem('kidbum-theme',dark?'dark':'light')}catch{}}
+let dark=false;try{dark=localStorage.getItem('kidbum-theme')==='dark'}catch{}theme(dark);by('theme').onclick=()=>theme(!document.documentElement.classList.contains('dark'));
+select(location.hash.slice(1));
+</script></body></html>

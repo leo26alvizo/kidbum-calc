@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html'];
+const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html','expansion-20.html'];
 const shared=fs.readFileSync('assets/chatgpt-analysis.js','utf8');new vm.Script(shared);
 const window={};const doc={};
 vm.runInNewContext(shared,{window,document:doc});
@@ -27,6 +27,6 @@ const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-se
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/chatgpt-analysis\.js'/);assert.match(sw,/chatgpt-external-restored/);
 const reg=index.slice(index.indexOf('const externalCalculators='),index.indexOf('const calculatorCount='));
 const paths=[...reg.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(paths.length,6,'six standalone calculators');
+assert.equal(paths.length,26,'twenty-six standalone calculators');
 for(const path of new Set(paths))assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
-console.log('Standalone ChatGPT analysis PASS: 6 calculators, 3 pages, privacy, completion gating, themes, offline.');
+console.log('Standalone ChatGPT analysis PASS: 26 calculators, 4 pages, privacy, completion gating, themes, offline.');
