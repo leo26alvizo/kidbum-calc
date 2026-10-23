@@ -7,7 +7,7 @@ const Y=(key,label)=>Q(key,label,[['no','No, evaluado y ausente'],['yes','Sí, p
 const S=(key,label,labels)=>Q(key,label,labels.map((x,i)=>[String(x[0]),x[1]]));
 const sources={
  pecarn:'https://www.ncbi.nlm.nih.gov/books/NBK591248/table/tbl001/',
- silverman:'https://www.ncbi.nlm.nih.gov/books/NBK560779/',
+ silverman:'https://pmc.ncbi.nlm.nih.gov/articles/PMC4922755/',
  ballard:'https://www.ncbi.nlm.nih.gov/books/NBK613281/',
  pram:'https://www.mdcalc.com/calc/3384/pediatric-respiratory-assessment-measure-pram-asthma-exacerbation-severity',
  kdigo:'https://kdigo.org/guidelines/acute-kidney-injury/',
@@ -103,7 +103,7 @@ variants:{
 {id:'meows',title:'MEOWS · alerta obstétrica',cat:'Ginecología y obstetricia',image:'atlas-obstetrics.jpg',short:'Semáforo obstétrico explícito: señales rojas/amarillas',source:sources.meows,warning:'Los umbrales varían por adaptación local; versión informativa basada en tabla publicada de MEOWS. Una alerta roja o dos amarillas requieren valoración/escalamiento, aun sin suma total.',
 fields:[N('temp','Temperatura',30,43,'°C'),N('sbp','Presión sistólica',40,260,'mmHg'),N('dbp','Presión diastólica',20,170,'mmHg'),N('hr','Frecuencia cardíaca',20,240,'lpm'),N('rr','Frecuencia respiratoria',4,65,'rpm'),Y('neuro','Alteración del estado mental'),Y('bleed','Sangrado obstétrico anormal')],
 kind:'meows'},
-{id:'fullpiers',title:'fullPIERS · preeclampsia',cat:'Ginecología y obstetricia',image:'ginecologia-portada.webp',short:'Reúne seis predictores; riesgo oficial externo',source:sources.fullpiers,official:'https://pre-empt.obgyn.ubc.ca/evidence/fullpiers/',warning:'La probabilidad a 48 h depende de un modelo de regresión validado con interacciones no disponibles aquí: NO estimar porcentajes inventados. Preeclampsia con datos graves exige valoración obstétrica urgente sin esperar cálculo.',
+{id:'fullpiers',title:'fullPIERS · preeclampsia',cat:'Ginecología y obstetricia',image:'ginecologia-portada.webp',short:'Reúne seis predictores; riesgo oficial externo',source:sources.fullpiers,official:'https://pre-empt.obgyn.ubc.ca/home-page/past-projects/fullPIERS/',warning:'La probabilidad a 48 h depende de un modelo de regresión validado con interacciones no disponibles aquí: NO estimar porcentajes inventados. Preeclampsia con datos graves exige valoración obstétrica urgente sin esperar cálculo.',
 fields:[N('ga','Semanas gestacionales',20,44,'semanas'),N('spo2','Saturación de oxígeno',50,100,'%'),N('platelet','Plaquetas',1,1000,'×10⁹/L'),N('creatinine','Creatinina',0.1,15,'mg/dL'),N('ast','AST',1,3000,'U/L'),Y('chest','Dolor torácico o disnea')],
 kind:'reference'},
 {id:'at4',title:'4AT · tamizaje de delirium',cat:'Geriatría',image:'escalas-clinicas-portada.webp',short:'4 dominios, puntuación 0 a 12',source:sources.at4,warning:'Tamizaje, no diagnóstico de delirium. La sospecha clínica debe motivar evaluación de causas reversibles y comparación con estado basal.',
