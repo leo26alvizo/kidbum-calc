@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102f3a"><title>Geriatría · Valoración integral | KidBum CALC</title>
+<style>
+:root{color-scheme:light;--bg:#f0f4f5;--panel:#fff;--ink:#15333e;--soft:#516a75;--stroke:#ccdde0;--wash:#e6f3f1;--accent:#086c71;--accentText:#fff}
+html.dark{color-scheme:dark;--bg:#091c28;--panel:#122d3c;--ink:#e9f5f7;--soft:#b0cbd2;--stroke:#315565;--wash:#1a3c49;--accent:#7cdee0;--accentText:#132c37}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.52 system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:1130px;margin:0 auto;padding:16px 14px 80px}
+header nav{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:6px 0 15px}
+a{color:var(--accent)}nav a{text-decoration:none;font-weight:850}
+button,select,input{font:inherit}button{cursor:pointer;min-height:43px}
+nav button,.secondary{border:1px solid var(--stroke);border-radius:11px;padding:10px 13px;color:var(--ink);background:var(--panel);font-weight:750}
+.hero{display:flex;min-height:195px;border-radius:21px;overflow:hidden;color:white;background:#102c39;position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,31,41,.97),rgba(8,31,41,.82) 60%,rgba(8,31,41,.18)),url('./assets/geriatria-portada.webp') center/cover;z-index:-1}
+.hero-copy{padding:clamp(21px,4vw,43px);max-width:730px;align-self:end}
+.eyebrow{font-size:.76rem;font-weight:850;color:#abece4;letter-spacing:.15em}
+h1{font-size:clamp(1.8rem,5vw,2.9rem);line-height:1.14;margin:9px 0}
+.hero p{margin:0;color:#d8f3f3;font-size:.95rem}
+.tools-nav{margin:18px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.tools-nav label{font-weight:800}#picker{max-width:100%;flex:1;min-width:200px;min-height:47px;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);color:var(--ink);padding:10px}
+.count{font-size:.84rem;color:var(--soft);font-weight:750}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);gap:16px;align-items:start}
+.panel{border:1px solid var(--stroke);background:var(--panel);border-radius:18px;padding:clamp(16px,3vw,25px);box-shadow:0 8px 20px #102e3310}
+h2{margin:0 0 5px;font-size:1.15rem}#tool-intro{color:var(--soft);font-size:.9rem;margin:2px 0 17px}
+.field{border-top:1px solid var(--stroke);padding:14px 0;display:grid;gap:7px}.field label{font-weight:700;font-size:.96rem}
+.field select,.field input{width:100%;min-height:46px;border:1px solid var(--stroke);border-radius:10px;background:var(--panel);color:var(--ink);padding:10px 12px}
+.field small{color:var(--soft);font-size:.82rem}
+output{display:block;background:var(--wash);border-radius:14px;padding:18px;margin:15px 0}
+#score{font-weight:850;font-size:clamp(1.5rem,5vw,2.35rem);line-height:1.2}
+#interpretation{margin:9px 0 0;font-weight:650}
+#detail{font-size:.86rem;line-height:1.5;color:var(--soft);margin:10px 0 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.primary{border:1px solid var(--accent);background:var(--accent);color:var(--accentText);border-radius:11px;padding:10px 14px;font-weight:820}
+.primary:disabled{opacity:.53;cursor:not-allowed}
+.notice{border-left:4px solid var(--accent);background:var(--wash);padding:13px;margin:15px 0;border-radius:10px;font-size:.9rem}
+#example-note{font-size:.85rem;color:var(--soft)}
+#source-wrap{font-size:.86rem;overflow-wrap:anywhere}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:800px){.cols{grid-template-columns:1fr}.hero{min-height:175px}.hero-copy{padding:23px}.tools-nav label{width:100%}}
+@media print{nav,.tools-nav,.actions,#kb-ai-mount{display:none}.cols{display:block}.panel{box-shadow:none;break-inside:avoid;margin:10px 0}}
+</style>
+</head>
+<body><main>
+<header><nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<div class="hero"><div class="hero-copy"><span class="eyebrow">KIDBUM CALC · VALORACIÓN GERIÁTRICA INTEGRAL</span><h1>Geriatría</h1><p>Funcionalidad, fragilidad, sarcopenia, nutrición, marcha y desempeño físico · cálculos 100% locales</p></div></div>
+</header>
+<section class="tools-nav"><label for="picker">Seleccionar escala</label><select id="picker" aria-label="Seleccionar escala geriátrica"></select><span class="count" id="position"></span></section>
+<div class="cols">
+<section class="panel" aria-label="Evaluación"><h2 id="tool-title">Selecciona una escala</h2><p id="tool-intro">Completa todos los campos documentados.</p><div id="fields"></div></section>
+<section class="panel" aria-label="Resultado"><h2>Resultado</h2>
+<output aria-live="polite" aria-atomic="true"><div id="score">Evaluación pendiente</div><p id="interpretation">No se asumen respuestas normales.</p><p id="detail"></p></output>
+<div class="actions"><button type="button" class="secondary" id="example">↗ Ejemplo ficticio</button><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div>
+<p id="example-note" hidden>🧪 Ejemplo totalmente ficticio para enseñanza, no información de un paciente real.</p>
+<div id="kb-ai-mount"></div>
+<p class="notice" id="warning">La puntuación no sustituye la evaluación clínica.</p>
+<p id="source-wrap">Referencia: <a id="source" href="#" target="_blank" rel="noopener noreferrer">Consultar instrumento original ↗</a></p>
+<p style="color:var(--soft);font-size:.82rem">Evaluar funcionamiento basal, delirium, dolor, contexto agudo y riesgos de caídas. No diagnostica ni prescribe. Los datos no se transmiten ni se almacenan.</p>
+</section></div></main>
+<script src="./assets/geriatria-escalas.js"></script>
+<script src="./assets/chatgpt-analysis.js"></script>
+<script>
+'use strict';
+(function(){
+ const kit=window.KidBumGeriatria,tools=kit.tools,$=id=>document.getElementById(id);
+ let active=null,values={},last=null;
+ function updateTheme(){const dark=document.documentElement.classList.contains('dark');$('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro'}
+ try{document.documentElement.classList.toggle('dark',localStorage.getItem('kidbum-theme')==='dark')}catch{}
+ updateTheme();
+ $('theme').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}updateTheme()};
+ const picker=$('picker');for(const t of tools){const o=document.createElement('option');o.value=t.id;o.textContent=t.title;picker.add(o)}
+ function select(id){
+  active=tools.find(t=>t.id===id)||tools[0];picker.value=active.id;values={};last=null;
+  $('tool-title').textContent=active.title;$('tool-intro').textContent=active.short;
+  $('position').textContent=(tools.indexOf(active)+1)+' / '+tools.length;
+  $('warning').textContent=active.warning;$('source').href=active.source;
+  $('example-note').hidden=true;draw();render();
+  try{history.replaceState(null,'','#'+active.id)}catch{}
+ }
+ function draw(){
+  $('fields').replaceChildren();
+  for(const f of active.fields){
+   const row=document.createElement('div');row.className='field';
+   const label=document.createElement('label');label.textContent=f.label;label.htmlFor='ger-'+f.key;
+   const input=document.createElement(f.type==='choice'?'select':'input');input.id='ger-'+f.key;
+   if(f.type==='choice'){
+    const empty=document.createElement('option');empty.value='';empty.textContent='Seleccionar respuesta documentada';input.add(empty);
+    for(const [value,text] of f.options){const o=document.createElement('option');o.value=value;o.textContent=text;input.add(o)}
+   }else{input.type='number';input.inputMode='decimal';input.min=f.min;input.max=f.max;input.step='any';input.placeholder='Valor medido';}
+   input.value=values[f.key]??'';
+   input.onchange=()=>{values[f.key]=input.value;onInputChanged()};
+   input.oninput=()=>{if(f.type==='number'){values[f.key]=input.value;onInputChanged()}};
+   row.append(label,input);
+   if(f.help){const help=document.createElement('small');help.textContent=f.help;row.append(help)}
+   $('fields').append(row);
+  }
+  onInputChanged();
+ }
+ function onInputChanged(){
+  if(active.id==='tug'){
+   const seconds=$('ger-seconds'),row=seconds?.closest('.field');
+   const unable=values.status==='unable';
+   if(row)row.hidden=unable;
+   if(seconds&&unable){seconds.value='';delete values.seconds}
+  }
+  render();
+ }
+ function render(){
+  last=kit.evaluate(active,values);
+  const score=$('score'),interpretation=$('interpretation'),detail=$('detail');
+  if(!last){score.textContent='Evaluación pendiente';interpretation.textContent='Completa todas las respuestas requeridas, sin asumir datos normales.';detail.textContent='';$('copy').disabled=true;return}
+  score.textContent=last.display;interpretation.textContent=last.interpretation;detail.textContent=last.detail||'';$('copy').disabled=false;
+ }
+ picker.onchange=()=>select(picker.value);
+ $('example').onclick=()=>{values={...kit.examples[active.id]};$('example-note').hidden=false;draw();render()};
+ $('reset').onclick=()=>{values={};$('example-note').hidden=true;draw();render()};
+ $('copy').onclick=async()=>{
+  if(!last)return;
+  const summary='KidBum CALC · Geriatría\n'+active.title+'\nResultado: '+last.display+'\nInterpretación: '+last.interpretation+'\n'+last.detail+'\nPrecaución: '+active.warning+'\nEvaluación clínica y protocolo institucional imprescindibles.';
+  try{await navigator.clipboard.writeText(summary);$('copy').textContent='✓ Copiado';}catch{$('copy').textContent='No se pudo copiar'}
+ };
+ const analysis=KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>last?({
+  title:active.title,result:last.display,interpretation:last.interpretation,details:last.detail,warning:active.warning
+ }):null});
+ function refreshAi(){analysis.update?.()}
+ const oldRender=render;
+ render=function(){oldRender();refreshAi()};
+ select(decodeURIComponent(location.hash.replace(/^#/,'')));
+ window.addEventListener('hashchange',()=>{const id=decodeURIComponent(location.hash.slice(1));if(id!==active.id)select(id)});
+})();
+</script></body></html>
