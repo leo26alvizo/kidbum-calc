@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#125d69">
+<title>Capurro · Edad gestacional neonatal | KidBum CALC</title>
+<style>
+:root{color-scheme:light;--bg:#f0f5f5;--card:#fff;--ink:#173744;--muted:#5b7480;--border:#d7e5e7;--tint:#e8f5f3;--accent:#087f88;--accentText:#fff;--shadow:0 8px 26px #102f3b10}
+html.dark{color-scheme:dark;--bg:#081c2a;--card:#112c3c;--ink:#eef8fa;--muted:#b9d1dc;--border:#32536a;--tint:#183e4a;--accent:#7bdde0;--accentText:#09232e;--shadow:0 8px 26px #00000024}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:920px;margin:auto;padding:16px 15px 65px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:5px 0 20px}
+nav a{color:var(--accent);font-weight:800;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.theme,.secondary{background:var(--card);color:var(--ink);border:1px solid var(--border);border-radius:11px;padding:10px 14px;font-weight:750}
+.hero{position:relative;isolation:isolate;overflow:hidden;background-color:#163f4c;background-image:linear-gradient(95deg,rgba(6,37,52,.96),rgba(10,74,81,.8) 64%,rgba(21,87,89,.35)),url('./assets/pediatria-portada.webp');background-position:center;background-size:cover;color:#fff;border-radius:24px;padding:clamp(24px,5vw,45px);box-shadow:var(--shadow)}
+.eyebrow{font-size:.78rem;color:#bce8e5;letter-spacing:.15em;font-weight:850}
+h1{font:750 clamp(2.2rem,7vw,3.6rem)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.03em;margin:12px 0}
+.hero p{max-width:570px;color:#e7f5f3;margin:0}
+.panels{display:grid;grid-template-columns:minmax(0,1fr);gap:17px;margin-top:20px}
+section{border:1px solid var(--border);background:var(--card);padding:clamp(17px,3vw,27px);border-radius:19px;box-shadow:var(--shadow)}
+h2{font-size:1.22rem;line-height:1.3;margin:0 0 9px}
+.muted{color:var(--muted);margin:0 0 15px}
+.mode-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:15px 0}
+.mode{display:flex;flex-direction:column;align-items:start;text-align:left;justify-content:center;gap:5px;padding:14px;border:1px solid var(--border);border-radius:13px;background:var(--card);color:var(--ink);font-weight:800;min-height:94px}
+.mode small{font-weight:500;color:var(--muted)}
+.mode[aria-pressed=true]{background:var(--tint);border:2px solid var(--accent);padding:13px}
+.note{background:var(--tint);padding:13px 15px;border-radius:11px;border-left:4px solid var(--accent);font-size:.91rem;line-height:1.55}
+.progress-label{display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-weight:750;font-size:.87rem;margin:15px 0 6px}
+progress{width:100%;height:10px;accent-color:var(--accent)}
+fieldset{padding:17px 0;border:0;border-bottom:1px solid var(--border);margin:0}
+fieldset:last-child{border-bottom:0}
+legend{font-weight:800;font-size:1.04rem;padding:0 0 9px}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.choice{display:flex;align-items:flex-start;justify-content:space-between;gap:11px;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--border);border-radius:11px;padding:11px;min-height:75px;font-size:.86rem;line-height:1.35}
+.choice span{flex:1}
+.choice b{font-size:.85rem;white-space:nowrap;background:var(--tint);border-radius:8px;padding:3px 6px}
+.choice[aria-pressed=true]{border-color:var(--accent);background:var(--tint);box-shadow:inset 0 0 0 1px var(--accent)}
+.choice:focus-visible,.mode:focus-visible,.theme:focus-visible,.secondary:focus-visible,.primary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.result{background:var(--tint);padding:19px;border-radius:15px;margin-top:16px;min-height:130px}
+.result .big{font-weight:850;font-size:clamp(1.5rem,6vw,2.4rem);letter-spacing:-.025em}
+.result p{margin:6px 0;color:var(--ink)}
+#formula{color:var(--muted);font-size:.87rem}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.primary{border:1px solid var(--accent);background:var(--accent);color:var(--accentText);padding:11px 16px;border-radius:11px;font-weight:800}
+.sources{font-size:.88rem}
+.sources a{color:var(--accent)}
+@media(max-width:520px){.mode-options,.choices{grid-template-columns:1fr}.mode{min-height:78px}.choice{min-height:58px}.hero{min-height:250px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+@media print{nav,.actions{display:none}body{background:#fff;color:#132d35}section{box-shadow:none;break-inside:avoid}.panels{gap:10px}main{max-width:100%}}
+</style>
+</head>
+<body>
+<main>
+<nav><a href="./index.html">← KidBum CALC / Pediatría</a><button class="theme" type="button" id="theme">☀ Tema claro</button></nav>
+<header class="hero">
+<div class="eyebrow">PEDIATRÍA · NEONATOLOGÍA</div>
+<h1>Capurro · edad gestacional</h1>
+<p>Estimación clínica por madurez somática y neurológica del recién nacido, con selección de hallazgos, resultado en semanas y días e interpretación de la NOM-007.</p>
+</header>
+<div class="panels">
+<section>
+<h2>01 / Elige el método</h2>
+<p class="muted">Ambas variantes son estimaciones posnatales. Usa la datación obstétrica confiable como referencia cuando esté disponible.</p>
+<div class="mode-options" role="group" aria-label="Variante de Capurro">
+<button class="mode" type="button" data-mode="neuro" aria-pressed="true">Somático-neurológico <small>4 datos físicos + bufanda + cabeza en gota · K = 200 días</small></button>
+<button class="mode" type="button" data-mode="somatic" aria-pressed="false">Somático <small>5 datos físicos, sin valoración neurológica · K = 204 días</small></button>
+</div>
+<div class="note" id="mode-note">Para RN clínicamente estable, sin alteración neuromuscular, generalmente después de 12 horas de vida. Si existe disfunción neurológica, considera el método exclusivamente somático.</div>
+</section>
+<section>
+<div class="progress-label"><span>02 / Exploración dirigida</span><span id="progress-text">0 de 6 evaluados</span></div>
+<progress id="progress" max="6" value="0"></progress>
+<div id="fields" aria-label="Hallazgos de Capurro"></div>
+</section>
+<section>
+<h2>03 / Edad gestacional estimada</h2>
+<div class="result" aria-live="polite" role="status">
+<div class="big" id="result">Completa la exploración</div>
+<p id="classification">Las respuestas sin evaluar no se consideran normales.</p>
+<div id="formula">Selecciona un hallazgo en cada criterio.</div>
+</div>
+<div class="actions">
+<button class="secondary" id="reset" type="button">Reiniciar</button>
+<button class="primary" id="copy" type="button" disabled>Copiar resultado</button>
+</div>
+<p class="muted" style="margin-top:15px">Estimación orientativa, con error clínico aproximado de 1–2 semanas según condiciones y método. No sustituye la datación obstétrica, la valoración neonatal ni Ballard cuando sea más apropiado.</p>
+</section>
+<section class="sources">
+<h2>Seguridad clínica y referencias</h2>
+<p class="muted">En recién nacidos muy prematuros, críticos, con edema, malformaciones, sedación o hallazgos discordantes, la estimación por Capurro puede ser poco confiable. Verifica con antecedente obstétrico, ultrasonido temprano y valoración especializada. La clasificación utiliza los intervalos publicados en el Apéndice H de la NOM-007-SSA2-2016; no es una indicación de alta o ingreso por sí sola.</p>
+<p><a href="https://sidof.segob.gob.mx/notas/docFuente/5432289" target="_blank" rel="noopener noreferrer">NOM-007-SSA2-2016, Apéndice H</a> · <a href="https://www3.paho.org/hq/dmdocuments/2009/Cuaderno%20de%20Trabajo.pdf" target="_blank" rel="noopener noreferrer">OPS/CLAP, método de Capurro</a>.</p>
+</section>
+</div>
+</main>
+<script>
+'use strict';
+const CAPURRO_FIELDS={
+ ear:{label:'Forma del pabellón auricular',options:[[0,'Aplanada, sin incurvación'],[8,'Parte del borde superior incurvada'],[16,'Todo el borde superior incurvado'],[24,'Pabellón totalmente incurvado']]},
+ mammary:{label:'Tamaño de glándula mamaria',options:[[0,'No palpable'],[5,'Palpable, menor de 5 mm'],[10,'Diámetro de 5 a 10 mm'],[15,'Diámetro mayor de 10 mm']]},
+ nipple:{label:'Formación del pezón',options:[[0,'Apenas visible, sin areola'],[5,'Bien definido; areola lisa y chata, menor de 7.5 mm'],[10,'Areola punteada, borde no elevado'],[15,'Areola punteada, borde elevado']]},
+ skin:{label:'Textura de la piel',options:[[0,'Muy fina, gelatinosa'],[5,'Fina y lisa'],[10,'Algo gruesa, descamación superficial discreta'],[15,'Gruesa, grietas superficiales y descamación de manos/pies'],[20,'Gruesa, apergaminada, con grietas profundas']]},
+ soles:{label:'Surcos plantares',options:[[0,'Sin pliegues'],[5,'Marcas poco definidas en mitad anterior'],[10,'Marcas definidas en mitad anterior, surcos en tercio anterior'],[15,'Surcos sobre la mitad anterior'],[20,'Surcos profundos que sobrepasan la mitad anterior']]},
+ scarf:{label:'Signo de la bufanda',options:[[0,'Codo alcanza o sobrepasa axila contralateral'],[6,'Codo entre axila contralateral y línea media'],[12,'Codo a nivel de línea media'],[18,'Codo no alcanza la línea media']]},
+ head:{label:'Signo de cabeza en gota',options:[[0,'Cabeza cae completamente, sin intento de sostén'],[4,'Intenta sostenerla, sin lograr levantarla'],[8,'Elevación débil de cabeza hasta altura de hombros'],[12,'Eleva y sostiene la cabeza por encima de hombros']]}
+};
+const CAPURRO_MODES={
+ somatic:{keys:['ear','mammary','nipple','skin','soles'],constant:204},
+ neuro:{keys:['ear','mammary','skin','soles','scarf','head'],constant:200}
+};
+function capurroCalculate(mode,selections){
+ const method=CAPURRO_MODES[mode];if(!method)throw Error('Método de Capurro inválido');
+ const complete=method.keys.every(key=>Object.prototype.hasOwnProperty.call(selections,key)&&CAPURRO_FIELDS[key].options.some(item=>item[0]===selections[key]));
+ if(!complete)return null;
+ const points=method.keys.reduce((sum,key)=>sum+selections[key],0);
+ const days=points+method.constant;
+ return {points,days,weeks:Math.floor(days/7),remainingDays:days%7,classification:days<260?'Pretérmino':days<=294?'A término':'Postérmino'};
+}
+const $=id=>document.getElementById(id);
+let mode='neuro',selections={},copyText='';
+function renderFields(){
+ const method=CAPURRO_MODES[mode],root=$('fields');root.replaceChildren();
+ for(const key of method.keys){
+  const f=CAPURRO_FIELDS[key],group=document.createElement('fieldset');
+  const legend=document.createElement('legend');legend.textContent=f.label;group.append(legend);
+  const choices=document.createElement('div');choices.className='choices';
+  for(const [points,description] of f.options){
+   const btn=document.createElement('button');btn.type='button';btn.className='choice';btn.setAttribute('aria-pressed',String(selections[key]===points));
+   btn.setAttribute('aria-label',description+'; '+points+' puntos');
+   const label=document.createElement('span');label.textContent=description;
+   const score=document.createElement('b');score.textContent='+'+points;
+   btn.append(label,score);
+   btn.addEventListener('click',()=>{selections[key]=points;renderFields();renderResult()});
+   choices.append(btn);
+  }
+  group.append(choices);root.append(group);
+ }
+}
+function renderResult(){
+ const method=CAPURRO_MODES[mode],done=method.keys.filter(k=>Object.prototype.hasOwnProperty.call(selections,k)).length;
+ $('progress').max=method.keys.length;$('progress').value=done;
+ $('progress-text').textContent=done+' de '+method.keys.length+' evaluados';
+ const score=capurroCalculate(mode,selections);
+ if(!score){$('result').textContent='Faltan '+(method.keys.length-done)+' criterios';$('classification').textContent='Completa los hallazgos antes de interpretar la edad gestacional.';$('formula').textContent='Puntajes no seleccionados ≠ 0 puntos';copyText='';$('copy').disabled=true;return}
+ $('result').textContent=score.weeks+' semanas + '+score.remainingDays+' días';
+ $('classification').textContent=score.classification+' según los intervalos del Apéndice H, NOM-007-SSA2-2016';
+ $('formula').textContent=score.points+' puntos + K '+method.constant+' = '+score.days+' días gestacionales';
+ copyText='Capurro '+(mode==='somatic'?'somático':'somático-neurológico')+'\n'+score.points+' puntos + '+method.constant+' = '+score.days+' días\n'+score.weeks+' semanas + '+score.remainingDays+' días\n'+score.classification+' (NOM-007-SSA2-2016). Estimación clínica.';
+ $('copy').disabled=false;
+}
+function chooseMode(m){if(!CAPURRO_MODES[m])return;mode=m;selections={};document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));$('mode-note').textContent=m==='neuro'?'Para RN clínicamente estable, sin alteración neuromuscular, generalmente después de 12 horas de vida. Si existe disfunción neurológica, considera el método exclusivamente somático.':'Emplea cinco datos somáticos cuando los signos neurológicos no sean valorables o exista disfunción neurológica; no equivale a una valoración neurológica completa.';renderFields();renderResult()}
+document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
+$('reset').addEventListener('click',()=>chooseMode(mode));
+$('copy').addEventListener('click',async()=>{if(!copyText)return;try{await navigator.clipboard.writeText(copyText);$('copy').textContent='✓ Copiado'}catch{$('copy').textContent='No se pudo copiar'}});
+function syncTheme(dark){document.documentElement.classList.toggle('dark',dark);$('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro';try{localStorage.setItem('kidbum-theme',dark?'dark':'light')}catch{}}
+let themeDark=false;try{themeDark=localStorage.getItem('kidbum-theme')==='dark'}catch{}
+syncTheme(themeDark);$('theme').addEventListener('click',()=>syncTheme(!document.documentElement.classList.contains('dark')));
+chooseMode('neuro');
+</script></body></html>
