@@ -71,3 +71,5 @@ jobs:
         run: node tests/cardio-card-images.cjs
       - name: Card imagery and SNNOOP10 theme regressions
         run: node tests/cardio-images-snnoop-theme.cjs
+      - name: Capurro neonatal clinical and illustration tests
+        run: node tests/capurro-neonatal.cjs
