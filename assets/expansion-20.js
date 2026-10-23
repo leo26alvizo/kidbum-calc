@@ -144,7 +144,7 @@ function evaluate(def,values,variant){
  const alarm=red.length?'Alerta roja':yellowUnique.length>=2?'≥2 alertas amarillas':'Sin disparadores MEOWS de esta variante';
  return out(alarm,red.length||yellowUnique.length>=2?'Evaluación materna prioritaria según protocolo institucional.':'Aun sin disparadores, investigar síntomas preocupantes.',red.length+' rojas ('+red.join(', ')+'); '+yellowUnique.length+' amarillas ('+yellowUnique.join(', ')+').');
  }
- if(def.kind==='sum'){const total=fields.reduce((s,f)=>s+num(f.key),0);const cutoff=model.cutoffs||def.cutoffs||[];const label=(cutoff.find(([max])=>total<=max)||cutoff[cutoff.length-1]||[0,'Puntuación obtenida'])[1];return out(total+' puntos',label,'Puntaje bruto validado a partir de '+fields.length+' componentes.');}
+ if(def.kind==='sum'){const total=fields.reduce((s,f)=>s+(f.type==='choice'&&f.options.some(x=>x[0]==='yes')?(yes(f.key)?1:0):num(f.key)),0);const cutoff=model.cutoffs||def.cutoffs||[];const label=(cutoff.find(([max])=>total<=max)||cutoff[cutoff.length-1]||[0,'Puntuación obtenida'])[1];return out(total+' puntos',label,'Puntaje bruto validado a partir de '+fields.length+' componentes.');}
  throw Error('Implementación clínica no disponible');
 }
 global.KidBum20=Object.freeze({tools:T,active,evaluate,sources});
