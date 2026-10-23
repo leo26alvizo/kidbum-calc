@@ -2,9 +2,16 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.23**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.24**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Navegación móvil v0.10.24 — acceso directo a Inicio
+
+- La barra de navegación inferior cambia la pestaña Guardia por Inicio, con ícono de casa accesible.
+- Al tocar Inicio regresa a la portada y restaura Todas las especialidades y búsqueda vacía.
+- Favoritos, Historias y Acerca de mantienen su posición y funcionalidad. El Modo Guardia del menú lateral y las calculadoras permanecen sin cambios.
+- La PWA actualiza la clave del caché para que el cambio se publique también en la app instalada y permanezca disponible sin Internet.
 
 ## Geriatría v0.10.23 — ocho nuevas herramientas para valoración geriátrica integral
 
