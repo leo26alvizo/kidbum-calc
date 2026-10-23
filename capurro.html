@@ -86,6 +86,7 @@ legend{font-weight:800;font-size:1.04rem;padding:0 0 9px}
 <button class="secondary" id="reset" type="button">Reiniciar</button>
 <button class="primary" id="copy" type="button" disabled>Copiar resultado</button>
 </div>
+<div id="kb-ai-mount"></div>
 <p class="muted" style="margin-top:15px">Estimación orientativa, con error clínico aproximado de 1–2 semanas según condiciones y método. No sustituye la datación obstétrica, la valoración neonatal ni Ballard cuando sea más apropiado.</p>
 </section>
 <section class="sources">
@@ -95,7 +96,7 @@ legend{font-weight:800;font-size:1.04rem;padding:0 0 9px}
 </section>
 </div>
 </main>
-<script>
+<script src="./assets/chatgpt-analysis.js"></script><script>
 'use strict';
 const CAPURRO_FIELDS={
  ear:{label:'Forma del pabellón auricular',options:[[0,'Aplanada, sin incurvación'],[8,'Parte del borde superior incurvada'],[16,'Todo el borde superior incurvado'],[24,'Pabellón totalmente incurvado']]},
@@ -120,6 +121,16 @@ function capurroCalculate(mode,selections){
 }
 const $=id=>document.getElementById(id);
 let mode='neuro',selections={},copyText='';
+const capurroAi=window.KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>{
+ const result=capurroCalculate(mode,selections);if(!result)return null;
+ return {
+ title:'Capurro '+(mode==='somatic'?'somático':'somático-neurológico'),
+ result:result.weeks+' semanas y '+result.remainingDays+' días ('+result.days+' días gestacionales)',
+ interpretation:result.classification+' según NOM-007-SSA2-2016, Apéndice H',
+ details:result.points+' puntos + K '+CAPURRO_MODES[mode].constant+' días. Método '+mode,
+ warning:'Estimación clínica neonatal. Puede ser imprecisa en RN muy prematuros, críticos, sedados o con alteraciones neurológicas; confirmar con datación obstétrica fiable y equipo neonatal.'
+ };
+}});
 function renderFields(){
  const method=CAPURRO_MODES[mode],root=$('fields');root.replaceChildren();
  for(const key of method.keys){
@@ -143,12 +154,12 @@ function renderResult(){
  $('progress').max=method.keys.length;$('progress').value=done;
  $('progress-text').textContent=done+' de '+method.keys.length+' evaluados';
  const score=capurroCalculate(mode,selections);
- if(!score){$('result').textContent='Faltan '+(method.keys.length-done)+' criterios';$('classification').textContent='Completa los hallazgos antes de interpretar la edad gestacional.';$('formula').textContent='Puntajes no seleccionados ≠ 0 puntos';copyText='';$('copy').disabled=true;return}
+ if(!score){$('result').textContent='Faltan '+(method.keys.length-done)+' criterios';$('classification').textContent='Completa los hallazgos antes de interpretar la edad gestacional.';$('formula').textContent='Puntajes no seleccionados ≠ 0 puntos';copyText='';$('copy').disabled=true;capurroAi.setReady(false);return}
  $('result').textContent=score.weeks+' semanas + '+score.remainingDays+' días';
  $('classification').textContent=score.classification+' según los intervalos del Apéndice H, NOM-007-SSA2-2016';
  $('formula').textContent=score.points+' puntos + K '+method.constant+' = '+score.days+' días gestacionales';
  copyText='Capurro '+(mode==='somatic'?'somático':'somático-neurológico')+'\n'+score.points+' puntos + '+method.constant+' = '+score.days+' días\n'+score.weeks+' semanas + '+score.remainingDays+' días\n'+score.classification+' (NOM-007-SSA2-2016). Estimación clínica.';
- $('copy').disabled=false;
+ $('copy').disabled=false;capurroAi.setReady(true);
 }
 function chooseMode(m){if(!CAPURRO_MODES[m])return;mode=m;selections={};document.querySelectorAll('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.mode===mode)));$('mode-note').textContent=m==='neuro'?'Para RN clínicamente estable, sin alteración neuromuscular, generalmente después de 12 horas de vida. Si existe disfunción neurológica, considera el método exclusivamente somático.':'Emplea cinco datos somáticos cuando los signos neurológicos no sean valorables o exista disfunción neurológica; no equivale a una valoración neurológica completa.';renderFields();renderResult()}
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>chooseMode(b.dataset.mode)));
