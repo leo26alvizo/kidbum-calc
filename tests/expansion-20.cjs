@@ -29,7 +29,7 @@ assert.match(run('pecarn',{fracture:'yes'},'infant').display,/alto riesgo/);
 assert.match(run('pecarn',{vomit:'yes'},'older').display,/intermedio/);
 assert.match(run('silverman',{}).display,/0 puntos/);
 assert.match(run('pram',{sat:'2',supra:'2',scalene:'2',air:'3',wheeze:'3'}).display,/12 puntos/);
-assert.match(run('ballard',{}).display,/24.0 semanas/);
+assert.match(run('ballard',Object.fromEntries(Array.from({length:12},(_,i)=>['b'+i,'0']))).display,/24.0 semanas/);
 assert.match(run('kdigo',{baseline:'1',current:'2',within7:'yes',delta48:'no',urine:'0',rrt:'no'}).display,/estadio 2/);
 assert.match(run('kdigo',{baseline:'1',current:'1',within7:'no',delta48:'yes',urine:'0',rrt:'no'}).display,/estadio 1/);
 assert.match(run('heart',{}).display,/0 puntos/);
