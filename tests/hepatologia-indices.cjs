@@ -38,7 +38,7 @@ assert.equal(evaluate('rfactor',{...examples.rfactor,alpUln:'0'}),null,'Cannot d
 assert.match(evaluate('deritis',{ast:'80',alt:'40'}).value,/2.00/);
 assert.match(evaluate('apri',{ast:'80',astUln:'40',platelets:'200'}).value,/1.00/);
 assert.equal(evaluate('apri',{ast:'80',astUln:'40',platelets:'0'}),null);
-function fromValue(s){return Number(s.replace(/\./g,'').replace(',','.').replace(/\/100|\s*×|\s*segundos/g,''));}
+function fromValue(s){return Number(s.replace(/\/100|\s*×|\s*segundos/g,'').replace(/[^0-9.,-]/g,'').replace(/,/g,''));}
 const albi=evaluate('albi',{bilirubin:'1',albumin:'4'});
 const calculated=0.66*Math.log10(17.104)-0.085*40;
 almost(fromValue(albi.value.replace('ALBI ','')),Number(calculated.toFixed(3)),0.000001);
