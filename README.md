@@ -2,9 +2,22 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.24**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.25**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Hepatología v0.10.25 — Factor R y cinco índices hepáticos
+
+Hepatología pasa de 3 a **9 calculadoras**; toda KidBum de 118 a **124**. Se conservan sin duplicar FIB-4, Child-Pugh y MELD 3.0.
+
+- **Factor R**: (ALT/LSN ALT) / (fosfatasa alcalina/LSN FA), con clasificación ≤2 colestásica, 2<R<5 mixta, ≥5 hepatocelular y aviso cuando no hay elevaciones bioquímicas. No diagnostica DILI. Fuente: AASLD 2023/LiverTox.
+- **Cociente AST/ALT (De Ritis)**: relación aritmética, sin adjudicación etiológica automática.
+- **APRI**: (AST/LSN AST) ×100/plaquetas (10⁹/L), sin estadificación universal fuera de contexto.
+- **ALBI**: 0.66 × log10(bilirrubina en µmol/L) − 0.085 × albúmina g/L; admite mg/dL y g/dL y los convierte de manera explícita; clasifica grados 1–3.
+- **FLI**: modelo logístico original para esteatosis basado en IMC, cintura, triglicéridos en mg/dL y GGT.
+- **NFS histórico**: fórmula de Angulo con edad, IMC, IFG/diabetes, AST/ALT, plaquetas y albúmina; FIB-4 suele ser el primer escalón actual de evaluación de MASLD.
+
+Todas las calculadoras tienen datos de ejemplo totalmente ficticios, referencias verificables, resultados locales, validación estricta, avisos de seguridad y precarga PWA para abrirse sin Internet. Véase `tests/hepatologia-indices.cjs`. Ninguna herramienta confirma diagnósticos ni reemplaza protocolos o valoración médica.
 
 ## Navegación móvil v0.10.24 — acceso directo a Inicio
 
@@ -79,7 +92,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 118 calculadoras y herramientas en 13 categorías: 84 integradas y 34 independientes.**
+**Total actual: 124 calculadoras y herramientas en 13 categorías: 84 integradas y 40 independientes.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
