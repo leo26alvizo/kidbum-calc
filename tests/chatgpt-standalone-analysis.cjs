@@ -20,7 +20,7 @@ for(const path of files){
  assert.match(html,/src="\.\/assets\/chatgpt-analysis\.js"/,path+' library');
  assert.match(html,/KidBumAnalysis\.attach\(/,path+' actual handler');
  assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\((?:true|total>0)\)/,path+' enables on result');
- assert.match(html,path==='geriatria-escalas.html'?/\.setReady\(Boolean\(last\)\)/:/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
+ assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
  for(const match of html.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g)){if(match[1].trim())new vm.Script(match[1],{filename:path})}
 }
 const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-selector"/);assert.match(index,/function buildAnalysisPrompt/);
