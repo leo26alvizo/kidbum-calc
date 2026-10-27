@@ -1,0 +1,100 @@
+'use strict';
+/* Audit source-scoped monographs against approved fixtures, fail-closed input,
+   and guards preventing display of unsupported regimens. */
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const source=fs.readFileSync('assets/pharma-pro-monographs.js','utf8');
+const ui=fs.readFileSync('assets/pharma-pro-monographs-ui.js','utf8');
+const parent=fs.readFileSync('assets/pharma-pro-ui.js','utf8');
+const core=fs.readFileSync('assets/pharma-pro-core.js','utf8');
+const page=fs.readFileSync('pharma-pro.html','utf8');
+const home=fs.readFileSync('index.html','utf8');
+const sw=fs.readFileSync('sw.js','utf8');
+new vm.Script(source);new vm.Script(ui);new vm.Script(parent);
+const ctx={window:{}};vm.runInNewContext(source,ctx,{timeout:4000});
+const m=ctx.window.KidBumPharmaMonographs;
+assert.ok(m);
+assert.deepEqual(Array.from(m.records,x=>x.id),['ceftriaxona','enoxaparina','insulina-glargina']);
+for(const x of m.records){
+ assert.ok(x.source.url.startsWith('https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid='));
+ assert.equal(x.source.url.split('setid=')[1],x.source.setid);
+ assert.ok(x.source.version>0&&/^\d{4}-\d{2}-\d{2}$/.test(x.source.effective));
+ assert.match(x.jurisdiction,/México/);
+ assert.match(x.status,/parcial/i);
+ assert.ok(x.cautions.length>=3&&x.monitoring.length>=2);
+ assert.ok(x.regimens.every(y=>y.reference&&y.context&&y.constraints.length>=2));
+ assert.ok(x.regimens.every(y=>y.id&&y.indication&&y.population&&y.route));
+ assert.equal(m.check(x.id,{}).status,'blocked','no defaults for '+x.id);
+ assert.equal(m.check(x.id,{population:'neonate',indication:'x',allergy:'no'}).status,'blocked','neonatal blocked');
+ assert.equal(m.check(x.id,{population:'child',indication:'x',allergy:'no'}).status,'blocked','ambiguous population blocked');
+ assert.equal(m.check(x.id,{population:'adult',indication:'wrong',route:'sc',allergy:'no'}).status,'blocked','wrong indication blocked');
+ assert.equal(m.check(x.id,{population:'adult',indication:'',route:'sc',allergy:'no'}).status,'blocked','no unspecified indication');
+}
+const cefAdult={population:'adult',indication:'adult-general',route:'iv',allergy:'no',combinedSevereImpairment:'no',calciumIV:'no'};
+let r=m.check('ceftriaxona',cefAdult);
+assert.equal(r.status,'reference');
+assert.match(r.regimen.reference,/1–2 g al día/);
+assert.match(r.regimen.reference,/4 g\/día/);
+assert.equal(m.check('ceftriaxona',{...cefAdult,route:'sc'}).status,'blocked','ceftriaxone cannot be SC');
+assert.equal(m.check('ceftriaxona',{...cefAdult,route:'unknown'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,calciumIV:'yes'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,calciumIV:'unknown'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,combinedSevereImpairment:'yes'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,allergy:'unknown'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,allergy:'yes'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',{...cefAdult,population:'pediatric'}).status,'blocked');
+const cefChild={...cefAdult,population:'pediatric',indication:'pediatric-skin',route:'iv',weightVerified:'yes'};
+r=m.check('ceftriaxona',cefChild);assert.equal(r.status,'reference');
+assert.match(r.regimen.reference,/50–75 mg\/kg\/DÍA/);assert.match(r.regimen.reference,/máximo 2 g\/día/);
+assert.equal(m.check('ceftriaxona',{...cefChild,weightVerified:'unknown'}).status,'blocked');
+const cefAom={...cefChild,indication:'pediatric-aom',route:'im'};
+r=m.check('ceftriaxona',cefAom);assert.equal(r.status,'reference');
+assert.match(r.regimen.reference,/50 mg\/kg/);
+assert.equal(m.check('ceftriaxona',{...cefAom,route:'iv'}).status,'blocked','IM-only AOM');
+assert.equal(m.check('ceftriaxona',{...cefAom,indication:'meningitis'}).status,'blocked','unreviewed pediatric indication');
+assert.ok(m.indications('ceftriaxona','neonate').length===0);
+const enox={population:'adult',indication:'medical-prophy',route:'sc',allergy:'no',renal:'ge30',kidneyStable:'yes',bleeding:'no',hit:'no',neuroaxial:'no'};
+r=m.check('enoxaparina',enox);assert.equal(r.status,'reference');assert.match(r.regimen.reference,/40 mg/);
+assert.equal(m.check('enoxaparina',{...enox,renal:'lt30'}).status,'reference');
+assert.match(m.check('enoxaparina',{...enox,renal:'lt30'}).regimen.reference,/30 mg/);
+r=m.check('enoxaparina',{...enox,indication:'dvt-inpatient'});assert.equal(r.status,'reference');
+assert.match(r.regimen.reference,/1 mg\/kg cada 12 h/);
+r=m.check('enoxaparina',{...enox,indication:'dvt-inpatient',renal:'lt30'});assert.equal(r.status,'reference');
+assert.match(r.regimen.reference,/1 mg\/kg subcutáneo UNA vez/);
+for(const key of ['renal','kidneyStable','bleeding','hit','neuroaxial','route','allergy','indication']){
+ const input={...enox};delete input[key];assert.equal(m.check('enoxaparina',input).status,'blocked','no defaults '+key);
+}
+assert.equal(m.check('enoxaparina',{...enox,renal:'unknown'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,kidneyStable:'no'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,bleeding:'yes'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,hit:'yes'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,neuroaxial:'yes'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,population:'pediatric'}).status,'blocked');
+assert.equal(m.check('enoxaparina',{...enox,route:'iv'}).status,'blocked');
+const toujeo={population:'adult',indication:'adult-t2-naive',route:'sc',allergy:'no',formulation:'u300',type:'t2',prior:'no',hypoglycemia:'no'};
+r=m.check('insulina-glargina',toujeo);assert.equal(r.status,'reference');assert.match(r.regimen.reference,/0.2 unidades\/kg/);
+for(const [key,val] of [['formulation','u100'],['formulation','unknown'],['type','t1'],['prior','yes'],['prior','unknown'],['hypoglycemia','yes'],['hypoglycemia','unknown'],['route','iv'],['allergy','yes'],['population','pediatric']]){
+ assert.equal(m.check('insulina-glargina',{...toujeo,[key]:val}).status,'blocked','Toujeo guard '+key+'/'+val);
+}
+assert.equal(m.check('insulina-glargina',{...toujeo,indication:'adult-t1'}).status,'blocked');
+assert.equal(m.check('ceftriaxona',null).status,'blocked');
+assert.equal(m.check('unknown',toujeo).status,'absent');
+assert.equal(m.indications('insulina-glargina','neonate').length,0);
+assert.match(ui,/No se generan órdenes, no se calculan mg por paciente/); // UI disclaimer
+assert.ok(!/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/.test(source));
+assert.ok(!/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/.test(ui));
+assert.match(ui,/document\.createElement/);
+assert.match(ui,/show.*referencia/i);
+assert.match(parent,/KidBumPharmaMonographUI\.render\(id\)/);
+assert.match(parent,/Referencia posológica parcial/);
+assert.match(page,/assets\/pharma-pro-monographs\.js/);
+assert.match(page,/assets\/pharma-pro-monographs-ui\.js/);
+const scriptPaths=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
+assert.deepEqual(scriptPaths,['assets/pharma-pro-core.js','assets/pharma-pro-monographs.js','assets/pharma-pro-monographs-ui.js','assets/pharma-pro-ui.js']);
+for(const path of scriptPaths)assert.ok(sw.includes("'./"+path+"'"),'offline '+path);
+assert.match(sw,/monographs-v01030/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.30"/);
+assert.match(home,/SNNOOP10:[^]*?Simulador de pares craneales oculomotores[^]*?Biblioteca farmacológica · Pharma Pro/);
+assert.doesNotMatch(home,/data-mobile-nav="guard"/);
+const basic={window:{}};vm.runInNewContext(core,basic,{timeout:5000});
+assert.equal(basic.window.KidBumPharmaCore.records.length,46,'46 catalog records preserved');
+console.log('Pharma monographs PASS: 3 primary labels, 6 exact indication/renal regimens, no neonatal dose, allergy/formulation/route/renal gates, source provenance, offline links, no prescription.');
