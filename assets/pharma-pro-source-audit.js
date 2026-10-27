@@ -56,7 +56,7 @@ const entries=[
    reference:'Pauta de referencia de etiqueta: 500 mg VO cada 12 h O 250 mg VO cada 8 h, para infecciones bacterianas susceptibles de oído/nariz/garganta, piel y tracto genitourinario de gravedad leve-moderada.',
    context:'No selecciona duración ni antimicrobiano óptimo. Es imprescindible diagnóstico confirmado/probable y sensibilidad/resistencia; NO extrapolar a neumonía u otros escenarios.',constraints:['Adulto >40 kg, infección bacteriana susceptible del ámbito indicado','Función renal estable documentada ≥30 mL/min; revisar resistencia regional']}]},
  {id:'omeprazol',name:'Omeprazol de liberación retardada (cápsulas)',status:'Referencia etiquetada cotejada · revisión clínica externa pendiente',
-  jurisdiction:'Etiqueta estadounidense de cápsulas de omeprazol delayed-release; otras formulaciones pueden diferir.',
+  jurisdiction:'Etiqueta estadounidense de cápsulas de omeprazol delayed-release; NO demuestra autorización ni equivalencia de presentación en México.',
   source:SRC('ed9895ae-3d18-434c-8b56-47bccdc8fe6d','Omeprazole delayed-release capsules USP · PD-RX',51,'2026-10-15'),
   formulation:'Cápsulas de liberación retardada para vía oral, no formulación IV, tableta OTC ni mezcla con bicarbonato.',
   monitoring:['Persistencia de síntomas o signos de alarma digestiva.','Revisar duración/indicación y uso simultáneo de otros IBP.','Revisar interacciones y eventos adversos según duración.'],
