@@ -33,7 +33,7 @@ assert.ok(f('insulin-safety',{type:'t2',basal:'yes',concentration:'unknown'}).wa
 assert.equal(f('insulin-safety',{adult:'no'}).ready,false);
 assert.equal(f('insulin-safety',{dose:'-4'}).ready,false);
 assert.equal(f('insulin-safety',{dose:'NaN'}).ready,false);
-assert.ok(f('hospital-glucose',{}).metrics.below54>0);
+assert.ok(f('hospital-glucose',{}).metrics.below70>0);
 assert.equal(f('hospital-glucose',{readings:'08:00=120; 07:00=130'}).ready,false);
 assert.equal(f('hospital-glucose',{readings:'08:00=120; 08:00=130'}).ready,false);
 assert.equal(f('hospital-glucose',{readings:'08:00=<img>; 12:00=110'}).ready,false);
