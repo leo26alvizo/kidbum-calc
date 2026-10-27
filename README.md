@@ -2,9 +2,27 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.32**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.33**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro 0.10.33 · auditoría de fuentes y preparaciones por producto
+
+**Precisión editorial obligatoria:** la aplicación tiene **227 entradas de catálogo**, pero **0 monografías con validación clínica y farmacéutica independiente registrada**. Seis fichas están **cotejadas documentalmente con etiquetas US específicas**, con referencias posológicas parciales; **221 fichas permanecen sin cotejo de dosis/preparación**. Bajo ningún concepto se afirma que «227 medicamentos están validados». Etiquetado DailyMed de EE. UU. no equivale a registro/IPP del producto comercializado en México ni sustituye revisión institucional.
+
+**Nuevas fichas parcialmente cotejadas** (no prescritas automáticamente): metformina IR oral para inicio en DM2 adulta (comprobación de TFG estable ≥45, ausencia de acidosis, enfermedad aguda/hipoxia y contraste yodado pendiente); amoxicilina cápsulas orales para infección ENT/piel/GU bacteriana susceptible leve-moderada en adulto >40 kg (no extrapolar a neumonía o OMA, revisar función renal ≥30); omeprazol cápsulas de liberación retardada para ERGE sintomática adulta sin alarmas y ausencia de rilpivirina. Cada ficha exige vía, población, indicación, alergias, embarazo, formulación y contraindicaciones específicas; sin prellenado de respuestas. **No calcula mg/unidades por paciente**.
+
+**Preparaciones y administración, producto-específicas** (NO órdenes de preparación): ceftriaxona Hikma IV vial 1 g con cantidades de reconstitución y concentraciones etiquetadas, más cautela de calcio IV; enoxaparina Lovenox jeringa SC sin reconstitución; Toujeo U-300 pluma SC sin mezclar, diluir ni extraer a jeringa; las tres nuevas fichas orales incluyen instrucciones o limitaciones de administración, diferenciando formulaciones de liberación inmediata/retardada. Estas instrucciones **solo aparecen dentro del flujo que supera los controles**, muestran fuente primaria y una advertencia visible de que Farmacia debe validar la preparación real y producto mexicano.
+
+**Fuentes etiquetadas precisas:**
+- Ceftriaxona Hikma [DailyMed setid 8351aa37-552d-471d-b293-c564dcb6ec29](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29), v18, 2026-09-30, secciones 39–44.
+- Lovenox [setid 5017a927-2a24-4f27-89f9-27c805bf7d59](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5017a927-2a24-4f27-89f9-27c805bf7d59), v33, 2026-05-28.
+- Toujeo U-300 [setid c9561d96-124d-48ca-982f-0aa1575bff36](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c9561d96-124d-48ca-982f-0aa1575bff36), v25, 2025-05-30.
+- Metformina IR 500/850/1000 mg [setid f86bda10-8b25-4125-8bb1-1b5917969ff0](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f86bda10-8b25-4125-8bb1-1b5917969ff0), v14, 2026-09-30.
+- Amoxicilina cápsulas [setid 82c0c5d1-df2d-4352-bd12-99f955af569e](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=82c0c5d1-df2d-4352-bd12-99f955af569e), v11, 2026-10-19.
+- Omeprazol cápsulas de liberación retardada [setid ed9895ae-3d18-434c-8b56-47bccdc8fe6d](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=ed9895ae-3d18-434c-8b56-47bccdc8fe6d), v51, 2026-10-15.
+
+**Próximos requisitos antes de completar las otras 221:** verificación producto/IPP de COFEPRIS, versión de fuente, dosis por indicación/población/formulación, ajuste renal/hepático, pediatría y neonatos independientes, preparación, estabilidad, incompatibilidades, reglas de seguridad y revisión farmacéutica humana documentada. Los tests deterministas prueban restricciones de datos, NO equivalen a validación clínica profesional.
 
 ## KidBum Pharma Pro v0.10.32 · navegación rápida y seis nuevas rutas por diagnóstico
 
