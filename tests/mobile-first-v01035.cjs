@@ -1,0 +1,62 @@
+'use strict';
+/* Nonclinical responsive regression: confirms small-screen ergonomics and
+   source-order specificity without modifying any calculator logic. */
+const fs=require('node:fs'), assert=require('node:assert/strict');
+const read=p=>fs.readFileSync(p,'utf8');
+const home=read('index.html'), pharma=read('pharma-pro.html'), homeCSS=read('assets/mobile-first-v01035.css'),
+      pharmaCSS=read('assets/pharma-mobile-v01035.css'), sw=read('sw.js'), manifest=JSON.parse(read('manifest.webmanifest'));
+assert.match(home,/<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/);
+assert.match(pharma,/<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.35"/);
+assert.match(pharma,/<meta name="kidbum-app-version" content="0\.10\.35"/);
+const homeStyle=home.indexOf('</style>'),homeLink=home.indexOf('<link rel="stylesheet" href="./assets/mobile-first-v01035.css"');
+assert.ok(homeLink>homeStyle,'Responsive styles must override tablet layout, not precede it');
+const pharmaStyle=pharma.indexOf('</style>'),pharmaLink=pharma.indexOf('<link rel="stylesheet" href="./assets/pharma-mobile-v01035.css"');
+assert.ok(pharmaLink>pharmaStyle,'Pharma mobile styles must win cascade');
+assert.match(homeCSS,/@media\s*\(max-width:740px\)/);
+assert.match(homeCSS,/@media\s*\(max-width:600px\)/);
+assert.match(homeCSS,/@media\s*\(max-width:375px\)/);
+assert.match(homeCSS, /@media\s*\(min-width:741px\) and \(max-width:1024px\)/);
+assert.match(homeCSS,/\.calc-grid\s*\{grid-template-columns:minmax\(0,1fr\)/,'One column calculator list at phone width');
+assert.match(homeCSS,/\.calc-card\s*\{display:grid;grid-template-columns:101px minmax\(0,1fr\)/,'Compact horizontal mobile cards');
+assert.match(homeCSS,/\.atlas-category-grid\s*\{grid-template-columns:1fr/,'One-column phone categories');
+assert.match(homeCSS,/\.field-grid\s*\{grid-template-columns:minmax\(0,1fr\)/,'One-column phone inputs');
+assert.match(homeCSS,/\.search\s*\{order:-1/,'Search before description in mobile visual flow');
+assert.match(homeCSS,/\.search input\s*\{font-size:16px/,'iOS Safari should not zoom on search focus');
+assert.match(homeCSS,/\.control,[^\n]*font-size:16px/,'Clinical form input readable on phone');
+assert.match(homeCSS,/\.mobile-nav button\s*\{min-width:0;min-height:57px/,'Four accessible bottom targets');
+assert.match(homeCSS,/body:has\(input:focus,textarea:focus,select:focus\) \.mobile-nav\{display:none\}/,'Keyboard should not cover form fields');
+assert.match(homeCSS,/env\(safe-area-inset-bottom\)/,'Safe area respected');
+assert.match(homeCSS,/\.kb-resource-links\s*\{display:grid;grid-template-columns:1fr/,'Shortcuts become one-column on phone');
+assert.match(pharmaCSS,/@media\(max-width:740px\)/);
+assert.match(pharmaCSS,/@media\(max-width:375px\)/);
+assert.match(pharmaCSS,/main>\.hero\{display:none\}/,'Remove tablet-like promotional hero from phone');
+assert.match(pharmaCSS,/\.phone-brand\{display:block/,'Compact header preserves page identity');
+assert.match(pharmaCSS,/\.med-grid\{grid-template-columns:minmax\(0,1fr\)/);
+assert.match(pharmaCSS,/\.form-grid\{grid-template-columns:minmax\(0,1fr\)/,'Risk assessment controls in one column');
+assert.match(pharmaCSS,/\.field select,\.field input,\.field textarea\{font-size:16px;min-height:51px/);
+assert.match(pharmaCSS,/\.pharma-workspace-nav button\{font-size:12px;line-height:1\.1;min-height:52px/);
+assert.match(pharmaCSS,/\.pharma-fast-input input\{font-size:16px/);
+assert.match(pharmaCSS,/\.disease-options\{grid-template-columns:minmax\(0,1fr\)/);
+assert.match(pharmaCSS,/\.pharma-suggestions button\{min-height:50px/);
+assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.35<\/small>/);
+const shortcuts=home.match(/<div class="kb-resource-links"[^>]*>([\s\S]*?)<\/div>/);
+assert.ok(shortcuts,'All three feature shortcuts in same container');
+const links=shortcuts[1];
+const idxs=['./snnoop10.html','https://nerviosoculares.docramiro.workers.dev/','./pharma-pro.html'].map(x=>links.indexOf(x));
+assert.ok(idxs[0]>=0&&idxs[1]>idxs[0]&&idxs[2]>idxs[1],'Shortcut order preserved');
+assert.equal((links.match(/class="kb-resource-link"/g)||[]).length,3);
+assert.equal((home.match(/data-mobile-nav="/g)||[]).length,4,'Unchanged 4 bottom nav tabs');
+for(const tab of ['home','favorite','docs','about'])assert.ok(home.includes('data-mobile-nav="'+tab+'"'));
+assert.ok(!home.includes('data-mobile-nav="guard"'),'Do not restore Guardia');
+assert.ok(sw.includes("'./assets/mobile-first-v01035.css'"),'Offline main phone styling');
+assert.ok(sw.includes("'./assets/pharma-mobile-v01035.css'"),'Offline Pharma phone styling');
+assert.match(sw,/phone-first-v01035/);
+assert.equal(manifest.display,'standalone');
+for(const path of ['snnoop10.html','guardia-pro.html','capurro.html','wallace-adultos.html']){
+ assert.match(read(path),/width=device-width/,'Standalone '+path+' has responsive viewport');
+}
+const source=read('assets/pharma-pro-high-alert.js');
+assert.ok(source.includes("clinicallyApproved:0"),'Clinical review status unchanged');
+assert.ok(pharma.includes('9/227')&&pharma.includes('218/227'),'No pharmaceutical verification inflated');
+console.log('PASS mobile-first v0.10.35: one-column cards, 16px inputs, accessible bottom navigation, quick links, Pharma safety, and both PWA styles offline.');

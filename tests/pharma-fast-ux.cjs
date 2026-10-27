@@ -62,7 +62,7 @@ assert.ok(jsNames.indexOf('assets/pharma-pro-guides-plus.js')<jsNames.indexOf('a
 assert.equal(jsNames.at(-1),'assets/pharma-pro-quick-ui.js');
 for(const path of jsNames)assert.ok(sw.includes("'./"+path+"'"),'PWA precache missing '+path);
 assert.match(sw,/pharma-fast-ux-v01032/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.34"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.35"/);
 assert.ok(home.indexOf('SNNOOP10:')<home.indexOf('Simulador de pares craneales oculomotores'));
 assert.ok(home.indexOf('Simulador de pares craneales oculomotores')<home.indexOf('Biblioteca farmacológica · Pharma Pro'));
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);

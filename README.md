@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.34**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.35**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.35 · experiencia **primero en teléfono** (sin cambios clínicos)
+
+Corrección de responsive ergonomics para las dos superficies más utilizadas: **Inicio, categorías, buscador, fichas de calculadoras y formularios** y **Pharma Pro**. La PWA sigue soportando tablet/escritorio, pero ahora la prioridad es usarla en un teléfono de 320–430 px, con una mano.
+
+- **Inicio/KidBum Calc:** buscador primero en pantalla pequeña, tres accesos destacados contiguos SNNOOP10 → simulador ocular → Pharma Pro como filas táctiles grandes, portada compacta, categorías en una columna legible, calculadoras en tarjetas horizontales compactas (imagen a la izquierda, título y descripción a la derecha), formulario de cálculo en una columna en ≤600 px, botones e inputs de al menos 44–50 px y tamaño de texto 16 px para evitar zoom de Safari/iOS. Se mantiene en todo momento la barra inferior **Inicio | Favoritos | Historias | Acerca de**, con safe-area para iPhone; temporalmente se oculta al editar un campo para no cubrir el teclado.
+- **Pharma Pro:** barra superior breve con identidad y versión, se omite el banner decorativo grande en teléfono para acceder antes a las pestañas **Medicamentos / Enfermedades / Seguridad** y al buscador rápido, fichas farmacológicas en una columna con texto legible, monografías y formularios de alto riesgo en una columna, resultados y atajos con objetivos táctiles amplios. La cobertura editorial continúa **9/227 cotejos documentales parciales, 218 pendientes, 0 validación clínica/farmacéutica independiente documentada**.
+- **Tablet:** dos columnas entre los tamaños apropiados, sin forzar el ancho de escritorio.
+- **Offline:** `assets/mobile-first-v01035.css` y `assets/pharma-mobile-v01035.css` se precargan en Service Worker para que la PWA mantenga el diseño al no tener internet. Las calculadoras, la lógica farmacológica, los avisos ISMP/LASA, fórmulas, navegación y privacidad **no cambian**.
+- **QA:** `node tests/mobile-first-v01035.cjs` verifica breakpoints y ergonomía básica de las hojas de estilo, navegación original y cobertura offline; también se ejecuta la suite clínica y de regresión existente. Las pruebas de estructura **no equivalen a una auditoría visual con dispositivos físicos**, que puede hacerse adicionalmente.
 
 ## KidBum Pharma Pro 0.10.34 · medicamentos hospitalarios de alto riesgo (segunda ronda)
 

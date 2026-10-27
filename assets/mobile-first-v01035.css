@@ -1,0 +1,126 @@
+/* KidBum Calc · Mobile-first layout patch · v0.10.35
+   Visual-only: preserves all clinical formulas, data, workflows and mobile navigation.
+   Phone ergonomics take priority; larger screens retain the existing atlas layout.
+*/
+.kb-resource-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.kb-resource-link{display:inline-flex;align-items:center;min-height:44px;padding:9px 13px;border:1px solid var(--stroke);border-radius:11px;background:var(--surface);color:var(--accent-dark);font-size:12px;font-weight:750;text-decoration:none}
+.kb-resource-link:hover{background:var(--soft)}
+@media (max-width:740px){
+  html,body,.app-shell,.page{max-width:100%;min-width:0}
+  .topbar{height:auto;min-height:56px;padding:7px 13px;gap:8px}
+  .breadcrumb{min-width:0;gap:5px;font-size:12px;flex-wrap:wrap;line-height:1.3}
+  .top-actions{gap:7px;flex-shrink:0}
+  .icon-btn{height:44px;width:44px;min-height:44px;min-width:44px}
+  .kb-basic-trigger{min-height:44px;padding:9px 10px;font-size:12px;white-space:normal;line-height:1.2}
+  #main-content{padding:14px 12px calc(95px + env(safe-area-inset-bottom));min-width:0}
+  .hero{min-height:0!important;border-radius:16px;padding:0!important;display:block}
+  .hero-copy{padding:18px 16px!important;max-width:84%!important}
+  .hero .eyebrow{font-size:9px}
+  .hero h1{font-size:clamp(25px,6.4vw,31px)!important;line-height:1.08;margin:5px 0 9px;letter-spacing:-.6px}
+  .hero p{font-size:12px;line-height:1.4}
+  .hero-creator{padding:5px 8px;margin-top:8px;font-size:10px}
+  .atlas-hero-art{width:39%!important;opacity:.34!important;pointer-events:none}
+  .quick-stats{margin:10px 0 20px;gap:6px;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .mini-stat{padding:8px 4px;min-width:0;min-height:57px;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px;font-size:10px;line-height:1.15}
+  .mini-stat strong{font-size:17px}
+  .content-top{display:flex;flex-direction:column;align-items:stretch;gap:0;margin-bottom:13px}
+  .content-top>div{min-width:0}
+  .content-top h2{font-size:clamp(21px,5vw,26px);line-height:1.2}
+  .content-top p{font-size:12px}
+  .search{order:-1;max-width:none;min-width:0;width:100%;min-height:52px;margin:0 0 14px!important;padding:10px 14px}
+  .search input{font-size:16px;min-width:0;min-height:30px}
+  .kb-resource-links{display:grid;grid-template-columns:1fr;gap:7px;margin-top:11px}
+  .kb-resource-links a{display:flex;align-items:center;width:100%;min-height:48px;margin:0!important;padding:10px 12px!important;border:1px solid var(--stroke)!important;border-radius:12px!important;background:var(--surface);font-size:12px;line-height:1.35;font-weight:750;overflow-wrap:anywhere;text-decoration:none}
+  .kb-resource-links a:active{background:var(--soft)}
+  .chips{gap:8px;padding:3px 2px 10px;scroll-padding-inline:10px;-webkit-overflow-scrolling:touch}
+  .chip{min-height:44px;flex-shrink:0;padding:9px 13px;font-size:12px;display:inline-flex;align-items:center;gap:5px}
+  .atlas-category-grid{gap:9px}
+  .atlas-category-card{border-radius:14px;min-width:0}
+  .atlas-category-copy h3{overflow-wrap:anywhere}
+  .calc-detail-grid{grid-template-columns:minmax(0,1fr);gap:12px}
+  .calc-detail-grid .panel{min-width:0}
+  .atlas-calc-heading{min-height:165px;padding:15px 14px!important}
+  .atlas-calc-heading .calc-title{width:79%!important;max-width:none}
+  .atlas-calc-heading .calc-title h1{font-size:clamp(23px,5.6vw,31px)!important;line-height:1.1;overflow-wrap:anywhere}
+  .atlas-calc-heading .desc{font-size:12px;line-height:1.4}
+  .atlas-calc-art{width:41%;opacity:.29!important;pointer-events:none}
+  .calc-heading{gap:10px}
+  .panel-head{padding:15px 14px;gap:9px;align-items:flex-start}
+  .panel-body{padding:15px 14px;min-width:0}
+  .field{min-width:0}
+  .field label{font-size:12px;line-height:1.4}
+  .control,.pharma-dose-form input,.pharma-dose-form select{min-height:50px;padding:12px;font-size:16px}
+  .input-info{font-size:11px;line-height:1.4}
+  .actions{margin-top:18px;gap:9px}
+  .btn{min-height:48px;font-size:13px}
+  .result-top{padding:20px 16px}
+  .result-extra{padding:16px}
+  .result-extra p,.result-extra li,.citation-panel a{font-size:12px}
+  .result-warning,.result-errors{font-size:12px}
+  .citation-panel{padding:14px}
+  .mobile-nav{grid-template-columns:repeat(4,minmax(0,1fr));padding:6px 5px max(7px,env(safe-area-inset-bottom));z-index:50}
+  .mobile-nav button{min-width:0;min-height:57px;font-size:11px;line-height:1.15;gap:3px;padding:5px 2px}
+  .mobile-nav button>svg{width:23px;height:23px}
+  .mobile-nav button span{font-size:21px}
+  .mobile-nav button:focus-visible{outline-offset:-3px}
+  .toast{bottom:calc(89px + env(safe-area-inset-bottom))}
+  .kb-basic-backdrop{padding:9px 10px calc(9px + env(safe-area-inset-bottom));align-items:center}
+  .kb-basic-panel{width:min(100%,380px);max-height:calc(100dvh - 20px);overflow-y:auto;padding:13px}
+  .kb-basic-keys{gap:6px}
+  .kb-basic-keys button{min-height:49px}
+  .pharma-dose-form{padding:15px}
+  .pharma-dose-form .pharma-fields{grid-template-columns:1fr}
+  .pharma-dose-form .pharma-fields input,.pharma-dose-form .pharma-fields select{font-size:16px;min-height:50px}
+  .growth-table-scroll{max-width:100%;overscroll-behavior-x:contain}
+  .guard-grid{grid-template-columns:1fr}
+  /* The fixed navigation must not cover a mobile keyboard or edit fields. */
+  body:has(input:focus,textarea:focus,select:focus) .mobile-nav{display:none}
+  :is(#main-content,.panel-body,.calc-detail-grid,.result-extra) :is(p,li,a,h1,h2,h3){overflow-wrap:anywhere}
+}
+@media (max-width:600px){
+  .field-grid{grid-template-columns:minmax(0,1fr);gap:13px}
+  .calc-grid{grid-template-columns:minmax(0,1fr);gap:9px}
+  .calc-card{display:grid;grid-template-columns:101px minmax(0,1fr);grid-template-rows:auto auto;min-height:116px;padding:0;gap:0;align-items:stretch;overflow:hidden;border-radius:14px}
+  .calc-card .atlas-card-media{grid-column:1;grid-row:1/span 2;height:100%;min-height:116px}
+  .calc-card .atlas-card-illustration{height:100%;object-fit:cover}
+  .calc-card>div:not(.atlas-card-media):not(.calc-card-bottom){grid-column:2;min-width:0;padding:13px 39px 0 13px}
+  .calc-card h3{font-size:16px;line-height:1.17;margin:0 0 5px}
+  .calc-card p{font-size:12px;line-height:1.3}
+  .calc-card .calc-card-bottom{grid-column:2;grid-row:2;padding:6px 12px 11px 13px;margin-top:auto;font-size:10px;gap:8px;align-self:end}
+  .calc-card .calc-card-bottom span:first-child{overflow-wrap:anywhere}
+  .calc-card .fav-toggle{width:42px;height:42px;right:4px;top:4px;z-index:4;background:var(--surface)}
+  .calc-card .atlas-card-index{left:7px;bottom:7px;font-size:12px;padding:5px}
+  .calc-card .pharma-review-badge{font-size:9px}
+  .actions{display:grid;grid-template-columns:1fr;align-items:stretch}
+  .actions .btn{width:100%}
+  .atlas-category-grid{grid-template-columns:1fr;gap:9px}
+  .atlas-category-card{min-height:117px}
+  .atlas-category-copy{max-width:72%!important;padding:13px 12px!important}
+  .atlas-category-copy h3{font-size:18px!important;line-height:1.13;margin:6px 0 8px}
+  .atlas-category-eyebrow{font-size:9px!important}
+  .atlas-category-go{font-size:11px!important;padding:7px 9px;min-height:34px}
+  .atlas-category-visual{left:42%!important;opacity:.95!important}
+  .atlas-category-card .atlas-category-visual:before{background:linear-gradient(90deg,rgba(245,248,250,.4),transparent 65%)}
+}
+@media (max-width:375px){
+  #main-content{padding-left:10px;padding-right:10px}
+  .hero-copy{max-width:90%!important}
+  .hero h1{font-size:24px!important}
+  .calc-card{grid-template-columns:87px minmax(0,1fr)}
+  .calc-card>div:not(.atlas-card-media){padding-left:11px;padding-right:36px}
+  .calc-card .calc-card-bottom{padding-left:11px}
+  .calc-card h3{font-size:15px}
+  .atlas-category-copy h3{font-size:17px!important}
+  .atlas-category-card{min-height:109px}
+  .mobile-nav button{font-size:10px}
+}
+@media (min-width:741px) and (max-width:1024px){
+  /* Portrait tablets: two columns and more comfortable form targets. */
+  #main-content{padding:25px 26px 62px}
+  .calc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .field-grid{gap:13px}
+  .control{min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  .calc-card,.atlas-category-card{transition:none}
+}
