@@ -30,16 +30,19 @@ output{display:block;background:var(--wash);border-radius:14px;padding:17px;marg
 <output aria-live="polite" aria-atomic="true"><div id="score">—</div><p id="interp">Completa todos los campos documentados.</p><p id="detail"></p></output>
 <div class="buttons"><button id="example" type="button">↗ Ejemplo ficticio</button><button id="reset" type="button">↻ Limpiar</button><button id="copy" type="button" class="primary" disabled>Copiar resumen</button></div>
 <p id="example-note" class="small" hidden>🧪 Datos completamente ficticios para demostración.</p>
+<div id="kb-ai-mount"></div>
 <p class="notice" id="warning"></p>
 <p class="small">Fuente clínica: <a id="source" href="#" target="_blank" rel="noopener noreferrer">Consultar tabla original</a>.</p>
 <p class="small">Solo apoyo educativo. No se guardan ni transmiten las respuestas. Ante inestabilidad, hemorragia, trombosis o sospecha de HIT, priorizar valoración presencial y protocolos institucionales.</p>
 </section></div></main>
 <script src="./assets/guardia-pro.js"></script>
+<script src="./assets/chatgpt-analysis.js"></script>
 <script>
 (function(){
 'use strict';
 const kit=window.KidBumGuardiaPro,$=id=>document.getElementById(id),picker=$('picker');
 let active,values={},result=null;
+const ai=window.KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>({title:active.title,result:result.display,interpretation:result.interpretation,details:result.detail,warning:active.warning})});
 function theme(){const dark=document.documentElement.classList.contains('dark');$('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro'}
 try{document.documentElement.classList.toggle('dark',localStorage.getItem('kidbum-theme')==='dark')}catch{}
 theme();$('theme').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}theme()};
@@ -50,6 +53,7 @@ function update(){
  $('interp').textContent=result?result.interpretation:'Completa todos los campos con datos verificados. Nunca se asume una respuesta negativa.';
  $('detail').textContent=result?result.detail:'';
  $('copy').disabled=!result;
+ ai.setReady(Boolean(result));
 }
 function draw(){
  $('fields').replaceChildren();
