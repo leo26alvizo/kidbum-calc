@@ -3,14 +3,15 @@ const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('nod
 const html=fs.readFileSync('index.html','utf8');
 const page=fs.readFileSync('pharma-pro.html','utf8');
 const core=fs.readFileSync('assets/pharma-pro-core.js','utf8');
+const expansion=fs.readFileSync('assets/pharma-pro-expansion.js','utf8');
 const ui=fs.readFileSync('assets/pharma-pro-ui.js','utf8');
 const sw=fs.readFileSync('sw.js','utf8');
 const ctx={window:{}};new vm.Script(core,{filename:'pharma-core'});new vm.Script(ui,{filename:'pharma-ui'});
-vm.runInNewContext(core,ctx,{timeout:4000});
+vm.runInNewContext(expansion,ctx,{timeout:4000});vm.runInNewContext(core,ctx,{timeout:4000});
 const k=ctx.window.KidBumPharmaCore;
 assert.ok(k);
-assert.equal(k.records.length,46,'Initial catalog has 46 named medications');
-assert.equal(new Set(k.records.map(x=>x.id)).size,46,'Unique IDs');
+assert.equal(k.records.length,223,'Catalog expanded 46 + 177');
+assert.equal(new Set(k.records.map(x=>x.id)).size,223,'Unique IDs');
 for(const drug of k.records){
  assert.match(drug.name,/\S/);
  assert.match(drug.group,/\S/);
@@ -70,7 +71,7 @@ const idx3=html.indexOf('💊 Biblioteca farmacológica · Pharma Pro');
 const idx4=html.indexOf('<label class="search"',idx3);
 assert.ok(idx1>=0&&idx1<idx2&&idx2<idx3&&idx3<idx4,'Pharma quick link adjacent to existing two links, before main search');
 assert.match(html,/href="\.\/pharma-pro\.html"/);
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.30"/);
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.31"/);
 assert.doesNotMatch(html,/data-mobile-nav="guard"/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-core\.js">/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-ui\.js">/);
