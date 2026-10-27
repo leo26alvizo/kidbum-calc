@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.25**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.26**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Guardia Pro v0.10.26 — 4Ts, Padua, IMPROVE Bleeding y gasometría integrada
+
+- **4Ts** (HIT, 0–8): cuatro dominios puntuados y explicados según ASH, clasificación baja 0–3, intermedia 4–5 y alta 6–8. No diagnostica HIT ni autoriza heparina.
+- **Padua** (0–20): 11 factores, alto riesgo a partir de 4, limitado a pacientes médicos adultos hospitalizados; no prescribe profilaxis.
+- **IMPROVE Bleeding**: 11 componentes con puntos fraccionarios, grupos de edad y TFG excluyentes; clasificación de riesgo elevado desde 7. No permite decidir anticoagulación por sí solo.
+- **Panel de gasometría arterial**: pantalla integrada en Modo Guardia, con pH/PaCO₂/HCO₃⁻/Na/Cl y albúmina opcional, referencias de laboratorio explícitas y confirmación de tipo de muestra y población. Reutiliza los motores existentes de brecha aniónica, Winter y delta ratio, sin duplicar fórmulas. La brecha aniónica puede exponer ahora AG corregida de modo estructurado, sin alterar el resultado tradicional.
+- Se conserva Modo Guardia en menú lateral, la barra inferior Inicio | Favoritos | Historias | Acerca de, créditos originales, imágenes previas y PWA offline.
+- **Total: 127 calculadoras, 84 integradas y 43 externas, en 13 especialidades, más un panel de integración que no añade fórmula duplicada.**
+- Validación: `tests/guardia-pro.cjs`, `tests/guardia-gasometria.cjs`, auditoría de catálogo, regresión y primera apertura offline. Las escalas y cálculos requieren revisión clínica local antes de emplearlos para decisiones.
 
 ## Hepatología v0.10.25 — Factor R y cinco índices hepáticos
 
@@ -92,7 +102,7 @@ Pruebas adicionales: `node tests/apache2.cjs`. Ninguna otra fórmula clínica ha
 - NEWS2, Wells para TVP y EP, PERC, Child-Pugh y sodio corregido por hiperglucemia.
 - **Ginecología y obstetricia:** EG por FUM, FPP por FUM, FPP desde edad gestacional informada en ultrasonido, Bishop clásico e índice de choque obstétrico.
 
-**Total actual: 124 calculadoras y herramientas en 13 categorías: 84 integradas y 40 independientes.**
+**Total actual: 127 calculadoras y herramientas en 13 categorías: 84 integradas y 43 independientes.**
 - Buscador, favoritos, tema oscuro y cálculos locales, sin consumo de una API de pago.
 
 ## Farmacología pediátrica v0.10.14 — Amoxicilina OMA, cálculo específico
