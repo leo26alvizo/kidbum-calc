@@ -28,7 +28,7 @@ function render(id){
  ]);
  const indication=chooser(grid,'indication','Indicación específica',[]);
  const route=chooser(grid,'route','Vía propuesta',[
-  ['iv','Intravenosa'],['im','Intramuscular'],['sc','Subcutánea'],['unknown','Sin verificar']
+  ['iv','Intravenosa'],['im','Intramuscular'],['sc','Subcutánea'],['po','Oral'],['unknown','Sin verificar']
  ]);
  const allergy=chooser(grid,'allergy','¿Alergia o hipersensibilidad relevante?',yn);
  const extra={};
@@ -49,6 +49,25 @@ function render(id){
   extra.type=chooser(grid,'type','Tipo de diabetes', [['t2','DM2 confirmada'],['t1','DM1'],['unknown','No confirmado']]);
   extra.prior=chooser(grid,'prior','¿Recibe o recibió insulina previamente?',yn);
   extra.hypoglycemia=chooser(grid,'hypoglycemia','¿Hipoglucemia presente?',yn);
+ }
+ if(['metformina','amoxicilina','omeprazol'].includes(id)){
+  extra.productConfirmed=chooser(grid,'productConfirmed','¿Presentación exacta confirmada?',yn);
+  extra.pregnancy=chooser(grid,'pregnancy','¿Embarazo o posibilidad de embarazo?',yn);
+  if(id==='metformina'){
+   extra.renal=chooser(grid,'renal','TFG estable mL/min/1.73 m²', [['ge45','≥45 confirmada'],['low','<45'],['unknown','Desconocida']]);
+   extra.metabolicAcidosis=chooser(grid,'metabolicAcidosis','¿Acidosis metabólica activa?',yn);
+   extra.acuteIllness=chooser(grid,'acuteIllness','¿Enfermedad aguda o hipoxia?',yn);
+   extra.iodinatedContrast=chooser(grid,'iodinatedContrast','¿Contraste yodado próximo o reciente?',yn);
+  }
+  if(id==='amoxicilina'){
+   extra.weightOver40=chooser(grid,'weightOver40','¿Peso corporal >40 kg?',yn);
+   extra.renal=chooser(grid,'renal','Filtración renal estable', [['ge30','≥30 mL/min confirmada'],['low','<30 mL/min'],['unknown','Desconocida']]);
+   extra.bacterial=chooser(grid,'bacterial','¿Infección bacteriana susceptible o fuertemente sospechada?',yn);
+  }
+  if(id==='omeprazol'){
+   extra.alarmSymptoms=chooser(grid,'alarmSymptoms','¿Signos de alarma digestiva?',yn);
+   extra.rilpivirine=chooser(grid,'rilpivirine','¿Usa medicamentos con rilpivirina?',yn);
+  }
  }
  function refill(){
   const prior=indication.value;indication.replaceChildren();const zero=el('option','Elegir indicación · obligatorio');zero.value='';indication.append(zero);
@@ -77,6 +96,10 @@ function render(id){
   group('Alcance validado de esta referencia',regimen.constraints);
   group('Referencia de dosis textual · NO es una indicación médica',[regimen.reference]);
   group('Interpretación y limitaciones',[regimen.context,...r.warnings]);
+  const preparation=engine.preparations?.[id];
+  if(preparation){
+   group('Vía y preparación específica de la presentación etiquetada · NO orden de preparación',[preparation.scope,preparation.method,preparation.restrictions,preparation.sourceSection,preparation.finalValidation]);
+  }
   const cite=el('a',m.source.title+' · v'+m.source.version+' · '+m.source.effective+' ↗');
   cite.href=m.source.url;cite.rel='noopener noreferrer';cite.target='_blank';output.append(cite);
  });
