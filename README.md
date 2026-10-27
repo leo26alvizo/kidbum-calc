@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.29**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.30**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro v0.10.30 · primera tanda de referencias posológicas por indicación
+
+Se conservan los **46 medicamentos del índice inicial**; **3 fichas** incorporan ahora **referencias posológicas parciales basadas en una etiqueta concreta de DailyMed** (EE. UU.): ceftriaxona (Hikma 2026-09-30, v18), enoxaparina/Lovenox (Sanofi 2026-05-28, v33) e insulina glargina U-300/Toujeo (Sanofi 2025-05-30, v25). No significa que exista una monografía mexicana completa validada ni que pueda prescribirse el producto automáticamente.
+
+- **Ceftriaxona:** referencia etiquetada general en adultos, infecciones de piel en pediatría no neonatal y otitis media aguda bacteriana IM pediátrica, cada una por indicación; bloqueos de neonatos, alergias, calcio IV por comprobar, vía incompatible o disfunción renal/hepática combinada.
+- **Enoxaparina:** profilaxis del paciente médico con movilidad reducida y TVP aguda hospitalaria; se distingue **CrCl ≥30 frente a <30 mL/min**, sin asumir función renal ni sustituir el cálculo y revisión renal. Bloqueos de sangrado, HIT, procedimientos neuroaxiales y función renal inestable/desconocida.
+- **Toujeo U-300:** referencia exclusivamente para inicio de DM2 en adulto sin insulinoterapia previa, tras confirmar U-300 en pluma, ausencia de hipoglucemia y vía SC. No aplicable a glargina U-100, DM1, pediatría ni cambio entre insulinas.
+
+La interfaz NO calcula dosis individual en unidades o mg, no rellena datos de pacientes y nunca genera órdenes ni instrucciones de preparación intravenosa. Cada pauta queda oculta si no hay selección explícita de población, indicación, vía y verificaciones aplicables. Muestra fuente con URL exacta, versión y fecha. Sigue siendo necesaria la revisión por médico y farmacia, junto al etiquetado del producto comercializado en México.
+
+**Fuentes directas:** [Ceftriaxona Hikma DailyMed](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29), [Lovenox Sanofi DailyMed](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5017a927-2a24-4f27-89f9-27c805bf7d59), [Toujeo U-300 Sanofi DailyMed](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c9561d96-124d-48ca-982f-0aa1575bff36).
 
 ## KidBum Pharma Pro v0.10.29 · biblioteca farmacológica
 

@@ -10,10 +10,10 @@ const SOURCES=Object.freeze({
  who:{label:'OMS · listas de medicamentos esenciales (2025)',url:'https://www.who.int/groups/expert-committee-on-selection-and-use-of-essential-medicines/essential-medicines-lists/'},
  cofepris:{label:'COFEPRIS · visor de registros de medicamentos',url:'https://registros.cofepris.gob.mx/BRSDM/default.aspx'},
  dailymed:{label:'DailyMed · etiquetado de medicamentos (FDA, EE. UU.)',url:'https://dailymed.nlm.nih.gov/dailymed/'},
- ceftriaxona:{label:'DailyMed · ceftriaxona, advertencias neonatales',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=36c07ebf-b091-483e-b2c4-f0fc0c2b4186'},
+ ceftriaxona:{label:'DailyMed · ceftriaxona, advertencias neonatales',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8351aa37-552d-471d-b293-c564dcb6ec29'},
  potasio:{label:'DailyMed · cloruro de potasio IV concentrado',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=559a0a8c-a8fe-40a5-b196-21f9308780ab'},
- glargina:{label:'DailyMed · insulina glargina U-300',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=99ea856d-9562-443a-9422-1006a3cff2f4'},
- enoxaparina:{label:'DailyMed · enoxaparina, etiqueta revisada 2026',url:'https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=b4728749-8453-4f07-9fbc-a1f3e9d2708b'},
+ glargina:{label:'DailyMed · insulina glargina U-300',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c9561d96-124d-48ca-982f-0aa1575bff36'},
+ enoxaparina:{label:'DailyMed · enoxaparina, etiqueta revisada 2026',url:'https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5017a927-2a24-4f27-89f9-27c805bf7d59'},
  warfarina:{label:'DailyMed · warfarina y interacciones CYP450',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2cbcc99d-9107-4d39-a1e9-e19305de8b5d'},
  ketorolaco:{label:'DailyMed · ketorolaco y riesgo hemorrágico',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=04df9620-6dcb-494a-83e2-6d28036be974'}
 });
