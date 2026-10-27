@@ -92,9 +92,13 @@ const extras=Object.freeze({
   'El tratamiento concomitante con anticoagulantes incrementa el riesgo de complicaciones hemorrágicas; valorar contraindicaciones y seguimiento.'
  ]}
 });
-const records=Object.freeze(defs.map(([id,name,group,pop,use,checks,high])=>Object.freeze({
+const extension=root.KidBumPharmaExpansion||{catalog:[],conditions:[],lasaPairs:[],sources:{},highAlertScope:{}};
+const allDefs=[...defs,...extension.catalog];
+const lasaById=Object.fromEntries(allDefs.map(x=>[x[0],[]]));
+for(const pair of extension.lasaPairs){for(let i=0;i<2;i++){const id=pair.ids[i],other=pair.ids[1-i];if(lasaById[id]&&lasaById[other])lasaById[id].push(Object.freeze({id:other,tallMan:pair.display[i],partnerTallMan:pair.display[1-i],source:pair.source}));}}
+const records=Object.freeze(allDefs.map(([id,name,group,pop,use,checks,high])=>Object.freeze({
  id,name,group,populations:pop.split('').map(x=>population[x]),use,checks,
- highRisk:high===1,evidence:extras[id]||null,
+ highRisk:high===1,highRiskScope:extension.highAlertScope[id]||(id==='amiodarona'?'Formulación IV':id==='sulfato-magnesio'?'Inyección':id==='potasio-iv'?'Concentrado inyectable':''),lasaPairs:Object.freeze(lasaById[id]||[]),evidence:extras[id]||null,
  reviewStatus:extras[id]?'Alerta de seguridad con fuente comprobada · monografía incompleta':'Ficha índice · monografía y dosis pendientes de validación'
 })));
 const byId=Object.freeze(Object.fromEntries(records.map(x=>[x.id,x])));
@@ -133,7 +137,10 @@ function audit(x){
 function search(q='',filter='all',population='all',onlyHigh=false){
  const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
  const term=normalize(q.trim());
- return records.filter(d=>(filter==='all'||d.group===filter)&&(population==='all'||d.populations.includes(population))&&(!onlyHigh||d.highRisk)&&normalize(d.name+' '+d.group+' '+d.use+' '+d.id).includes(term));
+ return records.filter(d=>(filter==='all'||d.group===filter)&&(population==='all'||d.populations.includes(population))&&(!onlyHigh||d.highRisk)&&normalize(d.name+' '+d.group+' '+d.use+' '+d.id+' '+d.lasaPairs.map(p=>p.tallMan+' '+p.partnerTallMan).join(' ')).includes(term));
 }
-root.KidBumPharmaCore=Object.freeze({records,byId,sources:SOURCES,interactionRules,interaction,audit,search});
+const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+const conditions=Object.freeze(extension.conditions.filter(x=>x.options.every(o=>byId[o[0]])));
+function searchConditions(q=''){const v=normalize(q);if(!v)return conditions;return conditions.filter(d=>normalize(d.name+' '+d.aliases).includes(v));}
+root.KidBumPharmaCore=Object.freeze({records,byId,sources:SOURCES,interactionRules,interaction,audit,search,conditions,searchConditions,lasaSources:Object.freeze(extension.sources),highAlertSource:extension.sources.high});
 })(typeof window!=='undefined'?window:globalThis);

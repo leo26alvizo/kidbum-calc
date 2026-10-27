@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.30**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.31**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro v0.10.31 · índice ampliado, búsqueda por enfermedad, alto riesgo y LASA
+
+**Catálogo:** la biblioteca pasa de 46 a **223 entradas farmacológicas** (177 nuevas; algunas corresponden a distintas formulaciones de una misma sustancia). No equivalen a 223 monografías posológicas validadas: las 177 nuevas entradas son índice de consulta, sin dosis ni ajustes individualizados. Se conservan las **tres monografías posológicas parciales** de 0.10.30, 133 calculadoras y el acceso destacado junto a SNNOOP10 y el simulador ocular.
+
+**Dos tipos de búsqueda:** por nombre o grupo farmacológico (incluyendo filtro LASA y alto riesgo) y por **enfermedad/diagnóstico**, con **9 rutas educativas documentadas** exclusivamente para **escenarios adultos no embarazados**: hipertensión, DM2, asma, EPOC estable, cistitis baja no complicada en mujer no embarazada, neumonía comunitaria de baja gravedad, IC-FEr, prevención de migraña y artritis reumatoide. Cada ficha clínica muestra el fenotipo al que aplica, señales de alarma, verificaciones necesarias, opciones por contexto de guía y enlaces directos. No muestra una «mejor opción» universal ni dosis prescritas. El selector bloquea las rutas de enfermedad en pediatría, neonatología y embarazo, sin extrapolar guías de adultos. Fuentes: [PRONAM HAS 2025](https://www.dof.gob.mx/2025/CSG/PRONAM_Hipertension_Arterial_Sistemica.pdf); [NICE DM2 NG28 2026](https://www.nice.org.uk/guidance/ng28/chapter/initial-medicines); [GINA 2026](https://ginasthma.org/wp-content/uploads/2026/07/GINA-Summary-Guide-2026-WEB-WMS.pdf); [GOLD 2026](https://goldcopd.org/wp-content/uploads/2025/11/GOLD-REPORT-2026-v1.2-20Nov2025_WMV.pdf); [NICE NG109](https://www.nice.org.uk/guidance/ng109/chapter/Recommendations); [NICE NG250](https://www.nice.org.uk/guidance/NG250/chapter/recommendations); [NICE NG106](https://www.nice.org.uk/guidance/ng106/chapter/recommendations); [NICE CG150](https://www.nice.org.uk/guidance/cg150/chapter/recommendations); [NICE NG100](https://www.nice.org.uk/guidance/ng100/chapter/Recommendations). México, antibiograma local y criterio clínico prevalecen según entorno.
+
+**Seguridad:** marcas **Alto riesgo** basadas en la [lista ISMP de uso hospitalario (2024)](https://www.ismp.org/system/files/resources/2024-01/ISMP_HighAlert_AcuteCare_List_010924_MS5760.pdf), especificando alcance por vía/formulación cuando aplica; y **11 pares LASA** (nombres similares) identificados en [FDA Tall Man](https://www.fda.gov/drugs/medication-errors-related-cder-regulated-drug-products/fda-name-differentiation-project) y [ISMP España 2025](https://www.ismp-espana.org/noticias/view/204). LASA no se infiere por similitud automática ni comprende todos los nombres comerciales mexicanos. Se incluye comparación bidireccional entre pares y enlaces originales. La **ausencia** de etiqueta «Alto riesgo» o «LASA» **no implica** que un medicamento sea seguro ni que el listado sea exhaustivo.
+
+La aplicación continúa como PWA **offline** mediante precaché de ambas nuevas fuentes JavaScript. No hace recomendaciones individualizadas, ajustes de dosis, órdenes ni retiene datos de pacientes. Pruebas deterministas inspeccionan conteos, referencias, rutas clínicas adultas, pares LASA, alertas y compatibilidad retroactiva.
 
 ## KidBum Pharma Pro v0.10.30 · primera tanda de referencias posológicas por indicación
 

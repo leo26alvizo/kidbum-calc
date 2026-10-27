@@ -13,7 +13,7 @@ const p=(text,cls='')=>{const el=document.createElement('p');el.textContent=text
 const elt=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el};
 const group=$('group');
 for(const name of [...new Set(lib.records.map(x=>x.group))].sort((a,b)=>a.localeCompare(b,'es'))){const o=elt('option',name);o.value=name;group.append(o);}
-$('num-meds').textContent=lib.records.length+' principios activos';
+$('num-meds').textContent=lib.records.length+' entradas farmacológicas';
 function persist(){
  try{localStorage.setItem(key,JSON.stringify(favorites));}catch(e){}
 }
@@ -22,7 +22,8 @@ function draw(){
  const query=$('search').value;
  let data=lib.search(query,group.value,['Adultos','Pediatría','Neonatología'].includes(pop)?pop:'all',pop==='high');
  if(pop==='favorites')data=data.filter(d=>favorites.includes(d.id));
- $('count').textContent=data.length+' de '+lib.records.length+' principios activos · '+(pop==='favorites'?'Favoritos del dispositivo':pop==='high'?'Medicamentos/grupos de alto riesgo':pop==='all'?'Todas las poblaciones':pop);
+ if(pop==='lasa')data=data.filter(d=>d.lasaPairs.length>0);
+ $('count').textContent=data.length+' de '+lib.records.length+' entradas · '+(pop==='favorites'?'Favoritos del dispositivo':pop==='high'?'Medicamentos/grupos de alto riesgo':pop==='lasa'?'Parejas LASA con fuente':pop==='all'?'Todas las poblaciones':pop);
  const grid=$('drug-grid');grid.replaceChildren();
  if(!data.length){grid.append(elt('div','No hay coincidencias. Prueba otro nombre o elimina filtros.','empty'));return;}
  for(const med of data){
@@ -32,7 +33,8 @@ function draw(){
   const star=elt('button',favorites.includes(med.id)?'★':'☆','star');star.type='button';star.setAttribute('aria-label',(favorites.includes(med.id)?'Quitar favorito: ':'Guardar favorito: ')+med.name);star.title='Favorito (solo se guarda el identificador del medicamento)';
   star.onclick=()=>fav(med.id);top.append(title,star);
   const grp=p(med.group+' · '+med.populations.join(', '),'small');
-  const tags=elt('div');if(med.highRisk)tags.append(elt('span','⚠ Alto riesgo','pill warn'));
+  const tags=elt('div');if(med.highRisk)tags.append(elt('span','⚠ Alto riesgo'+(med.highRiskScope?' · '+med.highRiskScope:''),'pill warn'));
+  if(med.lasaPairs.length)tags.append(elt('span','LASA · nombre confuso','pill lasa'));
   if(med.evidence)tags.append(elt('span','Aviso con fuente','pill review'));
   if(window.KidBumPharmaMonographs?.byId[med.id])tags.append(elt('span','Referencia posológica parcial','pill review'));
   const use=p(med.use);
@@ -57,16 +59,20 @@ function showDrug(id){
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(f1);
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(f2);
+ const related=window.KidBumPharmaIndicationsUI?.filterByDrug(med.id)||[];
+ if(related.length){const section=elt('section',undefined,'fact');section.append(elt('h3','Enfermedades relacionadas · rutas de guía delimitadas'));for(const item of related){const b=elt('button',item.name+' · ver vía terapéutica','db-btn');b.type='button';b.onclick=()=>{closeDrug();document.getElementById('disease-search').value=item.name;document.getElementById('disease-search').dispatchEvent(new Event('input'));document.getElementById('disease-finder').scrollIntoView({behavior:'smooth'});};section.append(b);}left.append(section);}
+ 
  if(extended&&window.KidBumPharmaMonographUI){left.append(window.KidBumPharmaMonographUI.render(id));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(f3);}
  const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(f4);
  const right=elt('aside');
  const safety=elt('section');safety.append(elt('h3','Alertas y documentación'));
- if(med.highRisk){const badge=elt('div','⚠ Medicamento o grupo de alto riesgo (ISMP 2024). Confirmar unidad, concentración, vía y doble verificación según protocolo.','verified');safety.append(badge);}
+ if(med.highRisk){const badge=elt('div','⚠ Medicamento o grupo de alto riesgo según ISMP 2024'+(med.highRiskScope?' · '+med.highRiskScope:'')+'. Confirmar presentación, unidades, concentración y salvaguardas institucionales.','verified');safety.append(badge);safety.append(a(lib.highAlertSource.url,lib.highAlertSource.title));}
  if(med.evidence){
   for(const text of med.evidence.highlights){const box=elt('div',undefined,'verified');box.append(p(text));safety.append(box);}
   safety.append(p('Estos avisos están respaldados por una etiqueta concreta; NO validan toda la monografía ni equivalen automáticamente al etiquetado autorizado en México.','small muted'));
  }else safety.append(p('No hay alertas individuales verificadas cargadas para este medicamento. NO implica ausencia de contraindicaciones, interacciones o efectos adversos.','pending'));
  right.append(safety);
+ if(med.lasaPairs.length){const panel=elt('div',undefined,'lasa-panel');panel.append(elt('strong','LASA · riesgo de confusión de nombres'));for(const pair of med.lasaPairs){const other=lib.byId[pair.id];panel.append(p('Tall Man: '+pair.tallMan+' ≠ '+pair.partnerTallMan));const b=elt('button','Comparar con '+other.name+' →');b.type='button';b.onclick=()=>{location.hash=other.id;showDrug(other.id);};panel.append(b);const src=lib.lasaSources[pair.source];if(src)panel.append(a(src.url,src.title));}panel.append(p('Verifica principio activo, indicación, concentración, paciente y presentación; las advertencias NO reflejan necesariamente nombres comerciales mexicanos.','small muted'));right.append(panel);}
  const source=elt('section',undefined,'fact');source.append(elt('h3','Fuentes y trazabilidad'));
  const refs=elt('div',undefined,'refs');
  if(med.evidence)refs.append(a(lib.sources[med.evidence.source].url,lib.sources[med.evidence.source].label));
@@ -130,5 +136,6 @@ const theme=$('theme');theme.onclick=()=>{document.documentElement.classList.tog
 try{if(localStorage.getItem('kidbum-pharma-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}
 function fromHash(){const id=decodeURIComponent(location.hash.slice(1));if(lib.byId[id])showDrug(id);else closeDrug();}
 window.addEventListener('hashchange',fromHash);
+if(window.KidBumPharmaIndicationsUI)window.KidBumPharmaIndicationsUI.mount(id=>{location.hash=id;showDrug(id);});
 draw();openTool('audit');if(location.hash)fromHash();
 })(typeof window!=='undefined'?window:globalThis);

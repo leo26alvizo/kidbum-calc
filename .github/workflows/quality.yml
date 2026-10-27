@@ -87,6 +87,8 @@ jobs:
         run: node tests/geriatria-scales.cjs
       - name: Hepatology factor R and five companion clinical formulas
         run: node tests/hepatologia-indices.cjs
+      - name: Pharma Pro 223-medication disease pathways and LASA evidence
+        run: node tests/pharma-indications-lasa.cjs
       - name: Pharmacy source-verified limited monographs and safety-gated labeled dose references
         run: node tests/pharma-monographs.cjs
       - name: Pharma Pro catalog, safety and adjacent homepage quick link
