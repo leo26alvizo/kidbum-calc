@@ -47,9 +47,9 @@ const packed=Array.from(self.__offlineAssets);
 const packedSet=new Set(packed);
 const mustHave=[
  'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
- 'capurro.html','wallace-adultos.html','snnoop10.html',
+ 'capurro.html','wallace-adultos.html','snnoop10.html','pharma-pro.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
- 'assets/startup-bundle.js','assets/pediatric-pharma.js','assets/diabetes-insulin-core.js','assets/diabetes-insulin-ui.js',
+ 'assets/startup-bundle.js','assets/pediatric-pharma.js','assets/pharma-pro-core.js','assets/pharma-pro-ui.js','assets/diabetes-insulin-core.js','assets/diabetes-insulin-ui.js',
  'assets/expansion-20.js','assets/geriatria-escalas.js','assets/hepatologia-indices.js','assets/guardia-pro.js','assets/guardia-gasometria.js','assets/fictitious-examples.js',
  'assets/chatgpt-analysis.js','assets/medical-atlas.js',
  'assets/wallace-adultos-original-HD.png','assets/wallace-adultos.webp',
