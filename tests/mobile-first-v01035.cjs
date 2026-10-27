@@ -7,8 +7,8 @@ const home=read('index.html'), pharma=read('pharma-pro.html'), homeCSS=read('ass
       pharmaCSS=read('assets/pharma-mobile-v01035.css'), sw=read('sw.js'), manifest=JSON.parse(read('manifest.webmanifest'));
 assert.match(home,/<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/);
 assert.match(pharma,/<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.36"/);
-assert.match(pharma,/<meta name="kidbum-app-version" content="0\.10\.36"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.37"/);
+assert.match(pharma,/<meta name="kidbum-app-version" content="0\.10\.37"/);
 const homeStyle=home.indexOf('</style>'),homeLink=home.indexOf('<link rel="stylesheet" href="./assets/mobile-first-v01035.css"');
 assert.ok(homeLink>homeStyle,'Responsive styles must override tablet layout, not precede it');
 const pharmaStyle=pharma.indexOf('</style>'),pharmaLink=pharma.indexOf('<link rel="stylesheet" href="./assets/pharma-mobile-v01035.css"');
@@ -39,7 +39,7 @@ assert.match(pharmaCSS,/\.pharma-workspace-nav button\{font-size:12px;line-heigh
 assert.match(pharmaCSS,/\.pharma-fast-input input\{font-size:16px/);
 assert.match(pharmaCSS,/\.disease-options\{grid-template-columns:minmax\(0,1fr\)/);
 assert.match(pharmaCSS,/\.pharma-suggestions button\{min-height:50px/);
-assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.36<\/small>/);
+assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.37<\/small>/);
 const shortcuts=home.match(/<div class="kb-resource-links"[^>]*>([\s\S]*?)<\/div>/);
 assert.ok(shortcuts,'All three feature shortcuts in same container');
 const links=shortcuts[1];
