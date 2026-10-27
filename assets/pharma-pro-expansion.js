@@ -62,7 +62,7 @@ const highAlertNames=new Set([
 const riskScope={
  digoxina:'Inotrópico IV (alto riesgo en esa vía); revisar formulación',
  midazolam:'Sedación IV / sedación pediátrica según contexto',lorazepam:'Sedación IV / sedación pediátrica según contexto',diazepam:'Sedación IV y pediátrica según contexto',
- 'acido-tranexamico':'Solo formulación inyectable',lidocaina-iv:'Solo formulación IV antiarrítmica',
+ 'acido-tranexamico':'Solo formulación inyectable','lidocaina-iv':'Solo formulación IV antiarrítmica',
  oxitocina:'Solo vía IV en lista ISMP',dopamina:'Administración IV',dobutamina:'Administración IV',vasopresina:'IV o intraósea',
  fenilefrina:'Administración IV',metotrexato:'Metotrexato oral no oncológico y antineoplásicos',
  'anfotericina-b':'Formulación convencional: no intercambiar con liposomal','anfotericina-b-liposomal':'Formulación liposomal: no intercambiar con convencional',
