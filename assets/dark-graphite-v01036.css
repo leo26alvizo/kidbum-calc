@@ -1,0 +1,235 @@
+/* KidBum v0.10.36 — Graphite Noir, a single cohesive dark palette.
+   ALL declarations are scoped to html.dark; the light theme is untouched.
+   Clinical warning/danger colors intentionally remain distinguishable.
+   Standalone modules consume their existing kidbum-theme preference.
+*/
+html.dark{
+  color-scheme:dark;
+  --kb-noir:#0b0b0d;
+  --kb-noir-card:#19191c;
+  --kb-noir-elevated:#232327;
+  --kb-noir-line:#404046;
+  --kb-noir-text:#f3f3f5;
+  --kb-noir-muted:#b6b6bc;
+  --kb-noir-focus:#dedee3;
+  --bg:#0b0b0d;--surface:#19191c;--panel:#19191c;--card:#19191c;
+  --ink:#f3f3f5;--fg:#f3f3f5;--ink-soft:#b6b6bc;--muted:#b6b6bc;--sub:#b6b6bc;--soft:#252529;
+  --stroke:#404046;--border:#404046;--line:#404046;
+  --nav:#111113;--nav-2:#19191c;
+  --accent:#dedee1;--accent-dark:#dedee1;--accentText:#0b0b0d;--buttonText:#0b0b0d;
+  --accent-pale:#262629;--tint:#262629;--wash:#252529;--mint:#242427;
+  --teal:#d7d7db;--focus:#dedee3;--shadow:0 8px 22px #0007;
+  --alert:#f0c68d;--warn:#f0c68d;--alert-bg:#32271d;--warningbg:#32271d;
+  --red:#ffabab;--red-bg:#341f23;--redbg:#341f23;
+  --sn-bg:#0b0b0d;--sn-panel:#19191c;--sn-ink:#f3f3f5;--sn-sub:#b6b6bc;
+  --sn-border:#404046;--sn-wash:#252529;--sn-accent:#dedee1;
+  --kb-bg:#0b0b0d;--kb-panel:#19191c;--kb-ink:#f3f3f5;
+  --kb-muted:#b6b6bc;--kb-line:#404046;--kb-wash:#252529;--kb-accent:#dedee1;
+  background:#0b0b0d;color:#f3f3f5;
+}
+html.dark body{background:#0b0b0d;color:#f3f3f5}
+html.dark :is(a,button,input,select,textarea,summary):focus-visible{
+  outline:2px solid #dedee3;outline-offset:3px;
+}
+html.dark :is(input:not([type="checkbox"]):not([type="radio"]),textarea,select){
+  background-color:#1b1b1e;color:#f3f3f5;border-color:#4a4a50;
+}
+html.dark :is(input,textarea)::placeholder{color:#aaaab1;opacity:1}
+html.dark :is(input[type="checkbox"],input[type="radio"]){accent-color:#dedee1}
+html.dark :is(option,optgroup){background:#1b1b1e;color:#f3f3f5}
+html.dark :is(p,li,small,dt,dd){color:inherit}
+html.dark :is(.muted,.small,.hint,.count,.status,.tip,.resultmeta,.input-info,.desc,.lead,.note,.sub){color:#b6b6bc}
+html.dark :is(.card,.panel,.calc-card,.med-card,.disease-card,.disease-option,.fact,.pharma-fast-search,.search,.citation-panel,.info-card,.mini-stat){
+  background-color:#19191c;border-color:#404046;color:#f3f3f5;
+}
+html.dark :is(.topbar,.mobile-nav){background:#151517;border-color:#38383d;color:#f3f3f5}
+html.dark .sidebar{background:#111113;color:#c9c9ce}
+html.dark .sidebar .identity-icon{background:#28282c;border-color:#55555b;color:#f1f1f3}
+html.dark .sidebar :is(.nav-overline,.side-meta,.sidebar-creator){color:#adadb3}
+html.dark .sidebar :is(.safe-note,.side-menu button.current){background:#262629;border-color:#47474e;color:#f2f2f4}
+html.dark .sidebar .side-menu button{color:#c9c9cf}
+html.dark .sidebar .side-menu button:hover{background:#252529}
+html.dark .sidebar .side-menu button.current{color:#fff}
+html.dark .breadcrumb,html.dark .top-status,html.dark .mobile-nav button{color:#bdbdc3}
+html.dark .mobile-nav button.active{color:#fff}
+html.dark :is(.hero,.atlas-calc-heading,.kb-hero,.pediatric-hero){
+  background-image:linear-gradient(125deg,#242427 0%,#131315 100%);
+  background-color:#19191c;border-color:#414146;
+}
+html.dark :is(.hero,.kb-hero,.pediatric-hero) :is(h1,h2,strong){color:#f7f7f8}
+html.dark :is(.hero,.kb-hero,.pediatric-hero) :is(p,.eyebrow,.kb-eyebrow,.overline){
+  color:#d5d5da;
+}
+html.dark .hero:after,html.dark .kb-hero:after,html.dark .pediatric-hero:after{
+  border-color:#ffffff1a;box-shadow:0 0 0 44px #ffffff05,0 0 0 95px #ffffff03;
+}
+html.dark .atlas-hero-art:before,html.dark .atlas-calc-art:before{
+  background:linear-gradient(90deg,#18181bee,transparent 95%);
+}
+html.dark .atlas-hero-illustration{filter:grayscale(.65) brightness(.8)}
+html.dark .atlas-calc-heading .calc-title :is(h1,.eyebrow,.desc){color:#f3f3f5}
+html.dark .atlas-calc-heading .calc-title .desc{color:#c8c8cc}
+html.dark :is(.atlas-category-grid .atlas-category-card,.atlas-category-grid .atlas-category-card .atlas-category-copy){
+  background:#232326!important;background-image:none!important;color:#f3f3f5!important;
+  border-color:#48484c;
+}
+html.dark .atlas-category-grid .atlas-category-card :is(h3,.atlas-category-eyebrow,.atlas-category-go){
+  color:#f4f4f6!important;
+}
+html.dark .atlas-category-grid .atlas-category-card .atlas-category-go{
+  background:#38383c!important;border:1px solid #55555b;
+}
+html.dark .atlas-category-grid .atlas-category-card .atlas-category-visual{
+  background:#242427!important;
+}
+html.dark .atlas-category-grid .atlas-category-card .atlas-category-visual:before{
+  background:linear-gradient(90deg,#232326 0%,transparent 100%)!important;
+}
+html.dark :is(.atlas-card-media,.calc-card .card-icon){
+  background:#29292c;color:#e2e2e5;
+}
+html.dark .atlas-card-index{background:#252529;color:#f2f2f4;border:1px solid #57575d}
+html.dark .calc-card :is(h3,.card-arrow){color:#f3f3f5}
+html.dark .calc-card :is(p,.calc-card-bottom){color:#bcbcc3}
+html.dark .fav-toggle{color:#c0c0c7}
+html.dark .fav-toggle.starred{color:#e6bf72}
+html.dark :is(.chip,.kb-resource-link,.kb-basic-trigger,.kb-basic-panel,.kb-basic-keys button,.icon-btn){
+  background:#202023;border-color:#4b4b50;color:#eeeef1;
+}
+html.dark :is(.chip.active,.btn:not(.outline),.actions .btn:not(.outline)){
+  background:#dedee1;border-color:#dedee1;color:#111114;
+}
+html.dark .chip.active .chip-count{color:#111114}
+html.dark .btn.outline{background:#222226;border-color:#58585e;color:#ededf0}
+html.dark :is(.search input,.pharma-fast-input input){background:transparent;border-color:transparent;color:#f3f3f5}
+html.dark .result-top{background:linear-gradient(145deg,#262629,#1c1c1f);border-color:#49494e;color:#f3f3f5}
+html.dark :is(.result-value,.result-interpret){color:#f4f4f6}
+html.dark :is(.result-label,.result-unit){color:#cacad0}
+html.dark :is(.control,.result-extra,.citation-panel,.info-card){border-color:#48484e}
+html.dark .result-extra{background:#19191c;color:#eeeef1}
+html.dark :is(.result-warning,.notice,.warning){background:#32271d;color:#f4d2a5;border-color:#ad8252}
+html.dark .result-errors{color:#ffaaaa}
+html.dark .tag{background:#29292c;color:#e7e7ec}
+html.dark .toast{background:#2a2a2e;color:#f3f3f5;border:1px solid #525258}
+/* Pharma Pro — charcoal rather than blue; light theme untouched. */
+html.dark[data-kb-page="pharma-pro"] .hero{background:linear-gradient(120deg,#29292d,#111113)}
+html.dark[data-kb-page="pharma-pro"] .eyebrow{color:#e0e0e4}
+html.dark[data-kb-page="pharma-pro"] .pharma-workspace-nav{background:#0b0b0d;border-color:#424247}
+html.dark[data-kb-page="pharma-pro"] :is(.pharma-workspace-nav button,.filters button,.tool-tabs button,.db-btn){
+  background:#232326;color:#eeeef0;border-color:#4e4e54;
+}
+html.dark[data-kb-page="pharma-pro"] :is(.pharma-workspace-nav button.active,.filters button.active,.tool-tabs button.active,.button){
+  background:#dedee1;color:#121214!important;border-color:#dedee1;
+}
+html.dark[data-kb-page="pharma-pro"] :is(.med-card,.disease-option,.disease-card,.disease-expanded,.tool-result){
+  background:#1a1a1d;border-color:#414147;
+}
+html.dark[data-kb-page="pharma-pro"] :is(.disease-alert,.lasa-panel,.verified){
+  background:#28282b;border-color:#65656c;color:#f3f3f5;
+}
+html.dark[data-kb-page="pharma-pro"] :is(.pending,.disease-danger){
+  background:#30251f;border-color:#926f4b;color:#f0d0a3;
+}
+html.dark[data-kb-page="pharma-pro"] :is(.pill,.pharma-suggestions,.pharma-suggestions button){
+  background:#26262a;border-color:#494950;color:#f0f0f2;
+}
+html.dark[data-kb-page="pharma-pro"] .pill.warn{color:#f0c68d;border-color:#b38e5b}
+html.dark[data-kb-page="pharma-pro"] .pill.lasa{color:#e8d1b0;border-color:#ad916a}
+html.dark[data-kb-page="pharma-pro"] :is(.pill.review,.disease-tier,.disease-reference a){color:#e2e2e7}
+html.dark[data-kb-page="pharma-pro"] .pharma-suggestions button:hover{background:#343439}
+html.dark[data-kb-page="pharma-pro"] .pharma-fast-input{background:#19191c;border-color:#74747b}
+html.dark[data-kb-page="pharma-pro"] .pharma-starter button{background:#27272a;color:#e8e8ec;border-color:#55555a}
+html.dark[data-kb-page="pharma-pro"] .top button{background:#232326;color:#f1f1f4;border-color:#515158}
+html.dark[data-kb-page="pharma-pro"] .med-card p{color:#bcbcc3}
+html.dark[data-kb-page="pharma-pro"] .disease-alert p{color:#dadade}
+/* Standalone clinical calculators: preserve meaning, remove saturated teal. */
+html.dark:is([data-kb-page="guardia-pro"],[data-kb-page="escalas-cardioembolia"]) .hero{
+  background-image:linear-gradient(100deg,#151518f5,#161618b8),url('./atlas-vascular.jpg');
+  background-position:center;background-size:cover;
+}
+html.dark[data-kb-page="escalas-cardioembolia"] .hero{
+  background-image:linear-gradient(100deg,#151518eb,#161618c5),url('./atlas-vascular.jpg');
+}
+html.dark :is(.choose,.layout,.field,.clinical-subgroup){border-color:#404046}
+html.dark :is(.choose select,.field input,.field select){background:#1b1b1e;color:#f2f2f5;border-color:#48484e}
+html.dark :is(.wash,.result,.result-box,output){background-color:#262629;color:#eeeef1}
+html.dark :is(.primary,button.primary){background:#dedee1!important;color:#141416!important;border-color:#dedee1!important}
+html.dark :is(.tab.active,.tabs button[aria-current=step],.section-btn[aria-current=step],.service[aria-pressed=true]){
+  background:#323236;color:#fff;border-color:#7a7a82;
+}
+html.dark :is(.tabs button,.section-btn,.service,.clinical-subgroup){
+  background:#222225;color:#eeeef0;border-color:#4b4b51;
+}
+html.dark .clinical-subgroup>summary{color:#f2f2f4}
+html.dark :is(.panel h2,.card h2,.kb-service-title,.kb-guide strong){color:#f2f2f4}
+html.dark .kb-service-symbol{background:#313136;color:#ededf0}
+html.dark .kb-number,html.dark .kb-service-arrow{color:#dddde2}
+html.dark .kb-status-line span{background:#ffffff10;color:#e3e3e7;border-color:#77777a55}
+html.dark .kb-hero p,html.dark .pediatric-hero p{color:#d8d8dc}
+html.dark :is(.card p,.kb-guide,.kb-service-meta,.hint,.count,.tip,.status){color:#bdbdc4}
+html.dark :is(.kb-topline,.kb-side,.kb-dashboard){border-color:#404046}
+html.dark .kb-note{background:#282523;border-left-color:#c29b70}
+html.dark .kb-note p{color:#ddd0c0}
+html.dark :is(.actions button,.kb-theme-toggle){background:#29292d;color:#f1f1f4;border-color:#55555b}
+html.dark .actions button.primary{background:#dedee1!important;color:#101013!important;border-color:#dedee1!important}
+html.dark .clinical-subgroup{background:#202023;border-color:#47474d}
+/* Dark document preview, but keep actual printed documents white. */
+html.dark :is(.preview,.paper){background:#202023;color:#f0f0f3;box-shadow:inset 0 0 0 1px #414149}
+html.dark :is(.preview,.paper) :is(h2,h3){color:#f0f0f3;background:#303034}
+html.dark :is(.preview,.paper) :is(p,strong,.meta){color:#e1e1e5}
+html.dark :is(.preview,.paper) .meta{color:#babac0}
+/* SNNOOP10: image kept, charcoal overlay instead of blue. */
+html.dark[data-kb-page="snnoop10"] .sn-hero{
+  background-color:#171719;
+  background-image:linear-gradient(90deg,#0a0a0bf2 0%,#121214d9 54%,#1a1a1c99 100%),url('./snnoop10-portada.jpg');
+}
+html.dark[data-kb-page="snnoop10"] .sn-eyebrow{color:#e0e0e2}
+html.dark[data-kb-page="snnoop10"] .sn-hero :is(h1,p,strong){color:#f3f3f5}
+html.dark[data-kb-page="snnoop10"] :is(.banner,.flag,section.results article){
+  background:#1c1c1f;border-color:#45454b;color:#f0f0f3;
+}
+html.dark[data-kb-page="snnoop10"] .flag:has(input:checked){background:#303034;border-color:#aaaab2}
+html.dark[data-kb-page="snnoop10"] :is(.secondary,.sn-theme){background:#29292c;color:#f2f2f4;border:1px solid #55555a}
+html.dark[data-kb-page="snnoop10"] .actions button:not(.secondary){background:#dedee1;color:#151518}
+html.dark[data-kb-page="snnoop10"] h3{color:#e4e4e8}
+/* Wallace and medicine atlas preserve useful clinical images, neutral UI. */
+html.dark[data-kb-page="wallace-adultos"] :is(.region,.side,.result,.score,.calculation){
+  background-color:#202023;color:#f1f1f4;border-color:#4c4c52;
+}
+html.dark[data-kb-page="atlas-gallery"]{--bg:#0b0b0d;--fg:#f3f3f5;--sub:#b6b6bc;--card:#19191c}
+html.dark[data-kb-page="atlas-gallery"] :is(figure,a.back){border-color:#49494e;background:#19191c;color:#eeeef1}
+/* Keep the gallery coherent with an explicit light preference even if OS dark. */
+@media(prefers-color-scheme:dark){
+  html:not(.dark)[data-kb-page="atlas-gallery"]{
+    --bg:#f5f3ee;--fg:#142e40;--sub:#567084;--card:#fffdf9;
+  }
+}
+@media(max-width:530px){
+ html.dark[data-kb-page="snnoop10"] .sn-hero{
+  background-image:linear-gradient(90deg,#0a0a0bee,#131315d4 80%,#171719a3),url('./snnoop10-portada.jpg');
+ }
+}
+/* Final overrides for legacy dark-only blue selections and illustration text wash. */
+html.dark .atlas-calc-heading .calc-title{
+  background:linear-gradient(90deg,#222225f7 0%,#222225e8 74%,#2222252e 100%)!important;
+}
+html.dark :is(.gcs-choice,.gcs-option,.kb-resource-link){background:#252529;color:#ebebef;border-color:#4b4b52}
+html.dark :is(.gcs-choice.selected,.gcs-choice[aria-pressed=true],.gcs-option[aria-pressed=true]){
+  background:#444449!important;color:#fff!important;border-color:#a5a5ac!important;
+}
+html.dark :is(.hero-creator,.mini-stat,.atlas-card-index){background-color:#29292d;border-color:#505057;color:#e5e5e8}
+html.dark .hero-creator strong{color:#f4f4f6}
+@media print{
+  html.dark[data-kb-page="documentacion"],
+  html.dark[data-kb-page="historia-pediatria"]{color-scheme:light!important;background:white!important;color:black!important}
+  html.dark:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) body{background:white!important;color:black!important}
+  html.dark:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) :is(.preview,.paper){
+    background:#fff!important;color:#172e3b!important;box-shadow:none!important;border:0!important;
+  }
+  html.dark:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) :is(.preview,.paper) :is(h2,h3){
+    background:#e9f3f7!important;color:#143d57!important;
+  }
+  html.dark:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) :is(.preview,.paper) :is(p,strong,.meta){
+    color:#243743!important;
+  }
+}
