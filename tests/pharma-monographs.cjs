@@ -83,7 +83,7 @@ assert.match(ui,/No se generan órdenes, no se calculan mg por paciente/); // UI
 assert.ok(!/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/.test(source));
 assert.ok(!/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/.test(ui));
 assert.match(ui,/document\.createElement/);
-assert.match(ui,/show.*referencia/i);
+assert.match(ui,/Mostrar referencia etiquetada/);
 assert.match(parent,/KidBumPharmaMonographUI\.render\(id\)/);
 assert.match(parent,/Referencia posológica parcial/);
 assert.match(page,/assets\/pharma-pro-monographs\.js/);
@@ -97,4 +97,4 @@ assert.match(home,/SNNOOP10:[^]*?Simulador de pares craneales oculomotores[^]*?B
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);
 const basic={window:{}};vm.runInNewContext(core,basic,{timeout:5000});
 assert.equal(basic.window.KidBumPharmaCore.records.length,46,'46 catalog records preserved');
-console.log('Pharma monographs PASS: 3 primary labels, 6 exact indication/renal regimens, no neonatal dose, allergy/formulation/route/renal gates, source provenance, offline links, no prescription.');
+console.log('Pharma monographs PASS: 3 primary labels, 8 exact indication/renal regimens, no neonatal dose, allergy/formulation/route/renal gates, source provenance, offline links, no prescription.');
