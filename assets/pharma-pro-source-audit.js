@@ -46,7 +46,7 @@ const entries=[
    reference:'Inicio etiquetado: 500 mg VO dos veces al día con comidas O 850 mg VO una vez al día con comida. Máximo del etiquetado IR: 2,550 mg/día en dosis divididas; titulación según tolerancia y control.',
    context:'No aplica a formulaciones de liberación prolongada, embarazo ni enfermedad aguda; no calculamos dosis individuales. Confirmar TFG y tolerancia.',constraints:['Adulto con DM2 confirmada y necesidad clínica documentada','Tableta de liberación inmediata y TFG estable ≥45 mL/min/1.73 m²']}]},
  {id:'amoxicilina',name:'Amoxicilina vía oral (cápsulas)',status:'Referencia etiquetada cotejada · revisión clínica externa pendiente',
-  jurisdiction:'Etiqueta estadounidense de amoxicilina; producto reenvasado, NO autoriza todas las presentaciones mexicanas.',
+  jurisdiction:'Etiqueta estadounidense de amoxicilina; producto reenvasado, no demuestra autorización ni equivalencia de presentación en México.',
   source:SRC('82c0c5d1-df2d-4352-bd12-99f955af569e','Amoxicillin capsules/tablets/oral suspension · RemedyRepack',11,'2026-10-19'),
   formulation:'Solo pauta orientativa ORAL de cápsulas de amoxicilina, no amoxicilina/clavulanato ni suspensión reconstituida.',
   monitoring:['Signos de hipersensibilidad y tolerancia gastrointestinal.','Respuesta al tratamiento, cultivo, resistencia local y control de infección.','Ajustar según función renal cuando aplique y protocolo institucional.'],
