@@ -60,7 +60,7 @@ assert.equal(f('dka-hhs',{sample:'no'}).ready,false);
 assert.equal(f('dka-hhs',{adult:'no'}).ready,false);
 assert.equal(f('dka-hhs',{bun:'0'}).ready,true);
 assert.equal(f('dka-hhs',{bun:'urea'}).ready,false);
-assert.equal(f('dka-hhs',{},null).ready,false,'cannot silently recompute shared formulas when engine missing');
+assert.equal(d.evaluate('dka-hhs',d.examples['dka-hhs'],null).ready,false,'cannot silently recompute shared formulas when engine missing');
 assert.ok(f('dm2-navigator',{}).warnings.some(x=>/cardiorrenal/.test(x)));
 assert.equal(f('dm2-navigator',{type:'t1'}).ready,false);
 assert.equal(f('dm2-navigator',{a1c:'',glucose:''}).ready,false);
