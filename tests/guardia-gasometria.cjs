@@ -42,6 +42,13 @@ const tr=engine.calculate('anion',{na:140,cl:104,hco3:23});
 assert.equal(tr.value,13,'Original AG equation preserved');
 assert.ok(html.includes("window.KidBumGasometria.render(main,engine"));
 assert.ok(html.includes("id:'gasometria'"));
+assert.match(html,/const gasometriaVisible=screen==='home'&&\(category==='Todas'\|\|category==='Urgencias y Terapia Intensiva'\)/,'Gasometry card appears on home and Urgencias');
+assert.match(html,/data-gasometria-open/,'Accessible standalone catalog card');
+assert.match(html,/document\.querySelectorAll\('\[data-gasometria-open\]'\)/,'Catalog card has interaction');
+assert.match(html,/gasometriaOrigin='home';go\('gasometria'\)/,'Card opens existing integrated calculator');
+assert.match(html,/category='Urgencias y Terapia Intensiva';search='';go\('home'\)/,'Back returns to Urgencias');
+assert.doesNotMatch(html,/data-mobile-nav="guard"/,'No Guardia in mobile bottom bar');
+
 assert.match(html,/assets\/guardia-gasometria\.js/);
 assert.doesNotMatch(gas,/fetch\(|XMLHttpRequest|api\.openai\.com/);
 console.log('Gasometria PASS: engine reuse, corrected albumin AG, Winter, delta, sample safety, missing data and numeric limits.');
