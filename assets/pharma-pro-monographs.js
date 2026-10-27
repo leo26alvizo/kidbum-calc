@@ -48,7 +48,7 @@ const monographs=[
     context:'No extrapolar a SCA/STEMI, intervenciones ni poblaciones pediátricas. Comprobar hemostasia, plaquetas, peso, esquema anticoagulante y función renal.',
     constraints:['TVP aguda con o sin embolia pulmonar, manejo hospitalario','CrCl <30 mL/min documentada; confirmar estabilidad, diálisis y pertinencia clínica']}
   ]},
- {id:'insulina-glargina',name:'Insulina glargina U-300 (Toujeo)',status:'Referencia posológica parcial verificada',jurisdiction:'Etiqueta estadounidense de Toujeo U-300; no extrapolar a glargina U-100 ni a otras presentaciones',
+ {id:'insulina-glargina',name:'Insulina glargina U-300 (Toujeo)',status:'Referencia posológica parcial verificada',jurisdiction:'Etiqueta estadounidense de Toujeo U-300; NO acredita registro en México ni debe extrapolarse a glargina U-100 u otras presentaciones',
   source:{title:'Toujeo / Toujeo Max (insulin glargine U-300) · Sanofi-Aventis U.S.',setid:'c9561d96-124d-48ca-982f-0aa1575bff36',version:25,effective:'2025-05-30',url:'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c9561d96-124d-48ca-982f-0aa1575bff36'},
   formulation:'Únicamente glargina U-300 (300 unidades/mL), en plumas Toujeo SoloStar/Max SoloStar. No incluye glargina U-100.',
   monitoring:['Glucemia y episodios de hipoglucemia, especialmente en cambios de esquema y enfermedad aguda.','Ingesta, horarios, función renal/hepática, riesgo de hipopotasemia.','En DM1 siempre revisar cobertura de insulina prandial/rápida, no usar basal sola.'],
