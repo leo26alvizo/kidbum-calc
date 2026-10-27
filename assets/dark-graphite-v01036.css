@@ -209,6 +209,16 @@ html.dark[data-kb-page="atlas-gallery"] :is(figure,a.back){border-color:#49494e;
   background-image:linear-gradient(90deg,#0a0a0bee,#131315d4 80%,#171719a3),url('./snnoop10-portada.jpg');
  }
 }
+/* Final overrides for legacy dark-only blue selections and illustration text wash. */
+html.dark .atlas-calc-heading .calc-title{
+  background:linear-gradient(90deg,#222225f7 0%,#222225e8 74%,#2222252e 100%)!important;
+}
+html.dark :is(.gcs-choice,.gcs-option,.kb-resource-link){background:#252529;color:#ebebef;border-color:#4b4b52}
+html.dark :is(.gcs-choice.selected,.gcs-choice[aria-pressed=true],.gcs-option[aria-pressed=true]){
+  background:#444449!important;color:#fff!important;border-color:#a5a5ac!important;
+}
+html.dark :is(.hero-creator,.mini-stat,.atlas-card-index){background-color:#29292d;border-color:#505057;color:#e5e5e8}
+html.dark .hero-creator strong{color:#f4f4f6}
 @media print{
   html.dark[data-kb-page="documentacion"],
   html.dark[data-kb-page="historia-pediatria"]{color-scheme:light!important;background:white!important;color:black!important}
