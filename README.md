@@ -2,9 +2,17 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.36**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.37**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.37 · sincronización de tema oscuro entre Pharma Pro y toda KidBum
+
+Corrección posterior a la verificación visual de Graphite Noir: **Pharma Pro guardaba una preferencia independiente** (`kidbum-pharma-theme`) del resto de la PWA (`kidbum-theme`). Ahora Pharma Pro lee y escribe **la misma preferencia global** para que Claro/Oscuro se mantenga coherente al abrir Inicio, SNNOOP10, Guardia, Farmacología, historias y los demás módulos. La preferencia antigua de Pharma solo se aprovecha una vez si todavía no existe elección global, sin sobreescribir una preferencia global explícita.
+
+El control de Pharma Pro indica ahora **«☀ Modo claro» en oscuro**, con etiquetas accesibles `aria-label`/ `aria-pressed`, para dejar clara la acción de regreso al diseño claro. En **modo claro** se conserva el texto visual original «◐ Tema», y los colores/estilos del tema claro permanecen **sin cambios**. El observador de barra del navegador de 0.10.36 sigue funcionando en ambos sentidos y restaura `theme-color` por página.
+
+La versión de PWA se incrementó a 0.10.37, sin modificar fórmulas, datos médicos, monografías ni componentes visuales del modo claro. `tests/pharma-theme-sync-v01037.cjs` prueba ambas direcciones del control, preferencia global, prioridad sobre ajustes heredados y etiqueta accesible.
 
 ## KidBum 0.10.36 · Graphite Noir (modo oscuro unificado en toda la app)
 
