@@ -38,6 +38,7 @@ function draw(){
   if(med.lasaPairs.length)tags.append(elt('span','LASA · nombre confuso','pill lasa'));
   if(med.evidence)tags.append(elt('span','Aviso con fuente','pill review'));
   if(window.KidBumPharmaMonographs?.byId[med.id])tags.append(elt('span','Referencia posológica parcial','pill review'));
+  else tags.append(elt('span','Dosis sin cotejo','pill'));
   const use=p(med.use);
   const footer=elt('div',undefined,'card-footer');const b=elt('button','Ver ficha y precauciones →');b.type='button';b.onclick=()=>{location.hash=med.id;showDrug(med.id);};footer.append(b);
   item.append(top,grp,tags,use,footer);grid.append(item);
@@ -55,7 +56,7 @@ function showDrug(id){
  const star=elt('button',favorites.includes(id)?'★ Favorito':'☆ Guardar','back');star.type='button';star.onclick=()=>fav(id);
  hdr.append(titleBox,star);panel.append(hdr);
  const extended=Boolean(window.KidBumPharmaMonographs?.byId[id]);
- const notice=elt('div',undefined,'pending');notice.textContent=extended?'Referencias posológicas delimitadas y documentadas para esta formulación estadounidense; NO son recetas ni equivalentes a autorización mexicana. Otras indicaciones, ajustes y diluciones pendientes.':med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';panel.append(notice);
+ const notice=elt('div',undefined,'pending');notice.textContent=extended?'REFERENCIA COTEJADA CON ETIQUETA US, PERO SIN VALIDACIÓN CLÍNICA/FARMACÉUTICA INDEPENDIENTE. Solo indicaciones, vías y preparaciones específicas de la presentación documentada. No es receta ni autorización mexicana.':med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';panel.append(notice);
  const cols=elt('div',undefined,'detail-col');
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(f1);
