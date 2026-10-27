@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.25" />
+  <meta name="kidbum-app-version" content="0.10.26" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1123,16 +1123,19 @@ html.dark .atlas-calc-heading .calc-title{
       const f=fields(o,{na:[40,220,'Sodio'],cl:[20,200,'Cloro'],hco3:[1,70,'Bicarbonato']});
       if(f.errors.length)return {error:f.errors};
       const v=f.o.na-f.o.cl-f.o.hco3;
+      let adjustedAG=null;
       let notes=['El intervalo de referencia depende del laboratorio y método analítico.','No diagnostica acidosis metabólica sin gasometría/pH y contexto clínico.'];
       let detail='AG = Na − (Cl + HCO₃).';
       if(o.alb!==undefined&&String(o.alb).trim()!==''){
         const a=val(o.alb);
         if(!valid(a,0.5,7))return {error:['Albúmina: introduce un valor de 0.5 a 7 g/dL o déjala vacía.']};
-        const cv=v+2.5*(4-a);
+        const cv=v+2.5*(4-a);adjustedAG=cv;
         detail+=` AG corregida por albúmina: ${cv.toFixed(1)} mmol/L [AG + 2.5 × (4 − albúmina g/dL)].`;
         notes.push('La corrección por albúmina es aproximada; no sustituye la evaluación ácido-base.');
       }else notes.push('Albúmina no disponible: la brecha podría estar infraestimada en hipoalbuminemia.');
-      return done(v,'mmol/L','Brecha aniónica sin potasio.',notes,detail);
+      const result=done(v,'mmol/L','Brecha aniónica sin potasio.',notes,detail);
+      if(adjustedAG!==null)result.correctedAG=adjustedAG;
+      return result;
     },
     osm(o){
       const f=fields(o,{na:[40,220,'Sodio'],gluc:[1,1500,'Glucosa'],bun:[0,300,'BUN']});
@@ -1459,6 +1462,7 @@ html.dark .atlas-calc-heading .calc-title{
 
 </script>
 <script src="./assets/analytics.js"></script>
+<script src="./assets/guardia-gasometria.js"></script>
 <script src="./assets/medical-atlas.js"></script>
 <script>
 (function(){
@@ -1802,7 +1806,10 @@ const externalCalculators=[
  {id:'geneva',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#geneva',image:'atlas-wellspe.jpg'},
  {id:'pesi',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#pesi',image:'atlas-lungs.jpg'},
  {id:'bova',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#bova',image:'atlas-vascular.jpg'},
- {id:'sgarbossa',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#sgarbossa',image:'cardiologia-portada.jpg'}
+ {id:'sgarbossa',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#sgarbossa',image:'cardiologia-portada.jpg'},
+ {id:'hit4ts',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#hit4ts',image:'atlas-vascular.jpg'},
+ {id:'padua',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#padua',image:'atlas-vascular.jpg'},
+ {id:'improvebleed',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#improvebleed',image:'atlas-vascular.jpg'}
 ];
 const calculatorCount=(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+externalCalculators.filter(d=>cat==='Todas'||d.category===cat).length;
 const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología','Geriatría'];
