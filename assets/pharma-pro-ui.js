@@ -7,7 +7,7 @@ const key='kidbum-pharma-favorite-drugs';
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','&#39;': '&#39;'}[c]));
 let favorites=[];
 try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(saved))favorites=saved.filter(x=>typeof x==='string'&&lib.byId[x]).slice(0,100);}catch(e){}
-let pop='all',tool='audit',activeDrug=null;
+let pop='all',tool='audit',activeDrug=null,visibleLimit=24;
 const a=(url,label)=>{const el=document.createElement('a');el.href=url;el.target='_blank';el.rel='noopener noreferrer';el.textContent=label+' ↗';return el};
 const p=(text,cls='')=>{const el=document.createElement('p');el.textContent=text;if(cls)el.className=cls;return el};
 const elt=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el};
@@ -26,7 +26,8 @@ function draw(){
  $('count').textContent=data.length+' de '+lib.records.length+' entradas · '+(pop==='favorites'?'Favoritos del dispositivo':pop==='high'?'Medicamentos/grupos de alto riesgo':pop==='lasa'?'Parejas LASA con fuente':pop==='all'?'Todas las poblaciones':pop);
  const grid=$('drug-grid');grid.replaceChildren();
  if(!data.length){grid.append(elt('div','No hay coincidencias. Prueba otro nombre o elimina filtros.','empty'));return;}
- for(const med of data){
+ const more=$('show-more-drugs');if(more){more.classList.toggle('hidden',data.length<=visibleLimit);more.textContent='Mostrar siguientes medicamentos ('+Math.min(24,data.length-visibleLimit)+' de '+Math.max(0,data.length-visibleLimit)+')';}
+ for(const med of data.slice(0,visibleLimit)){
   const item=elt('article',undefined,'med-card');
   const top=elt('div',undefined,'med-card-top');
   const title=elt('h3',med.name);
@@ -82,11 +83,13 @@ function showDrug(id){
  source.append(refs);right.append(source);
  const act=elt('button','Usar en auditoría de seguridad →','button');act.type='button';act.onclick=()=>{closeDrug();document.querySelector('[data-tool="audit"]').click();$('audit-drug').value=id;$('tools').scrollIntoView({behavior:'smooth'});};right.append(act);
  cols.append(left,right);panel.append(cols);d.append(panel);
+ root.KidBumPharmaQuick?.onDrugOpen(id);
  d.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function closeDrug(){activeDrug=null;$('detail').classList.add('hidden');$('browse').classList.remove('hidden');draw();}
-$('search').addEventListener('input',draw);group.addEventListener('change',draw);
-document.querySelectorAll('[data-pop]').forEach(b=>b.onclick=()=>{pop=b.dataset.pop;document.querySelectorAll('[data-pop]').forEach(x=>x.classList.toggle('active',x.dataset.pop===pop));draw();});
+function closeDrug(){activeDrug=null;$('detail').classList.add('hidden');$('browse').classList.remove('hidden');draw();root.KidBumPharmaQuick?.onDrugClose();}
+$('search').addEventListener('input',()=>{visibleLimit=24;draw();});group.addEventListener('change',()=>{visibleLimit=24;draw();});
+$('show-more-drugs')?.addEventListener('click',()=>{visibleLimit+=24;draw();});
+document.querySelectorAll('[data-pop]').forEach(b=>b.onclick=()=>{pop=b.dataset.pop;visibleLimit=24;document.querySelectorAll('[data-pop]').forEach(x=>x.classList.toggle('active',x.dataset.pop===pop));draw();});
 const sourceLink=(id)=>lib.sources[id]||null;
 function options(list,holder,placeholder){const first=elt('option',placeholder||'Selecciona un medicamento');first.value='';holder.append(first);for(const d of list){const o=elt('option',d.name);o.value=d.id;holder.append(o);}}
 function selectField(form,id,label,items){const wrapper=elt('div',undefined,'field');const l=elt('label',label);l.htmlFor=id;const sel=elt('select');sel.id=id;for(const [value,txt] of items){const o=elt('option',txt);o.value=value;sel.append(o);}wrapper.append(l,sel);form.append(wrapper);return sel;}
@@ -137,5 +140,6 @@ try{if(localStorage.getItem('kidbum-pharma-theme')==='dark')document.documentEle
 function fromHash(){const id=decodeURIComponent(location.hash.slice(1));if(lib.byId[id])showDrug(id);else closeDrug();}
 window.addEventListener('hashchange',fromHash);
 if(window.KidBumPharmaIndicationsUI)window.KidBumPharmaIndicationsUI.mount(id=>{location.hash=id;showDrug(id);});
+root.KidBumPharmaUI=Object.freeze({openDrug:id=>{if(!lib.byId[id])return;location.hash=id;showDrug(id);},closeDrug,redraw:draw});
 draw();openTool('audit');if(location.hash)fromHash();
 })(typeof window!=='undefined'?window:globalThis);
