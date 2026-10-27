@@ -2,9 +2,13 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.26**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.27**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Acceso directo a gasometría v0.10.27 — navegación desde Urgencias
+
+La **Gasometría integrada · Panel** aparece como tarjeta visible y buscable desde **Inicio → Urgencias y Terapia Intensiva**, junto a 4Ts, Padua e IMPROVE Bleeding. Se abre por clic, Enter o barra espaciadora. Al volver, se muestra la categoría de Urgencias. **No se recupera el botón eliminado de Modo Guardia en la barra inferior móvil**, que continúa como Inicio | Favoritos | Historias | Acerca de. Mantiene las 127 calculadoras: la gasometría es un panel que reutiliza motores y NO incrementa el contador.
 
 ## Guardia Pro v0.10.26 — 4Ts, Padua, IMPROVE Bleeding y gasometría integrada
 
