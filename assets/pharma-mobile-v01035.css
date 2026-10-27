@@ -1,0 +1,93 @@
+/* KidBum Pharma Pro · mobile-first ergonomics v0.10.35
+   Clinical content/eligibility rules and source transparency are unchanged.
+*/
+.phone-brand{display:none}
+@media(max-width:740px){
+  html,body,main{max-width:100%;min-width:0}
+  main{padding:8px 12px calc(35px + env(safe-area-inset-bottom))}
+  .top{margin:0 0 7px;min-height:48px;gap:7px}
+  .top a{font-size:12px;line-height:1.25;flex:0 1 auto}
+  .top button{min-height:44px;min-width:44px;padding:8px;font-size:12px;flex:0 0 auto}
+  .phone-brand{display:block;flex:1;min-width:0;font-size:14px;letter-spacing:-.2px;text-align:center;line-height:1.25}
+  /* Page title moves into the compact mobile top bar; no promotional hero above search. */
+  main>.hero{display:none}
+  .pharma-workspace-nav{position:sticky;top:0;z-index:20;margin:0 -4px 0;padding:7px 4px;background:var(--bg);grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;border-bottom:1px solid var(--line);box-shadow:0 3px 10px rgba(4,33,42,.04)}
+  .pharma-workspace-nav button{font-size:12px;line-height:1.1;min-height:52px;padding:8px 3px;border-radius:11px;min-width:0;white-space:normal}
+  .pharma-fast-search{margin:10px 0 12px;padding:13px;border-radius:14px}
+  .pharma-fast-search>label{font-size:13px;margin-bottom:7px}
+  .pharma-fast-input{min-height:53px;padding:6px 9px}
+  .pharma-fast-input input{font-size:16px;min-height:35px;padding:6px 2px}
+  .pharma-fast-input button{min-width:44px;min-height:44px}
+  .pharma-suggestions{top:91px;left:10px;right:10px;max-height:min(55dvh,310px)}
+  .pharma-suggestions button{min-height:50px;padding:11px 12px}
+  .pharma-starter{gap:6px;margin-top:9px}
+  .pharma-starter button{min-height:42px;font-size:12px}
+  .notice{margin:9px 0;padding:11px 12px;font-size:12px;line-height:1.5}
+  #pharma-coverage{margin-top:3px}
+  .section-title{margin:15px 0 10px}
+  .section-title h2{font-size:21px}
+  .section-title p{font-size:12px;line-height:1.45}
+  .panel{padding:14px;border-radius:14px;min-width:0}
+  .toolbar{gap:9px}
+  .toolbar .search{margin:0}
+  .toolbar .search input{font-size:16px}
+  .filters{gap:7px;margin:0 -2px;scroll-padding-inline:10px}
+  .filters button{min-height:44px;padding:9px 12px;font-size:12px}
+  .field{min-width:0}
+  .field label{font-size:12px;line-height:1.4}
+  .field select,.field input,.field textarea{font-size:16px;min-height:51px;min-width:0;width:100%}
+  .med-grid{grid-template-columns:minmax(0,1fr);gap:8px}
+  .med-card{padding:12px 13px;min-height:0;gap:6px;border-radius:13px}
+  .med-card h3{font-size:17px;line-height:1.25}
+  .med-card p{font-size:12px;line-height:1.45}
+  .med-card .pill{font-size:11px;padding:4px 8px}
+  .card-footer button{font-size:13px;min-height:44px}
+  .star{min-height:44px}
+  .pharma-more{padding:13px 0}
+  .pharma-more button{width:100%;font-size:14px;min-height:48px}
+  .detail-header{gap:7px;align-items:flex-start}
+  .detail-header h2{font-size:23px;overflow-wrap:anywhere}
+  .detail-header .back{min-width:70px}
+  .detail-col{grid-template-columns:minmax(0,1fr);gap:11px;margin-top:10px}
+  .fact{padding:12px 0}
+  .fact p,.fact li{font-size:13px;line-height:1.52}
+  .refs a{padding:12px;font-size:12px;min-height:44px;overflow-wrap:anywhere}
+  .verified,.pending{font-size:12px;line-height:1.5;padding:12px}
+  .tool-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .tool-tabs button{min-width:0;min-height:48px;font-size:12px;line-height:1.35}
+  .form-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+  .button,.db-btn{min-height:48px;font-size:13px}
+  .tool-result{padding:12px;font-size:13px}
+  .disease-options{grid-template-columns:minmax(0,1fr);gap:8px}
+  .disease-card{padding:12px;border-radius:12px}
+  .disease-top{gap:10px}
+  .disease-top h3{font-size:16px}
+  .disease-expanded{gap:10px}
+  .disease-option{padding:12px;gap:8px}
+  .disease-tier{font-size:11px}
+  .integrations{display:grid;grid-template-columns:1fr}
+  .integrations a{min-height:46px;align-items:center}
+  main :is(p,li,td,th,h2,h3,strong,a){overflow-wrap:anywhere}
+  :is(#browse,#detail,#tools,#disease-finder){scroll-margin-top:80px}
+  .pharma-workspace-nav button:focus-visible,.filters button:focus-visible{outline-offset:-3px}
+}
+@media(max-width:375px){
+  main{padding-left:9px;padding-right:9px}
+  .phone-brand{font-size:13px}
+  .pharma-workspace-nav button{font-size:11px}
+  .med-card{padding:11px}
+  .med-card h3{font-size:16px}
+  .section-title h2{font-size:20px}
+  .pharma-fast-search{padding:10px}
+  .pharma-starter button{font-size:11px;padding:7px 9px}
+}
+@media(min-width:741px) and (max-width:1024px){
+  main{padding-left:21px;padding-right:21px}
+  .med-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail-col{grid-template-columns:minmax(0,1fr)}
+  .form-grid{gap:12px}
+  .field select,.field input{min-height:48px}
+}
+@media(prefers-reduced-motion:reduce){
+  .med-card{transition:none}
+}
