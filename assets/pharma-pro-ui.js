@@ -34,6 +34,7 @@ function draw(){
   const grp=p(med.group+' · '+med.populations.join(', '),'small');
   const tags=elt('div');if(med.highRisk)tags.append(elt('span','⚠ Alto riesgo','pill warn'));
   if(med.evidence)tags.append(elt('span','Aviso con fuente','pill review'));
+  if(window.KidBumPharmaMonographs?.byId[med.id])tags.append(elt('span','Referencia posológica parcial','pill review'));
   const use=p(med.use);
   const footer=elt('div',undefined,'card-footer');const b=elt('button','Ver ficha y precauciones →');b.type='button';b.onclick=()=>{location.hash=med.id;showDrug(med.id);};footer.append(b);
   item.append(top,grp,tags,use,footer);grid.append(item);
@@ -50,12 +51,13 @@ function showDrug(id){
  const hdr=elt('div',undefined,'detail-header'),titleBox=elt('div');titleBox.append(elt('div',med.group,'eyebrow'),elt('h2',med.name),p(med.populations.join(' · '),'muted small'));
  const star=elt('button',favorites.includes(id)?'★ Favorito':'☆ Guardar','back');star.type='button';star.onclick=()=>fav(id);
  hdr.append(titleBox,star);panel.append(hdr);
- const notice=elt('div',undefined,'pending');notice.textContent=med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';panel.append(notice);
+ const extended=Boolean(window.KidBumPharmaMonographs?.byId[id]);
+ const notice=elt('div',undefined,'pending');notice.textContent=extended?'Referencias posológicas delimitadas y documentadas para esta formulación estadounidense; NO son recetas ni equivalentes a autorización mexicana. Otras indicaciones, ajustes y diluciones pendientes.':med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';panel.append(notice);
  const cols=elt('div',undefined,'detail-col');
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(f1);
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(f2);
- const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(f3);
+ if(extended&&window.KidBumPharmaMonographUI){left.append(window.KidBumPharmaMonographUI.render(id));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(f3);}
  const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(f4);
  const right=elt('aside');
  const safety=elt('section');safety.append(elt('h3','Alertas y documentación'));
