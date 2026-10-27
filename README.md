@@ -2,9 +2,26 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.31**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.32**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro v0.10.32 · navegación rápida y seis nuevas rutas por diagnóstico
+
+**UX mobile-first:** un único buscador destacado con sugerencias de medicamentos o diagnósticos, según la pestaña seleccionada; navegación clara por **Medicamentos / Enfermedades / Seguridad**, cuatro accesos rápidos a enfermedades frecuentes, apertura directa de fichas o algoritmos con Enter o toque, retorno a la sección previa, controles táctiles accesibles y límite inicial de **24 tarjetas** con opción de cargar más para evitar renderizar todo el catálogo de golpe. Se mantienen filtros por grupo, población, alto riesgo, LASA y favoritos locales, así como enlace de acceso en Inicio junto a SNNOOP10 y simulador ocular. Continúa offline sin cuentas ni datos de pacientes.
+
+**Catálogo:** **227 entradas** (46 originales + 177 en expansión previa + 4 nuevas: colchicina, alopurinol, febuxostat y sumatriptán). Son entradas de índice, no nuevos regímenes individualizados ni monografías posológicas completas. Se mantienen las 3 fichas parciales previamente revisadas y las 133 calculadoras.
+
+**Enfermedades:** **15 rutas por escenarios adultos no embarazados** (9 existentes + 6 nuevas): crisis aguda de gota, control prolongado de uratos, ERGE sin signos de alarma, FA con indicación de anticoagulación para prevención del ictus, hipotiroidismo primario manifiesto y tratamiento agudo de migraña. Cada ruta muestra requisitos y exclusiones, posibles opciones por contexto, alertas y enlace a guía. **No receta, no ordena medicamentos para un paciente, ni recomienda extrapolar a pediatría o embarazo.**
+
+**Fuentes de las seis rutas añadidas:**
+- NICE [NG219 Gout](https://www.nice.org.uk/guidance/ng219/chapter/Recommendations) (crisis aguda y ULT);
+- NICE [CG184 ERGE/dispepsia](https://www.nice.org.uk/guidance/cg184/chapter/Recommendations);
+- NICE [NG196 fibrilación auricular](https://www.nice.org.uk/guidance/ng196/chapter/Recommendations);
+- NICE [NG145 hipotiroidismo](https://www.nice.org.uk/guidance/ng145/chapter/recommendations);
+- NICE [CG150 cefaleas/migraña](https://www.nice.org.uk/guidance/cg150/chapter/recommendations).
+
+La elección farmacológica exige revisar indicación individual, guías y registros mexicanos, interacciones, disponibilidad y protocolo institucional. Las alertas Alto riesgo ISMP y LASA siguen siendo parciales, no listas exhaustivas.
 
 ## KidBum Pharma Pro v0.10.31 · índice ampliado, búsqueda por enfermedad, alto riesgo y LASA
 

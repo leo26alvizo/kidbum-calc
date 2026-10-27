@@ -66,7 +66,17 @@ root.KidBumPharmaIndicationsUI=Object.freeze({
   $('disease-pop').addEventListener('change',viewConditions);
   viewConditions();
  },
- filterByDrug(id){
+ openCondition(id){
+  const target=lib.conditions.find(x=>x.id===id);
+  if(!target)return false;
+  selected=id;
+  $('disease-search').value=target.name;
+  viewConditions();
+  const header=$('disease-finder');
+  if(header)header.scrollIntoView({behavior:'smooth',block:'start'});
+  return true;
+ },
+  filterByDrug(id){
   const related=lib.conditions.filter(d=>d.options.some(x=>x[0]===id));
   return related.map(d=>({id:d.id,name:d.name,source:d.source}));
  }
