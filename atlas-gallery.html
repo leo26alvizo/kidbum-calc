@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-kb-page="atlas-gallery">
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
@@ -22,7 +22,9 @@ figcaption p{font-size:12px;line-height:1.5;color:var(--sub);margin:0}
 footer{text-align:center;color:var(--sub);font-size:12px;padding:15px}
 </style>
 <script src="./assets/medical-atlas.js"></script>
-</head>
+<link rel="stylesheet" href="./assets/dark-graphite-v01036.css">
+<script>/* Respect explicit KidBum theme on gallery, even when OS differs. */
+try{document.documentElement.classList.toggle('dark',localStorage.getItem('kidbum-theme')==='dark')}catch{}</script></head>
 <body>
 <header>
 <a class="back" href="./index.html">← Volver a KidBum CALC</a>
