@@ -84,6 +84,6 @@ assert.match(page,/0 fichas con validación clínica/);
 assert.match(page,/assets\/pharma-pro-high-alert\.js/);
 assert.match(sw,/pharma-high-alert-v01034/);
 assert.ok(sw.includes("'./assets/pharma-pro-high-alert.js'"));
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.34"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.35"/);
 assert.doesNotMatch(fs.readFileSync('assets/pharma-pro-high-alert.js','utf8'),/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage/);
 console.log('PASS · 227 catalog entries, 9 label-cotejado partial profiles, 218 non-verified, 0 clinical approval; KCl IV / heparin / lispro U100 all fail closed; prior monographs preserved.');
