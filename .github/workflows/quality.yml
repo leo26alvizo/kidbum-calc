@@ -47,6 +47,8 @@ jobs:
         run: node tests/pediatric-mobile-groups.cjs
       - name: Oculomotor simulator navigation
         run: node tests/ocular-simulator-link.cjs
+      - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
+        run: node tests/dark-graphite-v01036.cjs
       - name: Phone-first UI, safe-area, single-column forms and offline mobile styles
         run: node tests/mobile-first-v01035.cjs
       - name: Mobile Inicio breadcrumb navigation
