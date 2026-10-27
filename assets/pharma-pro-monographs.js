@@ -96,6 +96,8 @@ function check(id,x){
  }
  const candidate=possible.find(r=>(r.renal===undefined||r.renal===x?.renal)&&(r.formulation===undefined||r.formulation===x?.formulation)&&(r.prior===undefined||r.prior===x?.prior))||null;
  if(possible.length&&!candidate)errors.push('La condición renal/formulación no coincide con las pautas revisadas.');
+ if(!['iv','im','sc'].includes(x?.route))errors.push('Seleccionar una vía de administración verificada.');
+ if(candidate&&!(candidate.route==='ivim'&&['iv','im'].includes(x?.route))&&candidate.route!==x?.route)errors.push('La vía propuesta NO coincide con la vía de la referencia etiquetada.');
  if(errors.length)return {status:'blocked',messages:errors,warnings,regimen:null,monograph:m};
  warnings.push('REFERENCIA DOCUMENTAL DE ETIQUETA ESTADOUNIDENSE; no receta, ajuste personalizado ni autorización de uso en México.');
  warnings.push('Verificar producto, alergias, datos clínicos, presentación, guías mexicanas y validación por médico/farmacia.');
