@@ -136,8 +136,24 @@ function drawSources(){
 }
 function openTool(name){tool=name;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x.dataset.tool===name));if(name==='audit')drawAudit();else if(name==='interactions')drawInteractions();else drawSources();}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
-const theme=$('theme');theme.onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-pharma-theme',document.documentElement.classList.contains('dark')?'dark':'light');}catch(e){}};
-try{if(localStorage.getItem('kidbum-pharma-theme')==='dark')document.documentElement.classList.add('dark');}catch(e){}
+/* One shared theme preference across ALL KidBum modules.
+   Read the legacy Pharma preference only when no global choice exists. */
+const theme=$('theme');
+function applyPharmaTheme(dark){
+ document.documentElement.classList.toggle('dark',Boolean(dark));
+ theme.textContent=dark?'☀ Modo claro':'◐ Tema';
+ theme.setAttribute('aria-label',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');
+ theme.setAttribute('title',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');
+ theme.setAttribute('aria-pressed',String(Boolean(dark)));
+ try{localStorage.setItem('kidbum-theme',dark?'dark':'light');}catch(e){}
+}
+let pharmaInitialDark=false;
+try{
+ const shared=localStorage.getItem('kidbum-theme');
+ pharmaInitialDark=shared==='dark'||(shared!=='light'&&localStorage.getItem('kidbum-pharma-theme')==='dark');
+}catch(e){}
+applyPharmaTheme(pharmaInitialDark);
+theme.onclick=()=>applyPharmaTheme(!document.documentElement.classList.contains('dark'));
 function fromHash(){const id=decodeURIComponent(location.hash.slice(1));if(lib.byId[id])showDrug(id);else closeDrug();}
 window.addEventListener('hashchange',fromHash);
 if(window.KidBumPharmaIndicationsUI)window.KidBumPharmaIndicationsUI.mount(id=>{location.hash=id;showDrug(id);});
