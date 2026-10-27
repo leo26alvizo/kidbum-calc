@@ -92,7 +92,7 @@ const scriptPaths=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].ma
 assert.deepEqual(scriptPaths,['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-core.js','assets/pharma-pro-indications-ui.js' ,'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-monographs-ui.js','assets/pharma-pro-ui.js','assets/pharma-pro-quick-ui.js']);
 for(const path of scriptPaths)assert.ok(sw.includes("'./"+path+"'"),'offline '+path);
 assert.match(sw,/monographs-v01030/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.35"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.36"/);
 assert.match(home,/SNNOOP10:[^]*?Simulador de pares craneales oculomotores[^]*?Biblioteca farmacológica · Pharma Pro/);
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);
 const basic={window:{}};vm.runInNewContext(fs.readFileSync('assets/pharma-pro-expansion.js','utf8'),basic,{timeout:5000});vm.runInNewContext(fs.readFileSync('assets/pharma-pro-guides-plus.js','utf8'),basic,{timeout:5000});vm.runInNewContext(core,basic,{timeout:5000});
