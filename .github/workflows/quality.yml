@@ -25,7 +25,7 @@ jobs:
         run: node tests/pediatric-drug-doses.cjs
       - name: Mobile data and offline startup
         run: node tests/pwa-cellular.cjs
-      - name: First-launch airplane mode for all 127 calculators
+      - name: First-launch airplane mode for all 133 clinical tools
         run: node tests/offline-110.cjs
       - name: APACHE II score and example audit
         run: node tests/apache2.cjs
@@ -87,6 +87,8 @@ jobs:
         run: node tests/geriatria-scales.cjs
       - name: Hepatology factor R and five companion clinical formulas
         run: node tests/hepatologia-indices.cjs
+      - name: Six Diabetes and Insulin Pro tools including DKA/HHS safety
+        run: node tests/diabetes-insulin-pro.cjs
       - name: Guardia Pro HIT, Padua and IMPROVE Bleeding scoring and safety
         run: node tests/guardia-pro.cjs
       - name: Integrated arterial blood gas and engine reuse
