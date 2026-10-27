@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.35**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.36**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.36 · Graphite Noir (modo oscuro unificado en toda la app)
+
+**Diseño:** modo oscuro coherente en **13 superficies HTML**: Inicio/calculadoras, Pharma Pro, Atlas editorial, Capurro, Documentación clínica, Escalas cardioembolia, Expansión 20, Geriatría, Guardia Pro, Hepatología, Historia Pediátrica, SNNOOP10 y Wallace. Se sustituye el azul petróleo nocturno por un esquema **grafito casi negro** (`#0b0b0d` fondo, `#19191c` tarjetas, `#404046` bordes, `#f3f3f5` texto), con tonos neutros en enlaces, botones, pestañas y estados. Se mantienen **ámbar y rojo** en advertencias y riesgos clínicos para conservar distinción semántica.
+
+**Invariante principal:** el modo claro **no cambia**; la nueva hoja de estilos solo aplica con `html.dark`. No se modificaron fórmulas, tratamientos, reglas de dosis, fuentes, notas, flujo de datos ni la navegación inferior móvil. Las vistas de impresión de Historias y Documentación conservan papel blanco para resultados legibles y exportaciones.
+
+**Funcionamiento:** `assets/dark-graphite-v01036.css` se agrega después de las hojas originales de cada página (y después de las mejoras móviles), anulando los antiguos fondos azules **solo en oscuro**. `assets/theme-chrome-v01036.js` sigue el cambio manual entre claro/oscuro y pone la barra del navegador/PWA en negro grafito cuando está oscuro; restaura el `theme-color` original por página en claro. El atlas respeta la preferencia ya usada por KidBum en `kidbum-theme`. Ambos archivos se precargan **offline**.
+
+**QA:** `tests/dark-graphite-v01036.cjs` cubre las 13 páginas, alcance oscuro, lectura de etiquetas, contrastes calculados para texto estándar/botones/alertas, preservación de modo claro, navegación, impresión y precaché. Las verificaciones automatizadas de CSS/contraste no sustituyen comprobación manual visual en distintos navegadores, equipos y dispositivos.
 
 ## KidBum 0.10.35 · experiencia **primero en teléfono** (sin cambios clínicos)
 
