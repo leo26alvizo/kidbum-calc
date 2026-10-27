@@ -13,7 +13,7 @@ const additions=[
  ['sumatriptan','Sumatriptán','Neurología y Psiquiatría','A','Índice para tratamiento agudo de migraña en casos seleccionados.','Verificar diagnóstico, enfermedad cardiovascular, hipertensión no controlada, interacciones y tipo de formulación.',0]
 ];
 const routes=[
- {id:'gota-crisis',name:'Crisis aguda de gota',aliases:'ataque de gota artritis gotosa podagra monoartritis aguda',population:'adult',setting:'consulta',
+ {id:'gota-crisis',name:'Crisis aguda de gota',aliases:'ataque de gota crisis de gota artritis gotosa podagra monoartritis aguda',population:'adult',setting:'consulta',
   source:'https://www.nice.org.uk/guidance/ng219/chapter/Recommendations',year:'NICE NG219 · tratamiento de crisis',
   scope:'Adulto con ataque de gota confirmado, clínicamente estable; no corresponde a artritis séptica ni a pacientes embarazadas.',
   factors:['Descartar artritis séptica si monoartritis febril o diagnósticos inciertos','Función renal/hepática y comorbilidades','AINE concomitantes y riesgo gastrointestinal','Interacciones de colchicina y posibilidad de glucocorticoides','Evaluar infección y contraindicaciones'],
