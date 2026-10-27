@@ -55,7 +55,7 @@ for(const d of k.conditions){
  assert.ok(d.factors.length>=3);
  assert.ok(d.redFlags&&d.redFlags.length>=30,'Warn about red flags/exclusions');
  assert.ok(d.year&&/^https:\/\//.test(d.source),'Guideline provenance');
- assert.ok(d.options.length>=2);
+ assert.ok(d.options.length>=1,'Some guidelines correctly have one first-line treatment, e.g. levothyroxine');
  const ids=new Set();
  for(const [drug,tier,note] of d.options){
   assert.ok(k.byId[drug],'Every recommended treatment MUST refer to an indexed medicine: '+drug);
