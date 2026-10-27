@@ -13,7 +13,7 @@ const p=(text,cls='')=>{const el=document.createElement('p');el.textContent=text
 const elt=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el};
 const group=$('group');
 for(const name of [...new Set(lib.records.map(x=>x.group))].sort((a,b)=>a.localeCompare(b,'es'))){const o=elt('option',name);o.value=name;group.append(o);}
-$('num-meds').textContent=lib.records.length+' principios activos';
+$('num-meds').textContent=lib.records.length+' entradas farmacológicas';
 function persist(){
  try{localStorage.setItem(key,JSON.stringify(favorites));}catch(e){}
 }
@@ -23,7 +23,7 @@ function draw(){
  let data=lib.search(query,group.value,['Adultos','Pediatría','Neonatología'].includes(pop)?pop:'all',pop==='high');
  if(pop==='favorites')data=data.filter(d=>favorites.includes(d.id));
  if(pop==='lasa')data=data.filter(d=>d.lasaPairs.length>0);
- $('count').textContent=data.length+' de '+lib.records.length+' principios activos · '+(pop==='favorites'?'Favoritos del dispositivo':pop==='high'?'Medicamentos/grupos de alto riesgo':pop==='lasa'?'Parejas LASA con fuente':pop==='all'?'Todas las poblaciones':pop);
+ $('count').textContent=data.length+' de '+lib.records.length+' entradas · '+(pop==='favorites'?'Favoritos del dispositivo':pop==='high'?'Medicamentos/grupos de alto riesgo':pop==='lasa'?'Parejas LASA con fuente':pop==='all'?'Todas las poblaciones':pop);
  const grid=$('drug-grid');grid.replaceChildren();
  if(!data.length){grid.append(elt('div','No hay coincidencias. Prueba otro nombre o elimina filtros.','empty'));return;}
  for(const med of data){
