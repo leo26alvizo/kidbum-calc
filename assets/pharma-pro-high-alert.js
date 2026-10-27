@@ -19,7 +19,7 @@ const review=[
   monitoring:['Potasio sérico actual y repetido; magnesio, creatinina y diuresis.','ECG y vigilancia cardíaca según gravedad, situación clínica y protocolo institucional.','Concentración final y velocidad verificadas por farmacia y enfermería con medidas institucionales de seguridad.'],
   cautions:['ALTO RIESGO · ISMP 2024: KCl inyectable concentrado. La inyección IV sin diluir puede provocar paro cardiaco inmediato.','Contraindicado ante hiperpotasemia, insuficiencia renal o condiciones con retención de potasio según la etiqueta consultada.','Las velocidades para hipopotasemia crítica requieren un protocolo de urgencias/UCI con monitorización continua; NO se habilitan aquí.','No convertir automáticamente mEq del vial a una orden de infusión. La velocidad y concentración finales dependen del acceso venoso, laboratorio y protocolo.'],
   preparation:{
-   method:'Presentación específica Hospira: KCl concentrado 2 mEq/mL; DEBE diluirse en un volumen grande de solución compatible, con mezclado completo del recipiente antes de administrar. La etiqueta enumera formatos de 10/5, 20/10 y 40/20 (mEq/mL de presentación); NO se entrega un procedimiento de preparación calculado.',
+   method:'Presentación específica Hospira: KCl concentrado 2 mEq/mL; DEBE diluirse en un volumen grande de solución compatible, con mezclado completo del recipiente antes de administrar. La etiqueta enumera envases de 10 mEq/5 mL, 20 mEq/10 mL y 40 mEq/20 mL (todos 2 mEq/mL); NO se entrega un procedimiento de preparación calculado.',
    restrictions:'NUNCA IV directo/bolo, IM ni SC. Sin bomba, protocolo, acceso apropiado y validación de farmacia, NO preparar. No extrapolar las concentraciones a otras marcas.',
    scope:'Solo concentrado de Hospira 2 mEq/mL como dato de identificación; no preparación final prescriptiva',
    sourceSection:'DOSAGE AND ADMINISTRATION / CONTRAINDICATIONS / HOW SUPPLIED (secc. 4, 5, 10, 11)',
@@ -28,7 +28,7 @@ const review=[
   regimens:[{id:'adult-kcl-noncritical',population:'adult',indication:'adult-kcl-noncritical',title:'Adulto · hipopotasemia NO crítica, hospitalizado y monitorizado',route:'iv',
    reference:'La etiqueta Hospira indica para K sérico >2.5 mEq/L: velocidad de infusión que NO exceda 10 mEq/h y concentración de hasta 40 mEq/L; límite de la etiqueta 200 mEq/24 h. ESTOS SON LÍMITES DOCUMENTALES, NO DOSIS PRESCRITA. Existen situaciones con requisitos distintos que deben manejarse con protocolo específico.',
    context:'La ficha no determina déficit de potasio, mEq a administrar, volumen, diluyente, acceso ni tiempo de reposición. Solo adultos con hipopotasemia no crítica y sin insuficiencia renal; requerir protocolo hospitalario y farmacia. Para K ≤2.5, síntomas graves o cambios ECG, NO utilizar esta ruta.',
-   constraints:['K sérico documentado 2.5–3.4 mEq/L, sin datos de urgencia cardiaca','Función renal/diuresis y monitorización verificadas, concentrado identificado y validación por farmacia']}]},
+   constraints:['K sérico documentado >2.5 y <3.5 mEq/L, sin datos de urgencia cardiaca','Función renal/diuresis y monitorización verificadas, concentrado identificado y validación por farmacia']}]},
  {id:'heparina',name:'Heparina sódica no fraccionada inyectable (Hikma)',
   status:'Cotejo documental parcial · anticoagulante de alto riesgo',
   jurisdiction:'Etiqueta estadounidense de Hikma; sin autorización o equivalencia de presentación confirmada en México.',
@@ -82,7 +82,7 @@ function check(id,x){
  if(!regimen)errors.push('Indicación fuera de los escenarios con cotejo documental.');
  if(x?.route!==regimen?.route)errors.push('Vía no coincide con la referencia de formulación.');
  if(id==='potasio-iv'){
-  if(x?.kRange!=='noncritical')errors.push('Solo hipopotasemia no crítica con K 2.5–3.4 mEq/L; otros rangos requieren protocolo distinto.');
+  if(x?.kRange!=='noncritical')errors.push('Solo hipopotasemia no crítica con K >2.5 y <3.5 mEq/L; otros rangos requieren protocolo distinto.');
   if(x?.renalStable!=='yes')errors.push('Función renal/diuresis no verificadas o alteradas.');
   if(x?.monitoring!=='yes')errors.push('Monitorización de K/ECG no disponible o no confirmada.');
   if(x?.dilutionValidated!=='yes')errors.push('La dilución/concentración por Farmacia no ha sido validada.');
