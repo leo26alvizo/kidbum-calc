@@ -88,7 +88,7 @@ assert.ok(scripts.indexOf('assets/pharma-pro-indications-ui.js')>scripts.indexOf
 assert.ok(scripts.indexOf('assets/pharma-pro-ui.js')>scripts.indexOf('assets/pharma-pro-indications-ui.js'),'Main UI mounts disease search');
 for(const path of scripts)assert.ok(sw.includes("'./"+path+"'"),'Offline precached '+path);
 assert.match(sw,/pharma-indications-lasa-v01031/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.34"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.35"/);
 assert.ok(home.indexOf('SNNOOP10:')<home.indexOf('Simulador de pares craneales oculomotores')&&home.indexOf('Simulador de pares craneales oculomotores')<home.indexOf('Biblioteca farmacológica · Pharma Pro'),'Featured placement preserved');
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);
 for(const s of [expansionSrc,coreSrc,disUI])assert.doesNotMatch(s,/fetch\s*\(|XMLHttpRequest|sendBeacon|api\.openai\.com/,'No external calls in offline clinical layer');
