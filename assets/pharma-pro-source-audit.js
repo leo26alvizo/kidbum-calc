@@ -37,7 +37,7 @@ const preparation={
 const entries=[
  {id:'metformina',name:'Metformina de liberación inmediata (tabletas)',status:'Referencia etiquetada cotejada · revisión clínica externa pendiente',
   jurisdiction:'Etiqueta US de METFORMIN HYDROCHLORIDE TABLETS, solución no parenteral. Verificar registro/formulación en México.',
-  source:SRC('bfd6ec0f-8264-4877-aa6d-f347f53bc426','Metformin hydrochloride tablets · RemedyRepack / etiqueta combinada IR-ER',4,'2026-10-23'),
+  source:SRC('f86bda10-8b25-4125-8bb1-1b5917969ff0','Metformin hydrochloride tablets IR · Golden State Medical Supply',14,'2026-09-30'),
   formulation:'Tabletas de liberación inmediata, vía oral. No confundir con tabletas XR/ER. El etiquetado fuente contempla IR y ER; esta ficha solo aborda IR.',
   monitoring:['TFG al inicio y periódicamente.','Síntomas de intolerancia gastrointestinal o acidosis láctica.','Revisar condiciones de hipoxia, enfermedad aguda y estudios con contraste iodado.'],
   cautions:['Metformina contraindica TFG <30 mL/min/1.73 m² y acidosis metabólica activa (incluida CAD).','NO iniciar metformina si TFG 30–44 mL/min/1.73 m² según esta etiqueta.','Con contraste yodado puede requerirse suspensión temporal por criterios de TFG/comorbilidad/vía; comprobar protocolo y etiqueta.','Las tabletas IR y ER tienen pautas y máximos diferentes; NO intercambiarlas sin revisión.'],
