@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.28**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.29**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro v0.10.29 · biblioteca farmacológica
+
+Acceso destacado **💊 Biblioteca farmacológica · Pharma Pro** en **Inicio → Biblioteca**, inmediatamente después de SNNOOP10 y del simulador de pares craneales, con el mismo estilo visual. Mantiene la barra inferior **Inicio | Favoritos | Historias | Acerca de**, y el catálogo sigue con **133 calculadoras**. Disponible en `pharma-pro.html`, precargado sin conexión por Service Worker.
+
+**Contenido de esta primera implementación:** índice consultable de **46 principios activos** (no 46 monografías posológicas validadas), búsqueda sin acentos, grupos, filtros Adultos/Pediatría/Neonatología/alto riesgo, favoritos que almacenan solo identificadores locales, monografías parciales con límites transparentes, fuentes primarias enlazadas y alertas comprobadas para ceftriaxona neonatal, KCl concentrado, glargina U-300, enoxaparina, warfarina y ketorolaco. Incluye auditoría de seguridad orientativa por población/vía/alergias/función renal y **tres pares de interacciones** documentadas, con aviso expreso de que la base NO es exhaustiva ni certifica ausencia de interacciones.
+
+**Las dosis, ajustes farmacológicos individuales, compatibilidades IV y diluciones están intencionalmente inhabilitados** hasta completar revisión clínica/farmacéutica por indicación, formulación y población; no se confunden avisos de seguridad documentados con una monografía completa. Los avisos farmacológicos usan etiquetado de EE. UU. y **no presuponen autorización ni equivalencia de presentación en México**. No se almacenan datos clínicos de pacientes. Esta versión no es un sistema de prescripción.
+
+Fuentes transversales: [COFEPRIS](https://registros.cofepris.gob.mx/BRSDM/default.aspx), [DailyMed](https://dailymed.nlm.nih.gov/dailymed/), [ISMP 2024](https://www.ismp.org/system/files/resources/2024-01/ISMP_HighAlert_AcuteCare_List_010924_MS5760.pdf), [OMS 2025](https://www.who.int/groups/expert-committee-on-selection-and-use-of-essential-medicines/essential-medicines-lists/). Las fuentes específicas de cada advertencia figuran dentro de la ficha.
 
 ## Acceso directo a gasometría v0.10.27 — navegación desde Urgencias
 
