@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.25" />
+  <meta name="kidbum-app-version" content="0.10.26" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1123,16 +1123,19 @@ html.dark .atlas-calc-heading .calc-title{
       const f=fields(o,{na:[40,220,'Sodio'],cl:[20,200,'Cloro'],hco3:[1,70,'Bicarbonato']});
       if(f.errors.length)return {error:f.errors};
       const v=f.o.na-f.o.cl-f.o.hco3;
+      let adjustedAG=null;
       let notes=['El intervalo de referencia depende del laboratorio y método analítico.','No diagnostica acidosis metabólica sin gasometría/pH y contexto clínico.'];
       let detail='AG = Na − (Cl + HCO₃).';
       if(o.alb!==undefined&&String(o.alb).trim()!==''){
         const a=val(o.alb);
         if(!valid(a,0.5,7))return {error:['Albúmina: introduce un valor de 0.5 a 7 g/dL o déjala vacía.']};
-        const cv=v+2.5*(4-a);
+        const cv=v+2.5*(4-a);adjustedAG=cv;
         detail+=` AG corregida por albúmina: ${cv.toFixed(1)} mmol/L [AG + 2.5 × (4 − albúmina g/dL)].`;
         notes.push('La corrección por albúmina es aproximada; no sustituye la evaluación ácido-base.');
       }else notes.push('Albúmina no disponible: la brecha podría estar infraestimada en hipoalbuminemia.');
-      return done(v,'mmol/L','Brecha aniónica sin potasio.',notes,detail);
+      const result=done(v,'mmol/L','Brecha aniónica sin potasio.',notes,detail);
+      if(adjustedAG!==null)result.correctedAG=adjustedAG;
+      return result;
     },
     osm(o){
       const f=fields(o,{na:[40,220,'Sodio'],gluc:[1,1500,'Glucosa'],bun:[0,300,'BUN']});
@@ -1459,6 +1462,7 @@ html.dark .atlas-calc-heading .calc-title{
 
 </script>
 <script src="./assets/analytics.js"></script>
+<script src="./assets/guardia-gasometria.js"></script>
 <script src="./assets/medical-atlas.js"></script>
 <script>
 (function(){
@@ -1802,7 +1806,10 @@ const externalCalculators=[
  {id:'geneva',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#geneva',image:'atlas-wellspe.jpg'},
  {id:'pesi',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#pesi',image:'atlas-lungs.jpg'},
  {id:'bova',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#bova',image:'atlas-vascular.jpg'},
- {id:'sgarbossa',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#sgarbossa',image:'cardiologia-portada.jpg'}
+ {id:'sgarbossa',category:'Urgencias y Terapia Intensiva',href:'./escalas-cardioembolia.html#sgarbossa',image:'cardiologia-portada.jpg'},
+ {id:'hit4ts',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#hit4ts',image:'atlas-vascular.jpg'},
+ {id:'padua',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#padua',image:'atlas-vascular.jpg'},
+ {id:'improvebleed',category:'Urgencias y Terapia Intensiva',href:'./guardia-pro.html#improvebleed',image:'atlas-vascular.jpg'}
 ];
 const calculatorCount=(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+externalCalculators.filter(d=>cat==='Todas'||d.category===cat).length;
 const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología','Geriatría'];
@@ -1820,19 +1827,21 @@ function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');c
 function go(page,what=''){if(page==='docs'){window.location.assign('./documentacion.html');return;}if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
 function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
 function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['docs','▤','Documentación clínica'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>{const target=b.dataset.nav||b.dataset.mobileNav;if(target==='home'){category='Todas';search='';}go(target);});document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
-function render(){renderNav();el('#breadcrumb-current').hidden=screen==='home';el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':'Inicio';if(screen==='guard'){renderGuard();return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
+function render(){renderNav();el('#breadcrumb-current').hidden=screen==='home';el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':screen==='gasometria'?'Gasometría integrada':'Inicio';if(screen==='guard'){renderGuard();return;}if(screen==='gasometria'){window.KidBumGasometria.render(main,engine,()=>go('guard'));return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
 
 /* Acceso rápido exclusivo, no duplica calculadoras ni mantiene fichas de pacientes. */
 const guardGroups=[
  {name:'Oxigenación y respiratorio',hint:'Apoyo a monitorización; reevaluar dificultad respiratoria y oxigenación.',ids:['pafi','rox','rass','camicu','sofa2','news2']},
  {name:'Choque y deterioro',hint:'Priorizar ABCDE, signos vitales, perfusión y escalamiento.',ids:['map','shock','qsofa','news2','apache2quick']},
  {name:'Neurología de urgencia',hint:'Identificar déficit focal y alteración de conciencia; no retrasar valoración.',ids:['gcs','nihss','abcd2']},
- {name:'Gasometría y función renal',hint:'Interpretar fórmulas en el contexto de muestras y unidades correctas.',ids:['anion','winter','deltaratio','fena','feurea']}
+ {name:'Gasometría y función renal',hint:'Interpretar fórmulas en el contexto de muestras y unidades correctas.',ids:['gasometria','anion','winter','deltaratio','fena','feurea']},
+ {name:'Trombosis y sangrado',hint:'Ante sospecha de HIT priorizar su evaluación; los puntajes NO prescriben profilaxis.',ids:['hit4ts','padua','improvebleed']}
 ];
 function renderGuard(){
- const cards=guardGroups.map(g=>`<section class="guard-group"><h2>${enc(g.name)}</h2><p>${enc(g.hint)}</p><div class="guard-links">${g.ids.map(gid=>{const d=defs.find(x=>x.id===gid);return d?`<button type="button" data-guard-open="${enc(d.id)}"><strong>${enc(d.title)}</strong><span>${enc(d.short)} →</span></button>`:'';}).join('')}</div></section>`).join('');
+ const extraGuard={gasometria:{id:'gasometria',title:'Gasometría integrada',short:'AG, Winter y delta ratio'},hit4ts:{id:'hit4ts',title:'4Ts · sospecha de HIT',short:'Probabilidad preprueba de HIT'},padua:{id:'padua',title:'Padua · riesgo de TEV',short:'Riesgo tromboembólico'},improvebleed:{id:'improvebleed',title:'IMPROVE Bleeding',short:'Riesgo hemorrágico'}};
+ const cards=guardGroups.map(g=>`<section class="guard-group"><h2>${enc(g.name)}</h2><p>${enc(g.hint)}</p><div class="guard-links">${g.ids.map(gid=>{const d=defs.find(x=>x.id===gid)||extraGuard[gid];return d?`<button type="button" data-guard-open="${enc(d.id)}"><strong>${enc(d.title)}</strong><span>${enc(d.short)} →</span></button>`:'';}).join('')}</div></section>`).join('');
  main.innerHTML=`<section class="guard-intro"><div class="eyebrow">ACCESOS RÁPIDOS · KIDBUM</div><h1>Modo Guardia</h1><p>Calculadoras esenciales para pacientes hospitalizados y atención urgente. Todas son herramientas de apoyo: los resultados no sustituyen la exploración, la estabilización ni los protocolos institucionales.</p></section><section class="guard-safety" role="note"><strong>Prioridad clínica:</strong> ante compromiso de vía aérea, ventilación, circulación o estado neurológico, activar atención inmediata. No esperar ni basar intervenciones en una calculadora.</section><div class="guard-grid">${cards}</div><p class="guard-footnote">Sin almacenamiento de datos identificables del paciente. Cada herramienta exige sus propios datos y muestra límites de interpretación.</p>`;
- document.querySelectorAll('[data-guard-open]').forEach(button=>button.onclick=()=>go('calc',button.dataset.guardOpen));
+ document.querySelectorAll('[data-guard-open]').forEach(button=>button.onclick=()=>{const target=button.dataset.guardOpen;if(target==='gasometria')go('gasometria');else if(['hit4ts','padua','improvebleed'].includes(target))window.location.assign('./guardia-pro.html#'+target);else go('calc',target);});
 }
 
 function renderHome(full){
@@ -1859,7 +1868,9 @@ function renderHome(full){
  ];
  const cardioVisible=screen==='home'&&(category==='Todas'||category==='Urgencias y Terapia Intensiva');
  const cardioCards=cardioVisible?cardioTools.filter(x=>!search.trim()||(''+x.name+' '+x.description+' '+x.id).toLowerCase().includes(search.trim().toLowerCase())).map(x=>'<article class="calc-card" data-cardio="'+x.id+'" role="button" tabindex="0" aria-label="Abrir '+x.name+'"><div class="atlas-card-media cardio-card-media" style="background-image:url(./assets/'+x.image+')"><img class="atlas-card-illustration" src="./assets/'+x.image+'" alt="" loading="eager" decoding="async"/><span class="atlas-card-index">'+x.symbol+'</span></div><div><h3>'+x.name+'</h3><p>'+x.description+'</p></div><div class="calc-card-bottom"><span>Urgencias y Terapia Intensiva</span><span class="card-arrow">→</span></div></article>').join(''):'';
- const cards=wallaceCard+capurroCard+cardioCards+newTwentyCards+geriatricCards+liverCards+pharmaCard+list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
+ const guardiaProTools=[{id:'hit4ts',title:'4Ts · sospecha de HIT',short:'Trombocitopenia por heparina · probabilidad preprueba'},{id:'padua',title:'Padua · riesgo de TEV',short:'Riesgo tromboembólico en paciente médico hospitalizado'},{id:'improvebleed',title:'IMPROVE Bleeding',short:'Riesgo hemorrágico intrahospitalario'}];
+ const guardiaProCards=screen==='home'&&(category==='Todas'||category==='Urgencias y Terapia Intensiva')?guardiaProTools.filter(t=>!search.trim()||(t.title+' '+t.short+' urgencias').toLowerCase().includes(search.trim().toLowerCase())).map(t=>'<article class="calc-card" data-guardia-pro="'+t.id+'" role="button" tabindex="0" aria-label="Abrir '+enc(t.title)+'"><div class="atlas-card-media cardio-card-media"><img class="atlas-card-illustration" src="./assets/atlas-vascular.jpg" loading="lazy" alt="" /><span class="atlas-card-index">GP</span></div><div><h3>'+enc(t.title)+'</h3><p>'+enc(t.short)+'</p></div><div class="calc-card-bottom"><span>Urgencias y Terapia Intensiva</span><span class="card-arrow">→</span></div></article>').join(''):'';
+ const cards=wallaceCard+capurroCard+cardioCards+newTwentyCards+geriatricCards+liverCards+guardiaProCards+pharmaCard+list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
  if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1><span class="atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integral</span></h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></div></div><div class="atlas-hero-art" aria-hidden="true">${atlas.img("qsofa","atlas-hero-illustration","",true)}</div></section><div class="quick-stats"><span class="mini-stat"><strong>${calculatorCount()}</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p><p><a href="./snnoop10.html" style="display:inline-block;margin-top:8px;padding:9px 13px;border:1px solid #3a93a0;border-radius:10px;font-weight:700">🧠 SNNOOP10: banderas rojas de cefalea →</a></p><p><a href="https://nerviosoculares.docramiro.workers.dev/" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:8px;padding:9px 13px;border:1px solid #3a93a0;border-radius:10px;font-weight:700">👁️ Simulador de pares craneales oculomotores →</a></p></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div class="chips" id="chips"></div><div id="atlas-categories" class="atlas-category-grid" aria-label="Colecciones médicas ilustradas"></div><div id="calc-list" class="calc-grid"></div>`;
  el('#chips').innerHTML=categories.map(c=>`<button type="button" class="chip ${category===c?'active':''}" data-cat="${enc(c)}" aria-label="${enc(c)}: ${calculatorCount(c)} calculadoras">${enc(c)} <span class="chip-count">${calculatorCount(c)}</span></button>`).join('');
 
@@ -1884,6 +1895,7 @@ function renderHome(full){
  el('#calc-list').innerHTML=cards||`<div class="empty-state">${screen==='favorite'?'Todavía no tienes favoritas. Marca ☆ en cualquier calculadora.':'No encontramos coincidencias. Prueba otro término.'}</div>`;
  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{category=b.dataset.cat;renderHome(false);});
  document.querySelectorAll('[data-expansion]').forEach(c=>{const open=()=>window.location.assign('./expansion-20.html#'+c.dataset.expansion);c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});
+ document.querySelectorAll('[data-guardia-pro]').forEach(c=>{const open=()=>window.location.assign('./guardia-pro.html#'+c.dataset.guardiaPro);c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});
  document.querySelectorAll('[data-hepatologia]').forEach(c=>{const open=()=>window.location.assign('./hepatologia-indices.html#'+c.dataset.hepatologia);c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});
  document.querySelectorAll('[data-geriatria]').forEach(c=>{const open=()=>window.location.assign('./geriatria-escalas.html#'+c.dataset.geriatria);c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});
  document.querySelectorAll('[data-capurro-open]').forEach(c=>{const open=()=>window.location.assign('./capurro.html');c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}};});

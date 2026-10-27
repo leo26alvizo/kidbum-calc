@@ -27,6 +27,6 @@ const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-se
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/chatgpt-analysis\.js'/);assert.match(sw,/chatgpt-external-restored/);
 const reg=index.slice(index.indexOf('const externalCalculators='),index.indexOf('const calculatorCount='));
 const paths=[...reg.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(paths.length,40,'forty standalone calculators');
+assert.equal(paths.length,43,'43 standalone calculators');
 for(const path of new Set(paths))assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
-console.log('Standalone ChatGPT analysis PASS: 40 calculators, 6 pages, privacy, completion gating, themes, offline.');
+console.log('Standalone ChatGPT analysis PASS: 43 calculators, 7 pages, privacy, completion gating, themes, offline.');

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102f3a"><title>Guardia Pro · Trombosis y sangrado | KidBum CALC</title>
+<style>
+:root{color-scheme:light;--bg:#eef4f5;--panel:#fff;--ink:#15333e;--soft:#516a75;--stroke:#cadde0;--wash:#e5f3f2;--accent:#086c71;--buttonText:#fff}
+html.dark{color-scheme:dark;--bg:#091c28;--panel:#122d3c;--ink:#e9f5f7;--soft:#b0cbd2;--stroke:#315565;--wash:#1a3c49;--accent:#7cdee0;--buttonText:#12313b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.52 system-ui,-apple-system,'Segoe UI',sans-serif}main{max-width:1120px;margin:auto;padding:17px 14px 80px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}nav a{font-weight:800;color:var(--accent)}
+button,select,input{font:inherit}button{cursor:pointer;min-height:44px;border-radius:11px;padding:10px 13px;font-weight:750;border:1px solid var(--stroke);background:var(--panel);color:var(--ink)}
+.hero{border-radius:21px;overflow:hidden;background:linear-gradient(100deg,#092835ef,#092835a4),url('./assets/atlas-vascular.jpg') center/cover;color:#fff;padding:clamp(22px,4vw,43px);min-height:180px}
+.eyebrow{font-size:.76rem;letter-spacing:.13em;color:#b7f3ed;font-weight:800}h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.14;margin:9px 0}.hero p{max-width:750px;color:#d6f3f0;margin:0}
+.choose{margin:18px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}.choose label{font-weight:800}.choose select{flex:1;min-width:230px;max-width:100%;min-height:49px;border:1px solid var(--stroke);border-radius:12px;background:var(--panel);color:var(--ink);padding:11px}
+.layout{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);gap:16px;align-items:start}.panel{border:1px solid var(--stroke);background:var(--panel);border-radius:18px;padding:clamp(16px,3vw,26px);box-shadow:0 8px 24px #001c2412}
+h2{font-size:1.16rem;margin:0 0 8px}.small{font-size:.87rem;color:var(--soft)}.field{border-top:1px solid var(--stroke);padding:13px 0;display:grid;gap:7px}.field label{font-weight:730}.field select,.field input{background:var(--panel);color:var(--ink);width:100%;min-height:47px;border:1px solid var(--stroke);border-radius:10px;padding:11px}.field small{color:var(--soft)}
+output{display:block;background:var(--wash);border-radius:14px;padding:17px;margin:12px 0}#score{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:850}#interp{font-weight:700;margin:6px 0}#detail{font-size:.87rem;color:var(--soft);line-height:1.6;overflow-wrap:anywhere}
+.buttons{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}.primary{background:var(--accent);color:var(--buttonText);border-color:var(--accent)}button:disabled{opacity:.55;cursor:not-allowed}
+.notice{border-left:4px solid var(--accent);border-radius:8px;padding:13px;background:var(--wash);font-size:.9rem}#source{overflow-wrap:anywhere;color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.choose label{width:100%}.hero{min-height:160px}}
+@media print{nav,.choose,.buttons{display:none}.layout{display:block}.panel{break-inside:avoid;margin-bottom:10px}}
+</style></head><body><main>
+<nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<header class="hero"><div class="eyebrow">KIDBUM · GUARDIA PRO</div><h1>Trombosis y sangrado</h1><p>4Ts, Padua e IMPROVE Bleeding · resultados locales y sin prescripciones automáticas</p></header>
+<div class="choose"><label for="picker">Seleccionar herramienta</label><select id="picker"></select></div>
+<div class="layout">
+<section class="panel"><h2 id="title"></h2><p class="small" id="intro"></p><div id="fields"></div></section>
+<section class="panel" aria-label="Resultado">
+<h2>Resultado clínico</h2>
+<output aria-live="polite" aria-atomic="true"><div id="score">—</div><p id="interp">Completa todos los campos documentados.</p><p id="detail"></p></output>
+<div class="buttons"><button id="example" type="button">↗ Ejemplo ficticio</button><button id="reset" type="button">↻ Limpiar</button><button id="copy" type="button" class="primary" disabled>Copiar resumen</button></div>
+<p id="example-note" class="small" hidden>🧪 Datos completamente ficticios para demostración.</p>
+<div id="kb-ai-mount"></div>
+<p class="notice" id="warning"></p>
+<p class="small">Fuente clínica: <a id="source" href="#" target="_blank" rel="noopener noreferrer">Consultar tabla original</a>.</p>
+<p class="small">Solo apoyo educativo. No se guardan ni transmiten las respuestas. Ante inestabilidad, hemorragia, trombosis o sospecha de HIT, priorizar valoración presencial y protocolos institucionales.</p>
+</section></div></main>
+<script src="./assets/guardia-pro.js"></script>
+<script src="./assets/chatgpt-analysis.js"></script>
+<script>
+(function(){
+'use strict';
+const kit=window.KidBumGuardiaPro,$=id=>document.getElementById(id),picker=$('picker');
+let active,values={},result=null;
+const ai=window.KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>({title:active.title,result:result.display,interpretation:result.interpretation,details:result.detail,warning:active.warning})});
+function theme(){const dark=document.documentElement.classList.contains('dark');$('theme').textContent=dark?'☾ Tema oscuro':'☀ Tema claro'}
+try{document.documentElement.classList.toggle('dark',localStorage.getItem('kidbum-theme')==='dark')}catch{}
+theme();$('theme').onclick=()=>{document.documentElement.classList.toggle('dark');try{localStorage.setItem('kidbum-theme',document.documentElement.classList.contains('dark')?'dark':'light')}catch{}theme()};
+for(const t of kit.tools){const o=document.createElement('option');o.value=t.id;o.textContent=t.title;picker.add(o)}
+function update(){
+ result=kit.evaluate(active,values);
+ $('score').textContent=result?result.display:'—';
+ $('interp').textContent=result?result.interpretation:'Completa todos los campos con datos verificados. Nunca se asume una respuesta negativa.';
+ $('detail').textContent=result?result.detail:'';
+ $('copy').disabled=!result;
+ ai.setReady(Boolean(result));
+}
+function draw(){
+ $('fields').replaceChildren();
+ for(const f of active.fields){
+  const row=document.createElement('div');row.className='field';
+  const label=document.createElement('label');label.htmlFor='gp-'+f.key;label.textContent=f.label;
+  const input=document.createElement(f.type==='choice'?'select':'input');input.id='gp-'+f.key;
+  if(f.type==='choice'){
+   const missing=document.createElement('option');missing.value='';missing.textContent='Selecciona la respuesta documentada';input.add(missing);
+   for(const [value,text] of f.options){const o=document.createElement('option');o.value=value;o.textContent=text;input.add(o)}
+  }else{input.type='number';input.step='any';input.min=f.min;input.max=f.max;input.inputMode='decimal';input.placeholder='Dato documentado'+(f.unit?' ('+f.unit+')':'')}
+  input.value=values[f.key]||'';
+  const updateInput=()=>{values[f.key]=input.value;update()};
+  input.addEventListener('change',updateInput);
+  if(f.type==='number')input.addEventListener('input',updateInput);
+  row.append(label,input);
+  if(f.help||f.unit){const help=document.createElement('small');help.textContent=f.help||(f.unit?'Unidad: '+f.unit:'');row.append(help)}
+  $('fields').append(row);
+ }
+ update();
+}
+function select(id){
+ active=kit.tools.find(t=>t.id===id)||kit.tools[0];picker.value=active.id;values={};
+ $('title').textContent=active.title;$('intro').textContent=active.short;$('warning').textContent=active.warning;$('source').href=active.source;
+ $('example-note').hidden=true;draw();
+ try{history.replaceState(null,'','#'+active.id)}catch{}
+}
+picker.onchange=()=>select(picker.value);
+$('example').onclick=()=>{values={...kit.examples[active.id]};$('example-note').hidden=false;draw()};
+$('reset').onclick=()=>{values={};$('example-note').hidden=true;draw()};
+$('copy').onclick=async()=>{
+ if(!result)return;
+ const s='KidBum Guardia Pro — '+active.title+'\nDatos (no identificables):\n'+active.fields.map(f=>f.label+': '+(values[f.key]||'[PENDIENTE]')).join('\n')+'\nResultado: '+result.display+'\nInterpretación: '+result.interpretation+'\nComponentes: '+result.detail+'\nPrecauciones: '+active.warning+'\nReferencia: '+active.source+'\nNo constituye prescripción ni diagnóstico.';
+ try{await navigator.clipboard.writeText(s);$('copy').textContent='✓ Copiado'}catch{$('copy').textContent='Copia manual no disponible'}
+};
+select(decodeURIComponent(location.hash.slice(1)));
+})();
+</script></body></html>

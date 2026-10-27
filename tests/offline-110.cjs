@@ -1,5 +1,5 @@
 'use strict';
-// Verify that an installed KidBum release can open all 124 clinical tools in
+// Verify that an installed KidBum release can open all 127 clinical tools in
 // airplane mode, including pages never visited before and query-string images.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -46,18 +46,18 @@ vm.runInNewContext(sw+'\nself.__offlineAssets=CORE_ASSETS;',context,{timeout:300
 const packed=Array.from(self.__offlineAssets);
 const packedSet=new Set(packed);
 const mustHave=[
- 'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','escalas-cardioembolia.html',
+ 'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
  'assets/startup-bundle.js','assets/pediatric-pharma.js',
- 'assets/expansion-20.js','assets/geriatria-escalas.js','assets/hepatologia-indices.js','assets/fictitious-examples.js',
+ 'assets/expansion-20.js','assets/geriatria-escalas.js','assets/hepatologia-indices.js','assets/guardia-pro.js','assets/guardia-gasometria.js','assets/fictitious-examples.js',
  'assets/chatgpt-analysis.js','assets/medical-atlas.js',
  'assets/wallace-adultos-original-HD.png','assets/wallace-adultos.webp',
  'assets/snnoop10-portada.jpg'
 ];
 for(const p of mustHave)assert.ok(packedSet.has('./'+p),'Not precached: '+p);
 const external=[...home.matchAll(/\{id:'([^']+)',category:'[^']+',href:'([^']+)',image:'([^']+)'\}/g)];
-assert.equal(external.length,40,'All 40 standalone tool links must remain registered');
+assert.equal(external.length,43,'All 43 standalone tool links must remain registered');
 for(const match of external){
  const page=match[2].split('#')[0];
  assert.ok(packedSet.has(page),'Calculator '+match[1]+' not precached: '+page);
@@ -105,5 +105,5 @@ async function navigate(path){
  await navigate('./assets/wallace-adultos.webp?v=20261021-repaired');
  await navigate('./assets/snnoop10-portada.jpg?v=cover');
  assert.equal(networkCalls,0,'Cold airplane-mode app navigation contacted the network');
- console.log('FULL OFFLINE PASS: 124 calculator routes, 11 local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
+ console.log('FULL OFFLINE PASS: 127 calculator routes, 12 local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
 })().catch(e=>{console.error(e);process.exitCode=1;});
