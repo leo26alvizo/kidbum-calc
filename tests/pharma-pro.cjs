@@ -71,7 +71,7 @@ const idx3=html.indexOf('💊 Biblioteca farmacológica · Pharma Pro');
 const idx4=html.indexOf('<label class="search"',idx3);
 assert.ok(idx1>=0&&idx1<idx2&&idx2<idx3&&idx3<idx4,'Pharma quick link adjacent to existing two links, before main search');
 assert.match(html,/href="\.\/pharma-pro\.html"/);
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.33"/);
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.34"/);
 assert.doesNotMatch(html,/data-mobile-nav="guard"/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-core\.js">/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-ui\.js">/);
