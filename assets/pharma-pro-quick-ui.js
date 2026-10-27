@@ -4,6 +4,7 @@
 const lib=root.KidBumPharmaCore;
 const UI=root.KidBumPharmaUI;
 if(!lib||!UI||!document.getElementById('quick-search'))return;
+document.documentElement.classList.add('pharma-fast-ready');
 const $=id=>document.getElementById(id);
 const quick=$('quick-search'),suggestions=$('quick-suggestions'),clear=$('quick-clear');
 const tabs=[...document.querySelectorAll('[data-pharma-view]')];
@@ -89,6 +90,17 @@ root.KidBumPharmaQuick=Object.freeze({
  onDrugClose(){
   state.drugDetail=false;
   sectionVisibility();
+ },
+ openDisease(id){
+  const entry=lib.conditions.find(x=>x.id===id);
+  if(!entry)return false;
+  history.replaceState(null,'',location.pathname+location.search);
+  display('diseases');
+  quick.value=entry.name;
+  state.history.diseases=entry.name;
+  dispatch('disease-search',entry.name);
+  const opened=root.KidBumPharmaIndicationsUI?.openCondition?.(id);
+  return opened===true;
  }
 });
 /* The original page invokes showDrug once on initial hash; respect deep links. */
