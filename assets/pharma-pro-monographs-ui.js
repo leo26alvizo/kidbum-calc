@@ -69,6 +69,32 @@ function render(id){
    extra.rilpivirine=chooser(grid,'rilpivirine','¿Usa medicamentos con rilpivirina?',yn);
   }
  }
+ if(['potasio-iv','heparina','insulina-lispro'].includes(id)){
+  extra.productConfirmed=chooser(grid,'productConfirmed','¿Concentración y presentación exactas verificadas?',yn);
+  extra.pregnancy=chooser(grid,'pregnancy','¿Embarazo posible o documentado?',yn);
+  extra.hospitalProtocol=chooser(grid,'hospitalProtocol','¿Protocolo y supervisión disponibles?',yn);
+  if(id==='potasio-iv'){
+   extra.kRange=chooser(grid,'kRange','Potasio sérico actual',[['noncritical','>2.5 a <3.5 mEq/L, confirmado'],['critical','≤2.5 mEq/L (NO cubierto)'],['normal','≥3.5 mEq/L / otra situación'],['unknown','Sin laboratorio']]);
+   extra.renalStable=chooser(grid,'renalStable','¿Función renal y diuresis adecuadas, confirmadas?',yn);
+   extra.monitoring=chooser(grid,'monitoring','¿Vigilancia de K/ECG según protocolo?',yn);
+   extra.dilutionValidated=chooser(grid,'dilutionValidated','¿Farmacia validó concentración, diluyente y acceso?',yn);
+   extra.urgentSymptoms=chooser(grid,'urgentSymptoms','¿Síntomas graves o cambios ECG?',yn);
+  }
+  if(id==='heparina'){
+   extra.bleeding=chooser(grid,'bleeding','¿Sangrado activo no controlado?',yn);
+   extra.hit=chooser(grid,'hit','¿HIT previa o sospechada?',yn);
+   extra.labMonitoring=chooser(grid,'labMonitoring','¿aPTT/anti-Xa, plaquetas y hemoglobina disponibles?',yn);
+   extra.neuroaxial=chooser(grid,'neuroaxial','¿Procedimiento neuroaxial previsto?',yn);
+   extra.vialStrength=chooser(grid,'vialStrength','¿Unidades/mL del vial y uso sistémico confirmados?',yn);
+  }
+  if(id==='insulina-lispro'){
+   extra.formulation=chooser(grid,'formulation','Presentación Humalog', [['u100','Humalog U-100'],['u200','Humalog U-200 (NO cubierto)'],['mix','Humalog Mix (NO cubierto)'],['unknown','Sin identificar']]);
+   extra.hypoglycemia=chooser(grid,'hypoglycemia','¿Hipoglucemia actual?',yn);
+   extra.meal=chooser(grid,'meal','¿Comida e ingesta confirmadas?',yn);
+   extra.glucose=chooser(grid,'glucose','¿Glucemia actual y plan de monitoreo?',yn);
+   extra.insulinPlan=chooser(grid,'insulinPlan','¿Pauta individual de insulina revisada?',yn);
+  }
+ }
  function refill(){
   const prior=indication.value;indication.replaceChildren();const zero=el('option','Elegir indicación · obligatorio');zero.value='';indication.append(zero);
   for(const x of engine.indications(id,population.value)){const o=el('option',x.title);o.value=x.id;indication.append(o);}

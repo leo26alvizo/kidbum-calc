@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.33**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.34**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum Pharma Pro 0.10.34 · medicamentos hospitalarios de alto riesgo (segunda ronda)
+
+**Progreso verificable:** `227` entradas de catálogo; **9** con cotejo DOCUMENTAL PARCIAL de etiqueta US (las 6 previas más 3), **218** todavía sin cotejo individual de dosis; **0** con validación clínica y farmacéutica independiente registrada. La revisión textual de etiquetas FDA/DailyMed NO equivale a autorización de una presentación en México ni a habilitar órdenes médicas.
+
+Tres nuevas fichas de alto riesgo:
+
+- **Cloruro de potasio IV concentrado (Hospira, 2 mEq/mL).** Etiqueta estadounidense [setid 559a0a8c-a8fe-40a5-b196-21f9308780ab](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=559a0a8c-a8fe-40a5-b196-21f9308780ab), v23 (fecha efectiva 2026-07-01). Muestra únicamente límites DOCUMENTALES del etiquetado para hipopotasemia no crítica en adulto, no una dosis ni volumen. Requiere verificar K sérico >2.5 y <3.5 mEq/L, función renal y diuresis, ECG, ausencia de síntomas graves, supervisión y dilución validada por Farmacia. **NUNCA administrar concentrado IV directo, ni usar los límites como pauta prescrita.** Casos graves quedan fuera del formulario.
+- **Heparina sódica no fraccionada (Hikma).** [setid 7014808d-cec9-4b2c-8eb5-940493e356ab](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=7014808d-cec9-4b2c-8eb5-940493e356ab), v18 (2026-10-23). Se documenta tabla del fabricante para anticoagulación IV a dosis plenas como **ejemplo histórico**, NO nomograma actual; controles de HIT, sangrado, procedimientos neuroaxiales, capacidad de monitorizar aPTT/anti-Xa y selección de vial y potencia en unidades/mL. Prohibida vía IM. La dosis y preparación real deben seguir protocolo hospitalario actual.
+- **Insulina lispro Humalog U-100 SC (Eli Lilly).** [setid c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f](https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f), v87 (2026-06-16). La etiqueta **no tiene dosis inicial universal**; sólo pauta de administración en relación con las comidas y necesidad de individualizar unidades. Bloquea hipoglucemia, ausencia de control glucémico, comida no confirmada o presentación U-200/Mix. No traslada preparación SC a infusión IV.
+
+Se mantiene el uso local sin transmisión de datos de pacientes, las tres monografías previas de la primera ronda y las tres de la segunda, los avisos ISMP [alto riesgo 2024](https://www.ismp.org/system/files/resources/2024-01/ISMP_HighAlert_AcuteCare_List_010924_MS5760.pdf), y la barra móvil original. **Pruebas deterministas** verifican bloqueos ante faltantes y contraindicación, pero no sustituyen revisión médica y farmacéutica independiente.
 
 ## KidBum Pharma Pro 0.10.33 · auditoría de fuentes y preparaciones por producto
 
