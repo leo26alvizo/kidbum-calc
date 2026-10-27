@@ -5,7 +5,7 @@ const crypto=require('node:crypto');
 const source=fs.readFileSync('index.html','utf8');
 const cache=fs.readFileSync('sw.js','utf8');
 const image=fs.readFileSync('assets/geriatria-portada.webp');
-assert.ok(source.includes("const categories=['Todas'")&&source.includes("'Geriatría']"),'Geriatría is included among filter chips');
+assert.ok(source.includes("const categories=['Todas'")&&source.includes("'Geriatría','Endocrinología y Diabetes']"),'Geriatría is included among filter chips');
 assert.match(source,/const ordered=\[[^\]]*'Gastroenterología','Geriatría','Ginecología y obstetricia'/,'Home category cards include Geriatría between Gastro and Ginecología');
 assert.match(source,/c==='Geriatría'\?' atlas-gineco-feature atlas-geriatria-feature'/,'Geriatría uses featured card style');
 assert.match(source,/c==='Geriatría'\?'<img class="atlas-category-illustration atlas-gineco-photo atlas-geriatria-photo" src="\.\/assets\/geriatria-portada\.webp"/,'The portrait is the supplied local asset');

@@ -2,13 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.27**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.28**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
 
 ## Acceso directo a gasometría v0.10.27 — navegación desde Urgencias
 
 La **Gasometría integrada · Panel** aparece como tarjeta visible y buscable desde **Inicio → Urgencias y Terapia Intensiva**, junto a 4Ts, Padua e IMPROVE Bleeding. Se abre por clic, Enter o barra espaciadora. Al volver, se muestra la categoría de Urgencias. **No se recupera el botón eliminado de Modo Guardia en la barra inferior móvil**, que continúa como Inicio | Favoritos | Historias | Acerca de. Mantiene las 127 calculadoras: la gasometría es un panel que reutiliza motores y NO incrementa el contador.
+
+## Diabetes & Insulin Pro v0.10.28 — nueva categoría
+
+**Endocrinología y Diabetes** en Inicio incorpora seis herramientas integradas: Insulin Safety Check, Hospital Glucose Monitor, Hypoglycemia Assist, DKA/HHS Assist, DM2 Treatment Navigator y CGM Intelligence. Se ejecutan localmente, con datos obligatorios explícitos, ejemplos ficticios, importación CSV local de CGM, bloqueos ante unidades/esquemas no verificables y sin cálculo automático de dosis ni órdenes médicas.
+
+La herramienta CAD/EHH **reutiliza los motores numéricos KidBum `osm` y `correctedna`**, requiriendo potasio y muestras temporalmente comparables. Registros CGM <14 días o con cobertura <70% se califican como exploratorios. Los seis módulos se cuentan como nuevas herramientas (84 integradas previas + 43 standalone + 6 diabetes = **133 herramientas**). Se conserva la barra móvil **Inicio | Favoritos | Historias | Acerca de**; no se añade Modo Guardia.
+
+**Fuentes y límites:** ADA 2026 (https://doi.org/10.2337/dc26-s016; https://doi.org/10.2337/dc26-s006); consenso CAD/EHH 2024 (https://doi.org/10.2337/dci24-0032); PRONAM DT2 2025 (https://sidof.segob.gob.mx/notas/docFuente/5761885). La implementación requiere validación clínica independiente y pruebas en dispositivos físicos antes de uso asistencial.
 
 ## Guardia Pro v0.10.26 — 4Ts, Padua, IMPROVE Bleeding y gasometría integrada
 

@@ -1,5 +1,5 @@
 'use strict';
-// Verify that an installed KidBum release can open all 127 clinical tools in
+// Verify that an installed KidBum release can open all 133 clinical tools in
 // airplane mode, including pages never visited before and query-string images.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -49,7 +49,7 @@ const mustHave=[
  'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
- 'assets/startup-bundle.js','assets/pediatric-pharma.js',
+ 'assets/startup-bundle.js','assets/pediatric-pharma.js','assets/diabetes-insulin-core.js','assets/diabetes-insulin-ui.js',
  'assets/expansion-20.js','assets/geriatria-escalas.js','assets/hepatologia-indices.js','assets/guardia-pro.js','assets/guardia-gasometria.js','assets/fictitious-examples.js',
  'assets/chatgpt-analysis.js','assets/medical-atlas.js',
  'assets/wallace-adultos-original-HD.png','assets/wallace-adultos.webp',
