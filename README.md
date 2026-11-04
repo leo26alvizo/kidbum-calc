@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.40**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.41**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.41 · Kramer PLUS — análisis seguro de hiperbilirrubinemia neonatal
+
+- **Conserva el bebé original y cinco zonas anatómicas táctiles.** La exploración visual documenta extensión, nunca estima bilirrubina.
+- **Nuevo panel objetivo offline:** edad postnatal en horas (manual o calculada), semanas completas de gestación, TSB/TcB, conversión mg/dL ↔ µmol/L, bilirrubina directa y porcentaje, velocidad de ascenso en mg/dL/h, pérdida/ganancia ponderal y factores de neurotoxicidad.
+- **Comparador de umbrales con puerta de seguridad:** el médico obtiene los umbrales exactos de su tabla AAP 2022, los transcribe y confirma la curva de EG/edad/riesgo; KidBum calcula delta al umbral de fototerapia, escalamiento (intercambio − 2 mg/dL), alertas y seguimiento de Fig. 7 cuando aplique. **No se dibujan ni interpolan umbrales inventados, ni se decide fototerapia con TcB o Kramer.** En línea ofrece vínculo explícito a PediTools con los parámetros ingresados; nunca hay solicitud automática de datos.
+- **Seguridad:** bloquea cifras incompletas/incoherentes, edades fuera de 1–336 h y <35 semanas, mezcla de métodos para ascensos, fracción directa mayor a la total, valores de umbral sin confirmación, alteración neurológica, coluria/acolia, ictericia <24 h, TcB ≥15 mg/dL, cercanía ≤3 mg/dL, ascenso acelerado e indicios de hemólisis. No almacena datos de pacientes. No modifica motores TEP/Ferrés.
+- **Ámbito AAP:** recién nacidos de ≥35 semanas; consultar protocolo institucional mexicano. Referencias: AAP 2022 [guía](https://www.aap.org/en/patient-care/hyperbilirubinemia/), [FAQ](https://www.aap.org/en/patient-care/hyperbilirubinemia/frequently-asked-questions-about-the-2022-aap-guideline-on-the-management-of-hyperbilirubinemia/), [tablas](https://aap2.silverchair-cdn.com/aap2/content_public/journal/pediatrics/150/3/10.1542_peds.2022-058859/5/peds_2022058859supplementarydata.pdf); [CENETEC SS-372-16](https://www.cenetec-difusion.com/CMGPC/SS-372-16/RR.pdf).
+- La implementación se entrega como **apoyo clínico sometido a pruebas**, no se describe como una herramienta validada prospectivamente; requiere revisión institucional antes de uso asistencial.
 
 ## KidBum 0.10.40 · Imagen original y zonas táctiles para Kramer
 
