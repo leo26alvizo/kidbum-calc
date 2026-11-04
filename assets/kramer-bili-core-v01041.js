@@ -1,5 +1,5 @@
 /* KidBum 0.10.41 — Neonatal jaundice objective-data support, AAP 2022.
- * PURE calculation module. No network, localStorage, charts reconstructed from visual Kramer.
+ * PURE calculation module. No network, persisted browser state, or curves inferred from the visual Kramer illustration.
  * AAP treatment thresholds MUST be independently sourced and explicitly verified by clinician.
  * This module is decision support, not an autonomous prescription.
  */
