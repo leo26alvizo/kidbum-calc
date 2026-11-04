@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.37**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.38**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.38 · Pharma Pro UX 2.0 (consulta rápida y ficha completa)
+
+**Entrega:** se mantienen 227 entradas farmacológicas, 15 rutas de enfermedades (escenarios adultos no embarazados), 9 cotejos DOCUMENTALES PARCIALES por producto estadounidense y 0 validaciones clínicas/farmacéuticas independientes documentadas. Esta actualización mejora exclusivamente la interfaz y no cambia indicaciones, dosis, fórmulas, preparaciones o criterios de seguridad.
+
+- **Medicamentos:** fichas compactas con cobertura documental explícita, búsqueda rápida, favoritos y filtros originales.
+- **Ficha clínica:** consulta rápida de usos, verificaciones, advertencias con fuente y estado de revisión; ficha completa con secciones plegables y los formularios de elegibilidad originales. Ninguna referencia de dosis se habilita si faltan los datos obligatorios.
+- **Navegación y accesibilidad:** flechas arriba/abajo, Enter y Escape en sugerencias con atributos ARIA; regreso que conserva filtros, búsqueda, foco y desplazamiento; enlaces directos y temas claro/Graphite Noir conservados.
+- **Advertencias:** la prohibición de prescripción automática y el estado 9/227, 0 validadas siguen visibles. El texto completo de límites clínicos está en el desplegable «Seguridad farmacológica», especialmente para ahorrar espacio en teléfonos.
+- **Ingeniería:** nuevo \`assets/pharma-pro-ux-v01038.css\`, ajustes de presentación en \`assets/pharma-pro-ui.js\` y \`assets/pharma-pro-quick-ui.js\`, actualización atómica de \`sw.js\`, sin modificar motores farmacológicos.
+- **QA automatizada:** \`tests/pharma-ux-v01038.cjs\` y \`tests/pharma-browser-ux-v01038.cjs\` con Chromium real (búsqueda, fichas, bloqueos, favoritos, navegación, temas y desbordamientos). GitHub Actions genera capturas móviles y de escritorio como artefacto de revisión. Las pruebas no equivalen a una validación clínica independiente ni sustituyen pruebas físicas en Safari/iOS.
+- **Seguridad:** el contenido sigue siendo educativo y de consulta. No genera órdenes médicas, no envía datos de pacientes y requiere consulta de IPP mexicana, farmacia clínica y protocolo institucional cuando corresponda.
 
 ## KidBum 0.10.37 · sincronización de tema oscuro entre Pharma Pro y toda KidBum
 

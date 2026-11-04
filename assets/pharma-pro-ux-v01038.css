@@ -1,0 +1,66 @@
+/* Pharma Pro UX 2.0 · staged presentation-only stylesheet; theme tokens retained. */
+#browse .med-grid{align-items:stretch}
+#browse .med-card{min-height:0;gap:8px;padding:16px;border-radius:15px}
+#browse .med-card h3{font-size:17px;line-height:1.3}
+#browse .med-card .pill{white-space:normal}
+.pharma-ux-card-status{font-size:12px;font-weight:800;line-height:1.45;color:var(--accent);background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+#browse .med-card .card-footer{border-top:1px solid var(--line);padding-top:4px}
+#browse .med-card .card-footer button{width:100%;min-height:44px}
+#detail{scroll-margin-top:80px}
+.pharma-ux-switcher{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.pharma-ux-switcher button{min-height:48px;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:11px;font:inherit;font-size:13px;font-weight:800;padding:9px}
+.pharma-ux-switcher button.active{background:var(--accent);color:white;border-color:var(--accent)}
+html.dark .pharma-ux-switcher button.active{color:#0b0b0d}
+.pharma-ux-quick{display:grid;gap:15px;min-width:0}
+.pharma-ux-quick h2{font-size:clamp(22px,4vw,29px);margin:3px 0}
+.pharma-ux-quick h3{font-size:15px;margin:0 0 7px}
+.pharma-ux-quick p{margin:5px 0;font-size:14px;line-height:1.6}
+.pharma-ux-quick .small{font-size:12px}
+.pharma-ux-quick>section{border-bottom:1px solid var(--line);padding-bottom:12px}
+.pharma-ux-evidence{padding:12px!important;border:1px solid var(--line)!important;border-radius:12px;background:var(--bg)}
+.pharma-ux-coverage{font-weight:800;color:var(--accent)}
+.pharma-ux-warning{border-left:4px solid var(--warn);padding:10px 12px;border-radius:9px;background:var(--warningbg)}
+.pharma-ux-open{width:100%;min-height:49px;font-size:14px}
+.pharma-ux-fold{border:1px solid var(--line);border-radius:12px;margin-bottom:11px;padding:0 12px}
+.pharma-ux-fold>summary{min-height:48px;cursor:pointer;font-size:14px;font-weight:800;padding:14px 3px;line-height:1.4}
+.pharma-ux-fold>summary:focus-visible{outline:3px solid var(--focus);outline-offset:1px}
+.pharma-ux-fold>.fact,.pharma-ux-fold>.pm-verified{margin:0;border:0;padding:10px 0 15px}
+.pharma-ux-fold>.fact>h3{display:none}
+.pharma-ux-fold>.pm-verified>h3{display:block}
+@media(max-width:740px){
+ #browse .med-card{padding:12px 13px}
+ .pharma-ux-switcher button{font-size:13px}
+ .pharma-ux-quick{padding:15px}
+ .pharma-ux-full{padding:12px}
+}
+@media(max-width:375px){
+ .pharma-ux-switcher button{font-size:12px}
+ .pharma-ux-quick{padding:12px}
+}
+@media print{
+ .pharma-ux-switcher,.pharma-ux-open{display:none!important}
+ .pharma-ux-full.hidden{display:block!important}
+ .pharma-ux-quick{display:none!important}
+}
+
+/* Keyboard highlight retains active option while focus stays in the search input. */
+.pharma-suggestions [role="option"][aria-selected="true"]{background:var(--mint);outline:2px solid var(--focus);outline-offset:-2px}
+
+/* Preserve full clinical disclaimer without hiding the critical visible prohibition. */
+.pharma-ux-scope{margin:10px 0 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.pharma-ux-scope>summary{display:list-item;cursor:pointer;font-size:13px;font-weight:800;line-height:1.5;padding:13px 15px;color:var(--ink);min-height:44px}
+.pharma-ux-scope>summary:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.pharma-ux-scope>.notice{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--warningbg);line-height:1.6}
+@media(max-width:740px){
+  #pharma-coverage{margin:10px 0 7px;padding:10px 12px;font-size:12px;line-height:1.45}
+  .pharma-ux-scope{margin:7px 0 11px}
+  .pharma-ux-scope>summary{font-size:12px;padding:10px 12px;min-height:48px}
+  #browse .section-title{margin:11px 0 8px}
+  #browse .section-title h2{font-size:20px}
+}
+@media print{
+ .pharma-ux-scope .notice{display:block!important}
+}
+
+/* Legible category eyebrows on light surfaces; hero text retains its own contrast. */
+#browse .eyebrow,#detail .eyebrow{color:var(--accent)}

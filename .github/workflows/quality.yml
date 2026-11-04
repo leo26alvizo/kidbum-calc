@@ -47,6 +47,10 @@ jobs:
         run: node tests/pediatric-mobile-groups.cjs
       - name: Oculomotor simulator navigation
         run: node tests/ocular-simulator-link.cjs
+      - name: Pharma Pro UX 2.0 source states, original clinical engines and offline support
+        run: node tests/pharma-ux-v01038.cjs
+      - name: Real headless Chrome UX smoke test, safety gating and mobile layout
+        run: node tests/pharma-browser-ux-v01038.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
@@ -111,3 +115,34 @@ jobs:
         run: node tests/guardia-pro.cjs
       - name: Integrated arterial blood gas and engine reuse
         run: node tests/guardia-gasometria.cjs
+      - name: Capture Pharma Pro UX candidate screenshots for visual review
+        if: always()
+        run: |
+          mkdir -p qa-screens
+          node tests/pharma-visual-fixtures-v01038.cjs
+          CHROME="$(command -v google-chrome || command -v chromium || command -v google-chrome-stable)"
+          test -n "$CHROME"
+          for view in list detail full dark; do
+            case "$view" in
+              detail) TARGET="file://$PWD/pharma-pro.html#ceftriaxona" ;;
+              full) TARGET="file://$PWD/.pharma-visual-full.html" ;;
+              dark) TARGET="file://$PWD/.pharma-visual-dark.html" ;;
+              *) TARGET="file://$PWD/pharma-pro.html" ;;
+            esac
+            for size in mobile desktop; do
+              if [ "$size" = "mobile" ]; then DIMS="390,844"; else DIMS="1366,900"; fi
+              timeout 45s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --allow-file-access-from-files \
+                --no-first-run --disable-extensions --virtual-time-budget=3200 --window-size="$DIMS" \
+                --user-data-dir="$(mktemp -d)" --screenshot="$PWD/qa-screens/pharma-$view-$size.png" "$TARGET" >/dev/null 2>&1
+              test -s "qa-screens/pharma-$view-$size.png"
+            done
+          done
+          ls -lh qa-screens
+          rm -f .pharma-visual-full.html .pharma-visual-dark.html
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pharma-ux-v01038-visual-review
+          path: qa-screens/*.png
+          if-no-files-found: warn
+          retention-days: 14
