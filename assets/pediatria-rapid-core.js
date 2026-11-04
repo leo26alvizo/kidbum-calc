@@ -76,7 +76,14 @@
  ]);
  function kramer(values){
   const input=values||{},raw=input.zona,zone=/^[0-5]$/.test(String(raw))?Number(raw):null;
-  if(zone===null)return {ready:false,zone:null,message:'Selecciona la zona más distal donde se observa ictericia.',alerts:[]};
+  if(zone===null){
+   const urgent=input.primeras24===true||input.neurologico===true;
+   const messages=[];
+   if(input.primeras24===true)messages.push('Ictericia durante las primeras 24 horas: medición objetiva urgente.');
+   if(input.neurologico===true)messages.push('Signos neurológicos presentes: evaluación neonatal inmediata.');
+   return {ready:false,zone:null,urgency:urgent?'critica':'pendiente',
+    message:urgent?'No esperar selección anatómica para activar valoración neonatal.':'Selecciona la zona más distal donde se observa ictericia.',alerts:messages};
+  }
   const flags=[
    ['primeras24','Ictericia en las primeras 24 horas: medición urgente de bilirrubina total sérica o transcutánea según protocolo.'],
    ['neurologico','Letargo marcado, hipotonía, irritabilidad intensa o succión débil: valoración neonatal urgente.'],

@@ -117,7 +117,7 @@ function renderKramer(){
  all('#kramer-buttons button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.zone)===zone)));
  all('.kramer-svg [data-zone]').forEach(node=>node.classList.toggle('selected',Number(node.dataset.zone)===zone));
  const r=engine.kramer(state.kramer);
- if(!r.ready){sectionMessage($('#kramer-output'),'pending','Zona pendiente',r.message);setCopy('kramer','');return;}
+ if(!r.ready){sectionMessage($('#kramer-output'),r.urgency||'pending','Zona pendiente',r.message,r.alerts);setCopy('kramer','');return;}
  const tag=zone===0?'Sin ictericia visible':'Zona '+zone+' · '+r.area;
  sectionMessage($('#kramer-output'),r.urgency,tag,r.message,r.alerts);
  setCopy('kramer','Kramer: '+tag+'. '+r.message+(r.alerts.length?' Alertas: '+r.alerts.join(' '):''));

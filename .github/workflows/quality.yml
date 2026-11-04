@@ -51,6 +51,10 @@ jobs:
         run: node tests/pharma-ux-v01038.cjs
       - name: Real headless Chrome UX smoke test, safety gating and mobile layout
         run: node tests/pharma-browser-ux-v01038.cjs
+      - name: Pediatric visual triad clinical engine, sources, safety and offline
+        run: node tests/pediatria-rapid-v01039.cjs
+      - name: Pediatric rapid tools in real headless Chromium
+        run: node tests/pediatria-rapid-browser-v01039.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
