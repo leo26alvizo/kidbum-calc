@@ -105,7 +105,7 @@ jobs:
         run: node tests/hepatologia-indices.cjs
       - name: Rapid Pharma Pro mobile UX and 15 verified treatment pathways
         run: node tests/pharma-fast-ux.cjs
-      - name: Pharma Pro 0.10.43 expansion: 416 medication names, 205 diagnoses, no new treatment claims
+      - name: Pharma Pro expansion 0.10.43 - 416 medication names and 205 diagnosis topics
         run: node tests/pharma-massive-catalog-v01043.cjs
       - name: Pharma Pro 3.0 partial reconciliation, traceable high-risk label review and no-blanket-clearance safety
         run: node tests/pharma-reconciliation-v01042.cjs
