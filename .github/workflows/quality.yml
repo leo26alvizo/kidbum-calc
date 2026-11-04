@@ -126,7 +126,7 @@ jobs:
           node tests/pediatria-rapid-fixtures-v01039.cjs
           CHROME="$(command -v google-chrome || command -v chromium || command -v google-chrome-stable)"
           test -n "$CHROME"
-          for view in tep wood kramer dark; do
+          for view in tep wood kramer kramer5 dark; do
             for size in mobile desktop; do
               if [ "$size" = "mobile" ]; then DIMS="390,1100"; else DIMS="1366,900"; fi
               timeout 45s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage \

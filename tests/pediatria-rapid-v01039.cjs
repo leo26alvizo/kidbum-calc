@@ -1,5 +1,5 @@
 'use strict';
-const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const read=x=>fs.readFileSync(x,'utf8');
 const page=read('pediatria-evaluacion-rapida.html'),home=read('index.html');
 const core=read('assets/pediatria-rapid-core.js'),ui=read('assets/pediatria-rapid-ui.js');
@@ -53,6 +53,17 @@ for(const hash of ['#tep','#wood','#kramer'])assert.ok(home.includes("pediatria-
 assert.match(home,/content="0\.10\.40"/);
 assert.match(page,/content="0\.10\.40"/);
 assert.match(sw,/pediatria-rapid-v01039/);
+const imageBytes=fs.readFileSync('assets/kramer-bebe-referencia-v01040.jpg');
+assert.equal(imageBytes.length,174636,'Original user image bytes preserved');
+assert.equal(crypto.createHash('sha256').update(imageBytes).digest('hex'),'0bda95a511a1d9deb6563f5da42a8ea17451498ef8e047171e6b5520f6e5cfe2','Original image must be byte-identical');
+assert.ok(imageBytes.subarray(0,3).equals(Buffer.from([255,216,255])),'Original image has JPEG magic bytes');
+assert.match(page,/src="\.\/assets\/kramer-bebe-referencia-v01040\.jpg" width="1229" height="1536"/);
+assert.match(page,/viewBox="0 0 1229 1536"/);
+assert.equal((page.match(/class="zone" data-zone="[1-5]"/g)||[]).length,5);
+for(let zone=1;zone<=5;zone++)assert.match(page,new RegExp('class="zone" data-zone="'+zone+'" role="button" tabindex="0" aria-pressed="false"'));
+assert.match(css,/kramer-image-stage/);
+assert.match(css,/\.kramer-hotspot/);
+assert.ok(sw.includes("'./assets/kramer-bebe-referencia-v01040.jpg'"),'Original image is available offline');
 assert.match(css,/@media\(max-width:740px\)/);
 assert.match(css,/html\.dark/);
 assert.doesNotMatch(ui,/\bfetch\s*\(|XMLHttpRequest|sendBeacon|api\.openai\.com/,'No clinical telemetry');
