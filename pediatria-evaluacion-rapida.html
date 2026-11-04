@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10283b">
-<meta name="kidbum-app-version" content="0.10.39">
+<meta name="kidbum-app-version" content="0.10.40">
 <meta name="description" content="Pediatría rápida de KidBum: triángulo de evaluación pediátrica, Wood-Downes-Ferrés y zonas de Kramer. Consulta clínica visual y offline.">
 <title>Pediatría rápida · TEP, Wood-Downes-Ferrés y Kramer | KidBum</title>
 <link rel="manifest" href="./manifest.webmanifest">
@@ -19,7 +19,7 @@
   <button type="button" id="rapid-theme" aria-label="Cambiar a modo oscuro">◐</button>
  </nav>
  <header class="hero">
-  <span class="eyebrow">KidBum · Pediatría · 0.10.39</span>
+  <span class="eyebrow">KidBum · Pediatría · 0.10.40</span>
   <h1>Decide qué observar. <em>No pierdas lo importante.</em></h1>
   <p>Tres herramientas visuales de valoración inicial. Resultados instantáneos, sin datos de pacientes ni conexión obligatoria tras instalar.</p>
  </header>
@@ -76,17 +76,36 @@
   <div class="section-heading"><div class="eyebrow">03 · Neonatología</div><h2 id="kramer-title">Zonas de Kramer</h2><p>Selecciona la región más distal con ictericia observada. <strong>No calcula bilirrubina.</strong> La medición objetiva y las horas de vida determinan decisiones.</p></div>
   <div class="two-col kramer-layout">
    <div class="surface kramer-surface">
-    <div class="diagram-title">Toca una región de la silueta neonatal</div>
-    <svg class="kramer-svg" viewBox="0 0 300 365" role="group" aria-labelledby="kramer-svg-title kramer-svg-desc">
-     <title id="kramer-svg-title">Esquema anatómico clicable de cinco zonas de Kramer</title>
-     <desc id="kramer-svg-desc">Cabeza y cuello zona 1; tronco superior zona 2; abdomen inferior y muslos zona 3; brazos y piernas distales zona 4; palmas y plantas zona 5. Dibujo esquemático, no fotografía de un paciente.</desc>
-     <g class="zone" data-zone="1" role="button" tabindex="0" aria-label="Zona 1, cabeza y cuello"><circle cx="150" cy="59" r="36"/><rect x="140" y="91" width="20" height="19" rx="5"/></g>
-     <g class="zone" data-zone="2" role="button" tabindex="0" aria-label="Zona 2, tronco superior"><path d="M113 108 Q150 98 187 108 L185 171 L115 171 Z"/></g>
-     <g class="zone" data-zone="3" role="button" tabindex="0" aria-label="Zona 3, abdomen inferior y muslos"><path d="M115 173 L185 173 L181 218 L162 255 L150 245 L137 255 L119 218 Z"/></g>
-     <g class="zone" data-zone="4" role="button" tabindex="0" aria-label="Zona 4, brazos y segmentos distales de piernas"><path d="M111 109 L100 116 L69 206 L83 213 L120 144 Z"/><path d="M189 109 L200 116 L231 206 L217 213 L180 144 Z"/><path d="M121 240 L141 246 L133 325 L113 325 Z"/><path d="M159 246 L179 240 L187 325 L167 325 Z"/></g>
-     <g class="zone" data-zone="5" role="button" tabindex="0" aria-label="Zona 5, palmas y plantas"><circle cx="74" cy="225" r="14"/><circle cx="226" cy="225" r="14"/><ellipse cx="122" cy="337" rx="23" ry="13"/><ellipse cx="178" cy="337" rx="23" ry="13"/></g>
-     <text x="150" y="65" class="zone-label">1</text><text x="150" y="146" class="zone-label">2</text><text x="150" y="208" class="zone-label">3</text><text x="88" y="177" class="zone-label">4</text><text x="74" y="231" class="zone-label">5</text>
-    </svg>
+    <div class="diagram-title">Toca la zona del bebé donde observas ictericia</div>
+    <div class="kramer-image-stage" id="kramer-image-stage">
+     <img class="kramer-baby" id="kramer-baby" src="./assets/kramer-bebe-referencia-v01040.webp" width="900" height="1125" alt="Ilustración de bebé utilizada como referencia anatómica para seleccionar las zonas de Kramer" decoding="async" fetchpriority="high"/>
+     <svg class="kramer-svg" viewBox="0 0 1229 1536" preserveAspectRatio="xMidYMid meet" role="group" aria-labelledby="kramer-svg-title kramer-svg-desc">
+      <title id="kramer-svg-title">Zonas de Kramer seleccionables sobre la ilustración del bebé</title>
+      <desc id="kramer-svg-desc">Toca o selecciona con teclado cabeza y cuello, tórax, abdomen y muslos, extremidades, o palmas y plantas. Las zonas se resaltan sobre la ilustración original. También hay botones alternativos más abajo.</desc>
+      <g class="zone" data-zone="1" role="button" tabindex="0" aria-pressed="false" aria-label="Zona 1, cabeza y cuello">
+       <path class="kramer-hotspot" d="M 329 132 C 370 41 560 5 666 90 C 760 160 775 345 757 434 C 730 492 674 526 590 537 C 501 551 374 512 324 432 C 278 355 286 218 329 132 Z"/>
+      </g>
+      <g class="zone" data-zone="2" role="button" tabindex="0" aria-pressed="false" aria-label="Zona 2, tronco superior hasta el ombligo">
+       <path class="kramer-hotspot" d="M 366 489 Q 475 486 558 503 Q 686 475 753 508 L 786 610 L 788 840 Q 792 905 774 914 Q 560 943 357 915 L 366 675 Q 348 576 366 489 Z"/>
+      </g>
+      <g class="zone" data-zone="3" role="button" tabindex="0" aria-pressed="false" aria-label="Zona 3, tronco inferior y muslos">
+       <path class="kramer-hotspot" d="M 356 900 Q 545 940 784 903 L 826 992 Q 950 992 989 1065 Q 1032 1125 994 1234 L 932 1263 Q 824 1256 764 1201 L 661 1210 Q 545 1248 436 1207 L 341 1243 Q 254 1250 219 1192 Q 189 1100 233 1041 Q 274 997 337 989 Z"/>
+      </g>
+      <g class="zone" data-zone="4" role="button" tabindex="0" aria-pressed="false" aria-label="Zona 4, brazos y segmentos distales de las piernas">
+       <path class="kramer-hotspot" d="M 366 494 Q 310 495 274 552 L 195 745 Q 164 803 157 880 L 158 918 L 304 934 Q 294 850 317 796 L 402 638 Q 435 564 407 520 Z"/>
+       <path class="kramer-hotspot" d="M 765 330 Q 822 336 847 388 L 920 511 Q 928 606 873 643 Q 831 670 769 643 Q 726 601 728 560 L 730 433 Z"/>
+       <path class="kramer-hotspot" d="M 297 1179 Q 351 1190 403 1227 Q 475 1269 474 1354 L 361 1400 Q 302 1322 284 1287 Q 265 1224 297 1179 Z"/>
+       <path class="kramer-hotspot" d="M 789 1165 Q 860 1199 934 1202 Q 1003 1260 1016 1350 L 820 1385 Q 761 1339 780 1269 Z"/>
+      </g>
+      <g class="zone" data-zone="5" role="button" tabindex="0" aria-pressed="false" aria-label="Zona 5, palmas y plantas">
+       <path class="kramer-hotspot" d="M 162 880 Q 219 871 278 897 L 305 956 Q 305 1032 249 1061 Q 202 1051 165 1029 Q 134 995 145 930 Z"/>
+       <path class="kramer-hotspot" d="M 714 301 Q 728 265 768 280 Q 814 278 843 325 L 854 395 Q 832 428 778 419 Q 724 417 704 369 Z"/>
+       <path class="kramer-hotspot" d="M 308 1327 Q 375 1295 449 1314 Q 524 1335 543 1381 Q 553 1425 509 1452 Q 431 1512 341 1498 Q 304 1476 313 1437 Q 268 1412 308 1377 Z"/>
+       <path class="kramer-hotspot" d="M 779 1328 Q 845 1286 948 1303 Q 1021 1296 1094 1291 Q 1129 1304 1135 1356 Q 1142 1406 1074 1453 Q 970 1491 842 1469 Q 761 1446 766 1397 Z"/>
+      </g>
+     </svg>
+    </div>
+    <p id="kramer-image-feedback" class="kramer-image-feedback" role="status" aria-live="polite">Selecciona una región en la imagen o usa los botones de zonas.</p>
     <p class="helper">Explorar con luz adecuada y blanqueamiento suave de la piel. La pigmentación cutánea cambia la fiabilidad de la observación.</p>
    </div>
    <div class="surface">
@@ -107,7 +126,7 @@
   <details class="source"><summary>Fuentes, incertidumbre y límites</summary><p>La regla de Kramer describe la <strong>distribución cefalocaudal</strong> de la ictericia, pero no ofrece concentraciones predictivas fiables. La AAP 2022 observó grandes discrepancias entre la apreciación visual y la bilirrubina medida. En presencia de ictericia antes de las 24 h, obtener medición urgente.</p><p>Para decisiones sobre fototerapia utilizar valores de TSB/TcB, edad en horas, edad gestacional, factores de neurotoxicidad y guías vigentes; nunca el número de zona por sí solo.</p><a target="_blank" rel="noopener noreferrer" href="https://www.imss.gob.mx/sites/all/statics/guiasclinicas/262GRR.pdf">IMSS · Diagnóstico y Tratamiento de la Ictericia Neonatal (2019)</a><a target="_blank" rel="noopener noreferrer" href="https://publications.aap.org/pediatrics/article/150/3/e2022058859/188726/">AAP · Hiperbilirrubinemia neonatal (2022)</a></details>
  </section>
  <div id="kb-ai-mount"></div>
- <footer>KidBum CALC · Pediatría rápida v0.10.39 · Apoyo educativo, no diagnóstico definitivo ni prescripción. Los datos se procesan localmente y se descartan al cerrar.</footer>
+ <footer>KidBum CALC · Pediatría rápida v0.10.40 · Apoyo educativo, no diagnóstico definitivo ni prescripción. Los datos se procesan localmente y se descartan al cerrar.</footer>
 </main>
 <script src="./assets/fictitious-examples.js"></script>
 <script src="./assets/chatgpt-analysis.js"></script>
