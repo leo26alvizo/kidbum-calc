@@ -8,6 +8,7 @@ if(!engine||!document.getElementById('tep'))return;
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const state={tep:{apariencia:null,respiracion:null,circulacion:null},wood:{},kramer:{zona:null}};
 const summaries={tep:'',wood:'',kramer:''};
+let activeTool='tep',analysis=null;
 function element(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
 function sectionMessage(holder,urgency,title,detail,alerts,score){
  holder.className='outcome '+(urgency||'pending');holder.replaceChildren();
@@ -16,9 +17,10 @@ function sectionMessage(holder,urgency,title,detail,alerts,score){
  if(detail)holder.append(element('p',detail));
  if(alerts&&alerts.length){const ul=element('ul');alerts.forEach(x=>ul.append(element('li',x)));holder.append(ul);}
 }
-function setCopy(tool,summary){summaries[tool]=summary;const b=$('[data-copy="'+tool+'"]');if(b)b.disabled=!summary;}
+function setCopy(tool,summary){summaries[tool]=summary;const b=$('[data-copy="'+tool+'"]');if(b)b.disabled=!summary;if(analysis&&activeTool===tool)analysis.setReady(Boolean(summary));}
 function navTo(tool){
  if(!['tep','wood','kramer'].includes(tool))tool='tep';
+ activeTool=tool;if(analysis)analysis.setReady(Boolean(summaries[tool]));
  all('.tool').forEach(e=>e.classList.toggle('hidden',e.id!==tool));
  all('[data-tool-tab]').forEach(e=>{
   if(e.dataset.toolTab===tool)e.setAttribute('aria-current','page');
@@ -150,5 +152,16 @@ let dark=false;try{dark=localStorage.getItem('kidbum-theme')==='dark';}catch(e){
 themeApply(dark);
 theme.onclick=()=>themeApply(!document.documentElement.classList.contains('dark'));
 renderTep();renderWood();renderKramer();
+if(root.KidBumAnalysis){
+ analysis=root.KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>{
+  const summary=summaries[activeTool];
+  if(!summary)return null;
+  const title={tep:'Triángulo de Evaluación Pediátrica',wood:'Wood-Downes-Ferrés (0–14)',kramer:'Zonas de Kramer'}[activeTool];
+  return {title,result:summary,interpretation:'Evaluación visual orientativa, no diagnóstico ni prescripción.',
+   details:'Cálculo local con datos clínicos seleccionados voluntariamente; sin identificadores.',
+   warning:'Verificar al paciente presencialmente y aplicar ABCDE, laboratorio y protocolo institucional cuando corresponda.'};
+ }});
+ analysis.setReady(Boolean(summaries[activeTool]));
+}
 if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{});
 })(typeof window!=='undefined'?window:globalThis);
