@@ -120,7 +120,12 @@ all('[data-kramer-flag]').forEach(box=>box.addEventListener('change',()=>{
 function renderKramer(){
  const zone=state.kramer.zona;
  all('#kramer-buttons button').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.zone)===zone)));
- all('.kramer-svg [data-zone]').forEach(node=>node.classList.toggle('selected',Number(node.dataset.zone)===zone));
+ all('.kramer-svg [data-zone]').forEach(node=>{const selected=Number(node.dataset.zone)===zone;node.classList.toggle('selected',selected);node.setAttribute('aria-pressed',String(selected));});
+ const feedback=$('#kramer-image-feedback');
+ if(feedback){
+  feedback.textContent=zone===null?'Selecciona una región en la imagen o usa los botones de zonas.':'Zona '+zone+' seleccionada · '+(engine.kramerZones[zone]||'');
+  feedback.classList.toggle('is-selected',zone!==null);
+ }
  const r=engine.kramer(state.kramer);
  if(!r.ready){sectionMessage($('#kramer-output'),r.urgency||'pending','Zona pendiente',r.message,r.alerts);setCopy('kramer','');return;}
  const tag=zone===0?'Sin ictericia visible':'Zona '+zone+' · '+r.area;

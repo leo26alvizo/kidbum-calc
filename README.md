@@ -2,9 +2,17 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.39**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.40**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.40 · Imagen original y zonas táctiles para Kramer
+
+- **Ilustración proporcionada por el usuario:** se sustituye el esquema genérico por el archivo original de 1229 × 1536 píxeles, conservado sin recomprimir como `assets/kramer-bebe-referencia-v01040.jpg` (aprox. 175 KB).
+- **Interacción:** cinco regiones anatómicas superpuestas mediante SVG independiente con coordenadas alineadas a la imagen; selección táctil, teclado, `aria-pressed`, resaltado temporal y sincronización con los botones de zona.
+- **No modifica la imagen original:** los polígonos transparentes se dibujan encima en tiempo de ejecución; se muestra la zona seleccionada debajo de la ilustración y se mantiene alternativa accesible mediante botones.
+- **Seguridad:** la escala continúa siendo puramente descriptiva de distribución, sin estimar bilirrubina ni sugerir fototerapia; no cambian las alertas de neonatología ni otros motores clínicos.
+- **PWA:** caché rotado de forma atómica para incorporar el nuevo archivo sin conexión; regresiones automáticas clínicas y de interacción.
 
 ## KidBum 0.10.39 · Pediatría rápida interactiva
 

@@ -59,11 +59,23 @@ html.dark .hero{background:linear-gradient(120deg,#16181c,#2a3434)}
 .wood-risk-scale{display:flex;border-radius:10px;overflow:hidden;font-size:11px;gap:3px;margin:10px 0 4px;text-align:center;font-weight:800}
 .wood-risk-scale span{flex:1;padding:9px 5px;color:#fff}.wood-risk-scale span:nth-child(1){background:#217d70}.wood-risk-scale span:nth-child(2){background:#ad721e}.wood-risk-scale span:nth-child(3){background:#a83341}
 .sm-heading{font-size:14px;margin:0 0 11px}.sm-heading:not(:first-child){margin-top:18px}
-.kramer-surface{background:var(--surface2)}.kramer-svg{display:block;margin:8px auto;width:min(100%,290px);height:auto}
-.kramer-svg .zone{cursor:pointer}.kramer-svg .zone>*{fill:#c9d8e0;stroke:#5b8696;stroke-width:2;transition:fill .1s}
-html.dark .kramer-svg .zone>*{fill:#455663;stroke:#94bbcc}
-.kramer-svg .zone.selected>*{fill:#efbe4e;stroke:#b48017}.kramer-svg .zone:hover>*{filter:brightness(.97)}
-.kramer-svg .zone-label{font-weight:900;fill:#162c3b;text-anchor:middle;font-size:14px;pointer-events:none}
+.kramer-surface{background:var(--surface2)}
+/* User-provided high-resolution illustration remains a raster image.
+   Accurate interactive polygons sit in a responsive 1229x1536 overlay, not baked into pixels. */
+.kramer-image-stage{width:min(100%,510px);aspect-ratio:1229/1536;position:relative;overflow:hidden;border-radius:18px;background:#fff;margin:12px auto 0;border:1px solid var(--line);isolation:isolate}
+.kramer-baby{display:block;width:100%;height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.kramer-svg{position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;overflow:visible}
+.kramer-svg .zone{cursor:pointer;outline:none;touch-action:manipulation}
+.kramer-svg .zone .kramer-hotspot{fill:rgba(4,126,131,0.001);stroke:transparent;stroke-width:5px;vector-effect:non-scaling-stroke;pointer-events:visiblePainted;transition:fill .12s,stroke .12s}
+.kramer-svg .zone.selected .kramer-hotspot{fill:rgba(2,134,137,.14);stroke:#047e83;stroke-width:5px;stroke-linejoin:round}
+.kramer-svg .zone:focus-visible .kramer-hotspot{stroke:#075f78;stroke-width:7px;stroke-dasharray:12 6}
+.kramer-svg .zone:not(.selected):hover .kramer-hotspot{fill:rgba(6,137,151,.08);stroke:rgba(5,117,130,.72)}
+html.dark .kramer-svg .zone.selected .kramer-hotspot{fill:rgba(4,176,179,.17);stroke:#00c8c0}
+html.dark .kramer-svg .zone:focus-visible .kramer-hotspot{stroke:#a5f4f0}
+.kramer-image-feedback{margin:9px 0 4px;padding:9px 12px;font-size:12px;min-height:42px;border-radius:10px;background:var(--surface);color:var(--muted);font-weight:700;border:1px solid var(--line)}
+.kramer-image-feedback.is-selected{background:var(--accentTint);color:var(--ink);border-color:var(--accent)}
+@media(max-width:740px){.kramer-image-stage{width:min(100%,390px);border-radius:14px;margin-top:8px}.kramer-image-feedback{font-size:11px;padding:8px 10px}}
+
 .kramer-buttons{display:grid;gap:7px}.kramer-buttons button{text-align:left;display:flex;align-items:center;gap:10px;line-height:1.3}
 .kramer-buttons button strong{display:grid;place-items:center;flex:0 0 29px;height:29px;border-radius:8px;background:var(--surface);font-size:14px}
 .kramer-flags{display:grid;gap:8px}.kramer-flags label{display:flex;align-items:center;gap:10px;min-height:45px;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12px;cursor:pointer}
