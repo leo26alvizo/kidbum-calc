@@ -2,7 +2,7 @@
 /* Pharma Pro 3.0 phase-one / 0.10.42: no-inference safety audit, source provenance and offline guarantees. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const ctx={window:{}};
-const paths=['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-core.js',
+const paths=['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-expansion-index-v01043.js','assets/pharma-pro-core.js',
  'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js',
  'assets/pharma-pro-high-alert.js','assets/pharma-pro-reconciliation-v01042.js'];
 for(const path of paths){
@@ -11,10 +11,10 @@ for(const path of paths){
 }
 const r=ctx.window.KidBumPharmaReconciliation,lib=ctx.window.KidBumPharmaCore,mono=ctx.window.KidBumPharmaMonographs;
 assert.ok(r&&lib&&mono);
-assert.equal(lib.records.length,227);
-assert.equal(r.coverage().total,227);
+assert.equal(lib.records.length,643);
+assert.equal(r.coverage().total,643);
 assert.equal(r.coverage().partial,9);
-assert.equal(r.coverage().other,218);
+assert.equal(r.coverage().other,634);
 assert.equal(r.coverage().approved,0);
 assert.equal(r.coverage().recheckedNow,3);
 assert.equal(r.reviewedAt,'2026-11-04');
@@ -84,4 +84,4 @@ for(const x of ['assets/pharma-pro-reconciliation-v01042.js','assets/pharma-pro-
  assert.ok(sw.includes("'./"+x+"'"),x+' missing PWA precache');
 new vm.Script(fs.readFileSync('assets/pharma-pro-reconciliation-ui-v01042.js','utf8'));
 assert.match(fs.readFileSync('assets/pharma-pro-reconciliation-v01042.css','utf8'),/@media\(max-width:740px\)/);
-console.log('Pharma reconciliation PASS: 227 indexed, 9 partial label comparisons, 3 official labels rechecked, 0 clinical approvals, LASA/high-risk/duplicates documented, unknown interactions never cleared, UI/PWA assets and privacy.');
+console.log('Pharma reconciliation PASS: 643 indexed, 9 partial label comparisons, 3 official labels rechecked, 0 clinical approvals, LASA/high-risk/duplicates documented, unknown interactions never cleared, UI/PWA assets and privacy.');

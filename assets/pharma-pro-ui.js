@@ -44,6 +44,7 @@ function pharmaSummary(med,onFull){
  const warnings=elt('section',undefined,'pharma-ux-alert');
  warnings.append(elt('h3','Precauciones y alertas'));
  if(med.highRisk)warnings.append(p('⚠ Medicamento o grupo de alto riesgo según ISMP 2024'+(med.highRiskScope?' · '+med.highRiskScope:'')+'. Confirmar presentación, unidades, concentración y salvaguardas institucionales.','pharma-ux-warning'));
+ if(med.indexPendingSafety)warnings.append(p('⚠ Incorporado como entrada de búsqueda sin cotejo de presentación, indicaciones, riesgos ISMP, interacciones ni dosis. La ausencia de insignia de alto riesgo NO confirma seguridad.','pharma-ux-warning'));
  if(med.lasaPairs.length)warnings.append(p('⚠ Pareja de nombres LASA documentada. Verificar principio activo y presentación; consultar la referencia en la ficha completa.','pharma-ux-warning'));
  if(med.evidence?.highlights?.length){
   for(const highlight of med.evidence.highlights)warnings.append(p(highlight,'pharma-ux-warning'));
@@ -79,6 +80,7 @@ function draw(){
   const grp=p(med.group+' · '+med.populations.join(', '),'small');
   const tags=elt('div');if(med.highRisk)tags.append(elt('span','⚠ Alto riesgo'+(med.highRiskScope?' · '+med.highRiskScope:''),'pill warn'));
   if(med.lasaPairs.length)tags.append(elt('span','LASA · nombre confuso','pill lasa'));
+  if(med.indexPendingSafety)tags.append(elt('span','Sin cotejo de riesgos','pill warn'));
   if(med.evidence)tags.append(elt('span','Aviso con fuente','pill review'));
   const status=elt('div',pharmaCoverage(med).label,'pharma-ux-card-status');
   const use=p(med.use);

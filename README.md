@@ -2,9 +2,20 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.42**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.43**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Pharma Pro 0.10.43 · expansión masiva de búsqueda (catálogos NO prescriptivos)
+
+**Alcance de la publicación:** 643 entradas de búsqueda de medicamentos (227 previas + 416 nuevas), 205 temas de enfermedad/síndromes en un índice clínico nuevo y 15 rutas terapéuticas previamente documentadas **sin ampliarse ni modificarse sus recomendaciones**. Se mantiene la cifra de **9 fichas parcialmente cotejadas con etiquetado específico estadounidense**, **634 sin ese cotejo** y **0 validadas clínica/farmacéuticamente de manera independiente**.
+
+- **Medicamentos:** incorporación de 416 nombres genéricos, combinaciones y algunas formulaciones diferenciadas para búsqueda, agrupados por ámbito farmacológico. Las nuevas entradas son fichas **terminológicas**; no se confirma inclusión individual en Compendio Nacional, registro COFEPRIS, disponibilidad IMSS, autorización por edad, dosis, indicación específica, seguridad ISMP, interacciones ni equivalencia entre productos. Se distinguen mediante la leyenda **«Sin cotejo de riesgos»** y alerta en consulta rápida. No reciben dosis nuevas ni bloqueos falsamente declarados como exhaustivos.
+- **Enfermedades:** nuevo explorador de 205 entidades y síndromes, con especialidad, nombre y sinónimos frecuentes; búsqueda, filtros y paginación móvil. Su contenido es **directorio para buscar temas** y no reemplaza criterios diagnósticos ni crea vínculos de tratamiento. Las **15 rutas para adultos** con guías delimitadas siguen separadas y marcadas como rutas documentadas. Buscar una enfermedad sin ruta cotejada nunca produce una recomendación inventada.
+- **Búsqueda única:** la sugerencia rápida por enfermedad distingue visualmente rutas terapéuticas y temas del índice sin tratamiento cotejado; la de medicamentos incluye los 643 registros.
+- **Privacidad y PWA:** nuevos módulos de datos locales; sin envío de consultas, datos clínicos, ni persistencia adicional. Caché versionada 0.10.43, navegación con teclado y diseño 320–430 px.
+- **Fuentes editoriales transversales**, NO aval individual de cada entrada: [Lista modelo OMS 2025](https://www.who.int/groups/expert-committee-on-selection-and-use-of-essential-medicines/essential-medicines-lists/), [Listados institucionales IMSS](https://www.imss.gob.mx/profesionales-salud/cuadros-basicos/medicamentos), [actualizaciones del Compendio Nacional CSG](https://www.gob.mx/csg/articulos/acuerdos-por-el-que-se-actualiza-el-compendio-nacional-de-insumos-para-la-salud), [Clasificación Internacional de Enfermedades OMS](https://www.who.int/standards/classifications/classification-of-diseases). No se asignan códigos CIE-11 a cada entrada sin verificación.
+- **QA**: pruebas de 643 IDs únicos, 416 nuevos medicamentos, 205 temas, distinción entre 15 rutas y directorio, ausencia de cálculos nuevos, filtros, interacción móvil, script order, Service Worker e integridad de la suite histórica. Se requiere verificación antes de publicar.
 
 ## Pharma Pro 3.0 · Fase 1 (0.10.42): conciliación parcial y trazabilidad de evidencia
 

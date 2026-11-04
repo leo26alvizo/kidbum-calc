@@ -94,11 +94,13 @@ const extras=Object.freeze({
 });
 const extension=root.KidBumPharmaExpansion||{catalog:[],conditions:[],lasaPairs:[],sources:{},highAlertScope:{}};
 const allDefs=[...defs,...extension.catalog];
+const incompleteIndex=new Set(root.KidBumPharmaExpansionIndex?.newDrugIds||[]);
 const lasaById=Object.fromEntries(allDefs.map(x=>[x[0],[]]));
 for(const pair of extension.lasaPairs){for(let i=0;i<2;i++){const id=pair.ids[i],other=pair.ids[1-i];if(lasaById[id]&&lasaById[other])lasaById[id].push(Object.freeze({id:other,tallMan:pair.display[i],partnerTallMan:pair.display[1-i],source:pair.source}));}}
 const records=Object.freeze(allDefs.map(([id,name,group,pop,use,checks,high])=>Object.freeze({
  id,name,group,populations:pop.split('').map(x=>population[x]),use,checks,
  highRisk:high===1,highRiskScope:extension.highAlertScope[id]||(id==='amiodarona'?'Formulación IV':id==='sulfato-magnesio'?'Inyección':id==='potasio-iv'?'Concentrado inyectable':''),lasaPairs:Object.freeze(lasaById[id]||[]),evidence:extras[id]||null,
+ indexPendingSafety:incompleteIndex.has(id),
  reviewStatus:extras[id]?'Alerta de seguridad con fuente comprobada · monografía incompleta':'Ficha índice · monografía y dosis pendientes de validación'
 })));
 const byId=Object.freeze(Object.fromEntries(records.map(x=>[x.id,x])));
