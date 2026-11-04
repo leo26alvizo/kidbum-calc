@@ -2,7 +2,7 @@
 /* Pharma Pro 3.0 phase-one / 0.10.42: no-inference safety audit, source provenance and offline guarantees. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const ctx={window:{}};
-const paths=['assets/pharma-pro-expansion.js','assets/pharma-pro-core.js',
+const paths=['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-core.js',
  'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js',
  'assets/pharma-pro-high-alert.js','assets/pharma-pro-reconciliation-v01042.js'];
 for(const path of paths){
