@@ -9,7 +9,7 @@ const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const state={tep:{apariencia:null,respiracion:null,circulacion:null},wood:{},kramer:{zona:null}};
 const summaries={tep:'',wood:'',kramer:''};
 const exampleNote=$('#example-note');
-function clearExampleNote(){exampleNote.hidden=true;}
+function clearExampleNote(){if(exampleNote)exampleNote.hidden=true;}
 let activeTool='tep',analysis=null;
 function element(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
 function sectionMessage(holder,urgency,title,detail,alerts,score){
@@ -22,6 +22,7 @@ function sectionMessage(holder,urgency,title,detail,alerts,score){
 function setCopy(tool,summary){summaries[tool]=summary;const b=$('[data-copy="'+tool+'"]');if(b)b.disabled=!summary;if(analysis&&activeTool===tool)analysis.setReady(Boolean(summary));}
 function navTo(tool){
  if(!['tep','wood','kramer'].includes(tool))tool='tep';
+ if(activeTool!==tool)clearExampleNote();
  activeTool=tool;if(analysis)analysis.setReady(Boolean(summaries[tool]));
  all('.tool').forEach(e=>e.classList.toggle('hidden',e.id!==tool));
  all('[data-tool-tab]').forEach(e=>{
@@ -162,7 +163,7 @@ $('#example').onclick=()=>{
  if(activeTool==='wood'){state.wood={...fake};renderWood();}
  if(activeTool==='kramer'){
   state.kramer={...fake};
-  all('[data-kramer-flag]').forEach(box=>box.checked===Boolean(fake[box.dataset.kramerFlag])?null:(box.checked=Boolean(fake[box.dataset.kramerFlag])));
+  all('[data-kramer-flag]').forEach(box=>{box.checked=Boolean(fake[box.dataset.kramerFlag]);});
   renderKramer();
  }
  exampleNote.textContent='Ejemplo ficticio cargado para '+({tep:'el TEP',wood:'Wood-Downes-Ferrés',kramer:'Kramer'}[activeTool])+'. No representa a un paciente. Puedes cambiar cualquier respuesta.';
