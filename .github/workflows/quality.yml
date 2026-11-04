@@ -105,6 +105,8 @@ jobs:
         run: node tests/hepatologia-indices.cjs
       - name: Rapid Pharma Pro mobile UX and 15 verified treatment pathways
         run: node tests/pharma-fast-ux.cjs
+      - name: Pharma Pro 3.0 partial reconciliation, traceable high-risk label review and no-blanket-clearance safety
+        run: node tests/pharma-reconciliation-v01042.cjs
       - name: Pharma Pro 227-medication disease pathways and LASA evidence
         run: node tests/pharma-indications-lasa.cjs
       - name: Three additional high-alert drug monographs and fail-closed eligibility
