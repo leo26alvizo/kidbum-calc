@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es" data-kb-page="pediatria-rapida">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#10283b">
+<meta name="kidbum-app-version" content="0.10.39">
+<meta name="description" content="Pediatría rápida de KidBum: triángulo de evaluación pediátrica, Wood-Downes-Ferrés y zonas de Kramer. Consulta clínica visual y offline.">
+<title>Pediatría rápida · TEP, Wood-Downes-Ferrés y Kramer | KidBum</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./assets/pediatria-rapid-v01039.css">
+<script defer src="./assets/theme-chrome-v01036.js"></script>
+</head>
+<body>
+<main class="wrap">
+ <nav class="top" aria-label="Regresar a KidBum">
+  <a class="home-link" href="./index.html">← Pediatría · KidBum</a>
+  <strong class="brand">✚ <span>Evaluación rápida</span></strong>
+  <button type="button" id="rapid-theme" aria-label="Cambiar a modo oscuro">◐</button>
+ </nav>
+ <header class="hero">
+  <span class="eyebrow">KidBum · Pediatría · 0.10.39</span>
+  <h1>Decide qué observar. <em>No pierdas lo importante.</em></h1>
+  <p>Tres herramientas visuales de valoración inicial. Resultados instantáneos, sin datos de pacientes ni conexión obligatoria tras instalar.</p>
+ </header>
+ <nav class="switch" aria-label="Herramientas de pediatría rápida">
+  <a href="#tep" data-tool-tab="tep"><span aria-hidden="true">△</span><strong>TEP</strong><small>Evaluación inicial</small></a>
+  <a href="#wood" data-tool-tab="wood"><span aria-hidden="true">◉</span><strong>Wood-Downes</strong><small>Bronquiolitis</small></a>
+  <a href="#kramer" data-tool-tab="kramer"><span aria-hidden="true">✦</span><strong>Kramer</strong><small>Ictericia neonatal</small></a>
+ </nav>
+ <section class="safety-banner" role="note"><strong>⚠ Primero la clínica.</strong> Apnea, cianosis central, alteración de conciencia, tórax silente o hipoperfusión exigen valoración y escalamiento inmediato, aunque no se haya completado ninguna herramienta.</section>
+ <section id="tep" class="tool" aria-labelledby="tep-title">
+  <div class="section-heading"><div class="eyebrow">01 · Evaluación observacional</div><h2 id="tep-title">Triángulo de Evaluación Pediátrica</h2><p>Valora en segundos tres componentes de la impresión inicial. <strong>No tiene puntaje numérico</strong> y no sustituye ABCDE.</p></div>
+  <div class="two-col">
+   <div class="surface">
+    <div class="diagram-title">Toca un vértice o selecciona sus hallazgos</div>
+    <svg class="tep-svg" viewBox="0 0 340 290" role="img" aria-labelledby="tep-svg-title tep-svg-desc">
+     <title id="tep-svg-title">Triángulo de evaluación pediátrica interactivo</title>
+     <desc id="tep-svg-desc">Tres vértices observacionales: apariencia arriba, respiración abajo a la izquierda y circulación a la piel abajo a la derecha. Puedes tocar cada vértice o usar los botones equivalentes.</desc>
+     <path d="M170 48 L59 238 L281 238 Z" class="tep-outline"/>
+     <path d="M170 72 L76 230 L264 230 Z" class="tep-inner"/>
+     <g data-tep-focus="apariencia" role="button" tabindex="0" aria-label="Ir a Apariencia"><circle cx="170" cy="48" r="43"/><text x="170" y="42">👀</text><text class="node-caption" x="170" y="64">APARIENCIA</text></g>
+     <g data-tep-focus="respiracion" role="button" tabindex="0" aria-label="Ir a Trabajo respiratorio"><circle cx="67" cy="228" r="46"/><text x="67" y="221">🫁</text><text class="node-caption" x="67" y="242">RESPIRACIÓN</text></g>
+     <g data-tep-focus="circulacion" role="button" tabindex="0" aria-label="Ir a Circulación cutánea"><circle cx="273" cy="228" r="46"/><text x="273" y="221">♥</text><text class="node-caption" x="273" y="242">CIRCULACIÓN</text></g>
+     <text x="170" y="163" class="tep-center">TEP</text><text x="170" y="185" class="tep-sub">Primera impresión</text>
+    </svg>
+    <p class="helper">TICLS: tono, interactividad, consolabilidad, mirada y llanto. Observa también ruidos, tiraje, palidez y moteado.</p>
+   </div>
+   <div class="surface">
+    <div id="tep-choices" class="choice-list">
+     <fieldset data-tep-field="apariencia"><legend>👀 Apariencia</legend><p>Tono, interactividad, consolabilidad, mirada, llanto o lenguaje.</p><div class="buttons"><button type="button" data-tep-value="normal" aria-pressed="false">Normal</button><button type="button" data-tep-value="alterada" aria-pressed="false">Alterada</button></div></fieldset>
+     <fieldset data-tep-field="respiracion"><legend>🫁 Trabajo respiratorio</legend><p>Postura, tiraje, aleteo, quejido o ruidos respiratorios anormales.</p><div class="buttons"><button type="button" data-tep-value="normal" aria-pressed="false">Normal</button><button type="button" data-tep-value="alterada" aria-pressed="false">Alterado</button></div></fieldset>
+     <fieldset data-tep-field="circulacion"><legend>♥ Circulación cutánea</legend><p>Color de piel: palidez, moteado o cianosis; no reemplaza perfusión completa.</p><div class="buttons"><button type="button" data-tep-value="normal" aria-pressed="false">Normal</button><button type="button" data-tep-value="alterada" aria-pressed="false">Alterada</button></div></fieldset>
+    </div>
+   </div>
+  </div>
+  <div class="outcome pending" id="tep-output" role="status" aria-live="polite">Selecciona los tres componentes para interpretar el patrón.</div>
+  <div class="actions"><button type="button" class="clear" data-reset="tep">↻ Reiniciar TEP</button><button type="button" class="copy" data-copy="tep" disabled>Copiar resumen</button></div>
+  <details class="source"><summary>Interpretación y fuentes</summary><p>El TEP es una impresión inicial observacional: apariencia, trabajo respiratorio y circulación cutánea. Las categorías orientan prioridades, <strong>no confirman una etiología</strong>. En patrones mixtos se informa incertidumbre; el ABCDE no debe esperar el resultado.</p><a target="_blank" rel="noopener noreferrer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7182162/">Revisión del Triángulo de Evaluación Pediátrica (PMC)</a></details>
+ </section>
+ <section id="wood" class="tool hidden" aria-labelledby="wood-title">
+  <div class="section-heading"><div class="eyebrow">02 · Dificultad respiratoria</div><h2 id="wood-title">Wood-Downes modificada por Ferrés</h2><p>Versión de <strong>6 dominios y máximo 14 puntos</strong> de la GPC mexicana de bronquiolitis. No intercambiar con otras versiones de Wood-Downes.</p></div>
+  <div class="wood-progress" aria-label="Avance en el llenado"><span id="wood-progress-text">0 de 6 dominios seleccionados</span><span id="wood-progress-rail"><span id="wood-progress-fill"></span></span></div>
+  <div id="wood-fields" class="wood-fields"></div>
+  <div class="outcome pending" id="wood-output" role="status" aria-live="polite">Selecciona una opción en cada dominio. No hay puntaje hasta completar los seis.</div>
+  <div class="wood-risk-scale" aria-label="Bandas descriptivas de la escala: 1 a 3 leve, 4 a 7 moderada, 8 a 14 grave"><span>1–3 · Leve</span><span>4–7 · Moderada</span><span>8–14 · Grave</span></div>
+  <p class="helper">Los rangos publicados presentan límites sin asignación explícita: <strong>FR exactamente 30 rpm y FC exactamente 120 lpm</strong>. No forzar esos límites a una categoría; confirmar el protocolo institucional. Se requiere SpO₂ y valoración integral fuera del puntaje.</p>
+  <div class="actions"><button type="button" class="clear" data-reset="wood">↻ Reiniciar</button><button type="button" class="copy" data-copy="wood" disabled>Copiar resumen</button></div>
+  <details class="source"><summary>Tabla de referencia, alcance y fuente</summary><p>Ferrés para valoración histórica de bronquiolitis: sibilancias 0–3, tiraje 0–3, FR 0–3, FC 0–1, ventilación 0–3, cianosis 0–1. Total 0–14. Leve 1–3, moderada 4–7, grave 8–14. Un 0 solo indica ausencia de hallazgos puntuables, no descarta enfermedad.</p><p>El tórax silente o la cianosis requieren valoración inmediata sin importar la suma. No usar como orden de oxígeno, broncodilatador ni ingreso.</p><a target="_blank" rel="noopener noreferrer" href="https://infomed.isssteson.gob.mx/archivospublicos/guiasylineamientos/Dx%20y%20manejo%20en%20Ninos%20con%20Bronquiolitis%20en%20Fase%20Aguda.pdf">GPC mexicana · Bronquiolitis, anexo Wood-Downes-Ferrés</a></details>
+ </section>
+ <section id="kramer" class="tool hidden" aria-labelledby="kramer-title">
+  <div class="section-heading"><div class="eyebrow">03 · Neonatología</div><h2 id="kramer-title">Zonas de Kramer</h2><p>Selecciona la región más distal con ictericia observada. <strong>No calcula bilirrubina.</strong> La medición objetiva y las horas de vida determinan decisiones.</p></div>
+  <div class="two-col kramer-layout">
+   <div class="surface kramer-surface">
+    <div class="diagram-title">Toca una región de la silueta neonatal</div>
+    <svg class="kramer-svg" viewBox="0 0 300 365" role="img" aria-labelledby="kramer-svg-title kramer-svg-desc">
+     <title id="kramer-svg-title">Esquema anatómico clicable de cinco zonas de Kramer</title>
+     <desc id="kramer-svg-desc">Cabeza y cuello zona 1; tronco superior zona 2; abdomen inferior y muslos zona 3; brazos y piernas distales zona 4; palmas y plantas zona 5. Dibujo esquemático, no fotografía de un paciente.</desc>
+     <g class="zone" data-zone="1" role="button" tabindex="0" aria-label="Zona 1, cabeza y cuello"><circle cx="150" cy="59" r="36"/><rect x="140" y="91" width="20" height="19" rx="5"/></g>
+     <g class="zone" data-zone="2" role="button" tabindex="0" aria-label="Zona 2, tronco superior"><path d="M113 108 Q150 98 187 108 L185 171 L115 171 Z"/></g>
+     <g class="zone" data-zone="3" role="button" tabindex="0" aria-label="Zona 3, abdomen inferior y muslos"><path d="M115 173 L185 173 L181 218 L162 255 L150 245 L137 255 L119 218 Z"/></g>
+     <g class="zone" data-zone="4" role="button" tabindex="0" aria-label="Zona 4, brazos y segmentos distales de piernas"><path d="M111 109 L100 116 L69 206 L83 213 L120 144 Z"/><path d="M189 109 L200 116 L231 206 L217 213 L180 144 Z"/><path d="M121 240 L141 246 L133 325 L113 325 Z"/><path d="M159 246 L179 240 L187 325 L167 325 Z"/></g>
+     <g class="zone" data-zone="5" role="button" tabindex="0" aria-label="Zona 5, palmas y plantas"><circle cx="74" cy="225" r="14"/><circle cx="226" cy="225" r="14"/><ellipse cx="122" cy="337" rx="23" ry="13"/><ellipse cx="178" cy="337" rx="23" ry="13"/></g>
+     <text x="150" y="65" class="zone-label">1</text><text x="150" y="146" class="zone-label">2</text><text x="150" y="208" class="zone-label">3</text><text x="88" y="177" class="zone-label">4</text><text x="74" y="231" class="zone-label">5</text>
+    </svg>
+    <p class="helper">Explorar con luz adecuada y blanqueamiento suave de la piel. La pigmentación cutánea cambia la fiabilidad de la observación.</p>
+   </div>
+   <div class="surface">
+    <h3 class="sm-heading">Zona más distal observada</h3>
+    <div id="kramer-buttons" class="kramer-buttons"></div>
+    <h3 class="sm-heading">Signos de alarma (selección múltiple)</h3>
+    <div class="kramer-flags" id="kramer-flags">
+     <label><input type="checkbox" data-kramer-flag="primeras24"><span>Ictericia en primeras 24 horas</span></label>
+     <label><input type="checkbox" data-kramer-flag="neurologico"><span>Letargo, alteración neurológica o succión débil</span></label>
+     <label><input type="checkbox" data-kramer-flag="alimentacion"><span>Alimentación insuficiente / deshidratación</span></label>
+     <label><input type="checkbox" data-kramer-flag="prematuro"><span>Prematuridad</span></label>
+     <label><input type="checkbox" data-kramer-flag="coluria"><span>Coluria o heces pálidas (acolia)</span></label>
+    </div>
+   </div>
+  </div>
+  <div class="outcome pending" id="kramer-output" role="status" aria-live="polite">Marca una zona para consultar su extensión anatómica y las precauciones.</div>
+  <div class="actions"><button type="button" class="clear" data-reset="kramer">↻ Reiniciar</button><button type="button" class="copy" data-copy="kramer" disabled>Copiar resumen</button></div>
+  <details class="source"><summary>Fuentes, incertidumbre y límites</summary><p>La regla de Kramer describe la <strong>distribución cefalocaudal</strong> de la ictericia, pero no ofrece concentraciones predictivas fiables. La AAP 2022 observó grandes discrepancias entre la apreciación visual y la bilirrubina medida. En presencia de ictericia antes de las 24 h, obtener medición urgente.</p><p>Para decisiones sobre fototerapia utilizar valores de TSB/TcB, edad en horas, edad gestacional, factores de neurotoxicidad y guías vigentes; nunca el número de zona por sí solo.</p><a target="_blank" rel="noopener noreferrer" href="https://www.imss.gob.mx/sites/all/statics/guiasclinicas/262GRR.pdf">IMSS · Diagnóstico y Tratamiento de la Ictericia Neonatal (2019)</a><a target="_blank" rel="noopener noreferrer" href="https://publications.aap.org/pediatrics/article/150/3/e2022058859/188726/">AAP · Hiperbilirrubinemia neonatal (2022)</a></details>
+ </section>
+ <footer>KidBum CALC · Pediatría rápida v0.10.39 · Apoyo educativo, no diagnóstico definitivo ni prescripción. Los datos se procesan localmente y se descartan al cerrar.</footer>
+</main>
+<script src="./assets/pediatria-rapid-core.js"></script>
+<script src="./assets/pediatria-rapid-ui.js"></script>
+</body>
+</html>
