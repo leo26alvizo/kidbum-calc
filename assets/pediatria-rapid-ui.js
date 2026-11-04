@@ -8,6 +8,8 @@ if(!engine||!document.getElementById('tep'))return;
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 const state={tep:{apariencia:null,respiracion:null,circulacion:null},wood:{},kramer:{zona:null}};
 const summaries={tep:'',wood:'',kramer:''};
+const exampleNote=$('#example-note');
+function clearExampleNote(){exampleNote.hidden=true;}
 let activeTool='tep',analysis=null;
 function element(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;}
 function sectionMessage(holder,urgency,title,detail,alerts,score){
@@ -32,7 +34,7 @@ navTo(location.hash.slice(1));
 all('[data-tep-field]').forEach(row=>{
  const field=row.dataset.tepField;
  row.querySelectorAll('[data-tep-value]').forEach(button=>{
-  button.onclick=()=>{state.tep[field]=button.dataset.tepValue;renderTep();};
+  button.onclick=()=>{clearExampleNote();state.tep[field]=button.dataset.tepValue;renderTep();};
  });
 });
 all('[data-tep-focus]').forEach(node=>{
@@ -73,7 +75,7 @@ for(const domain of woodDomains){
   const b=element('button');b.type='button';b.dataset.woodField=domain.id;b.dataset.woodValue=String(value);
   b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',domain.name+': '+value+' puntos · '+label);
   b.append(element('strong',String(value)),element('span',label));
-  b.onclick=()=>{state.wood[domain.id]=value;renderWood();};
+  b.onclick=()=>{clearExampleNote();state.wood[domain.id]=value;renderWood();};
   grid.append(b);
  });
  box.append(grid);$('#wood-fields').append(box);
@@ -102,16 +104,16 @@ const zones=engine.kramerZones;
 zones.forEach((title,id)=>{
  const b=element('button');b.type='button';b.dataset.zone=String(id);b.setAttribute('aria-pressed','false');
  b.append(element('strong',id?'Z'+id:'0'),element('span',title));
- b.onclick=()=>{state.kramer.zona=id;renderKramer();};
+ b.onclick=()=>{clearExampleNote();state.kramer.zona=id;renderKramer();};
  $('#kramer-buttons').append(b);
 });
 all('.kramer-svg [data-zone]').forEach(node=>{
- const set=()=>{state.kramer.zona=Number(node.dataset.zone);renderKramer();};
+ const set=()=>{clearExampleNote();state.kramer.zona=Number(node.dataset.zone);renderKramer();};
  node.addEventListener('click',set);
  node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();set();}});
 });
 all('[data-kramer-flag]').forEach(box=>box.addEventListener('change',()=>{
- state.kramer[box.dataset.kramerFlag]=box.checked;
+ clearExampleNote();state.kramer[box.dataset.kramerFlag]=box.checked;
  renderKramer();
 }));
 function renderKramer(){
@@ -125,6 +127,7 @@ function renderKramer(){
  setCopy('kramer','Kramer: '+tag+'. '+r.message+(r.alerts.length?' Alertas: '+r.alerts.join(' '):''));
 }
 function reset(tool){
+ clearExampleNote();
  if(tool==='tep'){state.tep={apariencia:null,respiracion:null,circulacion:null};renderTep();}
  else if(tool==='wood'){state.wood={};renderWood();}
  else if(tool==='kramer'){state.kramer={zona:null};all('[data-kramer-flag]').forEach(x=>x.checked=false);renderKramer();}
@@ -152,6 +155,19 @@ let dark=false;try{dark=localStorage.getItem('kidbum-theme')==='dark';}catch(e){
 themeApply(dark);
 theme.onclick=()=>themeApply(!document.documentElement.classList.contains('dark'));
 renderTep();renderWood();renderKramer();
+$('#example').onclick=()=>{
+ const fake=root.KidBumFictitiousExamples?.forPediatricRapid(activeTool);
+ if(!fake){exampleNote.textContent='No hay ejemplo docente disponible.';exampleNote.hidden=false;return;}
+ if(activeTool==='tep'){state.tep={...fake};renderTep();}
+ if(activeTool==='wood'){state.wood={...fake};renderWood();}
+ if(activeTool==='kramer'){
+  state.kramer={...fake};
+  all('[data-kramer-flag]').forEach(box=>box.checked===Boolean(fake[box.dataset.kramerFlag])?null:(box.checked=Boolean(fake[box.dataset.kramerFlag])));
+  renderKramer();
+ }
+ exampleNote.textContent='Ejemplo ficticio cargado para '+({tep:'el TEP',wood:'Wood-Downes-Ferrés',kramer:'Kramer'}[activeTool])+'. No representa a un paciente. Puedes cambiar cualquier respuesta.';
+ exampleNote.hidden=false;
+};
 if(root.KidBumAnalysis){
  analysis=root.KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>{
   const summary=summaries[activeTool];

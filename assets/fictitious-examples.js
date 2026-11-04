@@ -41,10 +41,16 @@ const capurro=Object.freeze({
  somatic:{ear:16,mammary:10,nipple:10,skin:10,soles:10}
 });
 const wallace=Object.freeze(['chest','abdomen','rarm-f']);
+const pediatricRapid=Object.freeze({
+ tep:Object.freeze({apariencia:'normal',respiracion:'alterada',circulacion:'normal'}),
+ wood:Object.freeze({sibilancias:1,tiraje:1,fr:1,fc:0,ventilacion:1,cianosis:0}),
+ kramer:Object.freeze({zona:2,primeras24:false,neurologico:false,alimentacion:false,prematuro:false,coluria:false})
+});
 function clone(item){if(!item||typeof item!=='object')return null;return Array.isArray(item)?[...item]:{...item}}
 function twenty(id,variant){const item=examples[id];return clone(variant&&item&&item[variant]?item[variant]:item)}
 function forCardio(id){return clone(cardio[id])}
 function forCapurro(mode){return clone(capurro[mode])}
 function forWallace(){return clone(wallace)}
-global.KidBumFictitiousExamples=Object.freeze({twenty,forCardio,forCapurro,forWallace});
+function forPediatricRapid(id){return clone(pediatricRapid[id])}
+global.KidBumFictitiousExamples=Object.freeze({twenty,forCardio,forCapurro,forWallace,forPediatricRapid});
 })(window);
