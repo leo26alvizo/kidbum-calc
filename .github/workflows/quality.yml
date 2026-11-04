@@ -119,6 +119,33 @@ jobs:
         run: node tests/guardia-pro.cjs
       - name: Integrated arterial blood gas and engine reuse
         run: node tests/guardia-gasometria.cjs
+      - name: Capture pediatric visual tools in mobile and desktop for UX review
+        if: always()
+        run: |
+          mkdir -p pediatric-qa-screens
+          node tests/pediatria-rapid-fixtures-v01039.cjs
+          CHROME="$(command -v google-chrome || command -v chromium || command -v google-chrome-stable)"
+          test -n "$CHROME"
+          for view in tep wood kramer dark; do
+            for size in mobile desktop; do
+              if [ "$size" = "mobile" ]; then DIMS="390,1100"; else DIMS="1366,900"; fi
+              timeout 45s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage \
+                --allow-file-access-from-files --no-first-run --disable-extensions --virtual-time-budget=3200 \
+                --window-size="$DIMS" --user-data-dir="$(mktemp -d)" \
+                --screenshot="$PWD/pediatric-qa-screens/rapid-$view-$size.png" \
+                "file://$PWD/.pediatria-visual-$view.html" >/dev/null 2>&1
+              test -s "pediatric-qa-screens/rapid-$view-$size.png"
+            done
+          done
+          rm -f .pediatria-visual-*.html
+          ls -lh pediatric-qa-screens
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kidbum-pediatric-rapid-v01039-screens
+          path: pediatric-qa-screens/*.png
+          if-no-files-found: warn
+          retention-days: 14
       - name: Capture Pharma Pro UX candidate screenshots for visual review
         if: always()
         run: |
