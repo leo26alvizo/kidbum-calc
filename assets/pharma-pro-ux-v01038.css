@@ -45,3 +45,19 @@ html.dark .pharma-ux-switcher button.active{color:#0b0b0d}
 
 /* Keyboard highlight retains active option while focus stays in the search input. */
 .pharma-suggestions [role="option"][aria-selected="true"]{background:var(--mint);outline:2px solid var(--focus);outline-offset:-2px}
+
+/* Preserve full clinical disclaimer without hiding the critical visible prohibition. */
+.pharma-ux-scope{margin:10px 0 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}
+.pharma-ux-scope>summary{display:list-item;cursor:pointer;font-size:13px;font-weight:800;line-height:1.5;padding:13px 15px;color:var(--ink);min-height:44px}
+.pharma-ux-scope>summary:focus-visible{outline:3px solid var(--focus);outline-offset:-3px}
+.pharma-ux-scope>.notice{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--warningbg);line-height:1.6}
+@media(max-width:740px){
+  #pharma-coverage{margin:10px 0 7px;padding:10px 12px;font-size:12px;line-height:1.45}
+  .pharma-ux-scope{margin:7px 0 11px}
+  .pharma-ux-scope>summary{font-size:12px;padding:10px 12px;min-height:48px}
+  #browse .section-title{margin:11px 0 8px}
+  #browse .section-title h2{font-size:20px}
+}
+@media print{
+ .pharma-ux-scope .notice{display:block!important}
+}
