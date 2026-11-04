@@ -12,7 +12,7 @@ const sw=fs.readFileSync('sw.js','utf8');
 new vm.Script(expansionSrc);new vm.Script(guideSrc);new vm.Script(indexSrc);new vm.Script(coreSrc);new vm.Script(uiSrc);new vm.Script(disUI);
 const ctx={window:{}};vm.runInNewContext(expansionSrc,ctx);vm.runInNewContext(guideSrc,ctx);vm.runInNewContext(indexSrc,ctx);vm.runInNewContext(coreSrc,ctx);
 const e=ctx.window.KidBumPharmaExpansion,k=ctx.window.KidBumPharmaCore;
-assert.equal(e.catalog.length,601,'181 baseline expansion + 4 guides + 416 new search entries');
+assert.equal(e.catalog.length,597,'181 combined pre-existing expansion entries + 416 new search entries');
 assert.equal(k.records.length,643,'643 medication entries total');
 assert.equal(new Set(k.records.map(x=>x.id)).size,k.records.length,'No duplicate ids');
 assert.ok(k.records.every(x=>x.checks&&x.use&&x.populations.length));
