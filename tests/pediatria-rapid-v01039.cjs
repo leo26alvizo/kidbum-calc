@@ -50,8 +50,8 @@ for(const path of ['pediatria-evaluacion-rapida.html','assets/pediatria-rapid-co
  assert.ok(sw.includes("'./"+path+"'"),'Missing offline asset '+path);
 for(const code of ['pediatrictep','woodferres','kramer'])assert.ok(home.includes("id:'"+code+"'"),code);
 for(const hash of ['#tep','#wood','#kramer'])assert.ok(home.includes("pediatria-evaluacion-rapida.html"+hash));
-assert.match(home,/content="0\.10\.39"/);
-assert.match(page,/content="0\.10\.39"/);
+assert.match(home,/content="0\.10\.40"/);
+assert.match(page,/content="0\.10\.40"/);
 assert.match(sw,/pediatria-rapid-v01039/);
 assert.match(css,/@media\(max-width:740px\)/);
 assert.match(css,/html\.dark/);
