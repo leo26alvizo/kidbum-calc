@@ -42,3 +42,6 @@ html.dark .pharma-ux-switcher button.active{color:#0b0b0d}
  .pharma-ux-full.hidden{display:block!important}
  .pharma-ux-quick{display:none!important}
 }
+
+/* Keyboard highlight retains active option while focus stays in the search input. */
+.pharma-suggestions [role="option"][aria-selected="true"]{background:var(--mint);outline:2px solid var(--focus);outline-offset:-2px}

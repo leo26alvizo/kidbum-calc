@@ -9,11 +9,25 @@ const $=id=>document.getElementById(id);
 const quick=$('quick-search'),suggestions=$('quick-suggestions'),clear=$('quick-clear');
 const tabs=[...document.querySelectorAll('[data-pharma-view]')];
 const state={view:'drugs',history:{drugs:'',diseases:''},drugDetail:false};
+let activeSuggestion=-1,renderedSuggestions=[];
+quick.setAttribute('aria-autocomplete','list');
+quick.setAttribute('aria-haspopup','listbox');
+suggestions.setAttribute('role','listbox');
 const node=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
 function dispatch(id,value){
  const input=$(id);if(!input)return;input.value=value;input.dispatchEvent(new Event('input',{bubbles:true}));
 }
-function hideSuggestions(){suggestions.replaceChildren();suggestions.classList.add('hidden');quick.setAttribute('aria-expanded','false');}
+function hideSuggestions(){
+ activeSuggestion=-1;renderedSuggestions=[];
+ suggestions.replaceChildren();suggestions.classList.add('hidden');
+ quick.setAttribute('aria-expanded','false');quick.removeAttribute('aria-activedescendant');
+}
+function selectSuggestion(index){
+ if(!renderedSuggestions.length)return;
+ activeSuggestion=(index+renderedSuggestions.length)%renderedSuggestions.length;
+ suggestions.querySelectorAll('[role="option"]').forEach((b,i)=>b.setAttribute('aria-selected',String(i===activeSuggestion)));
+ quick.setAttribute('aria-activedescendant','pharma-suggest-'+activeSuggestion);
+}
 function currentItems(){
  const q=quick.value.trim();if(!q)return [];
  if(state.view==='drugs')return lib.search(q,'all','all',false).slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':''),kind:'drug'}));
@@ -27,15 +41,17 @@ function openItem(item){
 }
 function fillSuggestions(){
  const items=currentItems();
- suggestions.replaceChildren();
+ suggestions.replaceChildren();renderedSuggestions=items;activeSuggestion=-1;quick.removeAttribute('aria-activedescendant');
  if(!quick.value.trim()||state.view==='safety'){hideSuggestions();return;}
  if(!items.length){const p=node('p','Sin coincidencias verificadas. Revisa el nombre o la indicación.','small muted');suggestions.append(p);}
- for(const item of items){
-  const b=node('button');b.type='button';
+ items.forEach((item,i)=>{
+  const b=node('button');b.type='button';b.id='pharma-suggest-'+i;
+  b.setAttribute('role','option');b.setAttribute('aria-selected','false');
   b.append(node('strong',item.label),node('small',item.info));
   b.onclick=()=>openItem(item);
+  b.onmouseenter=()=>selectSuggestion(i);
   suggestions.append(b);
- }
+ });
  suggestions.classList.remove('hidden');
  quick.setAttribute('aria-expanded','true');
 }
@@ -74,8 +90,17 @@ quick.addEventListener('input',()=>{
  fillSuggestions();
 });
 quick.addEventListener('keydown',e=>{
- if(e.key==='Escape'){hideSuggestions();quick.blur();}
- if(e.key==='Enter'&&currentItems().length){e.preventDefault();openItem(currentItems()[0]);}
+ if(e.key==='Escape'){hideSuggestions();quick.blur();return;}
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+  if(!currentItems().length)return;
+  e.preventDefault();
+  if(suggestions.classList.contains('hidden'))fillSuggestions();
+  selectSuggestion(e.key==='ArrowDown'?activeSuggestion+1:(activeSuggestion===-1?renderedSuggestions.length-1:activeSuggestion-1));
+  return;
+ }
+ if(e.key==='Enter'&&currentItems().length){
+  e.preventDefault();openItem(renderedSuggestions[activeSuggestion]||currentItems()[0]);
+ }
 });
 clear.onclick=()=>{quick.value='';quick.dispatchEvent(new Event('input'));quick.focus();};
 document.querySelectorAll('[data-quick-disease]').forEach(b=>b.onclick=()=>{

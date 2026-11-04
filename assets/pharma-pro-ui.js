@@ -8,6 +8,7 @@ const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 let favorites=[];
 try{const saved=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(saved))favorites=saved.filter(x=>typeof x==='string'&&lib.byId[x]).slice(0,100);}catch(e){}
 let pop='all',tool='audit',activeDrug=null,visibleLimit=24,activeDetailMode='quick';
+let backScroll=0,backFocus='browse',backDrugId=null;
 const a=(url,label)=>{const el=document.createElement('a');el.href=url;el.target='_blank';el.rel='noopener noreferrer';el.textContent=label+' ↗';return el};
 const p=(text,cls='')=>{const el=document.createElement('p');el.textContent=text;if(cls)el.className=cls;return el};
 const elt=(tag,text,cls)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el};
@@ -70,7 +71,7 @@ function draw(){
  if(!data.length){grid.append(elt('div','No hay coincidencias. Prueba otro nombre o elimina filtros.','empty'));return;}
  const more=$('show-more-drugs');if(more){more.classList.toggle('hidden',data.length<=visibleLimit);more.textContent='Mostrar siguientes medicamentos ('+Math.min(24,data.length-visibleLimit)+' de '+Math.max(0,data.length-visibleLimit)+')';}
  for(const med of data.slice(0,visibleLimit)){
-  const item=elt('article',undefined,'med-card');
+  const item=elt('article',undefined,'med-card');item.dataset.drugId=med.id;
   const top=elt('div',undefined,'med-card-top');
   const title=elt('h3',med.name);
   const star=elt('button',favorites.includes(med.id)?'★':'☆','star');star.type='button';star.setAttribute('aria-label',(favorites.includes(med.id)?'Quitar favorito: ':'Guardar favorito: ')+med.name);star.title='Favorito (solo se guarda el identificador del medicamento)';
@@ -88,6 +89,11 @@ function draw(){
 function showDrug(id){
  const med=lib.byId[id];if(!med){return closeDrug();}
  if(activeDrug!==id)activeDetailMode='quick';
+ if(!activeDrug){
+  backScroll=window.scrollY;
+  backDrugId=id;
+  backFocus=document.activeElement?.closest?.('.pharma-fast-search')?'quick':'browse';
+ }
  activeDrug=id;
  const d=$('detail');d.classList.remove('hidden');$('browse').classList.add('hidden');
  d.replaceChildren();
@@ -147,7 +153,19 @@ function showDrug(id){
  root.KidBumPharmaQuick?.onDrugOpen(id);
  d.scrollIntoView({behavior:'smooth',block:'start'});
 }
-function closeDrug(){activeDrug=null;activeDetailMode='quick';$('detail').classList.add('hidden');$('browse').classList.remove('hidden');draw();root.KidBumPharmaQuick?.onDrugClose();}
+function closeDrug(){
+ const hadDetail=Boolean(activeDrug);
+ activeDrug=null;activeDetailMode='quick';
+ $('detail').classList.add('hidden');$('browse').classList.remove('hidden');draw();
+ root.KidBumPharmaQuick?.onDrugClose();
+ if(hadDetail&&!$('browse').classList.contains('hidden')){
+  const result=[...document.querySelectorAll('#browse .med-card')].find(x=>x.dataset.drugId===backDrugId);
+  const target=backFocus==='quick'?$('quick-search'):result?.querySelector('.card-footer button');
+  if(target){try{target.focus({preventScroll:true});}catch(e){target.focus();}}
+  try{window.scrollTo({top:backScroll,behavior:'instant'});}catch(e){window.scrollTo(0,backScroll);}
+ }
+ backDrugId=null;
+}
 $('search').addEventListener('input',()=>{visibleLimit=24;draw();});group.addEventListener('change',()=>{visibleLimit=24;draw();});
 $('show-more-drugs')?.addEventListener('click',()=>{visibleLimit+=24;draw();});
 document.querySelectorAll('[data-pop]').forEach(b=>b.onclick=()=>{pop=b.dataset.pop;visibleLimit=24;document.querySelectorAll('[data-pop]').forEach(x=>x.classList.toggle('active',x.dataset.pop===pop));draw();});
