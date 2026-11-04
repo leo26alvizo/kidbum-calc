@@ -119,10 +119,16 @@ jobs:
         if: always()
         run: |
           mkdir -p qa-screens
+          node tests/pharma-visual-fixtures-v01038.cjs
           CHROME="$(command -v google-chrome || command -v chromium || command -v google-chrome-stable)"
           test -n "$CHROME"
-          for view in list detail; do
-            if [ "$view" = "detail" ]; then TARGET="file://$PWD/pharma-pro.html#ceftriaxona"; else TARGET="file://$PWD/pharma-pro.html"; fi
+          for view in list detail full dark; do
+            case "$view" in
+              detail) TARGET="file://$PWD/pharma-pro.html#ceftriaxona" ;;
+              full) TARGET="file://$PWD/.pharma-visual-full.html" ;;
+              dark) TARGET="file://$PWD/.pharma-visual-dark.html" ;;
+              *) TARGET="file://$PWD/pharma-pro.html" ;;
+            esac
             for size in mobile desktop; do
               if [ "$size" = "mobile" ]; then DIMS="390,844"; else DIMS="1366,900"; fi
               timeout 45s "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --allow-file-access-from-files \
@@ -132,6 +138,7 @@ jobs:
             done
           done
           ls -lh qa-screens
+          rm -f .pharma-visual-full.html .pharma-visual-dark.html
       - uses: actions/upload-artifact@v4
         if: always()
         with:
