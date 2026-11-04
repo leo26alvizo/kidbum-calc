@@ -1,6 +1,6 @@
 'use strict';
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html'];
+const files=['capurro.html','wallace-adultos.html','escalas-cardioembolia.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','pediatria-evaluacion-rapida.html'];
 const shared=fs.readFileSync('assets/chatgpt-analysis.js','utf8');new vm.Script(shared);
 const window={};const doc={};
 vm.runInNewContext(shared,{window,document:doc});
@@ -18,15 +18,25 @@ for(const path of files){
  const html=fs.readFileSync(path,'utf8');
  assert.match(html,/<div id="kb-ai-mount"><\/div>/,path+' mount');
  assert.match(html,/src="\.\/assets\/chatgpt-analysis\.js"/,path+' library');
- assert.match(html,/KidBumAnalysis\.attach\(/,path+' actual handler');
- assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\((?:true|total>0)\)/,path+' enables on result');
- assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
+ if(path==='pediatria-evaluacion-rapida.html'){
+  const rapidUI=fs.readFileSync('assets/pediatria-rapid-ui.js','utf8');
+  assert.match(rapidUI,/KidBumAnalysis\.attach\(/,'Pediatrics shared ChatGPT analysis attached');
+  assert.match(rapidUI,/analysis\.setReady\(Boolean\(summaries\[activeTool\]\)\)/,'Pediatrics gating on complete assessment');
+ }else assert.match(html,/KidBumAnalysis\.attach\(/,path+' actual handler');
+ if(path!=='pediatria-evaluacion-rapida.html'){
+  assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\((?:true|total>0)\)/,path+' enables on result');
+  assert.match(html,['geriatria-escalas.html','hepatologia-indices.html'].includes(path)?/\.setReady\(Boolean\(last\)\)/:/\.setReady\(false\)|\.setReady\(total>0\)/,path+' disables on missing');
+ }
  for(const match of html.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g)){if(match[1].trim())new vm.Script(match[1],{filename:path})}
 }
 const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-selector"/);assert.match(index,/function buildAnalysisPrompt/);
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/chatgpt-analysis\.js'/);assert.match(sw,/chatgpt-external-restored/);
 const reg=index.slice(index.indexOf('const externalCalculators='),index.indexOf('const calculatorCount='));
 const paths=[...reg.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(paths.length,43,'43 standalone calculators');
-for(const path of new Set(paths))assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
-console.log('Standalone ChatGPT analysis PASS: 43 calculators, 7 pages, privacy, completion gating, themes, offline.');
+assert.equal(paths.length,46,'46 standalone calculators');
+for(const path of new Set(paths)){
+ if(path==='pediatria-evaluacion-rapida.html'){
+  assert.match(fs.readFileSync('assets/pediatria-rapid-ui.js','utf8'),/KidBumAnalysis\.attach\(/);
+ }else assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
+}
+console.log('Standalone ChatGPT analysis PASS: 46 calculators, 8 pages, privacy, completion gating, themes, offline.');

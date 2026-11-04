@@ -1,5 +1,5 @@
 'use strict';
-// Verify that an installed KidBum release can open all 133 clinical tools in
+// Verify that an installed KidBum release can open all 136 clinical tools in
 // airplane mode, including pages never visited before and query-string images.
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
@@ -47,9 +47,9 @@ const packed=Array.from(self.__offlineAssets);
 const packedSet=new Set(packed);
 const mustHave=[
  'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
- 'capurro.html','wallace-adultos.html','snnoop10.html','pharma-pro.html',
+ 'capurro.html','wallace-adultos.html','snnoop10.html','pharma-pro.html','pediatria-evaluacion-rapida.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
- 'assets/mobile-first-v01035.css','assets/pharma-mobile-v01035.css','assets/dark-graphite-v01036.css','assets/theme-chrome-v01036.js','assets/startup-bundle.js','assets/pediatric-pharma.js','assets/pharma-pro-core.js','assets/pharma-pro-ui.js','assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-monographs-ui.js','assets/pharma-pro-expansion.js','assets/pharma-pro-indications-ui.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-quick-ui.js','assets/diabetes-insulin-core.js','assets/diabetes-insulin-ui.js',
+ 'assets/pediatria-rapid-v01039.css','assets/pediatria-rapid-core.js','assets/pediatria-rapid-ui.js','assets/mobile-first-v01035.css','assets/pharma-mobile-v01035.css','assets/dark-graphite-v01036.css','assets/theme-chrome-v01036.js','assets/startup-bundle.js','assets/pediatric-pharma.js','assets/pharma-pro-core.js','assets/pharma-pro-ui.js','assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-monographs-ui.js','assets/pharma-pro-expansion.js','assets/pharma-pro-indications-ui.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-quick-ui.js','assets/diabetes-insulin-core.js','assets/diabetes-insulin-ui.js',
  'assets/expansion-20.js','assets/geriatria-escalas.js','assets/hepatologia-indices.js','assets/guardia-pro.js','assets/guardia-gasometria.js','assets/fictitious-examples.js',
  'assets/chatgpt-analysis.js','assets/medical-atlas.js',
  'assets/wallace-adultos-original-HD.png','assets/wallace-adultos.webp',
@@ -57,7 +57,7 @@ const mustHave=[
 ];
 for(const p of mustHave)assert.ok(packedSet.has('./'+p),'Not precached: '+p);
 const external=[...home.matchAll(/\{id:'([^']+)',category:'[^']+',href:'([^']+)',image:'([^']+)'\}/g)];
-assert.equal(external.length,43,'All 43 standalone tool links must remain registered');
+assert.equal(external.length,46,'All 46 standalone tool links must remain registered');
 for(const match of external){
  const page=match[2].split('#')[0];
  assert.ok(packedSet.has(page),'Calculator '+match[1]+' not precached: '+page);
@@ -66,7 +66,7 @@ for(const match of external){
 }
 // Every local script referenced by an alternate tool must be available offline.
 const pages=['index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','escalas-cardioembolia.html',
- 'capurro.html','wallace-adultos.html','snnoop10.html',
+ 'capurro.html','wallace-adultos.html','snnoop10.html','pediatria-evaluacion-rapida.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html'];
 for(const p of pages){
  const html=fs.readFileSync(p,'utf8');
@@ -105,5 +105,5 @@ async function navigate(path){
  await navigate('./assets/wallace-adultos.webp?v=20261021-repaired');
  await navigate('./assets/snnoop10-portada.jpg?v=cover');
  assert.equal(networkCalls,0,'Cold airplane-mode app navigation contacted the network');
- console.log('FULL OFFLINE PASS: 127 calculator routes, 12 local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
+ console.log('FULL OFFLINE PASS: 136 calculator routes, 13 local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
 })().catch(e=>{console.error(e);process.exitCode=1;});

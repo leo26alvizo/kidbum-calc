@@ -63,9 +63,21 @@ for(const path of pages){
 const main=fs.readFileSync('index.html','utf8');
 const registry=main.slice(main.indexOf('const externalCalculators='),main.indexOf('const calculatorCount='));
 const externalPaths=[...registry.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(externalPaths.length,43);
+assert.equal(externalPaths.length,46);
 for(const path of new Set(externalPaths)){
  const page=fs.readFileSync(path,'utf8');assert.match(page,/id="example"/,'Future calculator may not omit the fictitious example: '+path);
+ if(path==='pediatria-evaluacion-rapida.html'){
+  assert.match(page,/id="example-note"/);
+  assert.match(page,/src="\.\/assets\/fictitious-examples\.js"/);
+  assert.match(fs.readFileSync('assets/pediatria-rapid-ui.js','utf8'),/KidBumFictitiousExamples\?\.forPediatricRapid/);
+ }
 }
+const rapid=examples.forPediatricRapid('wood');
+assert.equal(rapid.sibilancias,1);
+const rapidEngine={};rapidEngine.globalThis=rapidEngine;
+vm.runInNewContext(fs.readFileSync('assets/pediatria-rapid-core.js','utf8'),rapidEngine);
+assert.equal(rapidEngine.KidBumPediatricRapid.wood(rapid).value,4);
+assert.equal(rapidEngine.KidBumPediatricRapid.tep(examples.forPediatricRapid('tep')).ready,true);
+assert.equal(rapidEngine.KidBumPediatricRapid.kramer(examples.forPediatricRapid('kramer')).zone,2);
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/fictitious-examples\.js'/);
 console.log('Example fixtures PASS: '+variantsTested+' score scenarios, 4 cardio, 2 Capurro, Wallace '+area+'% · all 26 tools have test examples and ChatGPT.');

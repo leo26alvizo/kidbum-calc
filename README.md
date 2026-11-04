@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.38**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.39**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.39 · Pediatría rápida interactiva
+
+Tres herramientas nuevas en **Pediatría** (total: 136 herramientas; Pediatría: 34): `pediatria-evaluacion-rapida.html#tep`, `#wood` y `#kramer`.
+
+- **Triángulo de Evaluación Pediátrica:** gráfico interactivo de apariencia, trabajo respiratorio y circulación cutánea, sin puntaje numérico; clasifica patrones observacionales, marcando como mixto el compromiso respiratorio-circulatorio sin apariencia alterada. No sustituye ABCDE.
+- **Wood-Downes modificado por Ferrés:** seis componentes (sibilancias 0–3, tiraje 0–3, FR 0–3, FC 0–1, ventilación 0–3, cianosis 0–1), total 0–14, bandas leve 1–3, moderada 4–7 y grave 8–14. Alerta crítica por cianosis o tórax silente independientemente de la suma; no se calcula con campos faltantes. La tabla histórica no especifica FR=30 ni FC=120 exactamente; confirmar protocolo institucional.
+- **Kramer:** selector anatómico de cinco zonas y alertas neonatales. No genera cifras estimadas de bilirrubina ni decisiones de fototerapia; se requiere medición objetiva con edad en horas y factores de riesgo.
+- **Diseño y seguridad:** controles táctiles, SVG interactivo, temas claro/oscuro, copia local de resúmenes, funcionamiento offline y acceso desde el catálogo; sin almacenamiento de información clínica ni decisiones terapéuticas automáticas.
+- **Fuentes clínicas:** GPC mexicana de bronquiolitis (anexo Wood-Downes-Ferrés), GPC IMSS 262-19 sobre ictericia, AAP 2022 sobre hiperbilirrubinemia y revisión del TEP (PMC7182162).
 
 ## KidBum 0.10.38 · Pharma Pro UX 2.0 (consulta rápida y ficha completa)
 
