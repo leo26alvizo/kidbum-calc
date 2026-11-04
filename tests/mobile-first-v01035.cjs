@@ -7,7 +7,7 @@ const home=read('index.html'), pharma=read('pharma-pro.html'), homeCSS=read('ass
       pharmaCSS=read('assets/pharma-mobile-v01035.css'), sw=read('sw.js'), manifest=JSON.parse(read('manifest.webmanifest'));
 assert.match(home,/<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/);
 assert.match(pharma,/<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.40"/);
+assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.41"/);
 assert.match(pharma,/<meta name="kidbum-app-version" content="0\.10\.40"/);
 const homeStyle=home.indexOf('</style>'),homeLink=home.indexOf('<link rel="stylesheet" href="./assets/mobile-first-v01035.css"');
 assert.ok(homeLink>homeStyle,'Responsive styles must override tablet layout, not precede it');
