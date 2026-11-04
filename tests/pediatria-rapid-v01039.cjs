@@ -50,7 +50,7 @@ for(const path of ['pediatria-evaluacion-rapida.html','assets/pediatria-rapid-co
  assert.ok(sw.includes("'./"+path+"'"),'Missing offline asset '+path);
 for(const code of ['pediatrictep','woodferres','kramer'])assert.ok(home.includes("id:'"+code+"'"),code);
 for(const hash of ['#tep','#wood','#kramer'])assert.ok(home.includes("pediatria-evaluacion-rapida.html"+hash));
-assert.match(home,/content="0\.10\.41"/);
+assert.match(home,/content="0\.10\.42"/);
 assert.match(page,/content="0\.10\.41"/);
 assert.match(sw,/pediatria-rapid-v01039/);
 const imageBytes=fs.readFileSync('assets/kramer-bebe-referencia-v01040.jpg');

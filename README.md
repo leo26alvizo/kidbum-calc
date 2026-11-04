@@ -2,9 +2,17 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.41**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.42**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Pharma Pro 3.0 · Fase 1 (0.10.42): conciliación parcial y trazabilidad de evidencia
+
+- Se mantiene **227 entradas** como índice; solo **9 fichas con cotejo parcial** de etiqueta estadounidense, **218 pendientes** y **0 validaciones clínicas/farmacéuticas independientes acreditadas**. Este cambio NO convierte un índice en un vademécum validado.
+- Nuevo panel *Seguridad → Conciliación parcial*: revisa de **2 a 8 medicamentos** simultáneos. Señala duplicidades exactas, tres pares de interacción documentados ya existentes, parejas LASA registradas, medicamentos ISMP de alto riesgo y posible solapamiento de anticoagulantes/insulinas. Para cada par sin regla específica muestra **SIN EVALUAR**; jamás devuelve «combinación segura».
+- Los recordatorios por clase son **heurísticos de conciliación**, no contraindicaciones automáticas. No se concluye seguridad por ausencia de alertas ni se valida dosificación, adecuación de indicación, embarazo, ajustes renales, compatibilidad o prescripción.
+- Reconsulta documental específica en **DailyMed el 04-11-2026** (sin consulta automática en el dispositivo): Hospira KCl 2 mEq/mL (setid 559a0a8c-a8fe-40a5-b196-21f9308780ab, v23, 2026-07-01), Hikma heparina (setid 7014808d-cec9-4b2c-8eb5-940493e356ab, v18, 2026-10-23) y Lilly Humalog lispro (setid c8ecbd7a-0e22-4fc7-a503-faa58c1b6f3f, v87, 2026-06-16). Se compararon advertencias, contraindicaciones, presentación y administración. **Son etiquetas de EE. UU.; falta cotejo con IPP/registro COFEPRIS y revisión farmacéutica independiente en México.**
+- El submódulo es independiente, procesado localmente y precargado en la PWA. La prueba pharma-reconciliation-v01042.cjs comprueba ausencia de «autorización segura», límites de cobertura, fuentes y escenarios LASA, anticoagulantes, insulinas y pares no evaluados.
 
 ## KidBum 0.10.41 · Kramer PLUS — análisis seguro de hiperbilirrubinemia neonatal
 
