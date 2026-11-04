@@ -61,3 +61,6 @@ html.dark .pharma-ux-switcher button.active{color:#0b0b0d}
 @media print{
  .pharma-ux-scope .notice{display:block!important}
 }
+
+/* Legible category eyebrows on light surfaces; hero text retains its own contrast. */
+#browse .eyebrow,#detail .eyebrow{color:var(--accent)}

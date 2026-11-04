@@ -21,6 +21,7 @@ assert.match(ui,/KidBumPharmaMonographUI\.render\(id\)/);
 assert.match(ui,/KidBumPharmaIndicationsUI\?\.filterByDrug/);
 assert.match(ui,/KidBumPharmaQuick\?\.onDrugOpen/);
 assert.match(ui,/No hay pauta|no cuenta con pauta posológica cotejada/);
+assert.match(css,/#browse \\.eyebrow,#detail \\.eyebrow/);
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
