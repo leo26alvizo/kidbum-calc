@@ -1,0 +1,33 @@
+/* Pharma Pro 3.0 (phase 1) v0.10.42 · partial drug-list review */
+.pharma-recon{margin-top:18px;border:1px solid var(--line);background:var(--panel);padding:17px;border-radius:16px}
+.pharma-recon h3{font-size:20px;line-height:1.25;margin:5px 0 8px;color:var(--ink)}
+.pharma-recon h4{font-size:13px;margin:14px 0 6px;color:var(--ink)}
+.pharma-recon p{line-height:1.55}
+.pharma-recon .pharma-recon-intro{font-size:12px;color:var(--muted);margin:0 0 12px}
+.pharma-recon-row{display:flex;align-items:end;gap:8px;margin-bottom:8px}
+.pharma-recon-row label{display:block;font-size:12px;min-width:0;flex:1;font-weight:720}
+.pharma-recon-row select{width:100%;min-width:0;min-height:47px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;font-size:13px;padding:8px 10px;margin-top:5px}
+.pharma-recon-row select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.pharma-recon-row button,.pharma-recon-actions button{min-height:44px;padding:8px 11px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;font-size:12px;font-weight:780;cursor:pointer}
+.pharma-recon-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.pharma-recon-actions button[type=submit]{background:var(--accent);color:var(--panel);border-color:var(--accent)}
+html.dark .pharma-recon-actions button[type=submit]{color:#0d202a}
+.pharma-recon-actions button:disabled{opacity:.5;cursor:not-allowed}
+.pharma-recon-result{border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:12px;padding:13px;background:var(--bg);margin:10px 0}
+.pharma-recon-result strong{font-size:13px}
+.pharma-recon-result p,.pharma-recon-result li{font-size:12px;line-height:1.55}
+.pharma-recon-result ul{padding-left:20px;margin:7px 0}
+.pharma-recon-result li+li{margin-top:5px}
+.pharma-recon-alert{color:var(--warn);font-weight:800}
+.pharma-recon-sources-wrap{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+.pharma-recon-sources-wrap summary{font-size:13px;font-weight:800;color:var(--accent);cursor:pointer;min-height:40px}
+.pharma-recon-counts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:9px 0}
+.pharma-recon-count{border:1px solid var(--line);border-radius:10px;padding:9px;background:var(--bg)}
+.pharma-recon-count strong{font-size:23px;font-weight:850;display:block;color:var(--ink)}
+.pharma-recon-count span{display:block;font-size:10px;line-height:1.35;color:var(--muted)}
+.pharma-recon-sources{display:grid;gap:8px;list-style:none;margin:10px 0;padding:0}
+.pharma-recon-sources li{border:1px solid var(--line);border-radius:11px;padding:11px;background:var(--bg)}
+.pharma-recon-sources li p{margin:5px 0;font-size:11px}
+.pharma-recon-sources li a,.pharma-recon-result a{font-size:12px;color:var(--accent);font-weight:780}
+@media(max-width:740px){.pharma-recon{padding:13px;margin-top:12px}.pharma-recon-counts{grid-template-columns:repeat(2,minmax(0,1fr))}.pharma-recon-row{align-items:stretch;flex-direction:column}.pharma-recon-row label{width:100%}.pharma-recon-row button{align-self:flex-end}.pharma-recon-actions button{flex:1;min-width:115px}}
+@media(max-width:360px){.pharma-recon-count strong{font-size:20px}.pharma-recon-row select{font-size:12px}}
