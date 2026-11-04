@@ -49,6 +49,8 @@ jobs:
         run: node tests/ocular-simulator-link.cjs
       - name: Pharma Pro UX 2.0 source states, original clinical engines and offline support
         run: node tests/pharma-ux-v01038.cjs
+      - name: Real headless Chrome UX smoke test, safety gating and mobile layout
+        run: node tests/pharma-browser-ux-v01038.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
