@@ -31,19 +31,24 @@ function selectSuggestion(index){
 function currentItems(){
  const q=quick.value.trim();if(!q)return [];
  if(state.view==='drugs')return lib.search(q,'all','all',false).slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':''),kind:'drug'}));
- if(state.view==='diseases')return lib.searchConditions(q).slice(0,7).map(x=>({id:x.id,label:x.name,info:'Ruta de guía · adultos',kind:'disease'}));
+ if(state.view==='diseases'){
+  const routes=lib.searchConditions(q).slice(0,4).map(x=>({id:x.id,label:x.name,info:'Ruta terapéutica documentada · adultos',kind:'disease'}));
+  const topics=(root.KidBumPharmaExpansionIndex?.searchDiseases(q)||[]).slice(0,7-routes.length).map(x=>({id:x.id,label:x.name,info:'Índice clínico · SIN tratamiento cotejado',kind:'topic'}));
+  return [...routes,...topics];
+ }
  return [];
 }
 function openItem(item){
  hideSuggestions();
  if(item.kind==='drug'){root.KidBumPharmaUI.openDrug(item.id);}
+ else if(item.kind==='topic')root.KidBumPharmaIndexUI?.openDisease(item.id);
  else if(root.KidBumPharmaIndicationsUI?.openCondition)root.KidBumPharmaIndicationsUI.openCondition(item.id);
 }
 function fillSuggestions(){
  const items=currentItems();
  suggestions.replaceChildren();renderedSuggestions=items;activeSuggestion=-1;quick.removeAttribute('aria-activedescendant');
  if(!quick.value.trim()||state.view==='safety'){hideSuggestions();return;}
- if(!items.length){const p=node('p','Sin coincidencias verificadas. Revisa el nombre o la indicación.','small muted');suggestions.append(p);}
+ if(!items.length){const p=node('p','Sin coincidencias en los índices. Revisa el nombre o utiliza otras fuentes.','small muted');suggestions.append(p);}
  items.forEach((item,i)=>{
   const b=node('button');b.type='button';b.id='pharma-suggest-'+i;
   b.setAttribute('role','option');b.setAttribute('aria-selected','false');

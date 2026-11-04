@@ -109,6 +109,7 @@ function check(id,x){
 }
 function indications(id,pop){if(!newIds[id])return base.indications(id,pop);return review.filter(x=>x.id===id).flatMap(x=>x.regimens.filter(r=>r.population===pop).map(r=>({id:r.indication,title:r.title})));}
 const preparations=Object.freeze({...base.preparations,...Object.fromEntries(review.map(x=>[x.id,x.preparation]))});
-const coverage=Object.freeze({totalIndexed:227,labelChecked:records.length,partiallyChecked:records.length,notLabelChecked:227-records.length,clinicallyApproved:0,reviewStandard:'9 fichas parcialmente cotejadas con etiquetas US; ninguna con validación clínica/farmacéutica independiente o IPP mexicana'});
+const totalIndexed=root.KidBumPharmaCore?.records.length||227;
+const coverage=Object.freeze({totalIndexed,labelChecked:records.length,partiallyChecked:records.length,notLabelChecked:totalIndexed-records.length,clinicallyApproved:0,reviewStandard:'9 fichas parcialmente cotejadas con etiquetas US; ninguna con validación clínica/farmacéutica independiente o IPP mexicana'});
 root.KidBumPharmaMonographs=Object.freeze({records,byId,check,indications,preparations,coverage,populations:base.populations});
 })(typeof window!=='undefined'?window:globalThis);
