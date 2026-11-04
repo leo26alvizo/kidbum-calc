@@ -22,7 +22,7 @@ for(const name of pages){
  const linkIdx=html.indexOf(ref),headEnd=html.indexOf('</head>');
  assert.ok(linkIdx<headEnd,'stylesheet stays inside <head> for '+name);
 }
-assert.match(read('index.html'),/content="0\.10\.40"/);
+assert.match(read('index.html'),/content="0\.10\.41"/);
 assert.match(read('pharma-pro.html'),/content="0\.10\.40"/);
 assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.40<\/small>/);
 assert.match(read('index.html'),/--bg:#f5f8fa/,'main original light palette untouched');

@@ -53,6 +53,8 @@ jobs:
         run: node tests/pharma-browser-ux-v01038.cjs
       - name: Pediatric visual triad clinical engine, sources, safety and offline
         run: node tests/pediatria-rapid-v01039.cjs
+      - name: Kramer neonatal objective-data support, AAP guardrails and offline safety
+        run: node tests/kramer-clinical-v01041.cjs
       - name: Pediatric rapid tools in real headless Chromium
         run: node tests/pediatria-rapid-browser-v01039.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle

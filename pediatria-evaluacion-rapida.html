@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10283b">
-<meta name="kidbum-app-version" content="0.10.40">
+<meta name="kidbum-app-version" content="0.10.41">
 <meta name="description" content="Pediatría rápida de KidBum: triángulo de evaluación pediátrica, Wood-Downes-Ferrés y zonas de Kramer. Consulta clínica visual y offline.">
 <title>Pediatría rápida · TEP, Wood-Downes-Ferrés y Kramer | KidBum</title>
 <link rel="manifest" href="./manifest.webmanifest">
@@ -19,7 +19,7 @@
   <button type="button" id="rapid-theme" aria-label="Cambiar a modo oscuro">◐</button>
  </nav>
  <header class="hero">
-  <span class="eyebrow">KidBum · Pediatría · 0.10.40</span>
+  <span class="eyebrow">KidBum · Pediatría · 0.10.41</span>
   <h1>Decide qué observar. <em>No pierdas lo importante.</em></h1>
   <p>Tres herramientas visuales de valoración inicial. Resultados instantáneos, sin datos de pacientes ni conexión obligatoria tras instalar.</p>
  </header>
@@ -121,16 +121,98 @@
     </div>
    </div>
   </div>
+  <section class="surface kbili-clinical" id="kbili-clinical" aria-labelledby="kbili-title">
+   <div class="kbili-heading">
+    <div><div class="eyebrow">Kramer PLUS · datos objetivos</div><h3 id="kbili-title">Evaluación de hiperbilirrubinemia neonatal</h3><p>Kramer registra la extensión visual; este panel analiza <strong>mediciones reales</strong>. No convierte zonas de piel en mg/dL ni prescribe tratamientos.</p></div>
+    <a class="kbili-reference-link" id="kbili-peditools" target="_blank" rel="noopener noreferrer" href="https://peditools.org/bili2022/">Consultar umbrales AAP 2022 ↗</a>
+   </div>
+   <div class="kbili-grid">
+    <fieldset class="kbili-fieldset"><legend>01 · Contexto del recién nacido</legend>
+     <div class="kbili-fields">
+      <label>Edad gestacional al nacer, semanas completas
+       <select data-kbili="ga" aria-label="Edad gestacional al nacer"><option value="">Selecciona EG</option><option value="34">Menos de 35 (fuera AAP 2022)</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42 o más</option></select>
+      </label>
+      <label>Edad en horas en el momento de la toma
+       <input data-kbili="age" type="number" inputmode="decimal" min="1" max="336" step="0.1" placeholder="Ej. 48" aria-label="Edad posnatal en horas"/>
+      </label>
+     </div>
+     <details class="kbili-details"><summary>Calcular edad exacta desde nacimiento y extracción</summary>
+      <div class="kbili-fields">
+       <label>Fecha y hora de nacimiento<input data-kbili="birth" type="datetime-local"/></label>
+       <label>Fecha y hora de medición<input data-kbili="sample" type="datetime-local"/></label>
+      </div>
+      <p id="kbili-time-warning" class="kbili-note" role="status">Usa la misma zona horaria para ambos registros. Confirma la edad contra el expediente.</p>
+     </details>
+     <label class="kbili-check"><input data-kbili="onPhoto" type="checkbox"/> Ha recibido fototerapia (activa o previa)</label>
+     <label>Momento previsto de alta para seguimiento AAP
+      <select data-kbili="discharge"><option value="">No definido</option><option value="before72">Antes de 72 h</option><option value="after72">Desde 72 h</option></select>
+     </label>
+    </fieldset>
+    <fieldset class="kbili-fieldset"><legend>02 · Bilirrubina medida</legend>
+     <div class="kbili-fields">
+      <label>Tipo de medición
+       <select data-kbili="method"><option value="TSB">TSB · sérica total</option><option value="TcB">TcB · transcutánea</option></select>
+      </label>
+      <label>Unidad
+       <select data-kbili="unit"><option value="mgdl">mg/dL</option><option value="umol">µmol/L</option></select>
+      </label>
+      <label>Bilirrubina medida
+       <input data-kbili="bili" type="number" inputmode="decimal" min="0" step="any" placeholder="Ej. 12.0"/>
+      </label>
+      <label>Bilirrubina directa (solo con TSB)
+       <input data-kbili="direct" type="number" inputmode="decimal" min="0" step="any" placeholder="Opcional"/>
+      </label>
+     </div>
+     <details class="kbili-details"><summary>Agregar segunda medición y curva de ascenso</summary>
+      <div class="kbili-fields">
+       <label>Medición anterior<input data-kbili="prior" type="number" inputmode="decimal" min="0" step="any" placeholder="Misma unidad"/></label>
+       <label>Edad en horas de la medición anterior<input data-kbili="priorAge" type="number" inputmode="decimal" min="1" step="any" placeholder="Ej. 24"/></label>
+       <label>Tipo de medición anterior<select data-kbili="priorMethod"><option value="TSB">TSB</option><option value="TcB">TcB</option></select></label>
+      </div>
+      <p class="kbili-note">El ascenso se calcula únicamente con métodos de medición coincidentes; no mezclar TSB con TcB como si fueran equivalentes.</p>
+     </details>
+     <details class="kbili-details"><summary>Agregar pesos para valorar pérdida ponderal</summary>
+      <div class="kbili-fields">
+       <label>Peso al nacimiento (g)<input data-kbili="birthWeight" type="number" inputmode="numeric" min="1" placeholder="Ej. 3200"/></label>
+       <label>Peso actual (g)<input data-kbili="currentWeight" type="number" inputmode="numeric" min="1" placeholder="Ej. 3010"/></label>
+      </div>
+     </details>
+    </fieldset>
+   </div>
+   <fieldset class="kbili-fieldset kbili-risk"><legend>03 · Factores de neurotoxicidad (AAP 2022)</legend>
+    <p class="kbili-note">La edad gestacional se maneja en su curva; en 35–37 semanas, NO marcar automáticamente riesgo adicional solo por prematuridad.</p>
+    <div class="kbili-check-grid">
+     <label class="kbili-check"><input data-kbili="hemolysis" type="checkbox"/> Enfermedad hemolítica (DAT positivo, G6PD u otra)</label>
+     <label class="kbili-check"><input data-kbili="sepsis" type="checkbox"/> Sepsis</label>
+     <label class="kbili-check"><input data-kbili="instability" type="checkbox"/> Inestabilidad clínica importante en últimas 24 h</label>
+     <label class="kbili-check"><input data-kbili="lowAlbumin" type="checkbox"/> Albúmina conocida &lt;3 g/dL</label>
+    </div>
+    <label class="kbili-check kbili-ack"><input data-kbili="riskReviewed" type="checkbox"/> <strong>He revisado explícitamente los cuatro factores anteriores (presentes o ausentes).</strong></label>
+   </fieldset>
+   <fieldset class="kbili-fieldset kbili-thresholds"><legend>04 · Comparar con umbrales AAP verificados</legend>
+    <p class="kbili-note">Los umbrales dependen de semanas completas, horas, factores adicionales y TSB. Copia los valores exactos de las tablas AAP 2022 o de PediTools verificado. <strong>La app no infiere umbrales de Kramer ni interpola curvas de una imagen.</strong> Este paso no requiere conexión si ya cuentas con los valores clínicos confirmados.</p>
+    <div class="kbili-fields">
+     <label>Umbral de fototerapia (en la unidad elegida)<input data-kbili="photo" type="number" min="0" step="any" inputmode="decimal" placeholder="Según gráfica AAP"/></label>
+     <label>Umbral de exanguinotransfusión (en la unidad elegida)<input data-kbili="exchange" type="number" min="0" step="any" inputmode="decimal" placeholder="Según gráfica AAP"/></label>
+    </div>
+    <label class="kbili-check kbili-ack"><input data-kbili="thresholdChecked" type="checkbox"/> <strong>Verifiqué los umbrales contra la curva correspondiente a EG, horas y factores de neurotoxicidad.</strong></label>
+   </fieldset>
+   <div id="kbili-output" class="kbili-result" role="status" aria-live="polite"></div>
+   <div class="actions kbili-actions"><button id="kbili-copy" class="copy" type="button" disabled>Copiar evaluación objetiva</button></div>
+   <p class="kbili-footnote">AAP 2022 para ≥35 semanas y 1–336 horas; aplicar el protocolo de tu institución. La evaluación posfototerapia, prematuros &lt;35 semanas, ictericia prolongada o colestasis requieren algoritmos específicos. Los datos se calculan localmente, sin guardarse ni transmitirse automáticamente.</p>
+  </section>
   <div class="outcome pending" id="kramer-output" role="status" aria-live="polite">Marca una zona para consultar su extensión anatómica y las precauciones.</div>
   <div class="actions"><button type="button" class="clear" data-reset="kramer">↻ Reiniciar</button><button type="button" class="copy" data-copy="kramer" disabled>Copiar resumen</button></div>
   <details class="source"><summary>Fuentes, incertidumbre y límites</summary><p>La regla de Kramer describe la <strong>distribución cefalocaudal</strong> de la ictericia, pero no ofrece concentraciones predictivas fiables. La AAP 2022 observó grandes discrepancias entre la apreciación visual y la bilirrubina medida. En presencia de ictericia antes de las 24 h, obtener medición urgente.</p><p>Para decisiones sobre fototerapia utilizar valores de TSB/TcB, edad en horas, edad gestacional, factores de neurotoxicidad y guías vigentes; nunca el número de zona por sí solo.</p><a target="_blank" rel="noopener noreferrer" href="https://www.imss.gob.mx/sites/all/statics/guiasclinicas/262GRR.pdf">IMSS · Diagnóstico y Tratamiento de la Ictericia Neonatal (2019)</a><a target="_blank" rel="noopener noreferrer" href="https://publications.aap.org/pediatrics/article/150/3/e2022058859/188726/">AAP · Hiperbilirrubinemia neonatal (2022)</a></details>
  </section>
  <div id="kb-ai-mount"></div>
- <footer>KidBum CALC · Pediatría rápida v0.10.40 · Apoyo educativo, no diagnóstico definitivo ni prescripción. Los datos se procesan localmente y se descartan al cerrar.</footer>
+ <footer>KidBum CALC · Pediatría rápida v0.10.41 · Apoyo educativo, no diagnóstico definitivo ni prescripción. Los datos se procesan localmente y se descartan al cerrar.</footer>
 </main>
 <script src="./assets/fictitious-examples.js"></script>
 <script src="./assets/chatgpt-analysis.js"></script>
 <script src="./assets/pediatria-rapid-core.js"></script>
 <script src="./assets/pediatria-rapid-ui.js"></script>
+<script src="./assets/kramer-bili-core-v01041.js"></script>
+<script src="./assets/kramer-bili-ui-v01041.js"></script>
 </body>
 </html>
