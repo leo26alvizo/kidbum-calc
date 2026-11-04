@@ -73,3 +73,24 @@ footer{color:var(--muted);font-size:11px;border-top:1px solid var(--line);paddin
 @media(max-width:355px){.switch a strong{font-size:10px}.switch a small{font-size:8px}.brand>span{display:none}.wood-buttons button{font-size:9px}.wood-buttons button strong{font-size:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 @media print{.top,.switch,.actions,#rapid-theme{display:none}.tool.hidden{display:block!important;break-before:page}.surface,.tool{box-shadow:none}.source{display:block}}
+
+/* Readability refinements from actual 390px Chrome snapshots. */
+.wood-buttons button span{overflow-wrap:anywhere;word-break:normal;hyphens:auto;max-width:100%}
+.tep-svg g text.node-caption{font-size:10px;letter-spacing:0}
+html.dark .tep-svg g[role="button"] circle{fill:#26383c;stroke:#90e0d6}
+html.dark .tep-svg g.active-normal circle{fill:#2c594c;stroke:#9ce3cd}
+html.dark .tep-svg g.active-altered circle{fill:#513036;stroke:#ffaaa9}
+html.dark .tep-svg g[role="button"] text{fill:#f5f7f8}
+@media(max-width:740px){
+ .hero{padding:12px 15px;border-radius:13px}
+ .hero h1{font-size:21px;line-height:1.2;margin:6px 0 0}
+ .hero p{display:none}
+ .switch a{min-height:53px}
+ .section-heading h2{font-size:21px}
+ .section-heading p{font-size:12px}
+ .tep-svg{max-width:215px}
+ .wood-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .wood-buttons button{min-height:55px;font-size:11px;padding:7px 8px}
+ .wood-buttons button strong{font-size:14px}
+ .wood-domain p{line-height:1.4}
+}
