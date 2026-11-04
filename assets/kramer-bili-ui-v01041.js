@@ -73,10 +73,27 @@
   holder.dataset.qaDelta=stats.deltaPhoto===undefined?'':String(stats.deltaPhoto);
   holder.dataset.qaRate=stats.rate===undefined?'':String(stats.rate);
  }
+ // Invalidate acknowledged AAP curves whenever a clinically material reference changes.
+ // When switching mg/dL ↔ µmol/L, convert ALL entered values together and force re-verification.
+ let previousUnit=input('unit')?.value||'mgdl';
+ const invalidatesThreshold=new Set(['ga','age','birth','sample','riskReviewed','hemolysis','sepsis','instability','lowAlbumin','photo','exchange','unit']);
  for(const key of keys){
   const el=input(key);if(!el)continue;
-  el.addEventListener('input',refresh);
-  el.addEventListener('change',refresh);
+  const changed=()=>{
+   if(key==='unit'&&el.value!==previousUnit){
+    const factor=engine.FACTOR;
+    for(const other of ['bili','prior','direct','photo','exchange']){
+     const node=input(other);if(!node||node.value==='')continue;
+     const n=Number(node.value);if(!Number.isFinite(n))continue;
+     node.value=String(Number((previousUnit==='mgdl'?n*factor:n/factor).toFixed(5)));
+    }
+    previousUnit=el.value;
+   }
+   if(invalidatesThreshold.has(key)&&input('thresholdChecked'))input('thresholdChecked').checked=false;
+   refresh();
+  };
+  el.addEventListener('input',changed);
+  el.addEventListener('change',changed);
  }
  for(const key of ['birth','sample']){
   input(key)?.addEventListener('change',()=>{
@@ -104,6 +121,7 @@
    else if(el.tagName==='SELECT')el.selectedIndex=0;
    else el.value='';
   }
+  previousUnit='mgdl';
   const warning=$('#kbili-time-warning');if(warning)warning.textContent='';
   queueMicrotask(refresh);
  });
