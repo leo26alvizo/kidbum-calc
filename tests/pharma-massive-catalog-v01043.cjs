@@ -95,6 +95,6 @@ const quick=fs.readFileSync('assets/pharma-pro-quick-ui.js','utf8');
 assert.match(quick,/kind:'topic'/);
 assert.match(quick,/KidBumPharmaIndexUI\?\.openDisease/);
 const main=fs.readFileSync('index.html','utf8');
-assert.match(main,/<meta name="kidbum-app-version" content="0\.10\.46"/);
+assert.match(main,/<meta name="kidbum-app-version" content="0\.10\.47"/);
 assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.43"/);
 console.log('PASS · 643 unique drug catalog entries (416 new; ALL non-prescriptive), 205 indexed illnesses/syndromes, 15 pre-existing adult guideline routes unchanged, 9/643 partial US label checks, 0 independent clinical approvals, no false safety clearance, offline assets.');
