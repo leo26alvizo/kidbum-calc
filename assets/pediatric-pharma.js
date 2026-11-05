@@ -21,7 +21,7 @@ function calcAmoxicillinAom(x){
  if(!numeric(x.weightKg)||Number(x.weightKg)<5||Number(x.weightKg)>100)
   return fail('weight','Peso fuera del intervalo admitido (5–100 kg). Confirmar peso y esquema individual.');
  if(Number(x.ageMonths)<24&&x.infantPlan!=='yes')
-  return fail('infant','En menores de 24 meses confirmar indicación antibiótica por edad, evolución, otoscopia, presentación y revisión médica individual.'];
+  return fail('infant','En menores de 24 meses confirmar indicación antibiótica por edad, evolución, otoscopia, presentación y revisión médica individual.');
  const required=[
   ['diagnosis','aom_confirmed','El diagnóstico de OMA debe confirmarse mediante valoración y otoscopia.'],
   ['treatmentChoice','yes','Debe confirmarse la indicación médica de antibiótico tras valorar la observación.'],
