@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.46**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.47**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.47 · Auditoría del contador del catálogo médico
+
+- **138 calculadoras de catálogo registradas y mostradas** (antes figuraban 136): 84 herramientas del motor clínico principal, 46 calculadoras visuales externas, 6 módulos de diabetes, más **PAS de apendicitis pediátrica** y **panel integral de gasometría** omitidos previamente del contador. Ambas herramientas ya existían, NO son nuevas funciones clínicas.
+- **Pediatría: 35** calculadoras, frente a 34 indicadas anteriormente. **Urgencias y Terapia Intensiva: 21**, frente a 20. La suma de las 14 especialidades coincide con el global: 138.
+- Añadido un registro explícito de los dos paneles integrados y un listado agregado único usado por la función calculatorCount() para mantener sincronizados la cifra de portada, los filtros y las tarjetas de especialidad. 138 identificadores únicos, sin duplicados.
+- **Definición del total:** cuenta una entrada del catálogo una sola vez, aunque contenga modos internos o se acceda por varias rutas. Las fichas informativas, acceso a SNNOOP10, contenidos docentes y el módulo **Farmacología pediátrica** se identifican como recursos complementarios y no se suman al indicador de «calculadoras» del catálogo principal.
+- **Regresión independiente:** auditoría estática de 138 IDs, categorías, alias de calculadoras rápidas y dos paneles faltantes; además, Chrome/Chromium real verifica en 390 y 1366 px que **cantidad de tarjetas = chip de cada categoría = número de portada**. Si una nueva herramienta aparece en el catálogo pero no se registra en el contador, el CI falla.
+- Ningún motor, fórmula, dosis ni puntuación clínica se ha modificado. PWA cache versionado para recuperar el indicador actualizado.
 
 ## KidBum 0.10.46 · Portada fotográfica y resultado PAS al final
 

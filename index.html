@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.46" />
+  <meta name="kidbum-app-version" content="0.10.47" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -1834,7 +1834,15 @@ const diabetesTools=[
  {id:'dm2-navigator',title:'DM2 Treatment Navigator',short:'Revisión estructurada del control y comorbilidades en DM2',category:'Endocrinología y Diabetes'},
  {id:'cgm-intelligence',title:'CGM Intelligence',short:'TIR, TBR, GMI y calidad de datos CSV locales',category:'Endocrinología y Diabetes'}
 ];
-const calculatorCount=(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+externalCalculators.filter(d=>cat==='Todas'||d.category===cat).length+diabetesTools.filter(d=>cat==='Todas'||d.category===cat).length;
+/* Calculator cards with their own integrated UX are distinct from the 84 core,
+   46 illustrated external tools, and 6 diabetes modules. Keep category badges
+   in sync with actual cards; the browser catalog test guards future omissions. */
+const integratedCalculators=[
+ {id:'pas',category:'Pediatría'},
+ {id:'gasometria',category:'Urgencias y Terapia Intensiva'}
+];
+const countedCalculatorRegistry=[...defs,...externalCalculators,...diabetesTools,...integratedCalculators];
+const calculatorCount=(cat='Todas')=>countedCalculatorRegistry.filter(d=>cat==='Todas'||d.category===cat).length;
 const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología','Geriatría','Endocrinología y Diabetes'];
 const main=document.getElementById('main-content');
 /* The meta tag is the single release-version source for sidebar, footer and About. */
