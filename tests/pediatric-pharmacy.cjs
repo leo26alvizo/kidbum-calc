@@ -69,6 +69,11 @@ assert.ok(main.innerHTML.includes('80 mg/kg/día')&&main.innerHTML.includes('90 
 assert.ok(main.innerHTML.includes('no calcula')===false,'Obsolete blanket no-calculation warning is not shown');
 assert.ok(main.innerHTML.includes('Referencia de dosis oral por peso'),'Two oral analgesics now offer guarded calculation');
 assert.ok(main.innerHTML.includes('pfx-med'),'Pharmacy form is present');
+assert.ok(main.innerHTML.includes('id="pfx-infantPlan"'));
+assert.ok(main.innerHTML.includes('id="pdv-section"'));
+assert.ok(main.innerHTML.includes('id="pdv-ageDays"'));
+assert.ok(main.innerHTML.includes('días desde el nacimiento'));
+assert.ok(main.innerHTML.includes('pediatric-pharma-v2'));
 for(const d of catalog)assert.ok(main.innerHTML.includes(d.name),'Medication displayed: '+d.name);
 // Test the ACTUAL form handler against the clinical motor, not only regex.
 const moduleContext={};moduleContext.window=moduleContext;moduleContext.globalThis=moduleContext;

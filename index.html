@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.43" />
+  <meta name="kidbum-app-version" content="0.10.44" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -840,7 +840,8 @@ html.dark .atlas-calc-heading .calc-title{
 .chip-count{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:5px;padding:0 5px;border-radius:99px;background:rgba(40,116,126,.12);font-size:10px;font-variant-numeric:tabular-nums}.chip.active .chip-count{background:rgba(255,255,255,.21);color:inherit}.cardio-card-media{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}.cardio-card-media>img.atlas-card-illustration{position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;object-fit:cover!important;width:100%!important;height:100%!important}.cardio-card-media.cardio-image-failed{background-color:#e8f2f0!important}.cardio-card-media .atlas-card-index{z-index:2}</style>
   <link rel="stylesheet" href="./assets/mobile-first-v01035.css" />
   <title>KidBum CALC · Herramientas clínicas</title>
-<link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script></head>
+<link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/pediatric-pharma-v01044.css" />
+</head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Navegación principal">
@@ -879,6 +880,7 @@ html.dark .atlas-calc-heading .calc-title{
 <!-- Clinical modules bundled in original execution order for fast mobile startup. -->
 <script src="./assets/startup-bundle.js"></script>
 <script src="./assets/pediatric-pharma.js"></script>
+<script src="./assets/pediatric-dose-math-v01044.js"></script>
 <script>
 /* KidBum CALC v0.1 · motor determinista sin red ni telemetría.
  * Las salidas son cálculos auxiliares, no órdenes ni diagnósticos.
@@ -1959,19 +1961,20 @@ function renderPharma(){
   '<p><strong>Presentaciones en el inventario:</strong> '+enc(m.forms)+'. Comprobar siempre la etiqueta y la formulación real.</p>'+
   '<ul>'+m.checks.map(c=>'<li>'+enc(c)+'</li>').join('')+'</ul>'+
   '<p class="pharma-not-ready">'+(m.name==='Amoxicilina'?'Solo OMA confirmada: referencia de dosis condicionada, no receta.':'Referencia oral disponible con filtros clínicos y límites conservadores.')+'</p></article>').join('');
- main.innerHTML='<button type="button" class="breadcrumb-back" id="pharma-back">← Volver a Pediatría</button>'+
+ main.innerHTML='<div class="pediatric-pharma-v2"><button type="button" class="breadcrumb-back" id="pharma-back">← Volver a Pediatría</button>'+
   '<section class="pharma-intro"><span class="eyebrow">PEDIATRÍA · FARMACOLOGÍA</span><h1>Farmacología pediátrica</h1>'+
-  '<p>Referencias por peso para paracetamol e ibuprofeno orales, y cálculo condicionado de amoxicilina oral exclusivamente para otitis media aguda confirmada. Población inicial de 24–143 meses y 8–40 kg, según restricciones específicas. No sustituye la valoración médica.</p></section>'+
-  '<div class="pharma-safety-banner" role="note"><strong>⚠ Seguridad farmacológica.</strong> El número calculado no es una orden médica. No utilizar en menores de 2 años, peso fuera de 8–40 kg, condiciones especiales, embarazo, insuficiencia orgánica o si hay información desconocida. No se guardan datos del paciente.</div>'+
+  '<p>Referencias por peso para paracetamol e ibuprofeno orales, y cálculo condicionado de amoxicilina oral exclusivamente para otitis media aguda confirmada. Paracetamol desde 1 mes, ibuprofeno y OMA desde 6 meses; además, verificación matemática de una pauta oral ya indicada desde el día 0. No extrapolar dosis entre edades. No sustituye la valoración médica.</p></section>'+
+  '<div class="pharma-safety-banner" role="note"><strong>⚠ Seguridad farmacológica.</strong> El número calculado no es una orden médica. Fiebre en menores de 3 meses: valoración inmediata. Neonatos: solo pauta revisada con protocolo por gestación y edad posnatal. Cada fármaco requiere sus propios límites y controles. No se guardan datos del paciente.</div>'+
+  '<div class="ped-pharma-workflow" aria-label="Tres pasos de verificación"><div class="ped-pharma-step"><b>01</b><div><strong>Edad y peso</strong><small>Identifica lactante o recién nacido.</small></div></div><div class="ped-pharma-step"><b>02</b><div><strong>Medicamento y presentación</strong><small>Confirma indicación y concentración.</small></div></div><div class="ped-pharma-step"><b>03</b><div><strong>Seguridad primero</strong><small>Revisa límites y antecedentes.</small></div></div></div>'+
   '<div class="pharma-grid">'+cards+'</div>'+
   '<section class="pharma-dose-form" aria-label="Cálculo condicionado de dosis pediátrica oral">'+
-  '<h2>Referencia de dosis oral por peso</h2>'+
-  '<p class="input-info">Rangos y límites conservadores para fiebre con malestar o dolor. Hay que confirmar todos los datos antes de calcular. No se calculan gotas ni otras formulaciones.</p>'+
+  '<span class="ped-pharma-section-label blue">💧 Analgesia oral · edad específica</span><h2>Referencia de dosis oral por peso</h2>'+
+  '<p class="input-info">Paracetamol desde 1 mes e ibuprofeno desde 6 meses. En menores de 24 meses se exige revisión individual. No se calculan gotas ni formulaciones diferentes de la presentación seleccionada.</p>'+
   '<div class="pharma-fields">'+
    '<label>Medicamento<select id="pfx-med"><option value="">Selecciona</option><option value="paracetamol">Paracetamol oral</option><option value="ibuprofeno">Ibuprofeno oral</option></select></label>'+
    '<label>Indicación valorada<select id="pfx-indication"><option value="">Selecciona</option><option value="pain">Dolor</option><option value="fever">Malestar por fiebre</option></select></label>'+
-   '<label>Edad exacta (meses)<input id="pfx-age" type="number" min="24" max="143" step="1" inputmode="numeric" placeholder="Ej. 36" autocomplete="off"></label>'+
-   '<label>Peso actual (kg)<input id="pfx-weight" type="number" min="8" max="40" step="any" inputmode="decimal" placeholder="Ej. 15" autocomplete="off"></label>'+
+   '<label>Edad exacta (meses)<input id="pfx-age" type="number" min="0" max="215" step="1" inputmode="numeric" placeholder="Ej. 36" autocomplete="off"></label>'+
+   '<label>Peso actual (kg)<input id="pfx-weight" type="number" min="0.4" max="100" step="any" inputmode="decimal" placeholder="Ej. 15" autocomplete="off"></label>'+
    '<label>Dosis de referencia (mg/kg/toma)<select id="pfx-dose"><option value="">Selecciona medicamento</option></select></label>'+
    '<label>Concentración que indica el frasco<select id="pfx-strength"><option value="">Selecciona medicamento</option></select></label>'+
    '<label>Dosis recibidas en últimas 24 h (número)<input id="pfx-count" type="number" min="0" step="1" inputmode="numeric" placeholder="0 si ninguna" autocomplete="off"></label>'+
@@ -1980,19 +1983,21 @@ function renderPharma(){
    '<label>¿Coinciden principio activo, vía ORAL y concentración de etiqueta?<select id="pfx-label"><option value="">Confirmar</option><option value="yes">Sí, verifiqué el frasco</option><option value="no">No / No sé</option></select></label>'+
    '<label>¿La dosis elegida está revisada por personal médico?<select id="pfx-clinician"><option value="">Confirmar</option><option value="yes">Sí, se revisó el caso</option><option value="no">No / Pendiente</option></select></label>'+
   '</div>'+
+  '<div id="pfx-age-guidance" class="ped-pharma-age-helper" role="status" aria-live="polite">Indica medicamento y edad para conocer el alcance seguro.</div>'+
+  '<div class="ped-pharma-infant"><strong>👶 Revisión individual en menores de 24 meses</strong><label>¿Se revisó esta pauta para la edad, indicación y formulación?<select id="pfx-infantPlan"><option value="">Selecciona</option><option value="yes">Sí, pauta revisada por personal médico</option><option value="no">No / pendiente</option></select></label></div>'+
   '<div id="pfx-checks" class="pharma-checks" aria-live="polite"></div>'+
   '<div class="actions"><button type="button" id="pfx-calculate" class="btn">Verificar cálculo de referencia</button><button type="button" id="pfx-reset" class="btn outline">Limpiar datos</button></div>'+
   '<div id="pfx-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
   '<p class="pharma-source">Fuentes revisadas: <a href="https://www.censia.salud.gob.mx/contenidos/descargas/vacunas/Lineamientos_de_Vac_25_10_13_media.pdf" target="_blank" rel="noopener noreferrer">CENSIA / Secretaría de Salud</a>, <a href="https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx" target="_blank" rel="noopener noreferrer">AAP · Paracetamol</a>, <a href="https://www.rch.org.au/clinicalguide/guideline_index/Acute_pain_management/" target="_blank" rel="noopener noreferrer">RCH · Dolor agudo</a> y <a href="https://www.nhs.uk/medicines/ibuprofen-for-children/" target="_blank" rel="noopener noreferrer">NHS · Ibuprofeno</a>. Límites seleccionados con criterio conservador, no extrapolar.</p>'+
   '</section>'+
   '<section class="pharma-dose-form" aria-label="Amoxicilina para otitis media aguda solamente">'+
-  '<h2>Amoxicilina oral · solo otitis media aguda (OMA)</h2>'+
+  '<span class="ped-pharma-section-label violet">🦠 Antibiótico · OMA confirmada</span><h2>Amoxicilina oral · solo otitis media aguda (OMA)</h2>'+
   '<p class="input-info"><strong>Uso restringido.</strong> Confirmar OMA mediante evaluación y otoscopia; decidir previamente si corresponde observación o antibiótico. Esta herramienta NO diagnostica OMA ni determina duración, pauta definitiva o elección de antibiótico. Si existen señales de gravedad, derivar y valorar presencialmente.</p>'+
   '<div class="pharma-fields">'+
    '<label>Diagnóstico clínico<select id="pfa-diagnosis"><option value="">Selecciona</option><option value="aom_confirmed">OMA confirmada por personal médico con otoscopia</option><option value="unknown">No confirmado / otro diagnóstico</option></select></label>'+
    '<label>Decisión de usar antibiótico<select id="pfa-treatmentChoice"><option value="">Selecciona</option><option value="yes">Sí, se valoró observación y se decidió tratar</option><option value="no">No / aún no decidido</option></select></label>'+
-   '<label>Edad exacta (meses)<input id="pfa-ageMonths" type="number" min="24" max="143" step="1" inputmode="numeric" autocomplete="off" placeholder="Ej. 36"></label>'+
-   '<label>Peso actual (kg)<input id="pfa-weightKg" type="number" min="8" max="40" step="any" inputmode="decimal" autocomplete="off" placeholder="Ej. 15"></label>'+
+   '<label>Edad exacta (meses)<input id="pfa-ageMonths" type="number" min="0" max="215" step="1" inputmode="numeric" autocomplete="off" placeholder="Ej. 36"></label>'+
+   '<label>Peso actual (kg)<input id="pfa-weightKg" type="number" min="0.4" max="100" step="any" inputmode="decimal" autocomplete="off" placeholder="Ej. 15"></label>'+
    '<label>Referencia elegida por el médico (mg/kg/DÍA)<select id="pfa-dailyMgKg"><option value="">Selecciona</option><option value="80">80 mg/kg/día, en dos tomas</option><option value="90">90 mg/kg/día, en dos tomas</option></select></label>'+
    '<label>Concentración exacta del frasco<select id="pfa-strength"><option value="">Selecciona</option><option value="400/5">Amoxicilina sola 400 mg/5 mL</option><option value="other">Otra / no confirmada</option></select></label>'+
    '<label>¿Se confirmó amoxicilina SOLA (sin clavulanato)?<select id="pfa-plainAmoxicillin"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / no sé</option></select></label>'+
@@ -2000,6 +2005,8 @@ function renderPharma(){
    '<label>¿El paciente tolera medicación por vía oral?<select id="pfa-oralFeasible"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / no sé</option></select></label>'+
    '<label>¿Se revisó el esquema con un médico?<select id="pfa-clinician"><option value="">Confirma</option><option value="yes">Sí</option><option value="no">No / pendiente</option></select></label>'+
   '</div>'+
+  '<div id="pfa-age-guidance" class="ped-pharma-age-helper" role="status">OMA desde los seis meses según gravedad, otoscopia y decisión terapéutica.</div>'+
+  '<div class="ped-pharma-infant"><strong>👶 OMA de 6–23 meses</strong><label>¿Se individualizó la decisión antibiótica por edad y gravedad?<select id="pfa-infantPlan"><option value="">Selecciona</option><option value="yes">Sí, tras revisión del médico</option><option value="no">No / pendiente</option></select></label></div>'+
   '<div id="pfa-checks" class="pharma-checks">'+
    '<p><strong>Condiciones que requieren otro abordaje.</strong> Responde cada una. Si la respuesta es Sí o no puede descartarse, el resultado se bloquea.</p>'+
   '</div>'+
@@ -2007,7 +2014,42 @@ function renderPharma(){
   '<div id="pfa-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
   '<p class="pharma-source">Fuentes: <a href="https://gpc.salud.gob.mx/DDIMBE/DDIMBE/ContenidoGuia?DocumentoID=3061" target="_blank" rel="noopener noreferrer">Guía mexicana IMSS-496-21</a>, <a href="https://publications.aap.org/pediatrics/article/131/3/e964/30912/The-Diagnosis-and-Management-of-Acute-Otitis-Media" target="_blank" rel="noopener noreferrer">AAP · OMA</a>, <a href="https://idmp.ucsf.edu/content/acute-otitis-media" target="_blank" rel="noopener noreferrer">UCSF · dosis y máximo</a>. No emplear para sinusitis, faringitis, neumonía ni otras infecciones.</p>'+
   '</section>'+
-  '<section class="info-card"><h2>Uso adecuado de antibióticos</h2><p>Muchas OMA pueden observarse inicialmente; esta calculadora no decide si indicar antibiótico. En alergia a betalactámicos, conjuntivitis purulenta, amoxicilina en los últimos 30 días, falla terapéutica, enfermedad renal o complicaciones, debe individualizarse el tratamiento. La duración tampoco se calcula automáticamente.</p><p><strong>Inventario de origen:</strong> PDF «Calculadora Pediátrica AnetteB», aportado al proyecto, no validado por sí mismo.</p></section>';
+  '<section class="pharma-dose-form" id="pdv-section" aria-label="Verificador matemático de pauta oral prescrita desde el nacimiento">'+
+    '<span class="ped-pharma-section-label teal">🧮 Verificación de una pauta escrita · desde el día 0</span><h2>Verificador de una dosis YA indicada</h2>'+
+    '<p class="input-info">Para recién nacidos, lactantes y niños mayores. Transcribe una <strong>pauta ya prescrita y revisada</strong>, su concentración y máximos. Solo verifica matemáticas: NO selecciona fármaco, dosis, frecuencia ni límites.</p>'+
+    '<div class="ped-pharma-header-alert"><strong>🚫 No usar para fármacos de alto riesgo ni infusiones o vía IV.</strong> En neonatos/prematuros se requiere protocolo por edad posnatal y gestación antes de mostrar cifras.</div>'+
+    '<div class="ped-pharma-fields-title"><em>01</em> Contexto clínico</div>'+
+    '<div class="pharma-fields">'+
+     '<label>Medicamento genérico de la pauta<input id="pdv-drug" type="text" maxlength="90" autocomplete="off" placeholder="Nombre exacto"></label>'+
+     '<label>Edad cronológica (días desde el nacimiento)<input id="pdv-ageDays" type="number" min="0" max="6574" step="1" inputmode="numeric" placeholder="0 = día del nacimiento"></label>'+
+     '<label>Peso actual (kg)<input id="pdv-weightKg" type="number" min="0.4" max="200" step="any" inputmode="decimal" placeholder="Ej. 3.25"></label>'+
+     '<label>¿Prematuridad?<select id="pdv-premature"><option value="">Selecciona</option><option value="no">No</option><option value="yes">Sí</option></select></label>'+
+     '<label>EG al nacimiento en semanas completas (si RN/prematuro)<input id="pdv-gestationalWeeks" type="number" min="22" max="42" step="1" inputmode="numeric" placeholder="Ej. 38"></label>'+
+     '<label>¿Protocolo neonatal específico revisado?<select id="pdv-neonatalProtocol"><option value="">Selecciona</option><option value="yes">Sí, según EG y edad posnatal</option><option value="no">No / pendiente</option></select></label>'+
+    '</div>'+
+    '<div class="ped-pharma-fields-title"><em>02</em> Pauta escrita y concentración</div>'+
+    '<div class="pharma-fields">'+
+     '<label>La orden escrita indica<select id="pdv-basis"><option value="">Selecciona</option><option value="perDose">mg/kg/TOMA</option><option value="perDay">mg/kg/DÍA</option></select></label>'+
+     '<label>Valor prescrito (mg/kg)<input id="pdv-mgKg" type="number" min="0.001" step="any" inputmode="decimal" placeholder="No sugerido por la app"></label>'+
+     '<label>Tomas indicadas por 24 h<input id="pdv-dosesPerDay" type="number" min="1" max="12" step="1" inputmode="numeric" placeholder="Ej. 3"></label>'+
+     '<label>Concentración del frasco: mg<input id="pdv-strengthMg" type="number" min="0.001" step="any" inputmode="decimal" placeholder="Ej. 160"></label>'+
+     '<label>Concentración del frasco: mL<input id="pdv-strengthMl" type="number" min="0.001" step="any" inputmode="decimal" placeholder="Ej. 5"></label>'+
+     '<label>Máximo revisado por toma (mg)<input id="pdv-maxSingleMg" type="number" min="0.001" step="any" inputmode="decimal" placeholder="De fuente por edad"></label>'+
+     '<label>Máximo revisado por día (mg/24 h)<input id="pdv-maxDailyMg" type="number" min="0.001" step="any" inputmode="decimal" placeholder="De fuente por edad"></label>'+
+     '<label>Total recibido en últimas 24 h (mg)<input id="pdv-priorMg24h" type="number" min="0" step="any" inputmode="decimal" placeholder="0 si se confirma"></label>'+
+    '</div>'+
+    '<div class="ped-pharma-fields-title"><em>03</em> Verificaciones antes de mostrar cifras</div>'+
+    '<div class="pharma-fields">'+
+     '<label>Vía confirmada<select id="pdv-route"><option value="">Selecciona</option><option value="oral">ORAL</option><option value="other">Otra / no confirmada</option></select></label>'+
+     '<label>¿Se descartó que sea fármaco de alto riesgo?<select id="pdv-highRiskExcluded"><option value="">Selecciona</option><option value="yes">Sí, evaluado por profesional</option><option value="no">No / no se ha descartado</option></select></label>'+
+     '<label>¿Pauta, dosis y máximos revisados para la edad?<select id="pdv-referenceReviewed"><option value="">Selecciona</option><option value="yes">Sí, en referencia pertinente</option><option value="no">No / pendiente</option></select></label>'+
+     '<label>¿Revisión médica individual completa?<select id="pdv-clinician"><option value="">Selecciona</option><option value="yes">Sí, previa al cálculo</option><option value="no">No / pendiente</option></select></label>'+
+    '</div>'+
+    '<div class="actions"><button id="pdv-calculate" type="button" class="btn">Verificar pauta escrita</button><button id="pdv-reset" type="button" class="btn outline">Limpiar</button></div>'+
+    '<div id="pdv-result" class="pharma-results" role="status" aria-live="polite" hidden></div>'+
+    '<p class="pharma-source">Esta sección no incluye una monografía de dosificación neonatal. Confirmar protocolo hospitalario específico. <a href="https://www.rch.org.au/clinicalguide/guideline_index/Acute_pain_management/" target="_blank" rel="noopener noreferrer">RCH · farmacología pediátrica y dolor</a>.</p>'+
+   '</section>'+
+  '<section class="info-card"><h2>Uso adecuado de antibióticos</h2><p>Muchas OMA pueden observarse inicialmente; esta calculadora no decide si indicar antibiótico. En alergia a betalactámicos, conjuntivitis purulenta, amoxicilina en los últimos 30 días, falla terapéutica, enfermedad renal o complicaciones, debe individualizarse el tratamiento. La duración tampoco se calcula automáticamente.</p><p><strong>Inventario de origen:</strong> PDF «Calculadora Pediátrica AnetteB», aportado al proyecto, no validado por sí mismo.</p></section></div>';
  el('#pharma-back').onclick=()=>{category='Pediatría';search='';go('home');};
  const field=n=>el('#pfx-'+n);
  const result=field('result');
@@ -2026,15 +2068,16 @@ function renderPharma(){
    indication:val('indication'),ageMonths:val('age'),weightKg:val('weight'),
    doseMgKg:val('dose'),strength:val('strength'),
    doses24h:val('count'),totalMg24h:val('prior'),
-   hoursSinceLast:val('hours'),verifiedLabel:val('label'),clinician:val('clinician')
+   hoursSinceLast:val('hours'),verifiedLabel:val('label'),clinician:val('clinician'),infantPlan:val('infantPlan')
   };
   (flags[selected]||[]).forEach(([key])=>data[key]=val(key));
   const out=window.KidBumPediatricPharma?.calculate(selected,data);
   result.hidden=false;
-  if(!out||!out.ok){result.textContent='⚠ '+(out?.error||'Motor no disponible. Abre de nuevo la aplicación con conexión para actualizar.');return;}
+  if(!out||!out.ok){result.className='pharma-results blocked';result.textContent='⚠ '+(out?.error||'Motor no disponible. Abre de nuevo la aplicación con conexión para actualizar.');return;}
+  result.className='pharma-results';
   const fmt=n=>Number(n.toFixed(2)).toLocaleString('es-MX',{maximumFractionDigits:2});
   result.innerHTML='<strong>'+enc(out.drug)+' · solo referencia aritmética</strong>'+
-    '<p class="pharma-calculation">'+enc(fmt(out.mgPerDose))+' mg/toma = '+enc(fmt(out.mlPerDose))+' mL/toma teóricos ('+enc(out.concentration)+').</p>'+
+    '<div class="ped-pharma-result-metrics"><div class="ped-pharma-result-metric"><small>mg por toma</small><b>'+enc(fmt(out.mgPerDose))+' mg</b></div><div class="ped-pharma-result-metric"><small>mL teóricos por toma</small><b>'+enc(fmt(out.mlPerDose))+' mL</b></div></div><p>Concentración: '+enc(out.concentration)+'.</p>'+
     '<p>'+enc(fmt(out.weightKg))+' kg × '+enc(fmt(out.mgKgPerDose))+' mg/kg = '+enc(fmt(out.mgPerDose))+' mg; concentración = '+enc(fmt(out.mgPerMl))+' mg/mL.</p>'+
     '<p>Esquema de referencia: intervalo mínimo '+enc(out.intervalHours)+' h, hasta '+enc(out.maxDoses24h)+' tomas/24 h; límite conservador '+enc(fmt(out.maxMg24h))+' mg/24 h. Total hipotético con esta toma: '+enc(fmt(out.prospectiveMg24h))+' mg/24 h.</p>'+
     '<p><strong>NO es prescripción.</strong> El volumen mostrado no está redondeado a una jeringa específica: verificar graduación, tolerancia, indicación y dosis final con el equipo tratante antes de administrar.</p>';
@@ -2061,22 +2104,78 @@ function renderPharma(){
  const cleanAom=()=>{aomResult.hidden=true;aomResult.textContent='';};
  aomField('calculate').onclick=()=>{
   const keys=['ageMonths','weightKg','diagnosis','treatmentChoice','clinician',
-   'oralFeasible','plainAmoxicillin','verifiedLabel','strength','dailyMgKg'];
+   'oralFeasible','plainAmoxicillin','verifiedLabel','strength','dailyMgKg','infantPlan'];
   const data={};
   for(const key of keys)data[key]=aomField(key)?.value||'';
   for(const [key] of aomFlags)data[key]=aomField(key)?.value||'';
   const answer=window.KidBumPediatricPharma?.calculate('amoxicilina_oma',data);
   aomResult.hidden=false;
-  if(!answer?.ok){aomResult.textContent='⚠ '+(answer?.error||'No fue posible cargar el motor farmacológico actualizado.');return;}
+  if(!answer?.ok){aomResult.className='pharma-results blocked';aomResult.textContent='⚠ '+(answer?.error||'No fue posible cargar el motor farmacológico actualizado.');return;}
+  aomResult.className='pharma-results';
   const fmt=n=>Number(n.toFixed(3)).toLocaleString('es-MX',{maximumFractionDigits:3});
   aomResult.innerHTML='<strong>'+enc(answer.drug)+' · referencia matemática, NO prescripción</strong>'+
-    '<p class="pharma-calculation">'+enc(fmt(answer.mgPerDay))+' mg/día ÷ 2 = '+enc(fmt(answer.mgPerDose))+' mg/toma = '+enc(fmt(answer.mlPerDose))+' mL teóricos/toma ('+enc(answer.concentration)+').</p>'+
+    '<div class="ped-pharma-result-metrics"><div class="ped-pharma-result-metric"><small>mg por toma</small><b>'+enc(fmt(answer.mgPerDose))+' mg</b></div><div class="ped-pharma-result-metric"><small>mL teóricos por toma</small><b>'+enc(fmt(answer.mlPerDose))+' mL</b></div></div><p>'+enc(fmt(answer.mgPerDay))+' mg/día, presentación '+enc(answer.concentration)+'.</p>'+
     '<p>'+enc(fmt(answer.weightKg))+' kg × '+enc(fmt(answer.dailyMgKg))+' mg/kg/DÍA = '+enc(fmt(answer.mgPerDay))+' mg/día; concentración '+enc(fmt(answer.mgPerMl))+' mg/mL. Intervalo de referencia entre tomas: 12 h.</p>'+
     '<p><strong>No indica duración ni volumen redondeado.</strong> Verificar dispositivo medidor, diagnóstico, antecedentes, criterios de derivación y pauta elegida con el médico antes de administrar.</p>';
  };
  aomField('reset').onclick=()=>renderPharma();
  document.querySelectorAll('#pfa-checks select,.pharma-dose-form #pfa-diagnosis,.pharma-dose-form #pfa-treatmentChoice,.pharma-dose-form input[id^="pfa-"],.pharma-dose-form select[id^="pfa-"]')
   .forEach(node=>{node.addEventListener('change',cleanAom);node.addEventListener('input',cleanAom);});
+ const ageHelp=field('age-guidance');
+ function updateAgeHelp(){
+  const med=val('med'),str=val('age'),age=Number(str);
+  ageHelp.className='ped-pharma-age-helper';
+  if(!med||!str){ageHelp.textContent='Selecciona un medicamento y los meses completos para revisar elegibilidad.';return;}
+  if(!Number.isInteger(age)||age<0||age>215){ageHelp.className+=' danger';ageHelp.textContent='Edad fuera de intervalo. Para una pauta neonatal escrita utiliza el verificador verde.';return;}
+  if(age===0){ageHelp.className+=' danger';ageHelp.textContent='🍼 Recién nacido: NO extrapolar dosis de esta pauta; utilizar protocolo neonatal individual.';return;}
+  if(med==='ibuprofeno'&&age<6){ageHelp.className+=' danger';ageHelp.textContent='Ibuprofeno antes de 6 meses: la referencia de KidBum no está habilitada para esta edad.';return;}
+  if(age<3&&val('indication')==='fever'){ageHelp.className+=' danger';ageHelp.textContent='🚨 Fiebre en menores de 3 meses: valoración clínica inmediata antes de administrar antipiréticos.';return;}
+  if(age<24){ageHelp.className+=' warning';ageHelp.textContent='👶 Lactante: confirmar el plan médico, concentración, límites y contexto antes de obtener cifras.';return;}
+  ageHelp.textContent='✓ Edad incluida en esta referencia, pendiente de peso, concentración y revisión de seguridad.';
+ }
+ field('age').oninput=updateAgeHelp;
+ field('indication').onchange=updateAgeHelp;
+ const priorMedChange=field('med').onchange;
+ field('med').onchange=()=>{priorMedChange();updateAgeHelp();};
+ const aomAgeHelp=aomField('age-guidance');
+ function updateAomHelp(){
+  const raw=aomField('ageMonths').value||'',age=Number(raw);
+  aomAgeHelp.className='ped-pharma-age-helper';
+  if(!raw){aomAgeHelp.textContent='Introduce edad en meses completos para confirmar elegibilidad.';return;}
+  if(!Number.isInteger(age)||age<6){aomAgeHelp.className+=' danger';aomAgeHelp.textContent='🍼 Menor de 6 meses: requiere valoración pediátrica individual, no extrapolar la ruta AAP de OMA.';return;}
+  if(age<24){aomAgeHelp.className+=' warning';aomAgeHelp.textContent='👶 OMA de 6–23 meses: unilateralidad, bilateralidad y gravedad modifican elección entre antibiótico y observación.';return;}
+  aomAgeHelp.textContent='✓ Edad para ruta OMA, sujeta a otoscopia, diagnóstico, peso, factores clínicos y decisión médica.';
+ }
+ aomField('ageMonths').oninput=updateAomHelp;
+ const manualKeys=['drug','ageDays','gestationalWeeks','weightKg','premature','neonatalProtocol','basis','mgKg','dosesPerDay',
+ 'strengthMg','strengthMl','maxSingleMg','maxDailyMg','priorMg24h','route','highRiskExcluded','referenceReviewed','clinician'];
+ const manualField=key=>el('#pdv-'+key),manualResult=manualField('result');
+ manualField('calculate').onclick=()=>{
+  const data={};for(const k of manualKeys)data[k]=manualField(k)?.value||'';
+  const answer=window.KidBumPediatricDoseMath?.calculate(data);
+  manualResult.hidden=false;
+  if(!answer?.ok){
+   manualResult.className='pharma-results blocked';
+   manualResult.textContent='⚠ '+(answer?.error||'No se encuentra el motor de verificación actualizado.');
+   return;
+  }
+  const fmt=n=>Number(n.toFixed(3)).toLocaleString('es-MX',{maximumFractionDigits:3});
+  manualResult.className='pharma-results';
+  manualResult.innerHTML='<strong>✓ Cálculo matemático de pauta YA INDICADA · NO validación clínica</strong>'+
+   '<div class="ped-pharma-result-metrics"><div class="ped-pharma-result-metric"><small>mg matemáticos por toma</small><b>'+enc(fmt(answer.mgPerDose))+' mg</b></div><div class="ped-pharma-result-metric"><small>mL teóricos sin redondear</small><b>'+enc(fmt(answer.mlPerDose))+' mL</b></div></div>'+
+   '<p>'+enc(fmt(answer.weightKg))+' kg × '+enc(fmt(answer.mgKg))+' mg/kg/'+(answer.basis==='perDay'?'DÍA':'TOMA')+
+   ' · '+enc(answer.dosesPerDay)+' tomas/24 h · '+enc(fmt(answer.mgPerDay))+' mg/24 h teóricos.</p>'+
+   '<p><strong>'+enc(answer.caution)+'</strong></p>';
+ };
+ manualField('reset').onclick=()=>{
+  for(const k of manualKeys)if(manualField(k))manualField(k).value='';
+  manualResult.hidden=true;manualResult.textContent='';manualResult.className='pharma-results';
+ };
+ document.querySelectorAll('#pdv-section input,#pdv-section select').forEach(node=>{
+  const clear=()=>{manualResult.hidden=true;manualResult.textContent='';};
+  node.addEventListener('input',clear);node.addEventListener('change',clear);
+ });
+ updateAgeHelp();updateAomHelp();
 }
 function syncGcsOptions(){
  if(id!=='gcs')return;

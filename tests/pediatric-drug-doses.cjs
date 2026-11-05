@@ -48,10 +48,10 @@ reject('amoxicilina',para,'unreviewed');
 reject('',para,'unreviewed');
 for(const id of ['paracetamol','ibuprofeno']){
  const d=id==='paracetamol'?para:ibu;
- for(const ageMonths of ['','0','23','144','NaN','36.5','Infinity']){
+ for(const ageMonths of ['', '0','216','NaN','36.5','Infinity']){
   reject(id,{...d,ageMonths},'age');
  }
- for(const weightKg of ['','0','7.99','40.01','NaN','Infinity','-8']){
+ for(const weightKg of ['','0',id==='paracetamol'?'2.99':'4.99','100.01','NaN','Infinity','-8']){
   reject(id,{...d,weightKg},'weight');
  }
  for(const doseMgKg of ['','1','16','foo','Infinity','0']){
@@ -116,9 +116,9 @@ passAom({...aom,dailyMgKg:'80'},1200,600,7.5);
 passAom({...aom,weightKg:'20'},1800,900,11.25);
 rejectAom({...aom,weightKg:'30'},'limit');
 rejectAom({...aom,weightKg:'40'},'limit');
-for(const ageMonths of ['','23','144','36.5','NaN','Infinity',undefined])
+for(const ageMonths of ['','5','216','36.5','NaN','Infinity',undefined])
  rejectAom({...aom,ageMonths},'age');
-for(const weightKg of ['','7.9','40.1','NaN','Infinity',undefined])
+for(const weightKg of ['','4.9','100.1','NaN','Infinity',undefined])
  rejectAom({...aom,weightKg},'weight');
 for(const dailyMgKg of ['','20','45','10','0',undefined])
  rejectAom({...aom,dailyMgKg},'dose');
