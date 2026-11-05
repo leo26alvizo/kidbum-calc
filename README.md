@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.44**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.45**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.45 · PAS — Pediatric Appendicitis Score con semáforo y seguridad
+
+- Nueva calculadora independiente **Pediatría → PAS · Apendicitis pediátrica** y acceso directo a pediatria-pas.html, disponible tras precarga de la PWA offline.
+- **PAS de Samuel: 8 ítems y 10 puntos.** Migración del dolor a FID 1, anorexia 1, náusea/vómito 1, fiebre documentada >38 °C 1, dolor en FID a la palpación 2, dolor en FID con tos/percusión/salto 2, leucocitos >10 000/µL 1, neutrófilos absolutos (ANC) >7500/µL 1. Umbrales estrictos: 38.0 °C, WBC 10.0 y ANC 7.5 no puntúan como mayores.
+- **Semáforo de Johns Hopkins 2026:** 0–3 verde (baja sospecha por PAS), 4–6 amarillo (equívoco) y 7–10 rojo (alta sospecha). Nunca estimar probabilidad porcentual ni confirmar o descartar apendicitis únicamente con el PAS. Otros centros usan cortes distintos.
+- **Ningún dato faltante equivale a negativo:** opciones Sí/No/Sin dato, rango matemático mínimo-máximo con PAS incompleto, barra de progreso, alerta y sin semáforo verde incompleto. WBC y ANC usan unidades de miles por microlitro; ANC puede derivarse del diferencial y leucocitos, con alerta por discordancia.
+- **Signos de alarma sobre el PAS:** hipoperfusión, sepsis o peritonitis obligan a un aviso rojo de evaluación urgente incluso con PAS parcial o bajo. Menores de 4 años no reciben semáforo bajo por falta de validación; edad desconocida impide clasificación.
+- **Interfaz didáctica:** 8 tarjetas táctiles con iconos, dibujo esquemático de fosa ilíaca derecha, semáforo, anillo de progreso, colores redundantes con texto, adaptabilidad 320–1366 px, teclado y lectores de pantalla, reset y copia de resumen no identificable, modo oscuro compartido; procesamiento local sin almacenar datos clínicos.
+- **Complementos:** enlace al [pARC](https://www.mdcalc.com/calc/10201/pediatric-appendicitis-risk-calculator-parc) (modelo de probabilidad distinto, AUC 0.85 vs 0.77 para PAS en estudio de validación), ecografía de FID como estudio inicial cuando procede, revaloración seriada y diagnósticos diferenciales abdominales.
+- **Fuentes:** [Samuel 2002](https://pubmed.ncbi.nlm.nih.gov/12037754/); [Johns Hopkins All Children's, 27 abril 2026](https://www.hopkinsmedicine.org/-/media/files/allchildrens/clinical-pathways/acute-appendicitis-clinical-pathway-4_27_26.pdf); [CHOP, enero 2026](https://www.chop.edu/clinical-pathway/suspected-appendicitis-emergency-department-clinical-pathway); [IDSA/PIDS 2024, ultrasonido pediátrico](https://www.idsociety.org/practice-guideline/intra-abdominal-infections/); [pARC 2018](https://pmc.ncbi.nlm.nih.gov/articles/PMC5869337/); [IMSS-031-08 guía mexicana](https://www.imss.gob.mx/sites/all/statics/guiasclinicas/031GRR.pdf) — histórico, vigencia actual no confirmada.
+- Controles automáticos de errores, test de estados 0/3/4/6/7/10, ausencia de datos, umbrales, urgencias, edades, laboratorio, PWA y Chromium real. Las pruebas técnicas no implican validación médica independiente.
 
 ## KidBum 0.10.44 · Farmacología pediátrica lactantes y verificación matemática neonatal (no prescriptiva)
 
