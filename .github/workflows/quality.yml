@@ -59,6 +59,10 @@ jobs:
         run: node tests/kramer-clinical-v01041.cjs
       - name: PAS pediatric appendicitis clinical score, missing-data, red-flags and PWA
         run: node tests/pediatric-pas-v01045.cjs
+      - name: PAS surgical cover integrity, layout ordering, mobile result placement and offline assets
+        run: node tests/pediatric-pas-cover-v01046.cjs
+      - name: PAS cover photo and bottom-result layout in real Chromium mobile and desktop
+        run: node tests/pediatric-pas-layout-browser-v01046.cjs
       - name: PAS pediatric appendicitis real Chromium and mobile navigation
         run: node tests/pediatric-pas-browser-v01045.cjs
       - name: Pediatric rapid tools in real headless Chromium

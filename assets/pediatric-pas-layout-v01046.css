@@ -1,0 +1,92 @@
+/* KidBum 0.10.46 · PAS user-provided surgical cover + deliberate results-last workflow.
+ * CSS only: existing Samuel PAS algorithm, emergency overrides and scores untouched.
+ * Optimized WebP reference image displayed without superimposed altered anatomy.
+ */
+.pas-hero--surgical{
+ display:flex;flex-direction:column;gap:0;padding:0;min-height:0;
+ background:linear-gradient(111deg,#123047,#13545e 68%,#0b746d);
+ border:1px solid rgba(118,193,194,.24);border-radius:24px;overflow:hidden;
+}
+.pas-hero--surgical::before{display:none}
+.pas-cover-photo{
+ height:clamp(240px,35vw,420px);width:100%;position:relative;overflow:hidden;
+ background:linear-gradient(135deg,#123b52,#214a5e);
+}
+.pas-cover-photo-img{
+ display:block;width:100%;height:100%;object-fit:cover;object-position:center 51%;
+}
+.pas-cover-photo::after{
+ content:'';position:absolute;pointer-events:none;inset:auto 0 0;height:36%;
+ background:linear-gradient(0deg,rgba(5,21,37,.72),transparent);
+}
+.pas-photo-caption{
+ position:absolute;z-index:1;bottom:13px;left:clamp(15px,3vw,28px);
+ font-size:10px;letter-spacing:.10em;font-weight:850;color:white;
+ padding:7px 10px;background:rgba(3,26,43,.50);border:1px solid rgba(255,255,255,.25);
+ border-radius:8px;backdrop-filter:blur(4px);line-height:1.3;
+}
+.pas-hero--surgical .pas-hero-copy{padding:clamp(19px,3vw,34px);max-width:990px;position:relative}
+.pas-hero--surgical h1{font-size:clamp(27px,4.5vw,43px);margin:12px 0}
+.pas-hero--surgical h1 span{display:inline;color:#94e2d4}
+.pas-hero--surgical p{max-width:900px;margin:10px 0 15px;line-height:1.6}
+.pas-hero--surgical .pas-hero-tags span{
+ border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.075);
+ color:#e9f8f8;font-weight:750
+}
+/* The score is explicitly the LAST clinical panel, following every response and the educational appendix. */
+.pas-body-grid{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:18px}
+.pas-questions{width:100%;min-width:0;gap:16px}
+.pas-sidebar{order:2!important;position:relative;min-width:0;width:100%}
+.pas-result-heading{margin:0 0 13px;padding:22px clamp(17px,3vw,27px);border-radius:18px;border:1px solid var(--line);
+ background:linear-gradient(115deg,var(--soft),var(--surface));}
+.pas-result-kicker{display:inline-block;color:var(--accent);letter-spacing:.12em;font-weight:900;font-size:10px}
+.pas-result-heading h2{font-size:clamp(21px,3.2vw,30px);font-weight:890;letter-spacing:-.03em;margin:5px 0 9px}
+.pas-result-heading p{font-size:12px;line-height:1.6;max-width:920px;color:var(--muted);margin:0}
+.pas-result-heading p strong{color:var(--ink)}
+.pas-finish-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:17px 20px;border-radius:15px;
+ border:1px solid var(--line);background:var(--soft)}
+.pas-finish-strip div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.pas-finish-strip span{color:var(--accent);font-size:10px;letter-spacing:.1em;font-weight:900}
+.pas-finish-strip strong{color:var(--ink);font-size:17px}
+.pas-finish-strip small{font-size:11px;color:var(--muted)}
+.pas-finish-strip a{display:grid;place-items:center;min-width:160px;min-height:46px;
+ background:var(--accent);color:var(--bg);border-radius:12px;padding:8px 14px;
+ text-decoration:none;font-size:12px;font-weight:900;text-align:center}
+html.dark .pas-finish-strip a{color:#062d30}
+.pas-outcome{position:static!important;top:auto;min-width:0;width:100%;padding:clamp(14px,2.5vw,25px);border-radius:21px}
+@media(min-width:901px){
+ .pas-outcome{display:grid;grid-template-columns:240px minmax(0,1fr);column-gap:26px;row-gap:10px;align-items:center}
+ .pas-outcome-top{grid-column:1/-1}
+ .pas-dial{grid-column:1;grid-row:2 / span 3;margin:0 auto}
+ .pas-traffic{grid-column:2;grid-row:2}
+ .pas-risk-name{grid-column:2;grid-row:3;font-size:17px}
+ .pas-range{grid-column:2;grid-row:4;font-size:13px}
+ .pas-progress-track,.pas-alert-list,.pas-recommend,.pas-actions,.pas-score-disclaimer{grid-column:1/-1}
+ .pas-traffic span{height:16px}
+ .pas-traffic b{font-size:12px}
+ .pas-recommend ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 24px}
+ .pas-recommend li{font-size:12px}
+ .pas-actions{grid-template-columns:repeat(2,minmax(0,205px));justify-content:end}
+ .pas-alert-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .pas-outcome[data-band="urgent"] .pas-alert-list .critical{grid-column:1/-1}
+}
+@media(max-width:900px){
+ .pas-outcome{position:static!important}
+ .pas-sidebar{order:2!important}
+}
+@media(max-width:660px){
+ .pas-hero--surgical{padding:0}
+ .pas-cover-photo{height:clamp(190px,53vw,265px)}
+ .pas-cover-photo-img{object-position:center 50%}
+ .pas-photo-caption{font-size:8px;bottom:9px;padding:6px 8px;max-width:calc(100% - 26px)}
+ .pas-hero--surgical .pas-hero-copy{padding:19px 17px 21px}
+ .pas-hero--surgical h1{line-height:1.12;font-size:clamp(27px,7vw,33px)}
+ .pas-hero--surgical h1 span{display:block}
+ .pas-hero--surgical .pas-hero-tags{gap:6px}
+ .pas-hero--surgical .pas-hero-tags span{font-size:10px;padding:6px 8px}
+ .pas-result-heading{padding:16px}
+ .pas-finish-strip{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;padding:14px}
+ .pas-finish-strip a{width:100%;min-height:49px}
+ .pas-outcome{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){.pas-finish-strip a{scroll-behavior:auto}}

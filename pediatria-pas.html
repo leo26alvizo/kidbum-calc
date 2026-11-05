@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#123047">
-<meta name="kidbum-app-version" content="0.10.45">
+<meta name="kidbum-app-version" content="0.10.46">
 <meta name="description" content="Pediatric Appendicitis Score PAS de Samuel: 8 criterios, 0 a 10, semáforo clínico, hemograma y ANC, avisos de seguridad y orientación diagnóstica en pediatría.">
 <title>PAS · Apendicitis pediátrica | KidBum CALC</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./kidbum-icon-192-v081.png">
 <link rel="stylesheet" href="./assets/pediatric-pas-v01045.css">
+<link rel="stylesheet" href="./assets/pediatric-pas-layout-v01046.css">
 <script defer src="./assets/theme-chrome-v01036.js"></script>
 <script defer src="./assets/pediatric-pas-core-v01045.js"></script>
 <script defer src="./assets/pediatric-pas-ui-v01045.js"></script>
@@ -18,17 +19,20 @@
 <div class="pas-shell">
 <nav class="pas-topbar" aria-label="Navegación">
  <a class="pas-back" href="./index.html">← <span>Pediatría · KidBum</span></a>
- <span class="pas-brand">✚ <strong>PAS</strong><small>0.10.45</small></span>
+ <span class="pas-brand">✚ <strong>PAS</strong><small>0.10.46</small></span>
  <button id="pas-theme" type="button" aria-label="Alternar modo oscuro" aria-pressed="false" class="pas-theme">◐</button>
 </nav>
-<header class="pas-hero">
- <div class="pas-hero-copy">
- <span class="pas-eyebrow">PEDIATRÍA · DOLOR ABDOMINAL AGUDO</span>
- <h1>¿Apendicitis? <span>Valora con criterio.</span></h1>
- <p>Escala PAS de Samuel: <strong>8 criterios · 10 puntos</strong>. Selecciona hallazgos, interpreta el semáforo y decide con exploración, evolución e imagen cuando corresponda.</p>
- <div class="pas-hero-tags"><span>🟢 0–3 bajo</span><span>🟡 4–6 intermedio</span><span>🔴 7–10 alto</span></div>
+<header class="pas-hero pas-hero--surgical">
+ <div class="pas-cover-photo">
+  <img class="pas-cover-photo-img" src="./assets/pas-apendicectomia-portada-v01046.webp" width="1200" height="900" alt="Fotografía intraoperatoria de una apendicectomía, con apéndice expuesto e instrumental quirúrgico" fetchpriority="high" decoding="async">
+  <span class="pas-photo-caption">FOTOGRAFÍA INTRAOPERATORIA · CONTENIDO QUIRÚRGICO</span>
  </div>
- <div class="pas-hero-visual" aria-hidden="true"><div class="pas-hero-visual-ring"><span>10</span><small>puntos</small></div><span class="pas-hero-pulse">+2</span><span class="pas-hero-pulse second">+1</span></div>
+ <div class="pas-hero-copy">
+  <span class="pas-eyebrow">PEDIATRÍA · DOLOR ABDOMINAL AGUDO</span>
+  <h1>¿Apendicitis? <span>Valora con criterio.</span></h1>
+  <p>Escala PAS de Samuel: <strong>8 criterios · 10 puntos</strong>. Registra primero los datos y hallazgos clínicos; <strong>al final</strong> encontrarás el puntaje, el semáforo y la orientación para continuar la valoración.</p>
+  <div class="pas-hero-tags"><span>🩺 Hallazgos clínicos</span><span>🧪 Leucocitos y ANC</span><span>📊 Resultado al final ↓</span></div>
+ </div>
 </header>
 <div class="pas-alert-intro" role="note"><strong>⚠ Regla de seguridad:</strong> el PAS no diagnostica, descarta ni calcula un porcentaje de apendicitis. Ante choque, aspecto tóxico o peritonitis, prioriza la valoración urgente aunque la puntuación sea baja. <strong>El resultado solo es completo cuando se valoran los 8 componentes.</strong></div>
 <div class="pas-body-grid">
@@ -99,8 +103,17 @@
     <div><span>📊</span><strong>Herramienta complementaria</strong><p>El <strong>pARC</strong> estima riesgo continuo y mostró mejor discriminación que PAS en población elegible (desde 5 años), pero exige sus propios datos.</p><a href="https://www.mdcalc.com/calc/10201/pediatric-appendicitis-risk-calculator-parc" target="_blank" rel="noopener noreferrer">Abrir pARC externo ↗</a></div>
   </div>
  </section>
+ <nav class="pas-finish-strip" aria-label="Continuar a la interpretación PAS">
+  <div><span>✓ ÚLTIMO PASO</span><strong>Revisa tu evaluación</strong><small>Al final: puntaje · semáforo · alertas · orientación clínica</small></div>
+  <a href="#pas-results">Ver resultado PAS ↓</a>
+ </nav>
 </main>
 <aside class="pas-sidebar" aria-labelledby="pas-outcome-title">
+ <div class="pas-result-heading" id="pas-results">
+  <span class="pas-result-kicker">05 · DESPUÉS DE LOS DATOS DEL PACIENTE</span>
+  <h2 id="pas-outcome-title">Tu resultado PAS y semáforo</h2>
+  <p>Revisa aquí la puntuación calculada, los criterios faltantes, las alertas y los siguientes pasos. <strong>El color no reemplaza la valoración médica.</strong></p>
+ </div>
  <section class="pas-outcome" id="pas-outcome" data-band="pending">
   <div class="pas-outcome-top"><span class="pas-eyebrow">RESULTADO EN TIEMPO REAL</span><span id="pas-completeness">0 de 8</span></div>
   <div class="pas-dial" aria-hidden="true"><div class="pas-dial-center"><strong id="pas-points">—</strong><small>/ 10</small></div></div>
@@ -123,7 +136,7 @@
  <p><strong>Complemento:</strong> pARC (Kharbanda et al., Pediatrics 2018) mostró AUC 0.85 frente a 0.77 para PAS en la cohorte de validación. No transforma PAS en porcentaje. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5869337/" target="_blank" rel="noopener noreferrer">Estudio ↗</a></p>
  <p>Los umbrales son específicos de la ruta Johns Hopkins; otros centros usan puntos de corte distintos. Se presenta como herramienta de apoyo y NO como decisión médica automática.</p>
 </details>
-<footer class="pas-footer"><span>KidBum CALC · Pediatric Appendicitis Score</span><span>0.10.45 · Local · Sin guardar datos de pacientes</span></footer>
+<footer class="pas-footer"><span>KidBum CALC · Pediatric Appendicitis Score</span><span>0.10.46 · Local · Sin guardar datos de pacientes</span></footer>
 </div>
 </body>
 </html>
