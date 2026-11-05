@@ -73,5 +73,5 @@ assert.match(page,/assets\/pediatric-pharma-v01044\.css/);
 const sw=fs.readFileSync('sw.js','utf8');
 for(const file of ['pediatric-dose-math-v01044.js','pediatric-pharma-v01044.css'])assert.ok(sw.includes(file));
 assert.doesNotMatch(fs.readFileSync('assets/pediatric-dose-math-v01044.js','utf8'),/fetch\s*\(|localStorage|sessionStorage|sendBeacon/);
-assert.match(page,/content="0\.10\.45"/);
+assert.match(page,/content="0\.10\.46"/);
 console.log('PASS infant dosing: paracetamol ≥1m, ibuprofen/OMA ≥6m, fever <3m guard, day-0 math and neonatal protocol, maximums, exact presentation, offline.');

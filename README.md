@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.45**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.46**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.46 · Portada fotográfica y resultado PAS al final
+
+- La fotografía quirúrgica **aportada por el usuario** se integra como portada visible al comienzo de la calculadora PAS de apendicitis pediátrica, sin agregar dibujos anatómicos, objetos ni rótulos dentro de la imagen. Se entrega como WebP optimizado **1200×900 px / ~43 KB**, conservando el contenido de la fotografía y sin transmisiones externas, precargado en la PWA. También se usa como miniatura en la tarjeta PAS del catálogo de Pediatría.
+- **Nuevo flujo de lectura vertical:** portada → advertencia clínica → información del paciente/señales de alarma → anamnesis → exploración → hemograma y ANC → herramientas educativas → **resultados PAS al final** (puntaje, semáforo, advertencias y recomendaciones). Desactivado el panel sticky que aparecía en la parte superior del móvil. En escritorio también aparece al final, no a la derecha.
+- Al cerrar los apartados se ofrece un acceso de teclado y táctil **«Ver resultado PAS ↓»**, que lleva al informe final sin alterar los hallazgos registrados.
+- El resultado mantiene textos y colores redundantes, lectura accesible, opciones Sí/No/Sin dato, ANC derivado, semáforo y alertas de inestabilidad o peritonitis. **No se ha modificado el motor clínico PAS 0.10.45**, sus criterios ni sus límites; esta versión es únicamente de presentación y experiencia móvil.
+- Servicio offline: nuevos CSS y WebP añadidos a precarga; sin guardar datos de pacientes, sin dependencias de imagen externa. Pruebas con Chromium en anchuras de 390 y 1366 px, orden visual y accesibilidad, integridad del archivo de portada y regresión funcional.
+- Aviso: la fotografía contiene una escena quirúrgica explícita y se presenta como recurso educativo, no como señal de un diagnóstico.
 
 ## KidBum 0.10.45 · PAS — Pediatric Appendicitis Score con semáforo y seguridad
 
