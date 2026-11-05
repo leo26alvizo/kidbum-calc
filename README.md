@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.43**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.44**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.44 · Farmacología pediátrica lactantes y verificación matemática neonatal (no prescriptiva)
+
+- Se elimina el bloqueo general injustificado de 24 meses para las tres referencias ORALES existentes. El motor mantiene límites **por fármaco e indicación**, no por el módulo entero: paracetamol 1–215 meses y peso 3–100 kg, ibuprofeno 6–215 meses y peso 5–100 kg, y amoxicilina en **OMA otoscópicamente confirmada** 6–215 meses y peso 5–100 kg. Los máximos conservadores por toma/día y el resto de contraindicaciones se mantienen; la ampliación no constituye validación prospectiva ni autoriza usar formulaciones distintas.
+- Paracetamol en menores de 24 meses, ibuprofeno de 6–23 meses y amoxicilina en OMA de 6–23 meses **requieren confirmación pediátrica adicional**; fiebre en menores de 3 meses exige valoración clínica inmediata y bloquea el antipirético automático. Ibuprofeno en menores de 6 meses y amoxicilina para OMA en menores de 6 meses NO se extrapolan.
+- **Cualquier edad desde día 0**: nuevo verificador independiente de ARITMÉTICA de una pauta oral **ya prescrita**, con edad posnatal en días, semanas de gestación al nacimiento, prematuridad, peso, mg/kg/TOMA o mg/kg/DÍA, dosis por 24 horas, formulación mg/mL y máximos por dosis/día TRANSCRITOS y cotejados por el equipo tratante. Nunca recomienda una dosis o medicamento ni genera órdenes. Bloquea si falta EG/protocolo neonatal en recién nacidos o prematuros, vía no oral, medicamentos de alto riesgo o revisiones de fuente y supervisión. No se debe usar para medicación IV ni para deducir pautas específicas de neonatos.
+- UX: presentación móvil con tres pasos ilustrados, edad contextual, advertencias adaptativas, campos táctiles y tarjetas de mg/mL teóricos destacados. Verificación local y precarga PWA; **no almacena datos ni los envía**.
+- Referencias contrastadas: [AAP paracetamol, actualización enero 2026](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Acetaminophen-for-Fever-and-Pain.aspx), [AAP ibuprofeno](https://www.healthychildren.org/English/safety-prevention/at-home/medication-safety/Pages/Ibuprofen-for-Fever-and-Pain.aspx), [RCH Melbourne manejo del dolor](https://www.rch.org.au/clinicalguide/guideline_index/Acute_pain_management/), [AAP OMA ≥6 meses](https://publications.aap.org/pediatrics/article/131/3/e964/30912/The-Diagnosis-and-Management-of-Acute-Otitis-Media), [GPC IMSS-496](https://www.imss.gob.mx/sites/all/statics/guiasclinicas/496GRR.pdf).
+- Los test de cálculo son controles técnicos de regresión, no revisión independiente de dosis. Antes del uso clínico es indispensable verificación en protocolo institucional y farmacia clínica.
 
 ## Pharma Pro 0.10.43 · expansión masiva de búsqueda (catálogos NO prescriptivos)
 

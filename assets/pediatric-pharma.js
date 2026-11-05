@@ -1,5 +1,5 @@
-/* KidBum CALC — Pediatric oral medicine reference, version 1.
- * Narrow eligibility: age 24–143 months, weight 8–40 kg, supervised care.
+/* KidBum CALC — Pediatric oral medicine reference, version 2 / 0.10.44.
+ * Infant eligibility is drug- and indication-specific, NOT a blanket neonatal license.
  * Independent clinical references: CENSIA 2025, AAP, RCH Melbourne.
  * Never a medical prescription; no patient data persisted or transmitted.
  */
@@ -16,10 +16,12 @@ const fail=(code,message)=>({ok:false,code,error:message});
    UCSF: max 1000 mg/dose; DO NOT silently cap if exceeded. */
 function calcAmoxicillinAom(x){
  const numeric=v=>typeof v==='string'&&/^(?:\d+(?:\.\d+)?|\.\d+)$/.test(v.trim())&&Number.isFinite(Number(v));
- if(!numeric(x.ageMonths)||!Number.isInteger(Number(x.ageMonths))||Number(x.ageMonths)<24||Number(x.ageMonths)>143)
-  return fail('age','Solo en niños de 24 a 143 meses; otros casos requieren valoración individual.');
- if(!numeric(x.weightKg)||Number(x.weightKg)<8||Number(x.weightKg)>40)
-  return fail('weight','Peso fuera del intervalo revisado (8–40 kg).');
+ if(!numeric(x.ageMonths)||!Number.isInteger(Number(x.ageMonths))||Number(x.ageMonths)<6||Number(x.ageMonths)>215)
+  return fail('age','Esta ruta AAP de OMA es para 6–215 meses. Menores de 6 meses requieren protocolo y valoración presencial individual; no extrapolar.');
+ if(!numeric(x.weightKg)||Number(x.weightKg)<5||Number(x.weightKg)>100)
+  return fail('weight','Peso fuera del intervalo admitido (5–100 kg). Confirmar peso y esquema individual.');
+ if(Number(x.ageMonths)<24&&x.infantPlan!=='yes')
+  return fail('infant','En menores de 24 meses confirmar indicación antibiótica por edad, evolución, otoscopia, presentación y revisión médica individual.'];
  const required=[
   ['diagnosis','aom_confirmed','El diagnóstico de OMA debe confirmarse mediante valoración y otoscopia.'],
   ['treatmentChoice','yes','Debe confirmarse la indicación médica de antibiótico tras valorar la observación.'],
@@ -66,8 +68,14 @@ function calc(id,input){
  const x=input||{};
  const age=Number(x.ageMonths),weight=Number(x.weightKg),dose=Number(x.doseMgKg),
    mgPrior=Number(x.totalMg24h),count=Number(x.doses24h);
- if(!Number.isInteger(age)||age<24||age>143)return fail('age','Disponible solo para niños de 24 a 143 meses. Fuera de este intervalo: valoración individual.');
- if(!Number.isFinite(weight)||weight<8||weight>40)return fail('weight','Peso fuera del intervalo revisado (8–40 kg). Verificar peso y necesidades individuales.');
+ if(x.ageMonths===undefined||x.ageMonths===null||String(x.ageMonths).trim()===''||!Number.isInteger(age)||age<1||age>215)
+  return fail('age','Se necesitan meses completos (1–215). Neonatos de 0–27 días: usar la verificación de una pauta neonatal previamente indicada, no extrapolar este esquema.');
+ const minAge=id==='ibuprofeno'?6:1;
+ if(age<minAge)return fail('age',id==='ibuprofeno'?'Ibuprofeno: esta referencia solo inicia a los 6 meses; menores requieren indicación y protocolo específicos.':'La referencia oral aquí comienza a partir de 1 mes.');
+ if(x.weightKg===undefined||x.weightKg===null||String(x.weightKg).trim()===''||!Number.isFinite(weight)||weight<(id==='ibuprofeno'?5:3)||weight>100)
+  return fail('weight',id==='ibuprofeno'?'Esta referencia exige peso de 5–100 kg y edad ≥6 meses.':'Peso fuera de 3–100 kg; verificar contexto y protocolo individual.');
+ if(age<24&&x.infantPlan!=='yes')return fail('infant','Menor de 2 años: confirmar pauta, indicación, concentración y revisión específica del lactante por el equipo médico.');
+ if(age<3&&x.indication==='fever')return fail('feverInfant','Fiebre en menor de 3 meses: valoración clínica inmediata; no calcular antipirético para enmascarar la evaluación.');
  if(!med.doseChoices.includes(dose)||!Number.isFinite(dose))return fail('dose','Selecciona una dosis de referencia admitida para este fármaco.');
  if(String(x.strength)!==med.strengthMg+'/'+med.strengthMl)return fail('strength','La concentración del frasco no coincide con la presentación revisada. No convertir dosis.');
  if(x.verifiedLabel!=='yes')return fail('label','Confirma el principio activo, vía oral y concentración exacta en la etiqueta del frasco.');
@@ -87,7 +95,7 @@ function calc(id,input){
   if(hours<med.intervalHours)return fail('interval','No ha transcurrido el intervalo de referencia desde la última administración.');
  }
  if(count>=med.maxDoses24h)return fail('limit','Ya se alcanzó el máximo conservador de administraciones en 24 horas.');
- const mg=weight*dose,maxDaily=weight*med.maxMgKg24h;
+ const mg=weight*dose,maxDaily=Math.min(weight*med.maxMgKg24h,med.maxMgPerDose*med.maxDoses24h);
  if(mg>med.maxMgPerDose+1e-9)return fail('limit','La dosis propuesta supera el máximo individual revisado.');
  if(mgPrior+mg>maxDaily+1e-9)return fail('limit','La dosis propuesta supera el máximo conservador para las 24 horas.');
  const mgPerMl=med.strengthMg/med.strengthMl;
@@ -100,7 +108,7 @@ function calc(id,input){
   intervalHours:med.intervalHours,maxDoses24h:med.maxDoses24h,
   priorMg24h:mgPrior,dosesPrior24h:count,maxMg24h:maxDaily,
   prospectiveMg24h:mgPrior+mg,
-  caution:'Referencia aritmética, NO una orden médica. Verificar presentación, indicación, límites, tratamiento concomitante y dosificación final antes de administrar.'
+  caution:(age<24?'Lactante: esquema únicamente tras validación individual por el médico. ':'')+'Referencia aritmética, NO una orden médica. Verificar presentación, indicación, límites, tratamiento concomitante y dosificación final antes de administrar.'
  });
 }
 root.KidBumPediatricPharma=Object.freeze({calculate:calc,supported:Object.freeze([...Object.keys(choices),'amoxicilina_oma'])});

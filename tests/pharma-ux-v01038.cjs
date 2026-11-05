@@ -7,7 +7,7 @@ assert.ok(page.includes('assets/pharma-pro-ux-v01038.css'));
 assert.match(page,/<meta name="kidbum-app-version" content="0\.10\.43"/);
 assert.match(page,/id="pharma-scope"/);
 assert.match(page,/No utilizar para prescribir automáticamente/);
-assert.match(read('index.html'),/<meta name="kidbum-app-version" content="0\.10\.43"/);
+assert.match(read('index.html'),/<meta name="kidbum-app-version" content="0\.10\.44"/);
 assert.ok(sw.includes("'./assets/pharma-pro-ux-v01038.css'"));
 assert.ok(sw.includes('-pharma-ux-v01038'));
 assert.match(ui,/function pharmaCoverage\(med\)/);

@@ -1,0 +1,64 @@
+/* KidBum CALC 0.10.44 • Pediatría Farmacología: didáctica, táctil y accesible.
+   Reusable theme tokens keep light and Graphite Noir readable. */
+.pediatric-pharma-v2{--ped-violet:#6653bc;--ped-blue:#116aaf;--ped-teal:#087b78;--ped-coral:#ad533b}
+.pediatric-pharma-v2 .pharma-intro{position:relative;margin:17px 0 14px;padding:24px 25px;border-radius:22px;overflow:hidden;
+ background:linear-gradient(115deg,rgba(8,131,141,.15),rgba(114,91,190,.09) 57%,rgba(245,171,90,.10));
+ border:1px solid var(--stroke)}
+.pediatric-pharma-v2 .pharma-intro:after{content:'⚕';position:absolute;right:26px;top:-24px;font-size:130px;line-height:1;opacity:.085;pointer-events:none}
+.pediatric-pharma-v2 .pharma-intro h1{font-family:var(--font);font-size:clamp(25px,4.5vw,39px);font-weight:850;letter-spacing:-.035em;line-height:1.14;max-width:650px}
+.pediatric-pharma-v2 .pharma-intro p{max-width:740px;font-size:14px;line-height:1.55;color:var(--ink)}
+.ped-pharma-mini-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.ped-pharma-mini-tags span{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border:1px solid var(--stroke);border-radius:999px;background:var(--surface);color:var(--ink);font-size:11px;font-weight:800}
+.ped-pharma-workflow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:14px 0}
+.ped-pharma-step{border-radius:14px;border:1px solid var(--stroke);background:var(--surface);padding:13px;display:flex;align-items:flex-start;gap:11px}
+.ped-pharma-step b{background:#dbeafe;color:#15477e;padding:8px 10px;border-radius:10px;min-width:39px;text-align:center;font-size:14px}
+.ped-pharma-step:nth-child(2) b{background:#e7e0ff;color:#5c3da1}
+.ped-pharma-step:nth-child(3) b{background:#d6f5ea;color:#0d655e}
+.ped-pharma-step strong{font-size:12px;color:var(--ink);display:block}
+.ped-pharma-step small{color:var(--ink-soft);font-size:11px;line-height:1.4;display:block;margin-top:4px}
+.pediatric-pharma-v2 .pharma-safety-banner{margin:14px 0;background:var(--alert-bg);border-left:5px solid #c68839;padding:14px 17px;font-size:13px;color:var(--ink)}
+.pediatric-pharma-v2 .pharma-grid{margin:14px 0;gap:11px}
+.pediatric-pharma-v2 .pharma-reference{padding:15px;border-top:4px solid var(--ped-teal);box-shadow:0 7px 25px rgba(7,37,72,.035)}
+.pediatric-pharma-v2 .pharma-reference:nth-child(2){border-top-color:var(--ped-blue)}
+.pediatric-pharma-v2 .pharma-reference:nth-child(3){border-top-color:var(--ped-violet)}
+.pediatric-pharma-v2 .pharma-reference h2{font-family:var(--font);font-size:18px;font-weight:820;letter-spacing:-.02em}
+.pediatric-pharma-v2 .pharma-reference ul{padding-left:19px;margin:8px 0}
+.pediatric-pharma-v2 .pharma-reference li{font-size:12px}
+.pediatric-pharma-v2 .pharma-dose-form{margin:14px 0;padding:18px;border-radius:19px;border-color:var(--stroke);box-shadow:0 9px 28px rgba(13,57,84,.035);overflow:hidden}
+.pediatric-pharma-v2 .pharma-dose-form h2{font-family:var(--font);font-size:21px;font-weight:850;letter-spacing:-.02em;line-height:1.24}
+.ped-pharma-section-label{display:inline-flex;gap:7px;align-items:center;margin-bottom:10px;padding:7px 11px;border-radius:8px;font-size:11px;font-weight:850}
+.ped-pharma-section-label.blue{color:#0b5b96;background:#dceffa}
+.ped-pharma-section-label.violet{color:#563897;background:#ece6ff}
+.ped-pharma-section-label.teal{color:#075f57;background:#d9f5ef}
+.ped-pharma-fields-title{font-size:12px;font-weight:850;display:flex;gap:9px;align-items:center;margin:15px 0 10px;color:var(--ink)}
+.ped-pharma-fields-title em{font-style:normal;padding:5px 8px;font-size:11px;background:var(--soft);border-radius:8px;color:var(--ink)}
+.pediatric-pharma-v2 .pharma-dose-form .pharma-fields{gap:12px}
+.pediatric-pharma-v2 .pharma-dose-form label{font-size:12px;font-weight:750;line-height:1.35}
+.pediatric-pharma-v2 .pharma-dose-form label input,.pediatric-pharma-v2 .pharma-dose-form label select{min-height:48px;padding:11px 12px;font-size:15px;border-radius:11px;border:1px solid var(--stroke);background:var(--bg);color:var(--ink)}
+.pediatric-pharma-v2 .pharma-dose-form label :is(input,select):focus-visible{outline:3px solid #58c1c4;outline-offset:1px}
+.ped-pharma-age-helper{padding:11px 14px;margin:12px 0;border-left:4px solid var(--ped-blue);background:var(--soft);border-radius:10px;font-size:12px;font-weight:700;line-height:1.5;color:var(--ink)}
+.ped-pharma-age-helper.warning{border-left-color:#c68839;background:var(--alert-bg)}
+.ped-pharma-age-helper.danger{border-left-color:#bd4040;background:var(--red-bg)}
+.ped-pharma-infant{margin:12px 0;padding:13px;background:var(--soft);border:1px dashed var(--stroke);border-radius:12px}
+.ped-pharma-infant strong{font-size:12px;display:block;margin-bottom:8px;color:var(--ink)}
+.ped-pharma-infant label{max-width:700px}
+.pediatric-pharma-v2 .pharma-dose-form .pharma-checks{padding:13px;border-radius:13px;border:1px solid var(--stroke);background:var(--soft)}
+.pediatric-pharma-v2 .pharma-dose-form .pharma-checks label{font-size:12px}
+.pediatric-pharma-v2 .pharma-dose-form .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.pediatric-pharma-v2 .pharma-dose-form .actions .btn{min-height:48px;font-weight:850;border-radius:12px;padding:11px 15px}
+.pediatric-pharma-v2 .pharma-dose-form .pharma-results{padding:17px;border-left:5px solid #0b8378;background:var(--accent-pale);color:var(--ink)}
+.pediatric-pharma-v2 .pharma-dose-form .pharma-results.blocked{border-left-color:#b04e3a;background:var(--red-bg)}
+.ped-pharma-result-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}
+.ped-pharma-result-metric{padding:13px;background:var(--surface);border:1px solid var(--stroke);border-radius:12px;min-width:0}
+.ped-pharma-result-metric small{font-size:11px;font-weight:750;color:var(--ink-soft);display:block}
+.ped-pharma-result-metric b{font-size:clamp(20px,3vw,28px);font-variant-numeric:tabular-nums;letter-spacing:-.02em;color:var(--ink);display:block}
+.ped-pharma-verified-details{background:var(--soft);border:1px solid var(--stroke);border-radius:12px;margin-top:15px;padding:12px}
+.ped-pharma-verified-details summary{cursor:pointer;font-weight:850;font-size:14px;min-height:34px;color:var(--ink)}
+.ped-pharma-verified-details[open] summary{margin-bottom:11px}
+.ped-pharma-note{font-size:12px;color:var(--ink-soft);line-height:1.55;margin:8px 0}
+.ped-pharma-calc-note{font-size:12px;font-weight:780;color:var(--ink)}
+.ped-pharma-header-alert{padding:11px 14px;border-radius:12px;border:1px solid var(--stroke);margin-top:12px;background:var(--alert-bg);font-size:12px;line-height:1.55}
+.pediatric-pharma-v2 .pharma-source a{font-weight:700}
+@media(max-width:860px){.ped-pharma-workflow{grid-template-columns:minmax(0,1fr)}.ped-pharma-step{align-items:center;padding:11px}}
+@media(max-width:740px){.pediatric-pharma-v2 .pharma-intro{padding:17px 16px}.pediatric-pharma-v2 .pharma-dose-form{padding:14px}.pediatric-pharma-v2 .pharma-dose-form .pharma-fields{grid-template-columns:1fr}.ped-pharma-result-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){.ped-pharma-result-metrics{grid-template-columns:1fr}.ped-pharma-mini-tags{gap:5px}.ped-pharma-mini-tags span{font-size:10px;padding:6px 8px}.pediatric-pharma-v2 .pharma-dose-form .actions .btn{width:100%}}

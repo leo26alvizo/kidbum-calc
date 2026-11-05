@@ -21,6 +21,8 @@ jobs:
         run: node tests/analytics.cjs
       - name: Pediatric pharmacy placement and safety
         run: node tests/pediatric-pharmacy.cjs
+      - name: Pediatric infant age-specific references and day-zero prescribed-dose arithmetic
+        run: node tests/pediatric-infant-pharma-v01044.cjs
       - name: Pediatric oral dose safety and arithmetic
         run: node tests/pediatric-drug-doses.cjs
       - name: Mobile data and offline startup
