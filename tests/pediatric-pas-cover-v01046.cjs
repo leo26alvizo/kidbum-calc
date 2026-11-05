@@ -37,7 +37,7 @@ assert.match(css,/@media\(max-width:660px\)/);
 assert.match(css,/@media\(min-width:901px\)/);
 assert.match(css,/\.pas-cover-photo-img\{/);
 assert.match(home,/content="0\.10\.47"/);
-assert.match(html,/content="0\.10\.47"/);
+assert.match(html,/content="0\.10\.46"/);
 assert.match(home,/image:'pas-apendicectomia-portada-v01046\.webp'/);
 assert.match(home,/c\.dataset\.pedRapid==='pas'\?'\.\/pediatria-pas\.html'/);
 assert.match(sw,/cover-results-bottom-v01046/);
