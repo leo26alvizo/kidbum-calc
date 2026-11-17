@@ -45,6 +45,8 @@ function pharmaSummary(med,onFull){
  q.append(evidence);
  const drugIndications=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndications)q.append(drugIndications);
+ const externalLabels=window.KidBumPharmaExternalLabels?.render(med);
+ if(externalLabels)q.append(externalLabels);
  const warnings=elt('section',undefined,'pharma-ux-alert');
  warnings.append(elt('h3','Precauciones y alertas'));
  if(med.highRisk)warnings.append(p('⚠ Medicamento o grupo de alto riesgo según ISMP 2024'+(med.highRiskScope?' · '+med.highRiskScope:'')+'. Confirmar presentación, unidades, concentración y salvaguardas institucionales.','pharma-ux-warning'));
@@ -127,6 +129,8 @@ function showDrug(id){
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(pharmaFold('Revisión previa imprescindible',f2,true));
  const drugIndicationsFull=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndicationsFull)left.append(drugIndicationsFull);
+ const externalLabelsFull=window.KidBumPharmaExternalLabels?.render(med);
+ if(externalLabelsFull)left.append(externalLabelsFull);
  
  if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
  const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(pharmaFold('Preparación intravenosa y compatibilidades',f4));
