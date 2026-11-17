@@ -39,7 +39,7 @@ assert.match(pharmaCSS,/\.pharma-workspace-nav button\{font-size:12px;line-heigh
 assert.match(pharmaCSS,/\.pharma-fast-input input\{font-size:16px/);
 assert.match(pharmaCSS,/\.disease-options\{grid-template-columns:minmax\(0,1fr\)/);
 assert.match(pharmaCSS,/\.pharma-suggestions button\{min-height:50px/);
-assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.49 · fuentes externas<\/small>/);
+assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.50 · diagnósticos<\/small>/);
 const shortcuts=home.match(/<div class="kb-resource-links"[^>]*>([\s\S]*?)<\/div>/);
 assert.ok(shortcuts,'All three feature shortcuts in same container');
 const links=shortcuts[1];
