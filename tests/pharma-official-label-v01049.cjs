@@ -85,7 +85,7 @@ assert.equal(inputNode.value,'amoxicillin');
  assert.match(fs.readFileSync('assets/pharma-pro-ui.js','utf8'),/KidBumPharmaExternalLabels\?\.render\(med\)/);
  const page=fs.readFileSync('pharma-pro.html','utf8');
  const scriptNames=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
- assert.equal(scriptNames.length,15);
+ assert.equal(scriptNames.length,16);
  assert.ok(scriptNames.indexOf('assets/pharma-label-lookup-v01049.js')<scriptNames.indexOf('assets/pharma-pro-ui.js'));
  const sw=fs.readFileSync('sw.js','utf8');
  assert.ok(sw.includes("'./assets/pharma-label-lookup-v01049.js'"));
