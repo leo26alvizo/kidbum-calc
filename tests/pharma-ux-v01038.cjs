@@ -25,7 +25,7 @@ assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(scripts.length,14);
+assert.equal(scripts.length,15);
 assert.equal(scripts.at(-1),'assets/pharma-pro-quick-ui.js');
 for(const path of scripts)assert.ok(sw.includes("'./"+path+"'"));
 assert.ok(fs.existsSync('assets/pharma-pro-monographs.js'));
