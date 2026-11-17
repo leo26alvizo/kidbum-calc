@@ -146,10 +146,14 @@ function render(med){
     const meta=parseMeta(record);
     const item=textNode('article',undefined,'pharma-reg-candidate');
     const title=meta.generic||'Principio activo no identificado';
+    const human=/^HUMAN (PRESCRIPTION|OTC) DRUG$/.test(meta.productType);
+    const exactName=normalize(title)===normalize(cleanTerm(input.value));
     item.append(textNode('strong',title));
+    if(!exactName)item.append(textNode('p','⚠ El principio activo no coincide exactamente con el término buscado: puede ser una combinación o una sal/presentación diferente. Verificar TODOS los ingredientes antes de leer cualquier dosis.','pharma-indication-pending'));
+    if(!human)item.append(textNode('p','⚠ No se confirmó clasificación de medicamento para uso humano. No se permite abrir este resultado como pauta clínica.','pharma-indication-pending'));
     item.append(textNode('p','Marca: '+(meta.brand||'no especificada')+' · Vía: '+(meta.route||'no especificada')+' · '+(meta.productType||'tipo no especificado'),'small muted'));
     item.append(textNode('p','Fabricante: '+(meta.manufacturer||'no identificado')+' · Fecha de etiqueta: '+(meta.date||'sin dato'),'small muted'));
-    const open=textNode('button','Examinar etiqueta '+(idx+1));open.type='button';
+    const open=textNode('button',human?'Examinar etiqueta '+(idx+1):'No elegible · clasificación no humana');open.type='button';open.disabled=!human;
     const body=textNode('div',undefined,'pharma-reg-label-detail');
     open.addEventListener('click',()=>{
      body.replaceChildren();
