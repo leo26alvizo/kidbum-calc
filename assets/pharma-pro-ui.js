@@ -22,11 +22,13 @@ function fav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[.
 /* UX-only presentation helpers; clinical engines and eligibility rules are never changed. */
 function pharmaCoverage(med){
  const monograph=window.KidBumPharmaMonographs?.byId[med.id];
+ const guide=window.KidBumPharmaIndicationsUI?.doseForDrug(med.id);
  return {
-  partial:Boolean(monograph),
-  label:monograph?'Referencia posológica parcial · etiqueta US':'Ficha índice · dosis sin cotejo',
+  partial:Boolean(monograph||guide),
+  label:monograph?'Referencia posológica parcial · etiqueta US':guide?'Intervalo PRONAM México 2026 · solo HTA':'Ficha índice · dosis sin cotejo',
   detail:monograph?
    'Cotejo documental parcial de una presentación estadounidense. No equivale a validación clínica/farmacéutica independiente, autorización mexicana ni prescripción.':
+   guide?'Solo referencia poblacional de guía mexicana para HTA, no pauta individual ni validación independiente. Confirmar aplicabilidad y formulación.':
    'La entrada no cuenta con pauta posológica cotejada. No calcular ni indicar dosis desde esta ficha.'
  };
 }
@@ -41,6 +43,8 @@ function pharmaSummary(med,onFull){
  const evidence=elt('section',undefined,'pharma-ux-evidence');
  evidence.append(elt('h3','Cobertura documental'),p(cov.label,'pharma-ux-coverage'),p(cov.detail,'small'));
  q.append(evidence);
+ const drugIndications=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
+ if(drugIndications)q.append(drugIndications);
  const warnings=elt('section',undefined,'pharma-ux-alert');
  warnings.append(elt('h3','Precauciones y alertas'));
  if(med.highRisk)warnings.append(p('⚠ Medicamento o grupo de alto riesgo según ISMP 2024'+(med.highRiskScope?' · '+med.highRiskScope:'')+'. Confirmar presentación, unidades, concentración y salvaguardas institucionales.','pharma-ux-warning'));
@@ -111,8 +115,8 @@ function showDrug(id){
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(pharmaFold('Ámbito y uso orientativo',f1,true));
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(pharmaFold('Revisión previa imprescindible',f2,true));
- const related=window.KidBumPharmaIndicationsUI?.filterByDrug(med.id)||[];
- if(related.length){const section=elt('section',undefined,'fact');section.append(elt('h3','Enfermedades relacionadas · rutas de guía delimitadas'));for(const item of related){const b=elt('button',item.name+' · ver vía terapéutica','db-btn');b.type='button';b.onclick=()=>{closeDrug();if(root.KidBumPharmaQuick?.openDisease){root.KidBumPharmaQuick.openDisease(item.id);}else{document.getElementById('disease-search').value=item.name;document.getElementById('disease-search').dispatchEvent(new Event('input'));document.getElementById('disease-finder').scrollIntoView({behavior:'smooth'});}};section.append(b);}left.append(section);}
+ const drugIndicationsFull=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
+ if(drugIndicationsFull)left.append(drugIndicationsFull);
  
  if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
  const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(pharmaFold('Preparación intravenosa y compatibilidades',f4));
