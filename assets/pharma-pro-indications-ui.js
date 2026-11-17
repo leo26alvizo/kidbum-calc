@@ -10,6 +10,83 @@ const node=(tag,text,cls)=>{
  const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;
 };
 const link=(href,label)=>{const a=node('a',label+' ↗');a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;};
+
+/* v0.10.48: reciprocidad medicamento → diagnóstico.
+   Los vínculos provienen de las 15 rutas ya documentadas, no de inferencias por clase.
+   PRONAM HAS 2026 contiene intervalos de referencia, NO dosis individualizadas.
+   La infografía excluye mujeres en edad fértil/embarazo y no sustituye la IPP mexicana.
+*/
+const HTA_SOURCE='https://pronamsalud.csg.gob.mx/infografia-hipertension-arterial-sistemica.pdf';
+const HTA_REGIMENS=Object.freeze({
+ amlodipino:['5–10 mg','cada 24 h'],
+ enalapril:['10–40 mg','cada 24 h'],
+ lisinopril:['10–40 mg','cada 24 h'],
+ clortalidona:['12.5–50 mg','cada 24 h'],
+ hidroclorotiazida:['12.5–50 mg','cada 24 h'],
+ valsartan:['80–320 mg','cada 24 h'],
+ telmisartan:['40–80 mg','cada 24 h'],
+ olmesartan:['10–40 mg','cada 24 h'],
+ bisoprolol:['2.5–20 mg','cada 24 h']
+});
+const HTA_CONTEXT='Solo referencia general de la infografía PRONAM HAS, 2.ª edición (2026): adultos >20 años en contexto ambulatorio, cuando el protocolo sea aplicable; la infografía excluye mujeres en edad fértil o embarazadas. No es pauta de inicio personalizada ni aplica a urgencia hipertensiva, menores o embarazo. Comprobar formulación, presión arterial, fragilidad, función renal, potasio e interacciones.';
+function doseForDrug(id){
+ const row=HTA_REGIMENS[id];
+ return row?Object.freeze({id,diagnosis:'Hipertensión arterial sistémica',dose:row[0],frequency:row[1],route:'vía oral; confirmar formulación',source:HTA_SOURCE,sourceLabel:'PRONAM México 2026 · infografía oficial',scope:HTA_CONTEXT}):null;
+}
+function relatedForDrug(id){
+ const matches=lib.conditions.filter(c=>c.options.some(o=>o[0]===id)).map(c=>{
+  const option=c.options.find(o=>o[0]===id);
+  return {id:c.id,name:c.name,tier:option[1],note:option[2],scope:c.scope,source:c.id==='hipertension-arterial'?HTA_SOURCE:c.source,year:c.id==='hipertension-arterial'?'PRONAM México 2026':c.year};
+ });
+ if(doseForDrug(id)&&!matches.some(c=>c.id==='hipertension-arterial')){
+  matches.unshift({id:'hipertension-arterial',name:'Hipertensión arterial sistémica',tier:'Tabla de antihipertensivos PRONAM',note:'Referencia de dosis exclusivamente para la indicación y población descritas.',scope:HTA_CONTEXT,source:HTA_SOURCE,year:'PRONAM México 2026'});
+ }
+ return matches;
+}
+function renderForDrug(id){
+ const med=lib.byId[id];if(!med)return null;
+ const container=node('section',undefined,'pharma-drug-indications');
+ container.setAttribute('aria-label','Indicaciones por diagnóstico y esquemas de '+med.name);
+ container.append(node('h3','🩺 ¿En qué diagnósticos se utiliza?'));
+ const matches=relatedForDrug(id);
+ if(matches.length){
+  const list=node('div',undefined,'pharma-drug-diagnoses');
+  for(const d of matches){
+   const item=node('article',undefined,'pharma-drug-diagnosis');
+   item.append(node('strong',d.name),node('p',d.tier+' · '+d.note,'small'));
+   item.append(node('p','Aplicabilidad: '+d.scope,'small muted'),link(d.source,d.year+' · consultar criterios de guía'));
+   list.append(item);
+  }
+  container.append(list);
+ }else{
+  container.append(node('p','Todavía no hay una relación medicamento–diagnóstico cotejada individualmente para esta entrada. No significa que carezca de indicaciones clínicas.','pharma-indication-pending'));
+  container.append(node('p','Descripción del índice (NO equivale a indicación autorizada): '+med.use,'small muted'));
+ }
+ const dose=node('div',undefined,'pharma-drug-dose');
+ dose.append(node('h3','💊 Dosis y esquemas por diagnóstico'));
+ const verified=doseForDrug(id);
+ const mono=root.KidBumPharmaMonographs?.byId?.[id];
+ if(verified){
+  dose.append(node('strong',verified.diagnosis+' · '+verified.sourceLabel));
+  dose.append(node('p','Intervalo de referencia: '+verified.dose+' por '+verified.route+' · '+verified.frequency+'.','pharma-dose-value'));
+  dose.append(node('p',verified.scope,'small muted'));
+  dose.append(link(verified.source,'Ver tabla original de dosis PRONAM 2026'));
+  if(mono)dose.append(node('p','Existen además referencias parciales específicas de etiquetado estadounidense en la ficha completa; requieren sus propias verificaciones.','small muted'));
+ }else if(mono){
+  dose.append(node('p','Existen '+mono.regimens.length+' referencia(s) posológica(s) parciales de una etiqueta estadounidense. Para verlas, abre la ficha completa, selecciona indicación, población, vía y responde los controles de seguridad obligatorios.','pharma-indication-pending'));
+ }else{
+  dose.append(node('p','Esquema NO cotejado: faltan dosis, vía, frecuencia, duración y ajustes específicos de una formulación e indicación. No se estima una pauta a partir de la clase farmacológica.','pharma-indication-pending'));
+ }
+ dose.append(node('p','Para toda pauta: validar edad/peso, diagnóstico, alergias, embarazo, función renal/hepática, interacciones, presentación y protocolo institucional. Una referencia poblacional no equivale a prescripción.','small muted'));
+ container.append(dose);
+ const references=node('div',undefined,'pharma-drug-source-search');
+ references.append(link('https://registros.cofepris.gob.mx/BRSDM/default.aspx','COFEPRIS · buscar presentación autorizada en México'));
+ references.append(link('https://dailymed.nlm.nih.gov/dailymed/search.cfm?query='+encodeURIComponent(med.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'')),'DailyMed · buscar etiquetas específicas (EE. UU.)'));
+ references.append(node('p','Los enlaces de búsqueda NO son cotejos individuales: elegir principio activo, vía, concentración y marca antes de usar información de la etiqueta.','small muted'));
+ container.append(references);
+ return container;
+}
+
 let selected='',openDrug=()=>{};
 function viewConditions(){
  const results=$('disease-results');results.replaceChildren();
@@ -77,8 +154,10 @@ root.KidBumPharmaIndicationsUI=Object.freeze({
   return true;
  },
   filterByDrug(id){
-  const related=lib.conditions.filter(d=>d.options.some(x=>x[0]===id));
-  return related.map(d=>({id:d.id,name:d.name,source:d.source}));
- }
+  return relatedForDrug(id).map(d=>({id:d.id,name:d.name,source:d.source}));
+ },
+ doseForDrug,
+ relatedForDrug,
+ renderForDrug
 });
 })(typeof window!=='undefined'?window:globalThis);
