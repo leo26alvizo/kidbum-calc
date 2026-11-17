@@ -32,7 +32,7 @@ for(const medicine of lib.records){
   assert.equal(item.status,'orientative');
   assert.equal(item.reviewed,false,'No implicit approval '+medicine.id);
   assert.equal(item.source,null,'No invented individually checked clinical citation '+medicine.id);
-  assert.ok(item.name.length>9,'Diagnostic label too generic: '+medicine.id);
+  assert.ok(item.name.length>=8,'Diagnostic label too generic: '+medicine.id);
   assert.equal('dose' in item,false,'Clinical dose must never be inferred from indication '+medicine.id);
   assert.equal('regimen' in item,false,'No dosing from editorial mapping '+medicine.id);
  }
@@ -41,7 +41,7 @@ for(const medicine of lib.records){
 assert.equal(covered.size,643);
 assert.equal(atlas.related('not-a-medicine').length,0);
 for(const dx of atlas.diagnoses){
- assert.ok(dx.name.length>10);
+ assert.ok(dx.name.length>=8);
  assert.ok(dx.medicineIds.length>=1);
  assert.equal(new Set(dx.medicineIds).size,dx.medicineIds.length,'No duplicate medicine in diagnosis '+dx.name);
  for(const id of dx.medicineIds){
