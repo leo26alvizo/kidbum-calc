@@ -119,6 +119,8 @@ jobs:
         run: node tests/pharma-fast-ux.cjs
       - name: Pharma drug-diagnosis associations and PRONAM 2026 adult hypertension reference intervals
         run: node tests/pharma-diagnoses-v01048.cjs
+      - name: Product-specific FDA label selection, privacy and 643 medication coverage
+        run: node tests/pharma-official-label-v01049.cjs
       - name: Pharma Pro expansion 0.10.43 - 416 medication names and 205 diagnosis topics
         run: node tests/pharma-massive-catalog-v01043.cjs
       - name: Pharma Pro 3.0 partial reconciliation, traceable high-risk label review and no-blanket-clearance safety
