@@ -32,6 +32,29 @@ main{width:min(1160px,100%);margin:auto;padding:18px 18px 90px}.top{display:flex
 .pharma-drug-source-search{display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--line);padding-top:12px}
 .pharma-drug-source-search p{margin:0}
 @media(max-width:590px){.pharma-drug-indications{padding:13px}.pharma-dose-value{font-size:15px}}
+
+/* Pharma 0.10.49 · vista de etiquetas SPL con elección explícita de producto */
+.pharma-reg-label{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:16px;margin:14px 0;display:grid;gap:9px}
+.pharma-reg-label h3{font-size:15px;margin:0;color:var(--ink)}
+.pharma-reg-label p{line-height:1.55;margin:0;overflow-wrap:anywhere}
+.pharma-reg-search{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:9px;align-items:end}
+.pharma-reg-search label{grid-column:1/-1;font-size:12px;font-weight:800}
+.pharma-reg-search input{min-width:0;border:1px solid var(--line);border-radius:9px;padding:11px;background:var(--bg);color:var(--ink);font-size:15px}
+.pharma-reg-search button,.pharma-reg-candidate button{border:1px solid var(--accent);background:var(--accent);color:var(--panel);padding:10px 13px;border-radius:9px;font-size:12px;font-weight:800;min-height:43px;cursor:pointer}
+html.dark .pharma-reg-search button,html.dark .pharma-reg-candidate button{color:#102530}
+.pharma-reg-search button:disabled{opacity:.55;cursor:wait}
+.pharma-reg-results{display:grid;gap:12px}
+.pharma-reg-candidate{display:grid;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:12px}
+.pharma-reg-candidate strong{overflow-wrap:anywhere}
+.pharma-reg-candidate button{justify-self:start}
+.pharma-reg-label-detail{display:grid;gap:11px}
+.pharma-reg-label-detail:empty{display:none}
+.pharma-reg-section{border:1px solid var(--line);border-radius:8px;background:var(--panel);padding:10px}
+.pharma-reg-section summary{cursor:pointer;font-weight:800;font-size:12px;color:var(--ink)}
+.pharma-reg-source-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;line-height:1.7;margin-top:10px!important}
+.pharma-reg-links{display:flex;flex-wrap:wrap;gap:11px;margin-top:6px}
+.pharma-reg-links a,.pharma-reg-label-detail a{font-size:12px;overflow-wrap:anywhere}
+@media(max-width:590px){.pharma-reg-search{grid-template-columns:1fr}.pharma-reg-search button{width:100%}.pharma-reg-label{padding:12px}.pharma-reg-candidate{padding:10px}}
 </style><link rel="stylesheet" href="./assets/pharma-mobile-v01035.css"><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><link rel="stylesheet" href="./assets/pharma-pro-ux-v01038.css"><link rel="stylesheet" href="./assets/pharma-pro-reconciliation-v01042.css"><link rel="stylesheet" href="./assets/pharma-disease-index-v01043.css"><script defer src="./assets/theme-chrome-v01036.js"></script></head>
 <body><main>
 <nav class="top" aria-label="Navegación"><a href="./index.html">← KidBum CALC</a><strong class="phone-brand">💊 Pharma Pro <small>v0.10.43</small></strong><button type="button" id="theme">◐ Tema</button></nav>
@@ -97,4 +120,4 @@ main{width:min(1160px,100%);margin:auto;padding:18px 18px 90px}.top{display:flex
 </section>
 <section class="tools" id="integrations" aria-labelledby="integrate"><div class="section-title"><div class="eyebrow">Herramientas ya disponibles</div><h2 id="integrate">Conectado con KidBum</h2><p>Accesos a verificadores existentes. Conservan su propio alcance, restricciones y cálculos.</p></div><div class="integrations"><a href="./index.html">🧮 Cockcroft–Gault y TFG →</a><a href="./index.html">👶 Farmacología pediátrica supervisada →</a><a href="./index.html">💉 Insulin Safety Check →</a></div></section>
 <footer>KidBum Pharma Pro · Datos locales · © KidBum CALC · Acceso a fuentes oficiales únicamente cuando el usuario abre sus enlaces. Los favoritos guardan solo nombres de medicamentos en el dispositivo; ningún dato clínico.</footer>
-</main><script src="./assets/pharma-pro-expansion.js"></script><script src="./assets/pharma-pro-guides-plus.js"></script><script src="./assets/pharma-pro-expansion-index-v01043.js"></script><script src="./assets/pharma-pro-core.js"></script><script src="./assets/pharma-pro-indications-ui.js"></script><script src="./assets/pharma-pro-monographs.js"></script><script src="./assets/pharma-pro-source-audit.js"></script><script src="./assets/pharma-pro-high-alert.js"></script><script src="./assets/pharma-pro-reconciliation-v01042.js"></script><script src="./assets/pharma-pro-monographs-ui.js"></script><script src="./assets/pharma-pro-ui.js"></script><script src="./assets/pharma-pro-reconciliation-ui-v01042.js"></script><script src="./assets/pharma-disease-index-ui-v01043.js"></script><script src="./assets/pharma-pro-quick-ui.js"></script></body></html>
+</main><script src="./assets/pharma-pro-expansion.js"></script><script src="./assets/pharma-pro-guides-plus.js"></script><script src="./assets/pharma-pro-expansion-index-v01043.js"></script><script src="./assets/pharma-pro-core.js"></script><script src="./assets/pharma-pro-indications-ui.js"></script><script src="./assets/pharma-pro-monographs.js"></script><script src="./assets/pharma-pro-source-audit.js"></script><script src="./assets/pharma-pro-high-alert.js"></script><script src="./assets/pharma-pro-reconciliation-v01042.js"></script><script src="./assets/pharma-pro-monographs-ui.js"></script><script src="./assets/pharma-label-lookup-v01049.js"></script><script src="./assets/pharma-pro-ui.js"></script><script src="./assets/pharma-pro-reconciliation-ui-v01042.js"></script><script src="./assets/pharma-disease-index-ui-v01043.js"></script><script src="./assets/pharma-pro-quick-ui.js"></script></body></html>
