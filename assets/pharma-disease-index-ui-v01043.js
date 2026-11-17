@@ -47,6 +47,53 @@ function render(){
  if(matches.length===0)cards.append(create('p','No hay temas con esta búsqueda. Esto no descarta ningún diagnóstico.','pharma-index-empty'));
  more.hidden=matches.length<=limit;more.textContent='Mostrar siguientes '+Math.min(24,matches.length-limit)+' temas';
 }
+/* Pharma 0.10.50: inverse map diagnosis → every mapped medication.
+   Editorial associations are NEVER presented as guideline-backed treatments. */
+const drugMap=root.KidBumPharmaDiagnosisCatalog;
+const dxBox=document.getElementById('pharma-dx-catalog');
+if(dxBox&&drugMap){
+ const dxResults=document.getElementById('pharma-dx-results');
+ const dxStatus=document.getElementById('pharma-dx-status');
+ const dxMore=document.getElementById('pharma-dx-more');
+ const selectPopulation=document.getElementById('disease-pop');
+ let dxLimit=18,expanded=null;
+ function drawDiagnosisMap(){
+  const matches=drugMap.searchDiagnoses(hiddenSearch.value);
+  const pop=selectPopulation?.value||'adult';
+  dxStatus.textContent=drugMap.coverage.mapped+' de '+drugMap.coverage.total+' medicamentos con ≥1 motivo clínico orientativo · '+matches.length+' diagnósticos/motivos coincidentes de '+drugMap.diagnoses.length+'. '+(pop==='adult'?'Sin validación individual ni dosis.':'La consulta NO valida indicaciones en pediatría, neonatología o embarazo.');
+  dxResults.replaceChildren();
+  for(const entry of matches.slice(0,dxLimit)){
+   const item=create('article',undefined,'pharma-dx-entry');
+   item.append(create('strong',entry.name),create('p',entry.medicineIds.length+' medicamentos vinculados · uso orientativo sin cotejo','small muted'));
+   const open=create('button',expanded===entry.name?'Ocultar medicamentos':'Ver medicamentos relacionados');
+   open.type='button';open.setAttribute('aria-expanded',String(expanded===entry.name));
+   open.onclick=()=>{expanded=expanded===entry.name?null:entry.name;drawDiagnosisMap();};
+   item.append(open);
+   if(expanded===entry.name){
+    const meds=create('div',undefined,'pharma-dx-meds');
+    meds.append(create('p','Vínculos editoriales, NO ordenados por eficacia ni recomendados para prescribir. Verifica indicación, edad, formulación y dosis en cada ficha.','small muted'));
+    for(const id of entry.medicineIds){
+     const med=lib?.byId[id];
+     if(!med)continue;
+     const b=create('button',med.name);b.type='button';
+     b.onclick=()=>root.KidBumPharmaUI?.openDrug(id);
+     meds.append(b);
+    }
+    item.append(meds);
+   }
+   dxResults.append(item);
+  }
+  if(!matches.length)dxResults.append(create('p','No hay vínculo editorial con ese término. Prueba un diagnóstico o enfermedad más amplio; no se infiere tratamiento.','small muted'));
+  dxMore.hidden=matches.length<=dxLimit;
+  dxMore.textContent='Mostrar más diagnósticos ('+Math.max(0,matches.length-dxLimit)+' restantes)';
+ }
+ hiddenSearch.addEventListener('input',()=>{dxLimit=18;expanded=null;drawDiagnosisMap();});
+ selectPopulation?.addEventListener('change',drawDiagnosisMap);
+ dxMore.addEventListener('click',()=>{dxLimit+=18;drawDiagnosisMap();});
+ drawDiagnosisMap();
+ root.KidBumPharmaDiagnosisIndexUI=Object.freeze({render:drawDiagnosisMap});
+}
+
 hiddenSearch.addEventListener('input',()=>{limit=24;selected.id=null;render();});
 group.addEventListener('change',()=>{limit=24;selected.id=null;render();});
 more.addEventListener('click',()=>{limit+=24;render();});
