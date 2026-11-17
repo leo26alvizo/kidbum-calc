@@ -311,5 +311,13 @@ const coverage=Object.freeze({total:lib.records.length,mapped:lib.records.length
 function related(id){return byId[id]||[];}
 const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
 function search(q){const t=norm(q);return lib.records.filter(m=>!t||related(m.id).some(c=>norm(c.name).includes(t)));}
-root.KidBumPharmaDiagnosisCatalog=Object.freeze({byId,related,search,coverage,missingIds,status:'ORIENTATIVO — pendiente de cotejo individual'}); 
+const conditionMap=new Map();
+for(const med of lib.records)for(const d of related(med.id)){
+ const key=norm(d.name);
+ if(!conditionMap.has(key))conditionMap.set(key,{name:d.name,medicines:[]});
+ conditionMap.get(key).medicines.push(med.id);
+}
+const diagnoses=Object.freeze([...conditionMap.values()].sort((a,b)=>a.name.localeCompare(b.name,'es')).map(entry=>Object.freeze({name:entry.name,medicineIds:Object.freeze(entry.medicines)})));
+function searchDiagnoses(q=''){const t=norm(q);return t?diagnoses.filter(d=>norm(d.name).includes(t)):diagnoses;}
+root.KidBumPharmaDiagnosisCatalog=Object.freeze({byId,related,search,diagnoses,searchDiagnoses,coverage,missingIds,status:'ORIENTATIVO — pendiente de cotejo individual'}); 
 })(typeof window!=='undefined'?window:globalThis);
