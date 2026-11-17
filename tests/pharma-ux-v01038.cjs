@@ -18,7 +18,7 @@ assert.match(ui,/pharma-ux-full/);
 assert.match(ui,/aria-pressed/);
 assert.match(ui,/pharmaFold\('Referencia posológica/);
 assert.match(ui,/KidBumPharmaMonographUI\.render\(id\)/);
-assert.match(ui,/KidBumPharmaIndicationsUI\?\.filterByDrug/);
+assert.match(ui,/KidBumPharmaIndicationsUI\?\.renderForDrug/,'Drug details must display source-linked diagnoses in the quick and complete views');
 assert.match(ui,/KidBumPharmaQuick\?\.onDrugOpen/);
 assert.match(ui,/No hay pauta|no cuenta con pauta posológica cotejada/);
 assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
