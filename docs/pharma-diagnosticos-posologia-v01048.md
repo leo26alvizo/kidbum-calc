@@ -36,3 +36,13 @@ Cada fármaco requiere revisión independiente de: diagnóstico exacto y línea 
 Los medicamentos de alto riesgo, neonatos, pacientes críticos, anticoagulantes, insulinas, quimioterapia y perfusiones IV precisan puerta de seguridad específica; las dosis no deben inferirse desde otras formulaciones. Cada ficha debe tener casos de prueba independientes y revisión clínica/farmacéutica antes del uso asistencial.
 
 Prueba nueva: tests/pharma-diagnoses-v01048.cjs, añadida al CI. Las pruebas técnicas no equivalen a una validación médica independiente.
+
+## Consulta de etiquetas oficiales por presentación — v0.10.49
+
+Se añadió un lector **opt-in** para los 643 medicamentos: al abrir la ficha, el usuario puede solicitar al API público de openFDA una lista de etiquetas estadounidenses candidatas. Debe **elegir explícitamente** la etiqueta concreta; por seguridad **nunca** se adopta automáticamente la primera coincidencia (una búsqueda simple puede devolver productos combinados, vías y concentraciones diferentes). Al seleccionarla se muestran las secciones originales: indicaciones/uso, dosis y administración, presentaciones, contraindicaciones, advertencias, interacciones, pediatría, geriatría, embarazo y función renal/hepática cuando la etiqueta contenga el dato. Se ofrece acceso a DailyMed para cotejar el documento completo.
+
+**Importante:** este mecanismo NO añade 631 pautas mexicanas validadas ni garantiza que los 643 principios activos tengan etiqueta estadounidense encontrada. No traduce, interpreta ni transforma regímenes en prescripciones; los textos pertenecen a la etiqueta seleccionada, no se ha verificado la equivalencia con la formulación de un producto mexicano. La información está disponible solamente con conexión, mediante clic voluntario; no se transmiten signos vitales, datos de pacientes ni selecciones farmacológicas salvo el término de búsqueda. El resto del catálogo sigue operando sin conexión.
+
+**Fuente API:** https://open.fda.gov/apis/drug/label/ . openFDA aclara que la documentación de medicamentos presentada es información enviada por empresas, reformateada, sin validación farmacológica individual por la FDA y no destinada por sí sola a decisiones de atención médica. Diario oficial mexicano: verificar siempre la IPP, registro COFEPRIS y protocolos del centro.
+
+**Prueba:** `node tests/pharma-official-label-v01049.cjs` (643 aperturas sin llamadas involuntarias, selección manual antes de mostrar dosis, secciones originales y ausencia de almacenamiento de datos clínicos). No equivale a pruebas de la conexión real, aprobación de fuentes o validación clínica independiente.
