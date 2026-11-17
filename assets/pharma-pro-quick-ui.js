@@ -30,11 +30,21 @@ function selectSuggestion(index){
 }
 function currentItems(){
  const q=quick.value.trim();if(!q)return [];
- if(state.view==='drugs')return lib.search(q,'all','all',false).slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':''),kind:'drug'}));
+ if(state.view==='drugs'){
+  const matches=[...lib.search(q,'all','all',false)];
+  for(const med of root.KidBumPharmaDiagnosisCatalog?.search(q)||[]){
+   if(!matches.some(x=>x.id===med.id))matches.push(med);
+  }
+  return matches.slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':'')+(lib.search(q).some(y=>y.id===x.id)?'':' · diagnóstico orientativo'),kind:'drug'}));
+ }
  if(state.view==='diseases'){
   const routes=lib.searchConditions(q).slice(0,4).map(x=>({id:x.id,label:x.name,info:'Ruta terapéutica documentada · adultos',kind:'disease'}));
   const topics=(root.KidBumPharmaExpansionIndex?.searchDiseases(q)||[]).slice(0,7-routes.length).map(x=>({id:x.id,label:x.name,info:'Índice clínico · SIN tratamiento cotejado',kind:'topic'}));
-  return [...routes,...topics];
+  const editorial=(root.KidBumPharmaDiagnosisCatalog?.searchDiagnoses(q)||[])
+    .filter(entry=>!routes.some(x=>x.label===entry.name)&&!topics.some(x=>x.label===entry.name))
+    .slice(0,Math.max(0,7-routes.length-topics.length))
+    .map(x=>({id:x.name,label:x.name,info:x.medicineIds.length+' medicamentos vinculados · índice orientativo SIN validación de tratamiento',kind:'editorial'}));
+  return [...routes,...topics,...editorial];
  }
  return [];
 }
@@ -42,6 +52,11 @@ function openItem(item){
  hideSuggestions();
  if(item.kind==='drug'){root.KidBumPharmaUI.openDrug(item.id);}
  else if(item.kind==='topic')root.KidBumPharmaIndexUI?.openDisease(item.id);
+ else if(item.kind==='editorial'){
+  quick.value=item.label;state.history.diseases=item.label;
+  dispatch('disease-search',item.label);
+  $('pharma-dx-catalog')?.scrollIntoView({behavior:'smooth',block:'start'});
+ }
  else if(root.KidBumPharmaIndicationsUI?.openCondition)root.KidBumPharmaIndicationsUI.openCondition(item.id);
 }
 function fillSuggestions(){

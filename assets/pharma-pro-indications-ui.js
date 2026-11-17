@@ -62,6 +62,20 @@ function renderForDrug(id){
   container.append(node('p','Todavía no hay una relación medicamento–diagnóstico cotejada individualmente para esta entrada. No significa que carezca de indicaciones clínicas.','pharma-indication-pending'));
   container.append(node('p','Descripción del índice (NO equivale a indicación autorizada): '+med.use,'small muted'));
  }
+ /* Catálogo editorial completo: todos los medicamentos cuentan con al menos
+    un diagnóstico o contexto clínico, sin afirmar validación por ficha o uso en México. */
+ const editorial=root.KidBumPharmaDiagnosisCatalog?.related(id)||[];
+ if(editorial.length){
+  const section=node('div',undefined,'pharma-orientative-wrap');
+  section.append(node('h4','Diagnósticos o motivos de uso asociados · revisión pendiente'));
+  section.append(node('p','Relaciones clínicas editoriales para orientar la búsqueda. NO son indicaciones aprobadas ni confirman que este medicamento sea preferible, seguro o esté disponible para este diagnóstico en México.','small muted'));
+  const list=node('ul',undefined,'pharma-orientative-list');
+  for(const item of editorial)list.append(node('li',item.name));
+  section.append(list,node('p','Para las intervenciones de anestesia, anticoncepción o diagnósticos por procedimientos se indica el motivo clínico de uso; no necesariamente una enfermedad. Confirmar producto, población, contraindicaciones y guía antes de usar.','small muted'));
+  container.append(section);
+ }else{
+  container.append(node('p','⚠ Asociación de uso clínico ausente; requiere corrección editorial.','pharma-indication-pending'));
+ }
  const dose=node('div',undefined,'pharma-drug-dose');
  dose.append(node('h3','💊 Dosis y esquemas por diagnóstico'));
  const verified=doseForDrug(id);

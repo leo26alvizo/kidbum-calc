@@ -55,10 +55,28 @@ html.dark .pharma-reg-search button,html.dark .pharma-reg-candidate button{color
 .pharma-reg-links{display:flex;flex-wrap:wrap;gap:11px;margin-top:6px}
 .pharma-reg-links a,.pharma-reg-label-detail a{font-size:12px;overflow-wrap:anywhere}
 @media(max-width:590px){.pharma-reg-search{grid-template-columns:1fr}.pharma-reg-search button{width:100%}.pharma-reg-label{padding:12px}.pharma-reg-candidate{padding:10px}}
+
+/* Pharma 0.10.50 · diagnóstico → medicamentos (orientativo, no posológico) */
+.pharma-orientative-wrap{border:1px solid var(--line);border-radius:11px;padding:12px;background:var(--bg);display:grid;gap:8px}
+.pharma-orientative-wrap h4{font-size:14px;margin:0;color:var(--ink)}
+.pharma-orientative-wrap p{margin:0}
+.pharma-orientative-list{margin:0;padding-left:20px;font-size:13px;line-height:1.7}
+.pharma-dx-catalog{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0;display:grid;gap:11px}
+.pharma-dx-catalog h3{font-size:17px;margin:0}
+.pharma-dx-catalog p{margin:0;line-height:1.55}
+.pharma-dx-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.pharma-dx-entry{padding:12px;border-radius:11px;background:var(--bg);border:1px solid var(--line);display:grid;gap:8px}
+.pharma-dx-entry strong{font-size:13px;line-height:1.4}
+.pharma-dx-entry .small{margin:0}
+.pharma-dx-entry button{font:inherit;font-size:12px;min-height:40px;background:var(--panel);color:var(--accent);border:1px solid var(--accent);border-radius:9px;cursor:pointer;padding:8px}
+.pharma-dx-meds{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:8px}
+.pharma-dx-meds button{text-align:left;color:var(--ink);border-color:var(--line)}
+.pharma-dx-catalog #pharma-dx-more{justify-self:center}
+@media(max-width:700px){.pharma-dx-results{grid-template-columns:1fr}.pharma-dx-catalog{padding:13px}}
 </style><link rel="stylesheet" href="./assets/pharma-mobile-v01035.css"><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><link rel="stylesheet" href="./assets/pharma-pro-ux-v01038.css"><link rel="stylesheet" href="./assets/pharma-pro-reconciliation-v01042.css"><link rel="stylesheet" href="./assets/pharma-disease-index-v01043.css"><script defer src="./assets/theme-chrome-v01036.js"></script></head>
 <body><main>
-<nav class="top" aria-label="Navegación"><a href="./index.html">← KidBum CALC</a><strong class="phone-brand">💊 Pharma Pro <small>v0.10.49 · fuentes externas</small></strong><button type="button" id="theme">◐ Tema</button></nav>
-<header class="hero"><div class="eyebrow">KidBum · Biblioteca clínica</div><h1>Pharma Pro <span aria-hidden="true">💊</span></h1><p>Medicamentos, enfermedades y seguridad farmacológica. 643 entradas farmacológicas y 205 temas diagnósticos para buscar, con 15 rutas terapéuticas documentadas y límites explícitos de evidencia. Ahora puedes consultar etiquetas oficiales por producto cuando tengas internet; las dosis no verificadas en México se identifican claramente.</p><div class="hero-meta"><span id="num-meds">Catálogo farmacológico ampliado</span><span>9 cotejos parciales · 0 validaciones clínicas independientes</span><span>Sin conexión tras instalar</span><span>Sin cuentas ni datos de pacientes</span></div></header>
+<nav class="top" aria-label="Navegación"><a href="./index.html">← KidBum CALC</a><strong class="phone-brand">💊 Pharma Pro <small>v0.10.50 · diagnósticos</small></strong><button type="button" id="theme">◐ Tema</button></nav>
+<header class="hero"><div class="eyebrow">KidBum · Biblioteca clínica</div><h1>Pharma Pro <span aria-hidden="true">💊</span></h1><p>Medicamentos, enfermedades y seguridad farmacológica. 643 entradas farmacológicas y 205 temas diagnósticos para buscar, con 15 rutas terapéuticas documentadas y límites explícitos de evidencia. Los 643 medicamentos están asociados al menos a un diagnóstico o motivo clínico de uso: las asociaciones editoriales se diferencian de las rutas verificadas. Puedes consultar etiquetas oficiales por producto con internet; las dosis no verificadas en México se identifican claramente.</p><div class="hero-meta"><span id="num-meds">Catálogo farmacológico ampliado</span><span>9 cotejos parciales · 0 validaciones clínicas independientes</span><span>Sin conexión tras instalar</span><span>Sin cuentas ni datos de pacientes</span></div></header>
 <nav class="pharma-workspace-nav" id="pharma-view-nav" aria-label="Modo de consulta">
 <button type="button" class="active" data-pharma-view="drugs" aria-pressed="true">💊 Medicamentos</button>
 <button type="button" data-pharma-view="diseases" aria-pressed="false">🩺 Enfermedades</button>
@@ -83,6 +101,14 @@ html.dark .pharma-reg-search button,html.dark .pharma-reg-candidate button{color
  <p id="pharma-index-counter" class="pharma-index-count" role="status"></p>
  <div id="pharma-index-results" class="pharma-index-grid"></div>
  <button id="pharma-index-more" type="button" class="pharma-index-more" hidden>Mostrar más temas</button>
+ </section>
+ <section id="pharma-dx-catalog" class="pharma-dx-catalog" aria-labelledby="pharma-dx-catalog-title">
+  <div class="eyebrow">Mapa de uso clínico · cobertura completa del catálogo</div>
+  <h3 id="pharma-dx-catalog-title">Diagnóstico → medicamentos relacionados</h3>
+  <p class="small">Explora asociaciones clínicas orientativas de los 643 medicamentos. Son vínculos editoriales para búsqueda, <strong>no tratamientos validados ni indicaciones autorizadas</strong>. Para prescribir se requiere verificar indicación, presentación, población, dosis, contraindicaciones y fuentes regulatorias.</p>
+  <p id="pharma-dx-status" class="small muted" role="status"></p>
+  <div id="pharma-dx-results" class="pharma-dx-results"></div>
+  <button id="pharma-dx-more" type="button" class="button" hidden>Ver más diagnósticos asociados</button>
  </section>
  <div class="panel"><div class="form-grid"><div class="field" id="disease-advanced-search"><label for="disease-search">Enfermedad o diagnóstico</label><input type="search" id="disease-search" placeholder="Ej. hipertensión, diabetes tipo 2, asma, cistitis…" autocomplete="off"></div>
  <div class="field"><label for="disease-pop">Población de la recomendación</label><select id="disease-pop"><option value="adult">Adultos no embarazados (guías disponibles)</option><option value="pediatric">Pediatría · no validado</option><option value="neonate">Neonatología · no validado</option><option value="pregnancy">Embarazo · no validado</option></select></div></div>
@@ -120,4 +146,4 @@ html.dark .pharma-reg-search button,html.dark .pharma-reg-candidate button{color
 </section>
 <section class="tools" id="integrations" aria-labelledby="integrate"><div class="section-title"><div class="eyebrow">Herramientas ya disponibles</div><h2 id="integrate">Conectado con KidBum</h2><p>Accesos a verificadores existentes. Conservan su propio alcance, restricciones y cálculos.</p></div><div class="integrations"><a href="./index.html">🧮 Cockcroft–Gault y TFG →</a><a href="./index.html">👶 Farmacología pediátrica supervisada →</a><a href="./index.html">💉 Insulin Safety Check →</a></div></section>
 <footer>KidBum Pharma Pro · Datos locales · © KidBum CALC · Acceso a fuentes oficiales únicamente cuando el usuario abre sus enlaces. Los favoritos guardan solo nombres de medicamentos en el dispositivo; ningún dato clínico.</footer>
-</main><script src="./assets/pharma-pro-expansion.js"></script><script src="./assets/pharma-pro-guides-plus.js"></script><script src="./assets/pharma-pro-expansion-index-v01043.js"></script><script src="./assets/pharma-pro-core.js"></script><script src="./assets/pharma-pro-indications-ui.js"></script><script src="./assets/pharma-pro-monographs.js"></script><script src="./assets/pharma-pro-source-audit.js"></script><script src="./assets/pharma-pro-high-alert.js"></script><script src="./assets/pharma-pro-reconciliation-v01042.js"></script><script src="./assets/pharma-pro-monographs-ui.js"></script><script src="./assets/pharma-label-lookup-v01049.js"></script><script src="./assets/pharma-pro-ui.js"></script><script src="./assets/pharma-pro-reconciliation-ui-v01042.js"></script><script src="./assets/pharma-disease-index-ui-v01043.js"></script><script src="./assets/pharma-pro-quick-ui.js"></script></body></html>
+</main><script src="./assets/pharma-pro-expansion.js"></script><script src="./assets/pharma-pro-guides-plus.js"></script><script src="./assets/pharma-pro-expansion-index-v01043.js"></script><script src="./assets/pharma-pro-core.js"></script><script src="./assets/pharma-drug-diagnoses-v01050.js"></script><script src="./assets/pharma-pro-indications-ui.js"></script><script src="./assets/pharma-pro-monographs.js"></script><script src="./assets/pharma-pro-source-audit.js"></script><script src="./assets/pharma-pro-high-alert.js"></script><script src="./assets/pharma-pro-reconciliation-v01042.js"></script><script src="./assets/pharma-pro-monographs-ui.js"></script><script src="./assets/pharma-label-lookup-v01049.js"></script><script src="./assets/pharma-pro-ui.js"></script><script src="./assets/pharma-pro-reconciliation-ui-v01042.js"></script><script src="./assets/pharma-disease-index-ui-v01043.js"></script><script src="./assets/pharma-pro-quick-ui.js"></script></body></html>

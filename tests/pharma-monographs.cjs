@@ -89,7 +89,7 @@ assert.match(parent,/Referencia posológica parcial/);
 assert.match(page,/assets\/pharma-pro-monographs\.js/);
 assert.match(page,/assets\/pharma-pro-monographs-ui\.js/);
 const scriptPaths=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.deepEqual(scriptPaths,['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-expansion-index-v01043.js','assets/pharma-pro-core.js','assets/pharma-pro-indications-ui.js' ,'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-reconciliation-v01042.js','assets/pharma-pro-monographs-ui.js','assets/pharma-label-lookup-v01049.js','assets/pharma-pro-ui.js','assets/pharma-pro-reconciliation-ui-v01042.js','assets/pharma-disease-index-ui-v01043.js','assets/pharma-pro-quick-ui.js']);
+assert.deepEqual(scriptPaths,['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-expansion-index-v01043.js','assets/pharma-pro-core.js','assets/pharma-drug-diagnoses-v01050.js','assets/pharma-pro-indications-ui.js' ,'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-reconciliation-v01042.js','assets/pharma-pro-monographs-ui.js','assets/pharma-label-lookup-v01049.js','assets/pharma-pro-ui.js','assets/pharma-pro-reconciliation-ui-v01042.js','assets/pharma-disease-index-ui-v01043.js','assets/pharma-pro-quick-ui.js']);
 for(const path of scriptPaths)assert.ok(sw.includes("'./"+path+"'"),'offline '+path);
 assert.match(sw,/monographs-v01030/);
 assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.47"/);
