@@ -105,3 +105,15 @@ html.dark .alg-peds .alg-search input{background:#232d36}
 @media(max-width:520px){.alg-peds .alg-main{padding-left:12px;padding-right:12px}.alg-peds .alg-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.alg-peds .alg-tile{min-height:209px;padding:13px}.alg-peds .alg-tile h3{font-size:16px}.alg-peds .alg-tile p{font-size:12px}.alg-peds .alg-header-in{padding-left:15px;padding-right:15px}.alg-peds .alg-question{padding:17px 13px}.alg-peds .alg-mode{flex-wrap:wrap}}
 @media(max-width:340px){.alg-peds .alg-grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){.alg-peds .alg-tile,.alg-peds .alg-option{transition:none}}
+
+/* Phase II · priority tiles and one-tap supporting scales */
+.alg-peds .alg-tile:has(.alg-tile-tag){position:relative}
+.alg-peds .alg-tile-tag{display:block;text-align:right;max-width:108px;line-height:1.35}
+.alg-peds .alg-tools[hidden]{display:none}
+.alg-peds .alg-tools{margin-top:14px;padding:13px;border:1px solid var(--p-line);background:var(--p-card);border-radius:14px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.alg-peds .alg-tools-heading{font-size:12px;color:var(--p-muted);width:100%}
+.alg-peds .alg-tool-link{display:inline-flex;align-items:center;min-height:44px;border-radius:11px;padding:10px 14px;border:1px solid #91cbd1;background:var(--p-soft);color:var(--p-teal);font-size:13px;font-weight:800;text-decoration:none}
+.alg-peds .alg-tool-link:focus-visible{outline:3px solid #f8ad33}
+.alg-peds .alg-tool-link:hover{text-decoration:underline}
+html.dark .alg-peds .alg-tool-link{border-color:#457c82}
+@media(max-width:520px){.alg-peds .alg-tool-link{width:100%;justify-content:center}.alg-peds .alg-tile-tag{font-size:10px}}

@@ -19,14 +19,15 @@ function updateControls(){
  $('alg-mode-estudio').setAttribute('aria-pressed',String(state.mode==='estudio'));
 }
 function renderLibrary(){
- const matches=engine.search(state.query,state.category);
+ const priority={crítica:0,prioritaria:1};
+ const matches=[...engine.search(state.query,state.category)].sort((a,b)=>(priority[a.urgency]??2)-(priority[b.urgency]??2)||a.title.localeCompare(b.title,'es'));
  $('alg-count').textContent=matches.length+' de '+engine.algorithms.length+' disponibles';
  $('alg-grid').replaceChildren();
  for(const a of matches){
   const b=elem('button',undefined,'alg-tile');b.type='button';b.dataset.algoId=a.id;
   b.setAttribute('aria-label','Abrir algoritmo '+a.title);
   const top=elem('span',undefined,'alg-tile-top');
-  top.append(elem('span',a.icon,'alg-tile-icon'),elem('span',a.time,'alg-tile-tag'));
+  top.append(elem('span',a.icon,'alg-tile-icon'),elem('span',(a.urgency==='crítica'?'🚨 ':'')+a.time,'alg-tile-tag'));
   b.append(top,elem('h3',a.title),elem('p',a.subtitle),elem('span','Iniciar algoritmo →','alg-tile-open'));
   b.addEventListener('click',()=>open(a.id));
   $('alg-grid').append(b);
@@ -40,6 +41,26 @@ function routeUrl(id){
 function showSection(active){
  $('alg-library').hidden=active;
  $('alg-flow').hidden=!active;
+}
+const CLINICAL_TOOLS=Object.freeze({
+ sepsis:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
+ 'asma-crisis':[['📊 PRAM · gravedad de asma','./expansion-20.html#pram']],
+ crup:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
+ bronquiolitis:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
+ neumonia:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
+ convulsion:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
+ ictericia:[['👶 Zonas de Kramer · NO estima bilirrubina','./pediatria-evaluacion-rapida.html#kramer']]
+});
+function renderTools(id){
+ const panel=$('alg-tools');if(!panel)return;
+ panel.replaceChildren();const items=CLINICAL_TOOLS[id]||[];
+ panel.hidden=items.length===0;
+ if(!items.length)return;
+ panel.append(elem('strong','Herramientas relacionadas · no sustituyen la valoración','alg-tools-heading'));
+ for(const [label,href] of items){
+  const link=elem('a',label,'alg-tool-link');
+  link.href=href;panel.append(link);
+ }
 }
 function open(id){
  const a=engine.byId[id];
@@ -56,6 +77,7 @@ function open(id){
   link.href=s.url;link.target='_blank';link.rel='noopener noreferrer';li.append(link);ul.append(li);
  }
  refs.append(ul,elem('p','Guías utilizadas para adaptar el flujo. El año de la fuente no certifica su vigencia o adopción institucional en México. No contiene órdenes, dosis ni cálculo de tratamiento.'));
+ renderTools(id);
  showSection(true);routeUrl(id);renderFlow();
  $('alg-flow').scrollIntoView({block:'start',behavior:'smooth'});
  return true;
@@ -86,7 +108,7 @@ function restart(){
 }
 function renderRail(){
  const step=engine.getStep(state.active,state.current);
- const max=state.active==='sepsis'?3:4;
+ const max=Math.min(6,Math.max(3,engine.byId[state.active]&&Object.keys(engine.byId[state.active].nodes).length+1||3));
  const completed=Math.min(max,state.path.length+(step?.kind==='outcome'?1:0)+1);
  const rail=$('alg-rail');rail.replaceChildren();
  for(let i=0;i<max;i++)rail.append(elem('span',undefined,i<completed?'active':''));

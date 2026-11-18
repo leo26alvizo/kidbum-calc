@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b3448">
-<meta name="kidbum-app-version" content="0.10.51">
-<meta name="description" content="Algoritmos pediátricos rápidos e interactivos: deshidratación, bronquiolitis, sepsis e ictericia. Decisiones visuales y signos de alarma con fuentes oficiales.">
+<meta name="kidbum-app-version" content="0.10.52">
+<meta name="description" content="Doce algoritmos pediátricos visuales: anafilaxia, convulsiones, hipoglucemia, cetoacidosis, asma, crup, neumonía, lactante febril y más. Decisiones visuales y signos de alarma con fuentes oficiales.">
 <title>Algoritmos de Pediatría · KidBum</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css">
@@ -16,11 +16,11 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
 </head>
 <body class="alg-peds">
 <header class="alg-header"><div class="alg-header-in">
- <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html">← KidBum · Pediatría</a><span class="alg-version">v0.10.51 · offline</span></nav>
+ <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html">← KidBum · Pediatría</a><span class="alg-version">v0.10.52 · offline</span></nav>
  <div class="alg-kicker">⚡ KidBum · Biblioteca de decisiones clínicas</div>
  <h1>Algoritmos<br>pediátricos.</h1>
  <p class="alg-hero-text">Rápidos de consultar, visuales y con prioridad en la seguridad. Selecciona hallazgos clínicos para recorrer un árbol de decisión. Sin recetas ni dosis inferidas.</p>
- <div class="alg-hero-bottom"><span class="alg-hero-chip">🩺 4 rutas iniciales</span><span class="alg-hero-chip">⚠️ Peligro primero</span><span class="alg-hero-chip">📴 Sin conexión</span><span class="alg-hero-chip">🔍 Fuentes en cada ruta</span></div>
+ <div class="alg-hero-bottom"><span class="alg-hero-chip">🩺 12 rutas interactivas</span><span class="alg-hero-chip">⚠️ Peligro primero</span><span class="alg-hero-chip">📴 Sin conexión</span><span class="alg-hero-chip">🔍 Fuentes en cada ruta</span></div>
 </div></header>
 <main class="alg-main" id="alg-main">
 <div class="alg-alert" role="note"><span aria-hidden="true" style="font-size:22px">⚠️</span><div><b>Prioridad clínica</b>Ante apnea, choque, cianosis, convulsión, alteración grave de conciencia o deterioro: activar atención urgente y estabilización ABCDE. No usar el cuestionario como condición para actuar.</div></div>
@@ -33,11 +33,12 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
    <button type="button" class="alg-chip" data-category="Neumología" aria-pressed="false">🫁 Neumología</button>
    <button type="button" class="alg-chip" data-category="Gastroenterología" aria-pressed="false">💧 Gastro</button>
    <button type="button" class="alg-chip" data-category="Neonatología" aria-pressed="false">👶 Neonatos</button>
+   <button type="button" class="alg-chip" data-category="Infectología" aria-pressed="false">🦠 Infecciones</button>
   </div>
  </div>
  <div class="alg-section-intro"><h2 id="alg-library-title">Selecciona un algoritmo</h2><span id="alg-count" class="alg-count" aria-live="polite"></span></div>
  <div id="alg-grid" class="alg-grid"></div>
- <div class="alg-safety-note">ℹ️ Primera entrega: cuatro rutas interactivas, con alcance y bibliografía explícitos. No se incluyen los demás algoritmos proyectados hasta completar revisión clínica y pruebas.</div>
+ <div class="alg-safety-note">ℹ️ Segunda entrega: 12 algoritmos interactivos, ocho de ellos nuevos. Las rutas aún pendientes de revisión no se anuncian como publicadas.</div>
 </section>
 <section class="alg-flow" id="alg-flow" aria-labelledby="alg-flow-title" hidden>
  <div class="alg-flow-header">
@@ -47,13 +48,15 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
  </div>
  <div id="alg-rail" class="alg-rail" role="img" aria-label="Avance del algoritmo"></div>
  <div id="alg-interaction" aria-live="polite" aria-atomic="true"></div>
+ <div id="alg-tools" class="alg-tools" aria-label="Herramientas complementarias" hidden></div>
  <div class="alg-actions"><button type="button" class="alg-secondary" id="alg-back-step">← Anterior</button><button type="button" class="alg-secondary" id="alg-restart">↺ Reiniciar</button><button type="button" class="alg-secondary" id="alg-theme">◐ Tema</button></div>
  <p id="alg-trail" class="alg-trail"></p>
  <details class="alg-evidence" id="alg-evidence"><summary>📚 Ámbito y fuentes de esta ruta</summary><div id="alg-evidence-content"></div></details>
  <p class="alg-safety-note">No es un diagnóstico automático, clasificación validada, indicación de alta ni orden médica. Usar los protocolos institucionales y el juicio del equipo tratante; en dudas, escalar.</p>
 </section>
 </main>
-<footer class="alg-footer">KidBum CALC · Algoritmos Pediátricos 0.10.51 · Decisiones orientativas y fuentes identificadas · Ningún dato del paciente se envía ni se almacena.</footer>
+<footer class="alg-footer">KidBum CALC · Algoritmos Pediátricos 0.10.52 · Decisiones orientativas y fuentes identificadas · Ningún dato del paciente se envía ni se almacena.</footer>
 <script src="./assets/pediatria-algoritmos-core-v01051.js"></script>
+<script src="./assets/pediatria-algoritmos-extension-v01052.js"></script>
 <script src="./assets/pediatria-algoritmos-ui-v01051.js"></script>
 </body></html>
