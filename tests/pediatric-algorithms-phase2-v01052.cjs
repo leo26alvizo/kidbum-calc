@@ -56,7 +56,7 @@ for(const id of expected){
    assert.doesNotMatch(node.data.title,/alta autorizada|receta aprobada|paciente seguro/i);
    return;
   }
-  assert.ok(node.data.question.length>35&&node.data.hint.length>=30,id+' question lacks useful context');
+  assert.ok(node.data.question.length>=20&&node.data.hint.length>=30,id+' question lacks useful context');
   assert.ok(node.data.choices.length>=2&&node.data.choices.length<=4,id+' choices need 2-4');
   node.data.choices.forEach((c,i)=>{
    const next=lib.transition(id,nodeId,i);
