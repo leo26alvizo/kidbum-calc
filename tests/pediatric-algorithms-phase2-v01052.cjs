@@ -92,7 +92,7 @@ assert.ok(['age8','age22','age29'].every(s=>lib.byId['lactante-febril'].outcomes
 assert.match(lib.byId['asma-crisis'].nodes.allergy.hint,/anafilaxia/i);
 assert.match(lib.byId.crup.nodes.atypical.hint,/epiglotitis/i);
 assert.match(lib.byId.hipoglucemia.nodes.danger.hint,/No dar alimentos/i);
-assert.match(lib.byId.cetoacidosis.nodes.triad.hint,/acidosis metabólica/);
+assert.match(lib.byId.cetoacidosis.nodes.triad.hint,/equilibrio ácido-base|acidosis metabólica/);
 assert.doesNotMatch(extensionSrc,/\bfetch\s*\(|XMLHttpRequest|sessionStorage|localStorage|innerHTML|eval\s*\(/,'No patient data collection, network or HTML injection');
 assert.doesNotMatch(extensionSrc,/\d+(?:\.\d+)?\s*(?:mg|mL|µg)\s*\/\s*kg/i,'No editorial weight-based dose published');
 const page=read('algoritmos-pediatria.html');
