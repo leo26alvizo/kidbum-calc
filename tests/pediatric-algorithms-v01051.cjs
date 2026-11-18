@@ -69,7 +69,7 @@ assert.match(page,/id="alg-interaction"/);
 assert.match(page,/id="alg-mode-guardia"/);
 assert.match(page,/id="alg-mode-estudio"/);
 assert.match(page,/id="alg-search-input"/);
-assert.match(page,/algoritmos-pediatria/);
+assert.match(page,/id="alg-library"/);
 assert.match(index,/class="ped-alg-tile"/);
 assert.match(index,/data-ped-alg/);
 assert.match(index,/location\.assign\('\.\/algoritmos-pediatria\.html'\)/);
