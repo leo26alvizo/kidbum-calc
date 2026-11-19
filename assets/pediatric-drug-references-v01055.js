@@ -7,8 +7,8 @@
  */
 (function(root){
 'use strict';
-const bridge=root.KidBumPediatricTherapyBridge;
-if(!bridge)throw Error('Cargar primero el puente pediátrico 0.10.54');
+const bridge=root.KidBumPediatricTherapyBridge||null;
+/* Standalone in Pharma Pro; linked-graph validation runs when bridge is loaded. */
 const SOURCE=Object.freeze({
  AHA_PALS:{name:'AHA/AAP · PALS 2025',year:'2025',url:'https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/pediatric-advanced-life-support'},
  AHA_BRADY:{name:'AHA/AAP · algoritmo de bradicardia pediátrica 2025',year:'2025',url:'https://cpr.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Algorithms/Algorithm-PALS-Bradycardia-250121.pdf'},
@@ -264,7 +264,7 @@ function find(id,algorithm,outcome){
 function validate(){
  const errors=[];
  const linked=new Set();
- for(const a of Object.values(bridge.byId)){
+ for(const a of Object.values(bridge?.byId||{})){
   for(const [outcome,branch] of Object.entries(a.branches)){
    for(const d of branch.medicines){linked.add(d.id);const x=find(d.id,Object.entries(bridge.byId).find(([k,v])=>v===a)?.[0],outcome);
     if(!x)errors.push('Sin ficha: '+d.id);
@@ -273,13 +273,13 @@ function validate(){
  }
  for(const id of linked)if(!M[id])errors.push('Falta dosier activo '+id);
  for(const [id,record] of Object.entries(M)){
-  if(!bridge.drugs[id])errors.push('ID inexistente Pharma Pro '+id);
+  if(bridge&&!bridge.drugs[id])errors.push('ID inexistente Pharma Pro '+id);
   if(!record.source||!SOURCE[record.source])errors.push(id+': fuente principal ausente');
   if(!record.watch.length||!record.avoid.length||!record.renal||!record.hepatic)errors.push(id+': seguridad incompleta');
   for(const r of record.regimens){
    if(!SOURCE[r.source])errors.push(id+': referencia no encontrada '+r.id);
    if(!r.doseText||!r.route||!r.interval||!r.maximum||!r.guard||!r.monitor)errors.push(id+': información parcial '+r.id);
-   for(const out of r.branches){const p=bridge.get(r.algorithm,out);if(!p||!p.drugs.some(d=>d.id===id))errors.push(id+': ruta o indicación no vinculada '+r.algorithm+'/'+out);}
+   for(const out of r.branches){if(!bridge)continue;const p=bridge.get(r.algorithm,out);if(!p||!p.drugs.some(d=>d.id===id))errors.push(id+': ruta o indicación no vinculada '+r.algorithm+'/'+out);}
   }
  }
  return errors;
