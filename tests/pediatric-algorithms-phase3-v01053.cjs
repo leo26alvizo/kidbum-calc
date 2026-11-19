@@ -91,12 +91,12 @@ assert.doesNotMatch(extension,/\bfetch\s*\(|XMLHttpRequest|sessionStorage|localS
 assert.doesNotMatch(extension,/\b\d+(?:\.\d+)?\s*(?:mg|mL|µg)\s*\/\s*kg/i,'No automatic or unverified prescriptions');
 const html=read('algoritmos-pediatria.html'),home=read('index.html'),sw=read('sw.js'),ui=read('assets/pediatria-algoritmos-ui-v01051.js');
 assert.match(html,/content="0\.10\.53"/);
-assert.match(html,/28 rutas interactivas/);
+assert.match(html,/28 rutas \+ tratamientos/);
 assert.match(html,/data-category="Hospitalización"/);
 const scripts=[...html.matchAll(/<script src="\.\/([^"]+)"/g)].map(m=>m[1]);
 const idx=scripts.indexOf(files[2]);
 assert.ok(idx>scripts.indexOf(files[1])&&idx<scripts.indexOf('assets/pediatria-algoritmos-ui-v01051.js'),'Extension must load before UI');
-assert.match(home,/28 rutas visuales/);
+assert.match(home,/28 algoritmos \+ tratamientos/);
 assert.match(home,/data-ped-alg/);
 assert.match(ui,/reanimacion-neonatal/);
 assert.match(ui,/apendicitis-pediatrica/);
