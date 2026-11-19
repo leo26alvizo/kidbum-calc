@@ -90,7 +90,7 @@ const extension=read(files[2]);
 assert.doesNotMatch(extension,/\bfetch\s*\(|XMLHttpRequest|sessionStorage|localStorage|innerHTML|eval\s*\(/,'Clinical graph must never collect patient data');
 assert.doesNotMatch(extension,/\b\d+(?:\.\d+)?\s*(?:mg|mL|µg)\s*\/\s*kg/i,'No automatic or unverified prescriptions');
 const html=read('algoritmos-pediatria.html'),home=read('index.html'),sw=read('sw.js'),ui=read('assets/pediatria-algoritmos-ui-v01051.js');
-assert.match(html,/content="0\.10\.53"/);
+assert.match(html,/content="0\.10\.54"/);
 assert.match(html,/28 rutas \+ tratamientos/);
 assert.match(html,/data-category="Hospitalización"/);
 const scripts=[...html.matchAll(/<script src="\.\/([^"]+)"/g)].map(m=>m[1]);
