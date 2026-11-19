@@ -49,7 +49,19 @@ const CLINICAL_TOOLS=Object.freeze({
  bronquiolitis:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
  neumonia:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
  convulsion:[['△ TEP · evaluación inicial','./pediatria-evaluacion-rapida.html#tep']],
- ictericia:[['👶 Zonas de Kramer · NO estima bilirrubina','./pediatria-evaluacion-rapida.html#kramer']]
+ ictericia:[['👶 Zonas de Kramer · NO estima bilirrubina','./pediatria-evaluacion-rapida.html#kramer']],
+ 'abcde-pediatrico':[['🔺 Triángulo de Evaluación Pediátrica','./pediatria-evaluacion-rapida.html#tep']],
+ 'paro-pediatrico':[['📋 Algoritmos originales PALS 2025 · AHA','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms/']],
+ 'bradicardia-pals':[['📋 Algoritmos originales PALS 2025 · AHA','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms/']],
+ 'taquicardia-pals':[['📋 Algoritmos originales PALS 2025 · AHA','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms/']],
+ 'dificultad-respiratoria':[['🔺 TEP · gravedad pediátrica','./pediatria-evaluacion-rapida.html#tep']],
+ 'oxigenoterapia-escala':[['🔺 TEP · apariencia, respiración y perfusión','./pediatria-evaluacion-rapida.html#tep']],
+ 'itu-pediatrica':[['📘 NICE NG224 · muestras y manejo','https://www.nice.org.uk/guidance/ng224/chapter/Recommendations']],
+ 'meningitis-pediatrica':[['📘 NICE NG240 · meningitis','https://www.nice.org.uk/guidance/ng240/chapter/Recommendations']],
+ 'reanimacion-neonatal':[['📋 Algoritmo neonatal original AHA/AAP','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/neonatal-resuscitation']],
+ 'apendicitis-pediatrica':[['📊 PAS · escala de apendicitis','./pediatria-pas.html']],
+ 'trastornos-sodio':[['🧪 Herramientas de líquidos · KidBum','./index.html']],
+ 'lesion-renal-aguda':[['📈 KDIGO · lesión renal aguda','./expansion-20.html#kdigo']]
 });
 function renderTools(id){
  const panel=$('alg-tools');if(!panel)return;
@@ -59,7 +71,9 @@ function renderTools(id){
  panel.append(elem('strong','Herramientas relacionadas · no sustituyen la valoración','alg-tools-heading'));
  for(const [label,href] of items){
   const link=elem('a',label,'alg-tool-link');
-  link.href=href;panel.append(link);
+  link.href=href;
+  if(/^https:\/\//.test(href)){link.target='_blank';link.rel='noopener noreferrer';}
+  panel.append(link);
  }
 }
 function open(id){
