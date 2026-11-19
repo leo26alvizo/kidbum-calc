@@ -97,8 +97,8 @@ assert.doesNotMatch(extensionSrc,/\bfetch\s*\(|XMLHttpRequest|sessionStorage|loc
 assert.doesNotMatch(extensionSrc,/\d+(?:\.\d+)?\s*(?:mg|mL|µg)\s*\/\s*kg/i,'No editorial weight-based dose published');
 const page=read('algoritmos-pediatria.html');
 const index=read('index.html'),ui=read('assets/pediatria-algoritmos-ui-v01051.js'),css=read('assets/pediatria-algoritmos-v01051.css'),sw=read('sw.js');
-assert.match(page,/kidbum-app-version" content="0\.10\.54"/);
-assert.match(page,/🩺 28 rutas \+ tratamientos/);
+assert.match(page,/kidbum-app-version" content="0\.10\.55"/);
+assert.match(page,/🩺 28 rutas \+ 29 fichas/);
 assert.match(page,/data-category="Infectología"/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"(?: defer)?><\/script>/g)].map(m=>m[1]);
 assert.ok(scripts.indexOf('assets/pediatria-algoritmos-core-v01051.js')<scripts.indexOf('assets/pediatria-algoritmos-extension-v01052.js'));
