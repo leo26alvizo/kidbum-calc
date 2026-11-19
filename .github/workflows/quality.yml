@@ -83,6 +83,10 @@ jobs:
         run: node tests/pediatric-pharma-bridge-v01054.cjs
       - name: Pediatric treatments and 122 outcomes in real mobile Chromium
         run: node tests/pediatric-pharma-bridge-browser-v01054.cjs
+      - name: Twenty-nine pediatric drug dossiers with indication-scoped references and fail-closed pending doses
+        run: node tests/pediatric-drug-references-v01055.cjs
+      - name: Pediatric dose references in algorithms and Pharma Pro on real mobile Chromium
+        run: node tests/pediatric-drug-references-browser-v01055.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
