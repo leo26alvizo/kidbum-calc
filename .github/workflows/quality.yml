@@ -75,6 +75,10 @@ jobs:
         run: node tests/pediatric-algorithms-phase2-v01052.cjs
       - name: Phase II algorithms on real mobile Chromium with critical case coverage
         run: node tests/pediatric-algorithms-phase2-browser-v01052.cjs
+      - name: Sixteen more pediatric PALS, infection, neonatal and hospital algorithms
+        run: node tests/pediatric-algorithms-phase3-v01053.cjs
+      - name: Phase III pediatric danger-first pathways in 390px Chromium mobile
+        run: node tests/pediatric-algorithms-phase3-browser-v01053.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
