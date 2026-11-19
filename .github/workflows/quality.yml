@@ -79,6 +79,10 @@ jobs:
         run: node tests/pediatric-algorithms-phase3-v01053.cjs
       - name: Phase III pediatric danger-first pathways in 390px Chromium mobile
         run: node tests/pediatric-algorithms-phase3-browser-v01053.cjs
+      - name: Pediatric outcome-specific treatment links to real 643-drug Pharma Pro catalog
+        run: node tests/pediatric-pharma-bridge-v01054.cjs
+      - name: Pediatric treatments and 122 outcomes in real mobile Chromium
+        run: node tests/pediatric-pharma-bridge-browser-v01054.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance

@@ -1,0 +1,41 @@
+/* KidBum 0.10.54 — treatment crosswalk; visual, accessible, mobile-first. */
+.alg-peds .alg-therapy{margin-top:15px;background:var(--p-card);border:1px solid var(--p-line);border-radius:19px;padding:17px;box-shadow:0 8px 28px rgba(6,54,65,.04);min-width:0}
+.alg-peds .alg-therapy-head{display:flex;gap:9px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;margin-bottom:9px}
+.alg-peds .alg-therapy-head h3{margin:0;font-size:20px;line-height:1.3;letter-spacing:-.02em;color:var(--p-ink)}
+.alg-peds .alg-therapy-branch{background:var(--p-soft);border:1px solid var(--p-line);color:var(--p-teal);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:750;max-width:100%;overflow-wrap:anywhere}
+.alg-peds .alg-therapy-context{font-size:14px;line-height:1.55;font-weight:680;color:var(--p-ink);margin:0 0 7px}
+.alg-peds .alg-therapy-purpose{font-size:12px;line-height:1.5;color:var(--p-muted);margin:0 0 15px}
+.alg-peds .alg-therapy-med-intro{display:flex;gap:9px;flex-wrap:wrap;justify-content:space-between;align-items:center;padding:13px 0 9px;border-top:1px solid var(--p-line)}
+.alg-peds .alg-therapy-med-intro strong{font-size:13px;color:var(--p-ink)}
+.alg-peds .alg-therapy-count{font-size:11px;font-weight:750;color:var(--p-muted)}
+.alg-peds .alg-therapy-medications{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.alg-peds .alg-therapy-med{min-width:0;display:flex;flex-direction:column;gap:7px;background:var(--p-bg);border:1px solid var(--p-line);border-radius:14px;padding:13px}
+.alg-peds .alg-rx-role{width:fit-content;max-width:100%;border-radius:999px;background:#e8f6f3;color:#076b69;border:1px solid #ade0d6;padding:5px 8px;font-size:10px;line-height:1.4;font-weight:850}
+.alg-peds .alg-rx-name{font-size:17px;line-height:1.25;color:var(--p-ink);overflow-wrap:anywhere}
+.alg-peds .alg-rx-context{font-size:12px;line-height:1.55;color:var(--p-muted);margin:0}
+.alg-peds .alg-rx-flags{display:flex;gap:6px;flex-wrap:wrap}
+.alg-peds .alg-rx-warning{color:#8c3818;background:#fff3e7;border:1px solid #e5c5a1;border-radius:9px;padding:5px 8px;font-size:10px;font-weight:780;line-height:1.4}
+.alg-peds .alg-rx-tag{font-size:10px;color:var(--p-muted);border:1px solid var(--p-line);border-radius:9px;padding:5px 8px}
+.alg-peds .alg-rx-precaution{font-size:11px;color:var(--p-muted);line-height:1.5;margin:0}
+.alg-peds .alg-rx-link{display:flex;align-items:center;justify-content:center;text-align:center;min-height:49px;border-radius:11px;background:#087d80;color:white;text-decoration:none;font-weight:850;font-size:12px;padding:10px 12px;margin-top:auto;line-height:1.4}
+.alg-peds .alg-rx-link:hover{background:#08676e;color:white;text-decoration:none}
+.alg-peds .alg-rx-link:focus-visible{outline:3px solid #f8ad33;outline-offset:3px}
+.alg-peds .alg-therapy-no-drug{font-size:13px;line-height:1.6;color:var(--p-muted);padding:13px;border:1px dashed var(--p-line);border-radius:12px;background:var(--p-bg)}
+.alg-peds .alg-therapy-checklist{margin-top:15px;background:var(--p-bg);border:1px solid var(--p-line);border-radius:12px;padding:12px 13px}
+.alg-peds .alg-therapy-checklist summary{cursor:pointer;font-size:12px;font-weight:850;color:var(--p-ink);min-height:24px}
+.alg-peds .alg-therapy-checklist ul{padding-left:20px;margin:10px 0 0;display:grid;gap:8px;font-size:12px;line-height:1.5;color:var(--p-muted)}
+.alg-peds .alg-therapy-footer{display:flex;gap:13px;flex-wrap:wrap;justify-content:space-between;align-items:center;border-top:1px solid var(--p-line);margin-top:15px;padding-top:13px}
+.alg-peds .alg-therapy-footer span{font-size:10px;line-height:1.5;color:var(--p-muted);flex:1;min-width:165px}
+.alg-peds .alg-rx-library{min-height:44px;font-size:12px;font-weight:800;color:var(--p-teal);text-decoration:none;display:inline-flex;align-items:center}
+html.dark .alg-peds .alg-rx-role{background:#1e4844;color:#a1f4d8;border-color:#3e8982}
+html.dark .alg-peds .alg-rx-warning{background:#48301b;color:#ffdbb5;border-color:#8b6337}
+html.dark .alg-peds .alg-rx-link{background:#176e73;color:white}
+html.dark .alg-peds .alg-rx-link:hover{background:#1b8890}
+@media(max-width:600px){
+ .alg-peds .alg-therapy{padding:14px 12px;margin-top:12px}
+ .alg-peds .alg-therapy-head h3{font-size:18px}
+ .alg-peds .alg-therapy-medications{grid-template-columns:1fr}
+ .alg-peds .alg-rx-name{font-size:17px}
+ .alg-peds .alg-rx-library{width:100%;justify-content:center;border-radius:10px;border:1px solid var(--p-line)}
+}
+@media(prefers-reduced-motion:reduce){.alg-peds .alg-rx-link{transition:none}}
