@@ -1,0 +1,40 @@
+/* KidBum v0.10.55 · source-scoped pediatric drug reference panels */
+.kb-ped-dose{min-width:0;width:100%;padding:14px;border-radius:15px;border:1px solid var(--p-line,#d8e4e7);background:var(--p-card,#fff);color:var(--p-ink,#173344);font-family:inherit;line-height:1.52}
+.kb-ped-dose.compact{padding:10px;border-radius:11px;margin:5px 0}
+.kb-dose-heading{display:flex;align-items:flex-start;flex-wrap:wrap;gap:8px;justify-content:space-between;margin:0 0 7px}
+.kb-dose-heading h4{font-size:14px;margin:0;font-weight:850;color:inherit}
+.kb-dose-source-tag,.kb-dose-pending-tag{font-size:10px;font-weight:850;padding:5px 7px;border-radius:8px;line-height:1.4;max-width:100%}
+.kb-dose-source-tag{color:#0a6872;background:#e9f8f6;border:1px solid #9edbd1}
+.kb-dose-pending-tag{color:#8e4618;background:#fff2e4;border:1px solid #e4bb86}
+.kb-dose-indication{font-size:11px;color:var(--p-muted,#647885);line-height:1.55;margin:4px 0 9px}
+.kb-dose-unavailable{font-size:12px;font-weight:850;line-height:1.55;padding:10px 11px;border-radius:10px;background:#fff3e7;border:1px solid #f3d1a6;color:#853f1b;margin:8px 0}
+.kb-dose-notes{font-size:11px;line-height:1.5;margin:7px 0;color:var(--p-muted,#647885)}
+.kb-dose-regimen{border:1px solid var(--p-line,#d8e4e7);border-radius:11px;background:var(--p-bg,#f6fafb);padding:11px;margin:9px 0;min-width:0}
+.kb-dose-scope{font-size:12px;font-weight:850;line-height:1.45;display:block;color:var(--p-ink,#173344);margin-bottom:8px}
+.kb-dose-values{display:grid;gap:6px}
+.kb-dose-row{display:grid;grid-template-columns:90px minmax(0,1fr);gap:9px;align-items:start;border-top:1px solid var(--p-line,#d8e4e7);padding:6px 0 3px}
+.kb-dose-row:first-child{border-top:0}
+.kb-dose-row span{font-size:10px;color:var(--p-muted,#647885);line-height:1.3}
+.kb-dose-row strong{font-size:12px;line-height:1.46;color:var(--p-ink,#173344);font-weight:750;overflow-wrap:anywhere}
+.kb-dose-row:first-child strong{color:#0d7b77;font-size:14px;font-weight:900}
+.kb-dose-guard,.kb-dose-monitor,.kb-dose-disclaimer{font-size:11px;line-height:1.5;margin:8px 0;color:var(--p-muted,#647885)}
+.kb-dose-guard{font-weight:650;color:#7d471e}
+.kb-dose-disclaimer{font-size:10px;font-weight:750}
+.kb-dose-cite{display:inline-flex;align-items:center;min-height:44px;font-size:11px;font-weight:850;line-height:1.4;color:#0e7180;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}
+.kb-dose-cite:focus-visible{outline:3px solid #e5ad49;outline-offset:2px;border-radius:6px}
+.kb-dose-safety{border-top:1px solid var(--p-line,#d8e4e7);margin-top:10px;padding-top:9px}
+.kb-dose-safety summary{font-size:11px;line-height:1.5;font-weight:850;min-height:32px;cursor:pointer}
+.kb-dose-safety ul{padding-left:19px;margin:7px 0;display:grid;gap:8px}
+.kb-dose-safety li{font-size:11px;line-height:1.5}
+.kb-dose-safety li::marker{color:#0e8386}
+.pharma-ux-full .kb-ped-dose{margin:12px 0}
+.pharma-ux-full .kb-dose-row{grid-template-columns:minmax(110px,.25fr) minmax(0,.75fr)}
+.alg-peds .alg-therapy-med .kb-ped-dose{background:var(--p-card)}
+html.dark .kb-ped-dose{--p-card:#202b34;--p-bg:#26343e;--p-line:#40535c;--p-ink:#f0f7fa;--p-muted:#aebdc3}
+html.dark .kb-dose-unavailable{background:#4c3423;color:#ffe1bd;border-color:#916440}
+html.dark .kb-dose-guard{color:#f8c28c}
+html.dark .kb-dose-row:first-child strong{color:#89e8d9}
+html.dark .kb-dose-source-tag{background:#1e4a45;color:#b0f3e5;border-color:#417c73}
+html.dark .kb-dose-pending-tag{background:#4b3520;color:#ffdbb8;border-color:#8e643d}
+html.dark .kb-dose-cite{color:#8ad5e2}
+@media(max-width:600px){.kb-ped-dose{padding:10px}.kb-dose-row{grid-template-columns:84px minmax(0,1fr)}.kb-dose-row strong{font-size:12px}.kb-dose-heading h4{font-size:13px}}
