@@ -43,6 +43,14 @@ function pharmaSummary(med,onFull){
  const evidence=elt('section',undefined,'pharma-ux-evidence');
  evidence.append(elt('h3','Cobertura documental'),p(cov.label,'pharma-ux-coverage'),p(cov.detail,'small'));
  q.append(evidence);
+ const pediatricCatalog=root.KidBumPediatricDrugReferences?.records[med.id];
+ if(pediatricCatalog){
+  const tag=elt('section',undefined,'pharma-ux-evidence');
+  tag.append(elt('h3','🧒 Pediatría · referencias por indicación'));
+  const count=pediatricCatalog.regimens.length;
+  tag.append(p(count?count+' pauta(s) con fuente específica; ninguna se debe extrapolar entre diagnósticos, edad o vías.':'Ficha pediátrica de seguridad disponible. Pauta numérica NO cotejada para sus usos vinculados.','small muted'));
+  const show=elt('button','Ver pautas, límites y fuentes →','button');show.type='button';show.onclick=onFull;tag.append(show);q.append(tag);
+ }
  const drugIndications=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndications)q.append(drugIndications);
  const externalLabels=window.KidBumPharmaExternalLabels?.render(med);
@@ -108,7 +116,10 @@ function draw(){
 }
 function showDrug(id){
  const med=lib.byId[id];if(!med){return closeDrug();}
- if(activeDrug!==id)activeDetailMode='quick';
+ const params=new URLSearchParams(location.search);
+ const pediatricContext=params.get('peds')==='1'&&params.get('med')===id;
+ const pediatricOptions=pediatricContext?{algorithm:params.get('alg'),outcome:params.get('outcome')}:{};
+ if(activeDrug!==id)activeDetailMode=pediatricContext?'full':'quick';
  if(!activeDrug){
   backScroll=window.scrollY;
   backDrugId=id;
@@ -129,6 +140,10 @@ function showDrug(id){
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(pharmaFold('Ámbito y uso orientativo',f1,true));
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(pharmaFold('Revisión previa imprescindible',f2,true));
+ const pediatricReference=root.KidBumPediatricDrugUI?.render(id,pediatricOptions);
+ if(pediatricReference){
+  left.append(pharmaFold('🧒 Pediatría: pautas documentales por indicación · NO receta',pediatricReference,pediatricContext));
+ }
  const drugIndicationsFull=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndicationsFull)left.append(drugIndicationsFull);
  const externalLabelsFull=window.KidBumPharmaExternalLabels?.render(med);
