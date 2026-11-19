@@ -56,7 +56,11 @@ assert.match(fast,/quick\.setAttribute\('aria-expanded'/);
 assert.doesNotMatch(fast,/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/,'No cloud patient data in quick search');
 assert.doesNotMatch(extra,/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage|api\.openai\.com/);
 const jsNames=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.equal(jsNames.length,16);
+assert.equal(jsNames.length,18,'Two pediatric-dose modules augment original 16 Pharma Pro scripts');
+assert.ok(jsNames.indexOf('assets/pharma-pro-core.js')<jsNames.indexOf('assets/pediatric-drug-references-v01055.js'));
+assert.ok(jsNames.indexOf('assets/pediatric-drug-references-v01055.js')<jsNames.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
+assert.ok(jsNames.indexOf('assets/pediatric-drug-references-ui-v01055.js')<jsNames.indexOf('assets/pharma-pro-ui.js'));
+
 assert.ok(jsNames.indexOf('assets/pharma-pro-expansion.js')<jsNames.indexOf('assets/pharma-pro-guides-plus.js'));
 assert.ok(jsNames.indexOf('assets/pharma-pro-guides-plus.js')<jsNames.indexOf('assets/pharma-pro-core.js'));
 assert.equal(jsNames.at(-1),'assets/pharma-pro-quick-ui.js');
