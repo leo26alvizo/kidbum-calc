@@ -38,3 +38,12 @@ html.dark .kb-dose-source-tag{background:#1e4a45;color:#b0f3e5;border-color:#417
 html.dark .kb-dose-pending-tag{background:#4b3520;color:#ffdbb8;border-color:#8e643d}
 html.dark .kb-dose-cite{color:#8ad5e2}
 @media(max-width:600px){.kb-ped-dose{padding:10px}.kb-dose-row{grid-template-columns:84px minmax(0,1fr)}.kb-dose-row strong{font-size:12px}.kb-dose-heading h4{font-size:13px}}
+
+/* one-tap access to exact source-context monograph */
+.alg-peds .alg-rx-dose-link{display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px;padding:10px 12px;font-size:12px;font-weight:900;color:#fff;background:#116d73;border-radius:12px;text-decoration:none;line-height:1.4}
+.alg-peds .alg-rx-dose-link:hover{background:#07545b;color:#fff;text-decoration:none}
+.alg-peds .alg-rx-dose-link:focus-visible{outline:3px solid #e5ad49;outline-offset:3px}
+.alg-peds .alg-rx-link{background:transparent;color:var(--p-teal);border:1px solid var(--p-line);min-height:46px}
+.alg-peds .alg-rx-link:hover{background:var(--p-soft);color:var(--p-teal)}
+html.dark .alg-peds .alg-rx-dose-link{background:#1f7c86;color:#fff}
+html.dark .alg-peds .alg-rx-link{color:#9ee9df;background:transparent;border-color:#4d666a}
