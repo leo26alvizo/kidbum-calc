@@ -220,3 +220,218 @@ simple({
  ['Valorar otras causas de fiebre y estado neurológico; reevaluar si persiste o progresa.',
  'Ante signos de infección sistémica o alteración neurológica, activar valoración urgente.']]
 });
+
+NEW.push({
+ id:'reanimacion-neonatal',icon:'👶',category:'Neonatología',title:'Reanimación neonatal · NRP 2025',
+ subtitle:'Pasos iniciales, ventilación efectiva y frecuencia cardiaca',
+ scope:'Recién nacidos inmediatamente antes, durante y después del nacimiento. Es una ruta de reconocimiento, no sustituto de entrenamiento NRP ni protocolo de ventilación, oxígeno o compresiones.',
+ urgency:'crítica',time:'2 decisiones',sources:[SRC.nres],start:'danger',
+ nodes:{
+  danger:{question:'Tras los pasos iniciales, ¿el recién nacido está en apnea/jadeo o tiene FC menor de 100/min?',
+   hint:'Preparar equipo antes del parto. Control térmico, secar y estimular según edad gestacional; evaluar respiración y FC. La ventilación es la prioridad cuando no respira eficazmente.',
+   choices:[{label:'🚨 Sí · iniciar ventilación efectiva',next:'ventilate',tone:'danger'},
+    {label:'No · respira y FC adecuada',next:'transition'},
+    {label:'No se puede determinar FC/respiración',next:'assess',tone:'warning'}]},
+  ventilate:{question:'Tras al menos 30 segundos de ventilación efectiva, ¿la FC permanece por debajo de 60/min?',
+   hint:'Antes de decidir compresiones asegurar movimiento torácico, sello de mascarilla y corrección de ventilación; una FC ascendente indica mejoría.',
+   choices:[{label:'🚨 Sí · FC <60',next:'compressions',tone:'danger'},
+    {label:'No · FC mejoró',next:'ventcheck',tone:'warning'},
+    {label:'No se puede confirmar la respuesta',next:'assess',tone:'warning'}]},
+  transition:{question:'¿Tiene esfuerzo respiratorio sostenido, buen tono y frecuencia adecuada?',
+   hint:'Cianosis persistente, respiración trabajosa, prematurez y signos de transición anormal exigen evaluación especializada aunque FC sea adecuada.',
+   choices:[{label:'Sí · transición adecuada',next:'routine'},
+    {label:'No · dificultad o mala transición',next:'support',tone:'warning'},
+    {label:'No fue posible evaluar',next:'assess',tone:'warning'}]}
+ },
+ outcomes:{
+  compressions:outcome('danger','🚨 Compresiones con ventilación efectiva · NRP','Si FC sigue <60 tras ventilación efectiva, se requiere el algoritmo NRP de compresiones coordinadas y manejo avanzado.',
+   ['Activar reanimación neonatal avanzada; comprobar eficacia de ventilación y vía aérea; administrar oxígeno y compresiones según algoritmo oficial.',
+    'Si no responde a la secuencia completa, considerar acceso y fármacos solo con dosis/vías específicas verificadas y equipo capacitado.']),
+  ventcheck:outcome('warning','Ventilación y reevaluación cardiopulmonar','La FC ascendente es el mejor signo de ventilación efectiva, pero puede persistir apnea o dificultad respiratoria.',
+   ['Continuar o retirar gradualmente soporte según FC, respiración, SpO₂ preductal y edad posnatal.',
+    'Monitorizar temperatura, glucosa y riesgo neonatal; escalar si reaparece apnea o baja FC.']),
+  routine:outcome('warning','Transición con vigilancia posnatal','Si respira, tiene buen tono y FC adecuada, continuar cuidados térmicos y vigilancia habitual acordes al riesgo.',
+   ['Favorecer contacto y cuidados inmediatos cuando sean seguros, prevenir hipotermia.',
+    'Reevaluar respiración, temperatura, alimentación y factores de riesgo; esta ruta no equivale a alta.']),
+  support:outcome('warning','Soporte y observación neonatal','Un recién nacido que respira con FC adecuada puede requerir soporte por dificultad respiratoria o prematurez.',
+   ['Valorar soporte respiratorio no invasivo apropiado y monitorización especializada; revisar preductal SpO₂ por minutos de vida.',
+    'Descartar infección, neumotórax, cardiopatía y enfermedad pulmonar neonatal.']),
+  assess:outcome('warning','Evaluar FC/ventilación sin demora','No conocer la FC o eficacia respiratoria impide clasificar con seguridad.',
+   ['Asignar reanimador entrenado, auscultar FC y monitorizar según disponibilidad sin retrasar soporte necesario.',
+    'Si apnea/jadeo o FC <100 se sospechan, activar vía de ventilación inmediatamente.'])
+ }
+});
+simple({
+ id:'hipoglucemia-neonatal',icon:'🍼',category:'Neonatología',title:'Hipoglucemia neonatal',
+ subtitle:'Factores de riesgo, síntomas y glucosa por edad posnatal',
+ scope:'Neonatos en el periodo de transición y días iniciales de vida, con decisiones según horas de nacimiento, prematuridad y síntomas. No extrapolar umbrales de niño mayor.',
+ urgent:'crítica',sources:['neonatalGlu'],
+ danger:'¿El recién nacido presenta convulsiones, apnea, conciencia alterada o mala perfusión con hipoglucemia sospechada?',
+ hint:'Síntomas inespecíficos pueden ser también sepsis o asfixia. Tomar glucosa inmediatamente, pero no retrasar intervención urgente ante compromiso neurológico.',
+ critical:['🚨 Corregir glucosa neonatal con supervisión','Hipoglucemia sintomática grave requiere intervención hospitalaria inmediata y búsqueda de causa.',
+ ['ABCDE neonatal, glucemia urgente y soporte de glucosa parenteral según edad y protocolo si está sintomático o no alimenta con seguridad.',
+ 'Control glucémico seriado y evaluar sepsis, asfixia, alteración endocrina/metabólica y persistencia de hipoglucemia.']],
+ screen:'¿Tiene glucosa baja según su edad posnatal o factores de riesgo como prematuridad, PEG o madre diabética?',
+ screenHint:'Interpretar el valor según la hora posnatal, método de medición y síntomas. Repetir/confirmar resultados cuando corresponda; no usar cifra fija sin contexto.',
+ yes:['⚠️ Protocolo neonatal de alimentación y control','Asintomáticos con riesgo o medición baja requieren manejo y controles según glucemia, horas de vida y capacidad de alimentación.',
+ ['Valorar leche materna/alimentación y gel oral de dextrosa cuando el protocolo y presentación lo permitan, con reevaluación de glucemia.',
+ 'Persistencia, recurrencia, síntomas o dificultad para alimentarse requieren neonatología y tratamiento parenteral.']],
+ normal:['Vigilancia según riesgo neonatal','Una medición aislada normal no elimina riesgo si persisten factores de riesgo o mala ingesta.',
+ ['Asegurar alimentación efectiva, termorregulación y controles de glucosa según grupo de riesgo.',
+ 'Reevaluar de inmediato si aparece letargia, apnea, temblores persistentes o mala succión.']]
+});
+simple({
+ id:'sepsis-neonatal',icon:'🦠',category:'Neonatología',title:'Sospecha de sepsis neonatal',
+ subtitle:'Signos inespecíficos, riesgo materno y cultivos',
+ scope:'Recién nacidos durante hospitalización neonatal o tras el alta inicial. Distinguir inicio temprano/tardío y protocolos de NICU; prematuros requieren especial valoración.',
+ urgent:'crítica',sources:['neonatalInf','unwellNeonate'],
+ danger:'¿Hay apnea, choque, fiebre/hipotermia con letargia, hipoxemia o alimentación muy deficiente?',
+ hint:'Los neonatos pueden tener sepsis sin fiebre. La mala perfusión, apnea y cambios neurológicos son emergencia; hipoglucemia puede coexistir.',
+ critical:['🚨 Sospecha de infección neonatal grave','Sepsis neonatal con compromiso requiere estabilización y antimicrobianos hospitalarios sin demora.',
+ ['ABCDE neonatal, acceso, glucemia, termorregulación y monitorización; extraer hemocultivos si no retrasan antibióticos necesarios.',
+ 'Antimicrobianos IV empíricos según edad al inicio, epidemiología, resistencia local y protocolo NICU; valorar LCR cuando esté estabilizado.']],
+ screen:'¿Existen factores maternos/perinatales, cultivos sugestivos o signos inespecíficos de infección?',
+ screenHint:'Considerar infección materna, estreptococo B, rotura de membranas, prematuridad, cambios de temperatura, alimentación o respiración. NICE NG195 incluye actualizaciones de factores maternos en 2026.',
+ yes:['⚠️ Evaluación neonatal y riesgo infeccioso','Un neonato con factores de riesgo o síntomas requiere evaluación protocolizada para posible infección de inicio temprano o tardío.',
+ ['Consultar criterios NICE NG195 y norma hospitalaria para vigilancia, cultivo y tratamiento; no decidir antibióticos solo por una casilla.',
+ 'Monitorizar síntomas, temperatura, perfusión y alimentación; actuar urgente si deteriora.']],
+ normal:['Observación clínica acorde a riesgo','La ausencia de un factor evidente no descarta infección neonatal.',
+ ['Mantener vigilancia y revisión de antecedentes obstétricos, evolución, signos vitales e ingesta.',
+ 'Si aparecen apnea, letargia, alteraciones térmicas o respiratorias, acudir a evaluación inmediata.']]
+});
+simple({
+ id:'apendicitis-pediatrica',icon:'🩻',category:'Gastroenterología',title:'Sospecha de apendicitis',
+ subtitle:'Peritonitis, riesgo de perforación y ultrasonido',
+ scope:'Niños y adolescentes con dolor abdominal agudo; apendicitis en menores de 5 años puede ser atípica, y el PAS existente no sustituye exploración ni imagen.',
+ sources:['abdomen'],
+ danger:'¿Hay abdomen rígido, rebote/peritonitis generalizada, choque o deterioro importante?',
+ hint:'Pensar en perforación, sepsis o abdomen agudo quirúrgico. No retrasar valoración quirúrgica por escalas ni imagen si está inestable.',
+ critical:['🚨 Abdomen agudo: cirugía pediátrica urgente','Sospecha de peritonitis/perforación o inestabilidad requiere intervención hospitalaria inmediata.',
+ ['ABCDE y reanimación según perfusión; acceso venoso, ayuno y analgesia adecuada.',
+ 'Avisar cirugía pediátrica; antibióticos cuando estén indicados por sospecha de infección intraabdominal; imagen solo si no retrasa manejo.']],
+ screen:'¿Hay dolor que migra a cuadrante inferior derecho, defensa localizada, fiebre o vómitos compatibles?',
+ screenHint:'Examen seriado, dolor focal, síntomas y evolución; leucocitos/ANC y ecografía se interpretan con probabilidad preprueba. Dolor atípico en pequeños.',
+ yes:['⚠️ Evaluación quirúrgica e imagen según riesgo','Hallazgos compatibles requieren exploración pediátrica, estratificación y ecografía cuando esté indicada.',
+ ['Analgesia, hidratación guiada, evaluación de signos vitales y consulta o interconsulta de cirugía.',
+ 'No basar descarte ni cirugía exclusivamente en PAS; observación seriada o imágenes complementarias según contexto.']],
+ normal:['Diagnóstico diferencial y reevaluación abdominal','La ausencia de presentación clásica no descarta apendicitis, especialmente en niños pequeños.',
+ ['Valorar invaginación, infección urinaria, gastroenteritis, torsión gonadal/ovárica y otras urgencias.',
+ 'Reevaluar el abdomen y advertir retorno inmediato por aumento de dolor, vómito bilioso o deterioro.']]
+});
+simple({
+ id:'obstruccion-invaginacion',icon:'🌀',category:'Gastroenterología',title:'Vómito bilioso e invaginación',
+ subtitle:'Obstrucción intestinal, dolor episódico y urgencia quirúrgica',
+ scope:'Lactantes y niños con vómitos o episodios de dolor abdominal. En recién nacidos el vómito bilioso obliga a descartar malrotación/vólvulo: ruta quirúrgica urgente específica.',
+ urgent:'crítica',sources:['intuss','abdomen'],
+ danger:'¿Hay vómito verde bilioso, choque, distensión marcada con peritonitis o mala perfusión?',
+ hint:'El vómito verde bilioso es obstrucción hasta demostrar lo contrario, incluso en neonatos. La tríada clásica de invaginación puede estar incompleta.',
+ critical:['🚨 Sospecha de obstrucción o isquemia intestinal','Vómito bilioso y/o inestabilidad requieren evaluación quirúrgica urgente, no manejo de gastroenteritis simple.',
+ ['Ayuno, ABCDE, acceso vascular y líquidos según perfusión; avisar cirugía pediátrica inmediatamente.',
+ 'Ecografía/imagen según edad y estabilidad; la reducción por enema no es apropiada en peritonitis, shock o perforación.']],
+ screen:'¿Hay dolor paroxístico con palidez/letargia, flexión de piernas o episodios de llanto inconsolable?',
+ screenHint:'Considerar invaginación incluso si no hay sangre en heces, una manifestación tardía. En intercrisis el niño puede parecer mejor.',
+ yes:['⚠️ Ecografía y valoración urgente por invaginación','La sospecha clínica de invaginación merece diagnóstico rápido y colaboración con cirugía/radiología.',
+ ['Solicitar ecografía por personal entrenado y consultar cirugía pediátrica; mantener ayuno y vigilancia.',
+ 'Valorar reducción por enema solo en condiciones apropiadas, tras excluir peritonitis, shock o perforación.']],
+ normal:['Reevaluar otras causas de vómitos y dolor','Ausencia del patrón paroxístico no elimina obstrucción, infección o enfermedad quirúrgica.',
+ ['Buscar bilis verde, distensión, alteración perfusional o empeoramiento de dolor en reevaluaciones.',
+ 'Valorar hidratación, edad y diagnósticos alternativos; si aparece vómito bilioso referir inmediatamente.']]
+});
+NEW.push({
+ id:'trastornos-sodio',icon:'🧂',category:'Hospitalización',title:'Trastornos del sodio',
+ subtitle:'Síntomas neurológicos y distinción hipo/hipernatremia',
+ scope:'Niños hospitalizados con natremia medida. Excluye cálculo de solución, velocidad de corrección, natremia en hiperglucemia sin ajuste y manejo especializado de CAD.',
+ urgency:'crítica',time:'2 decisiones',sources:[SRC.sodium,SRC.hypona,SRC.hyperna],start:'danger',
+ nodes:{
+  danger:{question:'¿Hay convulsión, alteración aguda de conciencia o deterioro neurológico con sodio alterado?',
+   hint:'La hiponatremia sintomática grave puede necesitar solución hipertónica urgente; la hipernatremia grave requiere manejo especializado. Confirmar glucosa y valorar osmolaridad.',
+   choices:[{label:'🚨 Sí · encefalopatía / crisis',next:'critical',tone:'danger'},
+    {label:'No · aparentemente estable',next:'classify'},
+    {label:'Se desconoce',next:'assess',tone:'warning'}]},
+  classify:{question:'¿Cómo está el sodio plasmático, interpretado con glucosa y estado hídrico?',
+   hint:'Distinguir hipo e hipernatremia, tiempo de evolución, volumen circulante y pérdidas. No corregir rápido ni establecer fórmula sin análisis de causa.',
+   choices:[{label:'Hiponatremia',next:'hypo',tone:'warning'},
+    {label:'Hipernatremia',next:'hyper',tone:'warning'},
+    {label:'Valor no fiable / aún no disponible',next:'assess',tone:'warning'}]}
+ },
+ outcomes:{
+  critical:outcome('danger','🚨 Disnatremia neurológicamente sintomática','Se requiere manejo urgente en entorno monitorizado, evaluación de volumen, glucosa, osmolaridad y asesoría de cuidados intensivos.',
+   ['Si hiponatremia aguda con convulsiones/encefalopatía, valorar solución salina hipertónica según protocolo y monitorización estricta.',
+    'En hipernatremia grave evitar correcciones precipitadas; personal experto define líquidos y velocidad con controles repetidos.']),
+  hypo:outcome('warning','⚠️ Hiponatremia: investigar causa y gravedad','Corregir hiponatremia según duración, síntomas, glucemia y volumen; la sobrecorrección puede ser peligrosa.',
+   ['Valorar osmolaridad, sodio urinario, balance de líquidos, medicamentos y probabilidad de SIADH, pérdida renal o GI.',
+    'Planificar tratamiento y monitorización de sodio con metas institucionales; no aplicar pauta fija de fluidos.']),
+  hyper:outcome('warning','⚠️ Hipernatremia: corrección vigilada','La hipernatremia requiere investigación de pérdidas, acceso a agua, glucosa y estado circulatorio; corrección controlada.',
+   ['Evaluar hidratación y perfusión sin asumir que el examen físico refleja el déficit completo.',
+    'Controlar sodio seriado y definir sustitución de agua/electrólitos bajo supervisión; evitar cambios rápidos.']),
+  assess:outcome('warning','⚠️ Confirmar electrolitos antes de tratar','Sin sodio, glucemia y evaluación clínica fiables no es seguro elegir un esquema.',
+   ['Solicitar/evaluar electrolitos y glucosa, estado hídrico y diuresis, y repetir la muestra si hay discordancia.',
+    'Si hay compromiso neurológico, activar atención inmediata antes de completar pruebas.'])
+ }
+});
+simple({
+ id:'lesion-renal-aguda',icon:'🫘',category:'Hospitalización',title:'Lesión renal aguda pediátrica',
+ subtitle:'Oliguria, potasio, sobrecarga y causas reversibles',
+ scope:'Niños y adolescentes con sospecha de reducción aguda de función renal. Enfermedad renal crónica, neonatos y diálisis requieren ajustes especializados; no calcula volumen ni estadificación KDIGO.',
+ urgent:'crítica',sources:['aki'],
+ danger:'¿Hay arritmia por hiperpotasemia, edema pulmonar, anuria con inestabilidad o shock?',
+ hint:'Comprobar K+ y ECG si hay riesgo; valorar oxigenación, balance hídrico, diuresis y perfusión. LRA puede presentarse sin oliguria.',
+ critical:['🚨 Complicación renal potencialmente mortal','Hiperpotasemia grave, edema pulmonar o compromiso hemodinámico requieren tratamiento hospitalario inmediato.',
+ ['ABCDE, ECG/monitorización, medidas urgentes para hiperpotasemia según protocolo y evaluación de sobrecarga.',
+ 'Consultar nefrología pediátrica/UCI para decidir reemplazo renal y control estricto de fluidos, potasio y diuresis.']],
+ screen:'¿Existe descenso de diuresis o elevación aguda de creatinina respecto a basal?',
+ screenHint:'Aplicar definición KDIGO apropiada por edad y basal; revisar hipovolemia, fármacos nefrotóxicos, sepsis y obstrucción. Diuresis aislada sin registro es incierta.',
+ yes:['⚠️ Investigar LRA y prevenir progresión','Cambios de diuresis/creatinina ameritan estratificación y corrección de causas sin provocar sobrecarga.',
+ ['Medir creatinina/electrólitos, balance y presión arterial; obtener urianálisis y ecografía cuando haya sospecha de obstrucción.',
+ 'Ajustar fármacos nefrotóxicos y fluidoterapia según estado de volumen; escalar si empeora o hay indicación de nefrología.']],
+ normal:['Riesgo renal sin evidencia concluyente','Una creatinina aparentemente normal al inicio no excluye lesión renal en evolución.',
+ ['Registrar diuresis y función renal según riesgo, especialmente en sepsis, deshidratación, nefrotoxinas o postoperatorio.',
+ 'Revaluar ante oliguria, edema, hipertensión o incremento de creatinina.']]
+});
+simple({
+ id:'neutropenia-febril',icon:'🧬',category:'Hospitalización',title:'Neutropenia febril pediátrica',
+ subtitle:'Fiebre en oncohematología, sepsis y antimicrobianos sin demora',
+ scope:'Niños y adolescentes con neutropenia sospechada/confirmada, en especial por quimioterapia, y fiebre o hipotermia. No requiere contar neutrófilos antes de activar si alto riesgo.',
+ urgent:'crítica',sources:['neutro'],
+ danger:'¿Hay neutropenia sospechada y fiebre con choque, mala perfusión o conciencia alterada?',
+ hint:'El paciente inmunocomprometido puede tener signos sutiles. Activar protocolo de sepsis desde triaje ante alteración de perfusión.',
+ critical:['🚨 Sepsis en neutropenia: antibióticos sin demora','La neutropenia febril con inestabilidad constituye una emergencia oncohematológica.',
+ ['Activar ABCDE/reanimación, cultivos si no atrasan la primera dosis y antibiótico empírico de amplio espectro con cobertura apropiada conforme a protocolo oncológico.',
+ 'Monitorizar perfusión y lactato cuando indique; llamar oncología/hematología y cuidados intensivos.']],
+ screen:'¿Hay fiebre o hipotermia en paciente oncológico con neutropenia probable, aunque esté aparentemente estable?',
+ screenHint:'Confirmar antecedentes de quimioterapia, recuento absoluto de neutrófilos y acceso venoso central. El tratamiento debe comenzar oportunamente sin esperar laboratorio si la sospecha es alta.',
+ yes:['⚠️ Protocolo urgente de neutropenia febril','La mayoría de pacientes con neutropenia febril requieren evaluación hospitalaria y antibióticos empíricos rápidos.',
+ ['Hemocultivos, incluyendo línea central según protocolo, hemograma y cultivos dirigidos sin demorar antimicrobianos.',
+ 'Elegir antibiótico anti-Pseudomonas según epidemiología, alergias y plan de oncología pediátrica; reevaluar necesidad de ingreso.']],
+ normal:['Vigilancia del inmunocomprometido','Sin fiebre ni neutropenia confirmada no se acredita síndrome de neutropenia febril, pero puede existir infección.',
+ ['Valorar síntomas, signos vitales, laboratorio y posibilidad de infección afebril en neutropenia intensa.',
+ 'Escalar ante nueva fiebre, deterioro o instrucciones específicas del equipo oncológico.']]
+});
+if(NEW.length!==16)throw Error('Fase III: se requieren exactamente 16 rutas, se encontraron '+NEW.length);
+const known=new Set(old.algorithms.map(a=>a.id));
+for(const a of NEW){if(known.has(a.id))throw Error('ID duplicado '+a.id);known.add(a.id);}
+const algorithms=Object.freeze([...old.algorithms,...NEW]),byId=Object.freeze(Object.fromEntries(algorithms.map(a=>[a.id,a])));
+const normalize=old.normalize;
+const search=(query='',category='all')=>{const q=normalize(query);return algorithms.filter(a=>(category==='all'||a.category===category)&&(!q||normalize(a.title+' '+a.subtitle+' '+a.category).includes(q)));};
+const getStep=(id,nodeId)=>{const a=byId[id];if(!a)return null;const n=nodeId||a.start;return a.nodes[n]?{kind:'question',data:a.nodes[n],id:n}:a.outcomes[n]?{kind:'outcome',data:a.outcomes[n],id:n}:null;};
+const transition=(id,node,choiceIndex)=>{const s=getStep(id,node);if(!s||s.kind!=='question'||!Number.isInteger(choiceIndex))return null;const n=s.data.choices[choiceIndex]?.next;return n&&getStep(id,n)?n:null;};
+function validate(){
+ const errors=[];
+ for(const a of algorithms){
+  const visited=new Set();
+  const walk=n=>{
+   if(visited.has(n))return;
+   visited.add(n);
+   const s=getStep(a.id,n);
+   if(!s){errors.push(a.id+': broken node '+n);return;}
+   if(s.kind==='question'){if(s.data.choices.length<2)errors.push(a.id+': too few choices');for(const c of s.data.choices)walk(c.next);}
+  };
+  if(!a.scope||!a.sources?.length)errors.push(a.id+': missing scope or source');
+  walk(a.start);
+  for(const n of [...Object.keys(a.nodes),...Object.keys(a.outcomes)])if(!visited.has(n))errors.push(a.id+': unreachable '+n);
+  for(const o of Object.values(a.outcomes))if(!o.summary||o.actions.length<2)errors.push(a.id+': incomplete outcome');
+ }
+ return errors;
+}
+root.KidBumPediatricAlgorithms=Object.freeze({algorithms,byId,normalize,search,getStep,transition,validate,version:'0.10.53'});
+})(typeof window!=='undefined'?window:globalThis);
