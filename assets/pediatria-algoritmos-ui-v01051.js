@@ -128,6 +128,68 @@ function renderRail(){
  for(let i=0;i<max;i++)rail.append(elem('span',undefined,i<completed?'active':''));
  rail.setAttribute('aria-label','Avance: '+Math.min(state.path.length+1,max)+' de '+max+' etapas aproximadas');
 }
+function renderTreatment(a,step){
+ const bridge=root.KidBumPediatricTherapyBridge;
+ const plan=bridge?.get(a.id,step.id);
+ if(!plan)return null;
+ const section=elem('section',undefined,'alg-therapy');
+ section.dataset.outcomeId=step.id;
+ section.dataset.algorithmId=a.id;
+ section.setAttribute('aria-label','Tratamiento clínico y fichas de Pharma Pro');
+ const head=elem('div',undefined,'alg-therapy-head');
+ const heading=elem('h3','💊 Tratamiento y farmacología vinculada');
+ const context=elem('span','Rama: '+step.data.title.replace(/^🚨\s*|^⚠️\s*/,'').slice(0,62),'alg-therapy-branch');
+ head.append(heading,context);section.append(head);
+ section.append(elem('p',plan.context,'alg-therapy-context'));
+ const info=elem('p','Objetivo: '+plan.purpose,'alg-therapy-purpose');
+ section.append(info);
+ if(plan.drugs.length){
+  const intro=elem('div',undefined,'alg-therapy-med-intro');
+  intro.append(elem('strong','Fármacos que conviene consultar en esta situación'));
+  intro.append(elem('span',plan.drugs.length+' fichas vinculadas','alg-therapy-count'));
+  section.append(intro);
+  const cards=elem('div',undefined,'alg-therapy-medications');
+  plan.drugs.forEach(m=>{
+   const card=elem('article',undefined,'alg-therapy-med');
+   card.dataset.drugId=m.id;
+   const label=elem('span',m.role,'alg-rx-role');
+   const name=elem('strong',m.name,'alg-rx-name');
+   const explanation=elem('p',m.context,'alg-rx-context');
+   card.append(label,name,explanation);
+   const status=elem('div',undefined,'alg-rx-flags');
+   if(m.highRisk)status.append(elem('span','⚠ Alto riesgo: doble verificación','alg-rx-warning'));
+   const age=a.category==='Neonatología'?'Neonatología':'Pediatría';
+   if(!m.populations.includes(age))status.append(elem('span','⚠ Sin ficha validada para '+age+' en Pharma Pro','alg-rx-warning'));
+   else status.append(elem('span','Catálogo: '+age+' · dosis no verificadas','alg-rx-tag'));
+   card.append(status);
+   if(m.warning)card.append(elem('p','Precaución: '+m.warning,'alg-rx-precaution'));
+   const link=elem('a','Consultar ficha en Pharma Pro →','alg-rx-link');
+   link.href=m.href;link.target='_blank';link.rel='noopener noreferrer';
+   link.setAttribute('aria-label','Abrir ficha de '+m.name+' en Pharma Pro');
+   card.append(link);
+   cards.append(card);
+  });
+  section.append(cards);
+ }else{
+  section.append(elem('p','Sin medicamento seleccionado automáticamente en esta rama. No implica que nunca pueda indicarse uno; la prioridad está descrita en la conducta clínica anterior.','alg-therapy-no-drug'));
+ }
+ const safe=elem('details',undefined,'alg-therapy-checklist');
+ safe.append(elem('summary','🛡️ Comprobaciones antes de prescribir'));
+ const bullets=elem('ul');
+ for(const item of [
+  'Confirmar diagnóstico, gravedad, edad gestacional/posnatal y peso actual.',
+  'Verificar alergias, vía, formulación y concentración local; revisar función renal/hepática e interacciones.',
+  'Cotejar la pauta y dosis pediátrica/neonatal con guía aplicable y ficha autorizada del producto en México.',
+  'Las fichas de índice de Pharma Pro pueden carecer de indicación, dosis o población validadas: NO constituyen una orden.'
+ ])bullets.append(elem('li',item));
+ safe.append(bullets);section.append(safe);
+ const foot=elem('div',undefined,'alg-therapy-footer');
+ foot.append(elem('span','📚 Fuentes del algoritmo: '+plan.sources.map(x=>x.year).join(' · ')));
+ const full=elem('a','Explorar los 643 medicamentos ↗','alg-rx-library');
+ full.href='./pharma-pro.html';full.target='_blank';full.rel='noopener noreferrer';
+ foot.append(full);section.append(foot);
+ return section;
+}
 function renderFlow(){
  const a=engine.byId[state.active],step=engine.getStep(state.active,state.current);
  if(!a||!step)return;
@@ -157,6 +219,8 @@ function renderFlow(){
   for(const action of outcome.actions)list.append(elem('li',action));
   wrap.append(list);
   area.append(wrap);
+  const therapy=renderTreatment(a,step);
+  if(therapy)area.append(therapy);
  }
  $('alg-back-step').disabled=!state.path.length;
  const trail=state.path.map(x=>{
