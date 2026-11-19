@@ -163,6 +163,13 @@ function renderTreatment(a,step){
    else status.append(elem('span','Catálogo: '+age+' · dosis no verificadas','alg-rx-tag'));
    card.append(status);
    if(m.warning)card.append(elem('p','Precaución: '+m.warning,'alg-rx-precaution'));
+   const reference=root.KidBumPediatricDrugUI?.render(m.id,{algorithm:a.id,outcome:step.id,compact:true});
+   if(reference)card.append(reference);
+   const contextual=elem('a','Abrir pauta contextual en Pharma Pro →','alg-rx-dose-link');
+   contextual.href='./pharma-pro.html?peds=1&alg='+encodeURIComponent(a.id)+'&outcome='+encodeURIComponent(step.id)+'#'+encodeURIComponent(m.id);
+   contextual.target='_blank';contextual.rel='noopener noreferrer';
+   contextual.setAttribute('aria-label','Abrir referencia pediátrica de '+m.name+' para '+a.title);
+   card.append(contextual);
    const link=elem('a','Consultar ficha en Pharma Pro →','alg-rx-link');
    link.href=m.href;link.target='_blank';link.rel='noopener noreferrer';
    link.setAttribute('aria-label','Abrir ficha de '+m.name+' en Pharma Pro');
