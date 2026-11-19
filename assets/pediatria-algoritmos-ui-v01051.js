@@ -166,7 +166,7 @@ function renderTreatment(a,step){
    const reference=root.KidBumPediatricDrugUI?.render(m.id,{algorithm:a.id,outcome:step.id,compact:true});
    if(reference)card.append(reference);
    const contextual=elem('a','Abrir pauta contextual en Pharma Pro →','alg-rx-dose-link');
-   contextual.href='./pharma-pro.html?peds=1&alg='+encodeURIComponent(a.id)+'&outcome='+encodeURIComponent(step.id)+'#'+encodeURIComponent(m.id);
+   contextual.href='./pharma-pro.html?peds=1&alg='+encodeURIComponent(a.id)+'&outcome='+encodeURIComponent(step.id)+'&med='+encodeURIComponent(m.id)+'#'+encodeURIComponent(m.id);
    contextual.target='_blank';contextual.rel='noopener noreferrer';
    contextual.setAttribute('aria-label','Abrir referencia pediátrica de '+m.name+' para '+a.title);
    card.append(contextual);
