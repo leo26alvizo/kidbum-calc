@@ -21,7 +21,7 @@ const e=window.KidBumPediatricAlgorithms,b=window.KidBumPediatricTherapyBridge,m
 assert.equal(e.version,'0.10.53');assert.equal(b.version,'0.10.54');
 assert.equal(e.algorithms.length,28);assert.equal(med.records.length,643);
 assert.deepEqual(Array.from(b.validate()),[]);
-assert.deepEqual(Object.keys(b.byId).sort(),e.algorithms.map(a=>a.id).sort());
+assert.deepEqual(Object.keys(b.byId).sort(),Array.from(e.algorithms,a=>a.id).sort());
 const all=e.algorithms.flatMap(a=>Object.keys(a.outcomes).map(outcome=>b.get(a.id,outcome)));
 assert.equal(all.length,122,'All outcome branches must have treatment connection');
 assert.ok(all.every(x=>x&&x.context&&x.purpose&&x.sources.length&&x.population));
@@ -54,7 +54,7 @@ for(const plan of all){
 assert.ok(referenced.size>=25,'At least 25 real cross-linked drug monographs');
 assert.equal(b.get('does-not-exist','critical'),null);
 assert.equal(b.get('anafilaxia','not-a-terminal'),null);
-function ids(a,o){return b.get(a,o).drugs.map(x=>x.id);}
+function ids(a,o){return Array.from(b.get(a,o).drugs,x=>x.id);}
 function contexts(a,o){return b.get(a,o).drugs.map(x=>x.context+' '+x.warning).join(' ');}
 assert.deepEqual(ids('bronquiolitis','support'),[],'Do not suggest routine bronchodilators/antibiotics in bronchiolitis');
 assert.deepEqual(ids('diarrea','rehydrate'),[],'ORS is not equivalent to prescription medication');
