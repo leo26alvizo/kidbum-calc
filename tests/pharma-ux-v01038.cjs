@@ -25,7 +25,11 @@ assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(scripts.length,16);
+assert.equal(scripts.length,18,'Pharma Pro adds two standalone pediatric dosing modules');
+assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pediatric-drug-references-v01055.js'));
+assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
+assert.ok(scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js')<scripts.indexOf('assets/pharma-pro-ui.js'));
+
 assert.equal(scripts.at(-1),'assets/pharma-pro-quick-ui.js');
 for(const path of scripts)assert.ok(sw.includes("'./"+path+"'"));
 assert.ok(fs.existsSync('assets/pharma-pro-monographs.js'));
