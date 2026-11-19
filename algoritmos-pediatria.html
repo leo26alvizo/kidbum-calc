@@ -4,12 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b3448">
-<meta name="kidbum-app-version" content="0.10.54">
+<meta name="kidbum-app-version" content="0.10.55">
 <meta name="description" content="Veintiocho algoritmos pediátricos interactivos: PALS, neonatología, reanimación, sepsis, infecciones, abdomen agudo, electrolitos y más. Decisiones visuales y signos de alarma con fuentes oficiales.">
 <title>Algoritmos de Pediatría · KidBum</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css">
 <link rel="stylesheet" href="./assets/pediatria-farmaco-bridge-v01054.css">
+<link rel="stylesheet" href="./assets/pediatric-drug-references-v01055.css">
 <script>
 try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kidbum-theme')===null&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}
 </script>
@@ -17,11 +18,11 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
 </head>
 <body class="alg-peds">
 <header class="alg-header"><div class="alg-header-in">
- <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html">← KidBum · Pediatría</a><span class="alg-version">v0.10.54 · offline</span></nav>
+ <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html">← KidBum · Pediatría</a><span class="alg-version">v0.10.55 · offline</span></nav>
  <div class="alg-kicker">⚡ KidBum · Biblioteca de decisiones clínicas</div>
  <h1>Algoritmos<br>pediátricos.</h1>
  <p class="alg-hero-text">Decide en pocos toques y consulta el tratamiento de la rama elegida, conectado con las fichas de Pharma Pro. Sin recetas automáticas ni dosis no verificadas.</p>
- <div class="alg-hero-bottom"><span class="alg-hero-chip">🩺 28 rutas + tratamientos</span><span class="alg-hero-chip">⚠️ Peligro primero</span><span class="alg-hero-chip">📴 Sin conexión</span><span class="alg-hero-chip">💊 Enlace directo a Pharma Pro</span></div>
+ <div class="alg-hero-bottom"><span class="alg-hero-chip">🩺 28 rutas + 29 fichas</span><span class="alg-hero-chip">⚠️ Peligro primero</span><span class="alg-hero-chip">📴 Sin conexión</span><span class="alg-hero-chip">💊 Enlace directo a Pharma Pro</span></div>
 </div></header>
 <main class="alg-main" id="alg-main">
 <div class="alg-alert" role="note"><span aria-hidden="true" style="font-size:22px">⚠️</span><div><b>Prioridad clínica</b>Ante apnea, choque, cianosis, convulsión, alteración grave de conciencia o deterioro: activar atención urgente y estabilización ABCDE. No usar el cuestionario como condición para actuar.</div></div>
@@ -40,7 +41,7 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
  </div>
  <div class="alg-section-intro"><h2 id="alg-library-title">Selecciona un algoritmo</h2><span id="alg-count" class="alg-count" aria-live="polite"></span></div>
  <div id="alg-grid" class="alg-grid"></div>
- <div class="alg-safety-note">ℹ️ 28 algoritmos con conducta clínica por desenlace y fichas de Pharma Pro enlazadas cuando corresponden. Los medicamentos son referencias para revisión, no recetas; la dosis pediátrica debe verificarse con una fuente apropiada.</div>
+ <div class="alg-safety-note">ℹ️ 28 rutas con tratamiento y 29 fichas pediátricas por indicación. Pautas documentales sólo donde existe fuente aplicable; otras se muestran pendientes, nunca como receta automática.</div>
 </section>
 <section class="alg-flow" id="alg-flow" aria-labelledby="alg-flow-title" hidden>
  <div class="alg-flow-header">
@@ -57,10 +58,12 @@ try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kid
  <p class="alg-safety-note">Este módulo orienta conductas y abre fichas de catálogo; no valida indicación, elegibilidad pediátrica, dosis o prescripción. Usar protocolos institucionales y supervisión del equipo tratante; en dudas, escalar.</p>
 </section>
 </main>
-<footer class="alg-footer">KidBum CALC · Algoritmos Pediátricos 0.10.54 · Decisiones orientativas y fuentes identificadas · Ningún dato del paciente se envía ni se almacena.</footer>
+<footer class="alg-footer">KidBum CALC · Algoritmos Pediátricos 0.10.55 · Decisiones orientativas y fuentes identificadas · Ningún dato del paciente se envía ni se almacena.</footer>
 <script src="./assets/pediatria-algoritmos-core-v01051.js"></script>
 <script src="./assets/pediatria-algoritmos-extension-v01052.js"></script>
 <script src="./assets/pediatria-algoritmos-extension-v01053.js"></script>
 <script src="./assets/pediatria-farmaco-bridge-v01054.js"></script>
+<script src="./assets/pediatric-drug-references-v01055.js"></script>
+<script src="./assets/pediatric-drug-references-ui-v01055.js"></script>
 <script src="./assets/pediatria-algoritmos-ui-v01051.js"></script>
 </body></html>

@@ -86,9 +86,12 @@ assert.match(idx,/root\.KidBumPharmaDiagnosisCatalog/);
 assert.match(idx,/medicamentos vinculados · uso orientativo sin cotejo/);
 assert.match(page,/id="pharma-dx-catalog"/);
 assert.match(page,/id="pharma-dx-results"/);
-assert.match(page,/v0\.10\.50 · diagnósticos/);
+assert.match(page,/v0\.10\.55 · pediatría y dosis documentales/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.equal(scripts.length,16);
+assert.equal(scripts.length,18,'Pediatric reference library adds two standalone modules');
+assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pediatric-drug-references-v01055.js'));
+assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
+
 assert.ok(scripts.includes('assets/pharma-drug-diagnoses-v01050.js'));
 assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pharma-drug-diagnoses-v01050.js'));
 assert.ok(scripts.indexOf('assets/pharma-drug-diagnoses-v01050.js')<scripts.indexOf('assets/pharma-pro-indications-ui.js'));
