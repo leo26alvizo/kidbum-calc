@@ -254,7 +254,7 @@ function find(id,algorithm,outcome){
  const record=M[id];if(!record)return null;
  const matches=record.regimens.filter(r=>r.algorithm===algorithm&&r.branches.includes(outcome));
  return Object.freeze({
-  id,algorithm,outcome,name:bridge.drugs[id]?.[0]||id,record,
+  id,algorithm,outcome,name:bridge?.drugs?.[id]?.[0]||id,record,
   regimens:Object.freeze(matches),
   status:matches.length?'referencia-documentada-contextual':'pauta-no-cotejada-para-esta-rama',
   populationVerifiedForRegimen:matches.length>0,
