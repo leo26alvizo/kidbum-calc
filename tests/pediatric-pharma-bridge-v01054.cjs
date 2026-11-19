@@ -90,7 +90,7 @@ assert.deepEqual(ids('dificultad-respiratoria','urgent'),[],'No empiric drug wit
 const bridge=read(algoSources[3]),page=read('algoritmos-pediatria.html'),ui=read('assets/pediatria-algoritmos-ui-v01051.js'),css=read('assets/pediatria-farmaco-bridge-v01054.css'),sw=read('sw.js'),index=read('index.html'),pharmaPage=read('pharma-pro.html'),pharmaUI=read('assets/pharma-pro-ui.js');
 assert.doesNotMatch(bridge,/\bfetch\s*\(|XMLHttpRequest|sessionStorage|localStorage|innerHTML|eval\s*\(/,'No patient data collection or network in treatment bridge');
 assert.doesNotMatch(bridge,/(?:\d+\s*(?:mg|mL|µg)\s*\/\s*kg|=\s*\d+\s*mg\/kg)/i,'No unverified mg/kg dosing');
-assert.match(page,/kidbum-app-version" content="0\.10\.54"/);
+assert.match(page,/kidbum-app-version" content="0\.10\.55"/);
 assert.match(page,/pediatria-farmaco-bridge-v01054\.css/);
 assert.match(page,/pediatria-farmaco-bridge-v01054\.js/);
 assert.ok(page.indexOf('pediatria-algoritmos-extension-v01053.js')<page.indexOf('pediatria-farmaco-bridge-v01054.js')&&page.indexOf('pediatria-farmaco-bridge-v01054.js')<page.indexOf('pediatria-algoritmos-ui-v01051.js'),'Bridge must load before UI');
