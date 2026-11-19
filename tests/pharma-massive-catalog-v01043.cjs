@@ -83,7 +83,9 @@ assert.match(html,/9\/643/);
 assert.match(html,/634\/643/);
 assert.match(css,/@media\(max-width:590px\)/);
 const js=[...html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(js.length,16);
+assert.equal(js.length,18,'Pediatric dossier/renderer expand Pharma Pro scripts by two');
+assert.ok(js.indexOf('assets/pediatric-drug-references-v01055.js')<js.indexOf('assets/pharma-pro-ui.js'));
+
 assert.ok(js.indexOf('assets/pharma-pro-expansion-index-v01043.js')>js.indexOf('assets/pharma-pro-guides-plus.js'));
 assert.ok(js.indexOf('assets/pharma-pro-expansion-index-v01043.js')<js.indexOf('assets/pharma-pro-core.js'));
 assert.ok(js.indexOf('assets/pharma-disease-index-ui-v01043.js')<js.indexOf('assets/pharma-pro-quick-ui.js'));
