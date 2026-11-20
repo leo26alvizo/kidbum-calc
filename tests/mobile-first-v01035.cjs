@@ -39,7 +39,7 @@ assert.match(pharmaCSS,/\.pharma-workspace-nav button\{font-size:12px;line-heigh
 assert.match(pharmaCSS,/\.pharma-fast-input input\{font-size:16px/);
 assert.match(pharmaCSS,/\.disease-options\{grid-template-columns:minmax\(0,1fr\)/);
 assert.match(pharmaCSS,/\.pharma-suggestions button\{min-height:50px/);
-assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.60 · índice ampliado<\/small>/);
+assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.60 · Pharma Pro 2\.0<\/small>/);
 const shortcuts=home.match(/<div class="kb-resource-links"[^>]*>([\s\S]*?)<\/div>/);
 assert.ok(shortcuts,'All three feature shortcuts in same container');
 const links=shortcuts[1];
@@ -58,5 +58,5 @@ for(const path of ['snnoop10.html','guardia-pro.html','capurro.html','wallace-ad
 }
 const source=read('assets/pharma-pro-high-alert.js');
 assert.ok(source.includes("clinicallyApproved:0"),'Clinical review status unchanged');
-assert.ok(pharma.includes('9 fichas con cotejo documental parcial US')&&pharma.includes('0 con validación clínica/farmacéutica independiente'),'No pharmaceutical verification inflated');
+assert.ok(pharma.includes('15 medicamentos con cotejo parcial')&&pharma.includes('0 fichas con validación clínica/farmacéutica independiente'),'No pharmaceutical verification inflated');
 console.log('PASS mobile-first v0.10.35: one-column cards, 16px inputs, accessible bottom navigation, quick links, Pharma safety, and both PWA styles offline.');

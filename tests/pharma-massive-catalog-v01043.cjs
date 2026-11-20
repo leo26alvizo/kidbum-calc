@@ -79,11 +79,11 @@ assert.match(html,/id="pharma-disease-index"/);
 assert.match(html,/id="pharma-index-results"/);
 assert.match(html,/id="pharma-index-category"/);
 assert.match(html,/un catálogo extensivo de búsqueda por principios activos/);
-assert.match(html,/9 fichas con cotejo documental parcial US/);
-assert.match(html,/sin cotejo de etiqueta/);
+assert.match(html,/15 medicamentos con cotejo parcial/,'Scoped source review coverage is transparent');
+assert.match(html,/1,551 nombres no cuentan con cotejo individual/,'Unreviewed index entries remain explicit');
 assert.match(css,/@media\(max-width:590px\)/);
 const js=[...html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(js.length,19,'Broad name index adds a nonclinical script alongside existing Pharma scripts');
+assert.equal(js.length,21,'Forty-item evidence queue adds two safety-only, non-prescriptive scripts');
 assert.ok(js.indexOf('assets/pediatric-drug-references-v01055.js')<js.indexOf('assets/pharma-pro-ui.js'));
 
 assert.ok(js.indexOf('assets/pharma-pro-expansion-index-v01043.js')>js.indexOf('assets/pharma-pro-guides-plus.js'));

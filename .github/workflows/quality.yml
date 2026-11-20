@@ -167,6 +167,8 @@ jobs:
         run: node tests/pharma-indications-lasa.cjs
       - name: Three additional high-alert drug monographs and fail-closed eligibility
         run: node tests/pharma-high-alert.cjs
+      - name: Pharma Pro 2.0 · 40 prioritized meds, six source-audited safety-only dossiers, mobile and offline safeguards
+        run: node tests/pharma-pro-evidence-v01100.cjs
       - name: Pharmacy source-label audit, safety gating and six preparation reference cards
         run: node tests/pharma-source-audit.cjs
       - name: Pharmacy source-verified limited monographs and safety-gated labeled dose references

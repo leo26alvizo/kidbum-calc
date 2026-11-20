@@ -24,7 +24,7 @@ for(const name of pages){
 }
 assert.match(read('index.html'),/content="0\.10\.60"/);
 assert.match(read('pharma-pro.html'),/content="0\.10\.60"/);
-assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.60 · índice ampliado<\/small>/);
+assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.60 · Pharma Pro 2\.0<\/small>/);
 assert.match(read('index.html'),/--bg:#f5f8fa/,'main original light palette untouched');
 assert.match(read('pharma-pro.html'),/--bg:#f4f7f7/,'pharma original light palette untouched');
 assert.match(read('snnoop10.html'),/--sn-bg:#f1f6f7/,'SNNOOP original light palette untouched');
@@ -77,5 +77,5 @@ assert.doesNotMatch(body,/data-mobile-nav="guard"/);
 for(const slug of ['home','favorite','docs','about'])assert.ok(body.includes('data-mobile-nav="'+slug+'"'));
 assert.ok(body.includes('assets/mobile-first-v01035.css'),'Phone-first styling preserved');
 assert.ok(read('pharma-pro.html').includes('assets/pharma-mobile-v01035.css'),'Pharma phone-first styling preserved');
-assert.ok(read('pharma-pro.html').includes('9 fichas con cotejo documental parcial US')&&read('pharma-pro.html').includes('0 con validación clínica/farmacéutica independiente'),'Original source verification not inflated');
+assert.ok(read('pharma-pro.html').includes('15 medicamentos con cotejo parcial')&&read('pharma-pro.html').includes('0 fichas con validación clínica/farmacéutica independiente'),'Original source verification not inflated');
 console.log('PASS Graphite Noir v0.10.36: 13 scoped pages, light unchanged, contrast, clinical warnings, native bar sync, mobile/PWA and prior clinical coverage.');
