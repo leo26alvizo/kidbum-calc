@@ -27,7 +27,7 @@ assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original
 assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
 assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
 assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
-assert.match(swSource,/kidbum-calc-v01060-safe-update/,'New PWA cache must be distinguishable');
+assert.match(swSource,/safe-update-v01060-r1/,'New PWA cache must be distinguishable');
 assert.match(swSource,/assets\/escalas-clinicas-portada\.webp/,'Offline PWA must cache clinical-scales plate');
 assert.match(swSource,/assets\/hemodinamica-portada\.webp/,'Offline PWA must cache hemodynamic plate');
 assert.match(swSource,/assets\/funcion-renal-portada\.webp/,'Offline PWA must cache renal plate');
