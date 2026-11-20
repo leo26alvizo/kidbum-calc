@@ -22,9 +22,9 @@ for(const name of pages){
  const linkIdx=html.indexOf(ref),headEnd=html.indexOf('</head>');
  assert.ok(linkIdx<headEnd,'stylesheet stays inside <head> for '+name);
 }
-assert.match(read('index.html'),/content="0\.10\.56"/);
-assert.match(read('pharma-pro.html'),/content="0\.10\.43"/);
-assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.55 · pediatría y dosis documentales<\/small>/);
+assert.match(read('index.html'),/content="0\.10\.58"/);
+assert.match(read('pharma-pro.html'),/content="0\.10\.58"/);
+assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.58 · índice ampliado<\/small>/);
 assert.match(read('index.html'),/--bg:#f5f8fa/,'main original light palette untouched');
 assert.match(read('pharma-pro.html'),/--bg:#f4f7f7/,'pharma original light palette untouched');
 assert.match(read('snnoop10.html'),/--sn-bg:#f1f6f7/,'SNNOOP original light palette untouched');
