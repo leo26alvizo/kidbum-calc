@@ -12,6 +12,9 @@ for(const path of [
  'assets/pharma-drug-diagnoses-v01050.js'
 ])vm.runInNewContext(read(path),root,{filename:path,timeout:5000});
 const lib=root.KidBumPharmaCore,broad=root.KidBumPharmaBroadIndex,dx=root.KidBumPharmaDiagnosisCatalog;
+const snapWindow={window:{}};vm.runInNewContext(read('assets/clinical-drug-names-v01057.js'),snapWindow,{timeout:5000});
+const idsSnapshot=new Set(snapWindow.window.KidBumDrugSearchNames.map(x=>x[0]));
+console.log('DEBUG Pharma index',JSON.stringify({original:lib.records.length-broad.count,actual:lib.records.length,newCount:broad.count,missing:lib.records.filter(x=>!idsSnapshot.has(x.id)).map(x=>[x.id,x.name]),extra:snapWindow.window.KidBumDrugSearchNames.filter(x=>!lib.byId[x[0]])}));
 assert.equal(broad.version,'0.10.58');
 assert.equal(broad.count,923,'Deduplicated additions must remain stable');
 assert.equal(lib.records.length,1566,'Exactly 643 existing + 923 added searchable entries');
