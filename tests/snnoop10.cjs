@@ -28,7 +28,7 @@ assert.match(page,/Una sola bandera puede requerir atención inmediata/i,'No fal
 assert.match(page,/10\.1212\/WNL\.0000000000006697/,'Cite original SNNOOP10 publication');
 assert.match(index,/href="\.\/snnoop10\.html"/,'Module discoverable in home library');
 assert.match(sw,/'\.\/snnoop10\.html'/,'Precache the module for offline use');
-assert.match(sw,/20261020-snnoop10/,'Rotate cache when adding new HTML');
+assert.match(sw,/safe-update-v01060-r1/,'Current release cache preserves offline SNNOOP10');
 console.log('SNNOOP10 checks PASSED: 15 independent flags, descriptions, multi-selection, bibliographic reference and offline cache.');
 
 // The approved anatomical cover must be present before deployment.

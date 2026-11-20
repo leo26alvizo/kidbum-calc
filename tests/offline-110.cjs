@@ -18,9 +18,11 @@ class FakeResponse {
 const cache={
  async addAll(paths){
   for(const path of paths){
-   assert.match(path,/^\.\//,'Only local assets may be precached');
-   assert.ok(fs.existsSync(path), 'Required offline file missing: '+path);
-   entries.set(normalize(path),new FakeResponse(path));
+   assert.equal(path.cache,'no-store','Offline assets must be freshly downloaded');
+   const relative='./'+new URL(path.url).pathname.slice(new URL(origin).pathname.length);
+   assert.match(relative,/^\.\//,'Only local assets may be precached');
+   assert.ok(fs.existsSync(relative),'Required offline file missing: '+relative);
+   entries.set(normalize(path),new FakeResponse(relative));
   }
  },
  async match(req,options={}){
@@ -37,7 +39,7 @@ const self={
  addEventListener:(name,listener)=>{handlers[name]=listener;}
 };
 const context={
- self,URL,AbortController,setTimeout,clearTimeout,
+ self,URL,Request,AbortController,setTimeout,clearTimeout,
  caches:{open:async()=>cache,keys:async()=>['kidbum-calc-old'],delete:async()=>true},
  fetch:async()=>{networkCalls++;throw Error('No Wi-Fi, no cellular data');},
  Response:{error:()=>({status:0,body:'unavailable'})}
