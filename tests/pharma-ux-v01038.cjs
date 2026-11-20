@@ -25,7 +25,7 @@ assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(scripts.length,18,'Pharma Pro adds two standalone pediatric dosing modules');
+assert.equal(scripts.length,19,'Pharma Pro keeps prior scripts plus additive non-prescriptive index');
 assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pediatric-drug-references-v01055.js'));
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js')<scripts.indexOf('assets/pharma-pro-ui.js'));
