@@ -5,7 +5,7 @@ const root=path.resolve(__dirname,'..');
 const chrome=[process.env.CHROME_BIN,'/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/google-chrome-stable'].filter(Boolean).find(x=>fs.existsSync(x));
 assert.ok(chrome,'Chrome/Chromium required for mobile UI checks');
 const source=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const boot='<script>window.__kbErrors=[];window.addEventListener("error",e=>window.__kbErrors.push(String(e.message)));</script>';
+const boot='<script>window.__kbErrors=[];window.addEventListener("error",e=>window.__kbErrors.push(String(e.message)));try{localStorage.setItem("kidbum-access-recent-v1",JSON.stringify(["calc:gcs"]));}catch(e){}</script>';
 const fixture=source.replace('<body>','<body>'+boot);
 assert.notEqual(fixture,source,'Could not inject preflight browser error handler');
 function runSmoke(){
@@ -35,19 +35,19 @@ function runSmoke(){
  });
  check('Clinical calculator opens without changing its engine',()=>{
   click('#kb-access-slot [data-kb-open="calc:gcs"]');
-  return Boolean(q('#result-value'))&&JSON.parse(localStorage.getItem('kidbum-access-recent-v1')||'[]')[0]==='calc:gcs';
+  return Boolean(q('#result-value'))&&localStorage.getItem('kidbum-access-recent-v1')===null;
  });
- check('Bottom Inicio returns to recent tool shortcut',()=>{
+ check('Bottom Inicio does not show recent tools',()=>{
   click('[data-mobile-nav="home"]');
-  return Boolean(q('#kb-access-slot [data-kb-open="calc:gcs"]'))&&q('#kb-access-heading').textContent.includes('recientemente');
+  return !q('#kb-access-heading')&&!q('#kb-access-clear')&&!document.body.textContent.includes('Utilizadas recientemente');
  });
  check('Previously saved module appears in Favorites',()=>{
   click('[data-mobile-nav="favorite"]');
   return Boolean(q('#kb-access-slot [data-kb-open="url:./expansion-20.html#pecarn"]'));
  });
- check('History stores no clinical field values',()=>{
-  const names=['kidbum-access-pins-v1','kidbum-access-recent-v1'];
-  return names.every(k=>!String(localStorage.getItem(k)).includes('patient')&&!String(localStorage.getItem(k)).includes('f-gcs'));
+ check('History is erased and stays disabled; favorites remain local',()=>{
+  return localStorage.getItem('kidbum-access-recent-v1')===null&&
+   JSON.parse(localStorage.getItem('kidbum-access-pins-v1')||'[]').includes('url:./expansion-20.html#pecarn');
  });
  check('Keyboard focus visibly reaches skip link',()=>{
   const link=q('.kb-skip-link');link.focus();return document.activeElement===link;
