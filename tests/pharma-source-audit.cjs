@@ -85,7 +85,7 @@ assert.match(ui,/group\('Vía y preparación específica/);
 assert.match(ui,/productConfirmed/);
 assert.match(ui,/rilpivirine/);
 assert.match(markup,/pharma-coverage/);
-assert.match(markup,/0 con validación clínica\/farmacéutica independiente/);
+assert.match(markup,/0 fichas con validación clínica\/farmacéutica independiente/);
 assert.match(markup,/assets\/pharma-pro-source-audit\.js/);
 assert.match(sw,/pharma-source-audit-v01033/);
 assert.ok(sw.includes("'./assets/pharma-pro-source-audit.js'"));
