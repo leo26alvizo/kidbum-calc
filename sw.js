@@ -57,10 +57,13 @@ function progress(done,total,status='loading'){
 async function installRelease(){
  const cache=await caches.open(CACHE);
  try{
-  // A failed download is retried without spiking 160+ parallel connections.
-  // Do not reuse clinical files from another cache generation.
+  // Requests bypass the browser HTTP cache to avoid stale HTML or clinical JS.
+  // A failed download is retried without 160+ parallel connections.
+  // Never reuse clinical files from another cache generation.
   for(let offset=0;offset<CORE_ASSETS.length;offset+=INSTALL_BATCH_SIZE){
-   const batch=CORE_ASSETS.slice(offset,offset+INSTALL_BATCH_SIZE);
+   const batch=CORE_ASSETS.slice(offset,offset+INSTALL_BATCH_SIZE).map(path=>
+    new Request(new URL(path,self.registration.scope),{cache:'no-store'})
+   );
    for(let attempt=1;attempt<=INSTALL_RETRIES;attempt++){
     try{await cache.addAll(batch);break;}
     catch(error){
