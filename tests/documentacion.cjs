@@ -8,7 +8,7 @@ assert.match(home,/data-mobile-nav="docs"/,'Documentation is in bottom mobile na
 assert.match(home,/\['docs','▤','Documentación clínica'\]/,'Documentation is in sidebar');
 assert.match(home,/window\.location\.assign\('\.\/documentacion\.html'\)/,'Navigation opens editor');
 assert.match(sw,/'\.\/documentacion\.html'/,'Editor is available offline');
-assert.match(sw,/kidbum-calc-v01060-safe-update/,'Current release preloads documentation in a distinct cache');
+assert.match(sw,/safe-update-v01060-r1/,'Current release preloads documentation in a distinct cache');
 assert.match(html,/const SERVICES=/,'Specialty cards are defined');
 assert.match(html,/const STEPS=/,'Guided steps are defined');
 assert.match(html,/window\.print\(\)/,'User-triggered browser Save as PDF');
