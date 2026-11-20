@@ -6,6 +6,9 @@
 .pharma-evidence-stat{border:1px solid var(--line,#d8e5e8);border-radius:12px;padding:11px;background:var(--bg,#f4f8f8)}
 .pharma-evidence-stat strong{display:block;font-variant-numeric:tabular-nums;font-size:clamp(23px,3vw,32px);line-height:1.3;color:var(--ink,#123342)}
 .pharma-evidence-stat span{display:block;font-size:11px;color:var(--muted,#576d7b);line-height:1.5}
+.pharma-evidence-list-wrap{border-top:1px solid var(--line,#d8e5e8);padding-top:12px;margin-top:12px}
+.pharma-evidence-list-wrap>summary{cursor:pointer;font-size:13px;font-weight:800;line-height:1.5;padding:10px 2px;color:var(--accent,#047c81)}
+.pharma-evidence-list-wrap>summary:focus-visible{outline:3px solid #d8a339;outline-offset:3px}
 .pharma-evidence-filters{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
 .pharma-evidence-filters button{min-height:40px;padding:9px 13px;font-size:12px;border-radius:11px;border:1px solid var(--line,#d8e5e8);background:var(--panel,#fff);color:var(--ink,#123342);font-weight:750}
 .pharma-evidence-filters button[aria-pressed="true"]{background:var(--accent,#047c81);color:white}
