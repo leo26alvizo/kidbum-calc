@@ -87,6 +87,10 @@ jobs:
         run: node tests/pediatric-drug-references-v01055.cjs
       - name: Pediatric dose references in algorithms and Pharma Pro on real mobile Chromium
         run: node tests/pediatric-drug-references-browser-v01055.cjs
+      - name: Forty adult emergency and ICU algorithms with pharma links and strict safety graphs
+        run: node tests/urgencias-uci-algoritmos-v01056.cjs
+      - name: Urgencias/UCI outcome routing and correct specialty placement in real Chromium
+        run: node tests/urgencias-uci-algoritmos-browser-v01056.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
