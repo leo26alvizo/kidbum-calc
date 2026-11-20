@@ -1,0 +1,38 @@
+/* KidBum Urgencias/UCI · 40 decision paths, responsive embedded specialty tile.
+ * Shares accessible and offline component primitives with pediatric graph UI,
+ * but never touches pediatric data or its clinical rules.
+ */
+.urg-alg-tile{position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,1fr) 34%;align-items:stretch;min-height:210px;border:2px solid #e88564;border-radius:20px;overflow:hidden;cursor:pointer;text-align:left;color:#fff;background:linear-gradient(125deg,#35202e 0%,#8e3149 58%,#d45f46 100%);box-shadow:0 9px 26px rgba(81,29,38,.18)}
+.urg-alg-tile:hover{border-color:#ffbe88;transform:translateY(-1px)}
+.urg-alg-tile:focus-visible{outline:4px solid #fdbe49;outline-offset:3px}
+.urg-alg-tile .urg-alg-tile-content{position:relative;z-index:2;align-self:center;padding:22px 11px 19px 21px;min-width:0}
+.urg-alg-tile .urg-alg-tile-content b{color:#ffd6c1;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.09em;line-height:1.4}
+.urg-alg-tile .urg-alg-tile-content h3{color:#fff;font-size:clamp(19px,2.6vw,26px);line-height:1.1;letter-spacing:-.03em;margin:11px 0 9px}
+.urg-alg-tile .urg-alg-tile-content p{color:#fff2ec;font-size:13px;line-height:1.44;margin:0 0 14px;max-width:46ch}
+.urg-alg-tile .urg-alg-tile-content strong{display:inline-flex;align-items:center;background:#fff;color:#572438;border-radius:999px;padding:10px 14px;font-size:12px;line-height:1.25}
+.urg-alg-tile .urg-alg-tile-photo{display:block;width:100%;height:100%;min-height:210px;object-fit:cover;object-position:center;mask-image:linear-gradient(90deg,transparent,#000 34%);filter:saturate(.86) contrast(1.04);opacity:.9}
+@media(max-width:480px){.urg-alg-tile{min-height:178px;grid-template-columns:minmax(0,1fr) 30%}.urg-alg-tile .urg-alg-tile-photo{min-height:178px}.urg-alg-tile .urg-alg-tile-content{padding:15px 2px 14px 14px}.urg-alg-tile .urg-alg-tile-content h3{font-size:19px}.urg-alg-tile .urg-alg-tile-content p{font-size:12px}.urg-alg-tile .urg-alg-tile-content strong{padding:9px 11px}}
+body.alg-critical{--p-teal:#ad354f;--p-dark:#392133;--p-soft:#fff0ed;--p-bg:#f8f6f7;--p-line:#eadfe4}
+.alg-critical .alg-header{background:linear-gradient(132deg,#261b2d 0%,#712d44 60%,#b34b4e 100%)}
+.alg-critical .alg-header:after{background:radial-gradient(circle,rgba(255,196,171,.26),transparent 66%)}
+.alg-critical .alg-hero-chip{border-color:rgba(255,223,205,.4);background:rgba(255,255,255,.10)}
+.alg-critical .alg-kicker{color:#ffd7ba}
+.alg-critical .alg-alert{border-color:#db8c7c;background:#fff3ee}
+.alg-critical .alg-alert b{color:#7b2832}
+.alg-critical .alg-tile{border-color:#e6d9df}
+.alg-critical .alg-tile:hover{border-color:#b85863}
+.alg-critical .alg-tile-icon{background:#fbe9e5}
+.alg-critical .alg-tile-open{color:#9e3850}
+.alg-critical .alg-option.danger{border-color:#da777d;background:#fff0ef}
+.alg-critical .alg-outcome.danger{border-color:#d47575;background:#fff2f1}
+.alg-critical .alg-rx-role{color:#742d46;background:#fae9f0;border-color:#ecc4cd}
+.alg-critical .alg-rx-link{background:#913a56;color:#fff}
+.alg-critical .alg-rx-link:hover{background:#6e2940;color:#fff}
+.alg-critical .alg-therapy .alg-therapy-context{color:var(--p-ink)}
+html.dark body.alg-critical{--p-teal:#f3a8b3;--p-bg:#141a20;--p-card:#202832;--p-line:#45515c;--p-soft:#2b252e;--p-ink:#f5f4f5;--p-muted:#b5bdc4}
+html.dark .alg-critical .alg-alert{background:#392a30;border-color:#8e5557}
+html.dark .alg-critical .alg-alert b{color:#ffd0cb}
+html.dark .alg-critical .alg-outcome.danger{background:#3a292f;border-color:#8e5557}
+html.dark .alg-critical .alg-option.danger{background:#3a292f;border-color:#8e5557}
+html.dark .alg-critical .alg-rx-role{background:#50303b;color:#ffcfdb;border-color:#815264}
+html.dark .alg-critical .alg-rx-link{background:#a14964;color:#fff}
