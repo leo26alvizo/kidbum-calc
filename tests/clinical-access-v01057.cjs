@@ -1,5 +1,5 @@
 'use strict';
-/* v0.10.57: nonclinical search, privacy, history, bookmarks, offline integrity and a11y. */
+/* v0.10.57: nonclinical search, privacy, bookmarks, offline integrity and a11y. */
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
@@ -10,9 +10,12 @@ const meds=read('assets/clinical-drug-names-v01057.js');
 const memory=new Map();
 global.localStorage={
  getItem:key=>memory.has(key)?memory.get(key):null,
- setItem:(key,value)=>memory.set(key,String(value))
+ setItem:(key,value)=>memory.set(key,String(value)),
+ removeItem:key=>memory.delete(key)
 };
+memory.set('kidbum-access-recent-v1',JSON.stringify(['calc:gcs']));
 const access=require('../assets/clinical-access-v01057.js');
+assert.equal(memory.has('kidbum-access-recent-v1'),false,'A previously stored history is deleted during migration');
 assert.equal(access.normalize('ÁCIDO–BÁSE'),'acido base');
 const fixtures=[
  {key:'calc:gcs',id:'gcs',title:'Escala de Glasgow',category:'Neurología',kind:'Calculadora'},
@@ -23,22 +26,12 @@ assert.equal(access.searchEntries(fixtures,'GLASGOW')[0].key,'calc:gcs');
 assert.equal(access.searchEntries(fixtures,'gcs')[0].key,'calc:gcs');
 assert.equal(access.searchEntries(fixtures,'Algoritmos PEDIATRÍA')[0].key,'url:./algoritmos-pediatria.html');
 assert.equal(access.searchEntries(fixtures,'inexistente').length,0);
-access.remember('calc:gcs');
-access.remember('url:./algoritmos-pediatria.html');
-access.remember('calc:gcs');
-assert.deepEqual(access.recent(),['calc:gcs','url:./algoritmos-pediatria.html'],'Recent tools are ordered and unique');
-access.remember('url:./pharma-pro.html#ácido-zoledrónico');
-assert.equal(access.recent()[0],'url:./pharma-pro.html#ácido-zoledrónico','Unicode drug IDs must be preserved');
-access.remember('url:https://example.com/?patient=private');
-access.remember('calc:gcs?patient=private');
-assert.ok(!JSON.stringify(access.recent()).includes('private'),'User-controlled patient query data must never persist');
-for(let i=0;i<10;i++)access.remember('calc:test'+i);
-assert.equal(access.recent().length,6,'History must be limited to six tool keys');
 access.togglePin('url:./algoritmos-pediatria.html');
 assert.ok(access.pinned().includes('url:./algoritmos-pediatria.html'),'Module bookmarks persist');
-access.clearRecent();
-assert.deepEqual(access.recent(),[],'History clearing affects recents');
-assert.ok(access.pinned().includes('url:./algoritmos-pediatria.html'),'History clearing must not remove bookmarks');
+assert.equal(typeof access.remember,'undefined','No history writer is exposed');
+assert.equal(typeof access.recent,'undefined','No recent tools API remains');
+assert.equal(typeof access.trackClicks,'undefined','Click tracking is disabled');
+assert.ok(access.pinned().includes('url:./algoritmos-pediatria.html'),'Favorites remain supported');
 const sandbox={window:{}};
 vm.runInNewContext(meds,sandbox,{timeout:1000});
 const drugNames=sandbox.window.KidBumDrugSearchNames;
@@ -65,8 +58,11 @@ assert.match(code,/aria-pressed/);
 assert.match(css,/prefers-contrast:more/);
 assert.match(css,/forced-colors:active/);
 assert.match(css,/prefers-reduced-motion:reduce/);
-assert.match(html,/window\.KidBumAccess\?\.trackClicks\(\)/);
+assert.doesNotMatch(html,/window\.KidBumAccess\?\.trackClicks\(\)/);
+assert.doesNotMatch(code,/Utilizadas recientemente|Borrar historial|data-kb-clear/);
+assert.doesNotMatch(html,/KidBumAccess\?\.remember\(/);
+assert.match(code,/removeItem\('kidbum-access-recent-v1'\)/,'Old history must be cleaned up');
 assert.match(code,/offline aún no verificado/,'Offline success cannot be claimed before cache inspection');
 assert.match(html,/KidBumAccess\?\.showUpdate\(\)/,'New-version notice must allow explicit reloading');
 assert.match(html,/engine\.calculate\(id,data\)/,'Existing clinical calculation engine call preserved');
-console.log('PASS mobile access v0.10.57: accent-insensitive universal search, Pharma links, safe bounded history, module favorites, atomic offline cache, truthful status and accessibility.');
+console.log('PASS mobile access v0.10.57: accent-insensitive universal search, Pharma links, no history, module favorites, atomic offline cache, truthful status and accessibility.');
