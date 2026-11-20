@@ -7,14 +7,14 @@ const assert=require('node:assert/strict');
 const html=fs.readFileSync('index.html','utf8');
 const scripts=[...html.matchAll(/<script(?:[^>]*)>([\s\S]*?)<\/script>/g)].map(x=>x[1]).filter(x=>x.trim().length>0);
 assert.match(html,/assets\/medical-atlas\.js/,'Medical atlas source must be included');
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.58" \/>/,'Release version is defined centrally');
+assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.60" \/>/,'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
 assert.ok(!html.includes('KidBum CALC 0.10.3'),'About must not show an obsolete release');
 assert.ok(!html.includes('Descarga el archivo ZIP'),'Install guide must match the live hosted PWA');
 assert.match(html,/id="check-kidbum-update"/,'About offers an update action');
-assert.match(html,/registration\.update\(\)/,'Update action checks current service worker');
+assert.match(html,/window\.KidBumUpdater\?\.checkNow\(\)/,'Update action delegates to reliable update service');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
 assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
@@ -698,7 +698,7 @@ const mobileLoadingTests=[
  ['Startup bundle exists',()=>assert.ok(fs.existsSync('assets/startup-bundle.js'))],
  ['Startup bundle contains all WHO tables unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/who-bmifa.js','utf8')))],
  ['Startup bundle contains cardiology and ICU modules unchanged',()=>assert.ok(fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/cardiology-module.js','utf8'))&&fs.readFileSync('assets/startup-bundle.js','utf8').includes(fs.readFileSync('assets/critical-advanced.js','utf8')))],
- ['Offline installation atomically precaches tools without duplicate source modules',()=>assert.ok(swSource.includes('cache.addAll(CORE_ASSETS)')&&!swSource.includes('cache.addAll(ASSETS)')&&swSource.includes('BUNDLED_SOURCE_FILES'))],
+ ['Offline installation atomically precaches tools without duplicate source modules',()=>assert.ok(swSource.includes('cache.addAll(batch)')&&swSource.includes('INSTALL_RETRIES=3')&&!swSource.includes('cache.addAll(ASSETS)')&&swSource.includes('BUNDLED_SOURCE_FILES'))],
  ['Core includes startup clinical bundle and atlas',()=>assert.ok(swSource.includes("'./assets/startup-bundle.js'")&&swSource.includes("'./assets/medical-atlas.js'"))],
  ['Clinical illustrations are precached and versioned URLs use offline cache',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'")&&swSource.includes("'./assets/wallace-adultos-original-HD.png'")&&swSource.includes("const cached=await cache.match(req,{ignoreSearch:true})"))],
  ['Initial service worker claim never reloads page',()=>assert.ok(html.includes('const initiallyControlled=Boolean(navigator.serviceWorker.controller)')&&html.includes('window.location.reload()'))],
