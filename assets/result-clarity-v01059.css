@@ -1,0 +1,47 @@
+/* KidBum result clarity · progressive presentation only, v0.10.59.
+   Do not derive risk/diagnosis from CSS or edit clinical engines. */
+.result-panel.kb-result-modern{overflow:hidden;border-radius:18px;border:1px solid var(--stroke,#dbe7e9)}
+.kb-result-modern .result-top{padding:26px clamp(18px,3vw,30px);background:var(--surface,#fff)}
+.kb-result-modern .result-label{font-size:11px;letter-spacing:.08em}
+.kb-result-state{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:6px 11px;background:var(--soft,#edf3f6);border:1px solid var(--stroke,#dbe5e8);border-radius:20px;color:var(--ink,#1b3646);font-size:12px;font-weight:750;line-height:1.45}
+.kb-result-modern[data-kb-result-state="invalid"] .kb-result-state{border-color:var(--red,#ab3a3b);color:var(--red,#ab3a3b);background:var(--surface,#fff)}
+.kb-result-modern .result-value{font-size:clamp(38px,4.5vw,62px);font-weight:850;line-height:1.13;letter-spacing:-.035em;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;color:var(--ink,#122b3b)}
+.kb-result-modern .result-unit{font-size:.29em;letter-spacing:0;font-weight:600;color:var(--ink-soft,#486677);vertical-align:baseline}
+.kb-result-modern .result-interpret{font-size:clamp(14px,1.45vw,17px);font-weight:700;line-height:1.55;color:var(--ink,#163f4a);margin-top:14px;overflow-wrap:anywhere}
+.kb-result-modern .result-extra{padding:20px clamp(18px,3vw,30px) 26px}
+.kb-result-progress{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-top:15px;color:var(--ink-soft,#50677b);font-size:12px}
+.kb-result-progress strong{color:var(--ink,#173449);font-variant-numeric:tabular-nums}
+.kb-result-missing{margin:12px 0;padding:13px 16px;border-radius:12px;background:var(--soft,#edf3f6);border:1px solid var(--stroke,#dbe5e8);font-size:13px;color:var(--ink,#1b3646)}
+.kb-result-missing strong{display:block;margin-bottom:5px}
+.kb-result-missing ul{margin:6px 0 0;padding-left:22px;font-size:13px;line-height:1.6}
+.kb-result-modern .note-heading{font-size:12px;font-weight:800;letter-spacing:.02em;color:var(--ink,#1d394b)}
+.kb-result-modern #detail-text{font-size:13px;line-height:1.65;color:var(--ink-soft,#516a7d)}
+.kb-result-modern #notes-list{font-size:12px;line-height:1.7}
+.kb-result-modern .result-errors{font-size:13px}
+.kb-result-modern .result-warning{font-size:12px;line-height:1.65}
+.kb-result-reference{margin:18px 0 12px;padding-top:13px;border-top:1px solid var(--stroke,#dbe5e8);font-size:12px;line-height:1.6;color:var(--ink-soft,#516a7d)}
+.kb-result-reference strong{display:block;color:var(--ink,#1d394b);margin-bottom:4px}
+.kb-result-reference a{display:inline-block;color:var(--accent-dark,#007577);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.kb-result-copy{display:flex;width:100%;justify-content:center;align-items:center;gap:8px;min-height:46px;margin:6px 0 14px;font-size:13px}
+.kb-result-copy:disabled{opacity:.55;cursor:not-allowed}
+.kb-result-modern .kb-result-copy-note{font-size:11px;line-height:1.5;margin:0 0 18px;color:var(--ink-soft,#516a7d)}
+.kb-result-modern .result-top,.kb-result-modern .result-extra{min-width:0}
+.kb-result-modern a:focus-visible,.kb-result-modern button:focus-visible{outline:3px solid var(--accent,#008b8c);outline-offset:3px}
+/* A shared score/interpretation typography for external calculators that
+   retain their own, independently validated engines and copy controls. */
+.kb-result-surface{min-width:0;overflow-wrap:anywhere}
+.kb-result-surface :is(#score,#total,#result,#pas-points){font-variant-numeric:tabular-nums;font-size:clamp(29px,4vw,48px);font-weight:850;letter-spacing:-.025em;line-height:1.2;overflow-wrap:anywhere}
+.kb-result-surface :is(#interpretation,#interp,#classification,#pas-risk-name){font-size:clamp(14px,1.5vw,17px);font-weight:700;line-height:1.6;overflow-wrap:anywhere}
+.kb-result-surface :is(#detail,#formula,#pas-range){line-height:1.65;overflow-wrap:anywhere}
+.kb-result-surface :is(.output,output){min-width:0}
+@media(max-width:760px){
+ .kb-result-modern{position:static;top:auto}
+ .kb-result-modern .result-top{padding:21px 18px}
+ .kb-result-modern .result-extra{padding:18px}
+ .kb-result-modern .result-value{font-size:clamp(36px,11vw,52px)}
+ .kb-result-state{font-size:11px}
+ .kb-result-progress{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){.kb-result-modern *{scroll-behavior:auto!important;transition:none!important}}
+@media(forced-colors:active){.kb-result-state,.kb-result-missing,.kb-result-reference{border:1px solid CanvasText;background:Canvas;color:CanvasText}}
+@media print{.kb-result-copy,.kb-result-copy-note{display:none!important}.kb-result-modern{position:static!important;break-inside:avoid}}

@@ -41,7 +41,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
 @media(max-width:800px){.cols{grid-template-columns:1fr}.hero{min-height:175px}.hero-copy{padding:23px}.tools-nav label{width:100%}}
 @media print{nav,.tools-nav,.actions,#kb-ai-mount{display:none}.cols{display:block}.panel{box-shadow:none;break-inside:avoid;margin:10px 0}}
 </style>
-<link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script></head>
+<link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"></head>
 <body><main>
 <header><nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
 <div class="hero"><div class="hero-copy"><span class="eyebrow">KIDBUM CALC · PATRÓN BIOQUÍMICO Y EVALUACIÓN HEPÁTICA</span><h1>Índices hepáticos</h1><p>Factor R, AST/ALT, APRI, ALBI, Fatty Liver Index y NFS · fórmulas verificables, resultados locales</p></div></div>
@@ -49,7 +49,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
 <section class="tools-nav"><label for="picker">Seleccionar escala</label><select id="picker" aria-label="Seleccionar escala geriátrica"></select><span class="count" id="position"></span></section>
 <div class="cols">
 <section class="panel" aria-label="Evaluación"><h2 id="tool-title">Selecciona una escala</h2><p id="tool-intro">Completa todos los campos documentados.</p><div id="fields"></div></section>
-<section class="panel" aria-label="Resultado"><h2>Resultado</h2>
+<section class="panel kb-result-surface" aria-label="Resultado"><h2>Resultado</h2>
 <output aria-live="polite" aria-atomic="true"><div id="score">Evaluación pendiente</div><p id="interpretation">No se asumen respuestas normales.</p><p id="detail"></p></output>
 <div class="actions"><button type="button" class="secondary" id="example">↗ Ejemplo ficticio</button><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div>
 <p id="example-note" hidden>🧪 Ejemplo totalmente ficticio para enseñanza, no información de un paciente real.</p>
