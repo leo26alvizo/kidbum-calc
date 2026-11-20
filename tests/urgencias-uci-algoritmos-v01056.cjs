@@ -128,7 +128,7 @@ assert.match(page,/40 rutas clínicas/);
 assert.match(page,/data-category="UCI y soporte"/);
 assert.match(page,/data-category="Trauma y toxicología"/);
 const js=[...page.matchAll(/<script src="\.\/([^"]+)"/g)].map(m=>m[1]);
-assert.deepEqual(js.slice(-7),paths);
+assert.deepEqual(js.slice(-7),[...paths,'assets/urgencias-algoritmos-ui-v01056.js'],'Urgencias UI must load after six engine/pharmacy scripts');
 assert.match(ui,/KidBumCriticalAlgorithms/);assert.match(ui,/KidBumCriticalTreatmentBridge/);
 assert.match(ui,/KidBumCriticalAlgorithmUI/);assert.match(ui,/function renderTreatment\(a,step\)/);
 assert.doesNotMatch(ui,/KidBumPediatricDrugUI/);
