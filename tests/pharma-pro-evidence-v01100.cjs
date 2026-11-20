@@ -72,6 +72,8 @@ function smoke(){
  const results=[],q=s=>document.querySelector(s),check=(name,fn)=>{try{if(!fn())throw Error('Check false');results.push({name,ok:true});}catch(err){results.push({name,ok:false,error:String(err)})}};
  check('Evidence dashboard mounted',()=>Boolean(q('#pharma-evidence-board .pharma-evidence-summary')));
  check('40 priority entries accessible',()=>document.querySelectorAll('#pharma-evidence-list .pharma-evidence-item').length===40);
+ check('Long audit worklist is collapsed for mobile-first use',()=>q('#pharma-evidence-board details')?.open===false);
+ const panel=q('#pharma-evidence-board details');if(panel)panel.open=true;
  check('15 source-checked with zero clinical approvals',()=>q('#pharma-evidence-board')?.textContent.includes('15 de 40')&&q('#pharma-evidence-board')?.textContent.includes('0 con validación clínica independiente'));
  const button=q('.pharma-evidence-filters [data-filter="source-safety-only"]');
  button?.click();
