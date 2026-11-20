@@ -35,7 +35,7 @@
  function recent(){return safeRead(RECENTS).slice(0,6);}
  function pinned(){return safeRead(PINS);}
  function remember(key){
-  if(!/^calc:[a-z0-9-]+$/.test(key)&&!/^url:\.\/[a-z0-9-]+\.html(?:#[a-z0-9-]+)?$/.test(key)&&!/^app:(?:gasometria|pharma|diabetes:[a-z0-9-]+)$/.test(key))return;
+  if(!/^calc:[a-z0-9-]+$/.test(key)&&!/^url:\.\/[a-z0-9-]+\.html(?:#[\p{L}0-9-]+)?$/u.test(key)&&!/^app:(?:gasometria|pharma|diabetes:[a-z0-9-]+)$/.test(key))return;
   safeWrite(RECENTS,[key,...safeRead(RECENTS).filter(x=>x!==key)].slice(0,6));
  }
  function togglePin(key){
@@ -111,7 +111,7 @@
   for(const [attr,path]of Object.entries(standalone))if(card.hasAttribute(attr))return 'url:./'+path;
   if(card.matches('a[href]')){
    const href=card.getAttribute('href');
-   if(/^\.\/[a-z0-9-]+\.html(?:#[a-z0-9-]+)?$/.test(href))return 'url:'+href;
+   if(/^\.\/[a-z0-9-]+\.html(?:#[\p{L}0-9-]+)?$/u.test(href))return 'url:'+href;
   }
   return '';
  }
@@ -122,7 +122,7 @@
  function offlineStatus(){
   const node=document.getElementById('kb-offline-status');if(!node)return;
   const connected=navigator.onLine!==false;
-  const set=message=>{node.textContent=message;node.dataset.connection=connected?'online':'offline';};
+  const set=message=>{node.textContent=message;node.dataset.connection=connected?'online':'offline';const side=document.getElementById('net-label');if(side)side.textContent=message;};
   if(!('serviceWorker'in navigator)||!('caches'in window)){set(connected?'Conexión detectada · modo offline no verificado':'Sin red · recursos offline no verificados');return;}
   caches.keys().then(async names=>{
    const candidates=names.filter(n=>n.startsWith('kidbum-calc-')).reverse();
