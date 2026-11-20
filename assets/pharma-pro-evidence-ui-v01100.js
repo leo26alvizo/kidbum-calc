@@ -18,7 +18,7 @@ function renderReview(id){
  card.append(el('h3','Ficha de seguridad por presentación · '+d.name));
  card.append(el('div',d.status,'pharma-evidence-grade'));
  card.append(el('p',d.jurisdiction+' · Revisada el '+d.reviewedAt+'.','small muted'));
- const warning=el('div','NO hay dosis habilitada en esta ficha. No valida equivalencia mexicana, compatibilidad IV, uso pediátrico ni autorización clínica independiente.','pharma-evidence-caution');
+ const warning=el('div','SIN pauta posológica habilitada en esta ficha. No valida equivalencia mexicana, compatibilidad IV, uso pediátrico ni autorización clínica independiente.','pharma-evidence-caution');
  card.append(warning);
  card.append(el('p','Presentación del etiquetado: '+d.formulation));
  lineList(card,'Indicaciones descritas en ESTA etiqueta',d.indications);
