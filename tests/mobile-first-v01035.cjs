@@ -58,5 +58,5 @@ for(const path of ['snnoop10.html','guardia-pro.html','capurro.html','wallace-ad
 }
 const source=read('assets/pharma-pro-high-alert.js');
 assert.ok(source.includes("clinicallyApproved:0"),'Clinical review status unchanged');
-assert.ok(pharma.includes('9/643')&&pharma.includes('634/643'),'No pharmaceutical verification inflated');
+assert.ok(pharma.includes('9 fichas con cotejo documental parcial US')&&pharma.includes('0 con validación clínica/farmacéutica independiente'),'No pharmaceutical verification inflated');
 console.log('PASS mobile-first v0.10.35: one-column cards, 16px inputs, accessible bottom navigation, quick links, Pharma safety, and both PWA styles offline.');
