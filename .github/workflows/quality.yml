@@ -17,6 +17,8 @@ jobs:
         run: node tests/regression.cjs
       - name: Pharma Pro broad expansion - 1566 searchable entries, 29 groups, no new dosing claims
         run: node tests/pharma-broad-index-v01058.cjs
+      - name: Result clarity, safe copy, sources and real mobile / desktop checks
+        run: node tests/result-clarity-v01059.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
