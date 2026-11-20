@@ -844,12 +844,14 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
 .kb-basic-keys button[data-key="C"],.kb-basic-keys button[data-key="⌫"]{color:var(--red)}
 .chip-count{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:5px;padding:0 5px;border-radius:99px;background:rgba(40,116,126,.12);font-size:10px;font-variant-numeric:tabular-nums}.chip.active .chip-count{background:rgba(255,255,255,.21);color:inherit}.cardio-card-media{background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important}.cardio-card-media>img.atlas-card-illustration{position:relative!important;display:block!important;visibility:visible!important;opacity:1!important;object-fit:cover!important;width:100%!important;height:100%!important}.cardio-card-media.cardio-image-failed{background-color:#e8f2f0!important}.cardio-card-media .atlas-card-index{z-index:2}</style>
   <link rel="stylesheet" href="./assets/mobile-first-v01035.css" />
+  <link rel="stylesheet" href="./assets/clinical-access-v01057.css" />
   <title>KidBum CALC · Herramientas clínicas</title>
 <link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/pediatric-pharma-v01044.css" />
   <link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css" />
   <link rel="stylesheet" href="./assets/urgencias-algoritmos-v01056.css" />
 </head>
 <body>
+  <a class="kb-skip-link" href="#main-content">Saltar al contenido principal</a>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
@@ -873,6 +875,8 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
           <button class="icon-btn" id="theme-btn" aria-label="Cambiar tema" title="Cambiar tema" type="button">◐</button>
         </div>
       </header>
+      <div id="kb-offline-status" role="status" aria-live="polite">Comprobando disponibilidad sin conexión…</div>
+      <div id="kb-update-banner" hidden role="status">Se instaló una nueva versión de KidBum. Finaliza tu actividad antes de recargar. <button type="button">Actualizar ahora</button></div>
       <main id="main-content" tabindex="-1"></main>
       <footer class="footer"><span>KidBum CALC <b class="kidbum-version"></b> · Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></span><span>Sin conexión externa · Sin datos de pacientes almacenados</span></footer>
     </div>
@@ -888,6 +892,8 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
 <script src="./assets/startup-bundle.js"></script>
 <script src="./assets/pediatric-pharma.js"></script>
 <script src="./assets/pediatric-dose-math-v01044.js"></script>
+<script src="./assets/clinical-drug-names-v01057.js"></script>
+<script src="./assets/clinical-access-v01057.js"></script>
 <script>
 /* KidBum CALC v0.1 · motor determinista sin red ni telemetría.
  * Las salidas son cálculos auxiliares, no órdenes ni diagnósticos.
@@ -1858,7 +1864,7 @@ function storePrefs(){try{localStorage.setItem('kidbum-favs',JSON.stringify(fave
 function el(q){return document.querySelector(q)}
 function enc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3000);}
-function go(page,what=''){if(page==='docs'){window.location.assign('./documentacion.html');return;}if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
+function go(page,what=''){if(page==='calc')window.KidBumAccess?.remember('calc:'+what);else if(page==='gasometria')window.KidBumAccess?.remember('app:gasometria');else if(page==='pharma')window.KidBumAccess?.remember('app:pharma');else if(page==='diabetes')window.KidBumAccess?.remember('app:diabetes:'+what);if(page==='docs'){window.location.assign('./documentacion.html');return;}if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
 function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
 function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['docs','▤','Documentación clínica'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>{const target=b.dataset.nav||b.dataset.mobileNav;if(target==='home'){category='Todas';search='';}go(target);});document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
 function render(){renderNav();el('#breadcrumb-current').hidden=screen==='home';el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':screen==='gasometria'?'Gasometría integrada':screen==='diabetes'?'Diabetes & Insulin Pro':'Inicio';if(screen==='diabetes'){window.KidBumDiabetes.render(main,engine,()=>{category='Endocrinología y Diabetes';search='';go('home');},id);return;}if(screen==='guard'){renderGuard();return;}if(screen==='gasometria'){window.KidBumGasometria.render(main,engine,()=>{if(gasometriaOrigin==='guard')go('guard');else{category='Urgencias y Terapia Intensiva';search='';go('home');}});return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
@@ -1925,7 +1931,7 @@ function renderHome(full){
  );
  const emergencyAlgCard=showEmergencyAlgorithms?'<article class="urg-alg-tile" data-urg-alg role="button" tabindex="0" aria-label="Abrir 40 algoritmos de Urgencias y Terapia Intensiva con tratamientos y Pharma Pro"><div class="urg-alg-tile-content"><b>🚨 URGENCIAS Y TERAPIA INTENSIVA · ALGORITMOS</b><h3>40 algoritmos clínicos</h3><p>ACLS · choque · sepsis · EVC · vía aérea · ventilación · UCI · tratamiento y Pharma Pro</p><strong>Abrir decisiones clínicas →</strong></div><img class="urg-alg-tile-photo" src="./assets/urgencias-portada.jpg" alt="" loading="lazy" decoding="async" /></article>':'';
  const cards=algCard+emergencyAlgCard+wallaceCard+capurroCard+rapidCards+cardioCards+newTwentyCards+geriatricCards+liverCards+guardiaProCards+gasometriaCard+diabetesCards+pharmaCard+list.map(d=>`<article class="calc-card" data-open="${d.id}" role="button" tabindex="0" aria-label="Abrir ${enc(d.title)}"><button type="button" class="fav-toggle ${faves.includes(d.id)?'starred':''}" data-star="${d.id}" aria-label="${faves.includes(d.id)?'Quitar favorito':'Marcar favorito'}: ${enc(d.title)}">${faves.includes(d.id)?'★':'☆'}</button><div class="atlas-card-media">${atlas.img(d.id,"atlas-card-illustration",atlas.anatomy[d.id])}<span class="atlas-card-index">${d.symbol}</span></div><div><h3>${enc(d.title)}</h3><p>${enc(d.short)}</p></div><div class="calc-card-bottom"><span>${enc(d.category)}</span><span class="card-arrow">→</span></div></article>`).join('');
- if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1><span class="atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integral</span></h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></div></div><div class="atlas-hero-art" aria-hidden="true">${atlas.img("qsofa","atlas-hero-illustration","",true)}</div></section><div class="quick-stats"><span class="mini-stat"><strong>${calculatorCount()}</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p><div class="kb-resource-links" aria-label="Accesos clínicos destacados"><a href="./snnoop10.html" class="kb-resource-link">🧠 SNNOOP10: banderas rojas de cefalea →</a><a href="https://nerviosoculares.docramiro.workers.dev/" target="_blank" rel="noopener noreferrer" class="kb-resource-link">👁️ Simulador de pares craneales oculomotores →</a><a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a></div></div><label class="search" aria-label="Buscar calculadora"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar escala o fórmula" value="${enc(search)}" autocomplete="off" /></label></div><div class="chips" id="chips"></div><div id="atlas-categories" class="atlas-category-grid" aria-label="Colecciones médicas ilustradas"></div><div id="calc-list" class="calc-grid"></div>`;
+ if(full)main.innerHTML=`${screen==='home'?`<section class="hero"><div class="hero-copy"><div class="eyebrow">HERRAMIENTAS PARA LA PRÁCTICA MÉDICA</div><h1><span class="atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integral</span></h1><p>Calculadoras esenciales, claras y sin distracciones. Todas funcionan localmente y sin pagos adicionales.</p><div class="hero-creator">Creada por <strong>Teniente Pasante de Medicina Leonardo Alvizo Velázquez</strong></div></div><div class="atlas-hero-art" aria-hidden="true">${atlas.img("qsofa","atlas-hero-illustration","",true)}</div></section><div class="quick-stats"><span class="mini-stat"><strong>${calculatorCount()}</strong>calculadoras</span><span class="mini-stat"><strong>0</strong>cuentas requeridas</span><span class="mini-stat"><strong>100%</strong>cálculo local</span></div>`:''}<div class="content-top"><div><span class="eyebrow">BIBLIOTECA</span><h2>${screen==='favorite'?'Tus calculadoras guardadas':'Explora las calculadoras'}</h2><p>Elige una herramienta o encuentra rápidamente la que necesitas.</p><div class="kb-resource-links" aria-label="Accesos clínicos destacados"><a href="./snnoop10.html" class="kb-resource-link">🧠 SNNOOP10: banderas rojas de cefalea →</a><a href="https://nerviosoculares.docramiro.workers.dev/" target="_blank" rel="noopener noreferrer" class="kb-resource-link">👁️ Simulador de pares craneales oculomotores →</a><a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a></div></div><label class="search" aria-label="Buscar en todas las herramientas"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Escala, algoritmo o medicamento" aria-controls="kb-access-slot calc-list" value="${enc(search)}" autocomplete="off" /></label></div><div id="kb-access-slot" aria-label="Acceso rápido a herramientas"></div><div class="chips" id="chips"></div><div id="atlas-categories" class="atlas-category-grid" aria-label="Colecciones médicas ilustradas"></div><div id="calc-list" class="calc-grid"></div>`;
  el('#chips').innerHTML=categories.map(c=>`<button type="button" class="chip ${category===c?'active':''}" data-cat="${enc(c)}" aria-label="${enc(c)}: ${calculatorCount(c)} calculadoras">${enc(c)} <span class="chip-count">${calculatorCount(c)}</span></button>`).join('');
 
  const featured=screen==='home'&&category==='Todas'&&!search.trim();
@@ -1964,6 +1970,45 @@ function renderHome(full){
  document.querySelectorAll('[data-open]').forEach(c=>{c.onclick=e=>{if(e.target.closest('[data-star]'))return;go('calc',c.dataset.open);};c.onkeydown=e=>{if(e.key==='Enter'&&e.target===c)go('calc',c.dataset.open);};});
  document.querySelectorAll('[data-star]').forEach(b=>b.onclick=e=>{e.stopPropagation();favorite(b.dataset.star);});
  el('#search-input').oninput=e=>{search=e.target.value;renderHome(false);};
+
+  /* One on-device search index: existing core calculators + standalone modules +
+     Pharma Pro medication names. Never index patient fields or clinical results. */
+  if(typeof window!=='undefined'&&window.KidBumAccess){
+  const accessEntries=[
+   ...defs.map(x=>({key:'calc:'+x.id,id:x.id,title:x.title,short:x.short,category:x.category,kind:'Calculadora'})),
+   ...newTwentyTools.map(x=>({key:'url:./expansion-20.html#'+x.id,id:x.id,title:x.title,short:x.short,category:x.category,kind:'Calculadora'})),
+   ...geriatricTools.map(x=>({key:'url:./geriatria-escalas.html#'+x.id,id:x.id,title:x.title,short:x.short,category:'Geriatría',kind:'Calculadora'})),
+   ...liverTools.map(x=>({key:'url:./hepatologia-indices.html#'+x.id,id:x.id,title:x.title,short:x.short,category:'Hepatología',kind:'Calculadora'})),
+   ...cardioTools.map(x=>({key:'url:./escalas-cardioembolia.html#'+x.id,id:x.id,title:x.name,short:x.description,category:'Urgencias y Terapia Intensiva',kind:'Calculadora'})),
+   ...guardiaProTools.map(x=>({key:'url:./guardia-pro.html#'+x.id,id:x.id,title:x.title,short:x.short,category:'Urgencias y Terapia Intensiva',kind:'Calculadora'})),
+   ...rapidTools.map(x=>({key:x.id==='pas'?'url:./pediatria-pas.html':'url:./pediatria-evaluacion-rapida.html#'+x.id,id:x.id,title:x.title,short:x.short,category:'Pediatría',kind:'Calculadora'})),
+   ...diabetesTools.map(x=>({key:'app:diabetes:'+x.id,id:x.id,title:x.title,short:x.short,category:x.category,kind:'Calculadora'})),
+   ...externalCalculators.map(x=>({key:'url:'+x.href,id:x.id,title:x.id.replace(/-/g,' ').toUpperCase(),category:x.category,kind:'Calculadora'})),
+   {key:'app:gasometria',id:'gasometria',title:'Gasometría integrada',category:'Urgencias y Terapia Intensiva',kind:'Calculadora'},
+   {key:'app:pharma',id:'farmacologia-pediatrica',title:'Farmacología pediátrica',category:'Pediatría',kind:'Módulo'},
+   {key:'url:./algoritmos-urgencias.html',id:'algoritmos-urgencias',title:'Algoritmos de Urgencias y UCI',category:'Urgencias y Terapia Intensiva',kind:'Algoritmos'},
+   {key:'url:./algoritmos-pediatria.html',id:'algoritmos-pediatria',title:'Algoritmos clínicos de Pediatría',category:'Pediatría',kind:'Algoritmos'},
+   {key:'url:./pharma-pro.html',id:'pharma-pro',title:'Pharma Pro · biblioteca de medicamentos',category:'Farmacología',kind:'Módulo'},
+   {key:'url:./snnoop10.html',id:'snnoop10',title:'SNNOOP10 · banderas rojas de cefalea',category:'Neurología',kind:'Módulo'},
+   {key:'url:./wallace-adultos.html',id:'wallace',title:'Regla de los 9 de Wallace',category:'Urgencias y Terapia Intensiva',kind:'Calculadora'},
+   {key:'url:./capurro.html',id:'capurro',title:'Capurro · edad gestacional',category:'Pediatría',kind:'Calculadora'}
+  ];
+  window.KidBumAccess?.render({
+   entries:accessEntries,screen,search,favorites:faves,
+   onOpen:key=>{
+    if(key.startsWith('calc:'))go('calc',key.slice(5));
+    else if(key.startsWith('app:diabetes:'))go('diabetes',key.slice('app:diabetes:'.length));
+    else if(key==='app:gasometria'){gasometriaOrigin='home';go('gasometria');}
+    else if(key==='app:pharma')go('pharma');
+    else if(key.startsWith('url:'))window.location.assign(key.slice(4));
+   },
+   onPin:key=>{
+    if(key.startsWith('calc:'))favorite(key.slice(5));
+    else{window.KidBumAccess.togglePin(key);renderHome(false);}
+   }
+  });
+  }
+
 }
 function renderPharma(){
  const flags={
@@ -2387,7 +2432,7 @@ if('serviceWorker'in navigator&&window.location.protocol!=='file:'){
     Existing users see a nonblocking notice when an actual update takes control. */
  const initiallyControlled=Boolean(navigator.serviceWorker.controller);
  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-   if(initiallyControlled)toast('Versión actualizada. Cuando te convenga, vuelve a abrir la aplicación.');
+   if(initiallyControlled){toast('Versión actualizada. Recarga cuando no estés usando una herramienta.');window.KidBumAccess?.showUpdate();}
  });
  let lastVersionCheck=Date.now();
  const checkNewVersion=()=>{
@@ -2400,6 +2445,8 @@ if('serviceWorker'in navigator&&window.location.protocol!=='file:'){
  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).catch(()=>{});
  document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkNewVersion();});
 }
+window.KidBumAccess?.trackClicks();
+window.KidBumAccess?.bindStatus();
 render();
 })();
 

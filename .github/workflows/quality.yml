@@ -99,6 +99,10 @@ jobs:
         run: node tests/mobile-first-v01035.cjs
       - name: Mobile Inicio breadcrumb navigation
         run: node tests/mobile-home-breadcrumb.cjs
+      - name: Mobile search, recent tools, bookmarks, PWA status and accessibility
+        run: node tests/clinical-access-v01057.cjs
+      - name: Mobile search and bookmarks in real 390px Chromium
+        run: node tests/clinical-access-browser-v01057.cjs
       - name: PWA refresh and home navigation
         run: node tests/pwa-refresh-navigation.cjs
       - name: Clinical workspace premium UI safety
