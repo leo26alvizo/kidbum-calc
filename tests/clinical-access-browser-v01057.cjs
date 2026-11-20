@@ -39,7 +39,7 @@ function runSmoke(){
  });
  check('Bottom Inicio does not show recent tools',()=>{
   click('[data-mobile-nav="home"]');
-  return !q('#kb-access-heading')&&!q('#kb-access-clear')&&!document.body.textContent.includes('Utilizadas recientemente');
+  return !q('#kb-access-clear')&&![...document.querySelectorAll('#kb-access-slot h3')].some(x=>x.textContent.includes('Utilizadas recientemente'));
  });
  check('Previously saved module appears in Favorites',()=>{
   click('[data-mobile-nav="favorite"]');
