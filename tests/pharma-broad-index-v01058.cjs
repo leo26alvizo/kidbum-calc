@@ -46,7 +46,7 @@ assert.equal(new Set(names.map(x=>x[0])).size,1566);
 assert.ok(names.every(([id,name])=>lib.byId[id]?.name===name),'Home deep links must refer to actual Pharma Pro records');
 const sw=read('sw.js'),html=read('pharma-pro.html');
 assert.match(sw,/'\.\/assets\/pharma-broad-index-v01058\.js'/,'New index is precached for airplane mode');
-assert.match(sw,/kidbum-calc-v01060-safe-update/,'Current cache revision prevents mixed pharmacy versions');
+assert.match(sw,/safe-update-v01060-r1/,'Current cache revision prevents mixed pharmacy versions');
 assert.ok(html.indexOf('src="./assets/pharma-broad-index-v01058.js"')>html.indexOf('src="./assets/pharma-pro-expansion-index-v01043.js"'));
 assert.ok(html.indexOf('src="./assets/pharma-broad-index-v01058.js"')<html.indexOf('src="./assets/pharma-pro-core.js"'));
 assert.doesNotMatch(html,/Los 643 medicamentos están asociados/,'Do not claim every expanded entry has clinical linkage');
