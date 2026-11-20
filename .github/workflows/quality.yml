@@ -29,6 +29,8 @@ jobs:
         run: node tests/pediatric-infant-pharma-v01044.cjs
       - name: Pediatric oral dose safety and arithmetic
         run: node tests/pediatric-drug-doses.cjs
+      - name: PWA v0.10.60 reliable updates, atomic retry, rollback and recovery
+        run: node tests/pwa-update-v01060.cjs
       - name: Mobile data and offline startup
         run: node tests/pwa-cellular.cjs
       - name: First-launch airplane mode for all indexed clinical tools
