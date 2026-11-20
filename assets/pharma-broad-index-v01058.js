@@ -47,6 +47,9 @@ const groups=Object.freeze({
 const normalize=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 const ids=new Set(base.catalog.map(row=>row[0]));
 const names=new Set(base.catalog.map(row=>normalize(row[1])));
+/* These generic names are already in the 46 original core records,
+ * which are joined only later in pharma-pro-core.js. Never clone them. */
+for(const name of ['Atropina','Sulfato de magnesio'])names.add(normalize(name));
 const CHECKS='ENTRADA SIN COTEJO: identidad/presentación, vía, indicaciones, embarazo, pediatría, riesgos ISMP, interacciones, situación regulatoria mexicana y dosis pendientes. Revisar IPP, Farmacia Clínica y protocolos antes de cualquier decisión.';
 const USE='Índice terminológico para localizar el principio activo. Su agrupación es editorial, NO prueba indicación, eficacia, disponibilidad, registro en México ni aptitud para prescripción.';
 const additions=[];
