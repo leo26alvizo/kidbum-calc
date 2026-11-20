@@ -9,7 +9,9 @@
  if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis,function(){
  'use strict';
- const RECENTS='kidbum-access-recent-v1',PINS='kidbum-access-pins-v1';
+ const PINS='kidbum-access-pins-v1';
+ // Remove pre-existing automatic navigation history. Preserve explicit favorites.
+ try{if(typeof localStorage!=='undefined')localStorage.removeItem('kidbum-access-recent-v1');}catch{/* Optional browser storage. */}
  const aliases={
   'calc:gcs':'glasgow escala de coma gcs',
   'calc:nihss':'ictus evc evento vascular cerebral stroke',
@@ -32,16 +34,10 @@
   catch{return [];}
  }
  function safeWrite(key,items){try{localStorage.setItem(key,JSON.stringify(items));}catch{/* Storage is optional. */}}
- function recent(){return safeRead(RECENTS).slice(0,6);}
  function pinned(){return safeRead(PINS);}
- function remember(key){
-  if(!/^calc:[a-z0-9-]+$/.test(key)&&!/^url:\.\/[a-z0-9-]+\.html(?:#[\p{L}0-9-]+)?$/u.test(key)&&!/^app:(?:gasometria|pharma|diabetes:[a-z0-9-]+)$/.test(key))return;
-  safeWrite(RECENTS,[key,...safeRead(RECENTS).filter(x=>x!==key)].slice(0,6));
- }
  function togglePin(key){
   const items=pinned();safeWrite(PINS,items.includes(key)?items.filter(x=>x!==key):[key,...items].slice(0,70));
  }
- function clearRecent(){safeWrite(RECENTS,[]);}
  function searchEntries(entries,term,limit=18){
   const words=normalize(term).split(' ').filter(Boolean);
   if(!words.length)return [];
@@ -70,7 +66,6 @@
   const entries=catalog(options.entries), lookup=new Map(entries.map(e=>[e.key,e]));
   const core=new Set((options.favorites||[]).map(id=>'calc:'+id));
   const saved=new Set([...core,...pinned()]);
-  const recentEntries=recent().map(key=>lookup.get(key)).filter(Boolean);
   const savedModules=entries.filter(e=>saved.has(e.key)&&!e.key.startsWith('calc:'));
   const query=String(options.search||'').trim();
   let html='';
@@ -79,45 +74,12 @@
    const matches=searchEntries(scope,query,18);
    html='<section class="kb-access-section" aria-labelledby="kb-access-heading"><h3 id="kb-access-heading">Resultados en todas las herramientas</h3><p id="kb-access-count" role="status" aria-live="polite">'+(matches.length===18?'Primeras 18 coincidencias':matches.length+' coincidencia'+(matches.length===1?'':'s'))+' · Calculadoras, módulos y catálogo farmacológico</p>'+
     (matches.length?makeList(matches,null,saved):'<p class="kb-access-empty">No hay resultados en el índice general. Prueba con una sigla o sin acentos.</p>')+'</section>';
-  }else if(options.screen==='home'&&recentEntries.length){
-   html='<section class="kb-access-section" aria-labelledby="kb-access-heading"><div class="kb-access-head"><h3 id="kb-access-heading">Utilizadas recientemente</h3><button type="button" id="kb-access-clear" aria-label="Borrar historial local de herramientas">Borrar historial</button></div>'+makeList(recentEntries,null,saved)+'</section>';
   }else if(options.screen==='favorite'&&savedModules.length){
    html='<section class="kb-access-section" aria-labelledby="kb-access-heading"><h3 id="kb-access-heading">Otros módulos guardados</h3>'+makeList(savedModules,null,saved)+'</section>';
   }
   slot.innerHTML=html;
-  slot.querySelectorAll('[data-kb-open]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.kbOpen;if(lookup.has(key)){remember(key);options.onOpen(key);}}));
+  slot.querySelectorAll('[data-kb-open]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.kbOpen;if(lookup.has(key))options.onOpen(key);}));
   slot.querySelectorAll('[data-kb-pin]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.kbPin;if(lookup.has(key))options.onPin(key);}));
-  const clear=slot.querySelector('#kb-access-clear');
-  if(clear)clear.addEventListener('click',()=>{clearRecent();render(options);});
- }
- const launchMap={
-  'data-expansion':id=>'url:./expansion-20.html#'+id,
-  'data-geriatria':id=>'url:./geriatria-escalas.html#'+id,
-  'data-hepatologia':id=>'url:./hepatologia-indices.html#'+id,
-  'data-cardio':id=>'url:./escalas-cardioembolia.html#'+id,
-  'data-guardia-pro':id=>'url:./guardia-pro.html#'+id,
-  'data-diabetes':id=>'app:diabetes:'+id,
-  'data-ped-rapid':id=>id==='pas'?'url:./pediatria-pas.html':'url:./pediatria-evaluacion-rapida.html#'+id,
-  'data-open':id=>'calc:'+id
- };
- function keyFromTarget(target){
-  if(!target||typeof target.closest!=='function')return '';
-  const card=target.closest('[data-expansion],[data-geriatria],[data-hepatologia],[data-cardio],[data-guardia-pro],[data-ped-rapid],[data-diabetes],[data-open],[data-gasometria-open],[data-capurro-open],[data-wallace-open],[data-urg-alg],[data-ped-alg],[data-pharma-open],a[href]');
-  if(!card||target.closest('[data-star],[data-kb-pin]'))return '';
-  for(const [attr,make]of Object.entries(launchMap))if(card.hasAttribute(attr))return make(card.getAttribute(attr));
-  if(card.hasAttribute('data-gasometria-open'))return 'app:gasometria';
-  if(card.hasAttribute('data-pharma-open'))return 'app:pharma';
-  const standalone={'data-capurro-open':'capurro.html','data-wallace-open':'wallace-adultos.html','data-urg-alg':'algoritmos-urgencias.html','data-ped-alg':'algoritmos-pediatria.html'};
-  for(const [attr,path]of Object.entries(standalone))if(card.hasAttribute(attr))return 'url:./'+path;
-  if(card.matches('a[href]')){
-   const href=card.getAttribute('href');
-   if(/^\.\/[a-z0-9-]+\.html(?:#[\p{L}0-9-]+)?$/u.test(href))return 'url:'+href;
-  }
-  return '';
- }
- function trackClicks(){
-  document.addEventListener('click',e=>{const key=keyFromTarget(e.target);if(key)remember(key);},true);
-  document.addEventListener('keydown',e=>{if(e.key!=='Enter'&&e.key!==' ')return;const key=keyFromTarget(e.target);if(key&&e.target.closest('[role="button"]'))remember(key);},true);
  }
  function offlineStatus(){
   const node=document.getElementById('kb-offline-status');if(!node)return;
@@ -151,5 +113,5 @@
   }
   offlineStatus();
  }
- return Object.freeze({normalize,searchEntries,remember,recent,pinned,togglePin,clearRecent,catalog,render,keyFromTarget,trackClicks,offlineStatus,showUpdate,bindStatus});
+ return Object.freeze({normalize,searchEntries,pinned,togglePin,catalog,render,offlineStatus,showUpdate,bindStatus});
 });
