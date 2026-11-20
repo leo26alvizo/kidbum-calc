@@ -80,7 +80,7 @@ for(const key of ['kRange','renalStable','dilutionValidated','labMonitoring','hi
 const page=fs.readFileSync('pharma-pro.html','utf8'),sw=fs.readFileSync('sw.js','utf8'),home=fs.readFileSync('index.html','utf8');
 assert.match(page,/9 fichas con cotejo documental parcial US/);
 assert.match(page,/sin cotejo de etiqueta/);
-assert.match(page,/0 fichas con validación clínica/);
+assert.match(page,/0 con validación clínica\/farmacéutica independiente/);
 assert.match(page,/assets\/pharma-pro-high-alert\.js/);
 assert.match(sw,/pharma-high-alert-v01034/);
 assert.ok(sw.includes("'./assets/pharma-pro-high-alert.js'"));
