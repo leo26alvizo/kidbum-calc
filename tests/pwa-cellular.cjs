@@ -104,8 +104,8 @@ events.install({waitUntil:x=>installWaits.push(x)});
  assert.ok(!html.includes("window.addEventListener('load',()=>{"),'Registration must not await slow images');
  assert.ok(html.includes("navigator.serviceWorker.register('./sw.js'"),'Service worker registers immediately');
  assert.ok(!html.includes('window.location.assign(url.toString())'),'Manual update must not force a network-dependent reload');
- assert.ok(html.includes("new Promise((_,reject)=>setTimeout(()=>reject(Error('timeout')),6500))"),
- 'Manual update must have a deadline');
+ assert.ok(fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('AbortController')&&fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('withDeadline(registration.update(),15000)'),
+ 'Manual update must have bounded checks without forced reload');
  assert.ok(!source.includes('await fetch(req,{cache:'),'App navigation must not be network-first');
  console.log('Mobile-data and offline PWA tests PASSED (cached pages/clinical artwork/HD anatomy, optional lazy assets, update safety)');
 })().catch(err=>{console.error(err);process.exitCode=1;});
