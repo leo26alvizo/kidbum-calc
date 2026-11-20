@@ -29,6 +29,7 @@ const SOURCES=Object.freeze({
  PADIS:{label:'SCCM · PADIS: actualización de dolor, sedación y delirium',year:'2025',url:'https://sccm.org/clinical-resources/guidelines/guidelines/focused-update-padis-guideline'},
  TX:{label:'NICE NG225 · Autolesión y atención de urgencia (marco de seguridad)',year:'2022',url:'https://www.nice.org.uk/guidance/ng225'},
  END:{label:'Endocrine Society · Hipoglucemia en diabetes y riesgo',year:'2022; actualización en sitio',url:'https://www.endocrine.org/clinical-practice-guidelines/management-of-individuals-with-diabetes-at-high-risk-for-hypoglycemia'},
+ ANAPH:{label:'Resuscitation Council UK · Emergency treatment of anaphylaxis',year:'2021; vigente como recurso',url:'https://www.resus.org.uk/library/additional-guidance/guidance-anaphylaxis/emergency-treatment-anaphylactic-reactions'},
  AHA_HF:{label:'AHA/ACC/HFSA · Insuficiencia cardiaca',year:'2022; actualizaciones por sociedad',url:'https://professional.heart.org/en/science-news/2022-guideline-for-the-management-of-heart-failure'},
  WHO_BURN:{label:'WHO · Burn management guidance',year:'recurso de referencia',url:'https://www.who.int/news-room/fact-sheets/detail/burns'}
 });
