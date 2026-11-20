@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.47**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.60**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.60 · Actualizaciones PWA fiables
+
+- Instalación offline **atómica por lotes de cinco**, con reintentos controlados: si falla, se conserva la copia funcional previa sin activar módulos a medias.
+- Versión publicada comprobada por red mediante marcador sin caché; Inicio y Pharma Pro muestran v0.10.60.
+- Botón de actualización con estado real de descarga/activación, sin recargar automáticamente formularios clínicos.
+- [Centro de recuperación](https://leo26alvizo.github.io/kidbum-calc/actualizar.html): verifica la publicación, reintenta la instalación y ofrece reparación voluntaria limitada a archivos de caché de KidBum sin borrar favoritos ni preferencias.
+- [Alcance técnico, límites y procedimiento](docs/pwa-reliable-update-v01060.md).
+- Ninguna fórmula, validación de calculadora, dosis o fuente clínica se ha modificado.
 
 ## KidBum 0.10.47 · Auditoría del contador del catálogo médico
 
