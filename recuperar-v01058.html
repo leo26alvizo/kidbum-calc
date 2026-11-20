@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#12283a">
+<title>Recuperar actualización · KidBum</title>
+<meta name="description" content="Renueva la versión local de KidBum sin borrar favoritos ni registros.">
+<style>
+:root{color-scheme:light;--ink:#14283b;--sub:#50677b;--accent:#007b7c;--bg:#f2f6f8;--line:#dae4ea}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{width:min(560px,100%);padding:28px 20px 55px;margin:0 auto}
+.eyebrow{font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;color:#066465}
+h1{font-size:clamp(27px,6vw,38px);letter-spacing:-.04em;line-height:1.2;margin:10px 0}
+p{margin:12px 0;color:var(--sub)}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:20px;box-shadow:0 8px 32px #14304c09}
+dl{display:grid;grid-template-columns:1fr auto;gap:13px;margin:4px 0}dt{color:var(--sub);font-size:13px}dd{margin:0;font-size:13px;font-weight:800;max-width:185px;text-align:right;overflow-wrap:anywhere}
+button{border:0;border-radius:12px;padding:16px;min-height:50px;background:var(--accent);color:#fff;width:100%;font:inherit;font-weight:800;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}button:focus-visible,a:focus-visible{outline:3px solid #eea92b;outline-offset:3px}
+a{color:#00686b;font-weight:700}.secondary{display:block;margin:20px 0 10px}
+#feedback{margin-top:14px;min-height:44px;font-size:14px;font-weight:600;overflow-wrap:anywhere}
+#feedback[data-status="error"]{color:#9e2c2c}
+.note{font-size:13px;background:#e6f1f3;border-radius:12px;padding:12px;margin-top:14px}
+@media(prefers-reduced-motion:no-preference){button{transition:background .15s}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">KIDBUM · Centro de recuperación</div>
+<h1>¿Sigue apareciendo la versión anterior?</h1>
+<p>La versión publicada es <strong>0.10.58</strong>. Esta página permite reparar una copia de KidBum que se haya quedado en 0.10.56 porque el navegador conserva archivos antiguos.</p>
+<div class="panel" aria-label="Diagnóstico de actualización">
+<dl>
+<dt>Versión publicada</dt><dd>0.10.58</dd>
+<dt>Versión que recibe este navegador</dt><dd id="current">Comprobando…</dd>
+<dt>App instalada o navegador</dt><dd id="context">Comprobando…</dd>
+<dt>Control offline</dt><dd id="worker">Comprobando…</dd>
+</dl>
+</div>
+<div class="panel">
+<h2 style="margin:0;font-size:21px">Reparar sin borrar tus datos</h2>
+<p>Conéctate a internet, cierra cualquier cálculo en curso y pulsa el botón. Se eliminarán solamente las <strong>copias temporales de los archivos de KidBum</strong> y se reiniciará su control offline.</p>
+<button id="repair" type="button">Actualizar KidBum conservando mis datos</button>
+<div id="feedback" role="status" aria-live="polite"></div>
+<div class="note">Esta herramienta <strong>no borra</strong> favoritos, historiales, configuraciones ni el almacenamiento local de formularios. La primera apertura después de reparar necesita internet para volver a descargar los módulos. No usar durante la atención de un paciente.</div>
+</div>
+<a class="secondary" href="./index.html">Volver a KidBum</a>
+<a href="./pharma-pro.html">Ir a Pharma Pro</a>
+<p class="note">En iPhone, una app añadida a la pantalla de inicio puede tener datos distintos de Safari. Esta reparación afecta únicamente al navegador o instancia donde se abre la página. Si la app instalada sigue antigua, indícanos si usas iPhone o Android antes de eliminarla.</p>
+</main>
+<script>
+'use strict';
+(function(){
+ const root=new URL('./',location.href).href;
+ const el=id=>document.getElementById(id);
+ const feedback=el('feedback');
+ const status=(message,error=false)=>{feedback.textContent=message;feedback.dataset.status=error?'error':'info';};
+ const standalone=Boolean((window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||navigator.standalone===true);
+ el('context').textContent=standalone?'App instalada':'Navegador';
+ el('worker').textContent='serviceWorker'in navigator?(navigator.serviceWorker.controller?'Activo':'Sin control activo'):'No disponible';
+ (async function detect(){
+  try{
+   const response=await fetch(new URL('./index.html?version-verificacion='+Date.now(),location.href).href,{cache:'no-store'});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const html=await response.text();
+   const match=html.match(/<meta\s+name=["']kidbum-app-version["']\s+content=["']([^"']+)/i);
+   el('current').textContent=match?match[1]:'No identificada';
+   if(match&&match[1]!=='0.10.58')status('Se detectó una versión antigua en este navegador. Puedes actualizar sin borrar tus datos.');
+   else status('Este navegador recibe la versión nueva. Si el icono instalado sigue antiguo, quizá utiliza otra instancia de almacenamiento.');
+  }catch{
+   el('current').textContent='Sin conexión o lectura bloqueada';
+   status('Conéctate a internet y vuelve a abrir esta página para reparar.',true);
+  }
+ })();
+ el('repair').addEventListener('click',async function(){
+  if(navigator.onLine===false){status('No hay conexión. Activa Wi-Fi o datos móviles antes de continuar.',true);return;}
+  this.disabled=true;
+  status('Desactivando el controlador antiguo y borrando únicamente los archivos temporales…');
+  try{
+   if('serviceWorker'in navigator){
+    const reg=await navigator.serviceWorker.getRegistration(root);
+    if(reg&&reg.scope===root)await reg.unregister();
+   }
+   if('caches'in window){
+    const names=await caches.keys();
+    const owned=names.filter(name=>name.startsWith('kidbum-calc-'));
+    await Promise.all(owned.map(name=>caches.delete(name)));
+   }
+   status('Caché temporal renovada. Abriendo KidBum con conexión…');
+   const next=new URL('./index.html',location.href);
+   next.searchParams.set('recuperado',String(Date.now()));
+   window.location.replace(next.href);
+  }catch(err){
+   this.disabled=false;
+   status('No se pudo completar la reparación: '+(err&&err.message?err.message:'permiso o almacenamiento restringido')+'. Intenta desde Safari o Chrome con conexión.',true);
+  }
+ });
+})();
+</script>
+</body>
+</html>
