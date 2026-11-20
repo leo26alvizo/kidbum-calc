@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.47**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.56**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## Estado de la versión actual · v0.10.56 (20 noviembre 2026)
+
+Esta sección resume la versión declarada en `index.html`; las entradas históricas siguientes describen sus respectivas versiones anteriores.
+
+- **Urgencias y terapia intensiva:** [40 algoritmos de adultos](docs/urgencias-uci-algoritmos-v01056.md), 162 desenlaces y enlaces contextuales a Pharma Pro. Estas rutas no generan prescripciones ni dosis individualizadas; necesitan revisión clínica e institucional independiente.
+- **Pediatría:** [28 algoritmos publicados de 37 previstos](docs/algoritmos-pediatria-v01053.md). Seguimiento de las nueve rutas pendientes en el [issue #58](https://github.com/leo26alvizo/kidbum-calc/issues/58).
+- **Farmacología pediátrica:** [29 dosieres ligados a algoritmos](docs/pediatric-drug-references-v01055.md); 19 contienen al menos una referencia numérica contextual y diez retienen cifras intencionalmente. No constituyen pautas mexicanas validadas.
+- **Pharma Pro:** conserva un índice de 643 medicamentos; la auditoría documental por indicación, población y formulación está pendiente para la mayor parte del catálogo. Seguimiento en el [issue #55](https://github.com/leo26alvizo/kidbum-calc/issues/55).
+- **Calidad:** la validación automatizada se ejecuta en GitHub Actions mediante `.github/workflows/quality.yml`, con pruebas de motores, alertas, navegación móvil y modo sin conexión. Su aprobación no equivale a certificación clínica.
+
+**Seguridad:** KidBum CALC es apoyo educativo y de razonamiento clínico. Ninguna ruta o referencia debe utilizarse como orden médica automática; confirmar siempre indicación, contexto, fuentes vigentes y protocolos institucionales.
 
 ## KidBum 0.10.47 · Auditoría del contador del catálogo médico
 
