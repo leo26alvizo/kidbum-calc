@@ -42,7 +42,7 @@ assert.equal(x.root.dark,false,'Default still light');
 assert.equal(x.memory.get('kidbum-theme'),'light','Global setting initialized consistently');
 const home=fs.readFileSync('index.html','utf8'),pharma=fs.readFileSync('pharma-pro.html','utf8'),sw=fs.readFileSync('sw.js','utf8');
 assert.match(home,/content="0\.10\.58"/);
-assert.match(pharma,/content="0\.10\.43"/);
+assert.match(pharma,/content="0\.10\.58"/);
 assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.58 · índice ampliado<\/small>/,'Release banner shows the updated pediatric pharmacology interface');
 assert.match(sw,/pharma-theme-sync-v01037/);
 assert.match(pharma,/assets\/dark-graphite-v01036\.css/);
