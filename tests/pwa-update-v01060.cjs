@@ -43,11 +43,15 @@ function harness(permanentFailure=false){
    async addAll(list){
     calls.push([...list]);
     assert.ok(list.length<=5,'Batch exceeds cellular concurrency cap');
-    if(list.includes('./assets/startup-bundle.js')){
+    assert.ok(list.every(req=>req.cache==='no-store'),'Offline assets bypass stale HTTP cache');
+    if(list.some(req=>normalized(req)===origin+'assets/startup-bundle.js')){
      aborts++;
      if(permanentFailure||aborts===1)throw Error('Simulated network failure');
     }
-    for(const asset of list)entries.set(normalized(asset),new ResponseFake('cached:'+asset));
+    for(const asset of list){
+     const relative='./'+new URL(asset.url).pathname.slice(new URL(origin).pathname.length);
+     entries.set(normalized(asset),new ResponseFake('cached:'+relative));
+    }
    },
    async match(request,options={}){
     const u=normalized(request);
@@ -62,7 +66,7 @@ function harness(permanentFailure=false){
  let networkCalls=0;
  const cacheAPI={open:async name=>open(name),keys:async()=>[...named.keys()],delete:async name=>named.delete(name)};
  const self={registration:{scope:origin},clients:{claim:async()=>{activations++},matchAll:async()=>[{postMessage:m=>progress.push(m)}]},skipWaiting:async()=>{installs++},addEventListener:(name,fn)=>{events[name]=fn}};
- const ctx={self,caches:cacheAPI,URL,AbortController,setTimeout,clearTimeout,Response:{error:()=>new ResponseFake('unavailable',0)},fetch:async request=>{networkCalls++;return new ResponseFake('network:'+normalized(request))}};
+ const ctx={self,caches:cacheAPI,URL,Request,AbortController,setTimeout,clearTimeout,Response:{error:()=>new ResponseFake('unavailable',0)},fetch:async request=>{networkCalls++;return new ResponseFake('network:'+normalized(request))}};
  vm.runInNewContext(sw+'\nself.__testAssets=CORE_ASSETS;self.__testCache=CACHE;',ctx,{timeout:3000});
  function install(){
   const waits=[];events.install({waitUntil:p=>waits.push(p)});
