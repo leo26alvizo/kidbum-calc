@@ -10,7 +10,7 @@ if(Object.keys(byId).length!==algorithms.length)throw Error('IDs duplicados en U
 const normalize=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es').trim();
 function search(query='',category='all'){
  const q=normalize(query);
- return algorithms.filter(a=>(category==='all'||a.category===category)&&(!q||normalize(a.title+' '+a.subtitle+' '+a.category+' '+a.scope).includes(q)));
+ return algorithms.filter(a=>(category==='all'||a.category===category)&&(!q||normalize(a.id+' '+a.title+' '+a.subtitle+' '+a.category+' '+a.scope).includes(q)));
 }
 function getStep(id,nodeId){
  const a=byId[id];if(!a)return null;
