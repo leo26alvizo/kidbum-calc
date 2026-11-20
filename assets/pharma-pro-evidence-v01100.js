@@ -42,7 +42,7 @@ const safety=[
   indications:['La etiqueta aborda tratamiento de infecciones por bacterias susceptibles y profilaxis perioperatoria en escenarios específicos.'],
   cautions:['Contraindicación de la etiqueta ante alergia conocida al grupo de cefalosporinas; interrogar hipersensibilidad a otros betalactámicos.','La etiqueta no establece seguridad y eficacia para prematuros o neonatos: no extrapolar las pautas pediátricas.','Riesgo de diarrea asociada a antibióticos y sobrecrecimiento de microorganismos no susceptibles.'],
   interactions:['Probenecid puede disminuir eliminación renal y prolongar concentraciones de cefalosporinas según la etiqueta.'],
-  monitoring:['Función renal, reacción de hipersensibilidad, evolución bacteriológica y respuesta clínica.'],
+  monitoring:['Función renal y diuresis: la eliminación reducida modifica la exposición del antibiótico.','Reacciones de hipersensibilidad, diarrea asociada a antibióticos, microbiología y respuesta clínica.'],
   adjustment:'La etiqueta contiene ajustes por depuración de creatinina reducida; no mostrar dosis o intervalos hasta verificar contexto y formulación.',
   pregnancy:'Se requiere contextualización obstétrica y farmacéutica del producto local; esta ficha no avala empleo individual.'
  },
