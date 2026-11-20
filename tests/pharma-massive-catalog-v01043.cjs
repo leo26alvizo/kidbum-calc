@@ -80,7 +80,7 @@ assert.match(html,/id="pharma-index-results"/);
 assert.match(html,/id="pharma-index-category"/);
 assert.match(html,/un catálogo extensivo de búsqueda por principios activos/);
 assert.match(html,/15 medicamentos con cotejo parcial/,'Scoped source review coverage is transparent');
-assert.match(html,/sin cotejo de etiqueta/);
+assert.match(html,/1,551 nombres no cuentan con cotejo individual/,'Unreviewed index entries remain explicit');
 assert.match(css,/@media\(max-width:590px\)/);
 const js=[...html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
 assert.equal(js.length,21,'Forty-item evidence queue adds two safety-only, non-prescriptive scripts');
