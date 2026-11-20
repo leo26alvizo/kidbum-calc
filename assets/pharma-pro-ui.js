@@ -22,13 +22,17 @@ function fav(id){favorites=favorites.includes(id)?favorites.filter(x=>x!==id):[.
 /* UX-only presentation helpers; clinical engines and eligibility rules are never changed. */
 function pharmaCoverage(med){
  const monograph=window.KidBumPharmaMonographs?.byId[med.id];
+ const auditedSafety=window.KidBumPharmaEvidence?.byId[med.id];
+ const queued=window.KidBumPharmaEvidence?.priorityIds.includes(med.id);
  const guide=window.KidBumPharmaIndicationsUI?.doseForDrug(med.id);
  return {
-  partial:Boolean(monograph||guide),
-  label:monograph?'Referencia posológica parcial · etiqueta US':guide?'Intervalo PRONAM México 2026 · solo HTA':'Ficha índice · dosis sin cotejo',
+  partial:Boolean(monograph||auditedSafety||guide),
+  label:monograph?'Referencia posológica parcial · etiqueta US':auditedSafety?'Ficha de seguridad con etiqueta US · SIN dosis':guide?'Intervalo PRONAM México 2026 · solo HTA':queued?'Prioridad editorial · cotejo pendiente':'Ficha índice · dosis sin cotejo',
   detail:monograph?
    'Cotejo documental parcial de una presentación estadounidense. No equivale a validación clínica/farmacéutica independiente, autorización mexicana ni prescripción.':
+   auditedSafety?'Advertencias, contraindicaciones, interacciones y monitoreo cotejados de UNA presentación US específica; no hay dosis habilitada ni equivalencia mexicana verificada.':
    guide?'Solo referencia poblacional de guía mexicana para HTA, no pauta individual ni validación independiente. Confirmar aplicabilidad y formulación.':
+   queued?'Pendiente de cotejo individual de indicación, presentación y seguridad. Su inclusión en la lista de 40 NO acredita aprobación.':
    'La entrada no cuenta con pauta posológica cotejada. No calcular ni indicar dosis desde esta ficha.'
  };
 }
@@ -43,6 +47,14 @@ function pharmaSummary(med,onFull){
  const evidence=elt('section',undefined,'pharma-ux-evidence');
  evidence.append(elt('h3','Cobertura documental'),p(cov.label,'pharma-ux-coverage'),p(cov.detail,'small'));
  q.append(evidence);
+ const safetyEvidence=window.KidBumPharmaEvidence?.byId[med.id];
+ if(safetyEvidence){
+  const mini=elt('section',undefined,'pharma-ux-alert');
+  mini.append(elt('h3','⚠ Advertencias documentales · '+safetyEvidence.formulation));
+  for(const warning of safetyEvidence.cautions.slice(0,2))mini.append(p(warning,'small'));
+  mini.append(p('SIN pauta posológica habilitada; consultar ficha completa y etiqueta US.','small muted'));
+  q.append(mini);
+ }
  const pediatricCatalog=root.KidBumPediatricDrugReferences?.records[med.id];
  if(pediatricCatalog){
   const tag=elt('section',undefined,'pharma-ux-evidence');
@@ -135,11 +147,16 @@ function showDrug(id){
  const star=elt('button',favorites.includes(id)?'★ Favorito':'☆ Guardar','back');star.type='button';star.onclick=()=>fav(id);
  hdr.append(titleBox,star);panel.append(hdr);
  const extended=Boolean(window.KidBumPharmaMonographs?.byId[id]);
- const notice=elt('div',undefined,'pending');notice.textContent=extended?'REFERENCIA COTEJADA CON ETIQUETA US, PERO SIN VALIDACIÓN CLÍNICA/FARMACÉUTICA INDEPENDIENTE. Solo indicaciones, vías y preparaciones específicas de la presentación documentada. No es receta ni autorización mexicana.':med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';panel.append(notice);
+ const safetyReviewed=Boolean(window.KidBumPharmaEvidence?.byId[id]);
+ const notice=elt('div',undefined,'pending');
+ notice.textContent=extended?'REFERENCIA COTEJADA CON ETIQUETA US, PERO SIN VALIDACIÓN CLÍNICA/FARMACÉUTICA INDEPENDIENTE. Solo indicaciones, vías y preparaciones específicas de la presentación documentada. No es receta ni autorización mexicana.':safetyReviewed?'FICHA DE SEGURIDAD COTEJADA PARCIALMENTE CON UNA ETIQUETA US: SIN DOSIS HABILITADA, SIN REGISTRO MEXICANO VERIFICADO NI VALIDACIÓN CLÍNICA/FARMACÉUTICA INDEPENDIENTE.':med.reviewStatus+'. Dosis, máximos, ajustes individualizados y diluciones NO disponibles hasta la revisión clínica/farmacéutica de cada formulación y jurisdicción.';
+ panel.append(notice);
  const cols=elt('div',undefined,'detail-col');
  const left=elt('div');
  const f1=elt('section',undefined,'fact');f1.append(elt('h3','Ámbito y uso orientativo'),p(med.use+'; revisar diagnóstico, indicación autorizada y microbiología cuando aplique.'));left.append(pharmaFold('Ámbito y uso orientativo',f1,true));
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(pharmaFold('Revisión previa imprescindible',f2,true));
+ const sourceReview=window.KidBumPharmaEvidenceUI?.renderPriorityNotice(id);
+ if(sourceReview)left.append(pharmaFold('📚 Estado documental de la ficha, seguridad y fuentes',sourceReview,true));
  const pediatricReference=root.KidBumPediatricDrugUI?.render(id,pediatricOptions);
  if(pediatricReference){
   left.append(pharmaFold('🧒 Pediatría: pautas documentales por indicación · NO receta',pediatricReference,pediatricContext));
