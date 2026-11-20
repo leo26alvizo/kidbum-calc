@@ -78,8 +78,8 @@ assert.equal(regression.status,'reference','prior six monographs remain callable
 const ui=fs.readFileSync('assets/pharma-pro-monographs-ui.js','utf8');
 for(const key of ['kRange','renalStable','dilutionValidated','labMonitoring','hit','vialStrength','hypoglycemia','insulinPlan','formulation'])assert.ok(ui.includes(key),'Required UI field '+key);
 const page=fs.readFileSync('pharma-pro.html','utf8'),sw=fs.readFileSync('sw.js','utf8'),home=fs.readFileSync('index.html','utf8');
-assert.match(page,/9\/643/);
-assert.match(page,/634\/643/);
+assert.match(page,/9 fichas con cotejo documental parcial US/);
+assert.match(page,/sin cotejo de etiqueta/);
 assert.match(page,/0 fichas con validación clínica/);
 assert.match(page,/assets\/pharma-pro-high-alert\.js/);
 assert.match(sw,/pharma-high-alert-v01034/);
