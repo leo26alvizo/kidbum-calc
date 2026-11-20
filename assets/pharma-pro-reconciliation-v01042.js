@@ -53,6 +53,7 @@
   for(const id of unique){
    const d=lib.byId[id];
    if(counter[id]>1)duplicates.push('Duplicidad exacta: '+d.name+' aparece '+counter[id]+' veces. Verificar si representa una administración duplicada.');
+   if(d.indexPendingSafety)notices.push('⚠ '+d.name+': ficha índice sin verificación de riesgos, interacciones, edad, indicación, formulación ni registro mexicano. Una ausencia de alerta NO demuestra seguridad.');
    if(d.highRisk)highRisk.push({id,name:d.name,scope:d.highRiskScope||'Verificar formulación/vía y protocolo',
     source:monographs.byId[id]?.source?.url||''});
   }

@@ -66,7 +66,7 @@ const defs=[
 ['levotiroxina','Levotiroxina','Endocrinología','APN','Reemplazo tiroideo según indicación','Verificar formulación, administración, TSH/FT4 e interacciones.',0],
 ['prednisona','Prednisona','Corticoides','AP','Glucocorticoide oral en indicaciones específicas','Revisar duración, infecciones, glucemia, supresión del eje y retiro gradual.',0]
 ];
-const population=Object.freeze({A:'Adultos',P:'Pediatría',N:'Neonatología'});
+const population=Object.freeze({A:'Adultos',P:'Pediatría',N:'Neonatología',U:'No verificada'});
 function slug(id){return id;}
 const extras=Object.freeze({
  ceftriaxona:{source:'ceftriaxona',highlights:[

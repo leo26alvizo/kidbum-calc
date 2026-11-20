@@ -78,12 +78,12 @@ const html=fs.readFileSync('pharma-pro.html','utf8');
 assert.match(html,/id="pharma-disease-index"/);
 assert.match(html,/id="pharma-index-results"/);
 assert.match(html,/id="pharma-index-category"/);
-assert.match(html,/643 entradas farmacológicas y 205 temas diagnósticos/);
-assert.match(html,/9\/643/);
-assert.match(html,/634\/643/);
+assert.match(html,/un catálogo extensivo de búsqueda por principios activos/);
+assert.match(html,/9 fichas con cotejo documental parcial US/);
+assert.match(html,/sin cotejo de etiqueta/);
 assert.match(css,/@media\(max-width:590px\)/);
 const js=[...html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(js.length,18,'Pediatric dossier/renderer expand Pharma Pro scripts by two');
+assert.equal(js.length,19,'Broad name index adds a nonclinical script alongside existing Pharma scripts');
 assert.ok(js.indexOf('assets/pediatric-drug-references-v01055.js')<js.indexOf('assets/pharma-pro-ui.js'));
 
 assert.ok(js.indexOf('assets/pharma-pro-expansion-index-v01043.js')>js.indexOf('assets/pharma-pro-guides-plus.js'));

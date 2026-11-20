@@ -88,7 +88,7 @@ assert.match(page,/id="pharma-dx-catalog"/);
 assert.match(page,/id="pharma-dx-results"/);
 assert.match(page,/v0\.10\.55 · pediatría y dosis documentales/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.equal(scripts.length,18,'Pediatric reference library adds two standalone modules');
+assert.equal(scripts.length,19,'Expanded index adds one script; pediatric references remain unchanged');
 assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pediatric-drug-references-v01055.js'));
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
 

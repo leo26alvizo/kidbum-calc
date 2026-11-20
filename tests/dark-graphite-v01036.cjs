@@ -77,5 +77,5 @@ assert.doesNotMatch(body,/data-mobile-nav="guard"/);
 for(const slug of ['home','favorite','docs','about'])assert.ok(body.includes('data-mobile-nav="'+slug+'"'));
 assert.ok(body.includes('assets/mobile-first-v01035.css'),'Phone-first styling preserved');
 assert.ok(read('pharma-pro.html').includes('assets/pharma-mobile-v01035.css'),'Pharma phone-first styling preserved');
-assert.ok(read('pharma-pro.html').includes('9/643')&&read('pharma-pro.html').includes('634/643'),'Original source verification not touched');
+assert.ok(read('pharma-pro.html').includes('9 fichas con cotejo documental parcial US')&&read('pharma-pro.html').includes('0 con validación clínica/farmacéutica independiente'),'Original source verification not inflated');
 console.log('PASS Graphite Noir v0.10.36: 13 scoped pages, light unchanged, contrast, clinical warnings, native bar sync, mobile/PWA and prior clinical coverage.');
