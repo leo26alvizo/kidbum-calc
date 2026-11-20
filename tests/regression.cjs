@@ -701,7 +701,7 @@ const mobileLoadingTests=[
  ['Offline installation atomically precaches tools without duplicate source modules',()=>assert.ok(swSource.includes('cache.addAll(batch)')&&swSource.includes('INSTALL_RETRIES=3')&&!swSource.includes('cache.addAll(ASSETS)')&&swSource.includes('BUNDLED_SOURCE_FILES'))],
  ['Core includes startup clinical bundle and atlas',()=>assert.ok(swSource.includes("'./assets/startup-bundle.js'")&&swSource.includes("'./assets/medical-atlas.js'"))],
  ['Clinical illustrations are precached and versioned URLs use offline cache',()=>assert.ok(swSource.includes("'./assets/urgencias-portada.jpg'")&&swSource.includes("'./assets/wallace-adultos-original-HD.png'")&&swSource.includes("const cached=await cache.match(req,{ignoreSearch:true})"))],
- ['Initial service worker claim never reloads page',()=>assert.ok(html.includes('const initiallyControlled=Boolean(navigator.serviceWorker.controller)')&&html.includes('window.location.reload()'))],
+ ['Initial service worker claim never reloads page',()=>assert.ok(html.includes('const initiallyControlled=Boolean(navigator.serviceWorker.controller)')&&fs.readFileSync('assets/clinical-access-v01057.js','utf8').includes('window.location.reload()'))],
  ['Registration no longer waits for images',()=>assert.ok(!html.includes("window.addEventListener('load',()=>{"))],
  ['Manual update keeps current clinical session',()=>assert.ok(!html.includes('window.location.assign(url.toString())'))],
  ['No duplicate immediate registration update',()=>assert.ok(!html.includes('.then(reg=>reg.update()).catch('))],
