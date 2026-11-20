@@ -94,7 +94,9 @@ function mountDashboard(){
   }
  }
  for(const [id,name]of labels){const b=el('button',name);b.type='button';b.dataset.filter=id;b.setAttribute('aria-pressed','false');b.onclick=()=>{selected=id;draw();};filters.append(b);}
- host.append(filters,count,list);draw();
+ const expandable=el('details',undefined,'pharma-evidence-list-wrap');
+ expandable.append(el('summary','Ver los 40 medicamentos prioritarios y filtrar por estado'),filters,count,list);
+ host.append(expandable);draw();
 }
 root.KidBumPharmaEvidenceUI=Object.freeze({renderReview,renderPriorityNotice,mountDashboard});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mountDashboard,{once:true});
