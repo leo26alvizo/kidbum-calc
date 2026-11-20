@@ -15,7 +15,7 @@ assert.match(home,/assets\/pwa-update-v01060\.js/);
 assert.match(home,/href="\.\/actualizar\.html"/);
 assert.match(home,/KidBumUpdater\?\.checkNow\(\)/);
 assert.match(marker,/KidBumPublicRelease = '0\.10\.60'/);
-assert.match(sw,/const CACHE='kidbum-calc-v01060-safe-update-r1'/);
+assert.match(sw,/safe-update-v01060-r1/);
 assert.match(sw,/INSTALL_BATCH_SIZE=5/);
 assert.match(sw,/INSTALL_RETRIES=3/);
 assert.match(sw,/event\.waitUntil\(installRelease\(\)\)/);
