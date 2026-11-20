@@ -1973,6 +1973,7 @@ function renderHome(full){
 
   /* One on-device search index: existing core calculators + standalone modules +
      Pharma Pro medication names. Never index patient fields or clinical results. */
+  if(typeof window!=='undefined'&&window.KidBumAccess){
   const accessEntries=[
    ...defs.map(x=>({key:'calc:'+x.id,id:x.id,title:x.title,short:x.short,category:x.category,kind:'Calculadora'})),
    ...newTwentyTools.map(x=>({key:'url:./expansion-20.html#'+x.id,id:x.id,title:x.title,short:x.short,category:x.category,kind:'Calculadora'})),
@@ -2006,6 +2007,7 @@ function renderHome(full){
     else{window.KidBumAccess.togglePin(key);renderHome(false);}
    }
   });
+  }
 
 }
 function renderPharma(){
