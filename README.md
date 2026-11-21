@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.61**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.62**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.62 · Lion Awakening · Inicio cinematográfico
+
+- Entrada breve **Lion Awakening**: león geométrico plateado sobre azul profundo, luces turquesa en ambos ojos y destello horizontal de faros premium, seguido del nombre KidBum CALC.
+- Animación **decorativa**, limitada a ~1.34 s; se omite al tocar la pantalla, con el botón «Omitir» o con Escape. Se elimina automáticamente aunque no termine de cargar alguna herramienta.
+- Se presenta una sola vez por sesión de pestaña/PWA; cambiar de calculadora o recargar la misma sesión no la repite. Con «reducir movimiento» se omite por completo.
+- SVG + CSS + JS local, sin video, sonido, dependencias externas, recolección de datos ni modificaciones al motor clínico.
+- Nuevos recursos `assets/lion-splash-v01062.css` y `assets/lion-splash-v01062.js` precargados con la PWA. `sw.js`, marcador público, Inicio y Pharma Pro sincronizados a **0.10.62**.
+- La animación **no reemplaza** el indicador de errores de carga de módulos clínicos y no señala preparación, seguridad o confiabilidad de un cálculo.
 
 ## KidBum 0.10.61 · Clinical Results 2.0 (interfaz móvil)
 
