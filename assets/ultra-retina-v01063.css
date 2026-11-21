@@ -1,0 +1,379 @@
+/* KidBum Ultra Retina UI · v0.10.63
+   Surface, typography, geometry and vector chrome ONLY.
+   Zero image edits, filters, resolution manipulation, new image requests or
+   clinical calculation / severity / dosing changes. Offline system fonts. */
+
+html[data-kb-page]{
+ --ur-ink:#102e40;
+ --ur-border:#d9e3e8;
+ --ur-hairline:rgba(29,78,96,.12);
+ --ur-glow:rgba(27,154,155,.15);
+ --ur-elevation:0 2px 4px rgba(11,35,53,.025),0 12px 34px rgba(11,35,53,.075);
+ --ur-elevation-lg:0 3px 9px rgba(11,35,53,.035),0 24px 58px rgba(11,35,53,.11);
+ --ur-floating:rgba(255,255,255,.96);
+ --ur-ring:#20a8aa;
+ --ur-pill:#eef7f7;
+ --ur-radius:20px;
+ font-synthesis:none;
+ text-rendering:optimizeLegibility;
+}
+html.dark[data-kb-page]{
+ --ur-ink:#e8f0f4;
+ --ur-border:#414c57;
+ --ur-hairline:rgba(226,237,241,.14);
+ --ur-glow:rgba(76,211,205,.20);
+ --ur-elevation:0 3px 7px rgba(0,0,0,.12),0 15px 40px rgba(0,0,0,.22);
+ --ur-elevation-lg:0 6px 18px rgba(0,0,0,.14),0 22px 55px rgba(0,0,0,.33);
+ --ur-floating:rgba(29,30,35,.97);
+ --ur-ring:#7ce7dc;
+ --ur-pill:#283337;
+}
+html[data-kb-page] body{
+ -webkit-font-smoothing:antialiased;
+ -moz-osx-font-smoothing:grayscale;
+}
+html[data-kb-page] :is(h1,h2,h3,strong){
+ font-kerning:normal;
+}
+html[data-kb-page] :is(button,input,select,textarea){
+ font-variant-numeric:tabular-nums;
+}
+html[data-kb-page] :is(button,a,input,select,textarea,summary):focus-visible,
+html[data-kb-page] :is([role="button"],[tabindex="0"]):focus-visible{
+ outline:3px solid var(--ur-ring)!important;
+ outline-offset:3px!important;
+}
+html[data-kb-page] :is(button,input,select,textarea,[role="button"]){
+ -webkit-tap-highlight-color:rgba(35,164,162,.10);
+}
+html[data-kb-page] :is(button,input,select,textarea){
+ accent-color:var(--accent,var(--ur-ring));
+}
+html[data-kb-page] .kb-vector-icon{
+ width:20px;height:20px;display:inline-block;vertical-align:middle;
+ stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;
+ fill:none;flex-shrink:0;
+}
+
+/* Home dashboard: precise chrome, calibrated white-space, tactile controls. */
+html[data-kb-page="index"] .sidebar{
+ background:linear-gradient(160deg,#102a3c 0%,#0c1e2e 78%,#102f3a 100%);
+ border-right:1px solid rgba(152,200,206,.17);
+}
+html.dark[data-kb-page="index"] .sidebar{
+ background:linear-gradient(165deg,#191a1e,#0d1118 78%,#19262d);
+ border-right-color:#3b4046;
+}
+html[data-kb-page="index"] .identity{
+ padding-bottom:26px;
+ gap:13px;
+}
+html[data-kb-page="index"] .identity-icon{
+ width:46px;height:46px;
+ border:1px solid rgba(113,221,208,.45);
+ border-radius:14px;
+ background:linear-gradient(140deg,#174a59,#0b2e3e);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 7px 18px rgba(0,0,0,.14);
+}
+html[data-kb-page="index"] .identity-icon .kb-vector-icon{
+ width:34px;height:34px;
+ stroke-width:2.1;
+}
+html[data-kb-page="index"] .side-menu{gap:5px}
+html[data-kb-page="index"] .side-menu button{
+ border:1px solid transparent;
+ border-radius:13px;
+ padding:12px 14px;
+ font-size:13px;letter-spacing:.01em;
+ min-height:45px;
+ transition:background-color .16s ease,color .16s ease,border-color .16s ease,transform .16s ease;
+}
+html[data-kb-page="index"] .side-menu button .nicon{
+ display:inline-flex;align-items:center;justify-content:center;
+ width:24px;height:24px;
+}
+html[data-kb-page="index"] .side-menu button .nicon .kb-vector-icon{width:21px;height:21px}
+html[data-kb-page="index"] .side-menu button.current{
+ background:linear-gradient(100deg,rgba(51,139,152,.29),rgba(29,100,111,.22));
+ color:#dbfffa;border-color:rgba(107,208,207,.36);
+ box-shadow:inset 3px 0 0 #52d3c7;
+}
+html[data-kb-page="index"] .topbar{
+ min-height:70px;
+ border-bottom:1px solid var(--ur-hairline);
+ box-shadow:0 4px 15px rgba(10,43,58,.025);
+}
+html[data-kb-page="index"] .breadcrumb{
+ font-weight:740;
+ letter-spacing:.015em;
+}
+html[data-kb-page="index"] .kb-basic-trigger,
+html[data-kb-page="index"] .icon-btn{
+ background:var(--surface);
+ border:1px solid var(--ur-border);
+ box-shadow:0 2px 8px rgba(12,47,59,.05);
+ transition:box-shadow .18s ease,transform .18s ease,border-color .18s ease;
+}
+html[data-kb-page="index"] .kb-basic-trigger{
+ display:inline-flex;align-items:center;gap:7px;
+ min-height:42px;font-size:12px;
+ padding:8px 13px;
+}
+html[data-kb-page="index"] .kb-basic-trigger .kb-vector-icon{width:18px;height:18px}
+html[data-kb-page="index"] .icon-btn .kb-vector-icon{width:21px;height:21px}
+html[data-kb-page="index"] :is(.hero,.atlas-category-card,.calc-card,.panel,.mini-stat,.info-card,.citation-panel){
+ border-radius:var(--ur-radius);
+}
+html[data-kb-page="index"] .hero{
+ box-shadow:var(--ur-elevation-lg);
+ border:1px solid rgba(139,218,220,.2);
+}
+html[data-kb-page="index"] .hero h1{
+ text-wrap:balance;
+ letter-spacing:-.035em;
+}
+html[data-kb-page="index"] .hero .eyebrow,
+html[data-kb-page="index"] .content-top .eyebrow{
+ font-size:11px;
+ letter-spacing:.13em;
+}
+html[data-kb-page="index"] .mini-stat{
+ border-color:var(--ur-hairline);
+ box-shadow:var(--ur-elevation);
+ padding:15px 17px;
+}
+html[data-kb-page="index"] .mini-stat strong{
+ font-variant-numeric:tabular-nums;
+ letter-spacing:-.025em;
+}
+html[data-kb-page="index"] .content-top h2,
+html[data-kb-page="index"] .calc-title h1{
+ letter-spacing:-.035em;
+ line-height:1.15;
+ text-wrap:balance;
+}
+html[data-kb-page="index"] .atlas-category-card{
+ border:1px solid var(--ur-border);
+ box-shadow:var(--ur-elevation);
+ transition:box-shadow .2s ease,transform .2s ease,border-color .2s ease;
+}
+html[data-kb-page="index"] .atlas-category-copy{
+ gap:2px;
+}
+html[data-kb-page="index"] .atlas-category-copy h3{
+ letter-spacing:-.035em;
+}
+html[data-kb-page="index"] .atlas-category-go{
+ border:1px solid rgba(28,104,111,.13);
+ box-shadow:0 2px 4px rgba(15,50,61,.04);
+}
+html[data-kb-page="index"] .calc-card{
+ border:1px solid var(--ur-border);
+ box-shadow:var(--ur-elevation);
+ transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;
+}
+html[data-kb-page="index"] .calc-card h3{
+ font-size:14px;
+ line-height:1.4;
+ font-weight:780;
+ letter-spacing:-.02em;
+}
+html[data-kb-page="index"] .calc-card p{line-height:1.56}
+html[data-kb-page="index"] .calc-card-bottom{
+ padding-bottom:13px;
+}
+html[data-kb-page="index"] .fav-toggle{
+ border:1px solid var(--ur-hairline);
+ box-shadow:0 2px 10px rgba(0,0,0,.05);
+ border-radius:11px;
+}
+html[data-kb-page="index"] .search{
+ min-height:48px;
+ border:1px solid var(--ur-border);
+ border-radius:14px;
+ box-shadow:0 2px 9px rgba(17,58,71,.04);
+ transition:border-color .16s ease,box-shadow .16s ease;
+}
+html[data-kb-page="index"] .search:focus-within{
+ border-color:var(--ur-ring);
+ box-shadow:0 0 0 3px var(--ur-glow),0 5px 18px rgba(12,62,74,.09);
+}
+html[data-kb-page="index"] .search input{font-size:14px}
+html[data-kb-page="index"] :is(.chip,.btn,.control,.kb-resource-link){
+ border-radius:12px;
+}
+html[data-kb-page="index"] .chip{
+ font-weight:720;
+ transition:background-color .15s ease,border-color .15s ease,transform .15s ease;
+}
+html[data-kb-page="index"] .chip.active{
+ box-shadow:0 3px 12px var(--ur-glow);
+}
+html[data-kb-page="index"] .panel{
+ border:1px solid var(--ur-hairline);
+ box-shadow:var(--ur-elevation);
+}
+html[data-kb-page="index"] :is(.field input,.field select,.field textarea,.control){
+ border-radius:12px;
+}
+html[data-kb-page="index"] :is(.field input,.field select,.field textarea,.control):focus{
+ border-color:var(--ur-ring);
+ box-shadow:0 0 0 3px var(--ur-glow);
+}
+html[data-kb-page="index"] .btn{font-weight:760;letter-spacing:.005em}
+html[data-kb-page="index"] .info-card,
+html[data-kb-page="index"] .citation-panel{
+ border-color:var(--ur-hairline);
+ box-shadow:var(--ur-elevation);
+}
+html[data-kb-page="index"] .result-panel.kb-result-modern{
+ box-shadow:var(--ur-elevation-lg);
+}
+
+/* Professional mobile navigation: outlined vectors, no emoji fallback. */
+html[data-kb-page="index"] .mobile-nav{
+ border-top:1px solid var(--ur-hairline);
+ background:var(--ur-floating);
+ box-shadow:0 -8px 30px rgba(12,45,60,.09);
+}
+html[data-kb-page="index"] .mobile-nav button{
+ min-height:48px;
+ border-radius:12px;
+ line-height:1.3;
+}
+html[data-kb-page="index"] .mobile-nav button .kb-vector-icon,
+html[data-kb-page="index"] .mobile-nav button>svg{
+ width:24px;height:24px;
+ stroke:currentColor;stroke-width:1.9;
+ fill:none;
+}
+html[data-kb-page="index"] .mobile-nav button.active{
+ color:var(--accent-dark);
+ background:var(--ur-pill);
+}
+html[data-kb-page="index"] :is(.result-value,#gas-score,.kb-result-modern .result-value){
+ font-variant-numeric:tabular-nums;
+}
+
+/* Related clinical workspaces: consistent cards and forms, without overriding
+   diagnostic flags, contraindication alerts, status colors or medical images. */
+html[data-kb-page="pharma-pro"] :is(.med-card,.disease-card,.disease-option,.panel,.tool-result,.pharma-index-section,.pharma-dx-catalog),
+html[data-kb-page="guardia-pro"] .panel,
+html[data-kb-page="pediatria-pas"] :is(.pas-outcome,.pas-panel),
+html[data-kb-page="documentacion"] :is(.card,.service,.kb-dashboard),
+html[data-kb-page="historia-pediatria"] .panel,
+html[data-kb-page="escalas-cardioembolia"] .panel,
+html[data-kb-page="wallace-adultos"] .panel,
+html[data-kb-page="geriatria-escalas"] .panel,
+html[data-kb-page="hepatologia-indices"] .panel,
+html[data-kb-page="expansion-20"] .panel,
+html[data-kb-page="capurro"] .panel{
+ border-radius:var(--ur-radius);
+ box-shadow:var(--ur-elevation);
+}
+html[data-kb-page="pharma-pro"] :is(.med-card,.disease-card,.disease-option,.panel){
+ border-color:var(--line,var(--ur-border));
+}
+html[data-kb-page="pharma-pro"] :is(.med-card,.disease-card,.panel){
+ min-width:0;
+}
+html[data-kb-page="pharma-pro"] :is(.hero h1,.section-title h2){
+ letter-spacing:-.03em;
+ text-wrap:balance;
+}
+html[data-kb-page="pharma-pro"] :is(.top button,.tool-tabs button,.filters button,.pharma-workspace-nav button){
+ border-radius:12px;
+ transition:background-color .17s ease,border-color .17s ease,box-shadow .17s ease;
+}
+html[data-kb-page="pharma-pro"] :is(input[type="search"],select,textarea){
+ border-radius:12px;
+}
+html[data-kb-page="pharma-pro"] :is(input[type="search"],select,textarea):focus{
+ outline:3px solid var(--ur-ring);outline-offset:2px;
+}
+html:is([data-kb-page="guardia-pro"],[data-kb-page="escalas-cardioembolia"],[data-kb-page="wallace-adultos"]) .hero{
+ border:1px solid var(--ur-hairline);
+ box-shadow:var(--ur-elevation-lg);
+ border-radius:24px;
+}
+html:is([data-kb-page="guardia-pro"],[data-kb-page="escalas-cardioembolia"],[data-kb-page="wallace-adultos"]) :is(h1,h2){
+ letter-spacing:-.025em;
+ text-wrap:balance;
+}
+html:is([data-kb-page="geriatria-escalas"],[data-kb-page="hepatologia-indices"],[data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) :is(.hero,.kb-hero,.pediatric-hero){
+ border-radius:24px;
+ box-shadow:var(--ur-elevation-lg);
+}
+html[data-kb-page="documentacion"] :is(.services,.service,.sections,.card),
+html[data-kb-page="historia-pediatria"] :is(.tabs,.panel){
+ min-width:0;
+}
+html[data-kb-page="atlas-gallery"] figure{
+ border-radius:18px;box-shadow:var(--ur-elevation);
+}
+html[data-kb-page] :is(.panel,.card,.med-card,.result-panel){
+ overflow-wrap:anywhere;
+}
+
+/* Motion follows intent: hover feedback only on devices that actually hover. */
+@media(hover:hover) and (pointer:fine){
+ html[data-kb-page="index"] .calc-card:hover,
+ html[data-kb-page="index"] .atlas-category-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--ur-elevation-lg);
+  border-color:var(--ur-ring);
+ }
+ html[data-kb-page="index"] .kb-basic-trigger:hover,
+ html[data-kb-page="index"] .icon-btn:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--ur-elevation);
+  border-color:var(--ur-ring);
+ }
+ html[data-kb-page="index"] .side-menu button:hover{
+  background:rgba(42,121,132,.25);
+ }
+}
+@media(max-width:740px){
+ html[data-kb-page="index"] .topbar{
+  min-height:60px;
+  box-shadow:none;
+ }
+ html[data-kb-page="index"] .hero{box-shadow:var(--ur-elevation)}
+ html[data-kb-page="index"] .mini-stat{padding:11px 12px}
+ html[data-kb-page="index"] .calc-card{border-radius:17px}
+ html[data-kb-page="index"] .calc-card h3{font-size:13px}
+ html[data-kb-page="index"] .calc-card .calc-card-bottom{padding-bottom:12px}
+ html[data-kb-page="index"] .mobile-nav{
+  padding-top:9px;
+ }
+ html[data-kb-page="index"] .mobile-nav button{min-height:50px}
+ html[data-kb-page="index"] .result-panel.kb-result-modern{
+  box-shadow:var(--ur-elevation);
+ }
+}
+@media(max-width:390px){
+ html[data-kb-page="index"] .calc-card h3{font-size:12.5px}
+ html[data-kb-page="index"] .mini-stat{padding:10px}
+ html[data-kb-page="index"] .identity{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-kb-page] *{
+  scroll-behavior:auto!important;
+  animation-duration:.01ms!important;
+  animation-iteration-count:1!important;
+  transition-duration:.01ms!important;
+ }
+}
+@media(forced-colors:active){
+ html[data-kb-page] :is(.calc-card,.atlas-category-card,.panel,.med-card,.chip,.btn){
+  border:1px solid CanvasText!important;
+  box-shadow:none!important;
+ }
+ html[data-kb-page="index"] .mobile-nav button.active{border:2px solid Highlight}
+}
+@media print{
+ html[data-kb-page] :is(.calc-card,.atlas-category-card,.panel,.card){
+  box-shadow:none!important;break-inside:avoid;
+ }
+ html[data-kb-page="index"] .mobile-nav{display:none!important}
+}
