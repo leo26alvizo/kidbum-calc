@@ -65,7 +65,7 @@ async function main(){
    try{
     const page=await context.newPage();
     await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(()=>document.querySelector('#kb-lion-splash')?.hidden,{timeout:3500});
+    await page.waitForFunction(()=>document.querySelector('#kb-lion-splash')?.hidden,null,{timeout:3500});
     assert.equal(await page.locator('#search-input').isVisible(),true);
     await noHorizontalOverflow(page,'splash complete');
    }finally{await context.close()}
