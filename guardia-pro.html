@@ -19,13 +19,13 @@ output{display:block;background:var(--wash);border-radius:14px;padding:17px;marg
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media(max-width:800px){.layout{grid-template-columns:1fr}.choose label{width:100%}.hero{min-height:160px}}
 @media print{nav,.choose,.buttons{display:none}.layout{display:block}.panel{break-inside:avoid;margin-bottom:10px}}
-</style><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"></head><body><main>
+</style><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"><link rel="stylesheet" href="./assets/clinical-results-v01061.css"></head><body><main>
 <nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
 <header class="hero"><div class="eyebrow">KIDBUM · GUARDIA PRO</div><h1>Trombosis y sangrado</h1><p>4Ts, Padua e IMPROVE Bleeding · resultados locales y sin prescripciones automáticas</p></header>
 <div class="choose"><label for="picker">Seleccionar herramienta</label><select id="picker"></select></div>
 <div class="layout">
 <section class="panel"><h2 id="title"></h2><p class="small" id="intro"></p><div id="fields"></div></section>
-<section class="panel kb-result-surface" aria-label="Resultado">
+<section class="panel kb-result-surface kb-clinical-result guard-score-panel" aria-label="Resultado">
 <h2>Resultado clínico</h2>
 <output aria-live="polite" aria-atomic="true"><div id="score">—</div><p id="interp">Completa todos los campos documentados.</p><p id="detail"></p></output>
 <div class="buttons"><button id="example" type="button">↗ Ejemplo ficticio</button><button id="reset" type="button">↻ Limpiar</button><button id="copy" type="button" class="primary" disabled>Copiar resumen</button></div>
