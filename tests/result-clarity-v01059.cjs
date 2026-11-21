@@ -50,8 +50,8 @@ function smoke(){
  check('No runtime JS errors',()=>window.__kbResultErrors.length===0);
  const output=document.createElement('output');output.id='kb-result-smoke';output.setAttribute('data-report',encodeURIComponent(JSON.stringify(report)));document.body.append(output);
 }
-const inject='<script>window.__kbResultErrors=[];window.addEventListener("error",e=>window.__kbResultErrors.push(String(e.message)));<\/script>';
-const footer='<script>(function(){let ran=false;function start(){if(ran)return;ran=true;setTimeout('+smoke.toString()+',1200)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();})();<\\/script>';
+const inject='<script>window.__kbResultErrors=[];window.addEventListener("error",e=>window.__kbResultErrors.push(String(e.message)));</script>';
+const footer='<script>(function(){let ran=false;function start(){if(ran)return;ran=true;setTimeout('+smoke.toString()+',1200)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();})();</script>';
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'kidbum-results-'));
 const file=path.join(root,'.kb-result-qa-'+process.pid+'.html');
 try{
