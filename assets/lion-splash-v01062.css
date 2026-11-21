@@ -48,7 +48,7 @@
 .kb-lion-splash-name span{color:#57d2d1;font-size:.37em;vertical-align:middle;letter-spacing:.19em;margin-left:5px;font-weight:800}
 .kb-lion-splash-caption{z-index:1;margin:8px 0 0;color:#8eabb8;font-size:9px;font-weight:700;letter-spacing:.23em;
  text-transform:uppercase;opacity:0;animation:kb-lion-title 1.34s ease-out both}
-.kb-lion-splash-skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
+.kb-lion-splash-skip{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;
  z-index:2;border:1px solid rgba(149,187,202,.28);background:rgba(10,36,51,.6);color:#cce5e9;
  border-radius:999px;padding:8px 18px;font:700 12px/1.4 ui-sans-serif,system-ui,sans-serif;
  cursor:pointer;pointer-events:auto;min-height:40px;touch-action:manipulation}
