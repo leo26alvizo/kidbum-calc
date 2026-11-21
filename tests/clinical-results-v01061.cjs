@@ -48,7 +48,8 @@ async function main(){
      assert.equal(await page.locator('.mobile-nav').isVisible(),mobile,'mobile navigation visibility');
      assert.equal(await page.locator('.sidebar').isVisible(),!mobile,'desktop sidebar visibility');
      await noHorizontalOverflow(page,'home');
-     await page.evaluate(()=>go('calc','bmi'));
+     await page.locator('#search-input').fill('Índice de masa corporal');
+     await page.locator('[data-open="bmi"]').click();
      await page.locator('#f-weight').fill('70');
      await page.locator('#f-height').fill('175');
      await page.waitForFunction(()=>document.querySelector('#result-state')?.textContent==='Cálculo completado');
@@ -74,7 +75,8 @@ async function main(){
     const page=await context.newPage();
     await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
     await page.waitForFunction(()=>document.querySelector('#main-content').children.length>0);
-    await page.evaluate(()=>go('gasometria'));
+    await page.locator('#search-input').fill('gasometria integrada');
+    await page.locator('[data-gasometria-open]').click();
     await page.locator('#gas-example').click();
     assert.equal(await page.locator('#gas-state').innerText(),'Cálculo completado');
     assert.match(await page.locator('#gas-score').innerText(),/20[.,]0/);
