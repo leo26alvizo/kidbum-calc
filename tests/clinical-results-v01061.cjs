@@ -34,6 +34,42 @@ async function main(){
  const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
  const base='http://127.0.0.1:'+port;
  try{
+  await test('lion splash — headlights, skip, session and reduced motion',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    const errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    const splash=page.locator('#kb-lion-splash');
+    assert.equal(await splash.evaluate(el=>el.hidden),false,'cold start must show lion');
+    assert.equal(await page.locator('.kb-lion-eye').count(),1,'paired headlights should be drawn');
+    assert.match(await page.locator('.kb-lion-beam').first().evaluate(el=>getComputedStyle(el).animationName),/kb-lion-headlight/);
+    assert.equal(await page.locator('.kb-lion-splash-skip').isVisible(),true,'skip must be visible');
+    await page.locator('.kb-lion-splash-skip').click();
+    await page.waitForFunction(()=>document.querySelector('#kb-lion-splash')?.hidden);
+    assert.equal(await page.evaluate(()=>sessionStorage.getItem('kb-lion-splash-seen-v01062')),'1');
+    await page.reload({waitUntil:'domcontentloaded'});
+    assert.equal(await splash.evaluate(el=>el.hidden),true,'reload in the same session must not repeat');
+    assert.equal(errors.length,0,'splash JavaScript errors: '+errors.join('; '));
+   }finally{await context.close()}
+   const reduced=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{
+    const page=await reduced.newPage();
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('#kb-lion-splash').evaluate(el=>el.hidden),true,'reduced-motion must skip splash');
+    assert.equal(await page.locator('#search-input').isVisible(),true,'clinical search available immediately');
+   }finally{await reduced.close()}
+  });
+  await test('lion splash — automatic timeout cannot block clinical controls',async()=>{
+   const context=await browser.newContext({viewport:{width:320,height:740},serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    await page.waitForFunction(()=>document.querySelector('#kb-lion-splash')?.hidden,{timeout:3500});
+    assert.equal(await page.locator('#search-input').isVisible(),true);
+    await noHorizontalOverflow(page,'splash complete');
+   }finally{await context.close()}
+  });
   for(const width of [320,390,430,768]){
    await test(width+'px — home, BMI, missing, invalid and dark mode',async()=>{
     const context=await browser.newContext({viewport:{width,height:850},deviceScaleFactor:1,serviceWorkers:'block'});
