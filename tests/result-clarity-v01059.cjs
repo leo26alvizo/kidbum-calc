@@ -51,7 +51,7 @@ function smoke(){
  const output=document.createElement('output');output.id='kb-result-smoke';output.setAttribute('data-report',encodeURIComponent(JSON.stringify(report)));document.body.append(output);
 }
 const inject='<script>window.__kbResultErrors=[];window.addEventListener("error",e=>window.__kbResultErrors.push(String(e.message)));<\/script>';
-const footer='<script>window.addEventListener("load",()=>setTimeout('+smoke.toString()+',800));<\/script>';
+const footer='<script>(function(){let ran=false;function start(){if(ran)return;ran=true;setTimeout('+smoke.toString()+',1200)}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});else start();})();<\\/script>';
 const tmp=fs.mkdtempSync(path.join(os.tmpdir(),'kidbum-results-'));
 const file=path.join(root,'.kb-result-qa-'+process.pid+'.html');
 try{
@@ -60,7 +60,7 @@ try{
   const proc=cp.spawnSync(chrome,['--headless=new','--no-sandbox','--disable-gpu','--disable-dev-shm-usage','--no-first-run','--allow-file-access-from-files','--disable-extensions','--virtual-time-budget=13000','--window-size='+width+','+height,'--user-data-dir='+path.join(tmp,'profile-'+width),'--dump-dom','file://'+file],{cwd:root,encoding:'utf8',timeout:45000,maxBuffer:18*1024*1024});
   assert.equal(proc.status,0,'Chrome '+width+' failed: '+String(proc.stderr).slice(-900));
   const matched=proc.stdout.match(/id="kb-result-smoke" data-report="([^"]+)"/);
-  assert.ok(matched,'Browser report missing '+width);
+  assert.ok(matched,'Browser report missing '+width+'; stdout tail: '+String(proc.stdout).slice(-700)+'; stderr tail: '+String(proc.stderr).slice(-500));
   const results=JSON.parse(decodeURIComponent(matched[1]));
   for(const x of results)console.log((x.ok?'PASS ':'FAIL ')+width+'px · '+x.name+(x.error?' · '+x.error:''));
   assert.equal(results.filter(x=>!x.ok).length,0,'Result clarity browser failure '+width);
