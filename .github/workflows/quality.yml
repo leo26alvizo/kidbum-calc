@@ -24,6 +24,8 @@ jobs:
         run: node tests/result-clarity-v01059.cjs
       - name: Lion Awakening cold-start safety and reduced-motion checks
         run: node tests/lion-splash-v01062.cjs
+      - name: Ultra Retina visual scope, vector icon and unchanged-image checks
+        run: node tests/ultra-retina-v01063.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
