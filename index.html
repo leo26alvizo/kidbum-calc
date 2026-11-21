@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.62" />
+  <meta name="kidbum-app-version" content="0.10.63" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -852,6 +852,7 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
   <link rel="stylesheet" href="./assets/result-clarity-v01059.css" />
   <link rel="stylesheet" href="./assets/clinical-results-v01061.css" />
   <link rel="stylesheet" href="./assets/lion-splash-v01062.css" />
+  <link rel="stylesheet" href="./assets/ultra-retina-v01063.css" />
 </head>
 <body>
 <div class="kb-lion-splash" id="kb-lion-splash" hidden>
@@ -913,7 +914,7 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
   <div class="app-shell">
     <aside class="sidebar" aria-label="Navegación principal">
       <button class="identity" id="brand-home" type="button" aria-label="Ir al inicio">
-        <span class="identity-icon" aria-hidden="true"><svg viewBox="0 0 32 32" width="30" height="30"><path d="M3 17h6l4-9 6 17 4-8h6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="identity-icon" aria-hidden="true"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><path d="M12 2.6 9 1.8 5.3 3.9 2.8 7.6 2.2 11.8l1.8 4.1.8 2.6 3.8 3 3.4 1.3 3.4-1.3 3.8-3 .8-2.6 1.8-4.1-.6-4.2-2.5-3.7-3.7-2.1Z"/><path d="M12 5.1 8.7 4.8 6.1 7.2l1.1 3-1.2 2.6 1.9 4.7 4.1 2.7 4.1-2.7 1.9-4.7-1.2-2.6 1.1-3-2.6-2.4Z"/><path d="m6.9 11.4 2.8.5 2.3 2 2.3-2 2.8-.5M10.6 14.1l1.4.8 1.4-.8M12 14.9v2.1l-1.6 1M12 17l1.6 1"/></svg></span>
         <span><strong>KIDBUM <em>CALC</em></strong><small>Clinical toolkit · v<span class="kidbum-version"></span></small></span>
       </button>
       <p class="nav-overline">NAVEGACIÓN</p>
@@ -928,9 +929,9 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
     <div class="page">
       <header class="topbar">
         <div class="breadcrumb"><span class="crumb-brand">KIDBUM</span><span class="crumb-slash">/</span><button type="button" id="breadcrumb-home" class="breadcrumb-home" aria-label="Ir al inicio de KidBum">Inicio</button><span id="breadcrumb-current" hidden><span class="crumb-slash">/</span> <span id="breadcrumb-label"></span></span></div>
-        <div class="top-actions"><button type="button" class="kb-basic-trigger" id="kb-basic-open" title="Calculadora convencional">🧮 Calc</button>
+        <div class="top-actions"><button type="button" class="kb-basic-trigger" id="kb-basic-open" title="Calculadora convencional"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M8 8h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg> Calc</button>
           <span class="top-status"><span class="online-dot"></span>Sin suscripciones</span>
-          <button class="icon-btn" id="theme-btn" aria-label="Cambiar tema" title="Cambiar tema" type="button">◐</button>
+          <button class="icon-btn" id="theme-btn" aria-label="Cambiar tema" title="Cambiar tema" type="button"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><circle cx="12" cy="12" r="8.7"/><path d="M12 3.3a8.7 8.7 0 0 1 0 17.4Z"/><path d="M12 3.3v17.4"/></svg></button>
         </div>
       </header>
       <div id="kb-offline-status" role="status" aria-live="polite">Comprobando disponibilidad sin conexión…</div>
@@ -941,9 +942,9 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
   </div>
   <nav class="mobile-nav" aria-label="Navegación móvil">
     <button type="button" data-mobile-nav="home" aria-label="Ir al inicio de KidBum"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 10 9-7 9 7"/><path d="M5 9v12h14V9"/><path d="M9 21v-7h6v7"/></svg>Inicio</button>
-    <button type="button" data-mobile-nav="favorite"><span>☆</span>Favoritos</button>
-    <button type="button" data-mobile-nav="docs"><span>▤</span>Historias</button>
-    <button type="button" data-mobile-nav="about"><span>ⓘ</span>Acerca de</button>
+    <button type="button" data-mobile-nav="favorite"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><path d="m12 3.1 2.9 5.9 6.5.95-4.7 4.58 1.12 6.48L12 17.95l-5.82 3.06 1.12-6.48-4.7-4.58 6.5-.95Z"/></svg>Favoritos</button>
+    <button type="button" data-mobile-nav="docs"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><path d="M12 6.5C9.7 5 7.2 4.4 3 5v14.5c4.1-.6 6.8 0 9 1.5 2.2-1.5 4.9-2.1 9-1.5V5c-4.2-.6-6.7 0-9 1.5ZM12 6.5V21"/></svg>Historias</button>
+    <button type="button" data-mobile-nav="about"><svg class="kb-vector-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" ><circle cx="12" cy="12" r="9"/><path d="M12 10.5v5.5"/><path d="M12 7.7h.01" stroke-width="2.7"/></svg>Acerca de</button>
   </nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <!-- Clinical modules bundled in original execution order for fast mobile startup. -->
@@ -1925,7 +1926,7 @@ function enc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;',
 function toast(m){const t=el('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),3000);}
 function go(page,what=''){if(page==='docs'){window.location.assign('./documentacion.html');return;}if(page==='calc')calcOrigin=screen;screen=page;id=what;render();window.scrollTo({top:0,behavior:'instant'});}
 function favorite(x){faves=faves.includes(x)?faves.filter(t=>t!==x):[...faves,x];storePrefs();if(screen==='calc'){const b=el('#star-main');if(b){b.textContent=faves.includes(x)?'★ Guardada':'☆ Guardar';}}else renderHome(false);}
-function renderNav(){const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['docs','▤','Documentación clínica'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>{const target=b.dataset.nav||b.dataset.mobileNav;if(target==='home'){category='Todas';search='';}go(target);});document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
+function renderNav(){const navIcons={"home":"<svg class=\"kb-vector-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\" ><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1.5\"/></svg>","guard":"<svg class=\"kb-vector-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\" ><path d=\"M12 2.5 19 5.5v5.5c0 5-3 8-7 10.5-4-2.5-7-5.5-7-10.5V5.5Z\"/><path d=\"M12 7.5v8M8 11.5h8\"/></svg>","favorite":"<svg class=\"kb-vector-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\" ><path d=\"m12 3.1 2.9 5.9 6.5.95-4.7 4.58 1.12 6.48L12 17.95l-5.82 3.06 1.12-6.48-4.7-4.58 6.5-.95Z\"/></svg>","docs":"<svg class=\"kb-vector-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\" ><path d=\"M12 6.5C9.7 5 7.2 4.4 3 5v14.5c4.1-.6 6.8 0 9 1.5 2.2-1.5 4.9-2.1 9-1.5V5c-4.2-.6-6.7 0-9 1.5ZM12 6.5V21\"/></svg>","about":"<svg class=\"kb-vector-icon\" viewBox=\"0 0 24 24\" aria-hidden=\"true\" focusable=\"false\" ><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 10.5v5.5\"/><path d=\"M12 7.7h.01\" stroke-width=\"2.7\"/></svg>"};const items=[['home','▦','Explorar'],['guard','✚','Modo Guardia'],['favorite','☆','Guardadas'],['docs','▤','Documentación clínica'],['about','ⓘ','Información']];el('#nav-menu').innerHTML=items.map(([s,i,n])=>`<button type="button" data-nav="${s}" class="${screen===s||((screen==='calc'&&s===calcOrigin||screen==='pharma'&&s==='home'))?'current':''}"><span class="nicon">${navIcons[s]||i}</span>${n}</button>`).join('');document.querySelectorAll('[data-nav],[data-mobile-nav]').forEach(b=>b.onclick=()=>{const target=b.dataset.nav||b.dataset.mobileNav;if(target==='home'){category='Todas';search='';}go(target);});document.querySelectorAll('[data-mobile-nav]').forEach(b=>b.classList.toggle('active',(screen==='calc'&&b.dataset.mobileNav===calcOrigin)||b.dataset.mobileNav===screen));}
 function render(){renderNav();el('#breadcrumb-current').hidden=screen==='home';el('#breadcrumb-label').textContent=screen==='calc'?defs.find(d=>d.id===id).title:screen==='pharma'?'Pediatría · Farmacología':screen==='favorite'?'Guardadas':screen==='about'?'Información':screen==='guard'?'Modo Guardia':screen==='gasometria'?'Gasometría integrada':screen==='diabetes'?'Diabetes & Insulin Pro':'Inicio';if(screen==='diabetes'){window.KidBumDiabetes.render(main,engine,()=>{category='Endocrinología y Diabetes';search='';go('home');},id);return;}if(screen==='guard'){renderGuard();return;}if(screen==='gasometria'){window.KidBumGasometria.render(main,engine,()=>{if(gasometriaOrigin==='guard')go('guard');else{category='Urgencias y Terapia Intensiva';search='';go('home');}});return;}if(screen==='about'){renderAbout();return;}if(screen==='pharma'){renderPharma();return;}if(screen==='calc'){renderCalc();return;}renderHome(true);}
 
 /* Acceso rápido exclusivo, no duplica calculadoras ni mantiene fichas de pacientes. */
