@@ -84,6 +84,22 @@ async function main(){
      assert.equal(await page.locator('.mobile-nav').isVisible(),mobile,'mobile navigation visibility');
      assert.equal(await page.locator('.sidebar').isVisible(),!mobile,'desktop sidebar visibility');
      await noHorizontalOverflow(page,'home');
+     const finish=await page.evaluate(()=>{
+      const card=document.querySelector('.calc-card');
+      const styles=card&&getComputedStyle(card);
+      return {
+       loaded:[...document.styleSheets].some(sheet=>sheet.href?.includes('ultra-retina-v01063.css')),
+       cardRadius:styles?.borderRadius||'',
+       cardShadow:styles?.boxShadow||'',
+       vectorNavigation:!!document.querySelector('#nav-menu [data-nav="home"] .kb-vector-icon'),
+       mobileIcons:document.querySelectorAll('.mobile-nav button svg').length
+      };
+     });
+     assert.equal(finish.loaded,true,'Premium CSS loaded');
+     assert.ok(parseFloat(finish.cardRadius)>=16,'Cards receive premium rounded surfaces');
+     assert.notEqual(finish.cardShadow,'none','Cards receive calibrated shadows');
+     assert.equal(finish.vectorNavigation,true,'Desktop navigation uses SVG, not text glyphs');
+     assert.equal(finish.mobileIcons,4,'All four mobile navigation icons are scalable vectors');
      await page.locator('#search-input').fill('Índice de masa corporal');
      await page.locator('[data-open="bmi"]').click();
      await page.locator('#f-weight').fill('70');
@@ -124,6 +140,19 @@ async function main(){
     await page.locator('#pas-outcome').waitFor();
     assert.match(await page.locator('#pas-risk-name').innerText(),/incomplet|valoraci[oó]n/i);
     await noHorizontalOverflow(page,'PAS');
+   }finally{await context.close()}
+  });
+  await test('Ultra Retina — standalone clinical modules at 390px',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},deviceScaleFactor:1,serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    for(const path of ['pharma-pro.html','guardia-pro.html','documentacion.html','pediatria-pas.html']){
+     await page.goto(base+'/'+path,{waitUntil:'domcontentloaded'});
+     assert.equal(await page.locator('link[href*="ultra-retina-v01063.css"]').count(),1,path+' includes premium CSS');
+     const ready=await page.evaluate(()=>[...document.styleSheets].some(sheet=>sheet.href?.includes('ultra-retina-v01063.css')));
+     assert.equal(ready,true,path+' stylesheet actually applied');
+     await noHorizontalOverflow(page,path);
+    }
    }finally{await context.close()}
   });
  }finally{await browser.close();await stop()}
