@@ -27,6 +27,8 @@ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(css,/\.kb-lion-splash\[hidden\]\{display:none!important\}/);
 assert.match(css,/@media\(forced-colors:active\)/);
 assert.match(css,/kb-lion-splash-hide 1\.34s/);
+assert.match(css,/pointer-events:none;animation:kb-lion-splash-hide/,'Overlay cannot intercept clinical actions');
+assert.match(css,/pointer-events:auto;min-height:40px/,'Skip control remains interactive');
 assert.match(js,/timer=setTimeout\(finish,1390\)/,'Hard upper bound to dismiss');
 assert.match(js,/sessionStorage\.setItem\('kb-lion-splash-seen-v01062','1'\)/);
 for(const unsafe of ['localStorage','fetch(','XMLHttpRequest','navigator.sendBeacon','location.reload(','eval(']){
@@ -81,7 +83,7 @@ h.listeners.get('keydown')({key:'Escape'});
 h.runTimers();
 assert.equal(h.splash.hidden,true,'Escape bypasses introduction');
 h=makeHarness();
-h.splash.listeners.get('pointerdown')();
+h.listeners.get('pointerdown')();
 h.runTimers();
 assert.equal(h.splash.hidden,true,'Any tap bypasses introduction');
 console.log('PASS v0.10.62 Lion Awakening — eye glints, offline precache, skip, max duration, once/session, accessibility, reduced motion, no clinical data.');
