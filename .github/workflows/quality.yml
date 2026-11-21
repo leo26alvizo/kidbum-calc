@@ -22,6 +22,8 @@ jobs:
         run: node tests/pharma-broad-index-v01058.cjs
       - name: Result clarity, safe copy, sources and real mobile / desktop checks
         run: node tests/result-clarity-v01059.cjs
+      - name: Lion Awakening cold-start safety and reduced-motion checks
+        run: node tests/lion-splash-v01062.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
