@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.62**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.63**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.63 · Ultra Retina UI · Interfaz más precisa
+
+- **Las imágenes originales quedan intactas**: no se modifican, procesan, sustituyen, redimensionan, recomprimen ni regeneran archivos PNG, JPG, WebP o SVG preexistentes.
+- Nueva hoja de estilos local `assets/ultra-retina-v01063.css`, aplicada al Inicio y a 16 módulos independientes: elevación sutil, bordes de precisión, tipografía más legible, tarjetas mejor jerarquizadas, botones consistentes y navegación móvil refinada.
+- Navegación superior/inferior y barra lateral del Inicio con **íconos SVG vectoriales** de león, secciones, favoritos, documentación y controles; evita la baja consistencia visual de algunos símbolos de texto.
+- Mejoras de contraste y foco visible, tipografía numérica tabular, estados hover solo con puntero preciso, tamaños móviles y respeto por «reducir movimiento».
+- Actualización offline atómica a v0.10.63: la nueva hoja de estilos se precarga con la PWA. Se mantienen Lion Awakening, los motores y módulos clínicos anteriores, sin alterar fórmulas, alertas, puntuaciones, dosis ni referencias.
+- Contenido/ilustraciones del atlas y el diseño de las imágenes permanecen sin cambios. **«Ultra Retina» describe la calidad de la interfaz, no una ampliación real de píxeles de las fotografías**.
 
 ## KidBum 0.10.62 · Lion Awakening · Inicio cinematográfico
 
