@@ -7,7 +7,7 @@
  position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;
  justify-content:center;flex-direction:column;gap:0;isolation:isolate;
  overflow:hidden;background:#06131e;color:#e6f3f6;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
- text-align:center;animation:kb-lion-splash-hide 1.34s linear both;
+ text-align:center;pointer-events:none;animation:kb-lion-splash-hide 1.34s linear both;
  -webkit-tap-highlight-color:transparent;
 }
 .kb-lion-splash::before{content:"";position:absolute;inset:-25%;pointer-events:none;
@@ -51,7 +51,7 @@
 .kb-lion-splash-skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);
  z-index:2;border:1px solid rgba(149,187,202,.28);background:rgba(10,36,51,.6);color:#cce5e9;
  border-radius:999px;padding:8px 18px;font:700 12px/1.4 ui-sans-serif,system-ui,sans-serif;
- cursor:pointer;min-height:40px;touch-action:manipulation}
+ cursor:pointer;pointer-events:auto;min-height:40px;touch-action:manipulation}
 .kb-lion-splash-skip:focus-visible{outline:3px solid #7ef4e5;outline-offset:3px}
 .kb-lion-splash.kb-lion-splash-closing{animation:none;transition:opacity .13s ease-out;opacity:0;pointer-events:none}
 @keyframes kb-lion-stroke{0%{opacity:.1;stroke-dashoffset:460}100%{opacity:1;stroke-dashoffset:0}}
