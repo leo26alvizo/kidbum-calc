@@ -1,0 +1,72 @@
+/* KidBum Lion Awakening · v0.10.62
+ * Decorative first-launch splash, not a prerequisite for clinical calculations.
+ * Standalone SVG/CSS; no video, network, timers for the clinical engine or
+ * animation-driven clinical states. Keep readable content and reduced-motion. */
+.kb-lion-splash[hidden]{display:none!important}
+.kb-lion-splash{
+ position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;
+ justify-content:center;flex-direction:column;gap:0;isolation:isolate;
+ overflow:hidden;background:#06131e;color:#e6f3f6;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ text-align:center;pointer-events:none;animation:kb-lion-splash-hide 1.34s linear both;
+ -webkit-tap-highlight-color:transparent;
+}
+.kb-lion-splash::before{content:"";position:absolute;inset:-25%;pointer-events:none;
+ background:radial-gradient(ellipse 34% 32% at 50% 47%,rgba(14,121,137,.19),transparent 100%);
+}
+.kb-lion-splash::after{content:"";position:absolute;inset:0;pointer-events:none;
+ background:linear-gradient(115deg,transparent 34%,rgba(208,248,252,.025) 50%,transparent 66%);
+ opacity:.6;
+}
+.kb-lion-splash-stage{width:min(58vw,208px);height:min(58vw,208px);min-width:150px;min-height:150px;position:relative;z-index:1}
+.kb-lion-splash-mark{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 7px 22px rgba(0,0,0,.35))}
+.kb-lion-splash-mark .kb-lion-line{
+ fill:none;stroke:url(#kb-lion-silver);stroke-width:4;stroke-linejoin:round;stroke-linecap:round;
+ stroke-dasharray:460;stroke-dashoffset:460;
+ animation:kb-lion-stroke .64s cubic-bezier(.2,.7,.2,1) .05s both;
+}
+.kb-lion-splash-mark .kb-lion-line.kb-lion-delay{animation-delay:.11s}
+.kb-lion-splash-mark .kb-lion-line.kb-lion-last{animation-delay:.18s;stroke-width:3.6}
+.kb-lion-splash-mark .kb-lion-line.kb-lion-teal{stroke:#57c6c7;stroke-width:3.4;animation-delay:.22s}
+.kb-lion-splash-mark .kb-lion-eye{
+ fill:#deffff;opacity:0;filter:drop-shadow(0 0 5px #44dfe9) drop-shadow(0 0 12px #0fc7df);
+ animation:kb-lion-eyes 1.34s ease-out both;
+}
+.kb-lion-splash-mark .kb-lion-eye-glow{
+ fill:#50e7f2;opacity:0;filter:url(#kb-lion-blur);
+ animation:kb-lion-eye-halo 1.34s ease-out both;
+}
+.kb-lion-splash-mark .kb-lion-beam{
+ fill:none;stroke:url(#kb-lion-light);stroke-width:2;stroke-linecap:round;
+ transform-origin:50% 50%;transform:scaleX(.02);opacity:0;
+ filter:drop-shadow(0 0 5px rgba(106,241,252,.7));
+ animation:kb-lion-headlight 1.34s cubic-bezier(.12,.8,.3,1) both;
+}
+.kb-lion-splash-mark .kb-lion-beam-fine{stroke-width:.65;opacity:0;animation:kb-lion-headlight 1.34s ease-out both}
+.kb-lion-splash-name{z-index:1;margin:-3px 0 0;color:#edf6f7;
+ font-size:clamp(25px,6.7vw,34px);font-weight:760;letter-spacing:.025em;line-height:1.2;
+ opacity:0;animation:kb-lion-title 1.34s ease-out both}
+.kb-lion-splash-name span{color:#57d2d1;font-size:.37em;vertical-align:middle;letter-spacing:.19em;margin-left:5px;font-weight:800}
+.kb-lion-splash-caption{z-index:1;margin:8px 0 0;color:#8eabb8;font-size:9px;font-weight:700;letter-spacing:.23em;
+ text-transform:uppercase;opacity:0;animation:kb-lion-title 1.34s ease-out both}
+.kb-lion-splash-skip{position:absolute;top:max(18px,env(safe-area-inset-top));right:18px;
+ z-index:2;border:1px solid rgba(149,187,202,.28);background:rgba(10,36,51,.6);color:#cce5e9;
+ border-radius:999px;padding:8px 18px;font:700 12px/1.4 ui-sans-serif,system-ui,sans-serif;
+ cursor:pointer;pointer-events:auto;min-height:40px;touch-action:manipulation}
+.kb-lion-splash-skip:focus-visible{outline:3px solid #7ef4e5;outline-offset:3px}
+.kb-lion-splash.kb-lion-splash-closing{animation:none;transition:opacity .13s ease-out;opacity:0;pointer-events:none}
+@keyframes kb-lion-stroke{0%{opacity:.1;stroke-dashoffset:460}100%{opacity:1;stroke-dashoffset:0}}
+@keyframes kb-lion-eyes{0%,44%{opacity:0}48%{opacity:.8}52%{opacity:1}66%{opacity:1}81%,100%{opacity:.5}}
+@keyframes kb-lion-eye-halo{0%,43%{opacity:0}50%{opacity:.9}60%{opacity:.7}76%,100%{opacity:.12}}
+@keyframes kb-lion-headlight{0%,45%{opacity:0;transform:scaleX(.02)}50%{opacity:.9;transform:scaleX(.32)}56%{opacity:.78;transform:scaleX(1)}68%{opacity:.22;transform:scaleX(1.05)}77%,100%{opacity:0;transform:scaleX(1.05)}}
+@keyframes kb-lion-title{0%,44%{opacity:0;transform:translateY(7px)}57%,81%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-4px)}}
+@keyframes kb-lion-splash-hide{0%,84%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+@media(max-width:360px){.kb-lion-splash-stage{width:176px;height:176px}.kb-lion-splash-caption{font-size:8px}}
+@media(prefers-reduced-motion:reduce){
+ .kb-lion-splash{display:none!important}
+ .kb-lion-splash *{animation:none!important;transition:none!important}
+}
+@media(forced-colors:active){
+ .kb-lion-splash{background:Canvas;color:CanvasText}
+ .kb-lion-splash-skip{border:1px solid CanvasText;color:CanvasText;background:Canvas}
+ .kb-lion-splash-mark .kb-lion-line{stroke:CanvasText}
+}

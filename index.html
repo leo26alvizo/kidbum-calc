@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#10243b" />
-  <meta name="kidbum-app-version" content="0.10.61" />
+  <meta name="kidbum-app-version" content="0.10.62" />
   <!-- Safari en iOS/iPadOS: launch from Home Screen as a standalone web app. -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
@@ -851,8 +851,64 @@ html.dark .ped-pas-tile{background:linear-gradient(145deg,#152b33,#1c3f42);borde
   <link rel="stylesheet" href="./assets/urgencias-algoritmos-v01056.css" />
   <link rel="stylesheet" href="./assets/result-clarity-v01059.css" />
   <link rel="stylesheet" href="./assets/clinical-results-v01061.css" />
+  <link rel="stylesheet" href="./assets/lion-splash-v01062.css" />
 </head>
 <body>
+<div class="kb-lion-splash" id="kb-lion-splash" hidden>
+  <div class="kb-lion-splash-stage" aria-hidden="true">
+    <svg class="kb-lion-splash-mark" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" focusable="false">
+      <defs>
+        <linearGradient id="kb-lion-silver" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f4fbff"/><stop offset=".47" stop-color="#aebdc7"/><stop offset="1" stop-color="#e4f4f6"/>
+        </linearGradient>
+        <linearGradient id="kb-lion-light" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0" stop-color="#23c4d9" stop-opacity="0"/>
+          <stop offset=".28" stop-color="#6aefff" stop-opacity=".32"/>
+          <stop offset=".5" stop-color="#e8ffff" stop-opacity="1"/>
+          <stop offset=".72" stop-color="#6aefff" stop-opacity=".32"/>
+          <stop offset="1" stop-color="#23c4d9" stop-opacity="0"/>
+        </linearGradient>
+        <filter id="kb-lion-blur" x="-250%" y="-350%" width="600%" height="800%">
+          <feGaussianBlur stdDeviation="7"/>
+        </filter>
+      </defs>
+      <g class="kb-lion-line">
+        <path d="M120 24 L103 16 L69 30 L46 52 L33 82 L28 116 L43 151 L49 177 L83 211 L120 229"/>
+        <path d="M120 24 L137 16 L171 30 L194 52 L207 82 L212 116 L197 151 L191 177 L157 211 L120 229"/>
+      </g>
+      <g class="kb-lion-line kb-lion-delay">
+        <path d="M120 45 L93 38 L63 58 L52 88 L63 112 L51 136 L75 181 L101 198 L120 213"/>
+        <path d="M120 45 L147 38 L177 58 L188 88 L177 112 L189 136 L165 181 L139 198 L120 213"/>
+        <path d="M62 72 L89 70 L106 88 L120 93 L134 88 L151 70 L178 72"/>
+      </g>
+      <g class="kb-lion-line kb-lion-last">
+        <path d="M66 120 L88 115 L105 123 L120 142 L135 123 L152 115 L174 120"/>
+        <path d="M80 147 L93 163 L111 170 L120 165 L129 170 L147 163 L160 147"/>
+        <path d="M108 146 L120 151 L132 146 M120 151 L120 170 M120 170 L105 178 M120 170 L135 178"/>
+        <path d="M91 183 L120 206 L149 183"/>
+      </g>
+      <g class="kb-lion-line kb-lion-teal">
+        <path d="M56 96 L46 120 L62 147 M184 96 L194 120 L178 147"/>
+        <path d="M90 207 L120 223 L150 207"/>
+      </g>
+      <g class="kb-lion-eye-glow">
+        <ellipse cx="88" cy="119" rx="17" ry="9"/>
+        <ellipse cx="152" cy="119" rx="17" ry="9"/>
+      </g>
+      <g class="kb-lion-eye">
+        <path d="M80 119 L91 116 L99 119 L90 122 Z"/>
+        <path d="M160 119 L149 116 L141 119 L150 122 Z"/>
+      </g>
+      <path class="kb-lion-beam" d="M20 119 H220"/>
+      <path class="kb-lion-beam kb-lion-beam-fine" d="M28 116.5 H212"/>
+      <path class="kb-lion-beam kb-lion-beam-fine" d="M28 121.5 H212"/>
+    </svg>
+  </div>
+  <div class="kb-lion-splash-name">KidBum <span>CALC</span></div>
+  <div class="kb-lion-splash-caption">Precisión clínica</div>
+  <button type="button" class="kb-lion-splash-skip" data-kb-lion-skip aria-label="Omitir animación de inicio">Omitir</button>
+</div>
+<script src="./assets/lion-splash-v01062.js"></script>
   <a class="kb-skip-link" href="#main-content">Saltar al contenido principal</a>
   <div class="app-shell">
     <aside class="sidebar" aria-label="Navegación principal">
