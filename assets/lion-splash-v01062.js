@@ -21,7 +21,7 @@
   clearTimeout(timer);clearTimeout(cleanupTimer);
   splash.hidden=true;
   document.removeEventListener('keydown',onKey);
-  splash.removeEventListener('pointerdown',onPointer);
+  document.removeEventListener('pointerdown',onPointer,true);
   skip?.removeEventListener('click',onSkip);
  }
  function dismiss(){
@@ -35,7 +35,7 @@
  function onKey(event){if(event.key==='Escape')dismiss();}
  splash.hidden=false;
  skip?.addEventListener('click',onSkip);
- splash.addEventListener('pointerdown',onPointer);
+ document.addEventListener('pointerdown',onPointer,true);
  document.addEventListener('keydown',onKey);
  window.addEventListener('pagehide',finish,{once:true});
  // Fixed upper bound: a slow/failed clinical script cannot trap the screen.
