@@ -1,0 +1,205 @@
+/* KidBum Clinical Results 2.0 · v0.10.61
+   Presentation only. Clinical thresholds, states, warnings, formulas and scoring
+   remain owned by their existing engines. "Ready" means calculated, NOT low risk. */
+
+/* Main calculator + integrated arterial blood-gas panel. */
+.result-panel.kb-result-modern{
+  min-width:0;overflow:hidden;border:1px solid var(--stroke,#dbe5e8);
+  border-radius:22px;background:var(--surface,#fff);
+  box-shadow:0 14px 38px rgba(13,46,64,.075);
+}
+.kb-result-modern .result-top{
+  position:relative;min-width:0;padding:25px clamp(18px,3vw,30px) 23px;
+  background:var(--surface,#fff);border-bottom:1px solid var(--stroke,#dbe5e8);
+}
+.kb-result-modern .result-top::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:var(--accent,#008b8c);
+}
+.kb-result-modern[data-kb-result-state="invalid"] .result-top::before{background:var(--red,#a53837)}
+.kb-result-modern .result-label{
+  display:block;margin:0;color:var(--ink-soft,#516a7d);
+  font:800 11px/1.45 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:.11em;text-transform:uppercase;
+}
+.kb-result-modern .kb-result-state{
+  margin-top:15px;padding:7px 11px;
+  border-radius:999px;background:var(--soft,#edf3f6);
+  border:1px solid var(--stroke,#dbe5e8);color:var(--ink,#173449);
+  font-size:12px;font-weight:750;line-height:1.35;
+}
+.kb-result-modern[data-kb-result-state="invalid"] .kb-result-state{
+  background:var(--red-bg,#fff1ee);border-color:var(--red,#a53837);color:var(--red,#a53837);
+}
+.kb-result-modern .result-value{
+  display:block;margin:15px 0 0;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:clamp(40px,5vw,60px);font-weight:850;line-height:1.13;
+  letter-spacing:-.045em;font-variant-numeric:tabular-nums;
+  color:var(--ink,#122b3b);overflow-wrap:anywhere;
+}
+.kb-result-modern .result-unit{
+  display:inline-block;font-family:inherit;font-size:.31em;font-weight:700;
+  letter-spacing:0;line-height:1.3;color:var(--ink-soft,#516a7d);vertical-align:baseline;
+}
+.kb-result-modern .result-interpret{
+  margin-top:18px;padding-top:16px;border-top:1px solid var(--stroke,#dbe5e8);
+  color:var(--ink,#163f4a);font-size:clamp(15px,1.5vw,17px);
+  font-weight:740;line-height:1.55;overflow-wrap:anywhere;
+}
+.kb-result-modern .kb-result-progress{
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  margin-top:14px;padding:9px 12px;border:1px solid var(--stroke,#dbe5e8);
+  border-radius:11px;background:var(--soft,#edf3f6);
+  color:var(--ink-soft,#516a7d);font-size:12px;line-height:1.45;
+}
+.kb-result-modern .result-extra{padding:23px clamp(18px,3vw,30px) 26px;min-width:0}
+.kb-result-modern .note-heading{
+  color:var(--ink,#173449);font-size:12px;letter-spacing:.02em;
+  font-weight:850;line-height:1.45;
+}
+.kb-result-modern #detail-text,.kb-result-modern #gas-items,
+.kb-result-modern #gas-warnings{font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.kb-result-modern #notes-list{font-size:12px;line-height:1.75}
+.kb-result-modern #gas-warnings{margin-top:8px}
+.kb-result-modern .kb-result-missing{
+  margin:0 0 17px;padding:15px 16px;border-radius:12px;
+  border:1px solid var(--stroke,#dbe5e8);border-left:4px solid var(--accent,#008b8c);
+  background:var(--soft,#edf3f6);color:var(--ink,#173449);
+  font-size:13px;line-height:1.6;
+}
+.kb-result-modern .kb-result-missing[hidden]{display:none}
+.kb-result-modern .result-errors{
+  border-left:4px solid var(--red,#a53837);
+  padding:12px 12px 12px 25px;border-radius:10px;
+  background:var(--red-bg,#fff1ee);color:var(--ink,#173449);
+  font-size:13px;line-height:1.6;
+}
+.kb-result-modern .kb-result-reference{
+  margin:20px 0 15px;padding:14px 15px;
+  background:var(--soft,#edf3f6);border:1px solid var(--stroke,#dbe5e8);
+  border-radius:13px;color:var(--ink-soft,#516a7d);font-size:12px;
+  line-height:1.65;overflow-wrap:anywhere;
+}
+.kb-result-modern .kb-result-reference strong{margin:0 0 5px;color:var(--ink,#173449);font-weight:800}
+.kb-result-modern .kb-result-copy{min-height:48px;border-radius:11px;font-size:13px}
+.kb-result-modern .kb-result-copy-note{font-size:11px;line-height:1.55}
+.kb-result-modern .result-warning{
+  font-size:12px;line-height:1.65;
+  border-left:4px solid var(--alert,#a66c0d);
+}
+.kb-result-modern :is(button,a):focus-visible{outline:3px solid var(--accent,#008b8c);outline-offset:3px}
+
+/* Guardia Pro has its own color tokens and a separate scoring engine. */
+.guard-score-panel.kb-clinical-result{
+  min-width:0;border-radius:22px;box-shadow:0 14px 38px rgba(13,46,64,.075);
+}
+.guard-score-panel.kb-clinical-result h2{font-size:16px;font-weight:820;letter-spacing:-.015em}
+.guard-score-panel.kb-clinical-result output{
+  padding:22px clamp(16px,3vw,26px);background:var(--wash,#e5f3f2);
+  border:1px solid var(--stroke,#cadde0);border-radius:16px;
+}
+.guard-score-panel.kb-clinical-result #score{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:clamp(38px,5vw,56px);line-height:1.13;
+  letter-spacing:-.04em;font-weight:850;font-variant-numeric:tabular-nums;
+  overflow-wrap:anywhere;
+}
+.guard-score-panel.kb-clinical-result #interp{
+  margin:16px 0 10px;padding-top:15px;border-top:1px solid var(--stroke,#cadde0);
+  font-size:clamp(14px,1.5vw,17px);line-height:1.6;
+}
+.guard-score-panel.kb-clinical-result #detail{font-size:13px;line-height:1.7}
+
+/* Diabetes & Insulin Pro: retain the module's existing warning/status semantics. */
+.db-results.kb-clinical-result{border-radius:22px;min-width:0}
+.db-results.kb-clinical-result h2{font-size:17px;letter-spacing:-.02em}
+.db-results.kb-clinical-result .db-status{
+  padding:17px;border:1px solid var(--stroke,#dbe5e8);
+  border-left:4px solid var(--accent,#008b8c);border-radius:13px;
+  background:var(--soft,#edf3f6);line-height:1.55;
+}
+.db-results.kb-clinical-result .db-status strong{
+  display:block;font-size:clamp(17px,2vw,22px);line-height:1.4;
+  font-weight:820;overflow-wrap:anywhere;
+}
+.db-results.kb-clinical-result .db-status.critical{
+  border-left-color:var(--red,#a53837);background:var(--red-bg,#fff1ee);
+}
+.db-results.kb-clinical-result .db-status.review{
+  border-left-color:var(--alert,#a66c0d);background:var(--alert-bg,#fff8e9);
+}
+.db-results.kb-clinical-result .db-flag{
+  margin:14px 0;padding:14px 15px;
+  border:1px solid var(--stroke,#dbe5e8);border-radius:13px;
+}
+.db-results.kb-clinical-result .db-flag.urgent{
+  border-left:4px solid var(--red,#a53837);
+  background:var(--red-bg,#fff1ee);
+}
+.db-results.kb-clinical-result .db-flag h3{font-size:13px;font-weight:800;line-height:1.5}
+
+/* Pediatric PAS: preserve the existing validated band colors, score dial and
+   safety priority. This is typography/spacing only; never recolor by completeness. */
+.pas-outcome.kb-clinical-result{
+  min-width:0;border-radius:22px;box-shadow:0 14px 38px rgba(13,46,64,.075);
+}
+.pas-outcome.kb-clinical-result .pas-outcome-top{
+  padding-bottom:13px;border-bottom:1px solid var(--line,#d8e7eb);
+}
+.pas-outcome.kb-clinical-result .pas-outcome-top .pas-eyebrow{
+  font-size:11px;font-weight:850;letter-spacing:.06em;
+}
+.pas-outcome.kb-clinical-result .pas-risk-name{
+  font-size:clamp(14px,1.6vw,18px);line-height:1.48;
+  padding:13px 12px;overflow-wrap:anywhere;
+}
+.pas-outcome.kb-clinical-result .pas-range{font-size:12px;line-height:1.6}
+.pas-outcome.kb-clinical-result .pas-alert-item{
+  font-size:12px;line-height:1.65;border-left-width:4px;
+  border-radius:10px;padding:11px 12px;
+}
+.pas-outcome.kb-clinical-result .pas-recommend{
+  padding:16px;background:var(--soft,#edf5f8);
+}
+.pas-outcome.kb-clinical-result .pas-recommend h3{font-size:14px;line-height:1.4}
+.pas-outcome.kb-clinical-result .pas-recommend li{font-size:12px;line-height:1.65}
+.pas-outcome.kb-clinical-result .pas-score-disclaimer{font-size:11px;line-height:1.65}
+
+@media(max-width:760px){
+ .result-panel.kb-result-modern{position:static;top:auto;box-shadow:none}
+ .kb-result-modern .result-top{padding:22px 18px 19px}
+ .kb-result-modern .result-extra{padding:19px 18px 23px}
+ .kb-result-modern .result-value{font-size:clamp(40px,11vw,54px)}
+ .kb-result-modern .result-interpret{font-size:15px}
+ .kb-result-modern .kb-result-progress{flex-wrap:wrap}
+ .guard-score-panel.kb-clinical-result{box-shadow:none}
+ .db-results.kb-clinical-result .db-status strong{font-size:18px}
+ .pas-outcome.kb-clinical-result{box-shadow:none}
+}
+@media(max-width:390px){
+ .kb-result-modern .result-top{padding:19px 15px}
+ .kb-result-modern .result-extra{padding:17px 15px 20px}
+ .kb-result-modern .result-value{font-size:clamp(36px,10.5vw,44px)}
+ .pas-outcome.kb-clinical-result .pas-risk-name{font-size:13px;padding:9px 8px}
+}
+@media(prefers-reduced-motion:reduce){
+ .kb-result-modern *,.kb-clinical-result *{transition:none!important;animation:none!important}
+}
+@media(prefers-contrast:more){
+ .kb-result-modern .kb-result-state,.kb-result-modern .kb-result-progress,
+ .kb-result-modern .kb-result-reference,.db-results.kb-clinical-result .db-flag{
+  border-width:2px;
+ }
+}
+@media(forced-colors:active){
+ .kb-result-modern .result-top::before{background:CanvasText}
+ .kb-result-modern .kb-result-state,.kb-result-modern .kb-result-reference,
+ .kb-result-modern .kb-result-missing,.db-results.kb-clinical-result .db-status,
+ .pas-outcome.kb-clinical-result .pas-risk-name{
+  background:Canvas;color:CanvasText;border:1px solid CanvasText;
+ }
+}
+@media print{
+ .result-panel.kb-result-modern,.kb-clinical-result{position:static!important;box-shadow:none!important;break-inside:avoid}
+ .kb-result-modern .result-top{background:transparent}
+}
