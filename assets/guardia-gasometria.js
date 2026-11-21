@@ -62,7 +62,7 @@ function render(host,engine,onBack){
  '<div class="field"><label for="gas-primary">¿Acidosis metabólica primaria corroborada?</label><select class="control" id="gas-primary"><option value="">Seleccionar</option><option value="yes">Sí</option><option value="no">No</option><option value="unknown">No determinada</option></select></div>'+
  '</div><div id="gas-fields" class="field-grid"></div><div class="actions"><button class="btn outline" type="button" id="gas-example">↗ Ejemplo ficticio</button><button class="btn outline" type="reset">↻ Limpiar</button><button class="btn outline" type="button" id="gas-copy" disabled>Copiar resumen</button></div></form>'+
  '<p class="input-info">Datos procesados localmente. Na, Cl, HCO₃⁻ en mmol/L; albúmina g/dL; PaCO₂ arterial en mmHg.</p></div></section>'+
- '<aside class="panel result-panel" aria-live="polite"><div class="result-top"><div class="result-label">02 / RESULTADO</div><div class="result-value" id="gas-score">—</div><div class="result-interpret" id="gas-interpret">Verifica todos los datos.</div></div><div class="result-extra"><div class="note-heading">Cálculos</div><ul id="gas-items"></ul><div class="note-heading">Seguridad</div><ul id="gas-warnings"></ul><div class="result-warning">⚠ Ante paciente inestable, priorizar valoración y tratamiento inmediato, no la calculadora.</div></div></aside></div>';
+ '<aside class="panel result-panel kb-result-modern" id="gas-panel" data-kb-result-state="pending" aria-live="polite"><div class="result-top"><h2 class="result-label">02 / Resultado clínico</h2><div class="kb-result-state" id="gas-state">Datos pendientes</div><div class="result-value" id="gas-score">—</div><div class="result-interpret" id="gas-interpret">Verifica todos los datos.</div></div><div class="result-extra"><div class="note-heading">Cálculos</div><ul id="gas-items"></ul><div class="note-heading">Seguridad</div><ul id="gas-warnings"></ul><div class="result-warning">⚠ Ante paciente inestable, priorizar valoración y tratamiento inmediato, no la calculadora.</div></div></aside></div>';
  const $=id=>host.querySelector('#'+id);
  $('gas-back').onclick=onBack;
  const froot=$('gas-fields');
@@ -77,7 +77,19 @@ function render(host,engine,onBack){
   const x={pop:$('gas-pop').value,sample:$('gas-sample').value,paired:$('gas-paired').value,primary:$('gas-primary').value};
   for(const f of fields)x[f.key]=$('gas-'+f.key).value;
   last=evaluate(x,engine);
-  $('gas-score').textContent=last.display||'—';
+  $('gas-panel').dataset.kbResultState=last.pending?'pending':last.error?'invalid':'ready';
+  $('gas-state').textContent=last.pending?'Datos pendientes':last.error?'Revisar campos':'Cálculo completado';
+  // Present the existing numeric result and its unit on separate typographic
+  // levels. The calculation and the existing display text stay unchanged.
+  const score=$('gas-score');
+  score.textContent=last.display||'—';
+  if(Number.isFinite(last.value)){
+   score.textContent=last.value.toFixed(1);
+   const unit=document.createElement('span');
+   unit.className='result-unit';
+   unit.textContent=' mmol/L';
+   score.append(unit);
+  }
   $('gas-interpret').textContent=last.interpretation||(last.pending?'Datos o verificaciones pendientes.':'Revisa los valores documentados.');
   const draw=(id,items)=>{const root=$(id);root.replaceChildren();for(const value of items){const li=document.createElement('li');li.textContent=value;root.append(li)}};
   draw('gas-items',last.items||[]);

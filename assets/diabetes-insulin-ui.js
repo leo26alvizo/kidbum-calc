@@ -28,7 +28,7 @@ function render(host,engine,onBack,initialId){
   view.innerHTML='<div class="db-cardback"><button class="db-link" type="button" id="db-tools">← Todas las herramientas</button></div>'+
    '<div class="db-two"><section class="db-panel"><div class="db-overline">'+esc(tool.tag)+'</div><h2>'+esc(tool.title)+'</h2><p class="db-lead">'+esc(tool.intro)+'</p><form id="db-form" class="db-form" autocomplete="off"></form>'+
    '<div class="db-actions"><button type="button" class="db-btn" id="db-example">Ejemplo ficticio</button><button type="button" class="db-btn" id="db-clear">Limpiar</button><button type="button" class="db-btn" id="db-copy" disabled>Copiar resumen</button></div>'+
-   '</section><aside class="db-panel db-results" aria-live="polite"><h2>Evaluación clínica</h2><div id="db-output"><p>Completa todos los datos obligatorios.</p></div>'+
+   '</section><aside class="db-panel db-results kb-clinical-result" aria-live="polite"><h2>Evaluación clínica</h2><div id="db-output"><p>Completa todos los datos obligatorios.</p></div>'+
    '<div class="db-note"><strong>Fuentes y límites</strong><p>Referencias para verificar criterios y alcance clínico; sin actualización automática de guías.</p><p><a href="'+esc(tool.source)+'" target="_blank" rel="noopener noreferrer">Referencia principal de la herramienta ↗</a></p><p>Las salidas NO son órdenes terapéuticas.</p></div></aside></div>';
   view.querySelector('#db-tools').onclick=()=>{active=null;show();};
   const form=view.querySelector('#db-form'),entries=new Map();

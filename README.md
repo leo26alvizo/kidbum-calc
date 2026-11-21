@@ -2,9 +2,18 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.60**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.61**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.61 · Clinical Results 2.0 (interfaz móvil)
+
+- Diseño de lectura clínica actualizado en el **motor principal y panel de gasometría**, con cifra protagonista, estado textual de completitud, interpretación separada, información faltante legible y precauciones visibles.
+- **PAS pediátrico:** mejor jerarquía tipográfica para la puntuación, semáforo existente, rango, avisos y orientación; se conservan los intervalos, la evaluación de urgencia y la posición del resultado al final del formulario.
+- **Guardia Pro y Diabetes & Insulin Pro:** tarjetas más legibles, jerarquía clara en resultados y conservación de advertencias, sin cambios en motores ni validaciones.
+- CSS compartido `assets/clinical-results-v01061.css` precargado atómicamente con el resto de la PWA; `release-check.js`, Inicio, Pharma Pro y servicio offline sincronizados a v0.10.61.
+- Solo presentación y etiquetado de estados informativos; **un cálculo completado no significa riesgo bajo, seguridad terapéutica ni diagnóstico confirmado**. No se modifican fórmulas, dosis, umbrales, recomendaciones, fuentes ni decisiones clínicas.
+- [Alcance, casos de revisión y limitaciones](docs/clinical-results-v01061.md).
 
 ## KidBum 0.10.60 · Actualizaciones PWA fiables
 
