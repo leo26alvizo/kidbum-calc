@@ -79,7 +79,17 @@ function render(host,engine,onBack){
   last=evaluate(x,engine);
   $('gas-panel').dataset.kbResultState=last.pending?'pending':last.error?'invalid':'ready';
   $('gas-state').textContent=last.pending?'Datos pendientes':last.error?'Revisar campos':'Cálculo completado';
-  $('gas-score').textContent=last.display||'—';
+  // Present the existing numeric result and its unit on separate typographic
+  // levels. The calculation and the existing display text stay unchanged.
+  const score=$('gas-score');
+  score.textContent=last.display||'—';
+  if(Number.isFinite(last.value)){
+   score.textContent=last.value.toFixed(1);
+   const unit=document.createElement('span');
+   unit.className='result-unit';
+   unit.textContent=' mmol/L';
+   score.append(unit);
+  }
   $('gas-interpret').textContent=last.interpretation||(last.pending?'Datos o verificaciones pendientes.':'Revisa los valores documentados.');
   const draw=(id,items)=>{const root=$(id);root.replaceChildren();for(const value of items){const li=document.createElement('li');li.textContent=value;root.append(li)}};
   draw('gas-items',last.items||[]);
