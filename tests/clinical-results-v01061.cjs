@@ -155,6 +155,74 @@ async function main(){
     }
    }finally{await context.close()}
   });
+  await test('ENARM — same-size shortcut below Pharma Pro at 320/390/768px',async()=>{
+   for(const width of [320,390,768]){
+    const context=await browser.newContext({viewport:{width,height:845},serviceWorkers:'block'});
+    try{
+     const page=await context.newPage();
+     await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+     await page.locator('#search-input').waitFor();
+     const pharma=page.locator('a.kb-resource-link[href="./pharma-pro.html"]');
+     const enarm=page.locator('a.kb-enarm-link[href="./enarm.html"]');
+     assert.equal(await pharma.count(),1);
+     assert.equal(await enarm.count(),1);
+     const p=await pharma.boundingBox(),e=await enarm.boundingBox();
+     assert.ok(p&&e,'Both quick links should be rendered');
+     assert.ok(Math.abs(p.width-e.width)<1,'Pharma/ENARM quick links must be same width at '+width+'px');
+     assert.ok(Math.abs(p.height-e.height)<2,'Pharma/ENARM quick links must be same height at '+width+'px');
+     assert.ok(e.y>=p.y+p.height-1,'ENARM must appear BELOW Pharma Pro at '+width+'px');
+     await noHorizontalOverflow(page,'homepage ENARM '+width+'px');
+     await enarm.click();
+     await page.waitForURL(/enarm\.html/);
+     assert.equal(await page.locator('.en-stat').count(),3);
+     assert.match(await page.locator('#enarm-app').innerText(),/30/);
+     assert.match(await page.locator('#enarm-app').innerText(),/60/);
+     await noHorizontalOverflow(page,'ENARM '+width+'px');
+     const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>x.href));
+     assert.ok(links.some(url=>url.endsWith('enarm-v01064.css')),'ENARM CSS should be applied');
+    }finally{await context.close()}
+   }
+  });
+  await test('ENARM — one-at-a-time feedback, weakness tracking, local persistence and mock exam',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    const errors=[];page.on('pageerror',error=>errors.push(error.message));
+    page.on('dialog',dialog=>dialog.accept());
+    await page.goto(base+'/enarm.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#en-start').click();
+    assert.equal(await page.locator('input[name="en-answer"]').count(),4);
+    assert.equal(await page.locator('.en-feedback').count(),0,'No solution before answer');
+    const answer=await page.evaluate(()=>{
+     const title=document.querySelector('#en-question-title').textContent.trim();
+     const all=window.KidBumENARMBank.cases.flatMap(c=>c.questions);
+     const q=all.find(x=>x.prompt===title);
+     if(!q)throw Error('Question not in bank');return q.correct;
+    });
+    await page.locator('input[name="en-answer"][value="'+((answer+1)%4)+'"]').check();
+    await page.locator('#en-check').click();
+    assert.equal(await page.locator('.en-feedback[data-correct="false"]').count(),1,'Shows clinical rationale after choosing wrong option');
+    assert.ok((await page.locator('.en-feedback').innerText()).length>70);
+    await page.locator('#en-exit').click();
+    assert.equal(await page.locator('.en-mode').count(),3,'Return to dashboard');
+    assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/);
+    await page.locator('[data-mode="weak"]').click();
+    assert.equal(await page.locator('#en-start').isEnabled(),true,'Wrong answer should create a weakness to practice');
+    await page.reload({waitUntil:'domcontentloaded'});
+    assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/,'Progress survives reload');
+    await page.locator('[data-mode="exam"]').click();
+    await page.locator('#en-size').selectOption('10');
+    await page.locator('#en-start').click();
+    assert.equal(await page.locator('#en-clock').count(),1,'Mock exam clock');
+    assert.equal(await page.locator('.en-feedback').count(),0,'Mock exam must not reveal solution while running');
+    for(let i=0;i<9;i++)await page.locator('#en-next').click();
+    await page.locator('#en-next').click();
+    assert.match(await page.locator('#enarm-app').innerText(),/Revisión de preguntas/);
+    assert.equal(await page.locator('.en-summary-item').count(),10,'Mock exam reviews all ten questions');
+    await noHorizontalOverflow(page,'ENARM mock and feedback');
+    assert.equal(errors.length,0,'ENARM JS errors: '+errors.join('; '));
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');
