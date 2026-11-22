@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.63**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.64**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.64 · ENARM 1.0 · Entrenamiento clínico original
+
+- Acceso **KidBum ENARM** inmediatamente **debajo de Biblioteca farmacológica · Pharma Pro**. Ambos usan la misma clase de acceso rápido, ancho de columna y altura fija de **60 px** en teléfonos y escritorio; la nueva sección no altera el contador de 138 calculadoras.
+- Nueva página independiente `enarm.html`, con **30 casos clínicos originales y 60 preguntas**, dos por caso con cuatro opciones, organizadas en las siete áreas de la convocatoria del ENARM 2026. Los reactivos **NO** proceden del examen, **NO** están avalados por CIFRHS y tienen **revisión clínica independiente pendiente**.
+- **Modo Estudio:** pregunta a pregunta, explicación solo después de comprobar respuesta, lectura recomendada y opción de omitir. **Simulacro breve:** hasta 60 preguntas disponibles, temporizador orientativo de 90 s por pregunta, navegación atrás/adelante, resultados diferidos y revisión al final. El temporizador no reproduce condiciones oficiales.
+- **Mis debilidades:** recupera casos con errores registrados hasta dos aciertos consecutivos en sus reactivos. Estadísticas de intentos y porcentaje de aciertos almacenadas únicamente en `localStorage` de ese navegador. Sin cuentas, telemetría de preguntas, datos de pacientes ni solicitudes de red.
+- Recursos `assets/enarm-bank-v01064.js`, `assets/enarm-ui-v01064.js`, `assets/enarm-v01064.css` y `assets/enarm-entry-v01064.css` instalados atómicamente con el shell offline de la PWA v0.10.64.
+- Pruebas `tests/enarm-v01064.cjs` y Playwright ampliado: integridad del banco, equilibrio de claves, acceso y tamaño idéntico a Pharma Pro, flujo estudio, simulacro, progreso persistente, desbordamiento móvil. No se alteran fórmulas, dosis, imágenes ni umbrales clínicos del resto de KidBum.
+- Bibliografía ofrecida como **lectura sugerida para cotejo**, no como validación por reactivo; se requiere revisión profesional de cada caso y actualización de fuentes antes de presentar el banco como material validado.
 
 ## KidBum 0.10.63 · Ultra Retina UI · Interfaz más precisa
 
