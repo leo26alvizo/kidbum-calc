@@ -145,6 +145,17 @@
   Q('¿Qué se debe hacer con lotes posiblemente expuestos fuera de rango?',['Separar, identificar «no usar» y consultar evaluación técnica antes de liberar','Administrarlos rápidamente para no perderlos','Congelarlos todos inmediatamente','Descartar sin registrar el incidente ni consultar'],0,'No se asume que son seguros o inservibles sin evaluación; se inmovilizan y documentan para decisión del programa de inmunizaciones.')
  ])
  ];
+ // Deterministically rotate answer positions so trainees cannot infer the
+ // answer from a repeated option letter. Wording and clinical content stay
+ // identical; only option order and index are transformed together.
+ cases.forEach((c,ci)=>c.questions.forEach((q,qi)=>{
+  const shift=(ci*2+qi)%4;
+  if(!shift)return;
+  const options=Array(4);
+  q.options.forEach((value,i)=>{options[(i+shift)%4]=value});
+  q.options=options;
+  q.correct=(q.correct+shift)%4;
+ }));
  const AREAS=['Medicina Interna','Pediatría','Ginecología y Obstetricia','Cirugía General','Urgencias','Medicina Familiar','Salud Pública'];
  const questions=cases.reduce((n,c)=>n+c.questions.length,0);
  const api={VERSION:'1.0.0',caseCount:cases.length,questionCount:questions,cases,areas:AREAS,format:R.enarm,
