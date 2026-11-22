@@ -26,6 +26,8 @@ jobs:
         run: node tests/lion-splash-v01062.cjs
       - name: Ultra Retina visual scope, vector icon and unchanged-image checks
         run: node tests/ultra-retina-v01063.cjs
+      - name: ENARM 1.0 · original cases, educational safety, local privacy and offline support
+        run: node tests/enarm-v01064.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
