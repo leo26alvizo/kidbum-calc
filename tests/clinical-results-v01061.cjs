@@ -205,11 +205,11 @@ async function main(){
     assert.ok((await page.locator('.en-feedback').innerText()).length>70);
     await page.locator('#en-exit').click();
     assert.equal(await page.locator('.en-mode').count(),3,'Return to dashboard');
-    assert.match(await page.locator('.en-statgrid').innerText(),/1 intentos/);
+    assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/);
     await page.locator('[data-mode="weak"]').click();
     assert.equal(await page.locator('#en-start').isEnabled(),true,'Wrong answer should create a weakness to practice');
     await page.reload({waitUntil:'domcontentloaded'});
-    assert.match(await page.locator('.en-statgrid').innerText(),/1 intentos/,'Progress survives reload');
+    assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/,'Progress survives reload');
     await page.locator('[data-mode="exam"]').click();
     await page.locator('#en-size').selectOption('10');
     await page.locator('#en-start').click();
