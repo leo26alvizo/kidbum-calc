@@ -58,7 +58,7 @@ assert.match(ui,/function tick/);
 assert.match(ui,/function record/);
 assert.match(ui,/s\.mode==='exam'/);
 assert.match(ui,/s\.revealed\.has/);
-assert.match(ui,/no se envían respuestas|No se envían respuestas/i);
+assert.match(ui,/ni se envían respuestas a servidores/i);
 assert.match(css,/@media\(max-width:650px\)/);
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(css,/:focus-visible/);
