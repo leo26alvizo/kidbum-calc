@@ -56,7 +56,7 @@
   root.innerHTML='<section aria-label="Estadísticas de entrenamiento" class="en-statgrid">'+
    '<div class="en-stat"><strong>'+bank.caseCount+'</strong><span>Casos originales</span></div>'+
    '<div class="en-stat"><strong>'+bank.questionCount+'</strong><span>Preguntas disponibles</span></div>'+
-   '<div class="en-stat"><strong>'+(x.percent===null?'—':x.percent+'%')+'</strong><span>Aciertos acumulados · '+x.attempts+' intentos</span></div></section>'+
+   '<div class="en-stat"><strong>'+(x.percent===null?'—':x.percent+'%')+'</strong><span>Aciertos acumulados · '+x.attempts+' '+(x.attempts===1?'intento':'intentos')+'</span></div></section>'+
    '<section class="en-card" aria-labelledby="en-choose-title"><div class="en-overline">Entrenamiento personalizado</div>'+
    '<h2 id="en-choose-title">¿Cómo quieres estudiar?</h2>'+
    '<p class="en-small en-muted">Contesta una pregunta a la vez. El formato de caso (2 preguntas, 4 opciones) se inspira en la convocatoria 2026, pero este banco es de elaboración original y NO oficial.</p>'+
