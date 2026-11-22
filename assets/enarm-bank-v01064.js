@@ -125,7 +125,7 @@
   Q('¿Qué intervención protege inicialmente el miocardio ante cambios ECG?',['Calcio intravenoso según protocolo','Hierro oral','Suero glucosado sin tratamiento adicional','Aspirina en monoterapia'],0,'El calcio IV estabiliza membrana cardiaca pero no reduce el potasio; se requieren simultáneamente medidas para trasladarlo y eliminarlo.')
  ]),
  C('mf-01','Medicina Familiar','Confirmación de hipertensión','Hombre de 52 años sin síntomas con PA en consultorio de 152/92 y 148/94 mmHg en una misma visita. No hay datos de daño de órgano agudo.','pronam',[
-  Q('¿Qué se sospecha?',['Hipertensión arterial por confirmar','Choque hipovolémico','Hipotensión ortostática','Crisis hipertensiva obligada'],0,'Lecturas repetidas elevadas generan sospecha, pero en paciente estable es preferible confirmar con medición correcta y, de ser posible, fuera del consultorio.'),
+  Q('¿Qué diagnóstico debe sospecharse ante estas lecturas?',['Hipertensión arterial por confirmar','Choque hipovolémico','Hipotensión ortostática','Crisis hipertensiva obligada'],0,'Lecturas repetidas elevadas generan sospecha, pero en paciente estable es preferible confirmar con medición correcta y, de ser posible, fuera del consultorio.'),
   Q('¿Qué estrategia mejora la certeza diagnóstica?',['MAPA/AMPA o medidas estandarizadas seriadas','Solo tomar pulso radial una vez','Diagnosticar con un reloj inteligente sin validar','Prueba de esfuerzo como requisito universal'],0,'La monitorización ambulatoria o domiciliaria ayuda a confirmar hipertensión y a detectar efecto de bata blanca o enmascarada.')
  ]),
  C('mf-02','Medicina Familiar','Diagnóstico de diabetes','Mujer de 50 años sin síntomas de hiperglucemia, glucosa en ayunas de 138 mg/dL en laboratorio durante chequeo.','ada',[
