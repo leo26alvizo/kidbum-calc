@@ -39,7 +39,7 @@ assert.match(enarm,/kidbum-app-version" content="0\.10\.67"/);
 assert.match(publicVersion,/KidBumPublicRelease = '0\.10\.67'/);
 assert.match(updater,/const VERSION='0\.10\.67'/);
 assert.match(sw,/const RELEASE='0\.10\.67'/);
-assert.match(sw,/enarm-v01064-radar-v01065-cobalt-v01066'/,'Atomic offline cache identifier must include ENARM 1.1');
+assert.match(sw,/enarm-v01064-radar-v01065-cobalt-v01066-ivory-v01067'/,'Atomic offline cache identifier must include ENARM 1.1');
 for(const file of ['enarm.html','assets/enarm-entry-v01064.css','assets/enarm-v01064.css','assets/enarm-bank-v01064.js','assets/enarm-ui-v01064.js']){
  assert.ok(sw.includes("'./"+file+"'"),'Offline precache must include '+file);
 }
