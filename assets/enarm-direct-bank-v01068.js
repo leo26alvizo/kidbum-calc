@@ -42,7 +42,7 @@
   sp:[
    {label:'CDC · Principios de epidemiología, medidas de asociación',url:'https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/index.html'},
    {label:'CDC · Principios de epidemiología, razones de momios',url:'https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson3/section5.html'},
-   {label:'OMS · Manejo de antimicrobianos e infección',url:'https://www.who.int/teams/surveillance-prevention-control-AMR'}
+   {label:'OMS · Manejo de antimicrobianos e infección',url:'https://www.who.int/health-topics/antimicrobial-resistance'}
   ]
  };
  const EXPECTED=['mi','ped','go','cg','urg','mf','sp'];
