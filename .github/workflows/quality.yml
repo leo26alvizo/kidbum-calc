@@ -28,6 +28,8 @@ jobs:
         run: node tests/ultra-retina-v01063.cjs
       - name: ENARM 1.0 · original cases, educational safety, local privacy and offline support
         run: node tests/enarm-v01064.cjs
+      - name: ENARM 1.1 · radar, spaced-repetition and legacy-progress integrity
+        run: node tests/enarm-radar-v01065.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks

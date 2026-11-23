@@ -1,12 +1,13 @@
-/* KidBum ENARM 1.0 · UI and local training logic · v0.10.64
+/* KidBum ENARM 1.1 · UI and local training logic · v0.10.65
  * Runs offline, no analytics/network requests, no patient data or prescriptions.
  * Timed mode is a PRACTICE timer, not an ENARM timing claim. */
 (function(){
  'use strict';
  const root=document.getElementById('enarm-app');
  const bank=window.KidBumENARMBank;
+ const radar=window.KidBumENARMRadar;
  if(!root)return;
- if(!bank||!Array.isArray(bank.cases)){root.textContent='No se pudo cargar el banco educativo. Revisa la actualización de KidBum antes de estudiar.';return;}
+ if(!bank||!Array.isArray(bank.cases)||!radar){root.textContent='No se pudo cargar el banco educativo o el Radar. Actualiza los archivos de KidBum antes de estudiar.';return;}
  const storageKey='kidbum-enarm-progress-v1';
  const alphabet='ABCD';
  const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -23,14 +24,14 @@
    for(const [key,h] of Object.entries(obj).slice(0,250)){
     if(!/^[a-z]{2,3}-\d{2}-[01]$/.test(key)||!h||typeof h!=='object')continue;
     const n=v=>Number.isSafeInteger(v)&&v>=0&&v<=10000?v:0;
-    out[key]={seen:n(h.seen),right:n(h.right),wrong:n(h.wrong),streak:Math.min(2,n(h.streak))};
+    out[key]=radar.normalize({seen:n(h.seen),right:n(h.right),wrong:n(h.wrong),streak:n(h.streak),lastAt:h.lastAt,dueAt:h.dueAt,intervalDays:h.intervalDays});
    }
    return out;
   }catch{return Object.create(null)}
  }
  function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history))}catch{/* Remains in memory */}}
  const keyOf=(c,qi)=>c.id+'-'+qi;
- function isWeak(c){return c.questions.some((q,i)=>{const h=history[keyOf(c,i)];return h&&h.wrong>0&&h.streak<2})}
+ function isWeak(c){return c.questions.some((q,i)=>radar.weak(history[keyOf(c,i)]))}
  function counts(){
   const stats=Object.values(history);
   const attempts=stats.reduce((n,x)=>n+x.seen,0),correct=stats.reduce((n,x)=>n+x.right,0);
@@ -39,6 +40,7 @@
  function available(){
   let items=bank.cases.filter(c=>state.area==='Todas'||c.area===state.area);
   if(state.mode==='weak')items=items.filter(isWeak);
+  if(state.mode==='due')items=radar.dueCases(bank,history,state.area);
   return items;
  }
  function shuffle(items){
@@ -50,9 +52,37 @@
   if(!c.source||!/^https:\/\//.test(c.source.url))return '';
   return '<a class="en-ref" href="'+esc(c.source.url)+'" target="_blank" rel="noopener noreferrer">Lectura sugerida para cotejo: '+esc(c.source.label)+' ↗</a>';
  }
+ function radarSection(data){
+  const next=data.dueQuestions?'Hoy · tienes repasos pendientes':data.nextDueAt?new Date(data.nextDueAt).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}):'Sin repaso programado';
+  const weakest=data.weakest?'Área con más errores registrados (mínimo 5 intentos): <strong>'+esc(data.weakest.area)+'</strong>.':'Sin suficientes intentos por área para identificar una debilidad comparativa.';
+  return '<section class="en-card en-radar" id="en-radar" aria-labelledby="en-radar-title">'+
+   '<div class="en-overline">Tu progreso · solo en este dispositivo</div>'+
+   '<h2 id="en-radar-title">Radar de Conocimiento</h2>'+
+   '<p class="en-small en-muted">Aciertos de entrenamiento por área, calculados únicamente a partir de tus respuestas. No predice tu calificación ni el nivel de competencia clínica.</p>'+
+   '<div class="en-radar-summary"><div><strong>'+data.seenQuestions+'</strong><span>Preguntas practicadas</span></div>'+
+   '<div><strong>'+data.dueQuestions+'</strong><span>Preguntas listas para repasar</span></div>'+
+   '<div><strong>'+data.weakQuestions+'</strong><span>Preguntas con errores por reforzar</span></div></div>'+
+   '<div class="en-radar-bars" aria-label="Desempeño por especialidad">'+
+   data.areas.map(area=>{
+    const pct=area.percent,hasData=pct!==null;
+    const qualifier=area.smallSample&&hasData?' · Muestra pequeña':'';
+    return '<div class="en-radar-row"><div class="en-radar-head"><strong>'+esc(area.area)+'</strong>'+
+      '<span>'+(!hasData?'Sin datos':pct+' % · '+area.attempts+' '+(area.attempts===1?'intento':'intentos')+qualifier)+'</span></div>'+
+      '<div class="en-radar-track"'+(hasData?' role="progressbar" aria-label="'+esc(area.area)+': aciertos de práctica" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"':' aria-hidden="true"')+'>'+
+      '<div style="width:'+(hasData?pct:0)+'%"></div></div>'+
+      (area.dueQuestions?'<span class="en-radar-due">'+area.dueQuestions+' pendiente'+(area.dueQuestions===1?'':'s')+' de repaso</span>':'')+
+     '</div>';
+   }).join('')+'</div>'+
+   '<p class="en-radar-insight">'+weakest+'</p>'+
+   '<div class="en-radar-next"><div><strong>Repaso espaciado</strong>'+
+   '<p class="en-small en-muted">Intervalos progresivos de 1, 3, 7, 14, 30 y 60 días tras respuestas correctas. Un error vuelve a poner la pregunta en la cola. Próximo: '+esc(next)+'.</p></div>'+
+   '<button type="button" class="en-btn" id="en-due-start"'+(data.dueQuestions===0?' disabled':'')+'>Repasar ahora ('+data.dueQuestions+')</button></div>'+
+   '<p class="en-micro">Los porcentajes con menos de cinco intentos llevan la etiqueta «Muestra pequeña». Las preguntas nunca respondidas no cuentan como repaso pendiente.</p>'+
+   '</section>';
+ }
  function home(){
   clearInterval(timer);timer=null;state.screen='home';state.session=null;
-  const x=counts(),pool=available();
+  const x=counts(),pool=available(),radarData=radar.scores(bank,history);
   root.innerHTML='<section aria-label="Estadísticas de entrenamiento" class="en-statgrid">'+
    '<div class="en-stat"><strong>'+bank.caseCount+'</strong><span>Casos originales</span></div>'+
    '<div class="en-stat"><strong>'+bank.questionCount+'</strong><span>Preguntas disponibles</span></div>'+
@@ -61,7 +91,7 @@
    '<h2 id="en-choose-title">¿Cómo quieres estudiar?</h2>'+
    '<p class="en-small en-muted">Contesta una pregunta a la vez. El formato de caso (2 preguntas, 4 opciones) se inspira en la convocatoria 2026, pero este banco es de elaboración original y NO oficial.</p>'+
    '<div class="en-modes" role="group" aria-label="Modo de entrenamiento">'+
-   [['study','Modo estudio','Retroalimentación inmediatamente después de responder.'],['exam','Simulacro breve','Tiempo orientativo, revisión al concluir; no reproduce el ENARM oficial.'],['weak','Mis debilidades','Repite casos con errores hasta lograr dos aciertos seguidos.']].map(v=>
+   [['study','Modo estudio','Retroalimentación inmediatamente después de responder.'],['exam','Simulacro breve','Tiempo orientativo, revisión al concluir; no reproduce el ENARM oficial.'],['weak','Mis debilidades','Repite casos con errores hasta lograr dos aciertos seguidos.'],['due','Repaso de hoy','Preguntas pendientes según tus respuestas y la repetición espaciada.']].map(v=>
     '<button type="button" class="en-mode" data-mode="'+v[0]+'" aria-pressed="'+(state.mode===v[0])+'"><strong>'+v[1]+'</strong><small>'+v[2]+'</small></button>'
    ).join('')+'</div>'+
    '<div class="en-form"><div class="en-field"><label for="en-area">Área clínica</label><select id="en-area">'+
@@ -72,6 +102,7 @@
    '<div class="en-actions"><button class="en-btn" id="en-start" type="button"'+(!pool.length?' disabled':'')+'>Comenzar entrenamiento →</button>'+
    '<button class="en-btn en-quiet" id="en-reset" type="button"'+(!x.attempts?' disabled':'')+'>Borrar mi progreso</button></div>'+
    '<p class="en-micro">El progreso de preguntas se guarda únicamente en este navegador mediante almacenamiento local. No se guardan datos de pacientes ni se envían respuestas a servidores.</p></section>'+
+   radarSection(radarData)+
    '<section class="en-card" aria-label="Alcance del contenido"><h2>Aprende con criterio clínico</h2>'+
    '<p class="en-small en-muted">El banco incluye Medicina Interna, Pediatría, Ginecología y Obstetricia, Cirugía, Urgencias, Medicina Familiar y Salud Pública. Cada respuesta explica el razonamiento y permite consultar referencias para su cotejo.</p>'+
    '<p class="en-scope"><strong>Alcance:</strong> '+esc(bank.disclaimer)+' Los casos pueden contener simplificaciones y deben revisarse antes de uso docente institucional.</p>'+
@@ -80,6 +111,7 @@
   root.querySelector('#en-area').onchange=e=>{state.area=e.target.value;home()};
   root.querySelector('#en-size').onchange=e=>{state.size=Number(e.target.value);home()};
   root.querySelector('#en-start').onclick=startSession;
+  root.querySelector('#en-due-start').onclick=()=>{state.mode='due';state.area='Todas';startSession()};
   root.querySelector('#en-reset').onclick=()=>{
    if(!window.confirm('¿Eliminar el registro local de aciertos y errores ENARM de este navegador?'))return;
    for(const k of Object.keys(history))delete history[k];
@@ -88,7 +120,8 @@
   };
  }
  function startSession(){
-  const cases=shuffle(available()).slice(0,Math.ceil(state.size/2));
+  const pool=available();
+  const cases=(state.mode==='due'?radar.sortDue(pool,history):shuffle(pool)).slice(0,Math.ceil(state.size/2));
   if(!cases.length)return;
   const steps=cases.flatMap(c=>c.questions.map((q,qi)=>({c,qi,key:keyOf(c,qi)})));
   const seconds=steps.length*90;
@@ -99,11 +132,8 @@
  }
  function record(step,answer){
   if(answer===null)return;
-  const h=history[step.key]||{seen:0,right:0,wrong:0,streak:0};
-  h.seen++;
-  if(answer===step.c.questions[step.qi].correct){h.right++;h.streak=Math.min(2,h.streak+1)}
-  else{h.wrong++;h.streak=0}
-  history[step.key]=h;persist();
+  history[step.key]=radar.record(history[step.key],answer===step.c.questions[step.qi].correct);
+  persist();
  }
  function formatTime(seconds){return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
  function tick(){
@@ -123,7 +153,7 @@
   const rest=Math.max(0,Math.ceil((s.deadline-Date.now())/1000));
   root.innerHTML='<div class="en-card" aria-label="Pregunta clínica actual">'+
    '<div class="en-progress-top"><span>Pregunta '+(s.index+1)+' de '+s.steps.length+' · '+esc(step.c.area)+'</span>'+
-   (s.mode==='exam'?'<span class="en-clock" id="en-clock" data-low="'+(rest<=60)+'" role="timer" aria-label="Tiempo restante">⌛ '+formatTime(rest)+'</span>':'<span>Modo '+(s.mode==='weak'?'repaso':'estudio')+'</span>')+
+   (s.mode==='exam'?'<span class="en-clock" id="en-clock" data-low="'+(rest<=60)+'" role="timer" aria-label="Tiempo restante">⌛ '+formatTime(rest)+'</span>':'<span>Modo '+(s.mode==='weak'?'debilidades':s.mode==='due'?'repaso de hoy':'estudio')+'</span>')+
    '</div><div class="en-track" aria-hidden="true"><div style="width:'+Math.round((s.index+1)/s.steps.length*100)+'%"></div></div>'+
    '<div class="en-case"><span class="en-overline">Caso clínico · '+esc(step.c.topic)+'</span><p>'+esc(step.c.stem)+'</p></div>'+
    '<h2 id="en-question-title" tabindex="-1" class="en-question">'+esc(q.prompt)+'</h2>'+

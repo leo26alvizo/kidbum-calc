@@ -175,11 +175,13 @@ async function main(){
      await enarm.click();
      await page.waitForURL(/enarm\.html/);
      assert.equal(await page.locator('.en-stat').count(),3);
-     assert.match(await page.locator('#enarm-app').innerText(),/30/);
-     assert.match(await page.locator('#enarm-app').innerText(),/60/);
+     assert.match(await page.locator('#enarm-app').innerText(),/37/);
+     assert.match(await page.locator('#enarm-app').innerText(),/74/);
      await noHorizontalOverflow(page,'ENARM '+width+'px');
      const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>x.href));
      assert.ok(links.some(url=>url.endsWith('enarm-v01064.css')),'ENARM CSS should be applied');
+     assert.ok(links.some(url=>url.endsWith('enarm-radar-v01065.css')),'Radar CSS should load');
+     assert.equal(await page.locator('.en-radar-row').count(),7,'Radar lists all seven clinical areas');
     }finally{await context.close()}
    }
   });
@@ -204,12 +206,26 @@ async function main(){
     assert.equal(await page.locator('.en-feedback[data-correct="false"]').count(),1,'Shows clinical rationale after choosing wrong option');
     assert.ok((await page.locator('.en-feedback').innerText()).length>70);
     await page.locator('#en-exit').click();
-    assert.equal(await page.locator('.en-mode').count(),3,'Return to dashboard');
+    assert.equal(await page.locator('.en-mode').count(),4,'Return to dashboard including due review');
     assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/);
     await page.locator('[data-mode="weak"]').click();
     assert.equal(await page.locator('#en-start').isEnabled(),true,'Wrong answer should create a weakness to practice');
     await page.reload({waitUntil:'domcontentloaded'});
     assert.match(await page.locator('.en-statgrid').innerText(),/1 intento/,'Progress survives reload');
+    assert.equal(await page.locator('#en-due-start').isEnabled(),true,'A wrong answer is immediately available for review');
+    assert.match(await page.locator('#en-radar').innerText(),/Muestra pequeña/,'Radar does not exaggerate one attempt');
+    assert.equal(await page.locator('.en-radar-row').count(),7);
+    await page.locator('#en-due-start').click();
+    assert.match(await page.locator('#enarm-app').innerText(),/repaso de hoy/i);
+    const correct=await page.evaluate(()=>{
+     const prompt=document.querySelector('#en-question-title').textContent.trim();
+     return window.KidBumENARMBank.cases.flatMap(c=>c.questions).find(q=>q.prompt===prompt).correct;
+    });
+    await page.locator('input[name="en-answer"][value="'+correct+'"]').check();
+    await page.locator('#en-check').click();
+    assert.equal(await page.locator('.en-feedback[data-correct="true"]').count(),1);
+    await page.locator('#en-exit').click();
+    assert.equal(await page.locator('#en-due-start').isEnabled(),false,'Correct answer moves today review to tomorrow');
     await page.locator('[data-mode="exam"]').click();
     await page.locator('#en-size').selectOption('10');
     await page.locator('#en-start').click();
@@ -221,6 +237,22 @@ async function main(){
     assert.equal(await page.locator('.en-summary-item').count(),10,'Mock exam reviews all ten questions');
     await noHorizontalOverflow(page,'ENARM mock and feedback');
     assert.equal(errors.length,0,'ENARM JS errors: '+errors.join('; '));
+   }finally{await context.close()}
+  });
+  await test('ENARM Radar — migrate old local progress with no fabricated dates',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    await page.addInitScript(()=>{
+     localStorage.setItem('kidbum-enarm-progress-v1',JSON.stringify({'mi-01-0':{seen:3,right:2,wrong:1,streak:1}}));
+    });
+    await page.goto(base+'/enarm.html',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('#en-due-start').isEnabled(),true,'Legacy answered item without dueAt becomes reviewable');
+    assert.match(await page.locator('#en-radar').innerText(),/3 intentos/);
+    const meta=await page.evaluate(()=>JSON.parse(localStorage.getItem('kidbum-enarm-progress-v1'))['mi-01-0']);
+    assert.equal(meta.dueAt,undefined,'Migration must not silently invent historical dates');
+    await page.locator('#en-theme').click();
+    await noHorizontalOverflow(page,'ENARM Radar dark');
    }finally{await context.close()}
   });
  }finally{await browser.close();await stop()}
