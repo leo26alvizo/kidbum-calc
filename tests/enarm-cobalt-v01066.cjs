@@ -11,12 +11,12 @@ assert.equal(bank.caseCount,37);
 assert.equal(bank.questionCount,74);
 assert.equal(bank.areas.length,7);
 assert.equal(radar.INTERVALS.length,6);
-assert.match(enarm,/meta name="kidbum-app-version" content="0\.10\.67"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.67"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.67"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.67'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.67'/);
-assert.match(sw,/const RELEASE='0\.10\.67'/);
+assert.match(enarm,/meta name="kidbum-app-version" content="0\.10\.68"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.68"/);
+assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.68"/);
+assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.68'/);
+assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.68'/);
+assert.match(sw,/const RELEASE='0\.10\.68'/);
 assert.match(sw,/cobalt-v01066/,'Versioned atomic cache identity');
 for(const p of ['assets/enarm-cobalt-v01066.css','assets/enarm-hero-v01066.svg']){
  assert.ok(sw.includes("'./"+p+"'"),'New visuals must be precached for offline use: '+p);
