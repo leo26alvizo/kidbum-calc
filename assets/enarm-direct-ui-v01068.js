@@ -7,7 +7,7 @@
  const bank=window.KidBumDirectBank;
  const radar=window.KidBumENARMRadar;
  if(!root)return;
- if(!bank||bank.questionCount!==210||!radar){
+ if(!bank||bank.questionCount!==238||!radar){
   root.textContent='No se pudo cargar el banco de preguntas directas. Actualiza KidBum e inténtalo de nuevo.';
   return;
  }
