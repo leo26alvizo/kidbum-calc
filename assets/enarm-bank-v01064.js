@@ -19,15 +19,15 @@
   sepsis:{label:'SCCM · Surviving Sepsis Campaign 2026',url:'https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026'},
   aha:{label:'AHA · Situaciones especiales de reanimación 2025',url:'https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation/'},
   who:{label:'OMS · Sarampión',url:'https://www.who.int/es/news-room/fact-sheets/detail/measles'},
-  cold:{label:'OMS · Cadena de frío de inmunización',url:'https://www.who.int/teams/immunization-vaccines-and-biologicals/essential-programme-on-immunization/supply-chain/controlled-temperature-chain-%28ctc%29'}
- };
+  cold:{label:'OMS · Cadena de frío de inmunización',url:'https://www.who.int/teams/immunization-vaccines-and-biologicals/essential-programme-on-immunization/supply-chain/controlled-temperature-chain-%28ctc%29'},
   gold2026:{label:'GOLD · Global Strategy for COPD 2026',url:'https://goldcopd.org/2026-gold-report/'},
   cdcAom:{label:'CDC · Atención ambulatoria pediátrica, otitis media aguda',url:'https://www.cdc.gov/antibiotic-use/hcp/clinical-care/pediatric-outpatient.html'},
   msfShoulder:{label:'MSF · Distocia de hombros, guía clínica',url:'https://medicalguidelines.msf.org/en/viewport/ONC/english/7-5-shoulder-dystocia-51417529.html'},
   hernia:{label:'HerniaSurge · Update of international groin hernia guidelines (2023)',url:'https://academic.oup.com/bjsopen/article/7/5/zrad080/7325871'},
   niceTrauma:{label:'NICE NG39 · Major trauma, assessment and management',url:'https://www.nice.org.uk/guidance/ng39/chapter/Recommendations'},
   whoFlu:{label:'OMS · Programa mundial de influenza, grupos prioritarios',url:'https://www.who.int/teams/global-influenza-programme/vaccines/vaccine-use'},
-  predictive:{label:'CDC · Principios de epidemiología, valor predictivo positivo',url:'https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson5/appendixa.html'},
+  predictive:{label:'CDC · Principios de epidemiología, valor predictivo positivo',url:'https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson5/appendixa.html'}
+ };
  const Q=(prompt,options,correct,why)=>({prompt,options,correct,why});
  const C=(id,area,topic,stem,source,qs)=>({id,area,topic,stem,source:R[source],questions:qs});
  const cases=[
