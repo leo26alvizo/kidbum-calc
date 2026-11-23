@@ -27,7 +27,7 @@
   hernia:{label:'HerniaSurge · Update of international groin hernia guidelines (2023)',url:'https://academic.oup.com/bjsopen/article/7/5/zrad080/7325871'},
   niceTrauma:{label:'NICE NG39 · Major trauma, assessment and management',url:'https://www.nice.org.uk/guidance/ng39/chapter/Recommendations'},
   whoFlu:{label:'OMS · Programa mundial de influenza, grupos prioritarios',url:'https://www.who.int/teams/global-influenza-programme/vaccines/vaccine-use'},
-  predictive:{label:'NCBI Bookshelf · Prevalencia y valores predictivos',url:'https://www.ncbi.nlm.nih.gov/books/NBK430867/'},
+  predictive:{label:'CDC · Principios de epidemiología, valor predictivo positivo',url:'https://archive.cdc.gov/www_cdc_gov/csels/dsepd/ss1978/lesson5/appendixa.html'},
  const Q=(prompt,options,correct,why)=>({prompt,options,correct,why});
  const C=(id,area,topic,stem,source,qs)=>({id,area,topic,stem,source:R[source],questions:qs});
  const cases=[
