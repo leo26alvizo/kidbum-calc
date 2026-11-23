@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="740" viewBox="0 0 1400 740" role="img" aria-label="Emblema KidBum: león heráldico de oro champagne sobre escudo grafito y fondo marfil" fill="none">
+ <defs>
+  <linearGradient id="parchment" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#FAF8F2"/><stop offset=".42" stop-color="#F4EEE2"/><stop offset="1" stop-color="#E8DCC6"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8E9C3"/><stop offset=".19" stop-color="#D8BC7C"/><stop offset=".48" stop-color="#AF8548"/><stop offset=".75" stop-color="#E8CF95"/><stop offset="1" stop-color="#9B713E"/></linearGradient>
+  <linearGradient id="inner" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#32302C"/><stop offset=".64" stop-color="#171715"/><stop offset="1" stop-color="#3A352F"/></linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFD"/><stop offset="1" stop-color="#E8DDC8"/></linearGradient>
+  <radialGradient id="aura"><stop stop-color="#D5B37A" stop-opacity=".23"/><stop offset=".64" stop-color="#D5B37A" stop-opacity=".07"/><stop offset="1" stop-color="#D5B37A" stop-opacity="0"/></radialGradient>
+  <pattern id="papergrain" width="31" height="31" patternUnits="userSpaceOnUse"><circle cx="5" cy="7" r=".7" fill="#705C42" opacity=".12"/><circle cx="26" cy="19" r=".5" fill="#705C42" opacity=".1"/><path d="M0 30L30 0" stroke="#8D7D65" stroke-width=".25" opacity=".065"/></pattern>
+  <clipPath id="cl"><rect width="1400" height="740" rx="26"/></clipPath>
+ </defs>
+ <g clip-path="url(#cl)">
+  <rect width="1400" height="740" fill="url(#parchment)"/>
+  <rect width="1400" height="740" fill="url(#papergrain)"/>
+  <path d="M0 0H1400V8H0Z" fill="url(#metal)"/>
+  <path d="M0 728H1400V740H0Z" fill="#AF8955" opacity=".42"/>
+  <path d="M0 48H1400M0 698H1400" stroke="#B99C68" stroke-opacity=".28" stroke-width="1.4"/>
+  <path d="M52 0V740M1361 0V740" stroke="#BDA16B" stroke-opacity=".21" stroke-width="1.3"/>
+  <circle cx="1082" cy="360" r="435" fill="url(#aura)"/>
+  <circle cx="1100" cy="356" r="315" stroke="#B99A63" stroke-opacity=".24" stroke-width="1.5"/>
+  <circle cx="1100" cy="356" r="348" stroke="#8D7451" stroke-opacity=".14" stroke-width="1" stroke-dasharray="2 10"/>
+  <circle cx="1100" cy="356" r="392" stroke="#B99A63" stroke-opacity=".11" stroke-width="1"/>
+  <g stroke="#9C835A" stroke-width="1.5" stroke-opacity=".34">
+   <path d="M640 80H829M653 91H794M650 649H829M670 658H795"/>
+   <path d="M93 614H462M93 622H333"/>
+   <path d="M630 286l8-10 8 10-8 10Z"/>
+   <path d="M630 390l8-10 8 10-8 10Z"/>
+  </g>
+  <!-- subtle medical & academic symbols, inset into the parchment -->
+  <g opacity=".38" stroke="#AB9067" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M663 174H710M687 150V197"/>
+   <path d="M692 503l19 10 19-10-19-10ZM692 503v19l19 10 19-10v-19M711 513v19"/>
+  </g>
+  <path d="M86 546H188L207 530L227 550L249 496L265 585L287 533L308 547H520" stroke="#9D835B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" opacity=".36"/>
+  <!-- champagne-plated institutional shield -->
+  <path d="M1100 65C1205 114 1271 126 1322 131V320C1322 445 1258 555 1100 631C942 555 878 445 878 320V131C929 126 995 114 1100 65Z" fill="#BDA16C" opacity=".23" transform="translate(4 9)"/>
+  <path d="M1100 65C1205 114 1271 126 1322 131V320C1322 445 1258 555 1100 631C942 555 878 445 878 320V131C929 126 995 114 1100 65Z" fill="url(#inner)" stroke="url(#metal)" stroke-width="12"/>
+  <path d="M1100 84C1200 129 1254 145 1303 150V319C1303 433 1245 531 1100 606C955 531 897 433 897 319V150C946 145 1000 129 1100 84Z" stroke="#D9BE8D" stroke-opacity=".69" stroke-width="2.5"/>
+  <path d="M1100 98C1196 141 1243 153 1292 159V314C1292 427 1237 520 1100 592C963 520 908 427 908 314V159C957 153 1004 141 1100 98Z" stroke="#8A7350" stroke-opacity=".28" stroke-width="1.4"/>
+  <path d="m1100 104 7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2Z" fill="url(#metal)"/>
+  <!-- gold heraldic lion, adapted from the KidBum crest -->
+  <g transform="translate(904 152) scale(1.63)" stroke="url(#metal)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+   <path d="M120 24 103 16 69 30 46 52 33 82 28 116 43 151 49 177 83 211 120 229M120 24 137 16 171 30 194 52 207 82 212 116 197 151 191 177 157 211 120 229" stroke-width="6.1"/>
+   <path d="M120 45 93 38 63 58 52 88 63 112 51 136 75 181 101 198 120 213M120 45 147 38 177 58 188 88 177 112 189 136 165 181 139 198 120 213" stroke-width="4.3"/>
+   <path d="M62 72 89 70 106 88 120 93 134 88 151 70 178 72M66 120 88 115 105 123 120 142 135 123 152 115 174 120" stroke-width="3.9"/>
+   <path d="M80 147 93 163 111 170 120 165 129 170 147 163 160 147M108 146 120 151 132 146M120 151V170L105 178M120 170 135 178M91 183 120 206 149 183" stroke-width="4"/>
+   <path d="M56 96 46 120 62 147M184 96 194 120 178 147M90 207 120 223 150 207" stroke-width="3" opacity=".84"/>
+   <path d="M81 119 91 116 99 119M159 119 149 116 141 119" stroke-width="5.2"/>
+  </g>
+  <!-- heritage open book, entirely ornamental -->
+  <g transform="translate(978 600)">
+   <path d="M-7 16C32 1 78 4 122 20C165 4 213 1 251 16V76C204 60 160 60 122 79C83 60 39 60-7 76Z" fill="#2E2924" stroke="url(#metal)" stroke-width="4.5"/>
+   <path d="M4 24C46 12 84 15 118 30V68C77 52 40 50 4 64Z" fill="url(#paper)"/>
+   <path d="M126 30C160 15 199 12 240 24V64C204 50 167 52 126 68Z" fill="url(#paper)"/>
+   <path d="M122 21V78M23 36c35-6 67-3 85 4M23 46c35-6 65-3 85 4M142 40c19-7 49-10 78-4M142 50c21-7 49-10 78-4" stroke="#AD9365" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+  </g>
+  <path d="M84 113H143M84 123H117" stroke="#A88F63" stroke-width="3" opacity=".45" stroke-linecap="round"/>
+  <path d="M605 574h93" stroke="#A88F63" stroke-width="2" opacity=".35"/>
+ </g>
+</svg>
