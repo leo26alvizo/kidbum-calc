@@ -34,6 +34,8 @@ jobs:
         run: node tests/enarm-cobalt-v01066.cjs
       - name: ENARM Ivory Heritage · parchment lion, champagne/charcoal contrast and stable quiz
         run: node tests/enarm-ivory-v01067.cjs
+      - name: ENARM direct · 210 conceptual and clinical knowledge questions, offline and isolated progress
+        run: node tests/enarm-direct-v01068.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
