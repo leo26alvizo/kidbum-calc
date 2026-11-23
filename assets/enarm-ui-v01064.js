@@ -94,7 +94,7 @@
   const weakest=data.weakest?'Área con más errores registrados (mínimo 5 intentos): <strong>'+esc(data.weakest.area)+'</strong>.':'Sin suficientes intentos por área para identificar una debilidad comparativa.';
   return '<section class="en-card en-radar" id="en-radar" aria-labelledby="en-radar-title">'+
    '<div class="en-overline">Tu progreso · solo en este dispositivo</div>'+
-   '<div class="en-radar-title-row"><span class="en-radar-logo" aria-hidden="true">'+enIcon('chart')+'</span><h2 id="en-radar-title">Radar de Conocimiento</h2></div>'+
+   '<div class="en-radar-title-row"><span class="en-radar-logo" aria-hidden="true">'+enIcon('chart')+'</span><h2 id="en-radar-title">Radar de Conocimiento · Casos clínicos</h2></div>'+
    '<p class="en-small en-muted">Aciertos de entrenamiento por área, calculados únicamente a partir de tus respuestas. No predice tu calificación ni el nivel de competencia clínica.</p>'+
    '<div class="en-radar-summary"><div><strong>'+data.seenQuestions+'</strong><span>Preguntas practicadas</span></div>'+
    '<div><strong>'+data.dueQuestions+'</strong><span>Preguntas listas para repasar</span></div>'+

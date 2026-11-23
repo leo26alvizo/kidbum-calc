@@ -9,7 +9,7 @@ const original=JSON.stringify(ctx.KidBumDirectBank.items);
 run('assets/enarm-expansion-draft.js');run('assets/enarm-visual-bank-draft.js');run('assets/enarm-unified-radar-draft.js');
 const d=ctx.KidBumDirectBank,v=ctx.KidBumVisualBank,c=ctx.KidBumENARMBank,r=ctx.KidBumENARMRadar,a=ctx.KidBumUnifiedRadar;
 assert.equal(d.questionCount,238);assert.equal(JSON.stringify(d.items.slice(0,210)),original);
-assert.equal(new Set(d.items.map(q=>q.id)).size,238);assert.equal(v.items.length,12);assert.equal(Object.keys(v.figures).length,8);
+assert.equal(new Set(d.items.map(q=>q.id)).size,238);assert.equal(new Set(d.items.map(q=>q.prompt)).size,238);assert.equal(v.items.length,12);assert.equal(Object.keys(v.figures).length,8);
 for(const q of [...d.items,...v.items]){assert.equal(new Set(q.options).size,4);assert.ok(q.correct>=0&&q.correct<4);assert.ok(q.why.length>40)}
 for(const q of v.items)assert.ok(v.figures[q.figure].startsWith('<svg'));
 const empty=a.aggregate(c,d,v,{},r,1000);assert.equal(empty.total,324);assert.equal(empty.unique,0);assert.ok(empty.areas.every(x=>x.accuracy===null));
