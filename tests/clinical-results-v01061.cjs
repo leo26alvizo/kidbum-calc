@@ -182,7 +182,9 @@ async function main(){
      assert.ok(links.some(url=>url.endsWith('enarm-v01064.css')),'ENARM CSS should be applied');
      assert.ok(links.some(url=>url.endsWith('enarm-radar-v01065.css')),'Radar CSS should load');
      assert.equal(await page.locator('.en-radar-row').count(),7,'Radar lists all seven clinical areas');
-     assert.ok(links.some(url=>url.endsWith('enarm-cobalt-v01066.css')),'Cobalt CSS must load');
+     assert.ok(links.some(url=>url.endsWith('enarm-cobalt-v01066.css')),'Legacy Cobalt CSS must remain available');
+     assert.ok(links.some(url=>url.endsWith('enarm-ivory-v01067.css')),'Ivory Heritage must load last');
+     assert.ok(links.indexOf(links.find(url=>url.endsWith('enarm-ivory-v01067.css')))>links.indexOf(links.find(url=>url.endsWith('enarm-cobalt-v01066.css'))),'Ivory styles must take precedence over old blue colors');
      const artwork=page.locator('.en-hero-art');
      await artwork.evaluate(img=>img.decode());
      const art=await artwork.evaluate(img=>({complete:img.complete,width:img.naturalWidth,height:img.naturalHeight}));
@@ -194,8 +196,13 @@ async function main(){
       const styles=getComputedStyle(document.documentElement);
       return{background:styles.getPropertyValue('--en-bg').trim(),images:[...document.querySelectorAll('.en-mode')].map(el=>getComputedStyle(el,'::before').backgroundImage)};
      });
-     assert.ok(['#06183b','#030c22'].includes(visual.background.toLowerCase()),'Deep cobalt palette must apply');
-     assert.ok(visual.images.every(v=>v.includes('atlas-')),'All four mode cards use locally cached clinical images');
+     assert.equal(visual.background.toLowerCase(),'#f4f0e7','Ivory light-mode palette must replace cobalt by default');
+     assert.ok(visual.images.every(v=>v.includes('atlas-')),'All four mode cards retain existing local clinical images');
+     assert.equal(await artwork.getAttribute('src'),'./assets/enarm-hero-ivory-v01067.svg','Lion must appear in ivory heritage cover');
+     const colors=await page.evaluate(()=>({body:getComputedStyle(document.body).color,hero:getComputedStyle(document.querySelector('.en-intro h1')).color,card:getComputedStyle(document.querySelector('.en-mode')).color,background:getComputedStyle(document.querySelector('.en-card')).backgroundColor}));
+     assert.equal(colors.hero,'rgb(42, 39, 34)','Hero text is charcoal, not white-on-cobalt');
+     assert.equal(colors.card,'rgb(48, 43, 37)','Study cards are charcoal on ivory');
+     assert.notEqual(colors.background,'rgb(13, 42, 91)','Legacy blue cards must be overridden');
      await noHorizontalOverflow(page,'ENARM illustrated dashboard '+width);
     }finally{await context.close()}
    }
@@ -270,7 +277,8 @@ async function main(){
     const meta=await page.evaluate(()=>JSON.parse(localStorage.getItem('kidbum-enarm-progress-v1'))['mi-01-0']);
     assert.equal(meta.dueAt,undefined,'Migration must not silently invent historical dates');
     await page.locator('#en-theme').click();
-    await noHorizontalOverflow(page,'ENARM Radar dark');
+    assert.equal(await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--en-bg').trim()),'#1D1B19','Theme toggle should use warm graphite, not blue');
+    await noHorizontalOverflow(page,'ENARM Radar graphite dark');
    }finally{await context.close()}
   });
  }finally{await browser.close();await stop()}
