@@ -27,13 +27,16 @@
  }
  function record(previous,isCorrect,at=Date.now()){
   const p=normalize(previous),now=stamp(at)||Date.now();
-  const streak=isCorrect?Math.min(p.streak+1,6):0;
-  const intervalDays=isCorrect?INTERVALS[streak-1]:0;
+  // Repeating an already-correct item BEFORE its scheduled review date
+  // can improve practice counts, but must not accelerate the spaced interval.
+  const early=isCorrect&&p.streak>0&&p.dueAt>now;
+  const streak=isCorrect?(early?p.streak:Math.min(p.streak+1,6)):0;
+  const intervalDays=isCorrect?(early?(p.intervalDays||INTERVALS[streak-1]):INTERVALS[streak-1]):0;
   return{
    seen:Math.min(10000,p.seen+1),
    right:Math.min(10000,p.right+(isCorrect?1:0)),
    wrong:Math.min(10000,p.wrong+(isCorrect?0:1)),
-   streak,lastAt:now,dueAt:now+intervalDays*DAY,intervalDays
+   streak,lastAt:now,dueAt:early?p.dueAt:now+intervalDays*DAY,intervalDays
   };
  }
  function due(h,now=Date.now()){
