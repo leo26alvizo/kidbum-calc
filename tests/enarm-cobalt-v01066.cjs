@@ -39,7 +39,7 @@ assert.match(css,/\.en-mode\[data-mode="study"\]::before/);
 assert.match(css,/\.en-mode\[data-mode="exam"\]::before/);
 assert.match(css,/\.en-mode\[data-mode="weak"\]::before/);
 assert.match(css,/\.en-mode\[data-mode="due"\]::before/);
-for(const ref of ['atlas-brain.jpg','atlas-heart.jpg','atlas-shock.jpg','atlas-lungs.jpg']){
+for(const ref of ['atlas-brain.jpg','atlas-lab.jpg','atlas-shock.jpg','atlas-lungs.jpg']){
  assert.ok(css.includes(ref),'Decorative medical study artwork should use existing local image: '+ref);
  assert.ok(sw.includes("'./assets/"+ref+"'"),'Medical artwork must be cached offline: '+ref);
 }
