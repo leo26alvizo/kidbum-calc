@@ -53,7 +53,7 @@
   return '<a class="en-ref" href="'+esc(c.source.url)+'" target="_blank" rel="noopener noreferrer">Lectura sugerida para cotejo: '+esc(c.source.label)+' ↗</a>';
  }
  function radarSection(data){
-  const next=data.nextDueAt?new Date(data.nextDueAt).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}):'Sin repaso programado';
+  const next=data.dueQuestions?'Hoy · tienes repasos pendientes':data.nextDueAt?new Date(data.nextDueAt).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}):'Sin repaso programado';
   const weakest=data.weakest?'Área con más errores registrados (mínimo 5 intentos): <strong>'+esc(data.weakest.area)+'</strong>.':'Sin suficientes intentos por área para identificar una debilidad comparativa.';
   return '<section class="en-card en-radar" id="en-radar" aria-labelledby="en-radar-title">'+
    '<div class="en-overline">Tu progreso · solo en este dispositivo</div>'+
