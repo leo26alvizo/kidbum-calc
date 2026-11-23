@@ -460,7 +460,7 @@ html.dark[data-kb-page="enarm"] :focus-visible{outline-color:#E7C68D}
   border-radius:20px;
  }
  html[data-kb-page="enarm"] .en-hero-art{
-  object-position:67% 20%;
+  object-position:100% 20%;
  }
  html[data-kb-page="enarm"] .en-intro::before{
   background:linear-gradient(180deg,rgba(248,244,235,.06) 0%,
