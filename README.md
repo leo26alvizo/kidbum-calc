@@ -2,9 +2,20 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.65**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.66**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.66 · ENARM Cobalt · Renovación visual premium
+
+- **Portada ilustrada original** con un león heráldico dorado, escudo cobalto, detalles de medicina y estudio, exportada en **SVG vectorial local** `assets/enarm-hero-v01066.svg`. La imagen conserva nitidez, funciona offline y no necesita servicios de terceros.
+- Identidad visual de ENARM **azul rey y azul cobalto**, con acentos cian y oro, tarjetas elevadas, encabezados legibles, nuevos estados de foco y soporte claro/oscuro en un diseño predominantemente azul.
+- **Cuatro tarjetas visuales** (estudio, simulacro, debilidades, repaso de hoy) con íconos SVG propios e ilustraciones médicas locales ya presentes en KidBum. Las tarjetas conservan exactamente los controles y eventos previos.
+- **Radar de Conocimiento** con siete iconos médicos vectoriales y barras más visibles, sin generar estadísticas ficticias: «Sin datos» y «Muestra pequeña» permanecen.
+- **Casos clínicos** con una imagen médica decorativa según el área, sin cambiar la prioridad de la historia, las alternativas o la retroalimentación.
+- Respeta **320, 390, 430 y 768 px**, teclado, contraste forzado y preferencias de movimiento reducido. Los recursos están incorporados a la **instalación offline atómica v0.10.66**.
+- **Sin cambios** a las 74 preguntas, 37 casos, respuestas correctas, evaluación, repetición espaciada, historial local, calculadoras, Pharma Pro, imágenes originales o alertas médicas. El banco continúa pendiente de validación clínica independiente.
+- Pruebas `tests/enarm-cobalt-v01066.cjs` y Chrome responsive verifican imágenes, colores, iconos, sesiones y seguridad del resultado.
 
 ## KidBum 0.10.65 · ENARM 1.1 · Radar de Conocimiento y repaso espaciado
 
