@@ -22,11 +22,11 @@ for(const page of pages){
  assert.equal(html.split('assets/ultra-retina-v01063.css').length-1,1,page+' must load shared visual stylesheet exactly once');
  assert.ok(html.indexOf('assets/ultra-retina-v01063.css')<html.indexOf('</head>'),page+' styles must load inside the head');
 }
-assert.match(home,/kidbum-app-version" content="0\.10\.65"/);
-assert.match(pharma,/kidbum-app-version" content="0\.10\.65"/);
-assert.match(sw,/const RELEASE='0\.10\.65'/);
-assert.match(marker,/KidBumPublicRelease = '0\.10\.65'/);
-assert.match(updater,/const VERSION='0\.10\.65'/);
+assert.match(home,/kidbum-app-version" content="0\.10\.66"/);
+assert.match(pharma,/kidbum-app-version" content="0\.10\.66"/);
+assert.match(sw,/const RELEASE='0\.10\.66'/);
+assert.match(marker,/KidBumPublicRelease = '0\.10\.66'/);
+assert.match(updater,/const VERSION='0\.10\.66'/);
 assert.ok(sw.includes("'./assets/ultra-retina-v01063.css'"),'Critical stylesheet precached atomically for offline use');
 assert.match(sw,/ultra-retina-v01063-enarm-v01064-radar-v01065'/,'Cache identity remains invalidated and includes new ENARM release');
 assert.match(css,/html\[data-kb-page="index"\]/,'Core styles must be scoped by page');
