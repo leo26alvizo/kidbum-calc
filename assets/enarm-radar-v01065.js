@@ -15,8 +15,11 @@
  function stamp(n){return Number.isSafeInteger(n)&&n>0&&n<8640000000000000?n:0;}
  function normalize(input){
   const h=input&&typeof input==='object'?input:{};
+  const seen=nonneg(h.seen);
+  const right=Math.min(seen,nonneg(h.right));
+  const wrong=Math.min(seen-right,nonneg(h.wrong));
   return{
-   seen:nonneg(h.seen),right:nonneg(h.right),wrong:nonneg(h.wrong),
+   seen,right,wrong,
    streak:Math.min(6,nonneg(h.streak)),
    lastAt:stamp(h.lastAt),dueAt:stamp(h.dueAt),
    intervalDays:nonneg(h.intervalDays,60)
