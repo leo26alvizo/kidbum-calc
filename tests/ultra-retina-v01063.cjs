@@ -28,7 +28,7 @@ assert.match(sw,/const RELEASE='0\.10\.68'/);
 assert.match(marker,/KidBumPublicRelease = '0\.10\.68'/);
 assert.match(updater,/const VERSION='0\.10\.68'/);
 assert.ok(sw.includes("'./assets/ultra-retina-v01063.css'"),'Critical stylesheet precached atomically for offline use');
-assert.match(sw,/ultra-retina-v01063-enarm-v01064-radar-v01065-cobalt-v01066-ivory-v01067'/,'Cache identity remains invalidated and includes new ENARM release');
+assert.match(sw,/ultra-retina-v01063-enarm-v01064-radar-v01065-cobalt-v01066-ivory-v01067-direct-v01068'/,'Cache identity remains invalidated and includes new ENARM release');
 assert.match(css,/html\[data-kb-page="index"\]/,'Core styles must be scoped by page');
 assert.match(css,/html\.dark\[data-kb-page\]/,'Dark mode must be implemented');
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/,'Respect reduced motion');
