@@ -72,7 +72,7 @@
   return '<svg class="en-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+(paths[name]||paths.book)+'</svg>';
  }
  const caseArt={
-  'Medicina Interna':'./assets/atlas-heart.jpg',
+  'Medicina Interna':'./assets/cardiologia-portada.jpg',
   'Pediatría':'./assets/pediatria-portada.webp',
   'Ginecología y Obstetricia':'./assets/ginecologia-portada.webp',
   'Cirugía General':'./assets/atlas-bmi.jpg',
