@@ -2,9 +2,21 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.67**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.68**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.68 · ENARM 1.2 · 210 preguntas directas de conocimiento médico
+
+- Nueva sección **«210 preguntas directas»** dentro de la portada ENARM, enlazada a `enarm-direct.html`, manteniendo el estilo Ivory Heritage, el león y el mismo acceso original de ENARM inmediatamente debajo de Pharma Pro.
+- **210 reactivos originales SIN casos clínicos**, con cuatro respuestas y explicación: **30 preguntas por cada una de las siete especialidades**, organizadas uniformemente en **Conceptos, Mecanismos, Fisiopatología, Criterios diagnósticos, Tratamientos y Alto rendimiento** (35 por categoría).
+- **Cuatro modalidades**: Estudio (resolución y explicación una pregunta a la vez), Simulacro (revisión al final, reloj de práctica), Mis errores y Repaso de hoy (1/3/7/14/30/60 días, sin adelantar periodos por respuestas tempranas). Filtros por especialidad, categoría, búsqueda textual y longitud de sesión.
+- **Progreso separado**: `kidbum-enarm-direct-progress-v1` conserva intentos/aciertos de preguntas directas sin tocar `kidbum-enarm-progress-v1` de los casos clínicos. Datos locales, sin cuentas, sin telemetría y sin solicitudes de red.
+- **Contenido total ENARM: 284 preguntas originales** = 210 directas nuevas + 74 previas en 37 casos clínicos. La cifra de 284 es conteo educativo, NO equivalencia con puntaje, formato, validación ni contenido oficial ENARM.
+- **Seguridad editorial**: los 210 reactivos directos nuevos están **pendientes de revisión clínica independiente**. Las referencias son **lecturas generales por especialidad para cotejo**, no evidencia de que cada pregunta haya sido verificada. Los 74 reactivos de casos también conservan este estado.
+- Los 7 archivos de preguntas, banco integrador, UI, CSS y pantalla se almacenan en caché offline de la PWA **v0.10.68**. **No se cambian** fórmulas, dosis, 138 calculadoras, módulos Pharma ni imágenes existentes.
+- Pruebas `tests/enarm-direct-v01068.cjs` y Chrome real en 320/390/768 px validan conteo, claves A–D equilibradas, filtros, explicación, simulacro, almacenamiento separado, tema y accesibilidad.
+- [Registro editorial, fuentes temáticas y límites de los 210 reactivos](docs/enarm-direct-v01068.md).
 
 ## KidBum 0.10.67 · ENARM Ivory Heritage · Diseño institucional
 
