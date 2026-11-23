@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.66**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.67**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.67 · ENARM Ivory Heritage · Diseño institucional
+
+- **Ivory Heritage**: nueva identidad visual propia para Modo ENARM con **marfil, champagne y carbón**, acabado académico premium inspirado en una insignia heráldica; reemplaza la saturación visual del azul cobalto.
+- **El león permanece protagonista** en la portada vectorial local `assets/enarm-hero-ivory-v01067.svg`: escudo carbón con detalles oro champagne, libro académico y fondo de papel fino, sin fuentes ni imágenes remotas.
+- Nueva capa de estilos aislada `assets/enarm-ivory-v01067.css`, cargada después de Cobalt para mantener compatibilidad y sobrescribir sus colores: cuatro tarjetas ilustradas, cifras, etiquetas, Radar, modos de estudio, retroalimentación y formulario.
+- **Dos variantes coherentes**: marfil cálido (tema claro) y grafito oscuro con oro suave (tema oscuro). Se respeta el selector de tema y el almacenamiento local existente.
+- En móvil (320–580 px) la portada mantiene el león y el texto contrastado; también se incluyen reglas para contraste forzado, teclado, movimiento reducido e impresión.
+- Se conservan **exactamente 37 casos, 74 reactivos**, respuestas, simulacro, datos del Radar, intervalo de repaso, históricos locales, imágenes ya existentes y todos los motores clínicos.
+- Los dos nuevos recursos se incorporan al caché offline de la PWA **0.10.67**, con nuevas pruebas de apariencia, accesibilidad y no-regresión; **los 74 reactivos siguen pendientes de revisión independiente**, sin alegar certificación ni aval oficial.
 
 ## KidBum 0.10.66 · ENARM Cobalt · Renovación visual premium
 

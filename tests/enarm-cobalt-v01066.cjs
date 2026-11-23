@@ -11,18 +11,19 @@ assert.equal(bank.caseCount,37);
 assert.equal(bank.questionCount,74);
 assert.equal(bank.areas.length,7);
 assert.equal(radar.INTERVALS.length,6);
-assert.match(enarm,/meta name="kidbum-app-version" content="0\.10\.66"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.66"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.66"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.66'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.66'/);
-assert.match(sw,/const RELEASE='0\.10\.66'/);
+assert.match(enarm,/meta name="kidbum-app-version" content="0\.10\.67"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.67"/);
+assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.67"/);
+assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.67'/);
+assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.67'/);
+assert.match(sw,/const RELEASE='0\.10\.67'/);
 assert.match(sw,/cobalt-v01066/,'Versioned atomic cache identity');
 for(const p of ['assets/enarm-cobalt-v01066.css','assets/enarm-hero-v01066.svg']){
  assert.ok(sw.includes("'./"+p+"'"),'New visuals must be precached for offline use: '+p);
- assert.ok(enarm.includes('./'+p),'ENARM page must load visual asset: '+p);
+ assert.ok(p.endsWith('.css')?enarm.includes('./'+p):!enarm.includes('src="./'+p+'"'),'Legacy cobalt CSS remains available, while the prior lion image is superseded');
 }
-assert.ok(enarm.indexOf('enarm-cobalt-v01066.css')>enarm.indexOf('enarm-radar-v01065.css'),'Visual CSS should override legacy theme last');
+assert.ok(enarm.indexOf('enarm-cobalt-v01066.css')>enarm.indexOf('enarm-radar-v01065.css'),'Cobalt legacy CSS remains as a fallback');
+assert.ok(enarm.indexOf('enarm-ivory-v01067.css')>enarm.indexOf('enarm-cobalt-v01066.css'),'Ivory Heritage CSS must override legacy colors last');
 assert.match(enarm,/class="en-hero-art"/);
 assert.match(enarm,/class="en-intro-content"/);
 assert.match(enarm,/Modo <span>ENARM<\/span>/);
