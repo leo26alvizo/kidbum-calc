@@ -184,7 +184,7 @@ html[data-kb-page="enarm"] .en-mode[data-mode="study"]::before{background-image:
 html[data-kb-page="enarm"] .en-mode[data-mode="exam"]{
  background:linear-gradient(118deg,#253b9b,#13185e);border-color:#6c7af0;
 }
-html[data-kb-page="enarm"] .en-mode[data-mode="exam"]::before{background-image:url('./atlas-heart.jpg')}
+html[data-kb-page="enarm"] .en-mode[data-mode="exam"]::before{background-image:url('./atlas-lab.jpg')}
 html[data-kb-page="enarm"] .en-mode[data-mode="weak"]{
  background:linear-gradient(118deg,#0e3d8b,#092d64);
 }
