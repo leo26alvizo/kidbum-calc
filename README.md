@@ -2,9 +2,19 @@
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
 
-Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.64**.
+Aplicación web progresiva (PWA) gratuita de calculadoras médicas, orientada al uso educativo y al apoyo en razonamiento clínico. Versión **0.10.65**.
 
 **Sitio web:** https://leo26alvizo.github.io/kidbum-calc/
+
+## KidBum 0.10.65 · ENARM 1.1 · Radar de Conocimiento y repaso espaciado
+
+- **Radar de Conocimiento** para las siete áreas clínicas: porcentajes observados y conteo de intentos por especialidad, barras accesibles, etiqueta «Muestra pequeña» con menos de cinco intentos y «Sin datos» si aún no existen respuestas. Ningún indicador estima aprobación o calificación ENARM.
+- **Repaso de hoy** como cuarto modo, con cola personalizada: intervalos de práctica de 1, 3, 7, 14, 30 y 60 días tras aciertos y repetición inmediata tras error. Las preguntas nunca contestadas no aparecen como vencidas. Los intervalos son pedagógicos y no constituyen una prescripción de estudio individual validada.
+- **Conserva el historial ENARM 1.0** y su almacenamiento local sin borrar respuestas previas; las respuestas anteriores sin marca temporal quedan disponibles para repaso sin inventar fechas. Sin cuentas, telemetría de respuestas ni sincronización externa.
+- Banco original ampliado de 30 a **37 casos** y de 60 a **74 reactivos**: un caso añadido por cada una de las siete áreas clínicas, con fuentes públicas de referencia documentadas.
+- **Seguridad editorial:** siguen pendientes de revisión clínica independiente todos los 74 reactivos. Los enlaces son lecturas sugeridas para cotejo, NO avales ni pruebas de revisión médica especializada.
+- Pruebas de regresión de calendario, fuentes, preservación de progreso, Chrome móvil y 138 calculadoras de KidBum; servicio offline y marcador de publicación sincronizados a **0.10.65**.
+- [Fuentes, criterios de transparencia, limitaciones y plan de validación](docs/enarm-radar-v01065.md).
 
 ## KidBum 0.10.64 · ENARM 1.0 · Entrenamiento clínico original
 
