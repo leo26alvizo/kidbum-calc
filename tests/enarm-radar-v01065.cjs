@@ -1,0 +1,101 @@
+'use strict';
+/* Radar 1.1 · offline clinical-training integrity and deterministic scheduling. */
+const assert=require('node:assert/strict');
+const fs=require('node:fs'),vm=require('node:vm');
+const bank=require('../assets/enarm-bank-v01064.js');
+const radar=require('../assets/enarm-radar-v01065.js');
+const read=p=>fs.readFileSync(p,'utf8');
+const page=read('enarm.html'),ui=read('assets/enarm-ui-v01064.js');
+const style=read('assets/enarm-radar-v01065.css');
+const sw=read('sw.js'),home=read('index.html'),pharma=read('pharma-pro.html');
+const release=read('release-check.js'),updater=read('assets/pwa-update-v01060.js');
+for(const p of ['assets/enarm-bank-v01064.js','assets/enarm-radar-v01065.js','assets/enarm-ui-v01064.js']){
+ new vm.Script(read(p),{filename:p});
+}
+assert.equal(bank.VERSION,'1.1.0');
+assert.equal(bank.caseCount,37);
+assert.equal(bank.questionCount,74);
+assert.equal(bank.areas.length,7);
+assert.equal(new Set(bank.cases.map(c=>c.id)).size,37);
+const additions=['mi-08','ped-06','go-06','cg-05','urg-05','mf-04','sp-03'];
+for(const id of additions){
+ const c=bank.cases.find(x=>x.id===id);
+ assert.ok(c,'Source-guided original case missing '+id);
+ assert.ok(c.source?.url.startsWith('https://'),'Traceable source required for '+id);
+ assert.equal(c.questions.length,2);
+ for(const q of c.questions){
+  assert.equal(q.options.length,4);
+  assert.ok(q.correct>=0&&q.correct<4);
+  assert.ok(q.why.length>=45);
+ }
+}
+assert.match(page,/kidbum-app-version" content="0\.10\.65"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.65"/);
+assert.match(pharma,/kidbum-app-version" content="0\.10\.65"/);
+assert.match(release,/KidBumPublicRelease = '0\.10\.65'/);
+assert.match(updater,/const VERSION='0\.10\.65'/);
+assert.match(sw,/const RELEASE='0\.10\.65'/);
+assert.match(sw,/enarm-v01064-radar-v01065/);
+for(const asset of ['assets/enarm-radar-v01065.js','assets/enarm-radar-v01065.css']){
+ assert.ok(sw.includes("'./"+asset+"'"),'Missing offline asset '+asset);
+ assert.ok(page.includes('src="./'+asset+'"')||page.includes('href="./'+asset+'"'),'Missing page asset '+asset);
+}
+assert.ok(page.indexOf('enarm-bank-v01064.js')<page.indexOf('enarm-radar-v01065.js')&&page.indexOf('enarm-radar-v01065.js')<page.indexOf('enarm-ui-v01064.js'));
+assert.match(style,/en-radar-bars/);
+assert.match(style,/@media\(max-width:650px\)/);
+assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
+assert.match(ui,/function radarSection/);
+assert.match(ui,/id="en-radar-title"/);
+assert.match(ui,/id="en-due-start"/);
+assert.match(ui,/Repaso de hoy/);
+assert.match(ui,/Muestra pequeña/);
+assert.match(ui,/no predice|No predice/);
+assert.ok(!/\bfetch\(/.test(read('assets/enarm-radar-v01065.js')),'Radar must be offline');
+assert.ok(!/localStorage/.test(read('assets/enarm-radar-v01065.js')),'Pure scheduling cannot inspect storage');
+const day=radar.DAY,now=Date.parse('2026-11-23T12:00:00Z');
+assert.equal(day,86400000);
+assert.deepEqual(Array.from(radar.INTERVALS),[1,3,7,14,30,60]);
+assert.equal(radar.due(null,now),false,'Never answered questions are not due');
+assert.equal(radar.due({seen:1,right:1,wrong:0,streak:1},now),true,'Legacy answered question lacks timestamp -> immediately reviewable');
+let h=radar.record(null,false,now);
+assert.equal(h.seen,1);assert.equal(h.right,0);assert.equal(h.wrong,1);assert.equal(h.streak,0);
+assert.equal(h.dueAt,now);assert.equal(radar.due(h,now),true);assert.equal(radar.weak(h),true);
+h=radar.record(h,true,now+10);
+assert.equal(h.streak,1);assert.equal(h.intervalDays,1);assert.equal(h.dueAt,now+10+day);
+assert.equal(radar.due(h,now+10),false);
+assert.equal(radar.due(h,now+10+day),true);
+assert.equal(radar.weak(h),true);
+h=radar.record(h,true,now+20);
+assert.equal(h.streak,2);assert.equal(h.intervalDays,3);
+assert.equal(radar.weak(h),false);
+h=radar.record(h,true,now+30);assert.equal(h.intervalDays,7);
+h=radar.record(h,true,now+40);assert.equal(h.intervalDays,14);
+h=radar.record(h,true,now+50);assert.equal(h.intervalDays,30);
+h=radar.record(h,true,now+60);assert.equal(h.intervalDays,60);
+h=radar.record(h,true,now+70);assert.equal(h.intervalDays,60);
+const old=radar.normalize({seen:5,right:3,wrong:2,streak:1});
+assert.equal(old.dueAt,0);assert.equal(old.lastAt,0);
+assert.equal(radar.due(old,now),true,'Do not invent legacy dates');
+const sampleCase=bank.cases[0],sampleKey=sampleCase.id+'-0';
+const hist={[sampleKey]:radar.record(null,false,now)};
+let scores=radar.scores(bank,hist,now);
+assert.equal(scores.dueQuestions,1);assert.equal(scores.weakQuestions,1);
+assert.deepEqual(Array.from(scores.dueCaseIds),[sampleCase.id]);
+assert.equal(scores.areas.find(x=>x.area===sampleCase.area).percent,0);
+assert.equal(scores.areas.find(x=>x.area===sampleCase.area).smallSample,true);
+assert.equal(scores.weakest,null,'One attempt must not be presented as robust specialty weakness');
+assert.equal(scores.areas.filter(x=>x.percent===null).length,6,'Unstudied specialties display no data');
+assert.deepEqual(radar.dueCases(bank,hist,'Todas',now).map(x=>x.id),[sampleCase.id]);
+assert.equal(radar.dueCases(bank,hist,'Pediatría',now).length,0);
+const again=radar.record(hist[sampleKey],true,now+1);
+hist[sampleKey]=again;
+scores=radar.scores(bank,hist,now+1);
+assert.equal(scores.dueQuestions,0);assert.ok(scores.nextDueAt>now);
+assert.equal(scores.areas.find(x=>x.area===sampleCase.area).percent,50);
+const empty=radar.scores(bank,{},now);
+assert.equal(empty.dueQuestions,0);assert.equal(empty.seenQuestions,0);assert.equal(empty.weakest,null);
+assert.ok(empty.areas.every(a=>a.percent===null),'Empty history must not display fake 0% performance');
+const pharmaLink=home.indexOf('href="./pharma-pro.html" class="kb-resource-link"');
+const enarmLink=home.indexOf('href="./enarm.html" class="kb-resource-link kb-enarm-link"');
+assert.ok(pharmaLink>=0&&enarmLink>pharmaLink&&enarmLink-pharmaLink<200,'ENARM quick link remains right below Pharma Pro');
+console.log('PASS ENARM Radar 1.1: 37 cases/74 questions, six timed intervals, migrated progress, 7-area display, no fake scores, local due review and offline assets');
