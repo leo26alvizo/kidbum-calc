@@ -50,6 +50,6 @@ assert.match(html,/const count=calculatorCount\(c\)/);
 assert.match(html,/data-gasometria-open/);
 assert.match(html,/data-ped-rapid/);
 assert.match(html,/Módulo farmacológico no puntuable; no se incluye en el recuento de calculadoras/);
-assert.match(html,/content="0\.10\.67"/);
+assert.match(html,/content="0\.10\.68"/);
 assert.match(sw,/catalog-count-audit-v01047/);
 console.log('PASS catalog: 84 core + 46 external + 6 diabetes + PAS + gasometry = 138 unique calculators; Pediatrics 35; Urgencias 21; specialty totals sum to 138. Pharma resources excluded.');

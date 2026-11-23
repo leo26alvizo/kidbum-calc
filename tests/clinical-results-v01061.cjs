@@ -281,6 +281,101 @@ async function main(){
     await noHorizontalOverflow(page,'ENARM Radar graphite dark');
    }finally{await context.close()}
   });
+  await test('ENARM direct — 210 questions, seven specialties, six categories and responsive layout',async()=>{
+   for(const width of [320,390,768]){
+    const context=await browser.newContext({viewport:{width,height:845},serviceWorkers:'block'});
+    try{
+     const page=await context.newPage();
+     const errors=[];page.on('pageerror',err=>errors.push(err.message));
+     await page.goto(base+'/enarm.html',{waitUntil:'domcontentloaded'});
+     assert.equal(await page.locator('.dq-entry a[href="./enarm-direct.html"]').count(),1,'Direct bank entry inside main ENARM');
+     await page.locator('.dq-entry a').click();
+     await page.waitForURL(/enarm-direct\.html/);
+     assert.equal(await page.locator('.dq-stat').count(),3);
+     assert.match(await page.locator('#direct-app').innerText(),/210/);
+     assert.equal(await page.locator('.dq-mode').count(),4);
+     assert.equal(await page.locator('#dq-area option').count(),8,'Seven areas + all');
+     assert.equal(await page.locator('#dq-type option').count(),7,'Six categories + all');
+     assert.equal(await page.locator('.dq-track-row').count(),6,'Six independent knowledge progress bars');
+     const light=await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--en-bg').trim());
+     assert.equal(light,'#F4F0E7','Retain Ivory Heritage by default');
+     await page.locator('#dq-area').selectOption('Medicina Interna');
+     assert.match(await page.locator('#dq-available').innerText(),/30 preguntas disponibles/);
+     await page.locator('#dq-type').selectOption('Mecanismos');
+     assert.match(await page.locator('#dq-available').innerText(),/5 preguntas disponibles/);
+     await page.locator('#dq-search').fill('metformina');
+     assert.match(await page.locator('#dq-available').innerText(),/1 preguntas disponibles/);
+     await page.locator('#dq-start').click();
+     assert.equal(await page.locator('input[name="dq-answer"]').count(),4);
+     assert.equal(await page.locator('.dq-question-meta span').count(),2);
+     assert.equal(await page.locator('.en-feedback').count(),0,'Do not reveal answer before submit');
+     await noHorizontalOverflow(page,'ENARM direct '+width+'px');
+     assert.equal(errors.length,0,'Direct question JS errors: '+errors.join('; '));
+    }finally{await context.close()}
+   }
+  });
+  await test('ENARM direct — study feedback, isolated history, due review and test without answer leaks',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    const errors=[];page.on('pageerror',err=>errors.push(err.message));
+    page.on('dialog',dialog=>dialog.accept());
+    await page.addInitScript(()=>{
+     localStorage.setItem('kidbum-enarm-progress-v1',JSON.stringify({'mi-01-0':{seen:3,right:2,wrong:1,streak:1}}));
+    });
+    await page.goto(base+'/enarm-direct.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#dq-area').selectOption('Medicina Interna');
+    await page.locator('#dq-type').selectOption('Mecanismos');
+    await page.locator('#dq-search').fill('metformina');
+    await page.locator('#dq-start').click();
+    const answer=await page.evaluate(()=>{
+     const title=document.querySelector('#dq-prompt').textContent.trim();
+     const row=window.KidBumDirectBank.items.find(q=>q.prompt===title);
+     if(!row)throw Error('Direct question missing from bank');
+     return row.correct;
+    });
+    await page.locator('input[name="dq-answer"][value="'+((answer+1)%4)+'"]').check();
+    await page.locator('#dq-check').click();
+    assert.equal(await page.locator('.en-feedback[data-correct="false"]').count(),1,'Wrong answer shows specific explanation');
+    assert.match(await page.locator('.en-feedback').innerText(),/Lectura general por especialidad/);
+    await page.locator('#dq-exit').click();
+    assert.equal(await page.locator('.dq-mode').count(),4);
+    const local=await page.evaluate(()=>({
+     direct:JSON.parse(localStorage.getItem('kidbum-enarm-direct-progress-v1')),
+     cases:JSON.parse(localStorage.getItem('kidbum-enarm-progress-v1'))
+    }));
+    assert.equal(Object.keys(local.direct).length,1,'One direct question saved');
+    assert.equal(local.cases['mi-01-0'].seen,3,'Existing case history untouched');
+    await page.reload({waitUntil:'domcontentloaded'});
+    await page.locator('[data-dq-mode="weak"]').click();
+    assert.match(await page.locator('#dq-available').innerText(),/1 preguntas disponibles/);
+    await page.locator('[data-dq-mode="due"]').click();
+    await page.locator('#dq-start').click();
+    const correct=await page.evaluate(()=>{
+     const title=document.querySelector('#dq-prompt').textContent.trim();
+     return window.KidBumDirectBank.items.find(q=>q.prompt===title).correct;
+    });
+    await page.locator('input[name="dq-answer"][value="'+correct+'"]').check();
+    await page.locator('#dq-check').click();
+    assert.equal(await page.locator('.en-feedback[data-correct="true"]').count(),1);
+    await page.locator('#dq-exit').click();
+    assert.equal(await page.locator('#dq-start').isEnabled(),false,'Correct answer schedules next day');
+    await page.locator('[data-dq-mode="exam"]').click();
+    await page.locator('#dq-area').selectOption('Todas');
+    await page.locator('#dq-type').selectOption('Todos');
+    await page.locator('#dq-length').selectOption('10');
+    await page.locator('#dq-start').click();
+    assert.equal(await page.locator('#dq-clock').count(),1,'Practice timer available');
+    assert.equal(await page.locator('.en-feedback').count(),0,'Exam never reveals answer before finish');
+    for(let i=0;i<9;i++)await page.locator('#dq-next').click();
+    await page.locator('#dq-next').click();
+    assert.equal(await page.locator('.en-summary-item').count(),10,'Test reviews all ten questions');
+    assert.equal(await page.locator('.en-indicator.skip').count(),10);
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('kidbum-enarm-progress-v1'))['mi-01-0'].seen),3);
+    await noHorizontalOverflow(page,'ENARM direct test results');
+    assert.equal(errors.length,0,'Direct bank JS errors '+errors.join('; '));
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');
