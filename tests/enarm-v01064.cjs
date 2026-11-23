@@ -10,7 +10,7 @@ const publicVersion=read('release-check.js'),updater=read('assets/pwa-update-v01
 assert.equal(bank.caseCount,37);
 assert.equal(bank.questionCount,74);
 assert.equal(bank.areas.length,7);
-assert.equal(new Set(bank.cases.map(c=>c.id)).size,30,'No duplicate cases');
+assert.equal(new Set(bank.cases.map(c=>c.id)).size,37,'No duplicate cases');
 assert.ok(bank.disclaimer.includes('revisión clínica independiente pendiente'),'Editorial status remains honest');
 assert.ok(bank.disclaimer.includes('No son preguntas oficiales'),'No false affiliation');
 const areas=new Set(bank.areas),distribution=[0,0,0,0];
