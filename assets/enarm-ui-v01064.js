@@ -1,12 +1,13 @@
-/* KidBum ENARM 1.0 · UI and local training logic · v0.10.64
+/* KidBum ENARM 1.1 · UI and local training logic · v0.10.65
  * Runs offline, no analytics/network requests, no patient data or prescriptions.
  * Timed mode is a PRACTICE timer, not an ENARM timing claim. */
 (function(){
  'use strict';
  const root=document.getElementById('enarm-app');
  const bank=window.KidBumENARMBank;
+ const radar=window.KidBumENARMRadar;
  if(!root)return;
- if(!bank||!Array.isArray(bank.cases)){root.textContent='No se pudo cargar el banco educativo. Revisa la actualización de KidBum antes de estudiar.';return;}
+ if(!bank||!Array.isArray(bank.cases)||!radar){root.textContent='No se pudo cargar el banco educativo o el Radar. Actualiza los archivos de KidBum antes de estudiar.';return;}
  const storageKey='kidbum-enarm-progress-v1';
  const alphabet='ABCD';
  const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -23,14 +24,14 @@
    for(const [key,h] of Object.entries(obj).slice(0,250)){
     if(!/^[a-z]{2,3}-\d{2}-[01]$/.test(key)||!h||typeof h!=='object')continue;
     const n=v=>Number.isSafeInteger(v)&&v>=0&&v<=10000?v:0;
-    out[key]={seen:n(h.seen),right:n(h.right),wrong:n(h.wrong),streak:Math.min(2,n(h.streak))};
+    out[key]=radar.normalize({seen:n(h.seen),right:n(h.right),wrong:n(h.wrong),streak:n(h.streak),lastAt:h.lastAt,dueAt:h.dueAt,intervalDays:h.intervalDays});
    }
    return out;
   }catch{return Object.create(null)}
  }
  function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history))}catch{/* Remains in memory */}}
  const keyOf=(c,qi)=>c.id+'-'+qi;
- function isWeak(c){return c.questions.some((q,i)=>{const h=history[keyOf(c,i)];return h&&h.wrong>0&&h.streak<2})}
+ function isWeak(c){return c.questions.some((q,i)=>radar.weak(history[keyOf(c,i)]))}
  function counts(){
   const stats=Object.values(history);
   const attempts=stats.reduce((n,x)=>n+x.seen,0),correct=stats.reduce((n,x)=>n+x.right,0);
@@ -39,6 +40,7 @@
  function available(){
   let items=bank.cases.filter(c=>state.area==='Todas'||c.area===state.area);
   if(state.mode==='weak')items=items.filter(isWeak);
+  if(state.mode==='due')items=radar.dueCases(bank,history,state.area);
   return items;
  }
  function shuffle(items){
@@ -88,7 +90,8 @@
   };
  }
  function startSession(){
-  const cases=shuffle(available()).slice(0,Math.ceil(state.size/2));
+  const pool=available();
+  const cases=(state.mode==='due'?radar.sortDue(pool,history):shuffle(pool)).slice(0,Math.ceil(state.size/2));
   if(!cases.length)return;
   const steps=cases.flatMap(c=>c.questions.map((q,qi)=>({c,qi,key:keyOf(c,qi)})));
   const seconds=steps.length*90;
@@ -99,11 +102,8 @@
  }
  function record(step,answer){
   if(answer===null)return;
-  const h=history[step.key]||{seen:0,right:0,wrong:0,streak:0};
-  h.seen++;
-  if(answer===step.c.questions[step.qi].correct){h.right++;h.streak=Math.min(2,h.streak+1)}
-  else{h.wrong++;h.streak=0}
-  history[step.key]=h;persist();
+  history[step.key]=radar.record(history[step.key],answer===step.c.questions[step.qi].correct);
+  persist();
  }
  function formatTime(seconds){return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0')}
  function tick(){
@@ -123,7 +123,7 @@
   const rest=Math.max(0,Math.ceil((s.deadline-Date.now())/1000));
   root.innerHTML='<div class="en-card" aria-label="Pregunta clínica actual">'+
    '<div class="en-progress-top"><span>Pregunta '+(s.index+1)+' de '+s.steps.length+' · '+esc(step.c.area)+'</span>'+
-   (s.mode==='exam'?'<span class="en-clock" id="en-clock" data-low="'+(rest<=60)+'" role="timer" aria-label="Tiempo restante">⌛ '+formatTime(rest)+'</span>':'<span>Modo '+(s.mode==='weak'?'repaso':'estudio')+'</span>')+
+   (s.mode==='exam'?'<span class="en-clock" id="en-clock" data-low="'+(rest<=60)+'" role="timer" aria-label="Tiempo restante">⌛ '+formatTime(rest)+'</span>':'<span>Modo '+(s.mode==='weak'?'debilidades':s.mode==='due'?'repaso de hoy':'estudio')+'</span>')+
    '</div><div class="en-track" aria-hidden="true"><div style="width:'+Math.round((s.index+1)/s.steps.length*100)+'%"></div></div>'+
    '<div class="en-case"><span class="en-overline">Caso clínico · '+esc(step.c.topic)+'</span><p>'+esc(step.c.stem)+'</p></div>'+
    '<h2 id="en-question-title" tabindex="-1" class="en-question">'+esc(q.prompt)+'</h2>'+
