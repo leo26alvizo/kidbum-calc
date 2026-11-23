@@ -33,7 +33,7 @@ for(const q of bank.items){
  assert.equal(q.options.length,4,'Four options: '+q.id);
  assert.equal(new Set(q.options).size,4,'Discriminating choices: '+q.id);
  assert.ok(Number.isInteger(q.correct)&&q.correct>=0&&q.correct<4);
- assert.ok(q.options[q.correct].length>=6);
+ assert.ok(q.options[q.correct].length>=4,'Acronyms such as PHQ-2 are valid short correct answers');
  assert.ok(!titles.has(q.prompt),'No duplicate prompts: '+q.id);titles.add(q.prompt);
  assert.ok(!('stem' in q),'No case vignette/stem permitted');
  assert.ok(Array.isArray(q.reading),'Themed readings available');
