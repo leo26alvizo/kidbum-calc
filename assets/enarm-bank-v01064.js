@@ -1,4 +1,4 @@
-/* KidBum ENARM 1.0 · Banco local de CASOS ORIGINALES v0.10.64
+/* KidBum ENARM 1.0 · Banco local de CASOS ORIGINALES v0.10.65
  * Ejercicios educativos redactados para esta aplicación. No oficiales.
  * Sin revisión clínica independiente documentada; no usar como órdenes ni
  * para decisiones con pacientes. Los enlaces son lecturas sugeridas de cotejo,
@@ -21,6 +21,13 @@
   who:{label:'OMS · Sarampión',url:'https://www.who.int/es/news-room/fact-sheets/detail/measles'},
   cold:{label:'OMS · Cadena de frío de inmunización',url:'https://www.who.int/teams/immunization-vaccines-and-biologicals/essential-programme-on-immunization/supply-chain/controlled-temperature-chain-%28ctc%29'}
  };
+  gold2026:{label:'GOLD · Global Strategy for COPD 2026',url:'https://goldcopd.org/2026-gold-report/'},
+  cdcAom:{label:'CDC · Atención ambulatoria pediátrica, otitis media aguda',url:'https://www.cdc.gov/antibiotic-use/hcp/clinical-care/pediatric-outpatient.html'},
+  msfShoulder:{label:'MSF · Distocia de hombros, guía clínica',url:'https://medicalguidelines.msf.org/en/viewport/ONC/english/7-5-shoulder-dystocia-51417529.html'},
+  hernia:{label:'HerniaSurge · Update of international groin hernia guidelines (2023)',url:'https://academic.oup.com/bjsopen/article/7/5/zrad080/7325871'},
+  niceTrauma:{label:'NICE NG39 · Major trauma, assessment and management',url:'https://www.nice.org.uk/guidance/ng39/chapter/Recommendations'},
+  whoFlu:{label:'OMS · Programa mundial de influenza, grupos prioritarios',url:'https://www.who.int/teams/global-influenza-programme/vaccines/vaccine-use'},
+  predictive:{label:'NCBI Bookshelf · Prevalencia y valores predictivos',url:'https://www.ncbi.nlm.nih.gov/books/NBK430867/'},
  const Q=(prompt,options,correct,why)=>({prompt,options,correct,why});
  const C=(id,area,topic,stem,source,qs)=>({id,area,topic,stem,source:R[source],questions:qs});
  const cases=[
@@ -144,6 +151,35 @@
   Q('Para muchas vacunas del programa regular, ¿qué intervalo de conservación se usa como referencia?',['+2 a +8 °C, con excepciones según producto','−40 a −30 °C para todas','+20 a +30 °C para todas','Cualquier temperatura si la caja está cerrada'],0,'La cadena de frío estándar de múltiples vacunas es +2 a +8 °C; algunos productos tienen requisitos específicos que prevalecen.'),
   Q('¿Qué se debe hacer con lotes posiblemente expuestos fuera de rango?',['Separar, identificar «no usar» y consultar evaluación técnica antes de liberar','Administrarlos rápidamente para no perderlos','Congelarlos todos inmediatamente','Descartar sin registrar el incidente ni consultar'],0,'No se asume que son seguros o inservibles sin evaluación; se inmovilizan y documentan para decisión del programa de inmunizaciones.')
  ])
+,
+ C('mi-08','Medicina Interna','Diagnóstico de EPOC','Hombre de 62 años con tabaquismo de larga evolución, tos crónica y disnea progresiva. La espirometría posbroncodilatador muestra cociente VEF1/CVF de 0.63; se encuentra clínicamente estable.','gold2026',[
+  Q('¿Qué hallazgo permite documentar limitación persistente al flujo aéreo bajo el criterio GOLD?',['Cociente VEF1/CVF posbroncodilatador menor de 0.70','Disnea aislada sin espirometría','Frecuencia cardiaca mayor de 90','Radiografía normal con tos'],0,'GOLD utiliza VEF1/CVF posbroncodilatador menor de 0.70 como criterio espirométrico de obstrucción persistente, interpretado en contexto de síntomas y factores de riesgo.'),
+  Q('¿Cuál es una afirmación correcta sobre la evaluación integral posterior?',['Solo la radiografía define el pronóstico','Síntomas, exacerbaciones, comorbilidades y función pulmonar guían la evaluación','Todo paciente requiere antibiótico crónico','La espirometría excluye cualquier diagnóstico alternativo'],1,'La espirometría confirma obstrucción; el abordaje integral considera carga sintomática, historia de exacerbaciones, comorbilidades y diagnósticos alternativos.')
+ ]),
+ C('ped-06','Pediatría','Otitis media aguda','Niña de 3 años con otalgia de inicio agudo y fiebre. La otoscopia muestra membrana timpánica intensamente abombada con derrame en oído medio; no hay signos de mastoiditis.','cdcAom',[
+  Q('¿Qué hallazgo otoscópico apoya con más fuerza el diagnóstico de otitis media aguda?',['Membrana timpánica moderada o intensamente abombada','Canal auditivo externo normal sin derrame','Cerumen blando sin dolor','Tímpano ligeramente opaco sin clínica'],0,'La protrusión moderada a severa de la membrana timpánica o la otorrea nueva no atribuible a otitis externa es criterio diagnóstico importante de otitis media aguda.'),
+  Q('¿Qué evaluación clínica debe preceder a decidir entre observación y antibiótico?',['Solo preguntar por el color de la secreción nasal','Valorar edad, lateralidad, dolor, fiebre, duración y posibilidad de seguimiento','Ordenar antibiótico sin explorar oídos','Tratar siempre con antivirales'],1,'La conducta se individualiza por gravedad, edad, afectación bilateral o unilateral, seguimiento y hallazgos confirmatorios; no todos los casos necesitan la misma estrategia.')
+ ]),
+ C('go-06','Ginecología y Obstetricia','Distocia de hombros','Tras la salida de la cabeza fetal, esta se retrae contra el periné y no ocurre la salida de los hombros con tracción suave habitual; se sospecha impactación del hombro anterior.','msfShoulder',[
+  Q('¿Cuál es una maniobra inicial apropiada en distocia de hombros?',['Presión fúndica vigorosa','McRoberts con ayuda y presión suprapúbica según respuesta','Tracción forzada de la cabeza','Esperar diez minutos sin pedir apoyo'],1,'Debe solicitarse ayuda e iniciar maniobras sistemáticas; McRoberts y presión suprapúbica son maniobras externas iniciales habituales.'),
+  Q('¿Qué maniobra debe evitarse por aumentar la impactación o el riesgo de lesión?',['Presión sobre el fondo uterino','Flexión materna de caderas tipo McRoberts','Presión suprapúbica dirigida','Pedir apoyo adicional al equipo obstétrico'],0,'La presión fúndica no libera el hombro impactado y puede empeorar la obstrucción, aumentando el riesgo de lesión materna o fetal.')
+ ]),
+ C('cg-05','Cirugía General','Hernia inguinal complicada','Hombre de 71 años presenta masa inguinal dolorosa, irreductible desde hace horas, vómitos y distensión; el abdomen tiene defensa involuntaria y hay deterioro del estado general.','hernia',[
+  Q('¿Qué complicación debe considerarse prioritariamente ante este cuadro?',['Hernia estrangulada con posible isquemia intestinal','Hernia reducible asintomática','Dermatitis de contacto aislada','Lipoma subcutáneo no complicado'],0,'La irreductibilidad con dolor intenso, signos obstructivos y peritoneales sugiere estrangulación intestinal, situación potencialmente letal.'),
+  Q('¿Qué curso de acción es más adecuado ante sospecha de estrangulación?',['Esperar control programado a seis meses','Valoración quirúrgica y preparación para intervención urgente','Realizar reducción forzada reiterada sin valorar','Administrar únicamente analgésico y alta'],1,'Las guías de hernias complicadas recomiendan atención quirúrgica urgente cuando se sospecha estrangulación; no debe demorarse por pruebas innecesarias.')
+ ]),
+ C('urg-05','Urgencias','Neumotórax a tensión','Adulto tras trauma torácico presenta disnea intensa, SpO₂ 82 %, PA 72/40 mmHg, ingurgitación yugular y ausencia de murmullo vesicular izquierdo.','niceTrauma',[
+  Q('¿Qué diagnóstico amenazante para la vida debe reconocerse de inmediato?',['Neumotórax a tensión con inestabilidad hemodinámica','Bronquitis no complicada','EPOC estable','Tos posviral'],0,'La combinación de trauma, hipoxemia, asimetría auscultatoria y choque hace sospechar neumotórax a tensión; no es necesario observar desviación traqueal para actuar.'),
+  Q('¿Qué prioridad se indica si la sospecha es alta y persiste la inestabilidad?',['Esperar tomografía antes de intervenir','Descompresión torácica inmediata por personal capacitado mientras se reanima','Dar alta con analgesia','Solicitar prueba de función respiratoria'],1,'En neumotórax a tensión con inestabilidad hemodinámica o compromiso respiratorio grave, se prioriza descompresión antes de imágenes según recursos y competencia técnica.')
+ ]),
+ C('mf-04','Medicina Familiar','Prevención de influenza','Médica de primer nivel de 32 años, embarazada de 22 semanas, pregunta si la vacunación de influenza estacional es relevante para ella. No refiere antecedente de anafilaxia a la vacuna.','whoFlu',[
+  Q('¿Qué poblaciones aparecen entre los grupos prioritarios de vacunación estacional de influenza de la OMS?',['Solo personas con rinitis','Personal de salud y personas embarazadas, entre otros grupos','Exclusivamente adolescentes sanos','Solo varones mayores de cuarenta años'],1,'La OMS incluye al personal sanitario y a las personas embarazadas entre los grupos prioritarios, además de otros grupos de riesgo, según políticas nacionales.'),
+  Q('¿Qué enfoque de prevención es apropiado en este caso?',['Desalentar vacunación por embarazo sin evaluar tipo de producto','Revisar esquema y ofrecer vacuna estacional apropiada según recomendaciones nacionales','Indicar antibiótico preventivo','Reemplazar la vacuna por suplementos como único cuidado'],1,'En el embarazo debe ofrecerse inmunización antigripal estacional indicada y adecuada al producto, conforme a las recomendaciones sanitarias locales.')
+ ]),
+ C('sp-03','Salud Pública','Valor predictivo positivo','En un programa de tamizaje, 200 personas tuvieron resultado positivo; la prueba de referencia confirma enfermedad en 120 y la descarta en las otras 80. Se desea interpretar la utilidad de la prueba.','predictive',[
+  Q('¿Cuál es el valor predictivo positivo observado de la prueba en este programa?',['20 %','40 %','60 %','80 %'],2,'El valor predictivo positivo es verdaderos positivos entre todos los positivos: 120 dividido entre 200 = 0.60, equivalente a 60 %.'),
+  Q('Si baja la prevalencia de la enfermedad y sensibilidad/especificidad permanecen iguales, ¿qué ocurre en general con el valor predictivo positivo?',['Disminuye','Aumenta necesariamente','Permanece siempre fijo','Se convierte en la sensibilidad'],0,'Con prevalencia menor, una proporción relativamente mayor de resultados positivos puede ser falsa; el valor predictivo positivo usualmente disminuye si sensibilidad y especificidad se mantienen constantes.')
+ ]),
  ];
  // Deterministically rotate answer positions so trainees cannot infer the
  // answer from a repeated option letter. Wording and clinical content stay
@@ -158,7 +194,7 @@
  }));
  const AREAS=['Medicina Interna','Pediatría','Ginecología y Obstetricia','Cirugía General','Urgencias','Medicina Familiar','Salud Pública'];
  const questions=cases.reduce((n,c)=>n+c.questions.length,0);
- const api={VERSION:'1.0.0',caseCount:cases.length,questionCount:questions,cases,areas:AREAS,format:R.enarm,
+ const api={VERSION:'1.1.0',caseCount:cases.length,questionCount:questions,cases,areas:AREAS,format:R.enarm,
   disclaimer:'Casos educativos originales; revisión clínica independiente pendiente. No son preguntas oficiales ni sustituyen guías, supervisión ni juicio clínico.'};
  return Object.freeze(api);
 });
