@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="740" viewBox="0 0 1400 740" fill="none" role="img" aria-label="Emblema de león de KidBum sobre un escudo azul cobalto, con símbolos de medicina y estudio">
+<defs>
+ <linearGradient id="sky" x1="160" y1="740" x2="1270" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#04102C"/><stop offset=".37" stop-color="#073E97"/><stop offset=".7" stop-color="#0750B9"/><stop offset="1" stop-color="#020E29"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#00C8FF" stop-opacity=".4"/><stop offset=".43" stop-color="#1573F2" stop-opacity=".19"/><stop offset="1" stop-color="#1573F2" stop-opacity="0"/></radialGradient>
+ <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF4C5"/><stop offset=".22" stop-color="#DAB963"/><stop offset=".5" stop-color="#FFD778"/><stop offset=".78" stop-color="#B7782E"/><stop offset="1" stop-color="#FFF2BC"/></linearGradient>
+ <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F6FEFF"/><stop offset=".44" stop-color="#67CAFC"/><stop offset="1" stop-color="#1585D4"/></linearGradient>
+ <linearGradient id="book" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#DBF2FF"/><stop offset="1" stop-color="#4389D9"/></linearGradient>
+ <filter id="glo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9"/></filter>
+ <filter id="smallGlo" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="3"/></filter>
+ <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" stroke="#61BDFF" stroke-opacity=".11" stroke-width="1"/></pattern>
+ <clipPath id="clip"><rect width="1400" height="740" rx="32"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+ <rect width="1400" height="740" fill="url(#sky)"/>
+ <rect width="1400" height="740" fill="url(#grid)" opacity=".6"/>
+ <path d="M0 706C386 486 560 810 912 612C1112 498 1313 592 1430 552" stroke="#35CEFF" stroke-width="2" opacity=".45"/>
+ <path d="M-130 640C260 475 433 713 722 564C1010 412 1285 544 1490 415" stroke="#1398FC" stroke-width="10" opacity=".17"/>
+ <circle cx="1067" cy="320" r="485" fill="url(#halo)"/>
+ <circle cx="1112" cy="350" r="284" stroke="#58C8FF" stroke-opacity=".25" stroke-width="2"/>
+ <circle cx="1112" cy="350" r="327" stroke="#C4E9FF" stroke-opacity=".08" stroke-width="1"/>
+ <circle cx="1112" cy="350" r="366" stroke="#5BAFF6" stroke-opacity=".13" stroke-dasharray="7 13"/>
+ <path d="M24 550H113L133 534L155 559L177 475L193 601L218 539L240 551H360" stroke="#4EE7FF" stroke-opacity=".22" stroke-width="6" filter="url(#smallGlo)"/>
+ <path d="M24 550H113L133 534L155 559L177 475L193 601L218 539L240 551H360" stroke="#78DFFF" stroke-opacity=".62" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+ <!-- softly lit diagnostic hexagons -->
+ <g stroke="#7DD5FF" stroke-opacity=".48" stroke-width="2">
+  <path d="M690 148L734 123L778 148V198L734 223L690 198Z" fill="#063C8C" fill-opacity=".65"/>
+  <path d="M1290 86L1334 61L1378 86V136L1334 161L1290 136Z" fill="#063C8C" fill-opacity=".64"/>
+  <path d="M727 515L771 490L815 515V565L771 590L727 565Z" fill="#063C8C" fill-opacity=".64"/>
+ </g>
+ <!-- clinical cross -->
+ <path d="M729 148V197M705 173H753" stroke="#D7F5FF" stroke-width="7" stroke-linecap="round"/>
+ <!-- stylized pulse -->
+ <path d="M1309 112H1322L1327 102L1335 125L1342 109H1357" stroke="#D5F5FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+ <!-- book icon -->
+ <path d="M746 520Q760 516 772 527V567Q761 557 746 561ZM772 527Q786 516 799 521V561Q784 557 772 567Z" stroke="#D7F5FF" stroke-width="2.5" stroke-linejoin="round"/>
+ <!-- crest: precise gold plated shield -->
+ <path d="M1112 46C1206 93 1282 111 1356 115V311C1356 447 1293 549 1112 633C931 549 868 447 868 311V115C942 111 1018 93 1112 46Z" fill="#06142D" fill-opacity=".8" stroke="url(#gold)" stroke-width="12"/>
+ <path d="M1112 66C1201 110 1270 127 1332 133V311C1332 437 1276 530 1112 607C948 530 892 437 892 311V133C954 127 1023 110 1112 66Z" fill="#09448C" fill-opacity=".26" stroke="#9ACDFA" stroke-opacity=".42" stroke-width="2"/>
+ <path d="M1112 85L1121 105L1143 107L1126 122L1131 144L1112 133L1093 144L1098 122L1081 107L1103 105Z" fill="url(#gold)" opacity=".9"/>
+ <!-- gold lion: uniquely tailored, luminous symmetric heraldic line work -->
+ <g transform="translate(852 137) scale(2.17)" stroke="url(#gold)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+  <path d="M120 24L103 16 69 30 46 52 33 82 28 116 43 151 49 177 83 211 120 229M120 24L137 16 171 30 194 52 207 82 212 116 197 151 191 177 157 211 120 229" stroke-width="5.2"/>
+  <path d="M120 45L93 38 63 58 52 88 63 112 51 136 75 181 101 198 120 213M120 45L147 38 177 58 188 88 177 112 189 136 165 181 139 198 120 213" stroke-width="4.1"/>
+  <path d="M62 72L89 70 106 88 120 93 134 88 151 70 178 72M66 120L88 115 105 123 120 142 135 123 152 115 174 120" stroke-width="3.5"/>
+  <path d="M80 147L93 163 111 170 120 165 129 170 147 163 160 147M108 146L120 151 132 146M120 151V170L105 178M120 170L135 178M91 183L120 206 149 183" stroke-width="3.6"/>
+  <path d="M56 96L46 120 62 147M184 96L194 120 178 147M90 207L120 223 150 207" stroke-width="3" opacity=".85"/>
+ </g>
+ <path d="M1032 395L1060 399L1081 400M1194 400L1219 399L1242 395" stroke="#69EEFF" stroke-width="4" opacity=".8" stroke-linecap="round"/>
+ <circle cx="1112" cy="350" r="244" fill="none" stroke="#9BD5FF" stroke-opacity=".15" stroke-width="1.5"/>
+ <!-- small academic book at foot of shield -->
+ <g transform="translate(966 614)">
+  <path d="M0 12C54-6 97-2 146 17C198-2 246-4 292 12V72C237 55 194 52 146 74C99 52 54 55 0 72Z" fill="#0B3974" stroke="url(#gold)" stroke-width="4"/>
+  <path d="M13 22C66 10 106 15 143 28V62C91 45 55 45 13 59Z" fill="url(#book)" opacity=".92"/>
+  <path d="M150 28C186 15 226 10 278 22V59C234 45 197 45 150 62Z" fill="url(#book)" opacity=".92"/>
+  <path d="M145 25V72" stroke="#F3C978" stroke-width="3"/>
+  <path d="M34 34C71 27 104 30 125 36M34 44C71 38 103 40 125 46M166 36C195 29 229 27 263 34M166 46C194 40 228 38 263 43" stroke="#327EC6" stroke-width="1.9" opacity=".58"/>
+ </g>
+ <path d="M0 0H1400V6H0Z" fill="url(#gold)" opacity=".65"/>
+ <path d="M0 732H1400V740H0Z" fill="#0B6BEA" opacity=".45"/>
+</g>
+</svg>

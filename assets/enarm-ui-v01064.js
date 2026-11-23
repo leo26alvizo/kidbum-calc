@@ -1,4 +1,4 @@
-/* KidBum ENARM 1.1 · UI and local training logic · v0.10.65
+/* KidBum ENARM 1.1 · UI and local training logic · v0.10.66
  * Runs offline, no analytics/network requests, no patient data or prescriptions.
  * Timed mode is a PRACTICE timer, not an ENARM timing claim. */
 (function(){
@@ -52,12 +52,49 @@
   if(!c.source||!/^https:\/\//.test(c.source.url))return '';
   return '<a class="en-ref" href="'+esc(c.source.url)+'" target="_blank" rel="noopener noreferrer">Lectura sugerida para cotejo: '+esc(c.source.label)+' ↗</a>';
  }
+ function enIcon(name){
+  const paths={
+   book:'<path d="M12 6.5C9.6 5 7.2 4.7 3 5.2V20c4.1-.6 6.7-.2 9 1.3 2.3-1.5 4.9-1.9 9-1.3V5.2c-4.2-.5-6.6-.2-9 1.3ZM12 6.5V21"/>',
+   timer:'<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3M19 6l2-2"/>',
+   target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.7"/><path d="m12 12 8-8"/>',
+   calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18M8 15l2.2 2.2L16 12"/>',
+   layers:'<path d="m12 2 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 17l9 5 9-5"/>',
+   checklist:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8l1.4 1.4L12 7M14 8h3M8 15l1.4 1.4L12 14M14 15h3"/>',
+   chart:'<path d="M4 20V12M10 20V8M16 20V4M22 20V13"/><path d="M2 21h21"/>',
+   brain:'<path d="M12 20V5M12 5c-2-3-6-2-7 1-3 0-4 5-1 7-2 3 0 7 4 7 1 2 3 2 4 0M12 5c2-3 6-2 7 1 3 0 4 5 1 7 2 3 0 7-4 7-1 2-3 2-4 0M7 9l2 2M17 9l-2 2M6 15l3 1M18 15l-3 1"/>',
+   heart:'<path d="M20.8 5.6a5.6 5.6 0 0 0-7.9 0l-.9.9-.9-.9a5.6 5.6 0 0 0-7.9 7.3 7.3 0 0 0 0 9.3L12 22l8.8-7.1a7.3 7.3 0 0 0 0-9.3Z"/>',
+   medical:'<path d="M4 4v6a5 5 0 0 0 10 0V4M2 4h4M12 4h4M14 10v3a4 4 0 0 0 8 0v-1M22 12a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>',
+   people:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6M17 15a5 5 0 0 1 4 5v1"/>',
+   scalpel:'<path d="M18 3 9 12M18 3l3 3-9 9-3-3M8 13l-5 5v3h3l5-5"/>',
+   shield:'<path d="M12 2 20 6v6c0 5-3 8-8 10-5-2-8-5-8-10V6Z"/><path d="M12 7v9M8 11.5h8"/>',
+   globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/>'
+  };
+  return '<svg class="en-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">'+(paths[name]||paths.book)+'</svg>';
+ }
+ const caseArt={
+  'Medicina Interna':'./assets/cardiologia-portada.jpg',
+  'Pediatría':'./assets/pediatria-portada.webp',
+  'Ginecología y Obstetricia':'./assets/ginecologia-portada.webp',
+  'Cirugía General':'./assets/atlas-bmi.jpg',
+  'Urgencias':'./assets/urgencias-portada.jpg',
+  'Medicina Familiar':'./assets/atlas-lungs.jpg',
+  'Salud Pública':'./assets/atlas-brain.jpg'
+ };
+ const areaIcon={
+  'Medicina Interna':'medical',
+  'Pediatría':'heart',
+  'Ginecología y Obstetricia':'people',
+  'Cirugía General':'scalpel',
+  'Urgencias':'shield',
+  'Medicina Familiar':'book',
+  'Salud Pública':'globe'
+ };
  function radarSection(data){
   const next=data.dueQuestions?'Hoy · tienes repasos pendientes':data.nextDueAt?new Date(data.nextDueAt).toLocaleDateString('es-MX',{day:'numeric',month:'short',year:'numeric'}):'Sin repaso programado';
   const weakest=data.weakest?'Área con más errores registrados (mínimo 5 intentos): <strong>'+esc(data.weakest.area)+'</strong>.':'Sin suficientes intentos por área para identificar una debilidad comparativa.';
   return '<section class="en-card en-radar" id="en-radar" aria-labelledby="en-radar-title">'+
    '<div class="en-overline">Tu progreso · solo en este dispositivo</div>'+
-   '<h2 id="en-radar-title">Radar de Conocimiento</h2>'+
+   '<div class="en-radar-title-row"><span class="en-radar-logo" aria-hidden="true">'+enIcon('chart')+'</span><h2 id="en-radar-title">Radar de Conocimiento</h2></div>'+
    '<p class="en-small en-muted">Aciertos de entrenamiento por área, calculados únicamente a partir de tus respuestas. No predice tu calificación ni el nivel de competencia clínica.</p>'+
    '<div class="en-radar-summary"><div><strong>'+data.seenQuestions+'</strong><span>Preguntas practicadas</span></div>'+
    '<div><strong>'+data.dueQuestions+'</strong><span>Preguntas listas para repasar</span></div>'+
@@ -66,7 +103,7 @@
    data.areas.map(area=>{
     const pct=area.percent,hasData=pct!==null;
     const qualifier=area.smallSample&&hasData?' · Muestra pequeña':'';
-    return '<div class="en-radar-row"><div class="en-radar-head"><strong>'+esc(area.area)+'</strong>'+
+    return '<div class="en-radar-row"><div class="en-radar-head"><span class="en-area-name"><span class="en-area-icon" aria-hidden="true">'+enIcon(areaIcon[area.area])+'</span><strong>'+esc(area.area)+'</strong></span>'+
       '<span>'+(!hasData?'Sin datos':pct+' % · '+area.attempts+' '+(area.attempts===1?'intento':'intentos')+qualifier)+'</span></div>'+
       '<div class="en-radar-track"'+(hasData?' role="progressbar" aria-label="'+esc(area.area)+': aciertos de práctica" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"':' aria-hidden="true"')+'>'+
       '<div style="width:'+(hasData?pct:0)+'%"></div></div>'+
@@ -84,15 +121,15 @@
   clearInterval(timer);timer=null;state.screen='home';state.session=null;
   const x=counts(),pool=available(),radarData=radar.scores(bank,history);
   root.innerHTML='<section aria-label="Estadísticas de entrenamiento" class="en-statgrid">'+
-   '<div class="en-stat"><strong>'+bank.caseCount+'</strong><span>Casos originales</span></div>'+
-   '<div class="en-stat"><strong>'+bank.questionCount+'</strong><span>Preguntas disponibles</span></div>'+
-   '<div class="en-stat"><strong>'+(x.percent===null?'—':x.percent+'%')+'</strong><span>Aciertos acumulados · '+x.attempts+' '+(x.attempts===1?'intento':'intentos')+'</span></div></section>'+
+   '<div class="en-stat"><span class="en-stat-icon" aria-hidden="true">'+enIcon('book')+'</span><strong>'+bank.caseCount+'</strong><span>Casos originales</span></div>'+
+   '<div class="en-stat"><span class="en-stat-icon" aria-hidden="true">'+enIcon('checklist')+'</span><strong>'+bank.questionCount+'</strong><span>Preguntas disponibles</span></div>'+
+   '<div class="en-stat"><span class="en-stat-icon" aria-hidden="true">'+enIcon('chart')+'</span><strong>'+(x.percent===null?'—':x.percent+'%')+'</strong><span>Aciertos acumulados · '+x.attempts+' '+(x.attempts===1?'intento':'intentos')+'</span></div></section>'+
    '<section class="en-card" aria-labelledby="en-choose-title"><div class="en-overline">Entrenamiento personalizado</div>'+
    '<h2 id="en-choose-title">¿Cómo quieres estudiar?</h2>'+
    '<p class="en-small en-muted">Contesta una pregunta a la vez. El formato de caso (2 preguntas, 4 opciones) se inspira en la convocatoria 2026, pero este banco es de elaboración original y NO oficial.</p>'+
    '<div class="en-modes" role="group" aria-label="Modo de entrenamiento">'+
    [['study','Modo estudio','Retroalimentación inmediatamente después de responder.'],['exam','Simulacro breve','Tiempo orientativo, revisión al concluir; no reproduce el ENARM oficial.'],['weak','Mis debilidades','Repite casos con errores hasta lograr dos aciertos seguidos.'],['due','Repaso de hoy','Preguntas pendientes según tus respuestas y la repetición espaciada.']].map(v=>
-    '<button type="button" class="en-mode" data-mode="'+v[0]+'" aria-pressed="'+(state.mode===v[0])+'"><strong>'+v[1]+'</strong><small>'+v[2]+'</small></button>'
+    '<button type="button" class="en-mode" data-mode="'+v[0]+'" aria-pressed="'+(state.mode===v[0])+'"><span class="en-mode-icon" aria-hidden="true">'+enIcon(({study:'book',exam:'timer',weak:'target',due:'calendar'})[v[0]])+'</span><span class="en-mode-copy"><strong>'+v[1]+'</strong><small>'+v[2]+'</small></span><span class="en-mode-arrow" aria-hidden="true">›</span></button>'
    ).join('')+'</div>'+
    '<div class="en-form"><div class="en-field"><label for="en-area">Área clínica</label><select id="en-area">'+
    ['Todas',...bank.areas].map(v=>'<option value="'+esc(v)+'"'+(state.area===v?' selected':'')+'>'+esc(v)+'</option>').join('')+
@@ -155,7 +192,7 @@
    '<div class="en-progress-top"><span>Pregunta '+(s.index+1)+' de '+s.steps.length+' · '+esc(step.c.area)+'</span>'+
    (s.mode==='exam'?'<span class="en-clock" id="en-clock" data-low="'+(rest<=60)+'" role="timer" aria-label="Tiempo restante">⌛ '+formatTime(rest)+'</span>':'<span>Modo '+(s.mode==='weak'?'debilidades':s.mode==='due'?'repaso de hoy':'estudio')+'</span>')+
    '</div><div class="en-track" aria-hidden="true"><div style="width:'+Math.round((s.index+1)/s.steps.length*100)+'%"></div></div>'+
-   '<div class="en-case"><span class="en-overline">Caso clínico · '+esc(step.c.topic)+'</span><p>'+esc(step.c.stem)+'</p></div>'+
+   '<div class="en-case"><div class="en-case-copy"><span class="en-overline">Caso clínico · '+esc(step.c.topic)+'</span><p>'+esc(step.c.stem)+'</p></div><img class="en-case-img" src="'+(caseArt[step.c.area]||caseArt['Medicina Interna'])+'" alt="" width="115" height="115" loading="lazy" decoding="async" aria-hidden="true"></div>'+
    '<h2 id="en-question-title" tabindex="-1" class="en-question">'+esc(q.prompt)+'</h2>'+
    '<fieldset class="en-choices" aria-labelledby="en-question-title">'+q.options.map((option,i)=>
     '<label class="en-choice'+(reviewed?(i===q.correct?' en-correct':i===selected?' en-incorrect':''):'')+'">'+

@@ -30,6 +30,8 @@ jobs:
         run: node tests/enarm-v01064.cjs
       - name: ENARM 1.1 · radar, spaced-repetition and legacy-progress integrity
         run: node tests/enarm-radar-v01065.cjs
+      - name: ENARM Cobalt UI · cover, local illustrations, accessible icons and unchanged scoring
+        run: node tests/enarm-cobalt-v01066.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks

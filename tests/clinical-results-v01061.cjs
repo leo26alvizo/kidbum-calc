@@ -182,6 +182,21 @@ async function main(){
      assert.ok(links.some(url=>url.endsWith('enarm-v01064.css')),'ENARM CSS should be applied');
      assert.ok(links.some(url=>url.endsWith('enarm-radar-v01065.css')),'Radar CSS should load');
      assert.equal(await page.locator('.en-radar-row').count(),7,'Radar lists all seven clinical areas');
+     assert.ok(links.some(url=>url.endsWith('enarm-cobalt-v01066.css')),'Cobalt CSS must load');
+     const artwork=page.locator('.en-hero-art');
+     await artwork.evaluate(img=>img.decode());
+     const art=await artwork.evaluate(img=>({complete:img.complete,width:img.naturalWidth,height:img.naturalHeight}));
+     assert.ok(art.complete&&art.width===1400,'Premium lion SVG cover must be present');
+     assert.equal(await page.locator('.en-mode').count(),4);
+     assert.equal(await page.locator('.en-mode-icon svg').count(),4,'Each learning mode uses scalable icons');
+     assert.equal(await page.locator('.en-area-icon svg').count(),7,'Seven medical specialty icons');
+     const visual=await page.evaluate(()=>{
+      const styles=getComputedStyle(document.documentElement);
+      return{background:styles.getPropertyValue('--en-bg').trim(),images:[...document.querySelectorAll('.en-mode')].map(el=>getComputedStyle(el,'::before').backgroundImage)};
+     });
+     assert.ok(['#06183b','#030c22'].includes(visual.background.toLowerCase()),'Deep cobalt palette must apply');
+     assert.ok(visual.images.every(v=>v.includes('atlas-')),'All four mode cards use locally cached clinical images');
+     await noHorizontalOverflow(page,'ENARM illustrated dashboard '+width);
     }finally{await context.close()}
    }
   });
@@ -193,6 +208,9 @@ async function main(){
     page.on('dialog',dialog=>dialog.accept());
     await page.goto(base+'/enarm.html',{waitUntil:'domcontentloaded'});
     await page.locator('#en-start').click();
+    assert.equal(await page.locator('.en-case-img').count(),1,'Case vignette includes medical image');
+    await page.locator('.en-case-img').evaluate(img=>img.decode());
+    assert.ok(await page.locator('.en-case-img').evaluate(img=>img.naturalWidth>0),'Medical illustration must load locally');
     assert.equal(await page.locator('input[name="en-answer"]').count(),4);
     assert.equal(await page.locator('.en-feedback').count(),0,'No solution before answer');
     const answer=await page.evaluate(()=>{
