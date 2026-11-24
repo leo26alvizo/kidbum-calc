@@ -33,10 +33,10 @@ const index=fs.readFileSync('index.html','utf8');assert.match(index,/id="mode-se
 const sw=fs.readFileSync('sw.js','utf8');assert.match(sw,/'\.\/assets\/chatgpt-analysis\.js'/);assert.match(sw,/chatgpt-external-restored/);
 const reg=index.slice(index.indexOf('const externalCalculators='),index.indexOf('const calculatorCount='));
 const paths=[...reg.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(paths.length,46,'46 standalone calculators');
+assert.equal(paths.length,71,'71 standalone calculators');
 for(const path of new Set(paths)){
  if(path==='pediatria-evaluacion-rapida.html'){
   assert.match(fs.readFileSync('assets/pediatria-rapid-ui.js','utf8'),/KidBumAnalysis\.attach\(/);
  }else assert.match(fs.readFileSync(path,'utf8'),/KidBumAnalysis\.attach\(/,'Every external calculator must have ChatGPT analysis: '+path);
 }
-console.log('Standalone ChatGPT analysis PASS: 46 calculators, 8 pages, privacy, completion gating, themes, offline.');
+console.log('Standalone ChatGPT analysis PASS: 71 calculators, shared analysis pages, privacy, completion gating, themes, offline.');

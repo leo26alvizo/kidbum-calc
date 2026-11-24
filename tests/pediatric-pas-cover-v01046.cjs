@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* PAS 0.10.46 — only presentation changes; untouched 0.10.45 clinical engine. */
 const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const html=fs.readFileSync('pediatria-pas.html','utf8'),
@@ -36,7 +37,7 @@ assert.match(css,/\.pas-outcome\{position:static!important/);
 assert.match(css,/@media\(max-width:660px\)/);
 assert.match(css,/@media\(min-width:901px\)/);
 assert.match(css,/\.pas-cover-photo-img\{/);
-assert.match(home,/content="0\.10\.75"/);
+assert.match(home,new RegExp("content=\""+currentReleasePattern+"\""));
 assert.match(html,/content="0\.10\.46"/);
 assert.match(home,/image:'pas-apendicectomia-portada-v01046\.webp'/);
 assert.match(home,/c\.dataset\.pedRapid==='pas'\?'\.\/pediatria-pas\.html'/);

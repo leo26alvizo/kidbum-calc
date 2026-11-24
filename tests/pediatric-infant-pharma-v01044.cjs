@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 // Pediatric infant support v0.10.44 — technical checks, not independent clinical validation.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const context={};context.window=context;context.globalThis=context;
@@ -73,5 +74,5 @@ assert.match(page,/assets\/pediatric-pharma-v01044\.css/);
 const sw=fs.readFileSync('sw.js','utf8');
 for(const file of ['pediatric-dose-math-v01044.js','pediatric-pharma-v01044.css'])assert.ok(sw.includes(file));
 assert.doesNotMatch(fs.readFileSync('assets/pediatric-dose-math-v01044.js','utf8'),/fetch\s*\(|localStorage|sessionStorage|sendBeacon/);
-assert.match(page,/content="0\.10\.75"/);
+assert.match(page,new RegExp("content=\""+currentReleasePattern+"\""));
 console.log('PASS infant dosing: paracetamol ≥1m, ibuprofen/OMA ≥6m, fever <3m guard, day-0 math and neonatal protocol, maximums, exact presentation, offline.');

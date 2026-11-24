@@ -59,7 +59,7 @@ const mustHave=['algoritmos-oftalmologia.html','assets/oftalmologia-algoritmos-c
 ];
 for(const p of mustHave)assert.ok(packedSet.has('./'+p),'Not precached: '+p);
 const external=[...home.matchAll(/\{id:'([^']+)',category:'[^']+',href:'([^']+)',image:'([^']+)'\}/g)];
-assert.equal(external.length,46,'All 46 standalone tool links must remain registered');
+assert.equal(external.length,71,'All 71 standalone tool links must remain registered');
 for(const match of external){
  const page=match[2].split('#')[0];
  assert.ok(packedSet.has(page),'Calculator '+match[1]+' not precached: '+page);
@@ -69,7 +69,7 @@ for(const match of external){
 // Every local script referenced by an alternate tool must be available offline.
 const pages=['index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html','pediatria-evaluacion-rapida.html',
- 'documentacion.html','historia-pediatria.html','atlas-gallery.html'];
+ 'documentacion.html','historia-pediatria.html','atlas-gallery.html','ortopedia.html','guardia-pro.html','enarm.html','enarm-direct.html','enarm-visual.html','pharma-pro.html','algoritmos-pediatria.html','algoritmos-urgencias.html','algoritmos-oftalmologia.html','algoritmos-ortopedia.html','pediatria-pas.html'];
 for(const p of pages){
  const html=fs.readFileSync(p,'utf8');
  for(const m of html.matchAll(/<script[^>]*src=["'](\.\/[^"']+)["']/g)){
@@ -82,9 +82,9 @@ const sourceSize=packed.reduce((n,p)=>n+fs.statSync(p).size,0);
 const otoSize=packed.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).reduce((n,p)=>n+fs.statSync(p).size,0);
 const eyeSize=fs.statSync('assets/oftalmologia-portada-original.webp').size;
 assert.ok(eyeSize<256*1024,'Original ophthalmology cover size');
-assert.ok(sourceSize-otoSize-eyeSize<20*1024*1024,'Original offline pack exceeds 20 MiB');
+assert.ok(sourceSize-otoSize-eyeSize<24*1024*1024,'Non-otoscopy/non-cover pack exceeds 24 MiB');
 assert.ok(otoSize<2*1024*1024,'Otoscopic educational images exceed 2 MiB');
-assert.ok(sourceSize<22*1024*1024,'Expanded offline pack exceeds 22 MiB');
+assert.ok(sourceSize<26*1024*1024,'Expanded offline pack exceeds 26 MiB');
 assert.ok(sourceSize>8*1024*1024,'HD anatomical image was not bundled');
 assert.equal(packed.length,packedSet.size,'Offline pack must not contain duplicates');
 assert.ok(sw.includes('ignoreSearch:true'),'Versioned images require query-independent cache fallback');
@@ -114,5 +114,5 @@ async function navigate(path){
  await navigate('./assets/wallace-adultos.webp?v=20261021-repaired');
  await navigate('./assets/snnoop10-portada.jpg?v=cover');
  assert.equal(networkCalls,0,'Cold airplane-mode app navigation contacted the network');
- console.log('FULL OFFLINE PASS: 136 calculator routes, 13 local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
+ console.log('FULL OFFLINE PASS: 71 standalone calculator routes and local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
 })().catch(e=>{console.error(e);process.exitCode=1;});

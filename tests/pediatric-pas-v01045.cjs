@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 // Clinical PAS algorithm QA — verifies arithmetic and fail-closed behavior, NOT independent medical validation.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const read=x=>fs.readFileSync(x,'utf8');
@@ -102,7 +103,7 @@ assert.match(page,/pediatric-appendicitis-risk-calculator-parc/);
 assert.match(page,/2026/);
 assert.ok(home.includes("{id:'pas',title:'PAS · Apendicitis pediátrica'"));
 assert.ok(home.includes("c.dataset.pedRapid==='pas'?'./pediatria-pas.html'"));
-assert.match(home,/content="0\.10\.75"/);
+assert.match(home,new RegExp("content=\""+currentReleasePattern+"\""));
 assert.match(page,/content="0\.10\.46"/);
 for(const path of ['pediatria-pas.html','assets/pediatric-pas-core-v01045.js','assets/pediatric-pas-ui-v01045.js','assets/pediatric-pas-v01045.css'])
  assert.ok(sw.includes("'./"+path+"'"),'Offline precache missing '+path);
