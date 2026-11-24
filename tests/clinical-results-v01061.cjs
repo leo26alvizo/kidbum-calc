@@ -451,6 +451,37 @@ async function main(){
    try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-oph-alg]').count(),0);await page.locator('[data-featured="Oftalmología"]').click();assert.equal(await page.locator('[data-oph-alg]').count(),1);assert.equal(await page.locator('#calc-list article.calc-card').count(),15);await page.locator('[data-oph-alg]').click();await page.waitForURL('**/algoritmos-oftalmologia.html');assert.equal(await page.locator('[data-algo-id]').count(),23);await page.locator('#alg-search-input').fill('QUERATITIS');assert.equal(await page.locator('[data-algo-id="queratitis"]').count(),1);await page.locator('#alg-search-input').fill('');await page.locator('[data-algo-id="quemadura-quimica"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/irrigación copiosa inmediata/);await page.locator('[data-choice-index="2"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Incertidumbre/);await page.locator('#alg-back-step').click();await page.locator('[data-choice-index="1"]').click();await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Quemadura de riesgo alto/);await page.locator('#alg-mode-estudio').click();assert.equal(await page.locator('#alg-evidence').getAttribute('open'),'');await page.locator('#alg-theme').click();await noHorizontalOverflow(page,'Algoritmos oftalmología');await page.locator('.alg-back').click();await page.waitForURL('**/index.html?especialidad=oftalmologia');assert.equal(await page.locator('[data-oph-alg]').count(),1);
    }finally{await context.close()}
   });
+
+  await test('Examples — all core and diabetes tools, gasometry, PAS and cervical rule',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    const core=await page.evaluate(()=>{
+     const failures=[],total=defs.length;
+     for(const def of defs){
+      try{go('calc',def.id);const b=document.querySelector('#example');if(!b||b.disabled)throw Error('No example button');b.click();const state=document.querySelector('.kb-result-modern')?.dataset.kbResultState;if(!['ready','not-evaluable'].includes(state))throw Error('State '+state);}
+      catch(e){failures.push(def.id+': '+e.message);}
+     }
+     return {total,failures};
+    });
+    assert.equal(core.total,100);assert.deepEqual(core.failures,[]);
+    const diabetes=await page.evaluate(()=>{
+     const failures=[];
+     for(const tool of diabetesTools){try{go('diabetes',tool.id);const b=document.querySelector('#db-example');if(!b||b.disabled)throw Error('No example');b.click();if(document.querySelector('#db-copy')?.disabled!==false)throw Error('Example not ready');}catch(e){failures.push(tool.id+': '+e.message);}}
+     return {total:diabetesTools.length,failures};
+    });
+    assert.equal(diabetes.total,6);assert.deepEqual(diabetes.failures,[]);
+    await page.evaluate(()=>go('gasometria'));await page.locator('#gas-example').click();assert.equal(await page.locator('#gas-panel').getAttribute('data-kb-result-state'),'ready');
+    await page.goto(base+'/pediatria-pas.html',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('#pas-points').innerText(),'—');
+    await page.locator('#pas-example').click();assert.equal(await page.locator('#pas-points').innerText(),'7');
+    assert.match(await page.locator('#pas-completeness').innerText(),/8 de 8/);assert.equal(await page.locator('#pas-example-note').isVisible(),true);
+    await page.locator('#pas-reset').click();assert.equal(await page.locator('#pas-points').innerText(),'—');assert.equal(await page.locator('#pas-example-note').isVisible(),false);
+    await page.goto(base+'/ortopedia.html#ort-canadian-cspine',{waitUntil:'domcontentloaded'});
+    await page.locator('#example').click();assert.equal(await page.locator('#ort-low').inputValue(),'1');await page.locator('#form button[type=submit]').click();assert.match(await page.locator('#output').innerText(),/Negativa/);
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

@@ -72,6 +72,9 @@ for(const path of new Set(externalPaths)){
   assert.match(fs.readFileSync('assets/pediatria-rapid-ui.js','utf8'),/KidBumFictitiousExamples\?\.forPediatricRapid/);
  }
 }
+const pasPage=fs.readFileSync('pediatria-pas.html','utf8');
+assert.match(pasPage,/id="pas-example"/);assert.match(pasPage,/id="pas-example-note"/);
+assert.match(fs.readFileSync('assets/pediatric-pas-ui-v01045.js','utf8'),/\$\('pas-example'\)\.addEventListener\('click'/);
 const rapid=examples.forPediatricRapid('wood');
 assert.equal(rapid.sibilancias,1);
 const rapidEngine={};rapidEngine.globalThis=rapidEngine;

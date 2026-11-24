@@ -112,12 +112,20 @@ for(const id of inputs){
  });
 }
 function reset(){
+ $('pas-example-note').hidden=true;
  for(const id of inputs)$(id).value='';
  for(const x of api.criteria)states.answers[x.key]='unknown';
  states.redFlags.unstable='unknown';states.redFlags.peritonitis='unknown';
  updateSelections();render();$('pas-age').focus({preventScroll:true});
 }
 $('pas-reset').addEventListener('click',reset);
+$('pas-example').addEventListener('click',()=>{
+ const demo={'pas-age':'9','pas-duration':'18','pas-temperature':'38.4','pas-wbc':'12.5','pas-anc':'9.2','pas-percent':''};
+ for(const id of inputs)$(id).value=demo[id]??'';
+ Object.assign(states.answers,{migration:'yes',anorexia:'yes',vomiting:'no',fever:'yes',rlq:'yes',movement:'no',wbc:'unknown',anc:'unknown'});
+ Object.assign(states.redFlags,{unstable:'no',peritonitis:'no'});
+ $('pas-example-note').hidden=false;updateSelections();render();
+});
 const report=()=>{
  const r=assess();
  if(!r.ok)return 'PAS pediátrico — CÁLCULO BLOQUEADO: '+r.message;

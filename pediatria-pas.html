@@ -40,6 +40,8 @@
 <main class="pas-questions" id="pas-calculator">
  <section class="pas-section" aria-labelledby="pas-patient-title">
   <div class="pas-section-heading"><span class="pas-step-icon indigo">01</span><div><div class="pas-overline">CONTEXTO</div><h2 id="pas-patient-title">Paciente y señales de alarma</h2><p>Estos datos NO suman puntos, pero pueden cambiar por completo la conducta.</p></div></div>
+  <div class="pas-actions"><button type="button" id="pas-example">↗ Cargar ejemplo ficticio</button></div>
+  <p id="pas-example-note" class="pas-lab-note" role="status" hidden>Ejemplo exclusivamente docente. No representa a un paciente real ni establece conducta.</p>
   <div class="pas-two-col">
    <label class="pas-field">Edad en años <small>Para meses utiliza decimales; p. ej., 3.5 años</small><input id="pas-age" type="number" min="0" max="18" step="any" inputmode="decimal" placeholder="Ej. 9"></label>
    <label class="pas-field">Horas desde inicio del dolor <small>Opcional · no suma PAS</small><input id="pas-duration" type="number" min="0" max="720" step="any" inputmode="decimal" placeholder="Ej. 18"></label>
