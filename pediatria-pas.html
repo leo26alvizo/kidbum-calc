@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#123047">
 <meta name="kidbum-app-version" content="0.10.46">
-<meta name="description" content="Pediatric Appendicitis Score PAS de Samuel: 8 criterios, 0 a 10, semáforo clínico, hemograma y ANC, avisos de seguridad y orientación diagnóstica en pediatría.">
+<meta name="description" content="PAS rápido de Samuel: ocho criterios Sí/No, sin campos numéricos.">
 <title>PAS · Apendicitis pediátrica | KidBum CALC</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./kidbum-icon-192-v081.png">
@@ -30,53 +30,24 @@
  </div>
  <div class="pas-hero-copy">
   <span class="pas-eyebrow">PEDIATRÍA · DOLOR ABDOMINAL AGUDO</span>
-  <h1>¿Apendicitis? <span>Valora con criterio.</span></h1>
-  <p>Escala PAS de Samuel: <strong>8 criterios · 10 puntos</strong>. Responde únicamente los criterios puntuables. <strong>Resultado en tiempo real.</strong></p>
+  <h1>PAS rápido <span>8 criterios</span></h1>
+  <p>Marca Sí o No en cada criterio. No se requieren valores numéricos.</p>
   <div class="pas-hero-tags"><span>🩺 Hallazgos clínicos</span><span>🧪 Leucocitos y ANC</span><span>📊 Resultado al final ↓</span></div>
  </div>
 </header>
 <div class="pas-alert-intro" role="note"><strong>⚠ Regla de seguridad:</strong> PAS original en niños de 4–15 años. Esta calculadora solo suma puntos; no verifica edad ni signos de alarma, no diagnostica ni descarta apendicitis. Ante inestabilidad o peritonitis, valoración urgente sin esperar el puntaje.</div>
 <div class="pas-body-grid">
 <main class="pas-questions" id="pas-calculator">
- <div class="pas-actions"><button type="button" id="pas-example">↗ Cargar ejemplo ficticio</button></div>
+ <div class="pas-actions"><button type="button" id="pas-example">↗ Cargar ejemplo ficticio</button><button type="button" id="pas-clear-top">Limpiar</button></div>
  <p id="pas-example-note" class="pas-lab-note" role="status" hidden>Ejemplo exclusivamente docente. No representa a un paciente real.</p>
- <section class="pas-section" aria-labelledby="pas-history-title">
-  <div class="pas-section-heading"><span class="pas-step-icon teal">01</span><div><div class="pas-overline">HISTORIA Y SÍNTOMAS</div><h2 id="pas-history-title">¿Qué refiere el paciente?</h2><p>Marca Sí, No o Sin dato. No confundas «no explorado» con «negativo».</p></div></div>
-  <div class="pas-question-list" id="pas-history">
-   <fieldset class="pas-choice-card" data-criterion="migration"><legend><span class="pas-question-icon">↘️</span> Dolor que migra a fosa ilíaca derecha <em>+1</em></legend><p>Desde región periumbilical o difusa hacia cuadrante inferior derecho.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
-   <fieldset class="pas-choice-card" data-criterion="anorexia"><legend><span class="pas-question-icon">🍽️</span> Anorexia o falta de apetito <em>+1</em></legend><p>Disminución reciente del deseo de comer.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
-   <fieldset class="pas-choice-card" data-criterion="vomiting"><legend><span class="pas-question-icon">🤢</span> Náusea o vómito <em>+1</em></legend><p>Basta uno de los dos; no sumes ambos por separado.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
-   <fieldset class="pas-choice-card" data-criterion="fever"><legend><span class="pas-question-icon">🌡️</span> Fiebre documentada &gt;38 °C <em>+1</em></legend><p>Selecciona manualmente o registra una temperatura; 38.0 °C exactos no cumplen el criterio &gt;38 °C.</p>
-    <label class="pas-inline-temperature">Temperatura (°C) <input id="pas-temperature" type="number" step="any" inputmode="decimal" min="33" max="43" placeholder="Ej. 38.4"></label>
-    <div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div>
-    <small>Si hay temperatura medida, prevalece sobre la selección manual.</small>
-   </fieldset>
-  </div>
- </section>
- <section class="pas-section" aria-labelledby="pas-exam-title">
-  <div class="pas-section-heading"><span class="pas-step-icon purple">02</span><div><div class="pas-overline">EXPLORACIÓN</div><h2 id="pas-exam-title">Hallazgos abdominales</h2><p>Ambos hallazgos valen 2 puntos: aquí se concentran 4/10.</p></div></div>
-  <div class="pas-exam-layout">
-   <div class="pas-abdomen" aria-hidden="true">
-    <svg viewBox="0 0 180 185" role="img"><path d="M54 12Q52 37 30 49L18 129Q38 171 89 175Q142 171 161 129L148 49Q126 37 125 12" fill="#e6eee9" stroke="#7f9f99" stroke-width="3" stroke-linejoin="round"/><path d="M89 42V157M31 96H151" stroke="#b6c7c2" stroke-width="1.5" stroke-dasharray="5 5"/><circle cx="60" cy="126" r="19" fill="#ea6556" fill-opacity=".8"/><circle cx="60" cy="126" r="28" stroke="#e2574d" stroke-width="3" fill="none" stroke-dasharray="5 4"/><path d="M60 118v15M54 125h12" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
-    <span>FID = cuadrante inferior derecho del paciente</span>
-   </div>
-   <div class="pas-question-list">
-    <fieldset class="pas-choice-card" data-criterion="rlq"><legend><span class="pas-question-icon">👆</span> Dolor a palpación en FID <em>+2</em></legend><p>Palpación localizada sobre fosa ilíaca derecha.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
-    <fieldset class="pas-choice-card" data-criterion="movement"><legend><span class="pas-question-icon">🏃</span> Dolor en FID con tos, percusión o salto <em>+2</em></legend><p>No fuerces maniobras si hay dolor intenso, sospecha de peritonitis o incapacidad para cooperar.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
-   </div>
-  </div>
- </section>
- <section class="pas-section" aria-labelledby="pas-labs-title">
-  <div class="pas-section-heading"><span class="pas-step-icon orange">03</span><div><div class="pas-overline">LABORATORIO</div><h2 id="pas-labs-title">Hemograma y neutrófilos absolutos</h2><p>Dos puntos posibles; sin BH/diferencial quedan como pendientes, no como cero.</p></div></div>
-  <div class="pas-two-col">
-   <label class="pas-field">Leucocitos totales (WBC) <small>×10³/µL · ejemplo 12.5 = 12,500/µL</small><input id="pas-wbc" type="number" step="any" inputmode="decimal" placeholder="Ej. 12.5"></label>
-   <label class="pas-field">Neutrófilos absolutos (ANC) <small>×10³/µL · ejemplo 9.2 = 9,200/µL</small><input id="pas-anc" type="number" step="any" inputmode="decimal" placeholder="Ej. 9.2"></label>
-   <label class="pas-field">Neutrófilos en % <small>Opcional: para calcular ANC si no viene en BH</small><input id="pas-percent" type="number" step="any" min="0" max="100" inputmode="decimal" placeholder="Ej. 78"></label>
-   <div class="pas-formula" id="pas-anc-preview" role="status">🧪 ANC = leucocitos × porcentaje de neutrófilos / 100, si se proporcionan ambos.</div>
-  </div>
-  <div class="pas-mini-labs"><span><b>+1</b> Leucocitos &gt;10 ×10³/µL</span><span><b>+1</b> ANC &gt;7.5 ×10³/µL</span></div>
-  <p class="pas-lab-note">El PAS original utiliza <strong>ANC &gt;7500/µL</strong>. No sustituirlo por el porcentaje aislado. Si ANC medido y derivado discrepan, revisa las muestras antes de puntuar.</p>
- </section>
+ <section class="pas-section pas-quick-section" aria-labelledby="pas-history-title"><h2 id="pas-history-title">Síntomas</h2><div class="pas-question-list">   <fieldset class="pas-choice-card pas-quick-row" data-criterion="migration"><legend>Migración del dolor a FID <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset>
+   <fieldset class="pas-choice-card pas-quick-row" data-criterion="anorexia"><legend>Anorexia <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset>
+   <fieldset class="pas-choice-card pas-quick-row" data-criterion="vomiting"><legend>Náusea o vómito <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset>
+   <fieldset class="pas-choice-card pas-quick-row" data-criterion="fever"><legend>Temperatura &gt;38 °C <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset></div></section>
+ <section class="pas-section pas-quick-section" aria-labelledby="pas-exam-title"><h2 id="pas-exam-title">Exploración</h2><div class="pas-question-list">   <fieldset class="pas-choice-card pas-quick-row" data-criterion="rlq"><legend>Dolor a la palpación en FID <em>+2</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset>
+   <fieldset class="pas-choice-card pas-quick-row" data-criterion="movement"><legend>Dolor en FID con tos, percusión o salto <em>+2</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset></div></section>
+ <section class="pas-section pas-quick-section" aria-labelledby="pas-labs-title"><h2 id="pas-labs-title">Laboratorio</h2><div class="pas-question-list">   <fieldset class="pas-choice-card pas-quick-row" data-criterion="wbc"><legend>Leucocitos &gt;10 000/µL <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset>
+   <fieldset class="pas-choice-card pas-quick-row" data-criterion="anc"><legend>Neutrófilos absolutos &gt;7500/µL (ANC) <em>+1</em></legend><div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button></div></fieldset></div></section>
  <nav class="pas-finish-strip" aria-label="Continuar a la interpretación PAS">
   <div><span>✓ ÚLTIMO PASO</span><strong>Revisa tu evaluación</strong><small>Al final: puntaje de 0 a 10</small></div>
   <a href="#pas-results">Ver resultado PAS ↓</a>

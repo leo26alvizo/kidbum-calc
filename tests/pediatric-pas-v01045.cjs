@@ -92,12 +92,12 @@ for(const [changes,code] of [
 assert.ok(page.includes('aria-live="polite"'));
 assert.ok(page.includes('id="pas-outcome"'));
 assert.ok(page.includes('data-band="pending"'));
-assert.ok(page.includes('id="pas-anc-preview"'));
+assert.doesNotMatch(page,/<input\b/);
 assert.ok(!page.includes('data-flag="unstable"'));
 assert.ok(!page.includes('data-flag="peritonitis"'));
-assert.equal((page.match(/data-criterion="/g)||[]).length,6,'Six clinical selections, two objective lab fields');
+assert.equal((page.match(/data-criterion="/g)||[]).length,8,'Eight binary criteria');
 assert.equal((page.match(/data-flag="/g)||[]).length,0);
-assert.match(page,/ANC.*7500/);
+assert.match(page,/7500\/µL \(ANC\)/);
 assert.match(page,/0–10|0 a 10/);
 assert.match(page,/PMC5869337/);
 assert.match(page,/2026/);
@@ -118,5 +118,8 @@ assert.ok(!page.includes('<input id="patient-name"'));
 assert.doesNotMatch(page,/id="pas-(age|duration|red-flags)"/);
 assert.doesNotMatch(ui,/ageYears:|redFlags:/);
 assert.match(ui,/out.complete\?'score':'pending'/);
+assert.match(ui,/api\.calculateQuick\(answers\)/);
 const scoreOnly=pas.calculate({answers:{...allNo},wbcK:'8',ancK:'5'});assert.equal(scoreOnly.score,0);assert.equal(scoreOnly.band,'pending');
+for(let m=0;m<6561;m++){let n=m,points=0,missingWeight=0;const answers={};for(const c of pas.criteria){const value=['no','yes','unknown'][n%3];n=Math.floor(n/3);answers[c.key]=value;if(value==='yes')points+=c.points;if(value==='unknown')missingWeight+=c.points;}const q=pas.calculateQuick(answers);assert.equal(q.score,missingWeight?null:points);assert.equal(q.range[0],points);assert.equal(q.range[1],points+missingWeight);}
+assert.equal(pas.calculateQuick({wbc:'invalid'}).ok,false);
 console.log('PAS clinical QA PASS: 8 criteria, 10 total, 0/3/4/6/7/10 risk bands, fail-closed missing inputs, strict ANC/WBC/temp thresholds, danger overrides, age guard, PWA and accessible UI.');

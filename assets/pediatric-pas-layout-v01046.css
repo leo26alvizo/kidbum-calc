@@ -97,3 +97,6 @@ html.dark .pas-finish-strip a{color:#062d30}
 .pas-questions>.pas-lab-note[hidden]{display:none}
 .pas-outcome .pas-dial{grid-row:2 / span 2}
 @media(min-width:901px){.pas-outcome .pas-risk-name{grid-row:2}.pas-outcome .pas-range{grid-row:3}}
+
+/* Eight compact binary rows. No default No selection. */
+.pas-quick-section{padding:12px 14px!important}.pas-quick-section h2{font-size:16px;margin:0 0 8px}.pas-quick-section .pas-question-list{gap:7px}.pas-quick-row{padding:7px 10px!important;margin:0;min-width:0}.pas-quick-row legend{font-size:14px!important;line-height:1.3}.pas-quick-row .pas-choice-row{grid-template-columns:repeat(2,minmax(0,1fr));margin:4px 0 0}.pas-quick-row .pas-choice-row button{min-height:44px}.pas-questions>.pas-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.pas-hero--surgical .pas-hero-copy{padding:14px 17px}.pas-hero--surgical h1{margin:4px 0}.pas-hero--surgical p{margin:6px 0}.pas-hero-tags{margin:6px 0!important}

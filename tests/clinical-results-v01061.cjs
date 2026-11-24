@@ -457,23 +457,19 @@ async function main(){
    try{
     const page=await context.newPage();
     await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    await page.locator('[data-open]').first().waitFor();
     const core=await page.evaluate(()=>{
-     const failures=[],total=defs.length;
-     for(const def of defs){
-      try{go('calc',def.id);const b=document.querySelector('#example');if(!b||b.disabled)throw Error('No example button');b.click();const state=document.querySelector('.kb-result-modern')?.dataset.kbResultState;if(!['ready','not-evaluable'].includes(state))throw Error('State '+state);}
-      catch(e){failures.push(def.id+': '+e.message);}
-     }
-     return {total,failures};
+     const ids=[...document.querySelectorAll('[data-open]')].map(x=>x.dataset.open),failures=[];
+     for(const id of ids){try{document.querySelector('[data-open="'+id+'"]').click();const b=document.querySelector('#example');if(!b||b.disabled)throw Error('No example button');b.click();const state=document.querySelector('.kb-result-modern')?.dataset.kbResultState;if(!['ready','not-evaluable'].includes(state))throw Error('State '+state);}catch(e){failures.push(id+': '+e.message);}finally{document.querySelector('#back')?.click();}}
+     return {total:ids.length,failures};
     });
     assert.equal(core.total,100);assert.deepEqual(core.failures,[]);
-    const diabetes=await page.evaluate(()=>{
-     const failures=[];
-     for(const tool of diabetesTools){try{go('diabetes',tool.id);const b=document.querySelector('#db-example');if(!b||b.disabled)throw Error('No example');b.click();if(document.querySelector('#db-copy')?.disabled!==false)throw Error('Example not ready');}catch(e){failures.push(tool.id+': '+e.message);}}
-     return {total:diabetesTools.length,failures};
-    });
-    assert.equal(diabetes.total,6);assert.deepEqual(diabetes.failures,[]);
-    await page.evaluate(()=>go('gasometria'));await page.locator('#gas-example').click();assert.equal(await page.locator('#gas-panel').getAttribute('data-kb-result-state'),'ready');
+    const diabetesIds=await page.locator('[data-diabetes]').evaluateAll(xs=>xs.map(x=>x.dataset.diabetes));
+    assert.equal(diabetesIds.length,6);
+    for(const id of diabetesIds){await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});await page.locator('[data-diabetes="'+id+'"]').click();await page.locator('#db-example').click();assert.equal(await page.locator('#db-copy').isEnabled(),true);}
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});await page.locator('[data-gasometria-open]').click();await page.locator('#gas-example').click();assert.equal(await page.locator('#gas-panel').getAttribute('data-kb-result-state'),'ready');
     await page.goto(base+'/pediatria-pas.html',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('[data-criterion]').count(),8);assert.equal(await page.locator('input,[data-flag]').count(),0);
     assert.equal(await page.locator('#pas-points').innerText(),'—');
     await page.locator('#pas-example').click();assert.equal(await page.locator('#pas-points').innerText(),'7');
     assert.match(await page.locator('#pas-completeness').innerText(),/8 de 8/);assert.equal(await page.locator('#pas-example-note').isVisible(),true);

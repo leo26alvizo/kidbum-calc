@@ -93,5 +93,19 @@ function calculate(payload){
   answered,missing:8-answered,missingWeight,complete,clinicalBand,band,urgent,
   riskLabel:titles[band],recommendations:Object.freeze(plans[band]),warnings:Object.freeze(warnings)});
 }
-root.KidBumPAS=Object.freeze({criteria,calculate,classify});
+/* Score-only workflow: clinician confirms each threshold; no invented lab values. */
+function calculateQuick(answers={}){
+ if(!answers||typeof answers!=='object'||Array.isArray(answers))return fail('answer','Respuestas no válidas.');
+ const values={};let points=0,missingWeight=0,answered=0;
+ for(const item of criteria){
+  const value=Object.hasOwn(answers,item.key)?answers[item.key]:'unknown';
+  if(!['yes','no','unknown'].includes(value))return fail('answer','Respuesta no válida en '+item.key+'.');
+  values[item.key]=value;
+  if(value==='yes')points+=item.points;
+  if(value==='unknown')missingWeight+=item.points;else answered++;
+ }
+ const complete=answered===criteria.length;
+ return Object.freeze({ok:true,values:Object.freeze(values),score:complete?points:null,pointsKnown:points,range:Object.freeze([points,points+missingWeight]),answered,complete,missing:criteria.length-answered});
+}
+root.KidBumPAS=Object.freeze({criteria,calculate,classify,calculateQuick});
 })(typeof window!=='undefined'?window:globalThis);
