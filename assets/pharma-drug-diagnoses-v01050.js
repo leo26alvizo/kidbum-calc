@@ -303,7 +303,7 @@ const CLUSTERS=[
 ,['Crisis aguda de migraña','sumatriptan']
 
 ];
-function groupIds(){const map=Object.create(null);for(const [d,ids] of CLUSTERS){if(!d||!ids)throw Error('Pharma diagnosis: empty condition');for(const id of ids.split(/\s+/)){if(!lib.byId[id])throw Error('Pharma diagnosis: unknown id '+id);(map[id]||(map[id]=[])).push(Object.freeze({name:d,status:'orientative',reviewed:false,source:null}));}}return map;}
+function groupIds(){const map=Object.create(null);for(const [d,ids] of [...CLUSTERS,...(root.KidBumPharmaExpansion84?.associations||[])]){if(!d||!ids)throw Error('Pharma diagnosis: empty condition');for(const id of ids.split(/\s+/)){if(!lib.byId[id])throw Error('Pharma diagnosis: unknown id '+id);const list=map[id]||(map[id]=[]);if(!list.some(x=>x.name===d))list.push(Object.freeze({name:d,status:'orientative',reviewed:false,source:null}));}}return map;}
 const mutable=groupIds();
 const byId=Object.freeze(Object.fromEntries(lib.records.map(m=>[m.id,Object.freeze(mutable[m.id]||[])])));
 const missingIds=Object.freeze(lib.records.filter(m=>!byId[m.id].length).map(m=>m.id));

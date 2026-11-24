@@ -1,3 +1,7 @@
+## v0.10.84 · Pharma PRO — expansión clínica y seguridad
+
+181 entradas nuevas (principios activos, combinaciones y formulaciones; 1,747 entradas totales), 16 rutas de referencia para adultos no embarazados (31 totales), 151 temas diagnósticos candidatos deduplicados al cargar, 31 asociaciones editoriales nuevas y 34 parejas LASA adicionales con referencias FDA/ISMP. 79 identificadores seleccionados para clasificación positiva de alto riesgo por clase/vía ISMP 2024, incluyendo entradas existentes. El índice no equivale a monografías validadas, autorización mexicana ni disponibilidad; no se añaden dosis. Se conserva el bloqueo de recomendaciones para pediatría, neonatología, embarazo, urgencias y diagnósticos inciertos. Revisión independiente pendiente.
+
 ## v0.10.83 · Ortopedia ↔ Pharma PRO
 
 Acceso contextual en 28 desenlaces, 42 enlaces a 13 medicamentos distintos; todos los 73 desenlaces cuentan con contexto y acceso general. Precauciones por vía, alto riesgo, profilaxis antitetánica, analgesia, sedación monitorizada, tromboprofilaxis y antibióticos condicionados a evaluación; sin nuevas dosis ni prescripción. Índices de vacunas/inmunoglobulinas identificados como pendientes de cotejo. Lógica clínica y portada sin cambios; caché PWA actualizada. Revisión clínica independiente pendiente.

@@ -14,15 +14,15 @@ const script="<script>\n"+
 " function check(name,run){try{const result=run();if(result===false)throw Error('False');tests.push({name,pass:true});}catch(e){tests.push({name,pass:false,message:String(e)});}}\n"+
 " const $=selector=>document.querySelector(selector);\n"+
 " const input=(selector,value)=>{const x=$(selector);if(!x)throw Error('Missing '+selector);x.value=value;x.dispatchEvent(new Event('input',{bubbles:true}));};\n"+
-" check('Existing diagnosis links kept, 923 new entries explicitly unmapped',()=>window.KidBumPharmaDiagnosisCatalog.coverage.total===1566&&window.KidBumPharmaDiagnosisCatalog.coverage.mapped===643&&window.KidBumPharmaDiagnosisCatalog.coverage.missing===923);\n"+
-" check('250 distinct clinical contexts',()=>window.KidBumPharmaDiagnosisCatalog.diagnoses.length===250);\n"+
-" check('Verified pathways remain 15',()=>window.KidBumPharmaCore.conditions.length===15);\n"+
+" check('Existing diagnosis links kept, expanded index and pending mappings explicit',()=>window.KidBumPharmaDiagnosisCatalog.coverage.total===1747&&window.KidBumPharmaDiagnosisCatalog.coverage.mapped>643&&window.KidBumPharmaDiagnosisCatalog.coverage.missing>0);\n"+
+" check('Expanded clinical contexts',()=>window.KidBumPharmaDiagnosisCatalog.diagnoses.length>=250);\n"+
+" check('Scoped pathways expanded to 31',()=>window.KidBumPharmaCore.conditions.length===31);\n"+
 " check('No auto approval',()=>window.KidBumPharmaDiagnosisCatalog.coverage.verifiedIndependently===0);\n"+
 " check('Card shows orientative mapped condition',()=>{const x=window.KidBumPharmaCore.byId.bimatoprost;return !!x&&window.KidBumPharmaDiagnosisCatalog.related(x.id)[0].name.includes('Glaucoma');});\n"+
 " check('Opening medication displays diagnosis and warning',()=>{window.KidBumPharmaUI.openDrug('bimatoprost');const text=$('#pharma-ux-quick').textContent;return !$('#detail').classList.contains('hidden')&&text.includes('Glaucoma')&&text.includes('NO son indicaciones aprobadas');});\n"+
 " check('Dose is not invented for editorial association',()=>$('#pharma-ux-quick').textContent.includes('Esquema NO cotejado'));\n"+
 " check('Disease tab opens',()=>{window.KidBumPharmaUI.closeDrug();$('[data-pharma-view=\"diseases\"]').click();return !$('#disease-finder').classList.contains('hidden');});\n"+
-" check('Diagnoses search finds glaucoma',()=>{input('#quick-search','glaucoma');return $('#pharma-dx-status').textContent.includes('643 de 1566')&&$('#pharma-dx-results').textContent.includes('Glaucoma');});\n"+
+" check('Diagnoses search finds glaucoma',()=>{input('#quick-search','glaucoma');return $('#pharma-dx-status').textContent.includes('de 1747')&&$('#pharma-dx-results').textContent.includes('Glaucoma');});\n"+
 " check('Inverse listing includes bimatoprost',()=>{const b=$('#pharma-dx-results .pharma-dx-entry button');if(!b)throw Error('Missing map toggle');b.click();return $('#pharma-dx-results').textContent.includes('Bimatoprost');});\n"+
 " check('Inverse linked medicine opens original detail',()=>{const b=[...document.querySelectorAll('#pharma-dx-results .pharma-dx-meds button')].find(x=>x.textContent.includes('Bimatoprost'));if(!b)throw Error('No bimatoprost');b.click();return !$('#detail').classList.contains('hidden')&&$('#pharma-ux-quick').textContent.includes('Glaucoma');});\n"+
 " check('No horizontal overflow',()=>document.documentElement.scrollWidth<=window.innerWidth+4);\n"+

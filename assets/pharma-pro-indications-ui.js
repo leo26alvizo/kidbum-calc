@@ -12,7 +12,7 @@ const node=(tag,text,cls)=>{
 const link=(href,label)=>{const a=node('a',label+' ↗');a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;};
 
 /* v0.10.48: reciprocidad medicamento → diagnóstico.
-   Los vínculos provienen de las 15 rutas ya documentadas, no de inferencias por clase.
+   Los vínculos provienen de las rutas documentadas, no de inferencias por clase.
    PRONAM HAS 2026 contiene intervalos de referencia, NO dosis individualizadas.
    La infografía excluye mujeres en edad fértil/embarazo y no sustituye la IPP mexicana.
 */
@@ -107,7 +107,7 @@ function viewConditions(){
  const query=$('disease-search').value.trim();
  const population=$('disease-pop').value;
  const conditions=lib.searchConditions(query);
- $('disease-count').textContent=conditions.length+' indicaciones verificadas disponibles · ámbito de estas rutas: adultos no embarazados.';
+ $('disease-count').textContent=conditions.length+' escenarios con fuente clínica disponibles · ámbito de estas rutas: adultos no embarazados.';
  if(!conditions.length){
   results.append(node('div','No encontramos una ruta respaldada para esa enfermedad. NO significa que no existan tratamientos. Busca en el catálogo de medicamentos o consulta una guía clínica vigente.','empty'));return;
  }
