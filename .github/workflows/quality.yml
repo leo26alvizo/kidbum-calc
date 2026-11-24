@@ -36,6 +36,8 @@ jobs:
         run: node tests/enarm-ivory-v01067.cjs
       - name: ENARM direct · 210 conceptual and clinical knowledge questions, offline and isolated progress
         run: node tests/enarm-direct-v01068.cjs
+      - name: ENARM Visual and unified radar · new and legacy bank integrity
+        run: node tests/enarm-visual-radar-draft.cjs
       - name: Defensive functional audit
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks

@@ -29,7 +29,7 @@
    return out;
   }catch{return Object.create(null)}
  }
- function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history))}catch{/* Remains in memory */}}
+ function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history));window.dispatchEvent(new Event('kidbum-enarm-progress'))}catch{/* Remains in memory */}}
  const keyOf=(c,qi)=>c.id+'-'+qi;
  function isWeak(c){return c.questions.some((q,i)=>radar.weak(history[keyOf(c,i)]))}
  function counts(){
@@ -94,7 +94,7 @@
   const weakest=data.weakest?'Área con más errores registrados (mínimo 5 intentos): <strong>'+esc(data.weakest.area)+'</strong>.':'Sin suficientes intentos por área para identificar una debilidad comparativa.';
   return '<section class="en-card en-radar" id="en-radar" aria-labelledby="en-radar-title">'+
    '<div class="en-overline">Tu progreso · solo en este dispositivo</div>'+
-   '<div class="en-radar-title-row"><span class="en-radar-logo" aria-hidden="true">'+enIcon('chart')+'</span><h2 id="en-radar-title">Radar de Conocimiento</h2></div>'+
+   '<div class="en-radar-title-row"><span class="en-radar-logo" aria-hidden="true">'+enIcon('chart')+'</span><h2 id="en-radar-title">Radar de Conocimiento · Casos clínicos</h2></div>'+
    '<p class="en-small en-muted">Aciertos de entrenamiento por área, calculados únicamente a partir de tus respuestas. No predice tu calificación ni el nivel de competencia clínica.</p>'+
    '<div class="en-radar-summary"><div><strong>'+data.seenQuestions+'</strong><span>Preguntas practicadas</span></div>'+
    '<div><strong>'+data.dueQuestions+'</strong><span>Preguntas listas para repasar</span></div>'+
@@ -152,7 +152,7 @@
   root.querySelector('#en-reset').onclick=()=>{
    if(!window.confirm('¿Eliminar el registro local de aciertos y errores ENARM de este navegador?'))return;
    for(const k of Object.keys(history))delete history[k];
-   try{localStorage.removeItem(storageKey)}catch{}
+   try{localStorage.removeItem(storageKey);window.dispatchEvent(new Event('kidbum-enarm-progress'))}catch{}
    home();
   };
  }

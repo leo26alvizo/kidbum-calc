@@ -289,10 +289,10 @@ async function main(){
      const errors=[];page.on('pageerror',err=>errors.push(err.message));
      await page.goto(base+'/enarm.html',{waitUntil:'domcontentloaded'});
      assert.equal(await page.locator('.dq-entry a[href="./enarm-direct.html"]').count(),1,'Direct bank entry inside main ENARM');
-     await page.locator('.dq-entry a').click();
+     await page.locator('.dq-entry a[href="./enarm-direct.html"]').click();
      await page.waitForURL(/enarm-direct\.html/);
      assert.equal(await page.locator('.dq-stat').count(),3);
-     assert.match(await page.locator('#direct-app').innerText(),/210/);
+     assert.match(await page.locator('#direct-app').innerText(),/238/);
      assert.equal(await page.locator('.dq-mode').count(),4);
      assert.equal(await page.locator('#dq-area option').count(),8,'Seven areas + all');
      assert.equal(await page.locator('#dq-type option').count(),7,'Six categories + all');
@@ -300,9 +300,9 @@ async function main(){
      const light=await page.evaluate(()=>getComputedStyle(document.documentElement).getPropertyValue('--en-bg').trim());
      assert.equal(light,'#F4F0E7','Retain Ivory Heritage by default');
      await page.locator('#dq-area').selectOption('Medicina Interna');
-     assert.match(await page.locator('#dq-available').innerText(),/30 preguntas disponibles/);
+     assert.match(await page.locator('#dq-available').innerText(),/34 preguntas disponibles/);
      await page.locator('#dq-type').selectOption('Mecanismos');
-     assert.match(await page.locator('#dq-available').innerText(),/5 preguntas disponibles/);
+     assert.match(await page.locator('#dq-available').innerText(),/7 preguntas disponibles/);
      await page.locator('#dq-search').fill('metformina');
      assert.match(await page.locator('#dq-available').innerText(),/1 preguntas disponibles/);
      await page.locator('#dq-start').click();
