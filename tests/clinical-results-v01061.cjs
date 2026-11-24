@@ -401,6 +401,23 @@ async function main(){
     assert.equal(errors.length,0,errors.join('; '));
    }finally{await context.close()}
   });
+  await test('Centor/McIsaac — search, missing data, scoring, alarm guard',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#search-input').fill('Centor');
+    await page.locator('.calc-card').filter({hasText:'Centor / McIsaac'}).first().click();
+    assert.equal(await page.locator('#result-state').innerText(),'Datos pendientes');
+    await page.locator('#f-ageGroup').selectOption('3to14');
+    for(const key of ['fever','noCough','nodes','tonsils'])await page.locator('#f-'+key).selectOption('true');
+    for(const key of ['viral','alarm','highRisk'])await page.locator('#f-'+key).selectOption('false');
+    assert.match(await page.locator('#result-value').innerText(),/5/);
+    await page.locator('#f-ageGroup').selectOption('45plus');
+    assert.match(await page.locator('#result-value').innerText(),/3/);
+    await page.locator('#f-alarm').selectOption('true');
+    assert.match(await page.locator('#result-value').innerText(),/No evaluable/);
+    await noHorizontalOverflow(page,'Centor');
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

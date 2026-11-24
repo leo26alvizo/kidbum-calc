@@ -86,14 +86,14 @@ vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 /* These historical preservation tests predate two new APACHE II calculators.
    Check the original 68 separately AND verify both new IDs exist. */
 const clinicalIds=ctx.KidBumEngine.list;
-assert.equal(clinicalIds.length,84,'Total actual: 77 existing tools plus seven new scores and clinical references');
+assert.equal(clinicalIds.length,85,'Total actual: 77 existing tools plus seven new scores and clinical references');
 assert.ok(clinicalIds.includes('apache2')&&clinicalIds.includes('apache2quick'),'Both APACHE modes present');
 const newElectrolyteIds=['nadeficit','freewater','correctedca','osmgap','potassiumreview','bicarbdef'];
 for(const id of newElectrolyteIds)assert.ok(clinicalIds.includes(id),'New electrolyte engine must be present: '+id);
 assert.ok(clinicalIds.includes('urineoutputadult'),'Adult urine output must be available in renal section');
 const newClinicalImageIds=['sofa1','psiport','parklandburn','aldrete','apgar','devineibw','pedmathdose'];
 for(const id of newClinicalImageIds)assert.ok(clinicalIds.includes(id),'New reference present: '+id);
-const legacyCalculatorCount=clinicalIds.filter(id=>!['apache2','apache2quick','urineoutputadult',...newElectrolyteIds,...newClinicalImageIds].includes(id)).length;
+const legacyCalculatorCount=clinicalIds.filter(id=>!['centor','apache2','apache2quick','urineoutputadult',...newElectrolyteIds,...newClinicalImageIds].includes(id)).length;
 assert.equal(legacyCalculatorCount,68,'Original 68 calculator IDs preserved');
 
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
@@ -739,3 +739,20 @@ const appleSupportTests=[
 t.push(...appleSupportTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
 if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(t.length,'checks passed');
+
+// Centor/McIsaac: exhaustive scoring and safety guards.
+{
+ const run=x=>ctx.KidBumEngine.calculate('centor',x);
+ const base={ageGroup:'15to44',fever:'false',noCough:'false',nodes:'false',tonsils:'false',viral:'false',alarm:'false',highRisk:'false'};
+ for(const [ageGroup,adj] of [['3to14',1],['15to44',0],['45plus',-1]])for(let mask=0;mask<16;mask++){
+ const x={...base,ageGroup};let sum=0;['fever','noCough','nodes','tonsils'].forEach((k,i)=>{x[k]=String(!!(mask&(1<<i)));sum+=Number(x[k]==='true')});const r=run(x);assert.equal(r.value,sum+adj);assert.ok(r.interpretation.includes('McIsaac'));
+ }
+ assert.equal(run({...base,ageGroup:'under3'}).value,null);
+ assert.equal(run({...base,alarm:'true'}).value,null);
+ assert.ok(run({...base,fever:''}).error);
+ assert.ok(run({...base,ageGroup:'bad'}).error);
+ assert.match(run({...base,highRisk:'true'}).interpretation,/alto riesgo/i);
+ assert.match(run({...base,viral:'true'}).interpretation,/virales/i);
+ assert.ok(clinicalIds.includes('centor'));
+ console.log('PASS Centor/McIsaac: 48 combinations, age, missing data, alarms, viral and high risk');
+}
