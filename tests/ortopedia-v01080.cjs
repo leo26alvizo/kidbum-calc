@@ -26,3 +26,12 @@ for(const t of E.bank)assert.ok(home.includes("href:'./ortopedia.html#"+t.id+"'"
 for(const path of ['ortopedia.html','assets/ortopedia-core-v01080.js','assets/ortopedia-portada.webp'])assert.ok(sw.includes("'./"+path+"'"),path);
 assert.ok(page.includes('ortopedia-core-v01080.js'));assert.ok(fs.statSync('assets/ortopedia-portada.webp').size>2000);
 console.log('PASS 25 orthopedic tools, required fields, boundaries, catalog links and offline assets.');
+
+assert.match(page,/id="example-note"/);
+assert.match(page,/id="kb-ai-mount"/);
+assert.match(page,/KidBumAnalysis\.attach\(/);
+assert.match(page,/lastResult=r\.error\?null:r/);
+assert.match(page,/ai\?\.setReady\(Boolean\(lastResult\)\)/);
+assert.match(page,/function hideResult\(\)\{lastResult=null;ai\?\.setReady\(false\)/);
+assert.ok(sw.includes("'./assets/chatgpt-analysis.js'"));
+for(const part of page.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g))if(part[1].trim())new vm.Script(part[1]);

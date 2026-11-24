@@ -40,7 +40,7 @@ assert.match(pharmaCSS,/\.pharma-workspace-nav button\{font-size:12px;line-heigh
 assert.match(pharmaCSS,/\.pharma-fast-input input\{font-size:16px/);
 assert.match(pharmaCSS,/\.disease-options\{grid-template-columns:minmax\(0,1fr\)/);
 assert.match(pharmaCSS,/\.pharma-suggestions button\{min-height:50px/);
-assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.90 · Pharma PRO 3\.0<\/small>/);
+assert.match(pharma,new RegExp("class=\"phone-brand\">💊 Pharma Pro <small>v"+currentReleasePattern+" · Pharma PRO 3\\.0<\\/small>"));
 const shortcuts=home.match(/<div class="kb-resource-links"[^>]*>([\s\S]*?)<\/div>/);
 assert.ok(shortcuts,'All four feature shortcuts in same container');
 const links=shortcuts[1];

@@ -1,3 +1,7 @@
+## v0.10.91 · Auditoría de regresiones y análisis de Ortopedia
+
+Actualiza controles de versiones, catálogo y paquete offline sin eliminar verificaciones de seguridad. Integra análisis educativo optativo por portapapeles en las 25 herramientas de Ortopedia con bloqueo hasta resultado válido y etiqueta de ejemplos ficticios. No cambia fórmulas ni dosis. Candidato sujeto a CI; validación clínica independiente pendiente.
+
 ## v0.10.90 · ENARM — 70 reactivos nuevos en casos clínicos
 
 35 casos educativos originales adicionales (5 por área), 72 casos y 144 reactivos clínicos en total. Conserva 238 preguntas directas y 61 visuales, historial local y Radar. Referencias temáticas; revisión clínica independiente y confirmación de vigencia de GPC pendientes. No son reactivos oficiales.

@@ -25,7 +25,7 @@ for(const name of pages){
 }
 assert.match(read('index.html'),new RegExp("content=\""+currentReleasePattern+"\""));
 assert.match(read('pharma-pro.html'),new RegExp("content=\""+currentReleasePattern+"\""));
-assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.90 · Pharma PRO 3\.0<\/small>/);
+assert.match(read('pharma-pro.html'),new RegExp("class=\"phone-brand\">💊 Pharma Pro <small>v"+currentReleasePattern+" · Pharma PRO 3\\.0<\\/small>"));
 assert.match(read('index.html'),/--bg:#f5f8fa/,'main original light palette untouched');
 assert.match(read('pharma-pro.html'),/--bg:#f4f7f7/,'pharma original light palette untouched');
 assert.match(read('snnoop10.html'),/--sn-bg:#f1f6f7/,'SNNOOP original light palette untouched');
