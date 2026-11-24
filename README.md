@@ -1,7 +1,7 @@
 ## v0.10.72 · ENARM Visual — expansión de imagen clínica
 
-- 29 reactivos visuales (25 asociados a imágenes clínicas reales), 13 imágenes documentadas, 341 preguntas ENARM totales.
-- Se retiran 3 reactivos de epidemiología únicamente del módulo visual; sus IDs no se reutilizan y el historial previo se conserva. Nuevos 18 reactivos: ECG, radiografía torácica y musculoesquelética, TC y ultrasonido.
+- 41 reactivos visuales (37 asociados a imágenes clínicas reales), 19 imágenes documentadas, 353 preguntas ENARM totales.
+- Se retiran 3 reactivos de epidemiología únicamente del módulo visual; sus IDs no se reutilizan y el historial previo se conserva. Nuevos 30 reactivos: ECG, radiografía torácica, abdominal y musculoesquelética, TC y ultrasonido.
 - Imágenes clínicas por defecto, esquemas disponibles opcionalmente. Fuentes y licencias por imagen; revisión clínica independiente pendiente.
 
 ## v0.10.71 · Centor / McIsaac
