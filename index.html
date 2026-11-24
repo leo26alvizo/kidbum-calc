@@ -2428,7 +2428,7 @@ function validateClinicalInputs(definition,data){
   }else if(field.type==='number'){
    const normalized=String(value).trim().replace(',','.');
    const number=Number(normalized);
-   if(!(field.min<0?/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/:/^\+?(?:\d+(?:\.\d*)?|\.\d+)$/.test(normalized)||
+   if(!(field.min<0?/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/:/^\+?(?:\d+(?:\.\d*)?|\.\d+)$/).test(normalized)||
      !Number.isFinite(number)||number<field.min||number>field.max)
     errors.push(field.label+': valor inválido; rango '+field.min+'–'+field.max+(field.unit?' '+field.unit:'')+'.');
   }else if(field.type==='date'){
