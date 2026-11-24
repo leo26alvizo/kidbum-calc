@@ -9,12 +9,12 @@ const recovery=fs.readFileSync('actualizar.html','utf8');
 const marker=fs.readFileSync('release-check.js','utf8');
 const origin='https://leo26alvizo.github.io/kidbum-calc/';
 const normalized=x=>new URL(typeof x==='string'?x:x.url,origin).href;
-assert.match(home,/kidbum-app-version" content="0\.10\.74"/);
-assert.match(pharma,/kidbum-app-version" content="0\.10\.74"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
+assert.match(pharma,/kidbum-app-version" content="0\.10\.75"/);
 assert.match(home,/assets\/pwa-update-v01060\.js/);
 assert.match(home,/href="\.\/actualizar\.html"/);
 assert.match(home,/KidBumUpdater\?\.checkNow\(\)/);
-assert.match(marker,/KidBumPublicRelease = '0\.10\.74'/);
+assert.match(marker,/KidBumPublicRelease = '0\.10\.75'/);
 assert.match(sw,/safe-update-v01060-r1/);
 assert.match(sw,/INSTALL_BATCH_SIZE=5/);
 assert.match(sw,/INSTALL_RETRIES=3/);
@@ -83,7 +83,7 @@ function harness(permanentFailure=false){
 (async()=>{
  const ok=harness(false);
  const assets=Array.from(ok.self.__testAssets);
- assert.ok(assets.length>=150&&assets.length<230,'Full offline bundle must remain complete, including ten otoscopy assets');
+ assert.ok(assets.length>=150&&assets.length<234,'Full offline bundle must remain complete, including ten otoscopy assets');
  assert.equal(assets.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).length,10,'All ten otoscopy assets are included in atomic offline installation');
  await ok.install();
  assert.equal(ok.getStats().installs,1,'New service worker only activates after complete install');

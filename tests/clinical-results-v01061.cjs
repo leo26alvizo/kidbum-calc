@@ -446,6 +446,11 @@ async function main(){
     await noHorizontalOverflow(page,'Oftalmología');
    }finally{await context.close()}
   });
+  await test('Oftalmología clinical algorithms — category, urgent and uncertain branches, return and dark mode',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-oph-alg]').count(),0);await page.locator('[data-featured="Oftalmología"]').click();assert.equal(await page.locator('[data-oph-alg]').count(),1);assert.equal(await page.locator('#calc-list article.calc-card').count(),15);await page.locator('[data-oph-alg]').click();await page.waitForURL('**/algoritmos-oftalmologia.html');assert.equal(await page.locator('[data-algo-id]').count(),16);await page.locator('#alg-search-input').fill('QUERATITIS');assert.equal(await page.locator('[data-algo-id="queratitis"]').count(),1);await page.locator('#alg-search-input').fill('');await page.locator('[data-algo-id="quemadura-quimica"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/irrigación copiosa inmediata/);await page.locator('[data-choice-index="2"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Incertidumbre/);await page.locator('#alg-back-step').click();await page.locator('[data-choice-index="1"]').click();await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Quemadura de riesgo alto/);await page.locator('#alg-mode-estudio').click();assert.equal(await page.locator('#alg-evidence').getAttribute('open'),'');await page.locator('#alg-theme').click();await noHorizontalOverflow(page,'Algoritmos oftalmología');await page.locator('.alg-back').click();await page.waitForURL('**/index.html?especialidad=oftalmologia');assert.equal(await page.locator('[data-oph-alg]').count(),1);
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

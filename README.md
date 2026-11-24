@@ -1,3 +1,7 @@
+## v0.10.75 · Algoritmos de Oftalmología
+
+16 rutas clínicas de valoración inicial, con dos decisiones y salidas de incertidumbre, Guardia/Estudio, filtros, fuentes y acceso desde Oftalmología. Sin prescripción automática ni cambios al catálogo de 154 calculadoras. Revisión clínica independiente pendiente.
+
 ## v0.10.74 · Oftalmología
 
 15 herramientas de refracción, agudeza visual, glaucoma, retina y trauma ocular, con referencias por instrumento. Portada original proporcionada por el usuario, archivo intacto. Total 154 herramientas. Uso educativo; revisión clínica independiente pendiente.
