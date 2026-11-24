@@ -25,6 +25,9 @@ jobs:
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
         if: ${{ !cancelled() }}
         run: node tests/oftalmologia-algoritmos-v01075.cjs
+      - name: Pharma PRO antibiotics — scoped therapeutic lines
+        if: ${{ !cancelled() }}
+        run: node tests/pharma-antibioticos-v01088.cjs
       - name: Pharma PRO Coral and Jade UI and preserved safeguards
         if: ${{ !cancelled() }}
         run: node tests/pharma-coral-jade-v01086.cjs

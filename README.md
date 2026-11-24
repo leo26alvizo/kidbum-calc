@@ -1,3 +1,7 @@
+## v0.10.88 · Antibióticos por enfermedad
+
+154 entradas identificadas, 88 con escenarios vinculados, 66 pendientes de clasificación, 43 escenarios y 211 vínculos. Primera línea, segunda explícita, alternativa, dirigida, combinación, reserva y no recomendado. Sin nuevas dosis ni cambios a ISMP/LASA. Revisión independiente pendiente.
+
 ## v0.10.87 · Sincronización de publicación y controles de calidad
 
 Alinea metadatos de páginas versionadas, marcador público, caché y versión de respaldo del actualizador. Mantiene instalación atómica, reintentos y recuperación; permite reflejar progreso de una versión nueva durante su instalación. Actualiza pruebas antiguas de versión sin modificar fórmulas o datos farmacológicos. Las verificaciones clínicas independientes y de registro mexicano siguen pendientes.

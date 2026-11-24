@@ -64,6 +64,7 @@ function pharmaSummary(med,onFull){
   tag.append(p(count?count+' pauta(s) con fuente específica; ninguna se debe extrapolar entre diagnósticos, edad o vías.':'Ficha pediátrica de seguridad disponible. Pauta numérica NO cotejada para sus usos vinculados.','small muted'));
   const show=elt('button','Ver pautas, límites y fuentes →','button');show.type='button';show.onclick=onFull;tag.append(show);q.append(tag);
  }
+ const antibioticReference=root.KidBumAntibioticsUI?.render(med.id);if(antibioticReference)q.append(antibioticReference);
  const drugIndications=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndications)q.append(drugIndications);
  const externalLabels=window.KidBumPharmaExternalLabels?.render(med);
@@ -97,8 +98,9 @@ function draw(){
  if(query.trim()&&window.KidBumPharmaIndicationsUI?.relatedForDrug){
   const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const key=norm(query.trim());
+  const abxIds=new Set(root.KidBumAntibiotics?.search(query)||[]);
   const related=lib.search('',group.value,['Adultos','Pediatría','Neonatología'].includes(pop)?pop:'all',pop==='high')
-   .filter(m=>window.KidBumPharmaIndicationsUI.relatedForDrug(m.id).some(d=>norm(d.name+' '+d.note).includes(key))||
+   .filter(m=>abxIds.has(m.id)||window.KidBumPharmaIndicationsUI.relatedForDrug(m.id).some(d=>norm(d.name+' '+d.note).includes(key))||
     (window.KidBumPharmaDiagnosisCatalog?.related(m.id)||[]).some(d=>norm(d.name).includes(key)));
   data=[...new Map([...data,...related].map(m=>[m.id,m])).values()];
  }
@@ -125,7 +127,7 @@ function draw(){
   const editorialDx=window.KidBumPharmaDiagnosisCatalog?.related(med.id)||[];
   const diseaseSummary=p(confirmedDx.length?'Diagnósticos con guía: '+confirmedDx.slice(0,2).map(x=>x.name).join(' · ')+(confirmedDx.length>2?' +'+(confirmedDx.length-2):''):editorialDx.length?'Uso clínico orientativo (sin cotejo): '+editorialDx.slice(0,2).map(x=>x.name).join(' · '):'Diagnósticos específicos: cotejo pendiente','small muted');
   const footer=elt('div',undefined,'card-footer');const b=elt('button','Ver consulta rápida →');b.type='button';b.onclick=()=>{location.hash=med.id;showDrug(med.id);};footer.append(b);
-  item.append(top,grp,tags,status,use,diseaseSummary,footer);grid.append(item);
+  const abx=root.KidBumAntibiotics?.get(med.id);if(abx!==null&&abx!==undefined){const t=abx.length?'Antibiótico · '+abx.length+' escenarios con fuente: '+abx.slice(0,2).map(x=>x.title+' ('+x.label+')').join(' · '):'Antibiótico · línea por indicación pendiente de cotejo';item.append(top,grp,tags,status,p(t,'small'),use,diseaseSummary,footer);}else item.append(top,grp,tags,status,use,diseaseSummary,footer);grid.append(item);
  }
 }
 function showDrug(id){
@@ -165,6 +167,7 @@ function showDrug(id){
  if(pediatricReference){
   left.append(pharmaFold('🧒 Pediatría: pautas documentales por indicación · NO receta',pediatricReference,pediatricContext));
  }
+ const antibioticFull=root.KidBumAntibioticsUI?.render(med.id);if(antibioticFull)left.append(pharmaFold('🦠 Antibióticos: indicaciones y líneas por enfermedad',antibioticFull,true));
  const drugIndicationsFull=window.KidBumPharmaIndicationsUI?.renderForDrug(med.id);
  if(drugIndicationsFull)left.append(drugIndicationsFull);
  const externalLabelsFull=window.KidBumPharmaExternalLabels?.render(med);
