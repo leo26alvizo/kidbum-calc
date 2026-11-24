@@ -505,9 +505,15 @@ async function main(){
     const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
     await page.goto(base+'/index.html?especialidad=neurologia',{waitUntil:'domcontentloaded'});
     await page.locator('[data-neuro-alg]').waitFor();
+    await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>img.decode());
+    assert.equal(await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>img.naturalWidth),1536);
+    assert.equal(await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>getComputedStyle(img).objectFit),'contain');
     assert.match(await page.locator('[data-neuro-alg]').evaluate(el=>getComputedStyle(el).backgroundImage),/255, 244, 223/);
     await page.locator('[data-neuro-alg]').click();
     await page.waitForURL('**/algoritmos-neurologia.html');
+    await page.locator('.neuro-alg-cover').evaluate(img=>img.decode());
+    assert.equal(await page.locator('.neuro-alg-cover').evaluate(img=>img.naturalWidth),1536);
+    assert.equal(await page.locator('.neuro-alg-cover').evaluate(img=>img.naturalHeight),1152);
     assert.equal(await page.locator('[data-algo-id]').count(),16);
     assert.equal(await page.locator('body.alg-neuro').evaluate(el=>getComputedStyle(el).getPropertyValue('--p-teal').trim()),'#314b4c');
     await page.locator('[data-category="Raquimedular"]').click();assert.equal(await page.locator('[data-algo-id]').count(),4);

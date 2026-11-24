@@ -1,6 +1,6 @@
 ## v0.10.93 · Algoritmos de Neurología y Raquimedular
 
-16 rutas interactivas para adultos, con detección de urgencia, ramas de incertidumbre, evaluación dirigida, enlaces a escalas existentes y bibliografía. Portada original y paleta anatómica fija basada en la imagen proporcionada: marfil, ocre, terracota, sepia y azul petróleo. No se generan imágenes. Se mantienen las 191 calculadoras y 20 herramientas neurológicas; los algoritmos no se cuentan como calculadoras. Validación clínica independiente pendiente.
+16 rutas interactivas para adultos, con detección de urgencia, ramas de incertidumbre, evaluación dirigida, enlaces a escalas existentes y bibliografía. Portada de algoritmos proporcionada por el usuario, conservada byte a byte (WebP de 1536 × 1152), acceso completo pulsable y caché offline. Paleta anatómica fija basada en la imagen proporcionada: marfil, ocre, terracota, sepia y azul petróleo. No se generan imágenes. Se mantienen las 191 calculadoras y 20 herramientas neurológicas; los algoritmos no se cuentan como calculadoras. Validación clínica independiente pendiente.
 
 ## v0.10.92 · Neurología y Raquimedular PRO
 

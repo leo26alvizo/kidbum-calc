@@ -47,7 +47,7 @@ const context={
 vm.runInNewContext(sw+'\nself.__offlineAssets=CORE_ASSETS;',context,{timeout:3000});
 const packed=Array.from(self.__offlineAssets);
 const packedSet=new Set(packed);
-const mustHave=['algoritmos-oftalmologia.html','assets/oftalmologia-algoritmos-core-v01075.js','assets/oftalmologia-algoritmos-ui-v01075.js','assets/oftalmologia-algoritmos-v01075.css',
+const mustHave=['assets/neurologia-algoritmos-portada.webp','algoritmos-oftalmologia.html','assets/oftalmologia-algoritmos-core-v01075.js','assets/oftalmologia-algoritmos-ui-v01075.js','assets/oftalmologia-algoritmos-v01075.css',
  'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html','pharma-pro.html','pediatria-evaluacion-rapida.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
