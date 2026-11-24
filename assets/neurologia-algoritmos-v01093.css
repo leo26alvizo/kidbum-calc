@@ -1,7 +1,52 @@
-/* Neurología: portada original + lavanda/azul pizarra de la tarjeta existente. */
-.neuro-alg-tile{--neuro-dark:#263450;--neuro-mid:#526184;--neuro-light:#dcdcf1;border-color:#bcc3d8;background:linear-gradient(125deg,var(--neuro-dark),var(--neuro-mid));}
-.neuro-alg-tile:hover{border-color:#aab6d9}.neuro-alg-tile .urg-alg-tile-content b{color:#e3e6fb}.neuro-alg-tile .urg-alg-tile-content p{color:#f0eff6}.neuro-alg-tile .urg-alg-tile-content strong{color:#374663;background:#f0eff6}.neuro-alg-tile .urg-alg-tile-photo{filter:none;opacity:1;object-position:51% 45%}
-body.alg-neuro{--p-teal:#44587d;--p-dark:#263450;--p-soft:#f0eff6;--p-bg:#f5f5fa;--p-line:#d4d8e6;--neuro-dark:#263450;--neuro-mid:#526184}
-.alg-neuro .alg-header{background:linear-gradient(125deg,var(--neuro-dark),var(--neuro-mid))}.alg-neuro .alg-kicker{color:#e5e7fc}.alg-neuro .alg-hero-text{max-width:60ch}.alg-neuro .neuro-hero-photo{width:100%;height:clamp(100px,22vw,200px);object-fit:cover;object-position:51% 45%;border:1px solid #bcc3d8;border-radius:14px;margin:8px 0;display:block}.alg-neuro .alg-tile-icon{background:var(--p-soft)}.alg-neuro .alg-tile-open{color:var(--p-teal)}
-html.dark body.alg-neuro{--p-bg:#131722;--p-card:#202634;--p-ink:#f4f3fa;--p-muted:#c7cce0;--p-line:#46516a;--p-soft:#30394e;--p-teal:#b7c5fa}
-.alg-neuro .alg-option.danger,.alg-neuro .alg-outcome.danger{border-color:#ca666c;background:#fff0ef;color:#70272e}html.dark .alg-neuro .alg-option.danger,html.dark .alg-neuro .alg-outcome.danger{background:#39272e;color:#ffd5d7;border-color:#a86c75}
+/* Neurología · paleta fija tomada de la portada anatómica enviada por el usuario.
+ * Marfil #fff4df, ocre #f5a457, terracota #c16f42, sepia #302520,
+ * petróleo #314b4c y turquesa apagado #527576. Sin muestreo dinámico. */
+.neuro-alg-tile{border-color:#d29468;background:linear-gradient(125deg,#fff4df 0%,#f6e3cb 65%,#deb38d 100%);color:#302520;box-shadow:0 9px 26px rgba(99,58,42,.16)}
+.neuro-alg-tile:hover{border-color:#a65b34}
+.neuro-alg-tile .urg-alg-tile-content b{color:#314b4c}
+.neuro-alg-tile .urg-alg-tile-content h3{color:#302520}
+.neuro-alg-tile .urg-alg-tile-content p{color:#634536}
+.neuro-alg-tile .urg-alg-tile-content strong{background:#314b4c;color:#fff4df;border:1px solid #d29468}
+.neuro-alg-tile .urg-alg-tile-photo{filter:none;opacity:1;object-position:51% 45%}
+.neuro-alg-tile:focus-visible{outline-color:#a65b34}
+body.alg-neuro{--p-teal:#314b4c;--p-dark:#314b4c;--p-soft:#f6e3cb;--p-bg:#fff4df;--p-card:#fffaf0;--p-line:#d8bda1;--p-ink:#302520;--p-muted:#634536;--p-alert:#8e2f26;--p-warn:#80501d}
+.alg-neuro .alg-header{background:linear-gradient(125deg,#fff4df,#f6e3cb 65%,#deb38d);color:#302520;border-bottom:3px solid #c16f42}
+.alg-neuro .alg-header:after{background:radial-gradient(circle,rgba(245,164,87,.25),transparent 64%)}
+.alg-neuro .alg-kicker{color:#314b4c}
+.alg-neuro .alg-back{color:#314b4c;border-color:#b39172;background:#fffaf0}
+.alg-neuro .alg-version,.alg-neuro .alg-hero-text{color:#634536}
+.alg-neuro .alg-hero-text{max-width:60ch}
+.alg-neuro .alg-hero-chip{color:#314b4c;background:#fffaf0;border-color:#d8bda1}
+.alg-neuro .neuro-hero-photo{width:100%;height:clamp(100px,22vw,200px);object-fit:cover;object-position:51% 45%;border:1px solid #d29468;border-radius:14px;margin:8px 0;display:block}
+.alg-neuro .alg-tile{border-top:3px solid #c16f42}
+.alg-neuro .alg-tile:hover{border-color:#a65b34}
+.alg-neuro .alg-tile-icon,.alg-neuro .alg-flow-heading>span{background:var(--p-soft)}
+.alg-neuro .alg-tile-open{color:var(--p-teal)}
+.alg-neuro .alg-rail span{background:#deb38d}
+.alg-neuro .alg-rail span.active{background:#314b4c}
+.alg-neuro .alg-hint{background:#f6e3cb}
+.alg-neuro .alg-option:not(.danger):not(.warning){background:#f4eee1;border-color:#9caea5;color:#314b4c}
+.alg-neuro .alg-option.warning,.alg-neuro .alg-outcome.warning{background:#fff0d7;border-color:#d29468;color:#70431f}
+.alg-neuro .alg-outcome.warning{border-left-color:#a65b34}
+.alg-neuro .alg-option.danger,.alg-neuro .alg-outcome.danger{border-color:#b85c53;background:#fff0e7;color:#842c32}
+.alg-neuro .alg-outcome.danger{border-left-color:#a52a32}
+.alg-neuro .alg-tool-link{border-color:#9caea5}
+.alg-neuro :focus-visible{outline-color:#a65b34}
+html.dark .neuro-alg-tile{background:linear-gradient(125deg,#302520,#634536);border-color:#c16f42;color:#fff4df}
+html.dark .neuro-alg-tile .urg-alg-tile-content b{color:#b3d0ce}
+html.dark .neuro-alg-tile .urg-alg-tile-content h3{color:#fff4df}
+html.dark .neuro-alg-tile .urg-alg-tile-content p{color:#f6e3cb}
+html.dark .neuro-alg-tile .urg-alg-tile-content strong{background:#314b4c;color:#fff4df}
+html.dark body.alg-neuro{--p-bg:#211a16;--p-card:#302520;--p-ink:#fff4df;--p-muted:#debfa4;--p-line:#745746;--p-soft:#3e504d;--p-teal:#b3d0ce;--p-dark:#314b4c}
+html.dark .alg-neuro .alg-header{background:linear-gradient(125deg,#302520,#634536);color:#fff4df}
+html.dark .alg-neuro .alg-kicker{color:#b3d0ce}
+html.dark .alg-neuro .alg-back,html.dark .alg-neuro .alg-hero-chip{color:#fff4df;background:#302520;border-color:#b39172}
+html.dark .alg-neuro .alg-version,html.dark .alg-neuro .alg-hero-text{color:#f6e3cb}
+html.dark .alg-neuro .alg-search input{background:#302520}
+html.dark .alg-neuro .alg-rail span{background:#745746}
+html.dark .alg-neuro .alg-rail span.active{background:#b3d0ce}
+html.dark .alg-neuro .alg-hint{background:#3e504d}
+html.dark .alg-neuro .alg-option:not(.danger):not(.warning){background:#314b4c;border-color:#527576;color:#fff4df}
+html.dark .alg-neuro .alg-option.warning,html.dark .alg-neuro .alg-outcome.warning{background:#4b3521;border-color:#d29468;color:#fff0d7}
+html.dark .alg-neuro .alg-option.danger,html.dark .alg-neuro .alg-outcome.danger{background:#4b2623;color:#ffd5d7;border-color:#b85c53}
+html.dark .alg-neuro .alg-tool-link{border-color:#527576}
