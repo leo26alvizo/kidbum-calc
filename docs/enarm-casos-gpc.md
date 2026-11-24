@@ -38,4 +38,4 @@ Se conserva el orden e ID de los 37 casos originales, así como sus claves de re
 
 ## Publicación
 
-Candidato en rama de revisión. Se rota el identificador de caché; antes de fusionar, sincronizar marcador de versión general conforme al procedimiento del proyecto y ejecutar CI y pruebas en navegador. El progreso local no se modifica.
+Versión de aplicación 0.10.90. Se rota el identificador de caché y se sincronizan los marcadores que correspondían a 0.10.89. El progreso local no se modifica. La revisión clínica independiente y las pruebas completas de dispositivo continúan pendientes.

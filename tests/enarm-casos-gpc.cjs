@@ -14,5 +14,5 @@ const sample=bank.cases[71], key=sample.id+'-0',now=Date.now();
 const history={[key]:radar.record(null,false,now)};
 assert.ok(radar.dueCases(bank,history,'Todas',now).some(c=>c.id===sample.id));
 assert.ok(fs.readFileSync('sw.js','utf8').includes('enarm-casos-gpc-144'));
-assert.ok(fs.readFileSync('enarm.html','utf8').includes('72 casos · 144 reactivos'));
+assert.ok(fs.readFileSync('enarm.html','utf8').includes('Casos clínicos · 72 casos · 144 reactivos'));
 console.log('PASS expanded ENARM cases: 35 new cases, 70 correct answer keys, 7 areas, radar, cache and counts.');
