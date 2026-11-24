@@ -1,0 +1,7 @@
+/* Neurología: portada original + lavanda/azul pizarra de la tarjeta existente. */
+.neuro-alg-tile{--neuro-dark:#263450;--neuro-mid:#526184;--neuro-light:#dcdcf1;border-color:#bcc3d8;background:linear-gradient(125deg,var(--neuro-dark),var(--neuro-mid));}
+.neuro-alg-tile:hover{border-color:#aab6d9}.neuro-alg-tile .urg-alg-tile-content b{color:#e3e6fb}.neuro-alg-tile .urg-alg-tile-content p{color:#f0eff6}.neuro-alg-tile .urg-alg-tile-content strong{color:#374663;background:#f0eff6}.neuro-alg-tile .urg-alg-tile-photo{filter:none;opacity:1;object-position:51% 45%}
+body.alg-neuro{--p-teal:#44587d;--p-dark:#263450;--p-soft:#f0eff6;--p-bg:#f5f5fa;--p-line:#d4d8e6;--neuro-dark:#263450;--neuro-mid:#526184}
+.alg-neuro .alg-header{background:linear-gradient(125deg,var(--neuro-dark),var(--neuro-mid))}.alg-neuro .alg-kicker{color:#e5e7fc}.alg-neuro .alg-hero-text{max-width:60ch}.alg-neuro .neuro-hero-photo{width:100%;height:clamp(100px,22vw,200px);object-fit:cover;object-position:51% 45%;border:1px solid #bcc3d8;border-radius:14px;margin:8px 0;display:block}.alg-neuro .alg-tile-icon{background:var(--p-soft)}.alg-neuro .alg-tile-open{color:var(--p-teal)}
+html.dark body.alg-neuro{--p-bg:#131722;--p-card:#202634;--p-ink:#f4f3fa;--p-muted:#c7cce0;--p-line:#46516a;--p-soft:#30394e;--p-teal:#b7c5fa}
+.alg-neuro .alg-option.danger,.alg-neuro .alg-outcome.danger{border-color:#ca666c;background:#fff0ef;color:#70272e}html.dark .alg-neuro .alg-option.danger,html.dark .alg-neuro .alg-outcome.danger{background:#39272e;color:#ffd5d7;border-color:#a86c75}

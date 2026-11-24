@@ -69,7 +69,7 @@ for(const match of external){
 // Every local script referenced by an alternate tool must be available offline.
 const pages=['index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html','pediatria-evaluacion-rapida.html',
- 'documentacion.html','historia-pediatria.html','atlas-gallery.html','ortopedia.html','neurologia.html','guardia-pro.html','enarm.html','enarm-direct.html','enarm-visual.html','pharma-pro.html','algoritmos-pediatria.html','algoritmos-urgencias.html','algoritmos-oftalmologia.html','algoritmos-ortopedia.html','pediatria-pas.html'];
+ 'documentacion.html','historia-pediatria.html','atlas-gallery.html','ortopedia.html','neurologia.html','algoritmos-neurologia.html','guardia-pro.html','enarm.html','enarm-direct.html','enarm-visual.html','pharma-pro.html','algoritmos-pediatria.html','algoritmos-urgencias.html','algoritmos-oftalmologia.html','algoritmos-ortopedia.html','pediatria-pas.html'];
 for(const p of pages){
  const html=fs.readFileSync(p,'utf8');
  for(const m of html.matchAll(/<script[^>]*src=["'](\.\/[^"']+)["']/g)){
