@@ -1,3 +1,7 @@
+## v0.10.86 · Pharma PRO 3.0 — Coral & Jade
+
+Rediseño de presentación: coral/vino, jade y cian; modo claro/oscuro, portada compacta, contadores dinámicos, accesos rápidos, grupos, navegación inferior, comparador descriptivo por grupo, historial temporal sin almacenamiento, central de referencias IV por producto, acceso pediátrico, Guardia/Estudio y navegación de fichas. Sin cambios en motores clínicos, medicamentos, posologías o verificaciones; no implica validación independiente. Caché actualizada.
+
 ## v0.10.85 · Pharma PRO — referencias hospitalarias por producto
 
 Cuatro referencias documentales parciales de etiquetas US DailyMed específicas: cefepima Sagent, meropenem Hikma, piperacilina/tazobactam Fresenius Kabi envase a granel de farmacia, ketorolaco Sportpharm 60 mg/2 mL exclusivamente IM. Tablas estáticas por indicación y CrCl, preparación, restricciones, estabilidad, incompatibilidades y vigilancia tras cinco verificaciones obligatorias. Sin cálculo individualizado, dosis por peso, velocidad de bomba, validación mexicana ni autorización clínica independiente. Se conservan alertas ISMP y LASA existentes. Caché offline actualizada.

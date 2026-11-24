@@ -22,6 +22,10 @@ jobs:
         run: node tests/ortopedia-v01080.cjs
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
         run: node tests/oftalmologia-algoritmos-v01075.cjs
+      - name: Pharma PRO Coral and Jade UI and preserved safeguards
+        run: node tests/pharma-coral-jade-v01086.cjs
+      - name: Pharma PRO Coral and Jade — real mobile Chromium interaction checks
+        run: node tests/pharma-coral-jade-browser-v01086.cjs
       - name: Existing regression checks
         run: node tests/regression.cjs
       - name: Pharma PRO v0.10.85 — hospital product-specific references and fail-closed gates

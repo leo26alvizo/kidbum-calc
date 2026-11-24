@@ -86,9 +86,9 @@ assert.match(idx,/root\.KidBumPharmaDiagnosisCatalog/);
 assert.match(idx,/medicamentos vinculados · uso orientativo sin cotejo/);
 assert.match(page,/id="pharma-dx-catalog"/);
 assert.match(page,/id="pharma-dx-results"/);
-assert.match(page,/v0\.10\.75 · Pharma Pro 2\.0/);
+assert.match(page,/v0\.10\.86 · Pharma PRO 3\.0/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.equal(scripts.length,24,'New product-safety evidence modules are additive; pediatric reference scripts remain present');
+assert.equal(scripts.length,25,'New product-safety evidence modules are additive; pediatric reference scripts remain present');
 assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/pediatric-drug-references-v01055.js'));
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
 

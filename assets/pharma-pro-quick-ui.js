@@ -31,11 +31,11 @@ function selectSuggestion(index){
 function currentItems(){
  const q=quick.value.trim();if(!q)return [];
  if(state.view==='drugs'){
-  const matches=[...lib.search(q,'all','all',false)];
+  const matches=[...lib.search(q,'all','all',false)];const directIds=new Set(matches.map(x=>x.id));
   for(const med of root.KidBumPharmaDiagnosisCatalog?.search(q)||[]){
    if(!matches.some(x=>x.id===med.id))matches.push(med);
   }
-  return matches.slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':'')+(lib.search(q).some(y=>y.id===x.id)?'':' · diagnóstico orientativo'),kind:'drug'}));
+  return matches.slice(0,7).map(x=>({id:x.id,label:x.name,info:x.group+(x.highRisk?' · ⚠ Alto riesgo':'')+(x.lasaPairs.length?' · LASA':'')+(directIds.has(x.id)?'':' · diagnóstico orientativo'),kind:'drug'}));
  }
  if(state.view==='diseases'){
   const routes=lib.searchConditions(q).slice(0,4).map(x=>({id:x.id,label:x.name,info:'Ruta terapéutica documentada · adultos',kind:'disease'}));
@@ -76,7 +76,7 @@ function fillSuggestions(){
  quick.setAttribute('aria-expanded','true');
 }
 function sectionVisibility(){
- const detailVisible=state.drugDetail;
+ const detailVisible=state.drugDetail;document.dispatchEvent(new CustomEvent('pharma:view',{detail:{view:state.view,drugDetail:detailVisible}}));
  $('detail').classList.toggle('hidden',!detailVisible);
  $('browse').classList.toggle('hidden',detailVisible||state.view!=='drugs');
  $('disease-finder').classList.toggle('hidden',detailVisible||state.view!=='diseases');
@@ -98,7 +98,7 @@ function display(view){
  if(view==='diseases')dispatch('disease-search',quick.value);
 }
 function chooseView(view){
- if(state.drugDetail){history.replaceState(null,'',location.pathname+location.search);state.drugDetail=false;}
+ if(state.drugDetail){history.replaceState(null,'',location.pathname+location.search);UI.closeDrug();state.drugDetail=false;}
  display(view);
  const nav=$('pharma-view-nav');nav.scrollIntoView({behavior:'smooth',block:'start'});
 }
@@ -128,8 +128,8 @@ document.querySelectorAll('[data-quick-disease]').forEach(b=>b.onclick=()=>{
 });
 document.addEventListener('pointerdown',event=>{if(!event.target.closest('.pharma-fast-search'))hideSuggestions();});
 root.KidBumPharmaQuick=Object.freeze({
- onDrugOpen(){
-  state.drugDetail=true;
+ onDrugOpen(id){
+  state.drugDetail=true;document.dispatchEvent(new CustomEvent('pharma:drug',{detail:{id}}));
   sectionVisibility();hideSuggestions();
  },
  onDrugClose(){
@@ -150,7 +150,8 @@ root.KidBumPharmaQuick=Object.freeze({
 });
 /* The original page invokes showDrug once on initial hash; respect deep links. */
 display('drugs');
-if(location.hash&&lib.byId[decodeURIComponent(location.hash.slice(1))]){
+let initialId='';try{initialId=decodeURIComponent(location.hash.slice(1));}catch(e){}
+if(Object.hasOwn(lib.byId,initialId)){
  state.drugDetail=true;sectionVisibility();
 }
 })(typeof window!=='undefined'?window:globalThis);
