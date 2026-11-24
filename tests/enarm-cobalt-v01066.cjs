@@ -9,8 +9,8 @@ const css=read('assets/enarm-cobalt-v01066.css'),art=read('assets/enarm-hero-v01
 const ui=read('assets/enarm-ui-v01064.js'),sw=read('sw.js');
 const bank=require('../assets/enarm-bank-v01064.js');
 const radar=require('../assets/enarm-radar-v01065.js');
-assert.equal(bank.caseCount,37);
-assert.equal(bank.questionCount,74);
+assert.equal(bank.caseCount,72);
+assert.equal(bank.questionCount,144);
 assert.equal(bank.areas.length,7);
 assert.equal(radar.INTERVALS.length,6);
 assert.match(enarm,new RegExp("meta name=\"kidbum-app-version\" content=\""+releasePattern+"\""));

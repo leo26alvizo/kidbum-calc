@@ -181,6 +181,1199 @@
   Q('Si baja la prevalencia de la enfermedad y sensibilidad/especificidad permanecen iguales, ¿qué ocurre en general con el valor predictivo positivo?',['Disminuye','Aumenta necesariamente','Permanece siempre fijo','Se convierte en la sensibilidad'],0,'Con prevalencia menor, una proporción relativamente mayor de resultados positivos puede ser falsa; el valor predictivo positivo usualmente disminuye si sensibilidad y especificidad se mantienen constantes.')
  ]),
  ];
+ // 35 additional original educational cases, added after the legacy cases to preserve their option order and progress IDs.
+ cases.push(...[
+  {
+    "id": "mi-09",
+    "area": "Medicina Interna",
+    "topic": "Neumonía adquirida en la comunidad",
+    "stem": "Varón de 68 años, sin hospitalizaciones recientes, con fiebre de 39 °C, tos productiva, dolor pleurítico, estertores basales derechos y consolidación lobar nueva en la radiografía. FR 32/min, PA 88/54 mmHg.",
+    "source": {
+      "label": "GPC IMSS-234-09 · Neumonía adquirida en la comunidad",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/234GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el diagnóstico sindromático más probable?",
+        "options": [
+          "Neumonía adquirida en la comunidad",
+          "Exacerbación aislada de EPOC",
+          "Bronquitis aguda sin neumonía",
+          "Edema pulmonar cardiogénico"
+        ],
+        "correct": 0,
+        "why": "La fiebre, síntomas respiratorios y consolidación nueva apoyan neumonía; el patrón no determina por sí solo el agente."
+      },
+      {
+        "prompt": "¿Qué hallazgo favorece valoración hospitalaria urgente?",
+        "options": [
+          "Localización basal del infiltrado",
+          "Hipotensión y taquipnea marcada",
+          "Expectoración amarilla aislada",
+          "Dolor pleurítico sin otros datos"
+        ],
+        "correct": 1,
+        "why": "La hipotensión y la frecuencia respiratoria elevada indican posible compromiso sistémico; no debe basarse el destino solo en la imagen."
+      }
+    ]
+  },
+  {
+    "id": "mi-10",
+    "area": "Medicina Interna",
+    "topic": "Enfermedad renal crónica albuminúrica",
+    "stem": "Mujer de 58 años con diabetes tipo 2. TFGe de 48 mL/min/1.73 m² hace cuatro meses y 46 actualmente; cociente albúmina/creatinina urinario de 420 mg/g confirmado. No hay enfermedad aguda.",
+    "source": {
+      "label": "GPC IMSS-335-19 · Enfermedad renal crónica",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/335GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué categoría de TFGe corresponde al valor actual?",
+        "options": [
+          "G4",
+          "G3a",
+          "G2",
+          "G3b"
+        ],
+        "correct": 1,
+        "why": "G3a corresponde a 45–59 mL/min/1.73 m²; la persistencia por más de tres meses apoya enfermedad renal crónica."
+      },
+      {
+        "prompt": "¿Cómo se clasifica la albuminuria de 420 mg/g?",
+        "options": [
+          "A2",
+          "No clasificable por cociente",
+          "A3",
+          "A1"
+        ],
+        "correct": 2,
+        "why": "A3 corresponde a albuminuria superior a 300 mg/g y agrega riesgo renal y cardiovascular independientemente de la TFGe."
+      }
+    ]
+  },
+  {
+    "id": "mi-11",
+    "area": "Medicina Interna",
+    "topic": "Hipotiroidismo subclínico",
+    "stem": "Mujer de 46 años no embarazada, con TSH discretamente elevada de forma persistente en dos mediciones y T4 libre normal. No toma biotina ni presenta enfermedad aguda; no hay bocio palpable.",
+    "source": {
+      "label": "GPC IMSS-265-10 · Hipotiroidismo del adulto",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/265GER.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la interpretación bioquímica?",
+        "options": [
+          "Hipertiroidismo subclínico",
+          "Hipotiroidismo primario manifiesto",
+          "Hipotiroidismo subclínico primario",
+          "Hipotiroidismo central manifiesto"
+        ],
+        "correct": 2,
+        "why": "La TSH elevada con T4 libre dentro del intervalo es el patrón de hipotiroidismo subclínico primario."
+      },
+      {
+        "prompt": "¿Qué anticuerpo apoya etiología tiroidea autoinmune?",
+        "options": [
+          "Antirreceptor de acetilcolina",
+          "Anticentrómero",
+          "Antimembrana basal glomerular",
+          "Antiperoxidasa tiroidea (anti-TPO)"
+        ],
+        "correct": 3,
+        "why": "Los anti-TPO apoyan tiroiditis autoinmune y ayudan a valorar riesgo de progresión, sin establecer por sí solos necesidad de tratamiento."
+      }
+    ]
+  },
+  {
+    "id": "mi-12",
+    "area": "Medicina Interna",
+    "topic": "Trombosis venosa profunda",
+    "stem": "Mujer de 63 años, diez días después de artroplastia de rodilla, con aumento unilateral del perímetro de pantorrilla, dolor a lo largo de las venas profundas y edema. Sin disnea ni dolor torácico.",
+    "source": {
+      "label": "GPC IMSS · Enfermedad tromboembólica venosa",
+      "url": "https://revistamedica.imss.gob.mx/index.php/revista_medica/article/view/1707"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el diagnóstico que debe descartarse prioritariamente?",
+        "options": [
+          "Linfedema primario",
+          "Insuficiencia arterial crónica",
+          "Rotura de tendón de Aquiles",
+          "Trombosis venosa profunda"
+        ],
+        "correct": 3,
+        "why": "La cirugía reciente, inmovilidad y edema unilateral elevan la sospecha de trombosis venosa profunda."
+      },
+      {
+        "prompt": "Con probabilidad clínica alta, ¿cuál es el estudio inicial más útil?",
+        "options": [
+          "Ultrasonido venoso compresivo",
+          "Radiografía simple de rodilla",
+          "Dímero D como única prueba definitiva",
+          "Arteriografía de miembros inferiores"
+        ],
+        "correct": 0,
+        "why": "La ecografía compresiva permite detectar trombosis; el dímero D aislado no descarta de forma segura una TVP con probabilidad alta."
+      }
+    ]
+  },
+  {
+    "id": "mi-13",
+    "area": "Medicina Interna",
+    "topic": "Tuberculosis pulmonar",
+    "stem": "Varón de 39 años con tos de seis semanas, pérdida de peso, sudoración nocturna y hemoptisis escasa. Convive con una persona que recibió tratamiento por tuberculosis. Radiografía con cavitación apical.",
+    "source": {
+      "label": "IMSS · Tuberculosis pulmonar",
+      "url": "https://www.imss.gob.mx/node/95078"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué etiología debe investigarse prioritariamente?",
+        "options": [
+          "Mycobacterium tuberculosis",
+          "Streptococcus pneumoniae",
+          "Pneumocystis jirovecii",
+          "Mycoplasma pneumoniae"
+        ],
+        "correct": 0,
+        "why": "La evolución subaguda, síntomas constitucionales, exposición y cavitación superior obligan a investigar tuberculosis."
+      },
+      {
+        "prompt": "¿Qué muestra es adecuada para investigar tuberculosis pulmonar activa?",
+        "options": [
+          "Piel para biopsia sin lesiones",
+          "Esputo para prueba molecular y estudios microbiológicos según disponibilidad",
+          "Suero para anticuerpos aislados",
+          "Orina para urocultivo como única prueba"
+        ],
+        "correct": 1,
+        "why": "El estudio de secreciones respiratorias permite identificar el microorganismo y, según la técnica, resistencia; se aplican precauciones respiratorias y notificación según protocolo."
+      }
+    ]
+  },
+  {
+    "id": "ped-07",
+    "area": "Pediatría",
+    "topic": "Síndrome nefrítico postestreptocócico",
+    "stem": "Escolar de 8 años con edema palpebral, orina color té e hipertensión dos semanas después de faringitis. EGO con hematuria y cilindros eritrocitarios, proteinuria no masiva.",
+    "source": {
+      "label": "GPC-IMSS-826-18 · Síndrome nefrítico postestreptocócico",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/826GRR_0.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el diagnóstico más probable?",
+        "options": [
+          "Diabetes insípida",
+          "Glomerulonefritis postestreptocócica",
+          "Síndrome nefrótico por cambios mínimos",
+          "Cistitis no complicada"
+        ],
+        "correct": 1,
+        "why": "El intervalo posterior a infección y el sedimento glomerular con edema e hipertensión sugieren síndrome nefrítico postestreptocócico."
+      },
+      {
+        "prompt": "¿Qué alteración del complemento es característica en la fase aguda?",
+        "options": [
+          "Ausencia aislada de C1 inhibidor",
+          "Elevación exclusiva de C4",
+          "Disminución transitoria de C3",
+          "Aumento persistente de C3"
+        ],
+        "correct": 2,
+        "why": "El consumo de C3 es habitual y su recuperación en el seguimiento ayuda a distinguir este cuadro de otras glomerulopatías."
+      }
+    ]
+  },
+  {
+    "id": "ped-08",
+    "area": "Pediatría",
+    "topic": "Torsión testicular",
+    "stem": "Adolescente de 14 años con dolor escrotal unilateral intenso de 90 minutos, náusea, testículo elevado y reflejo cremastérico ausente. Afebril y sin síntomas urinarios.",
+    "source": {
+      "label": "GPC IMSS-229-10 · Escroto agudo",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/229GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué diagnóstico es prioritario?",
+        "options": [
+          "Hidrocele comunicante",
+          "Varicocele",
+          "Torsión testicular",
+          "Epididimitis bacteriana"
+        ],
+        "correct": 2,
+        "why": "El inicio abrupto, posición anormal y ausencia del reflejo apoyan torsión, una urgencia dependiente del tiempo."
+      },
+      {
+        "prompt": "¿Qué conducta es apropiada ante sospecha clínica muy alta?",
+        "options": [
+          "Observar hasta el día siguiente",
+          "Iniciar antibiótico oral y citar en una semana",
+          "Realizar biopsia testicular electiva",
+          "Valoración quirúrgica urgente sin retrasarla por estudios"
+        ],
+        "correct": 3,
+        "why": "La viabilidad depende del tiempo de isquemia; una ecografía puede ayudar si no retrasa la exploración indicada."
+      }
+    ]
+  },
+  {
+    "id": "ped-09",
+    "area": "Pediatría",
+    "topic": "Diarrea aguda sin deshidratación",
+    "stem": "Niña de 20 meses con cinco evacuaciones acuosas desde ayer, sin sangre ni vómitos persistentes. Está alerta, bebe normalmente, tiene mucosas húmedas y diuresis conservada.",
+    "source": {
+      "label": "GPC IMSS-156-08 · Diarrea aguda en niños",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/156GER.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el manejo de hidratación más apropiado?",
+        "options": [
+          "Solución intravenosa de mantenimiento por rutina",
+          "Suspender toda ingesta por doce horas",
+          "Solo bebidas deportivas azucaradas",
+          "Solución de rehidratación oral y vigilancia de pérdidas"
+        ],
+        "correct": 3,
+        "why": "Sin datos de deshidratación se mantienen líquidos y alimentación, se reponen pérdidas con solución oral y se vigilan alarmas."
+      },
+      {
+        "prompt": "¿Qué hallazgo obliga a reevaluar de forma urgente?",
+        "options": [
+          "Incapacidad para beber y letargo",
+          "Una evacuación acuosa adicional con buen estado",
+          "Apetito ligeramente reducido con diuresis normal",
+          "Persistencia de ruidos intestinales"
+        ],
+        "correct": 0,
+        "why": "El deterioro del estado mental y la imposibilidad de hidratarse pueden indicar deshidratación grave u otra complicación."
+      }
+    ]
+  },
+  {
+    "id": "ped-10",
+    "area": "Pediatría",
+    "topic": "Bronquiolitis: gravedad y pruebas",
+    "stem": "Lactante de 4 meses con coriza de tres días seguida de tos y sibilancias bilaterales por primera vez. Está alerta, tolera tomas, sin focalidad pulmonar ni datos de insuficiencia respiratoria.",
+    "source": {
+      "label": "GPC IMSS-032 · Bronquiolitis",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/032GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué método suele establecer el diagnóstico en este escenario típico?",
+        "options": [
+          "Historia y exploración clínica",
+          "Tomografía torácica sistemática",
+          "Cultivo de esputo obligatorio",
+          "Espirometría forzada"
+        ],
+        "correct": 0,
+        "why": "La bronquiolitis típica es un diagnóstico clínico; las pruebas se reservan para incertidumbre o complicaciones."
+      },
+      {
+        "prompt": "¿Qué dato debe motivar atención urgente?",
+        "options": [
+          "Sibilancias leves con alimentación normal",
+          "Episodios de apnea o cianosis",
+          "Rinorrea transparente aislada",
+          "Tos ocasional sin dificultad respiratoria"
+        ],
+        "correct": 1,
+        "why": "Apnea o cianosis indican posible compromiso respiratorio grave, especialmente en lactantes pequeños."
+      }
+    ]
+  },
+  {
+    "id": "ped-11",
+    "area": "Pediatría",
+    "topic": "Estenosis hipertrófica del píloro",
+    "stem": "Lactante masculino de 5 semanas con vómitos en proyectil no biliosos después de alimentarse, hambre posterior y pérdida ponderal. Se palpa una masa epigástrica pequeña; mucosas secas.",
+    "source": {
+      "label": "GPC IMSS-330-10 · Estenosis hipertrófica de píloro (ficha oficial)",
+      "url": "https://www.imss.gob.mx/node/85002"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la alteración ácido-base clásica si las pérdidas son prolongadas?",
+        "options": [
+          "Alcalosis respiratoria primaria",
+          "Alcalosis metabólica hipoclorémica",
+          "Acidosis metabólica hiperclorémica",
+          "Acidosis respiratoria aislada"
+        ],
+        "correct": 1,
+        "why": "La pérdida repetida de ácido clorhídrico gástrico produce alcalosis metabólica y depleción de cloro, a menudo también de potasio."
+      },
+      {
+        "prompt": "¿Cuál es la prueba de imagen inicial de elección?",
+        "options": [
+          "Radiografía de cráneo",
+          "Colangiografía endoscópica",
+          "Ultrasonido pilórico",
+          "Tomografía abdominal con contraste"
+        ],
+        "correct": 2,
+        "why": "El ultrasonido permite evaluar el engrosamiento y longitud del píloro; deben corregirse deshidratación y electrólitos antes del tratamiento definitivo."
+      }
+    ]
+  },
+  {
+    "id": "go-07",
+    "area": "Ginecología y Obstetricia",
+    "topic": "Diabetes gestacional: seguimiento",
+    "stem": "Gestante de 29 semanas sin diabetes previa, con diagnóstico de diabetes gestacional por curva de tolerancia. Crecimiento fetal adecuado, inicia plan nutricional y monitoreo glucémico.",
+    "source": {
+      "label": "GPC IMSS-320-10 · Diabetes en el embarazo",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/320GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué complicación fetal se asocia con hiperglucemia materna persistente?",
+        "options": [
+          "Restricción simétrica obligatoria",
+          "Anencefalia adquirida en el tercer trimestre",
+          "Crecimiento fetal excesivo",
+          "Agenesia renal bilateral como consecuencia típica tardía"
+        ],
+        "correct": 2,
+        "why": "La glucosa materna atraviesa la placenta y estimula hiperinsulinemia fetal, favoreciendo crecimiento excesivo."
+      },
+      {
+        "prompt": "Tras el parto, ¿qué acción es importante?",
+        "options": [
+          "Suspender definitivamente vigilancia metabólica",
+          "Diagnosticar diabetes tipo 1 en todas las pacientes",
+          "Realizar amniocentesis de control",
+          "Reevaluar metabolismo de glucosa y riesgo futuro de diabetes"
+        ],
+        "correct": 3,
+        "why": "La diabetes gestacional incrementa el riesgo posterior de diabetes tipo 2; se requiere reevaluación posparto y seguimiento periódico."
+      }
+    ]
+  },
+  {
+    "id": "go-08",
+    "area": "Ginecología y Obstetricia",
+    "topic": "Síndrome HELLP",
+    "stem": "Gestante de 35 semanas con hipertensión, dolor epigástrico y náuseas. Plaquetas 78 000/µL, AST 190 U/L, LDH elevada y esquistocitos en frotis. No tiene antecedente de hepatopatía.",
+    "source": {
+      "label": "GPC IMSS-058-08 · Enfermedades hipertensivas del embarazo",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/058GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la complicación obstétrica más probable?",
+        "options": [
+          "Hiperemesis gravídica no complicada",
+          "Colestasis intrahepática aislada",
+          "Trombocitopenia gestacional benigna",
+          "Síndrome HELLP"
+        ],
+        "correct": 3,
+        "why": "Hemólisis, elevación de enzimas hepáticas y trombocitopenia constituyen el patrón HELLP."
+      },
+      {
+        "prompt": "¿Cuál es la prioridad general de manejo?",
+        "options": [
+          "Estabilización materna y valoración obstétrica urgente para resolución",
+          "Alta con control prenatal ordinario",
+          "Esperar normalización espontánea sin vigilancia",
+          "Administrar hierro oral como única intervención"
+        ],
+        "correct": 0,
+        "why": "HELLP puede evolucionar rápidamente; requiere manejo especializado y decisión obstétrica tras estabilizar a la madre."
+      }
+    ]
+  },
+  {
+    "id": "go-09",
+    "area": "Ginecología y Obstetricia",
+    "topic": "Enfermedad trofoblástica gestacional",
+    "stem": "Mujer de 25 años con amenorrea de 11 semanas, sangrado vaginal, hiperemesis intensa y útero mayor de lo esperado. Ultrasonido con tejido vesicular difuso sin embrión y hCG muy elevada.",
+    "source": {
+      "label": "GPC SS-228-09 · Enfermedad trofoblástica gestacional",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/228GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el diagnóstico más probable?",
+        "options": [
+          "Mola hidatidiforme completa",
+          "Embarazo ectópico tubárico",
+          "Aborto completo",
+          "Embarazo intrauterino viable normal"
+        ],
+        "correct": 0,
+        "why": "La proliferación trofoblástica vesicular sin embrión con hCG elevada sugiere mola completa; la confirmación es histopatológica."
+      },
+      {
+        "prompt": "¿Qué marcador es esencial para vigilancia tras evacuación?",
+        "options": [
+          "Prolactina sérica",
+          "hCG cuantitativa seriada",
+          "Alfafetoproteína aislada",
+          "CA 19-9"
+        ],
+        "correct": 1,
+        "why": "El seguimiento de hCG permite detectar persistencia o ascenso sugestivo de neoplasia trofoblástica, conforme al protocolo especializado."
+      }
+    ]
+  },
+  {
+    "id": "go-10",
+    "area": "Ginecología y Obstetricia",
+    "topic": "Hipertensión gestacional",
+    "stem": "Mujer previamente normotensa a las 30 semanas, PA repetida de 146/94 mmHg. Proteinuria negativa, plaquetas y función renal y hepática normales; niega cefalea, fosfenos y dolor epigástrico.",
+    "source": {
+      "label": "GPC IMSS-058-08 · Enfermedades hipertensivas del embarazo",
+      "url": "https://imss.gob.mx/sites/all/statics/guiasclinicas/058GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la clasificación inicial más probable?",
+        "options": [
+          "Preeclampsia con datos de severidad",
+          "Hipertensión gestacional",
+          "Hipertensión crónica conocida",
+          "Eclampsia"
+        ],
+        "correct": 1,
+        "why": "La hipertensión nueva posterior a 20 semanas sin proteinuria ni datos de disfunción orgánica corresponde inicialmente a hipertensión gestacional."
+      },
+      {
+        "prompt": "¿Por qué requiere vigilancia estrecha?",
+        "options": [
+          "Implica siempre hemólisis presente",
+          "Solo aumenta riesgo de infección urinaria",
+          "Puede evolucionar a preeclampsia",
+          "Descarta complicaciones maternas futuras"
+        ],
+        "correct": 2,
+        "why": "La ausencia actual de proteinuria o síntomas no excluye progresión a preeclampsia; se requieren controles maternos y fetales."
+      }
+    ]
+  },
+  {
+    "id": "go-11",
+    "area": "Ginecología y Obstetricia",
+    "topic": "Control prenatal temprano",
+    "stem": "Primigesta de 9 semanas acude por primera vez. No conoce su grupo sanguíneo, no tiene estudios prenatales ni síntomas urinarios; refiere antecedente familiar de diabetes.",
+    "source": {
+      "label": "IMSS · Consulta de vigilancia prenatal",
+      "url": "https://www.imss.gob.mx/maternidad/estas-embarazada/consulta-vigilancia-prenatal"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es una finalidad central de los estudios iniciales prenatales?",
+        "options": [
+          "Establecer por laboratorio la vía de nacimiento",
+          "Determinar la fecha exacta del parto sin ultrasonido ni historia",
+          "Identificar anemia, riesgos infecciosos y trastornos metabólicos",
+          "Confirmar madurez pulmonar fetal"
+        ],
+        "correct": 2,
+        "why": "La evaluación prenatal temprana busca detectar enfermedades y factores modificables para reducir riesgos maternos y fetales."
+      },
+      {
+        "prompt": "¿Qué conducta es apropiada con los resultados y antecedentes?",
+        "options": [
+          "Posponer todos los controles hasta el tercer trimestre",
+          "Solicitar únicamente estudios si aparecen síntomas",
+          "Indicar cesárea por el antecedente familiar de diabetes",
+          "Estratificar riesgos y ajustar el calendario de seguimiento"
+        ],
+        "correct": 3,
+        "why": "La vigilancia se individualiza según factores de riesgo, edad gestacional y resultados, sin asumir complicaciones no demostradas."
+      }
+    ]
+  },
+  {
+    "id": "cg-06",
+    "area": "Cirugía General",
+    "topic": "Cólico biliar no complicado",
+    "stem": "Mujer de 36 años con episodios de dolor en hipocondrio derecho tras comidas, que ceden por completo en dos horas. Afebril, sin ictericia, leucocitos normales; ultrasonido con cálculos sin engrosamiento parietal.",
+    "source": {
+      "label": "GPC IMSS-237-09 · Colecistitis y colelitiasis",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/237GER.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué diagnóstico explica mejor el cuadro?",
+        "options": [
+          "Colecistitis aguda complicada",
+          "Colangitis aguda",
+          "Pancreatitis aguda",
+          "Colelitiasis sintomática sin colecistitis"
+        ],
+        "correct": 3,
+        "why": "El dolor transitorio con litiasis sin inflamación sistémica ni hallazgos ecográficos inflamatorios orienta a cólico biliar."
+      },
+      {
+        "prompt": "¿Cuál es una conducta razonable tras resolver el episodio y descartar complicaciones?",
+        "options": [
+          "Referencia programada para valorar colecistectomía",
+          "Antibiótico intravenoso indefinido",
+          "CPRE urgente en ausencia de datos de obstrucción",
+          "Evitar seguimiento porque los cálculos desaparecen siempre"
+        ],
+        "correct": 0,
+        "why": "La litiasis sintomática puede recurrir; se valora tratamiento definitivo electivo según comorbilidades y contexto."
+      }
+    ]
+  },
+  {
+    "id": "cg-07",
+    "area": "Cirugía General",
+    "topic": "Coledocolitiasis",
+    "stem": "Paciente de 51 años con dolor en hipocondrio derecho, ictericia y coluria. Afebril, estable, bilirrubina directa y fosfatasa alcalina elevadas, colédoco dilatado en ultrasonido.",
+    "source": {
+      "label": "GPC IMSS-237-09 · Colecistitis y colelitiasis",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/237GER.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué patrón de alteración hepática predomina?",
+        "options": [
+          "Colestásico",
+          "Hepatocelular puro",
+          "Hemolítico aislado",
+          "Insuficiencia sintética aislada"
+        ],
+        "correct": 0,
+        "why": "El predominio de bilirrubina conjugada y fosfatasa alcalina con dilatación ductal orienta a obstrucción biliar."
+      },
+      {
+        "prompt": "¿Qué complicación sugiere la aparición posterior de fiebre y escalofríos?",
+        "options": [
+          "Cólico renal",
+          "Colangitis aguda",
+          "Hernia hiatal",
+          "Hepatitis autoinmune aislada"
+        ],
+        "correct": 1,
+        "why": "Fiebre sobre un cuadro obstructivo biliar sugiere infección de la vía biliar y exige evaluación urgente."
+      }
+    ]
+  },
+  {
+    "id": "cg-08",
+    "area": "Cirugía General",
+    "topic": "Pancreatitis de origen biliar",
+    "stem": "Mujer de 48 años con dolor epigástrico irradiado a espalda y lipasa cinco veces el límite superior. Ultrasonido con litiasis vesicular; hemodinámicamente estable y sin fiebre.",
+    "source": {
+      "label": "GPC IMSS-239-09 · Pancreatitis aguda",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/239GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué etiología es más probable?",
+        "options": [
+          "Inducida por hiperparatiroidismo demostrado",
+          "Biliar",
+          "Autoinmune confirmada",
+          "Traumática"
+        ],
+        "correct": 1,
+        "why": "Los cálculos vesiculares en el contexto de pancreatitis apoyan etiología biliar; deben evaluarse otras causas y obstrucción persistente."
+      },
+      {
+        "prompt": "¿Qué criterio clínico indica mayor gravedad?",
+        "options": [
+          "Dolor irradiado a espalda por sí solo",
+          "Presencia de náusea aislada",
+          "Disfunción orgánica persistente",
+          "Magnitud de lipasa como único parámetro"
+        ],
+        "correct": 2,
+        "why": "La falla orgánica y su duración son determinantes de gravedad; la cifra de lipasa no cuantifica por sí sola la severidad."
+      }
+    ]
+  },
+  {
+    "id": "cg-09",
+    "area": "Cirugía General",
+    "topic": "Apendicitis: presentación atípica",
+    "stem": "Adolescente de 17 años con dolor abdominal de inicio periumbilical, ahora predominante en flanco derecho y exacerbado al extender la cadera. Fiebre y anorexia; sin disuria.",
+    "source": {
+      "label": "GPC IMSS-031-08 · Diagnóstico de apendicitis aguda",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/031GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué variante anatómica explica el dolor con extensión de cadera?",
+        "options": [
+          "Apéndice pélvico cercano al obturador interno",
+          "Apéndice intramural gástrico",
+          "Apéndice retrocecal próximo al psoas",
+          "Apéndice subhepático en todos los casos"
+        ],
+        "correct": 2,
+        "why": "La irritación del psoas puede aparecer con un apéndice retrocecal; el signo aislado no confirma apendicitis."
+      },
+      {
+        "prompt": "¿Qué conducta procede si persiste sospecha pese a exploración poco típica?",
+        "options": [
+          "Descartarla por no tener dolor exacto en McBurney",
+          "Administrar laxante como prueba diagnóstica",
+          "Esperar varias semanas sin control",
+          "Valoración quirúrgica y estudios de imagen según contexto"
+        ],
+        "correct": 3,
+        "why": "La posición apendicular modifica los hallazgos; la evaluación clínica seriada e imagen selectiva ayudan a evitar retrasos."
+      }
+    ]
+  },
+  {
+    "id": "cg-10",
+    "area": "Cirugía General",
+    "topic": "Hernia femoral",
+    "stem": "Mujer de 72 años con masa pequeña dolorosa inferior al ligamento inguinal, medial a los vasos femorales, de aparición reciente al estar de pie. Actualmente reductible, sin vómitos.",
+    "source": {
+      "label": "HerniaSurge · Actualización 2023 de hernia inguinal",
+      "url": "https://academic.oup.com/bjsopen/article/7/5/zrad080/7325871"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué tipo de hernia corresponde mejor a la localización?",
+        "options": [
+          "Inguinal directa",
+          "Umbilical",
+          "Incisional supraumbilical",
+          "Femoral"
+        ],
+        "correct": 3,
+        "why": "La hernia femoral protruye por el canal femoral, inferior al ligamento inguinal y medial a la vena femoral."
+      },
+      {
+        "prompt": "¿Por qué se recomienda valoración quirúrgica oportuna?",
+        "options": [
+          "Riesgo relativamente elevado de incarceración y estrangulación",
+          "Siempre se resuelve de forma espontánea",
+          "La reducción excluye riesgo futuro",
+          "Es una contraindicación absoluta para cualquier reparación"
+        ],
+        "correct": 0,
+        "why": "El cuello estrecho del canal femoral aumenta el riesgo de complicación, aun cuando la hernia sea inicialmente reductible."
+      }
+    ]
+  },
+  {
+    "id": "urg-06",
+    "area": "Urgencias",
+    "topic": "Dengue con signos de alarma",
+    "stem": "Adulto de 23 años residente en zona endémica, quinto día de fiebre y mialgias. Al bajar la fiebre aparece dolor abdominal intenso, vómitos persistentes y aumento del hematocrito con descenso plaquetario.",
+    "source": {
+      "label": "CENAPRECE · Protocolo de dengue, 10 septiembre 2024",
+      "url": "https://dengue.salud.gob.mx/interna/Evidencias.html"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la clasificación clínica más probable si no hay choque ni falla orgánica?",
+        "options": [
+          "Dengue con signos de alarma",
+          "Dengue sin signos de alarma",
+          "Dengue grave por choque establecido",
+          "Convalecencia sin riesgo"
+        ],
+        "correct": 0,
+        "why": "Dolor intenso, vómitos y hemoconcentración progresiva con plaquetopenia sugieren riesgo de fuga plasmática y requieren valoración estrecha."
+      },
+      {
+        "prompt": "¿Qué estrategia general corresponde a esta presentación?",
+        "options": [
+          "Transfusión de plaquetas automática por cualquier descenso",
+          "Evaluación hospitalaria, vigilancia de perfusión y líquidos según protocolo",
+          "Alta sin reevaluación porque desapareció la fiebre",
+          "Diurético rutinario para prevenir fuga capilar"
+        ],
+        "correct": 1,
+        "why": "La fase crítica puede comenzar con la defervescencia; la reposición de líquidos y vigilancia se individualizan, no se basan solo en plaquetas."
+      }
+    ]
+  },
+  {
+    "id": "urg-07",
+    "area": "Urgencias",
+    "topic": "Dengue: seguridad farmacológica",
+    "stem": "Mujer de 28 años con fiebre, cefalea retroocular y mialgias de dos días en zona con transmisión de dengue. Está estable, sin sangrado ni signos de alarma y tolera líquidos.",
+    "source": {
+      "label": "OMS · Dengue y dengue grave",
+      "url": "https://www.who.int/es/news-room/fact-sheets/detail/Dengue-and-severe-Dengue"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué fármaco debe evitarse ante sospecha de dengue?",
+        "options": [
+          "Ningún analgésico requiere precaución",
+          "Ácido acetilsalicílico",
+          "Paracetamol a dosis apropiada",
+          "Solución de rehidratación oral"
+        ],
+        "correct": 1,
+        "why": "El ácido acetilsalicílico y otros AINE pueden incrementar el riesgo de hemorragia; paracetamol puede emplearse con precauciones habituales."
+      },
+      {
+        "prompt": "¿Qué síntoma nuevo exige reevaluación urgente?",
+        "options": [
+          "Resolución de cefalea sin otros síntomas",
+          "Diuresis conservada",
+          "Dolor abdominal intenso persistente",
+          "Mejoría sostenida del apetito"
+        ],
+        "correct": 2,
+        "why": "El dolor abdominal intenso es signo de alarma, particularmente al disminuir la fiebre."
+      }
+    ]
+  },
+  {
+    "id": "urg-08",
+    "area": "Urgencias",
+    "topic": "Trauma abdominal con choque",
+    "stem": "Varón de 29 años tras colisión presenta PA 76/42 mmHg, taquicardia, abdomen distendido y doloroso. Tras evaluación inicial se sospecha hemorragia interna; eFAST muestra líquido libre intraperitoneal.",
+    "source": {
+      "label": "NICE NG39 · Trauma mayor",
+      "url": "https://www.nice.org.uk/guidance/ng39/chapter/Recommendations"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el tipo de choque más probable?",
+        "options": [
+          "Anafiláctico",
+          "Cardiogénico primario",
+          "Hipovolémico hemorrágico",
+          "Neurogénico"
+        ],
+        "correct": 2,
+        "why": "La inestabilidad tras trauma y líquido intraperitoneal sugieren hemorragia; se deben valorar simultáneamente otras fuentes."
+      },
+      {
+        "prompt": "¿Qué prioridad terapéutica es coherente con la inestabilidad persistente?",
+        "options": [
+          "Tomografía electiva antes de activar recursos",
+          "Observación ambulatoria con analgésicos",
+          "Diuréticos para reducir líquido abdominal",
+          "Reanimación hemostática y control urgente de hemorragia por equipo de trauma"
+        ],
+        "correct": 3,
+        "why": "El control del sangrado y la reanimación no deben retrasarse por estudios que no cambiarían la necesidad de intervención inmediata."
+      }
+    ]
+  },
+  {
+    "id": "urg-09",
+    "area": "Urgencias",
+    "topic": "Embolia pulmonar en paciente estable",
+    "stem": "Mujer de 54 años tras inmovilización por fractura, con disnea súbita, taquicardia y dolor pleurítico. PA 122/75 mmHg. Probabilidad clínica alta de embolia pulmonar; función renal y contraste sin impedimentos conocidos.",
+    "source": {
+      "label": "GPC IMSS · Enfermedad tromboembólica venosa",
+      "url": "https://revistamedica.imss.gob.mx/index.php/revista_medica/article/view/1707"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué prueba de imagen es apropiada para confirmar el diagnóstico?",
+        "options": [
+          "Radiografía de tórax como prueba definitiva",
+          "Doppler carotídeo",
+          "Ecocardiograma transtorácico como único método de exclusión",
+          "Angiotomografía pulmonar"
+        ],
+        "correct": 3,
+        "why": "En paciente estable con probabilidad alta y sin contraindicación al contraste, la angiotomografía permite demostrar defectos de llenado pulmonares."
+      },
+      {
+        "prompt": "¿Qué hallazgo cambiaría la prioridad hacia un cuadro de alto riesgo?",
+        "options": [
+          "Hipotensión persistente atribuible a embolia",
+          "Dolor pleurítico leve aislado",
+          "Taquicardia sin hipotensión por sí sola",
+          "Tos seca sin hipoxemia"
+        ],
+        "correct": 0,
+        "why": "La inestabilidad hemodinámica por embolia implica alto riesgo y puede requerir estrategia de reperfusión urgente según evaluación."
+      }
+    ]
+  },
+  {
+    "id": "urg-10",
+    "area": "Urgencias",
+    "topic": "Anafilaxia sin manifestaciones cutáneas",
+    "stem": "Paciente de 33 años desarrolla estridor, broncoespasmo e hipotensión minutos después de recibir un medicamento al que había reaccionado previamente. No presenta urticaria.",
+    "source": {
+      "label": "AHA · Situaciones especiales de reanimación 2025",
+      "url": "https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-and-pediatric-special-circumstances-of-resuscitation/"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué diagnóstico debe considerarse aun sin lesiones cutáneas?",
+        "options": [
+          "Anafilaxia",
+          "Crisis de ansiedad aislada",
+          "Rinitis alérgica no complicada",
+          "Urticaria crónica espontánea"
+        ],
+        "correct": 0,
+        "why": "El compromiso respiratorio y circulatorio abrupto tras exposición compatible permite sospechar anafilaxia aunque falten manifestaciones cutáneas."
+      },
+      {
+        "prompt": "¿Cuál es el tratamiento farmacológico inicial de elección?",
+        "options": [
+          "Adrenalina oral",
+          "Adrenalina intramuscular",
+          "Antihistamínico oral como monoterapia",
+          "Corticoide inhalado como única intervención"
+        ],
+        "correct": 1,
+        "why": "La adrenalina intramuscular es de primera línea; se activa apoyo urgente y se maneja vía aérea y circulación según respuesta."
+      }
+    ]
+  },
+  {
+    "id": "mf-05",
+    "area": "Medicina Familiar",
+    "topic": "Hipertensión de bata blanca",
+    "stem": "Hombre de 45 años con cifras repetidas en consultorio de 150/92 mmHg y registros domiciliarios validados consistentemente normales. No hay daño agudo de órgano blanco ni síntomas.",
+    "source": {
+      "label": "GPC IMSS-076-08 · Hipertensión arterial en primer nivel",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/076GER.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué fenómeno debe investigarse?",
+        "options": [
+          "Hipotensión ortostática demostrada",
+          "Hipertensión de bata blanca",
+          "Hipertensión enmascarada",
+          "Emergencia hipertensiva"
+        ],
+        "correct": 1,
+        "why": "La elevación en consultorio con cifras externas normales sugiere efecto o hipertensión de bata blanca según el contexto."
+      },
+      {
+        "prompt": "¿Qué estudio permite aclarar la discrepancia?",
+        "options": [
+          "Radiografía de columna",
+          "Troponina seriada de rutina",
+          "Monitoreo ambulatorio de presión arterial",
+          "Electroencefalograma"
+        ],
+        "correct": 2,
+        "why": "El monitoreo ambulatorio o domiciliario protocolizado permite comparar las cifras fuera del consultorio antes de clasificar y tratar."
+      }
+    ]
+  },
+  {
+    "id": "mf-06",
+    "area": "Medicina Familiar",
+    "topic": "Lumbalgia mecánica sin alarmas",
+    "stem": "Mujer de 37 años presenta dolor lumbar tras cargar cajas, de cuatro días, aumenta con movimiento. Sin fiebre, trauma importante, pérdida de peso, déficit neurológico ni disfunción de esfínteres.",
+    "source": {
+      "label": "GPC IMSS-045-08 · Lumbalgia",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/045GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué enfoque diagnóstico inicial es apropiado?",
+        "options": [
+          "Tomografía con contraste como primer estudio obligatorio",
+          "Punción lumbar",
+          "Evaluación clínica sin imagen rutinaria",
+          "Resonancia magnética urgente a toda persona"
+        ],
+        "correct": 2,
+        "why": "En lumbalgia aguda inespecífica sin signos de alarma, la imagen rutinaria no suele mejorar los resultados y puede mostrar hallazgos incidentales."
+      },
+      {
+        "prompt": "¿Qué síntoma nuevo exige valoración urgente?",
+        "options": [
+          "Rigidez muscular leve al despertar",
+          "Dolor localizado que mejora al caminar",
+          "Sensibilidad paravertebral sin déficit",
+          "Retención urinaria con anestesia en silla de montar"
+        ],
+        "correct": 3,
+        "why": "La alteración esfinteriana y anestesia perineal sugieren síndrome de cauda equina, que requiere evaluación urgente."
+      }
+    ]
+  },
+  {
+    "id": "mf-07",
+    "area": "Medicina Familiar",
+    "topic": "Tamizaje cervicouterino",
+    "stem": "Mujer de 39 años asintomática, con cuello uterino y sin tamizaje previo, solicita orientación en primer nivel. No refiere inmunosupresión ni antecedentes de lesión cervical.",
+    "source": {
+      "label": "GPC IMSS · Tamizaje de cáncer cervicouterino",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/146GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la finalidad del tamizaje en esta paciente?",
+        "options": [
+          "Confirmar cáncer invasor en toda prueba positiva",
+          "Diagnosticar endometriosis",
+          "Determinar reserva ovárica",
+          "Detectar lesiones precursoras o riesgo de cáncer antes de síntomas"
+        ],
+        "correct": 3,
+        "why": "El tamizaje identifica riesgo o lesiones precursoras; una prueba positiva necesita seguimiento según el algoritmo, no equivale a cáncer."
+      },
+      {
+        "prompt": "¿Qué factor debe determinar la prueba y periodicidad?",
+        "options": [
+          "Edad, historia de tamizaje y programa nacional aplicable",
+          "Grupo sanguíneo",
+          "Número de consultas al año",
+          "Presencia de dolor lumbar aislado"
+        ],
+        "correct": 0,
+        "why": "Los métodos e intervalos dependen de edad, antecedentes, población y lineamientos vigentes, que deben verificarse antes de aplicar un esquema."
+      }
+    ]
+  },
+  {
+    "id": "mf-08",
+    "area": "Medicina Familiar",
+    "topic": "Obesidad y atención longitudinal",
+    "stem": "Hombre de 47 años con IMC de 34 kg/m², hipertensión tratada y sedentarismo. Desea mejorar su salud; niega síntomas de urgencia. Ha intentado dietas restrictivas sin resultados sostenibles.",
+    "source": {
+      "label": "Consejo de Salubridad General · PRONAM, catálogo oficial",
+      "url": "https://pronamsalud.csg.gob.mx/"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué comorbilidad es relevante investigar de manera dirigida?",
+        "options": [
+          "Diabetes tipo 2",
+          "Enfermedad de Addison en todos los casos",
+          "Hipoparatiroidismo obligatorio",
+          "Síndrome de Marfan"
+        ],
+        "correct": 0,
+        "why": "La obesidad aumenta riesgo cardiometabólico; la evaluación debe incluir glucemia y otros factores asociados según contexto."
+      },
+      {
+        "prompt": "¿Qué estrategia se ajusta mejor a su manejo longitudinal?",
+        "options": [
+          "Considerar éxito solo si alcanza IMC menor de 20",
+          "Plan individualizado con objetivos sostenibles y seguimiento",
+          "Dieta extrema idéntica para todos sin controles",
+          "Suspensión automática de antihipertensivos"
+        ],
+        "correct": 1,
+        "why": "La obesidad es una enfermedad crónica; el enfoque debe considerar comorbilidades, preferencias, seguimiento y metas clínicas realistas."
+      }
+    ]
+  },
+  {
+    "id": "mf-09",
+    "area": "Medicina Familiar",
+    "topic": "Enfermedad renal crónica: tamizaje dirigido",
+    "stem": "Mujer de 61 años con diabetes tipo 2 de diez años e hipertensión. Creatinina dentro del rango del laboratorio, sin síntomas urinarios y sin mediciones recientes de albuminuria.",
+    "source": {
+      "label": "GPC IMSS-335-19 · Enfermedad renal crónica",
+      "url": "https://www.imss.gob.mx/sites/all/statics/guiasclinicas/335GRR.pdf"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué estudios permiten detectar afectación renal temprana?",
+        "options": [
+          "Densitometría ósea exclusivamente",
+          "TFGe y cociente albúmina/creatinina urinario",
+          "Urea aislada sin estimar filtración",
+          "Radiografía simple de abdomen"
+        ],
+        "correct": 1,
+        "why": "La creatinina aislada puede ocultar alteración de filtración; la albuminuria añade información de daño renal y riesgo."
+      },
+      {
+        "prompt": "¿Por qué repetir una alteración inicial según el contexto?",
+        "options": [
+          "Porque la albuminuria nunca varía",
+          "Para sustituir por completo la evaluación clínica",
+          "Para confirmar persistencia y descartar causas transitorias",
+          "Para asumir enfermedad crónica con cualquier resultado aislado"
+        ],
+        "correct": 2,
+        "why": "La definición de enfermedad renal crónica exige alteraciones durante al menos tres meses, salvo evidencia previa suficiente."
+      }
+    ]
+  },
+  {
+    "id": "sp-04",
+    "area": "Salud Pública",
+    "topic": "Brote alimentario: riesgo relativo",
+    "stem": "Tras una comida comunitaria se estudia a 100 asistentes: 30 de 50 que comieron ensalada enfermaron, frente a 5 de 50 que no la consumieron. Todos fueron identificados y evaluados.",
+    "source": {
+      "label": "CDC · Field Epidemiology Manual: análisis de datos",
+      "url": "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál fue la tasa de ataque entre los expuestos?",
+        "options": [
+          "35 %",
+          "10 %",
+          "60 %",
+          "30 %"
+        ],
+        "correct": 2,
+        "why": "Treinta enfermos entre cincuenta expuestos representan 0.60; el denominador corresponde a quienes comieron ensalada."
+      },
+      {
+        "prompt": "¿Cuál es el riesgo relativo de enfermar asociado a la exposición?",
+        "options": [
+          "3",
+          "0.6",
+          "12",
+          "6"
+        ],
+        "correct": 3,
+        "why": "El riesgo de los expuestos es 0.60 y el de no expuestos 0.10; su cociente es 6. La asociación no prueba causalidad por sí sola."
+      }
+    ]
+  },
+  {
+    "id": "sp-05",
+    "area": "Salud Pública",
+    "topic": "Estudio de casos y controles",
+    "stem": "Se seleccionan 80 personas con una enfermedad rara y 80 sin ella para investigar exposiciones previas a un producto. Los participantes se eligen según presencia o ausencia del desenlace.",
+    "source": {
+      "label": "CDC · Field Epidemiology Manual: análisis de datos",
+      "url": "https://www.cdc.gov/field-epi-manual/php/chapters/analyze-interpret-data.html"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué diseño epidemiológico se utiliza?",
+        "options": [
+          "Cohorte prospectiva",
+          "Ensayo clínico aleatorizado",
+          "Serie de casos sin comparación",
+          "Casos y controles"
+        ],
+        "correct": 3,
+        "why": "Los participantes se seleccionan a partir del desenlace y se compara la frecuencia de exposiciones previas."
+      },
+      {
+        "prompt": "¿Qué medida de asociación se obtiene directamente?",
+        "options": [
+          "Razón de momios (odds ratio)",
+          "Riesgo relativo de incidencia directamente",
+          "Tasa de ataque poblacional directamente",
+          "Diferencia de supervivencia a cinco años obligatoria"
+        ],
+        "correct": 0,
+        "why": "En casos y controles convencionales no se conocen denominadores poblacionales de riesgo; se estima la razón de momios."
+      }
+    ]
+  },
+  {
+    "id": "sp-06",
+    "area": "Salud Pública",
+    "topic": "Incidencia acumulada",
+    "stem": "En una comunidad cerrada de 1 000 personas sin una enfermedad al inicio del año se diagnostican 40 casos nuevos en doce meses; no hay pérdidas de seguimiento.",
+    "source": {
+      "label": "CDC · Field Epidemiology Manual: descripción de datos",
+      "url": "https://www.cdc.gov/field-epi-manual/php/chapters/describing-epi-data.html"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es la incidencia acumulada anual?",
+        "options": [
+          "4 %",
+          "0.4 %",
+          "40 %",
+          "25 %"
+        ],
+        "correct": 0,
+        "why": "La incidencia acumulada es casos nuevos entre población inicialmente en riesgo: 40/1000 = 0.04."
+      },
+      {
+        "prompt": "¿Qué medida describiría a todos los enfermos existentes en una fecha concreta?",
+        "options": [
+          "Letalidad",
+          "Prevalencia puntual",
+          "Incidencia acumulada",
+          "Riesgo relativo"
+        ],
+        "correct": 1,
+        "why": "La prevalencia puntual cuantifica casos existentes, nuevos o previos, en una fecha definida respecto de la población correspondiente."
+      }
+    ]
+  },
+  {
+    "id": "sp-07",
+    "area": "Salud Pública",
+    "topic": "Brote en comunidad: definición de caso",
+    "stem": "Una clínica identifica un aumento inesperado de gastroenteritis tras una fiesta. Se requiere comparar casos y describir la distribución temporal antes de establecer el agente causal.",
+    "source": {
+      "label": "CDC · Field Epidemiology Manual: investigación de campo",
+      "url": "https://www.cdc.gov/field-epi-manual/php/chapters/field-investigation.html"
+    },
+    "questions": [
+      {
+        "prompt": "¿Qué debe incluir una definición operativa inicial de caso?",
+        "options": [
+          "Solo resultados positivos de cualquier laboratorio",
+          "Criterios clínicos y restricciones de persona, lugar y tiempo",
+          "Solo el alimento que se sospecha como causa",
+          "Únicamente casos con complicaciones graves"
+        ],
+        "correct": 1,
+        "why": "Una definición uniforme permite identificar casos de manera reproducible; no debe incorporar la exposición que se pretende investigar como requisito sin justificación."
+      },
+      {
+        "prompt": "¿Qué gráfica ayuda a visualizar la distribución por inicio de síntomas?",
+        "options": [
+          "Gráfico de supervivencia por tratamiento",
+          "Histograma de edades sin información temporal",
+          "Curva epidémica",
+          "Diagrama de dispersión de peso y talla"
+        ],
+        "correct": 2,
+        "why": "La curva epidémica organiza los casos por tiempo de inicio y ayuda a formular hipótesis sobre patrón y duración del brote."
+      }
+    ]
+  },
+  {
+    "id": "sp-08",
+    "area": "Salud Pública",
+    "topic": "Dengue: prevención vectorial",
+    "stem": "En un municipio con transmisión de dengue se identifican recipientes domésticos con agua estancada y alta densidad de mosquitos. La comunidad solicita medidas preventivas sostenibles.",
+    "source": {
+      "label": "OMS · Dengue y dengue grave",
+      "url": "https://www.who.int/es/news-room/fact-sheets/detail/Dengue-and-severe-Dengue"
+    },
+    "questions": [
+      {
+        "prompt": "¿Cuál es el principal vector urbano del dengue?",
+        "options": [
+          "Triatoma infestans",
+          "Culex pipiens como principal vector de dengue",
+          "Aedes aegypti",
+          "Anopheles gambiae"
+        ],
+        "correct": 2,
+        "why": "Aedes aegypti es el principal vector urbano; otras especies de Aedes también pueden transmitir el virus."
+      },
+      {
+        "prompt": "¿Qué medida comunitaria reduce criaderos domésticos?",
+        "options": [
+          "Antibióticos profilácticos a toda la comunidad",
+          "Usar solo mosquiteros nocturnos como única acción",
+          "Clorar exclusivamente agua de consumo sin retirar criaderos",
+          "Eliminar, vaciar o cubrir recipientes que acumulan agua"
+        ],
+        "correct": 3,
+        "why": "La reducción de sitios de reproducción y la protección contra picaduras forman parte del control integrado del vector."
+      }
+    ]
+  }
+]);
  // Deterministically rotate answer positions so trainees cannot infer the
  // answer from a repeated option letter. Wording and clinical content stay
  // identical; only option order and index are transformed together.

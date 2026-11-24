@@ -9,8 +9,8 @@ const css=read('assets/enarm-ivory-v01067.css'),art=read('assets/enarm-hero-ivor
 const sw=read('sw.js'),ui=read('assets/enarm-ui-v01064.js');
 const bank=require('../assets/enarm-bank-v01064.js');
 const radar=require('../assets/enarm-radar-v01065.js');
-assert.equal(bank.caseCount,37,'Case bank preserved');
-assert.equal(bank.questionCount,74,'Question count preserved');
+assert.equal(bank.caseCount,72,'Case bank preserved');
+assert.equal(bank.questionCount,144,'Question count preserved');
 assert.equal(bank.areas.length,7,'Specialties preserved');
 assert.deepEqual(Array.from(radar.INTERVALS),[1,3,7,14,30,60],'Spaced repetition schedule unchanged');
 assert.match(html,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
@@ -68,4 +68,4 @@ new vm.Script(ui,{filename:'assets/enarm-ui-v01064.js'});
 const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a>';
 const enarm='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
 assert.ok(home.includes(pharma+enarm),'ENARM shortcut remains immediately below Pharma, same class/size');
-console.log('PASS ENARM Ivory Heritage v0.10.67: lion, gold/ivory/charcoal, WCAG support, offline, visual-only changes and 37/74 original cases.');
+console.log('PASS ENARM Ivory Heritage v0.10.67: lion, gold/ivory/charcoal, WCAG support, offline, visual-only changes and 72/144 original cases.');
