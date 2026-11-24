@@ -11,7 +11,7 @@ const elem=(tag,content,cls)=>{
  if(cls)el.className=cls;
  return el;
 };
-const ophthalmicIcons=Object.freeze({"ojo-rojo":"👁️","perdida-visual":"🌑","quemadura-quimica":"🧪","globo-abierto":"🛡️","glaucoma-agudo":"⏱️","queratitis":"🔬","uveitis":"🔥","retina":"⚡","occlusion-arterial":"🩸","arteritis":"🧠","celulitis-orbitaria":"🦠","compartimento-orbitario":"⚠️","endoftalmitis":"💉","diplopia":"👀","hifema":"💧","retinopatia-diabetica":"📈"});
+const ophthalmicIcons=Object.freeze({"ojo-rojo":"👁️","perdida-visual":"🌑","quemadura-quimica":"🧪","globo-abierto":"🛡️","glaucoma-agudo":"⏱️","queratitis":"🔬","uveitis":"🔥","retina":"⚡","occlusion-arterial":"🩸","arteritis":"🧠","celulitis-orbitaria":"🦠","compartimento-orbitario":"⚠️","endoftalmitis":"💉","diplopia":"👀","hifema":"💧","retinopatia-diabetica":"📈","conjuntivitis":"🌿"});
 const iconFor=a=>Object.hasOwn(ophthalmicIcons,a.id)?ophthalmicIcons[a.id]:'👁️';
 const state={category:'all',query:'',active:null,current:null,path:[],mode:'guardia'};
 const categories=[...document.querySelectorAll('[data-category]')];
@@ -114,11 +114,11 @@ function restart(){
 }
 function renderRail(){
  const step=engine.getStep(state.active,state.current);
- const max=Math.min(6,Math.max(3,engine.byId[state.active]&&Object.keys(engine.byId[state.active].nodes).length+1||3));
- const completed=Math.min(max,state.path.length+(step?.kind==='outcome'?1:0)+1);
+ const max=Math.max(3,Object.keys(engine.byId[state.active].nodes).length+1);
+ const completed=step?.kind==='outcome'?max:Math.min(max,state.path.length+1);
  const rail=$('alg-rail');rail.replaceChildren();
  for(let i=0;i<max;i++)rail.append(elem('span',undefined,i<completed?'active':''));
- rail.setAttribute('aria-label','Avance: '+Math.min(state.path.length+1,max)+' de '+max+' etapas aproximadas');
+ rail.setAttribute('aria-label',step?.kind==='outcome'?'Ruta completada':'Avance: '+Math.min(state.path.length+1,max)+' de '+max+' etapas máximas aproximadas');
 }
 function renderFlow(){
  const a=engine.byId[state.active],step=engine.getStep(state.active,state.current);

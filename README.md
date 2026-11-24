@@ -1,3 +1,7 @@
+## v0.10.78 · Conjuntivitis integral
+
+17 rutas oftalmológicas; conjuntivitis con 9 decisiones y 14 desenlaces, triaje de alarma, neonatos, lentes de contacto, inmunosupresión, ITS, herpes, persistencia y subtipos viral/bacteriano/alérgico. Enlaces a Pharma PRO condicionados al desenlace; sin nuevas dosis ni alta automática. Fuentes AAO 2024, CDC 2024/2021, revisión Cochrane e IMSS histórica (vigencia no confirmada). Revisión clínica independiente pendiente.
+
 ## v0.10.77 · Oftalmología ↔ Pharma PRO
 
 Acceso a biblioteca desde las 16 rutas y sus 64 desenlaces; enlaces contextuales a fichas existentes, vía explícita, fuentes y precauciones, sin dosis nuevas ni prescripción. Incertidumbre sin selección de medicamentos. Tema cian/amarillo/negro y motor clínico conservados; revisión independiente pendiente.
