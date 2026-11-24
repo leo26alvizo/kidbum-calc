@@ -1,4 +1,4 @@
-/* KidBum Urgencias/UCI 0.10.56 · adult-only accessible rapid clinical flow */
+/* KidBum Oftalmología · iconografía clínica local, sin cambios de decisiones. */
 (function(root){
 'use strict';
 const engine=root.KidBumOphthalmologyAlgorithms;
@@ -11,6 +11,8 @@ const elem=(tag,content,cls)=>{
  if(cls)el.className=cls;
  return el;
 };
+const ophthalmicIcons=Object.freeze({"ojo-rojo":"👁️","perdida-visual":"🌑","quemadura-quimica":"🧪","globo-abierto":"🛡️","glaucoma-agudo":"⏱️","queratitis":"🔬","uveitis":"🔥","retina":"⚡","occlusion-arterial":"🩸","arteritis":"🧠","celulitis-orbitaria":"🦠","compartimento-orbitario":"⚠️","endoftalmitis":"💉","diplopia":"👀","hifema":"💧","retinopatia-diabetica":"📈"});
+const iconFor=a=>Object.hasOwn(ophthalmicIcons,a.id)?ophthalmicIcons[a.id]:'👁️';
 const state={category:'all',query:'',active:null,current:null,path:[],mode:'guardia'};
 const categories=[...document.querySelectorAll('[data-category]')];
 function updateControls(){
@@ -27,7 +29,8 @@ function renderLibrary(){
   const b=elem('button',undefined,'alg-tile');b.type='button';b.dataset.algoId=a.id;
   b.setAttribute('aria-label','Abrir algoritmo '+a.title);
   const top=elem('span',undefined,'alg-tile-top');
-  top.append(elem('span',a.icon,'alg-tile-icon'),elem('span',(a.urgency==='crítica'?'🚨 ':'')+a.time,'alg-tile-tag'));
+  const icon=elem('span',iconFor(a),'alg-tile-icon');icon.setAttribute('aria-hidden','true');
+  top.append(icon,elem('span',(a.urgency==='crítica'?'🚨 ':'')+a.time,'alg-tile-tag'));
   b.append(top,elem('h3',a.title),elem('p',a.subtitle),elem('span','Iniciar algoritmo →','alg-tile-open'));
   b.addEventListener('click',()=>open(a.id));
   $('alg-grid').append(b);
@@ -47,7 +50,7 @@ function open(id){
  const a=Object.hasOwn(engine.byId,id)?engine.byId[id]:null;
  if(!a)return false;
  state.active=id;state.current=a.start;state.path=[];
- $('alg-flow-icon').textContent=a.icon;
+ $('alg-flow-icon').textContent=iconFor(a);
  $('alg-flow-title').textContent=a.title;
  $('alg-flow-subtitle').textContent=a.subtitle;
  const refs=$('alg-evidence-content');refs.replaceChildren();

@@ -1,3 +1,7 @@
+## v0.10.76 · Oftalmología — Cian y amarillo
+
+16 iconos individuales en tarjetas y encabezados, tema cian/amarillo/negro exclusivo de los algoritmos de Oftalmología, modos claro y oscuro; se conservan alertas clínicas, contenido, navegación y portada original. Renovación de caché PWA.
+
 ## v0.10.75 · Algoritmos de Oftalmología
 
 16 rutas clínicas de valoración inicial, con dos decisiones y salidas de incertidumbre, Guardia/Estudio, filtros, fuentes y acceso desde Oftalmología. Sin prescripción automática ni cambios al catálogo de 154 calculadoras. Revisión clínica independiente pendiente.

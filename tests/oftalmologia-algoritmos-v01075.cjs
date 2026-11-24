@@ -5,3 +5,16 @@ let leaves=0;for(const a of e.algorithms){assert.ok(a.scope&&a.sources.every(s=>
 assert.ok(e.search('QUERATITIS').some(x=>x.id==='queratitis'));assert.ok(e.search('retina','Retina y neurooftalmología').length);assert.equal(e.getStep('fake'),null);assert.equal(e.getStep('__proto__'),null);
 assert.match(e.byId['quemadura-quimica'].initial,/irrigación copiosa inmediata/);assert.match(e.byId['globo-abierto'].outcomes.critical.actions.join(' '),/sin presión/);assert.match(e.byId['occlusion-arterial'].outcomes.critical.title,/EVC/);
 const home=fs.readFileSync('index.html','utf8'),sw=fs.readFileSync('sw.js','utf8'),page=fs.readFileSync('algoritmos-oftalmologia.html','utf8');assert.match(home,/data-oph-alg/);assert.match(home,/algoritmos-oftalmologia\.html/);assert.match(home,/category==='Oftalmología'/);assert.match(home,/const cards=algCard\+emergencyAlgCard\+wallaceCard/);assert.match(home,/\+pharmaCard\+ophAlgCard\+list\.map/);assert.match(page,/especialidad=oftalmologia/);for(const p of ["algoritmos-oftalmologia.html","assets/oftalmologia-algoritmos-core-v01075.js","assets/oftalmologia-algoritmos-ui-v01075.js","assets/oftalmologia-algoritmos-v01075.css"])assert.ok(sw.includes("'./"+p+"'"));assert.doesNotMatch(fs.readFileSync('assets/oftalmologia-algoritmos-core-v01075.js','utf8'),/localStorage|fetch\s*\(|innerHTML/);console.log('PASS 16 ophthalmology routes, '+leaves+' traversed safe exits, source links and offline registration.');
+
+const ui=fs.readFileSync('assets/oftalmologia-algoritmos-ui-v01075.js','utf8');
+const css=fs.readFileSync('assets/oftalmologia-algoritmos-v01075.css','utf8');
+const iconMap=JSON.parse(ui.match(/const ophthalmicIcons=Object\.freeze\((\{[^\n]+\})\);/)[1]);
+assert.deepEqual(Object.keys(iconMap).sort(),Array.from(e.algorithms,a=>a.id).sort());
+assert.equal(new Set(Object.values(iconMap)).size,16);
+assert.match(ui,/iconFor\(a\),'alg-tile-icon'/);
+assert.match(ui,/alg-flow-icon'\)\.textContent=iconFor\(a\)/);
+assert.match(ui,/icon\.setAttribute\('aria-hidden','true'\)/);
+for(const color of ['#00cfe9','#ffda24','#080c10'])assert.ok(css.includes(color));
+assert.match(css,/html\.dark body\.alg-peds\.alg-ophthalmology/);
+assert.match(css,/\.alg-option:not\(\.danger\):not\(\.warning\)/);
+console.log('PASS 16 distinct icons and scoped cyan/yellow/black theme; clinical colors preserved.');

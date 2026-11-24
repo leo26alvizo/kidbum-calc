@@ -4,7 +4,62 @@
 .oph-alg-tile .urg-alg-tile-content p{color:#eff7fb}
 .oph-alg-tile .urg-alg-tile-content strong{color:#193c50}
 .oph-alg-tile .urg-alg-tile-photo{filter:none;opacity:1;object-position:50%}
-body.alg-ophthalmology{--p-teal:#286078;--p-dark:#19384b;--p-soft:#eaf4f8;--p-bg:#f4f7f9;--p-line:#cbdde5}
-.alg-ophthalmology .alg-header{background:linear-gradient(110deg,#142b40 0%,#23475a 62%,#586a72 100%)}
-.alg-ophthalmology .alg-kicker{color:#f6dfac}
-html.dark body.alg-ophthalmology{--p-teal:#9bd5ed;--p-bg:#141a20;--p-card:#202832;--p-line:#45515c;--p-soft:#233641;--p-ink:#f5f4f5;--p-muted:#b5bdc4}
+/* Cian eléctrico / amarillo / negro: exclusivo de la página de algoritmos. */
+body.alg-peds.alg-ophthalmology{
+ --oph-cyan:#00cfe9;--oph-yellow:#ffda24;--oph-black:#080c10;
+ --p-bg:#edf7f9;--p-card:#ffffff;--p-ink:#101d25;--p-muted:#405b65;
+ --p-line:#b9dce2;--p-teal:#006b80;--p-dark:#080c10;--p-soft:#dcf8fc;
+}
+.alg-peds.alg-ophthalmology .alg-header{
+ background:radial-gradient(ellipse at 100% 0%,#007c98 0%,transparent 68%),linear-gradient(125deg,#080c10,#10212b 65%,#123e4b);
+ border-bottom:4px solid var(--oph-yellow);
+}
+.alg-peds.alg-ophthalmology .alg-header:after{background:radial-gradient(circle,#00cfe94d,transparent 67%)}
+.alg-peds.alg-ophthalmology .alg-kicker{color:var(--oph-yellow);letter-spacing:.15em}
+.alg-peds.alg-ophthalmology .alg-hero-text{color:#d4f5fb}
+.alg-peds.alg-ophthalmology .alg-hero-chip,.alg-peds.alg-ophthalmology .alg-version{background:#07151db3;border-color:#00cfe96b;color:#d9faff}
+.alg-peds.alg-ophthalmology .alg-hero-chip:first-child{background:var(--oph-yellow);border-color:var(--oph-yellow);color:var(--oph-black);font-weight:800}
+.alg-peds.alg-ophthalmology .alg-back{border-color:#00cfe9a6;color:#e2faff}
+.alg-peds.alg-ophthalmology :focus-visible{outline:3px solid #c18c00;outline-offset:3px}
+.alg-peds.alg-ophthalmology .alg-search{border-top:3px solid #009bb3}
+.alg-peds.alg-ophthalmology .alg-search input{background:var(--p-bg);border-color:var(--p-line)}
+.alg-peds.alg-ophthalmology .alg-chip[aria-pressed="true"],.alg-peds.alg-ophthalmology .alg-mode button[aria-pressed="true"]{background:var(--oph-yellow);border-color:#ba9900;color:var(--oph-black)}
+.alg-peds.alg-ophthalmology .alg-tile{
+ position:relative;min-width:0;overflow:hidden;isolation:isolate;
+ border:1px solid var(--p-line);border-top:3px solid #00a7bd;
+ background:var(--p-card);box-shadow:0 5px 18px #062c4110;
+}
+.alg-peds.alg-ophthalmology .alg-tile:hover{border-color:#008ba3;box-shadow:0 7px 23px #007c9828}
+.alg-peds.alg-ophthalmology .alg-tile-top{gap:7px;align-items:flex-start}
+.alg-peds.alg-ophthalmology .alg-tile-icon,.alg-peds.alg-ophthalmology .alg-flow-heading>span{
+ flex:none;width:48px;height:48px;border-radius:13px;
+ background:linear-gradient(145deg,#080c10,#123945);border:1px solid var(--oph-cyan);
+ box-shadow:inset 0 0 0 2px #00cfe918;color:#fff;font-size:25px;
+}
+.alg-peds.alg-ophthalmology .alg-tile-tag{
+ min-width:0;max-width:105px;border:1px solid #e2b813;border-radius:9px;
+ background:#fff4ad;color:#302700;padding:5px 6px;font-size:10px;overflow-wrap:anywhere;
+}
+.alg-peds.alg-ophthalmology .alg-tile-open{color:var(--p-teal);border-top:1px solid var(--p-line);padding-top:9px;margin-top:auto}
+.alg-peds.alg-ophthalmology .alg-rail span{background:var(--p-line)}
+.alg-peds.alg-ophthalmology .alg-rail span.active{background:#00a6bf}
+.alg-peds.alg-ophthalmology .alg-question{border-top:3px solid #00a6bf}
+.alg-peds.alg-ophthalmology .alg-hint{background:var(--p-soft);color:var(--p-muted)}
+.alg-peds.alg-ophthalmology .alg-option:not(.danger):not(.warning){background:var(--p-soft);border-color:var(--p-line);color:var(--p-ink)}
+.alg-peds.alg-ophthalmology .alg-option:not(.danger):not(.warning):hover{border-color:#009db8}
+.alg-peds.alg-ophthalmology .alg-secondary,.alg-peds.alg-ophthalmology .alg-tool-link{border-color:var(--p-line);color:var(--p-teal)}
+/* Clinical danger and warning colors deliberately remain distinct from navigation. */
+html.dark body.alg-peds.alg-ophthalmology{
+ --p-bg:#080c10;--p-card:#111c23;--p-ink:#f3f8fa;--p-muted:#b2c7d1;
+ --p-line:#34535e;--p-teal:#63e8fa;--p-dark:#080c10;--p-soft:#102c35;
+}
+html.dark .alg-peds.alg-ophthalmology :focus-visible{outline-color:var(--oph-yellow)}
+html.dark .alg-peds.alg-ophthalmology .alg-tile{border-top-color:var(--oph-cyan)}
+html.dark .alg-peds.alg-ophthalmology .alg-tile:hover{border-color:var(--oph-cyan)}
+html.dark .alg-peds.alg-ophthalmology .alg-tile-tag{background:#332c09;color:#ffdf55;border-color:#8e7416}
+html.dark .alg-peds.alg-ophthalmology .alg-rail span.active{background:var(--oph-cyan)}
+@media(max-width:520px){
+ .alg-peds.alg-ophthalmology .alg-tile{padding:12px;gap:9px}
+ .alg-peds.alg-ophthalmology .alg-tile-icon{width:42px;height:42px;font-size:22px}
+ .alg-peds.alg-ophthalmology .alg-tile-tag{font-size:9px;padding:4px;max-width:88px}
+}
