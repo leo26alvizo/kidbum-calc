@@ -1,3 +1,8 @@
+## v0.10.70 · ENARM Visual clínico
+
+- Seis imágenes reales con licencia individual, créditos y enlaces a sus fuentes. ECG, radiografía, ultrasonido, fotografía intraoral y microscopía. Se conservan esquemas didácticos identificados.
+- 14 reactivos visuales; total 326. Filtro de imágenes clínicas, ampliación, archivos locales para uso offline. Revisión clínica independiente pendiente.
+
 ## v0.10.69 · ENARM Visual y Radar 2.0
 
 - 12 reactivos visuales, 8 ilustraciones sintéticas y 28 preguntas directas nuevas: 324 reactivos totales.
