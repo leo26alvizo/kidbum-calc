@@ -1,0 +1,28 @@
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const c={};c.window=c;vm.runInNewContext(fs.readFileSync('assets/ortopedia-core-v01080.js','utf8'),c);
+const E=c.KidBumOrthopedics;assert.equal(E.bank.length,25);assert.equal(new Set(E.bank.map(x=>x.id)).size,25);
+const run=(id,data)=>E.evaluate('ort-'+id,data);
+for(const t of E.bank){assert.ok(t.scope&&t.warning&&t.url.startsWith('https://'));assert.ok(E.evaluate(t.id,{}).error);const sample=Object.fromEntries(t.fields.map(f=>[f.id,String(f.example)]));if(t.formula==='ccr')sample.low='1';assert.ok(!E.evaluate(t.id,sample).error,t.id);for(const f of t.fields){const incomplete={...sample};delete incomplete[f.id];assert.ok(E.evaluate(t.id,incomplete).error,t.id+' missing '+f.id);}}
+assert.ok(run('ottawa-tobillo',{eligible:'0',medial:'0',lateral:'0',weight:'0'}).error);
+assert.equal(run('ottawa-tobillo',{eligible:'1',medial:'1',lateral:'0',weight:'0'}).value,'Positiva');
+assert.equal(run('ottawa-pie',{eligible:'1',navicular:'0',metatarsal:'0',weight:'0'}).value,'Negativa');
+const k={eligible:'1',age:'55',patella:'0',fibula:'0',flex:'0',weight:'0'};
+assert.equal(run('ottawa-rodilla',k).value,'Positiva');assert.equal(run('ottawa-rodilla',{...k,age:'54'}).value,'Negativa');assert.ok(run('ottawa-rodilla',{...k,age:'54.5'}).error);
+assert.equal(run('pittsburgh',{eligible:'1',age:'50',walk:'0'}).value,'Negativa');assert.equal(run('pittsburgh',{eligible:'1',age:'51',walk:'0'}).value,'Positiva');
+const cc={eligible:'1',age:'64',mechanism:'0',paresthesia:'0',low:'1',rotate:'1'};
+assert.equal(run('canadian-cspine',cc).value,'Negativa');assert.equal(run('canadian-cspine',{...cc,age:'65',rotate:'na'}).value,'Positiva');assert.ok(run('canadian-cspine',{...cc,rotate:'na'}).error);
+assert.equal(run('tlics',{morph:'2',lig:'3',neu:'0'}).value,'5 puntos');
+assert.equal(run('slic',{morph:'2',lig:'2',neu:'3',compression:'1'}).value,'8 puntos');assert.ok(run('slic',{morph:'2',lig:'2',neu:'0',compression:'1'}).error);
+assert.equal(run('mirels',{site:'3',type:'3',size:'3',pain:'3'}).value,'12/12');
+assert.equal(run('beighton',Object.fromEntries(E.byId['ort-beighton'].fields.map(f=>[f.id,'1']))).value,'9/9');
+assert.equal(run('insall-salvati',{tendon:'48',patella:'40'}).value,'1.2');assert.ok(run('insall-salvati',{tendon:'48',patella:'0'}).error);
+assert.equal(run('delta-p',{dbp:'65',icp:'35'}).value,'30 mmHg');assert.match(run('delta-p',{dbp:'65',icp:'35'}).interpretation,/Alarma/);
+assert.equal(run('api',{injured:'90',ref:'100'}).value,'0.9');assert.match(run('api',{injured:'89',ref:'100'}).interpretation,/urgente/);
+assert.equal(run('dismetria',{right:'87',left:'89'}).value,'2 cm');assert.equal(run('arco-movilidad',{start:'10',end:'120'}).value,'110°');
+assert.equal(run('pauwels',{angle:'30'}).interpretation,'Tipo II');assert.equal(run('pauwels',{angle:'51'}).interpretation,'Tipo III');
+const home=fs.readFileSync('index.html','utf8'),sw=fs.readFileSync('sw.js','utf8'),page=fs.readFileSync('ortopedia.html','utf8');
+for(const t of E.bank)assert.ok(home.includes("href:'./ortopedia.html#"+t.id+"'"),t.id);
+for(const path of ['ortopedia.html','assets/ortopedia-core-v01080.js','assets/ortopedia-portada.webp'])assert.ok(sw.includes("'./"+path+"'"),path);
+assert.ok(page.includes('ortopedia-core-v01080.js'));assert.ok(fs.statSync('assets/ortopedia-portada.webp').size>2000);
+console.log('PASS 25 orthopedic tools, required fields, boundaries, catalog links and offline assets.');

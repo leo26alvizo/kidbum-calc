@@ -1,3 +1,7 @@
+## v0.10.80 · Ortopedia
+
+25 herramientas: 6 reglas de imagen, TLICS, SLIC, Mirels, Beighton, 9 clasificadores interactivos y 6 mediciones. 179 herramientas en catálogo. Portada derivada de la imagen de rodilla entregada por el usuario (WebP 320 px, sin generación); Oftalmología conserva su portada. Referencias por instrumento, límites de aplicación, datos sin prellenar, ejemplos ficticios, validación estricta y caché PWA. Revisión clínica independiente pendiente.
+
 ## v0.10.79 · Oftalmología — Primer contacto
 
 Seis rutas nuevas: orzuelo/chalazión/blefaritis, ojo seco, abrasión/cuerpo extraño, hemorragia subconjuntival, dacriocistitis/obstrucción lagrimal y pterigión/pingüécula. 31 decisiones, 48 desenlaces propios; total 23 algoritmos y 126 desenlaces. Filtro Primer contacto incluye conjuntivitis. Iconos, fuentes, enlaces Pharma PRO condicionados, sin dosis nuevas. TFOS DEWS III 2025 y GPC mexicanas históricas identificadas. Revisión clínica independiente pendiente. Sincronización de versión de Pharma y corrección de prueba splash fijada a v0.10.75; prueba oftalmológica antes de otras regresiones.
