@@ -1,0 +1,16 @@
+(function(root){'use strict';
+const engine=root.KidBumPharmaHospitalReference;if(!engine)return;
+const el=(tag,text,cls)=>{const x=document.createElement(tag);if(text!==undefined)x.textContent=text;if(cls)x.className=cls;return x;};
+function list(host,title,items){host.append(el('h4',title));const u=el('ul');for(const s of items)u.append(el('li',s));host.append(u);}
+function render(id){const d=engine.byId[id];if(!d)return null;
+ const section=el('section',undefined,'pharma-evidence-dossier');section.append(el('h3','Referencia hospitalaria por presentación · '+d.name),el('div','Cotejo documental parcial · NO prescripción · revisión independiente pendiente','pharma-evidence-grade'),el('p',d.product),el('p','Vía: '+d.route),el('p',d.scope),el('p',d.risk,'pharma-evidence-caution'));list(section,'Indicaciones delimitadas',d.indications);list(section,'Monitorización y seguridad',d.monitor);section.append(el('h4','Función hepática'),el('p',d.hepatic));
+ const refs=el('div',undefined,'refs'),a=el('a','DailyMed · etiqueta v'+d.source.version+' · '+d.source.date);a.href='https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid='+d.source.setid;a.target='_blank';a.rel='noopener noreferrer';refs.append(a,el('p','Secciones cotejadas: '+d.source.sections));section.append(refs);
+ const form=el('form');form.autocomplete='off';form.append(el('h4','Verificaciones obligatorias antes de consultar dosis y preparación'),el('p','La ausencia de datos bloquea la tabla; confirmar solo datos documentados. No se guardan respuestas.','small muted'));const inputs={};
+ for(const [key,label] of engine.gates){const line=el('label',undefined,'pharma-hospital-gate');const x=el('input');x.type='checkbox';x.name=key;inputs[key]=x;line.append(x,el('span',label));form.append(line);}
+ const btn=el('button','Consultar referencia documental');btn.type='submit';form.append(btn);const out=el('div');out.setAttribute('aria-live','polite');section.append(form,out);
+ const clear=()=>out.replaceChildren();form.addEventListener('change',clear);
+ form.onsubmit=e=>{e.preventDefault();clear();const result=engine.check(id,Object.fromEntries(Object.entries(inputs).map(([k,x])=>[k,x.checked])));if(result.status!=='reference'){out.append(el('p','Bloqueada: faltan verificaciones obligatorias.','pharma-evidence-caution'));return;}const r=result.reference;out.append(el('h4','Dosis documental · no selección automática'));const sc=el('div',undefined,'pharma-hospital-table-scroll'),table=el('table');const th=el('thead'),tr=el('tr');for(const c of r.columns){const h=el('th',c);h.scope='col';tr.append(h);}th.append(tr);table.append(th);const body=el('tbody');for(const row of r.table){const t=el('tr');for(const val of row)t.append(el('td',val));body.append(t);}table.append(body);sc.append(table);out.append(sc,el('p',r.doseNote,'small'));list(out,'Preparación, vía y tiempo de administración',r.prep);list(out,'Compatibilidad y separación de líneas',r.compat);out.append(el('h4','Estabilidad y conservación'),el('p',r.stability),el('p','No calcula volumen, velocidad de bomba, dosis por peso ni compatibilidad universal. Verificar registro y protocolo de México.','pharma-evidence-caution'));};
+ return section;
+}
+root.KidBumPharmaHospitalReferenceUI=Object.freeze({render});
+})(typeof window!=='undefined'?window:globalThis);

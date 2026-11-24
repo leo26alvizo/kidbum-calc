@@ -1,3 +1,7 @@
+## v0.10.85 · Pharma PRO — referencias hospitalarias por producto
+
+Cuatro referencias documentales parciales de etiquetas US DailyMed específicas: cefepima Sagent, meropenem Hikma, piperacilina/tazobactam Fresenius Kabi envase a granel de farmacia, ketorolaco Sportpharm 60 mg/2 mL exclusivamente IM. Tablas estáticas por indicación y CrCl, preparación, restricciones, estabilidad, incompatibilidades y vigilancia tras cinco verificaciones obligatorias. Sin cálculo individualizado, dosis por peso, velocidad de bomba, validación mexicana ni autorización clínica independiente. Se conservan alertas ISMP y LASA existentes. Caché offline actualizada.
+
 ## v0.10.84 · Pharma PRO — expansión clínica y seguridad
 
 181 entradas nuevas (principios activos, combinaciones y formulaciones; 1,747 entradas totales), 16 rutas de referencia para adultos no embarazados (31 totales), 151 temas diagnósticos candidatos deduplicados al cargar, 31 asociaciones editoriales nuevas y 34 parejas LASA adicionales con referencias FDA/ISMP. 79 identificadores seleccionados para clasificación positiva de alto riesgo por clase/vía ISMP 2024, incluyendo entradas existentes. El índice no equivale a monografías validadas, autorización mexicana ni disponibilidad; no se añaden dosis. Se conserva el bloqueo de recomendaciones para pediatría, neonatología, embarazo, urgencias y diagnósticos inciertos. Revisión independiente pendiente.

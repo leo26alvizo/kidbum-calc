@@ -24,6 +24,8 @@ jobs:
         run: node tests/oftalmologia-algoritmos-v01075.cjs
       - name: Existing regression checks
         run: node tests/regression.cjs
+      - name: Pharma PRO v0.10.85 — hospital product-specific references and fail-closed gates
+        run: node tests/pharma-hospital-reference-v01085.cjs
       - name: Pharma PRO v0.10.84 — expanded catalog, clinical scenarios and safety crosslinks
         run: node tests/pharma-expansion-v01084.cjs
       - name: Pharma Pro broad expansion - 1566 searchable entries, 29 groups, no new dosing claims

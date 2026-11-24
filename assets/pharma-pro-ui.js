@@ -157,6 +157,8 @@ function showDrug(id){
  const f2=elt('section',undefined,'fact');f2.append(elt('h3','Revisión previa imprescindible'),p(med.checks));left.append(pharmaFold('Revisión previa imprescindible',f2,true));
  const sourceReview=window.KidBumPharmaEvidenceUI?.renderPriorityNotice(id);
  if(sourceReview)left.append(pharmaFold('📚 Estado documental de la ficha, seguridad y fuentes',sourceReview,true));
+ const hospitalReference=root.KidBumPharmaHospitalReferenceUI?.render(id);
+ if(hospitalReference)left.append(pharmaFold('🏥 Dosis y preparación hospitalaria · referencia por producto',hospitalReference,true));
  const pediatricReference=root.KidBumPediatricDrugUI?.render(id,pediatricOptions);
  if(pediatricReference){
   left.append(pharmaFold('🧒 Pediatría: pautas documentales por indicación · NO receta',pediatricReference,pediatricContext));
@@ -166,8 +168,8 @@ function showDrug(id){
  const externalLabelsFull=window.KidBumPharmaExternalLabels?.render(med);
  if(externalLabelsFull)left.append(externalLabelsFull);
  
- if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
- const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(pharmaFold('Preparación intravenosa y compatibilidades',f4));
+ if(hospitalReference){/* The product-specific gated reference is above. */}else if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
+ if(!hospitalReference){const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(pharmaFold('Preparación intravenosa y compatibilidades',f4));}
  const right=elt('aside');
  const safety=elt('section');safety.append(elt('h3','Alertas y documentación'));
  if(med.highRisk){const badge=elt('div','⚠ Medicamento o grupo de alto riesgo según ISMP 2024'+(med.highRiskScope?' · '+med.highRiskScope:'')+'. Confirmar presentación, unidades, concentración y salvaguardas institucionales.','verified');safety.append(badge);safety.append(a(lib.highAlertSource.url,lib.highAlertSource.title));}
