@@ -19,7 +19,7 @@ const script="<script>\n"+
 " check('Scoped pathways expanded to 31',()=>window.KidBumPharmaCore.conditions.length===31);\n"+
 " check('No auto approval',()=>window.KidBumPharmaDiagnosisCatalog.coverage.verifiedIndependently===0);\n"+
 " check('Card shows orientative mapped condition',()=>{const x=window.KidBumPharmaCore.byId.bimatoprost;return !!x&&window.KidBumPharmaDiagnosisCatalog.related(x.id)[0].name.includes('Glaucoma');});\n"+
-" check('Opening medication displays diagnosis and warning',()=>{window.KidBumPharmaUI.openDrug('bimatoprost');const text=$('#pharma-ux-quick').textContent;return !$('#detail').classList.contains('hidden')&&text.includes('Glaucoma')&&text.includes('NO son indicaciones aprobadas');});\n"+
+" check('Opening medication displays diagnosis and warning',()=>{window.KidBumPharmaUI.openDrug('bimatoprost');const text=$('#pharma-ux-quick').textContent;return !$('#detail').classList.contains('hidden')&&text.includes('Glaucoma')&&text.includes('NO confirman indicación autorizada');});\n"+
 " check('Dose is not invented for editorial association',()=>$('#pharma-ux-quick').textContent.includes('Esquema NO cotejado'));\n"+
 " check('Disease tab opens',()=>{window.KidBumPharmaUI.closeDrug();$('[data-pharma-view=\"diseases\"]').click();return !$('#disease-finder').classList.contains('hidden');});\n"+
 " check('Diagnoses search finds glaucoma',()=>{input('#quick-search','glaucoma');return $('#pharma-dx-status').textContent.includes('de 1747')&&$('#pharma-dx-results').textContent.includes('Glaucoma');});\n"+

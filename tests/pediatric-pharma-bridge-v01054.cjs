@@ -106,7 +106,7 @@ assert.match(css,/@media\(max-width:600px\)/);
 assert.match(index,/28 algoritmos \+ tratamientos/);
 assert.match(pharmaPage,/pharma-pro-ui\.js/);
 assert.match(pharmaUI,/function fromHash\(\)/);
-assert.match(pharmaUI,/if\(lib\.byId\[id\]\)showDrug\(id\)/);
+assert.match(pharmaUI,/if\(Object\.hasOwn\(lib\.byId,id\)\)showDrug\(id\)/);
 assert.ok(sw.includes("'./assets/pediatria-farmaco-bridge-v01054.js'"));
 assert.ok(sw.includes("'./assets/pediatria-farmaco-bridge-v01054.css'"));
 assert.match(sw,/pediatric-pharma-bridge-v01054/);

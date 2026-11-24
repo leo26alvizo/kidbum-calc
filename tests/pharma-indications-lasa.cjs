@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const expansionSrc=fs.readFileSync('assets/pharma-pro-expansion.js','utf8');
 const guideSrc=fs.readFileSync('assets/pharma-pro-guides-plus.js','utf8');
@@ -89,7 +90,7 @@ assert.ok(scripts.indexOf('assets/pharma-pro-indications-ui.js')>scripts.indexOf
 assert.ok(scripts.indexOf('assets/pharma-pro-ui.js')>scripts.indexOf('assets/pharma-pro-indications-ui.js'),'Main UI mounts disease search');
 for(const path of scripts)assert.ok(sw.includes("'./"+path+"'"),'Offline precached '+path);
 assert.match(sw,/pharma-indications-lasa-v01031/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 assert.ok(home.indexOf('SNNOOP10:')<home.indexOf('Simulador de pares craneales oculomotores')&&home.indexOf('Simulador de pares craneales oculomotores')<home.indexOf('Biblioteca farmacológica · Pharma Pro'),'Featured placement preserved');
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);
 for(const s of [expansionSrc,coreSrc,disUI])assert.doesNotMatch(s,/fetch\s*\(|XMLHttpRequest|sendBeacon|api\.openai\.com/,'No external calls in offline clinical layer');
