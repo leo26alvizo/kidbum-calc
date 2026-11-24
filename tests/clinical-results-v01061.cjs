@@ -376,6 +376,31 @@ async function main(){
     assert.equal(errors.length,0,'Direct bank JS errors '+errors.join('; '));
    }finally{await context.close()}
   });
+  await test('ENARM Visual clinical images — local file, zoom, attribution and progress',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    const errors=[];page.on('pageerror',err=>errors.push(err.message));
+    await page.goto(base+'/enarm-visual.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#vis-image-mode').selectOption('clinical');
+    assert.match(await page.locator('#vis-count').innerText(),/7 preguntas disponibles/);
+    await page.locator('#vis-cat').selectOption('Imagen torácica');
+    await page.locator('#vis-start').click();
+    const img=page.locator('#vis-clinical-img');
+    await img.waitFor({state:'visible'});
+    await page.waitForFunction(()=>document.querySelector('#vis-clinical-img')?.naturalWidth>0);
+    assert.ok((await img.getAttribute('src')).startsWith('./assets/enarm-clinical/'));
+    await page.locator('#vis-zoom').click();
+    assert.equal(await page.locator('dialog.kb-image-dialog').isVisible(),true);
+    await page.locator('dialog.kb-image-dialog button').click();
+    await page.locator('[data-opt="3"]').click();
+    assert.match(await page.locator('#vis-feedback').innerText(),/Correcto/);
+    assert.equal(await page.locator('#vis-feedback a[href="https://doi.org/10.4103/1817-1737.69106"]').count(),1);
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('kidbum-enarm-visual-progress-v1'))['visual-008'].seen),1);
+    await noHorizontalOverflow(page,'ENARM Visual clinical');
+    assert.equal(errors.length,0,errors.join('; '));
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');
