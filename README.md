@@ -1,3 +1,8 @@
+## v0.10.71 · Centor / McIsaac
+
+- Nueva escala en Escalas clínicas; 139 calculadoras únicas. Centor clásico (0–4) y ajuste de McIsaac (−1 a 5), con selección explícita de criterios y edad, orientación diagnóstica y alertas de seguridad. No indica antibióticos automáticamente.
+- Fuentes: IDSA 2025, CDC y validación de Fine et al. 2012. Uso educativo, revisión clínica independiente pendiente.
+
 ## v0.10.70 · ENARM Visual clínico
 
 - Seis imágenes reales con licencia individual, créditos y enlaces a sus fuentes. ECG, radiografía, ultrasonido, fotografía intraoral y microscopía. Se conservan esquemas didácticos identificados.
