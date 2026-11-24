@@ -1,3 +1,9 @@
+## v0.10.73 · ENARM Visual — Otoscopía
+
+- 20 reactivos nuevos y 10 fotografías otoscópicas reales con licencia individual: tres membranas normales, OMA, OME, perforación, colesteatoma, timpanosclerosis y tubo de ventilación.
+- 61 reactivos visuales (57 con imágenes reales), 29 imágenes clínicas, 373 reactivos ENARM en total; historial y filtros conservados.
+- Imágenes locales optimizadas, créditos y referencias clínicas; paquete previo limitado a 20 MiB más hasta 2 MiB para otoscopía. Revisión clínica independiente pendiente.
+
 ## v0.10.72 · ENARM Visual — expansión de imagen clínica
 
 - 41 reactivos visuales (37 asociados a imágenes clínicas reales), 19 imágenes documentadas, 353 preguntas ENARM totales.
