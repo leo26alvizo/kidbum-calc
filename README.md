@@ -1,3 +1,7 @@
+## v0.10.81 · Portada original de Ortopedia
+
+Se reemplaza la miniatura WebP por el archivo original del usuario, sin recodificación, 1536 × 1110 px, 383364 bytes. SHA-256 e1c5b38ad571d7343f3c3eb7a14a45d8ef2775ca768abc27b98cfadcdc98e61b. Se renueva caché PWA; no cambia ninguna fórmula clínica ni otra portada.
+
 ## v0.10.80 · Ortopedia
 
 25 herramientas: 6 reglas de imagen, TLICS, SLIC, Mirels, Beighton, 9 clasificadores interactivos y 6 mediciones. 179 herramientas en catálogo. Portada derivada de la imagen de rodilla entregada por el usuario (WebP 320 px, sin generación); Oftalmología conserva su portada. Referencias por instrumento, límites de aplicación, datos sin prellenar, ejemplos ficticios, validación estricta y caché PWA. Revisión clínica independiente pendiente.
