@@ -63,7 +63,7 @@ for(const path of pages){
 const main=fs.readFileSync('index.html','utf8');
 const registry=main.slice(main.indexOf('const externalCalculators='),main.indexOf('const calculatorCount='));
 const externalPaths=[...registry.matchAll(/href:'\.\/([^'#]+)(?:#[^']+)?'/g)].map(m=>m[1]);
-assert.equal(externalPaths.length,46);
+assert.equal(externalPaths.length,71);
 for(const path of new Set(externalPaths)){
  const page=fs.readFileSync(path,'utf8');assert.match(page,/id="example"/,'Future calculator may not omit the fictitious example: '+path);
  if(path==='pediatria-evaluacion-rapida.html'){
@@ -72,6 +72,9 @@ for(const path of new Set(externalPaths)){
   assert.match(fs.readFileSync('assets/pediatria-rapid-ui.js','utf8'),/KidBumFictitiousExamples\?\.forPediatricRapid/);
  }
 }
+const pasPage=fs.readFileSync('pediatria-pas.html','utf8');
+assert.match(pasPage,/id="pas-example"/);assert.match(pasPage,/id="pas-example-note"/);
+assert.match(fs.readFileSync('assets/pediatric-pas-ui-v01045.js','utf8'),/\$\('pas-example'\)\.addEventListener\('click'/);
 const rapid=examples.forPediatricRapid('wood');
 assert.equal(rapid.sibilancias,1);
 const rapidEngine={};rapidEngine.globalThis=rapidEngine;

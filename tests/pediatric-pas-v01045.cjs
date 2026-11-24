@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 // Clinical PAS algorithm QA — verifies arithmetic and fail-closed behavior, NOT independent medical validation.
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const read=x=>fs.readFileSync(x,'utf8');
@@ -91,18 +92,18 @@ for(const [changes,code] of [
 assert.ok(page.includes('aria-live="polite"'));
 assert.ok(page.includes('id="pas-outcome"'));
 assert.ok(page.includes('data-band="pending"'));
-assert.ok(page.includes('id="pas-anc-preview"'));
-assert.ok(page.includes('data-flag="unstable"'));
-assert.ok(page.includes('data-flag="peritonitis"'));
-assert.equal((page.match(/data-criterion="/g)||[]).length,6,'Six clinical selections, two objective lab fields');
-assert.equal((page.match(/data-flag="/g)||[]).length,2);
-assert.match(page,/ANC.*7500/);
-assert.match(page,/0–3/);assert.match(page,/4–6/);assert.match(page,/7–10/);
-assert.match(page,/pediatric-appendicitis-risk-calculator-parc/);
+assert.doesNotMatch(page,/<input\b/);
+assert.ok(!page.includes('data-flag="unstable"'));
+assert.ok(!page.includes('data-flag="peritonitis"'));
+assert.equal((page.match(/data-criterion="/g)||[]).length,8,'Eight binary criteria');
+assert.equal((page.match(/data-flag="/g)||[]).length,0);
+assert.match(page,/7500\/µL \(ANC\)/);
+assert.match(page,/0–10|0 a 10/);
+assert.match(page,/PMC5869337/);
 assert.match(page,/2026/);
 assert.ok(home.includes("{id:'pas',title:'PAS · Apendicitis pediátrica'"));
 assert.ok(home.includes("c.dataset.pedRapid==='pas'?'./pediatria-pas.html'"));
-assert.match(home,/content="0\.10\.75"/);
+assert.match(home,new RegExp("content=\""+currentReleasePattern+"\""));
 assert.match(page,/content="0\.10\.46"/);
 for(const path of ['pediatria-pas.html','assets/pediatric-pas-core-v01045.js','assets/pediatric-pas-ui-v01045.js','assets/pediatric-pas-v01045.css'])
  assert.ok(sw.includes("'./"+path+"'"),'Offline precache missing '+path);
@@ -114,4 +115,11 @@ assert.match(css,/\[aria-pressed="true"\]/);
 assert.doesNotMatch(core,/fetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|sendBeacon/);
 assert.doesNotMatch(ui,/fetch\s*\(|XMLHttpRequest|sendBeacon|api\.openai\.com/);
 assert.ok(!page.includes('<input id="patient-name"'));
+assert.doesNotMatch(page,/id="pas-(age|duration|red-flags)"/);
+assert.doesNotMatch(ui,/ageYears:|redFlags:/);
+assert.match(ui,/out.complete\?'score':'pending'/);
+assert.match(ui,/api\.calculateQuick\(answers\)/);
+const scoreOnly=pas.calculate({answers:{...allNo},wbcK:'8',ancK:'5'});assert.equal(scoreOnly.score,0);assert.equal(scoreOnly.band,'pending');
+for(let m=0;m<6561;m++){let n=m,points=0,missingWeight=0;const answers={};for(const c of pas.criteria){const value=['no','yes','unknown'][n%3];n=Math.floor(n/3);answers[c.key]=value;if(value==='yes')points+=c.points;if(value==='unknown')missingWeight+=c.points;}const q=pas.calculateQuick(answers);assert.equal(q.score,missingWeight?null:points);assert.equal(q.range[0],points);assert.equal(q.range[1],points+missingWeight);}
+assert.equal(pas.calculateQuick({wbc:'invalid'}).ok,false);
 console.log('PAS clinical QA PASS: 8 criteria, 10 total, 0/3/4/6/7/10 risk bands, fail-closed missing inputs, strict ANC/WBC/temp thresholds, danger overrides, age guard, PWA and accessible UI.');

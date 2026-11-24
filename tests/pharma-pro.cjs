@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs');
 const html=fs.readFileSync('index.html','utf8');
 const page=fs.readFileSync('pharma-pro.html','utf8');
@@ -71,7 +72,7 @@ const idx3=html.indexOf('💊 Biblioteca farmacológica · Pharma Pro');
 const idx4=html.indexOf('<label class="search"',idx3);
 assert.ok(idx1>=0&&idx1<idx2&&idx2<idx3&&idx3<idx4,'Pharma quick link adjacent to existing two links, before main search');
 assert.match(html,/href="\.\/pharma-pro\.html"/);
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(html,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 assert.doesNotMatch(html,/data-mobile-nav="guard"/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-core\.js">/);
 assert.match(page,/<script src="\.\/assets\/pharma-pro-ui\.js">/);

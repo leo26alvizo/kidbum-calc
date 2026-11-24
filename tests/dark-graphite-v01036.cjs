@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* Theme-only quality gate: 13/13 HTML surfaces, contrast, light-theme
  * invariance, PWA cache and native address-bar/standalone theme synchronization.
  */
@@ -22,9 +23,9 @@ for(const name of pages){
  const linkIdx=html.indexOf(ref),headEnd=html.indexOf('</head>');
  assert.ok(linkIdx<headEnd,'stylesheet stays inside <head> for '+name);
 }
-assert.match(read('index.html'),/content="0\.10\.75"/);
-assert.match(read('pharma-pro.html'),/content="0\.10\.75"/);
-assert.match(read('pharma-pro.html'),/class="phone-brand">💊 Pharma Pro <small>v0\.10\.75 · Pharma Pro 2\.0<\/small>/);
+assert.match(read('index.html'),new RegExp("content=\""+currentReleasePattern+"\""));
+assert.match(read('pharma-pro.html'),new RegExp("content=\""+currentReleasePattern+"\""));
+assert.match(read('pharma-pro.html'),new RegExp("class=\"phone-brand\">💊 Pharma Pro <small>v"+currentReleasePattern+" · Pharma PRO 3\\.0<\\/small>"));
 assert.match(read('index.html'),/--bg:#f5f8fa/,'main original light palette untouched');
 assert.match(read('pharma-pro.html'),/--bg:#f4f7f7/,'pharma original light palette untouched');
 assert.match(read('snnoop10.html'),/--sn-bg:#f1f6f7/,'SNNOOP original light palette untouched');

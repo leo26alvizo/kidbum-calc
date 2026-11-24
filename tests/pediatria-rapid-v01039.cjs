@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),crypto=require('node:crypto');
 const read=x=>fs.readFileSync(x,'utf8');
 const page=read('pediatria-evaluacion-rapida.html'),home=read('index.html');
@@ -50,7 +51,7 @@ for(const path of ['pediatria-evaluacion-rapida.html','assets/pediatria-rapid-co
  assert.ok(sw.includes("'./"+path+"'"),'Missing offline asset '+path);
 for(const code of ['pediatrictep','woodferres','kramer'])assert.ok(home.includes("id:'"+code+"'"),code);
 for(const hash of ['#tep','#wood','#kramer'])assert.ok(home.includes("pediatria-evaluacion-rapida.html"+hash));
-assert.match(home,/content="0\.10\.75"/);
+assert.match(home,new RegExp("content=\""+currentReleasePattern+"\""));
 assert.match(page,/content="0\.10\.41"/);
 assert.match(sw,/pediatria-rapid-v01039/);
 const imageBytes=fs.readFileSync('assets/kramer-bebe-referencia-v01040.jpg');

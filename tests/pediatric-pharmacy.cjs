@@ -40,7 +40,12 @@ const pharmaSource=html.slice(pharmaBegin,pharmaEnd);
 const elements={};
 const cardButton={dataset:{},onclick:null,onkeydown:null};
 const main={innerHTML:''};
+const orthoStart=html.indexOf('const orthoTools=');
+const orthoEnd=html.indexOf(';',orthoStart);
+const orthoTools=vm.runInNewContext(html.slice(orthoStart,orthoEnd)+';orthoTools');
+assert.equal(orthoTools.length,25);
 const context={
+ orthoTools,
  defs,pediatricPharma:catalog,calculatorCount:(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+(cat==='Todas'||cat==='Urgencias y Terapia Intensiva'?5:0),main,screen:'home',category:'Pediatría',search:'',faves:[],
  atlas:{img:()=>'<img alt="">',anatomy:{},categoryMap:{}},
  categories:['Todas','Pediatría'],

@@ -3,13 +3,14 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('nod
 const c={};c.window=c;vm.runInNewContext(fs.readFileSync('assets/ortopedia-core-v01080.js','utf8'),c);
 const E=c.KidBumOrthopedics;assert.equal(E.bank.length,25);assert.equal(new Set(E.bank.map(x=>x.id)).size,25);
 const run=(id,data)=>E.evaluate('ort-'+id,data);
-for(const t of E.bank){assert.ok(t.scope&&t.warning&&t.url.startsWith('https://'));assert.ok(E.evaluate(t.id,{}).error);const sample=Object.fromEntries(t.fields.map(f=>[f.id,String(f.example)]));if(t.formula==='ccr')sample.low='1';assert.ok(!E.evaluate(t.id,sample).error,t.id);for(const f of t.fields){const incomplete={...sample};delete incomplete[f.id];assert.ok(E.evaluate(t.id,incomplete).error,t.id+' missing '+f.id);}}
+for(const t of E.bank){assert.ok(t.scope&&t.warning&&t.url.startsWith('https://'));assert.ok(E.evaluate(t.id,{}).error);const sample=Object.fromEntries(t.fields.map(f=>[f.id,String(f.example)]));assert.ok(!E.evaluate(t.id,sample).error,t.id);for(const f of t.fields){const incomplete={...sample};delete incomplete[f.id];assert.ok(E.evaluate(t.id,incomplete).error,t.id+' missing '+f.id);}}
 assert.ok(run('ottawa-tobillo',{eligible:'0',medial:'0',lateral:'0',weight:'0'}).error);
 assert.equal(run('ottawa-tobillo',{eligible:'1',medial:'1',lateral:'0',weight:'0'}).value,'Positiva');
 assert.equal(run('ottawa-pie',{eligible:'1',navicular:'0',metatarsal:'0',weight:'0'}).value,'Negativa');
 const k={eligible:'1',age:'55',patella:'0',fibula:'0',flex:'0',weight:'0'};
 assert.equal(run('ottawa-rodilla',k).value,'Positiva');assert.equal(run('ottawa-rodilla',{...k,age:'54'}).value,'Negativa');assert.ok(run('ottawa-rodilla',{...k,age:'54.5'}).error);
 assert.equal(run('pittsburgh',{eligible:'1',age:'50',walk:'0'}).value,'Negativa');assert.equal(run('pittsburgh',{eligible:'1',age:'51',walk:'0'}).value,'Positiva');
+assert.equal(E.byId['ort-canadian-cspine'].fields.find(f=>f.id==='low').example,'1','Rotation in demo requires low risk factor');
 const cc={eligible:'1',age:'64',mechanism:'0',paresthesia:'0',low:'1',rotate:'1'};
 assert.equal(run('canadian-cspine',cc).value,'Negativa');assert.equal(run('canadian-cspine',{...cc,age:'65',rotate:'na'}).value,'Positiva');assert.ok(run('canadian-cspine',{...cc,rotate:'na'}).error);
 assert.equal(run('tlics',{morph:'2',lig:'3',neu:'0'}).value,'5 puntos');
@@ -26,3 +27,12 @@ for(const t of E.bank)assert.ok(home.includes("href:'./ortopedia.html#"+t.id+"'"
 for(const path of ['ortopedia.html','assets/ortopedia-core-v01080.js','assets/ortopedia-portada.webp'])assert.ok(sw.includes("'./"+path+"'"),path);
 assert.ok(page.includes('ortopedia-core-v01080.js'));assert.ok(fs.statSync('assets/ortopedia-portada.webp').size>2000);
 console.log('PASS 25 orthopedic tools, required fields, boundaries, catalog links and offline assets.');
+
+assert.match(page,/id="example-note"/);
+assert.match(page,/id="kb-ai-mount"/);
+assert.match(page,/KidBumAnalysis\.attach\(/);
+assert.match(page,/lastResult=r\.error\?null:r/);
+assert.match(page,/ai\?\.setReady\(Boolean\(lastResult\)\)/);
+assert.match(page,/function hideResult\(\)\{lastResult=null;ai\?\.setReady\(false\)/);
+assert.ok(sw.includes("'./assets/chatgpt-analysis.js'"));
+for(const part of page.matchAll(/<script(?:\s+[^>]*)?>([\s\S]*?)<\/script>/g))if(part[1].trim())new vm.Script(part[1]);

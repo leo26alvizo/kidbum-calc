@@ -85,7 +85,7 @@ assert.equal(inputNode.value,'amoxicillin');
  assert.match(fs.readFileSync('assets/pharma-pro-ui.js','utf8'),/KidBumPharmaExternalLabels\?\.render\(med\)/);
  const page=fs.readFileSync('pharma-pro.html','utf8');
  const scriptNames=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
- assert.equal(scriptNames.length,21,'Original label viewer and pediatric scripts remain, plus two nonprescriptive Pharma Pro 2.0 evidence files');
+ assert.equal(scriptNames.length,29,'All 29 current scripts retained');
  assert.ok(scriptNames.indexOf('assets/pediatric-drug-references-v01055.js')<scriptNames.indexOf('assets/pharma-pro-ui.js'));
 
  assert.ok(scriptNames.indexOf('assets/pharma-label-lookup-v01049.js')<scriptNames.indexOf('assets/pharma-pro-ui.js'));

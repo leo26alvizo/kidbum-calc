@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* Adult Urgencias/UCI v0.10.56: exhaustive graph safety and pharma cross-catalog validation. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const rd=p=>fs.readFileSync(p,'utf8');
@@ -122,7 +123,7 @@ assert.match(home,/data-urg-alg/);assert.match(home,/category==='Urgencias y Ter
 assert.match(home,/algoritmos-urgencias\.html/);
 assert.match(home,/const cards=algCard\+emergencyAlgCard/);
 assert.match(home,/data-ped-alg/,'Pediatric specialty tile must remain unaffected');
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 assert.match(page,/kidbum-app-version" content="0\.10\.56"/);
 assert.match(page,/40 rutas clínicas/);
 assert.match(page,/data-category="UCI y soporte"/);

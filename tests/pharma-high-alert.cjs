@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const files=['assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js'];
 const ctx={window:{}};for(const path of files){const s=fs.readFileSync(path,'utf8');new vm.Script(s,{filename:path});vm.runInNewContext(s,ctx,{timeout:3500});}
@@ -79,11 +80,11 @@ const ui=fs.readFileSync('assets/pharma-pro-monographs-ui.js','utf8');
 for(const key of ['kRange','renalStable','dilutionValidated','labMonitoring','hit','vialStrength','hypoglycemia','insulinPlan','formulation'])assert.ok(ui.includes(key),'Required UI field '+key);
 const page=fs.readFileSync('pharma-pro.html','utf8'),sw=fs.readFileSync('sw.js','utf8'),home=fs.readFileSync('index.html','utf8');
 assert.match(page,/15 medicamentos con cotejo parcial/,'New safety-only label reviews are separate from the original nine gated regimens');
-assert.match(page,/1,551 nombres no cuentan con cotejo individual/,'New labels do not approve the remaining 1,551 entries');
+assert.match(page,/No todos los nombres cuentan con revisión individual/,'Unreviewed entries remain explicitly unapproved');
 assert.match(page,/0 fichas con validación clínica\/farmacéutica independiente/);
 assert.match(page,/assets\/pharma-pro-high-alert\.js/);
 assert.match(sw,/pharma-high-alert-v01034/);
 assert.ok(sw.includes("'./assets/pharma-pro-high-alert.js'"));
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 assert.doesNotMatch(fs.readFileSync('assets/pharma-pro-high-alert.js','utf8'),/fetch\s*\(|XMLHttpRequest|sendBeacon|localStorage|sessionStorage/);
 console.log('PASS · 227 catalog entries, 9 label-cotejado partial profiles, 218 non-verified, 0 clinical approval; KCl IV / heparin / lispro U100 all fail closed; prior monographs preserved.');

@@ -31,7 +31,7 @@ async function noHorizontalOverflow(page,label){
 }
 async function main(){
  const port=await listen();
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+ const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})});
  const base='http://127.0.0.1:'+port;
  try{
   await test('lion splash — headlights, skip, session and reduced motion',async()=>{
@@ -175,8 +175,8 @@ async function main(){
      await enarm.click();
      await page.waitForURL(/enarm\.html/);
      assert.equal(await page.locator('.en-stat').count(),3);
-     assert.match(await page.locator('#enarm-app').innerText(),/37/);
-     assert.match(await page.locator('#enarm-app').innerText(),/74/);
+     assert.match(await page.locator('#enarm-app').innerText(),/72\s+Casos originales/);
+     assert.match(await page.locator('#enarm-app').innerText(),/144\s+Preguntas disponibles/);
      await noHorizontalOverflow(page,'ENARM '+width+'px');
      const links=await page.evaluate(()=>[...document.querySelectorAll('link[rel=stylesheet]')].map(x=>x.href));
      assert.ok(links.some(url=>url.endsWith('enarm-v01064.css')),'ENARM CSS should be applied');
@@ -448,7 +448,34 @@ async function main(){
   });
   await test('Oftalmología clinical algorithms — category, urgent and uncertain branches, return and dark mode',async()=>{
    const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
-   try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-oph-alg]').count(),0);await page.locator('[data-featured="Oftalmología"]').click();assert.equal(await page.locator('[data-oph-alg]').count(),1);assert.equal(await page.locator('#calc-list article.calc-card').count(),15);await page.locator('[data-oph-alg]').click();await page.waitForURL('**/algoritmos-oftalmologia.html');assert.equal(await page.locator('[data-algo-id]').count(),16);await page.locator('#alg-search-input').fill('QUERATITIS');assert.equal(await page.locator('[data-algo-id="queratitis"]').count(),1);await page.locator('#alg-search-input').fill('');await page.locator('[data-algo-id="quemadura-quimica"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/irrigación copiosa inmediata/);await page.locator('[data-choice-index="2"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Incertidumbre/);await page.locator('#alg-back-step').click();await page.locator('[data-choice-index="1"]').click();await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Quemadura de riesgo alto/);await page.locator('#alg-mode-estudio').click();assert.equal(await page.locator('#alg-evidence').getAttribute('open'),'');await page.locator('#alg-theme').click();await noHorizontalOverflow(page,'Algoritmos oftalmología');await page.locator('.alg-back').click();await page.waitForURL('**/index.html?especialidad=oftalmologia');assert.equal(await page.locator('[data-oph-alg]').count(),1);
+   try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-oph-alg]').count(),0);await page.locator('[data-featured="Oftalmología"]').click();assert.equal(await page.locator('[data-oph-alg]').count(),1);assert.equal(await page.locator('#calc-list article.calc-card').count(),15);await page.locator('[data-oph-alg]').click();await page.waitForURL('**/algoritmos-oftalmologia.html');assert.equal(await page.locator('[data-algo-id]').count(),23);await page.locator('#alg-search-input').fill('QUERATITIS');assert.equal(await page.locator('[data-algo-id="queratitis"]').count(),1);await page.locator('#alg-search-input').fill('');await page.locator('[data-algo-id="quemadura-quimica"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/irrigación copiosa inmediata/);await page.locator('[data-choice-index="2"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Incertidumbre/);await page.locator('#alg-back-step').click();await page.locator('[data-choice-index="1"]').click();await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('#alg-interaction').innerText(),/Quemadura de riesgo alto/);await page.locator('#alg-mode-estudio').click();assert.equal(await page.locator('#alg-evidence').getAttribute('open'),'');await page.locator('#alg-theme').click();await noHorizontalOverflow(page,'Algoritmos oftalmología');await page.locator('.alg-back').click();await page.waitForURL('**/index.html?especialidad=oftalmologia');assert.equal(await page.locator('[data-oph-alg]').count(),1);
+   }finally{await context.close()}
+  });
+
+  await test('Examples — all core and diabetes tools, gasometry, PAS and cervical rule',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{
+    const page=await context.newPage();
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    await page.locator('[data-open]').first().waitFor();
+    const core=await page.evaluate(()=>{
+     const ids=[...document.querySelectorAll('[data-open]')].map(x=>x.dataset.open),failures=[];
+     for(const id of ids){try{document.querySelector('[data-open="'+id+'"]').click();const b=document.querySelector('#example');if(!b||b.disabled)throw Error('No example button');b.click();const state=document.querySelector('.kb-result-modern')?.dataset.kbResultState;if(!['ready','not-evaluable'].includes(state))throw Error('State '+state);}catch(e){failures.push(id+': '+e.message);}finally{document.querySelector('#back')?.click();}}
+     return {total:ids.length,failures};
+    });
+    assert.equal(core.total,100);assert.deepEqual(core.failures,[]);
+    const diabetesIds=await page.locator('[data-diabetes]').evaluateAll(xs=>xs.map(x=>x.dataset.diabetes));
+    assert.equal(diabetesIds.length,6);
+    for(const id of diabetesIds){await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});await page.locator('[data-diabetes="'+id+'"]').click();await page.locator('#db-example').click();assert.equal(await page.locator('#db-copy').isEnabled(),true);}
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});await page.locator('[data-gasometria-open]').click();await page.locator('#gas-example').click();assert.equal(await page.locator('#gas-panel').getAttribute('data-kb-result-state'),'ready');
+    await page.goto(base+'/pediatria-pas.html',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('[data-criterion]').count(),8);assert.equal(await page.locator('input,[data-flag]').count(),0);
+    assert.equal(await page.locator('#pas-points').innerText(),'—');
+    await page.locator('#pas-example').click();assert.equal(await page.locator('#pas-points').innerText(),'7');
+    assert.match(await page.locator('#pas-completeness').innerText(),/8 de 8/);assert.equal(await page.locator('#pas-example-note').isVisible(),true);
+    await page.locator('#pas-reset').click();assert.equal(await page.locator('#pas-points').innerText(),'—');assert.equal(await page.locator('#pas-example-note').isVisible(),false);
+    await page.goto(base+'/ortopedia.html#ort-canadian-cspine',{waitUntil:'domcontentloaded'});
+    await page.locator('#example').click();assert.equal(await page.locator('#ort-low').inputValue(),'1');await page.locator('#form button[type=submit]').click();assert.match(await page.locator('#output').innerText(),/Negativa/);
    }finally{await context.close()}
   });
  }finally{await browser.close();await stop()}

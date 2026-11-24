@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* Audit source-scoped monographs against approved fixtures, fail-closed input,
    and guards preventing display of unsupported regimens. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
@@ -89,10 +90,10 @@ assert.match(parent,/Referencia posológica parcial/);
 assert.match(page,/assets\/pharma-pro-monographs\.js/);
 assert.match(page,/assets\/pharma-pro-monographs-ui\.js/);
 const scriptPaths=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(x=>x[1]);
-assert.deepEqual(scriptPaths,['assets/pharma-pro-expansion.js','assets/pharma-pro-guides-plus.js','assets/pharma-pro-expansion-index-v01043.js','assets/pharma-broad-index-v01058.js','assets/pharma-pro-core.js','assets/pediatric-drug-references-v01055.js','assets/pediatric-drug-references-ui-v01055.js','assets/pharma-drug-diagnoses-v01050.js','assets/pharma-pro-indications-ui.js' ,'assets/pharma-pro-monographs.js','assets/pharma-pro-source-audit.js','assets/pharma-pro-high-alert.js','assets/pharma-pro-evidence-v01100.js','assets/pharma-pro-reconciliation-v01042.js','assets/pharma-pro-monographs-ui.js','assets/pharma-label-lookup-v01049.js','assets/pharma-pro-evidence-ui-v01100.js','assets/pharma-pro-ui.js','assets/pharma-pro-reconciliation-ui-v01042.js','assets/pharma-disease-index-ui-v01043.js','assets/pharma-pro-quick-ui.js']);
+assert.deepEqual(scriptPaths,["assets/pharma-pro-expansion.js","assets/pharma-pro-guides-plus.js","assets/pharma-pro-expansion-index-v01043.js","assets/pharma-broad-index-v01058.js","assets/pharma-expansion-v01084.js","assets/pharma-pro-core.js","assets/pediatric-drug-references-v01055.js","assets/pediatric-drug-references-ui-v01055.js","assets/pharma-drug-diagnoses-v01050.js","assets/pharma-pro-indications-ui.js","assets/pharma-pro-monographs.js","assets/pharma-pro-source-audit.js","assets/pharma-pro-high-alert.js","assets/pharma-pro-evidence-v01100.js","assets/pharma-pro-reconciliation-v01042.js","assets/pharma-pro-monographs-ui.js","assets/pharma-label-lookup-v01049.js","assets/pharma-pro-evidence-ui-v01100.js","assets/pharma-hospital-reference-v01085.js","assets/pharma-hospital-reference-ui-v01085.js","assets/pharma-antibioticos-v01088.js","assets/pharma-antibioticos-ui-v01088.js","assets/pharma-therapeutic-lines-v01089.js","assets/pharma-therapeutic-lines-ui-v01089.js","assets/pharma-pro-ui.js","assets/pharma-pro-reconciliation-ui-v01042.js","assets/pharma-disease-index-ui-v01043.js","assets/pharma-pro-quick-ui.js","assets/pharma-clinical-edition-v01086.js"]);
 for(const path of scriptPaths)assert.ok(sw.includes("'./"+path+"'"),'offline '+path);
 assert.match(sw,/monographs-v01030/);
-assert.match(home,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 assert.match(home,/SNNOOP10:[^]*?Simulador de pares craneales oculomotores[^]*?Biblioteca farmacológica · Pharma Pro/);
 assert.doesNotMatch(home,/data-mobile-nav="guard"/);
 const basic={window:{}};vm.runInNewContext(fs.readFileSync('assets/pharma-pro-expansion.js','utf8'),basic,{timeout:5000});vm.runInNewContext(fs.readFileSync('assets/pharma-pro-guides-plus.js','utf8'),basic,{timeout:5000});vm.runInNewContext(fs.readFileSync('assets/pharma-pro-expansion-index-v01043.js','utf8'),basic,{timeout:5000});vm.runInNewContext(core,basic,{timeout:5000});

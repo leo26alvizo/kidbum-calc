@@ -1,4 +1,5 @@
 'use strict';
+const currentReleasePattern=require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* KidBum Pharma Pro 0.10.43: search-directory expansion, explicitly NON-PRESCRIPTIVE.
  * Protect historic guideline count and patient safety while growing discovery.
  */
@@ -78,12 +79,12 @@ const html=fs.readFileSync('pharma-pro.html','utf8');
 assert.match(html,/id="pharma-disease-index"/);
 assert.match(html,/id="pharma-index-results"/);
 assert.match(html,/id="pharma-index-category"/);
-assert.match(html,/un catálogo extensivo de búsqueda por principios activos/);
+assert.match(html,/Busca por principio activo, grupo o uso/);
 assert.match(html,/15 medicamentos con cotejo parcial/,'Scoped source review coverage is transparent');
-assert.match(html,/1,551 nombres no cuentan con cotejo individual/,'Unreviewed index entries remain explicit');
+assert.match(html,/No todos los nombres cuentan con revisión individual/,'Unreviewed index entries remain explicit');
 assert.match(css,/@media\(max-width:590px\)/);
 const js=[...html.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(js.length,21,'Forty-item evidence queue adds two safety-only, non-prescriptive scripts');
+assert.equal(js.length,29,'All current scripts retained');
 assert.ok(js.indexOf('assets/pediatric-drug-references-v01055.js')<js.indexOf('assets/pharma-pro-ui.js'));
 
 assert.ok(js.indexOf('assets/pharma-pro-expansion-index-v01043.js')>js.indexOf('assets/pharma-pro-guides-plus.js'));
@@ -97,6 +98,6 @@ const quick=fs.readFileSync('assets/pharma-pro-quick-ui.js','utf8');
 assert.match(quick,/kind:'topic'/);
 assert.match(quick,/KidBumPharmaIndexUI\?\.openDisease/);
 const main=fs.readFileSync('index.html','utf8');
-assert.match(main,/<meta name="kidbum-app-version" content="0\.10\.75"/);
-assert.match(html,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(main,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
+assert.match(html,new RegExp("<meta name=\"kidbum-app-version\" content=\""+currentReleasePattern+"\""));
 console.log('PASS · 643 unique drug catalog entries (416 new; ALL non-prescriptive), 205 indexed illnesses/syndromes, 15 pre-existing adult guideline routes unchanged, 9/643 partial US label checks, 0 independent clinical approvals, no false safety clearance, offline assets.');
