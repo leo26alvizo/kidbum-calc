@@ -1,3 +1,9 @@
+## v0.10.72 · ENARM Visual — expansión de imagen clínica
+
+- 29 reactivos visuales (25 asociados a imágenes clínicas reales), 13 imágenes documentadas, 341 preguntas ENARM totales.
+- Se retiran 3 reactivos de epidemiología únicamente del módulo visual; sus IDs no se reutilizan y el historial previo se conserva. Nuevos 18 reactivos: ECG, radiografía torácica y musculoesquelética, TC y ultrasonido.
+- Imágenes clínicas por defecto, esquemas disponibles opcionalmente. Fuentes y licencias por imagen; revisión clínica independiente pendiente.
+
 ## v0.10.71 · Centor / McIsaac
 
 - Nueva escala en Escalas clínicas; 139 calculadoras únicas. Centor clásico (0–4) y ajuste de McIsaac (−1 a 5), con selección explícita de criterios y edad, orientación diagnóstica y alertas de seguridad. No indica antibióticos automáticamente.
