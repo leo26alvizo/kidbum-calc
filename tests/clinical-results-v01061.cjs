@@ -31,7 +31,7 @@ async function noHorizontalOverflow(page,label){
 }
 async function main(){
  const port=await listen();
- const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
+ const browser=await chromium.launch({headless:true,args:['--no-sandbox'],...(process.env.CHROME_BIN?{executablePath:process.env.CHROME_BIN}:{})});
  const base='http://127.0.0.1:'+port;
  try{
   await test('lion splash — headlights, skip, session and reduced motion',async()=>{
