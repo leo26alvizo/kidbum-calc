@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es" data-kb-page="ortopedia-algoritmos">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#291c17">
+<meta name="kidbum-app-version" content="0.10.82">
+<meta name="description" content="Algoritmos de Ortopedia: valoración inicial, trauma, extremidades, columna y pediatría.">
+<title>Algoritmos clínicos · Ortopedia · KidBum</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css">
+<link rel="stylesheet" href="./assets/pediatria-farmaco-bridge-v01054.css">
+<link rel="stylesheet" href="./assets/ortopedia-algoritmos-v01082.css">
+<script>
+try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kidbum-theme')===null&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}
+</script>
+<script src="./assets/theme-chrome-v01036.js" defer></script>
+<link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head>
+<body class="alg-peds alg-orthopedics">
+<header class="alg-header"><div class="alg-header-in">
+ <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html?especialidad=ortopedia">← Ortopedia · KidBum</a><span class="alg-version">v0.10.82 · offline</span></nav>
+ <div class="ortho-hero-art" aria-hidden="true"><img src="./assets/ortopedia-portada.webp" alt=""></div><div class="alg-kicker">◉ KidBum · Ortopedia y Traumatología</div>
+ <h1>Algoritmos clínicos de<br>Ortopedia.</h1>
+ <p class="alg-hero-text">Valoración inicial, decisiones por hallazgos y criterios de referencia. Rutas para personal sanitario; la exploración y el tratamiento oportuno tienen prioridad.</p>
+ <div class="alg-hero-bottom"><span class="alg-hero-chip">15 rutas clínicas</span><span class="alg-hero-chip">⚡ Guardia</span><span class="alg-hero-chip">📖 Estudio</span><span class="alg-hero-chip">📴 Sin conexión</span><a class="alg-hero-chip ortho-pharma-entry" href="./pharma-pro.html" target="_blank" rel="noopener noreferrer">💊 Pharma PRO ↗</a></div>
+</div></header>
+<main class="alg-main" id="alg-main">
+<div class="alg-alert" role="note"><span aria-hidden="true">⚠</span><div><b>La atención precede al algoritmo</b>Inestabilidad, hemorragia grave, fractura abierta, isquemia, síndrome compartimental o déficit neurológico progresivo: atención inmediata. Priorizar ABCDE y protección de extremidad; no retrasar intervención por completar rutas o escalas.</div></div>
+<section class="alg-library" id="alg-library" aria-labelledby="alg-library-title">
+ <div class="alg-search">
+  <div><label for="alg-search-input">Buscar problema o síndrome</label><input type="search" id="alg-search-input" autocomplete="off" placeholder="Ej. fractura, rodilla, columna…"></div>
+  <div class="alg-chips" id="alg-chips" role="group" aria-label="Filtrar rutas de Ortopedia"><button type="button" class="alg-chip" data-category="all" aria-pressed="true">Todas</button><button type="button" class="alg-chip" data-category="Trauma y urgencias" aria-pressed="false">Trauma y urgencias</button><button type="button" class="alg-chip" data-category="Extremidades" aria-pressed="false">Extremidades</button><button type="button" class="alg-chip" data-category="Columna" aria-pressed="false">Columna</button><button type="button" class="alg-chip" data-category="Infección y consulta" aria-pressed="false">Infección y consulta</button><button type="button" class="alg-chip" data-category="Pediatría" aria-pressed="false">Pediatría</button></div>
+ </div>
+ <div class="alg-section-intro"><h2 id="alg-library-title">Selecciona un problema musculoesquelético</h2><span id="alg-count" class="alg-count" aria-live="polite"></span></div>
+ <div id="alg-grid" class="alg-grid"></div>
+ <div class="alg-safety-note">Cada ruta incluye ámbito, hallazgos de alarma, incertidumbre y conducta. No autoriza alta ni prescripción. Revisión clínica independiente pendiente.</div>
+</section>
+<section class="alg-flow" id="alg-flow" aria-labelledby="alg-flow-title" hidden>
+ <div class="alg-flow-header">
+  <button type="button" id="alg-to-library" class="alg-flow-return">← Los 15 algoritmos</button>
+  <div class="alg-flow-heading"><span id="alg-flow-icon" aria-hidden="true">🚨</span><div><h2 id="alg-flow-title">Algoritmo</h2><p id="alg-flow-subtitle"></p></div></div>
+  <div class="alg-mode"><span>Visualización:</span><div><button type="button" id="alg-mode-guardia" aria-pressed="true">⚡ Guardia</button> <button type="button" id="alg-mode-estudio" aria-pressed="false">📖 Estudio</button></div></div>
+ </div>
+ <div id="alg-rail" class="alg-rail" role="img" aria-label="Progreso del algoritmo"></div>
+ <div id="alg-interaction" aria-live="polite" aria-atomic="true"></div>
+ <div id="alg-tools" class="alg-tools" aria-label="Herramientas relacionadas" hidden></div>
+ <div class="alg-actions"><button type="button" class="alg-secondary" id="alg-back-step">← Anterior</button><button type="button" class="alg-secondary" id="alg-restart">↺ Reiniciar</button><button type="button" class="alg-secondary" id="alg-theme">◐ Tema</button></div>
+ <p id="alg-trail" class="alg-trail"></p>
+ <details class="alg-evidence" id="alg-evidence"><summary>📚 Ámbito, exclusiones y fuentes</summary><div id="alg-evidence-content"></div></details>
+ <p class="alg-safety-note">Apoyo educativo. No sustituye exploración, protocolos hospitalarios ni supervisión especializada. No se guardan datos clínicos.</p>
+</section>
+</main>
+<footer class="alg-footer">KidBum · Ortopedia v0.10.82 · 15 rutas · Fuentes consultables · Revisión clínica independiente pendiente</footer>
+<script src="./assets/ortopedia-core-v01080.js"></script>
+<script src="./assets/ortopedia-algoritmos-core-v01082.js"></script>
+<script src="./assets/ortopedia-algoritmos-ui-v01082.js"></script>
+</body></html>

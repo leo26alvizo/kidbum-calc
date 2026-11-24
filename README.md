@@ -1,3 +1,7 @@
+## v0.10.82 · Algoritmos de Ortopedia
+
+15 rutas interactivas, 36 decisiones y 73 desenlaces, con buscador, filtros, modos Guardia y Estudio, referencias, enlaces a las 25 herramientas existentes según tema y acceso general a Pharma PRO (sin prescripción ni dosis nuevas). Paleta café, rojo sangre y hueso; portada original conservada. Módulo no puntuable en el contador de calculadoras. Revisión clínica independiente pendiente.
+
 ## v0.10.81 · Portada original de Ortopedia
 
 Se reemplaza la miniatura WebP por el archivo original del usuario, sin recodificación, 1536 × 1110 px, 383364 bytes. SHA-256 e1c5b38ad571d7343f3c3eb7a14a45d8ef2775ca768abc27b98cfadcdc98e61b. Se renueva caché PWA; no cambia ninguna fórmula clínica ni otra portada.
