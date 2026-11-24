@@ -44,7 +44,12 @@ const orthoStart=html.indexOf('const orthoTools=');
 const orthoEnd=html.indexOf(';',orthoStart);
 const orthoTools=vm.runInNewContext(html.slice(orthoStart,orthoEnd)+';orthoTools');
 assert.equal(orthoTools.length,25);
+const neuroStart=html.indexOf('const neuroProTools=');
+const neuroEnd=html.indexOf(';',neuroStart);
+const neuroProTools=vm.runInNewContext(html.slice(neuroStart,neuroEnd)+';neuroProTools');
+assert.equal(neuroProTools.length,12);
 const context={
+ neuroProTools,
  orthoTools,
  defs,pediatricPharma:catalog,calculatorCount:(cat='Todas')=>defs.filter(d=>cat==='Todas'||d.category===cat).length+(cat==='Todas'||cat==='Urgencias y Terapia Intensiva'?5:0),main,screen:'home',category:'Pediatría',search:'',faves:[],
  atlas:{img:()=>'<img alt="">',anatomy:{},categoryMap:{}},

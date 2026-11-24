@@ -59,7 +59,7 @@ const mustHave=['algoritmos-oftalmologia.html','assets/oftalmologia-algoritmos-c
 ];
 for(const p of mustHave)assert.ok(packedSet.has('./'+p),'Not precached: '+p);
 const external=[...home.matchAll(/\{id:'([^']+)',category:'[^']+',href:'([^']+)',image:'([^']+)'\}/g)];
-assert.equal(external.length,71,'All 71 standalone tool links must remain registered');
+assert.equal(external.length,83,'All 83 standalone tool links must remain registered');
 for(const match of external){
  const page=match[2].split('#')[0];
  assert.ok(packedSet.has(page),'Calculator '+match[1]+' not precached: '+page);
@@ -69,7 +69,7 @@ for(const match of external){
 // Every local script referenced by an alternate tool must be available offline.
 const pages=['index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html','pediatria-evaluacion-rapida.html',
- 'documentacion.html','historia-pediatria.html','atlas-gallery.html','ortopedia.html','guardia-pro.html','enarm.html','enarm-direct.html','enarm-visual.html','pharma-pro.html','algoritmos-pediatria.html','algoritmos-urgencias.html','algoritmos-oftalmologia.html','algoritmos-ortopedia.html','pediatria-pas.html'];
+ 'documentacion.html','historia-pediatria.html','atlas-gallery.html','ortopedia.html','neurologia.html','guardia-pro.html','enarm.html','enarm-direct.html','enarm-visual.html','pharma-pro.html','algoritmos-pediatria.html','algoritmos-urgencias.html','algoritmos-oftalmologia.html','algoritmos-ortopedia.html','pediatria-pas.html'];
 for(const p of pages){
  const html=fs.readFileSync(p,'utf8');
  for(const m of html.matchAll(/<script[^>]*src=["'](\.\/[^"']+)["']/g)){
@@ -114,5 +114,5 @@ async function navigate(path){
  await navigate('./assets/wallace-adultos.webp?v=20261021-repaired');
  await navigate('./assets/snnoop10-portada.jpg?v=cover');
  assert.equal(networkCalls,0,'Cold airplane-mode app navigation contacted the network');
- console.log('FULL OFFLINE PASS: 71 standalone calculator routes and local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
+ console.log('FULL OFFLINE PASS: 83 standalone calculator routes and local pages, scripts, HD anatomy, versioned images; '+packed.length+' files, '+(sourceSize/1048576).toFixed(2)+' MiB');
 })().catch(e=>{console.error(e);process.exitCode=1;});
