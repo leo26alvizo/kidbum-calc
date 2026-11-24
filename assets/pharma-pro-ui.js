@@ -98,7 +98,7 @@ function draw(){
  if(query.trim()&&window.KidBumPharmaIndicationsUI?.relatedForDrug){
   const norm=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   const key=norm(query.trim());
-  const abxIds=new Set(root.KidBumAntibiotics?.search(query)||[]);
+  const abxIds=new Set([...(root.KidBumAntibiotics?.search(query)||[]),...(root.KidBumTherapeuticLines?.search(query)||[])]);
   const related=lib.search('',group.value,['Adultos','Pediatría','Neonatología'].includes(pop)?pop:'all',pop==='high')
    .filter(m=>abxIds.has(m.id)||window.KidBumPharmaIndicationsUI.relatedForDrug(m.id).some(d=>norm(d.name+' '+d.note).includes(key))||
     (window.KidBumPharmaDiagnosisCatalog?.related(m.id)||[]).some(d=>norm(d.name).includes(key)));
@@ -123,7 +123,7 @@ function draw(){
   if(med.evidence)tags.append(elt('span','Aviso con fuente','pill review'));
   const status=elt('div',pharmaCoverage(med).label,'pharma-ux-card-status');
   const use=p(med.use);
-  const confirmedDx=window.KidBumPharmaIndicationsUI?.relatedForDrug(med.id)||[];
+  const tx=root.KidBumTherapeuticLines?.get(med.id);const confirmedDx=tx?.rows.length?tx.rows.map(x=>({name:x.title,tier:x.label})):window.KidBumPharmaIndicationsUI?.relatedForDrug(med.id)||[];
   const editorialDx=window.KidBumPharmaDiagnosisCatalog?.related(med.id)||[];
   const diseaseSummary=p(confirmedDx.length?'Diagnósticos con guía: '+confirmedDx.slice(0,2).map(x=>x.name).join(' · ')+(confirmedDx.length>2?' +'+(confirmedDx.length-2):''):editorialDx.length?'Uso clínico orientativo (sin cotejo): '+editorialDx.slice(0,2).map(x=>x.name).join(' · '):'Diagnósticos específicos: cotejo pendiente','small muted');
   const footer=elt('div',undefined,'card-footer');const b=elt('button','Ver consulta rápida →');b.type='button';b.onclick=()=>{location.hash=med.id;showDrug(med.id);};footer.append(b);

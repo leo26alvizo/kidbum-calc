@@ -1,3 +1,7 @@
+## v0.10.89 · Indicaciones y líneas terapéuticas generales
+
+Sección universal para entradas no antibacterianas: 32 escenarios nuevos, 144 vínculos nuevos antes de deduplicación con rutas previas, 120 IDs distintos, directorio por padecimiento y filtro de papel. Estados referencia, asociación editorial pendiente y sin asociación. No inferir indicación ni línea a partir de clase. Sin dosis nuevas, preserva seguridad y referencias existentes; revisión independiente pendiente.
+
 ## v0.10.88 · Antibióticos por enfermedad
 
 154 entradas identificadas, 88 con escenarios vinculados, 66 pendientes de clasificación, 43 escenarios y 211 vínculos. Primera línea, segunda explícita, alternativa, dirigida, combinación, reserva y no recomendado. Sin nuevas dosis ni cambios a ISMP/LASA. Revisión independiente pendiente.

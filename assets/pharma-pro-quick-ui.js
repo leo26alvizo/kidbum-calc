@@ -32,7 +32,7 @@ function currentItems(){
  const q=quick.value.trim();if(!q)return [];
  if(state.view==='drugs'){
   const matches=[...lib.search(q,'all','all',false)];const directIds=new Set(matches.map(x=>x.id));
-  for(const id of root.KidBumAntibiotics?.search(q)||[]){if(!matches.some(x=>x.id===id))matches.push(lib.byId[id]);}
+  for(const id of [...(root.KidBumAntibiotics?.search(q)||[]),...(root.KidBumTherapeuticLines?.search(q)||[])]){if(!matches.some(x=>x.id===id))matches.push(lib.byId[id]);}
   for(const med of root.KidBumPharmaDiagnosisCatalog?.search(q)||[]){
    if(!matches.some(x=>x.id===med.id))matches.push(med);
   }

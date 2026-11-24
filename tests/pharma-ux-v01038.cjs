@@ -27,7 +27,7 @@ assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(scripts.length,27,'Pharma Pro retains prior scripts and adds two separate documentary safety review modules');
+assert.equal(scripts.length,29,'Pharma Pro retains prior scripts and adds two separate documentary safety review modules');
 assert.ok(scripts.includes('assets/pharma-pro-evidence-v01100.js')&&scripts.includes('assets/pharma-pro-evidence-ui-v01100.js'));
 assert.ok(scripts.indexOf('assets/pharma-pro-evidence-v01100.js')<scripts.indexOf('assets/pharma-pro-evidence-ui-v01100.js'));
 assert.ok(scripts.indexOf('assets/pharma-pro-evidence-ui-v01100.js')<scripts.indexOf('assets/pharma-pro-ui.js'));
