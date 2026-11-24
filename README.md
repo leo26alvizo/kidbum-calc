@@ -1,3 +1,7 @@
+## v0.10.92 · Neurología y Raquimedular PRO
+
+12 herramientas nuevas: FOUR, mRS, Fisher modificada, WFNS, MRC sum, Hughes, Hoehn y Yahr modificada, Nurick, McCormick, PPC, cociente glucosa LCR/sangre, STESS. 20 herramientas en Neurología y 191 globales. Ejemplos ficticios, fuentes y alcance clínico por herramienta, sin datos preseleccionados, integración local y análisis voluntario con ChatGPT. Validación independiente pendiente.
+
 ## v0.10.91 · Auditoría de regresiones y análisis de Ortopedia
 
 Actualiza controles de versiones, catálogo y paquete offline sin eliminar verificaciones de seguridad. Integra análisis educativo optativo por portapapeles en las 25 herramientas de Ortopedia con bloqueo hasta resultado válido y etiqueta de ejemplos ficticios. No cambia fórmulas ni dosis. Candidato sujeto a CI; validación clínica independiente pendiente.

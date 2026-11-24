@@ -22,6 +22,8 @@ jobs:
       - name: Orthopedics bank — formula boundaries and missing data
         if: ${{ !cancelled() }}
         run: node tests/ortopedia-v01080.cjs
+      - name: Neurología PRO 12 tools, fixtures and validation
+        run: node tests/neurologia-pro-v01092.cjs
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
         if: ${{ !cancelled() }}
         run: node tests/oftalmologia-algoritmos-v01075.cjs

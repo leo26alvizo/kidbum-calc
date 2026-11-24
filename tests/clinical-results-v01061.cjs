@@ -478,6 +478,27 @@ async function main(){
     await page.locator('#example').click();assert.equal(await page.locator('#ort-low').inputValue(),'1');await page.locator('#form button[type=submit]').click();assert.match(await page.locator('#output').innerText(),/Negativa/);
    }finally{await context.close()}
   });
+  await test('Neurología PRO — 12 tools, examples, valid results, reset and return',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{
+    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(base+'/index.html?especialidad=neurologia',{waitUntil:'domcontentloaded'});
+    await page.locator('[data-neuro-pro]').first().waitFor();
+    assert.equal(await page.locator('[data-neuro-pro]').count(),12);
+    assert.equal(await page.locator('#calc-list article.calc-card').count(),20);
+    const ids=await page.locator('[data-neuro-pro]').evaluateAll(xs=>xs.map(x=>x.dataset.neuroPro));
+    for(const id of ids){
+     await page.goto(base+'/neurologia.html#'+id,{waitUntil:'domcontentloaded'});
+     await page.locator('#example').waitFor();assert.equal(await page.locator('#result').isVisible(),false);
+     await page.locator('#example').click();await page.locator('#result').waitFor();assert.equal(await page.locator('#output .error').count(),0);
+     assert.ok((await page.locator('#output strong').innerText()).trim());assert.equal(await page.locator('#example-note').isVisible(),true);
+     await page.locator('#clear').click();assert.equal(await page.locator('#result').isVisible(),false);
+     await noHorizontalOverflow(page,id);
+    }
+    assert.deepEqual(errors,[]);
+    await page.locator('header nav a').click();await page.waitForURL('**/index.html?especialidad=neurologia');assert.equal(await page.locator('[data-neuro-pro]').count(),12);
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');
