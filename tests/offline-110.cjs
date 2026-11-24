@@ -76,9 +76,12 @@ for(const p of pages){
   assert.ok(packedSet.has(m[1].split('?')[0]),'Uncached script in '+p+': '+m[1]);
  }
 }
+assert.ok(packedSet.has('./assets/oftalmologia-portada-original.webp'));
 const sourceSize=packed.reduce((n,p)=>n+fs.statSync(p).size,0);
 const otoSize=packed.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).reduce((n,p)=>n+fs.statSync(p).size,0);
-assert.ok(sourceSize-otoSize<20*1024*1024,'Original offline pack exceeds 20 MiB');
+const eyeSize=fs.statSync('assets/oftalmologia-portada-original.webp').size;
+assert.ok(eyeSize<256*1024,'Original ophthalmology cover size');
+assert.ok(sourceSize-otoSize-eyeSize<20*1024*1024,'Original offline pack exceeds 20 MiB');
 assert.ok(otoSize<2*1024*1024,'Otoscopic educational images exceed 2 MiB');
 assert.ok(sourceSize<22*1024*1024,'Expanded offline pack exceeds 22 MiB');
 assert.ok(sourceSize>8*1024*1024,'HD anatomical image was not bundled');

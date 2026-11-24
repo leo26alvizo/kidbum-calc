@@ -434,6 +434,18 @@ async function main(){
     await noHorizontalOverflow(page,'ENARM otoscopy');
    }finally{await context.close()}
   });
+  await test('Oftalmología — original cover, category, signed input and result',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
+    const card=page.locator('[data-featured="Oftalmología"]');assert.equal(await card.count(),1);
+    assert.match(await card.locator('img').getAttribute('src'),/oftalmologia-portada-original\.webp$/);
+    await card.click();assert.equal(await page.locator('#calc-list article.calc-card').count(),15);
+    await page.locator('#calc-list article.calc-card').filter({hasText:'Equivalente esférico'}).click();
+    await page.locator('#f-sphere').fill('-2');await page.locator('#f-cylinder').fill('-1');
+    assert.match(await page.locator('#result-value').innerText(),/-2.500 D/);
+    await noHorizontalOverflow(page,'Oftalmología');
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

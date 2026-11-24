@@ -14,9 +14,9 @@ const a=html.indexOf('function validateClinicalInputs('),b=html.indexOf('functio
 const guard=vm.runInNewContext(html.slice(a,b)+'\nvalidateClinicalInputs;',{}, {timeout:5000});
 const d=defs.find(d=>d.id==='urineoutputadult');
 assert.ok(d&&d.category==='Función renal');
-assert.equal(defs.length,85,'Adult urine calculation preserved with seven new clinical tools');
-assert.equal(e.list.length,85,'All clinical modules registered');
-assert.equal(new Set(defs.map(d=>d.id)).size,85,'No duplicate calculator ID');
+assert.equal(defs.length,100,'Adult urine calculation preserved with seven new clinical tools');
+assert.equal(e.list.length,100,'All clinical modules registered');
+assert.equal(new Set(defs.map(d=>d.id)).size,100,'No duplicate calculator ID');
 const sample=Object.fromEntries(d.fields.map(f=>[f.key,f.example||'']));
 assert.equal(guard(d,sample),null,'Fictitious example is complete and passes form validation');
 let count=0;

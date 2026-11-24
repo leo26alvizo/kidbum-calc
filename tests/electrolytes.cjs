@@ -15,9 +15,9 @@ const start=html.indexOf('function validateClinicalInputs(');
 const stop=html.indexOf('function update(){',start);
 const validate=vm.runInNewContext(html.slice(start,stop)+'\nvalidateClinicalInputs;',{}, {timeout:5000});
 const ids=['nadeficit','freewater','correctedca','osmgap','potassiumreview','bicarbdef'];
-assert.equal(engine.list.length,85,'Previous renal/chemistry references preserved among 85 clinical tools');
-assert.equal(definitions.length,85);
-assert.equal(new Set(definitions.map(d=>d.id)).size,85,'No duplicate IDs');
+assert.equal(engine.list.length,100,'Previous renal/chemistry references preserved among 100 clinical tools');
+assert.equal(definitions.length,100);
+assert.equal(new Set(definitions.map(d=>d.id)).size,100,'No duplicate IDs');
 const base={};
 for(const id of ids){
  const d=definitions.find(d=>d.id===id);
