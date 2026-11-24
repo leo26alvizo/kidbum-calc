@@ -63,3 +63,11 @@ html.dark .alg-peds.alg-ophthalmology .alg-rail span.active{background:var(--oph
  .alg-peds.alg-ophthalmology .alg-tile-icon{width:42px;height:42px;font-size:22px}
  .alg-peds.alg-ophthalmology .alg-tile-tag{font-size:9px;padding:4px;max-width:88px}
 }
+
+/* Pharmacy links follow ophthalmology's palette without changing other modules. */
+.alg-peds.alg-ophthalmology .oph-pharma-entry{background:var(--oph-yellow);color:var(--oph-black);border-color:var(--oph-yellow);font-weight:800;text-decoration:none}
+.alg-peds.alg-ophthalmology .oph-therapy{border-top:3px solid #00a6bf}
+.alg-peds.alg-ophthalmology .oph-therapy .alg-therapy-branch,.alg-peds.alg-ophthalmology .oph-therapy .alg-rx-role{background:var(--p-soft);color:var(--p-teal);border-color:var(--p-line)}
+.alg-peds.alg-ophthalmology .oph-therapy .alg-rx-link{background:var(--oph-yellow);color:var(--oph-black)}
+.alg-peds.alg-ophthalmology .oph-therapy .alg-rx-link:hover{background:#f3c600;color:var(--oph-black)}
+.alg-peds.alg-ophthalmology .oph-therapy .alg-rx-library{color:var(--p-teal);overflow-wrap:anywhere}

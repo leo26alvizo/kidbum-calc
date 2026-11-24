@@ -1,3 +1,7 @@
+## v0.10.77 · Oftalmología ↔ Pharma PRO
+
+Acceso a biblioteca desde las 16 rutas y sus 64 desenlaces; enlaces contextuales a fichas existentes, vía explícita, fuentes y precauciones, sin dosis nuevas ni prescripción. Incertidumbre sin selección de medicamentos. Tema cian/amarillo/negro y motor clínico conservados; revisión independiente pendiente.
+
 ## v0.10.76 · Oftalmología — Cian y amarillo
 
 16 iconos individuales en tarjetas y encabezados, tema cian/amarillo/negro exclusivo de los algoritmos de Oftalmología, modos claro y oscuro; se conservan alertas clínicas, contenido, navegación y portada original. Renovación de caché PWA.

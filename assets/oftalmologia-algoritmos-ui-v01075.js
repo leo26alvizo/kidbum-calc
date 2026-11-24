@@ -45,7 +45,29 @@ function showSection(active){
  $('alg-library').hidden=active;
  $('alg-flow').hidden=!active;
 }
-function renderTools(id){const panel=$('alg-tools');panel.replaceChildren();const a=elem('a','Calculadoras y escalas de Oftalmología →','alg-tool-link');a.href='./index.html?especialidad=oftalmologia';panel.append(a);panel.hidden=false;}
+function pharmaLink(label,href,cls){const a=elem('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener noreferrer';return a;}
+function renderTools(id){const panel=$('alg-tools');panel.replaceChildren();const a=elem('a','Calculadoras y escalas de Oftalmología →','alg-tool-link');a.href='./index.html?especialidad=oftalmologia';panel.append(a,pharmaLink('💊 Biblioteca Pharma PRO ↗','./pharma-pro.html','alg-tool-link'));panel.hidden=false;}
+function renderTreatment(a,step){
+ const plan=root.KidBumOphthalmologyPharmaBridge?.get(a.id,step.id);
+ const section=elem('section',undefined,'alg-therapy oph-therapy');
+ const head=elem('div',undefined,'alg-therapy-head');
+ head.append(elem('h3','💊 Farmacología · Pharma PRO'),elem('span','Consulta educativa','alg-therapy-branch'));section.append(head);
+ section.append(elem('p',plan?.notes||'La selección terapéutica requiere valoración individual.','alg-therapy-context'));
+ section.append(elem('p','La ficha general no valida indicación, vía, concentración, dosis ni registro mexicano para este desenlace. No es una receta.','alg-therapy-purpose'));
+ if(plan?.drugs.length){
+  const cards=elem('div',undefined,'alg-therapy-medications');
+  for(const m of plan.drugs){
+   const card=elem('article',undefined,'alg-therapy-med');
+   card.append(elem('span',m.route,'alg-rx-role'),elem('strong',m.name,'alg-rx-name'),elem('p',m.context,'alg-rx-context'));
+   if(m.route.includes('Intravítrea'))card.append(elem('span','⚠ Vía especializada · no extrapolar ficha sistémica','alg-rx-warning'));
+   card.append(elem('span','Ficha de referencia · dosis no validada','alg-rx-tag'),pharmaLink('Abrir ficha en Pharma PRO ↗',m.href,'alg-rx-link'),pharmaLink('Fuente: '+m.source[0],m.source[1],'alg-rx-library'));cards.append(card);
+  }
+  section.append(cards);
+ }else section.append(elem('p','Sin selección de fármacos para este desenlace. Priorizar exploración, escalamiento o intervención; consulta libre de la biblioteca.','alg-therapy-no-drug'));
+ const details=elem('details',undefined,'alg-therapy-checklist');details.append(elem('summary','🛡️ Verificación farmacológica obligatoria'));
+ const ul=elem('ul');for(const t of ['Confirmar diagnóstico, edad, peso si procede, alergias, embarazo, contraindicaciones, función renal/hepática e interacciones.','Confirmar vía ocular, sistémica o intravítrea, presentación, concentración y pauta en protocolo local y ficha autorizada en México.','No retrasar irrigación, traslado, descompresión o intervención urgente por consultar la biblioteca. Revisión clínica independiente pendiente.'])ul.append(elem('li',t));details.append(ul);section.append(details);
+ const foot=elem('div',undefined,'alg-therapy-footer');foot.append(pharmaLink('Biblioteca Pharma PRO completa ↗','./pharma-pro.html','alg-rx-library'));section.append(foot);return section;
+}
 function open(id){
  const a=Object.hasOwn(engine.byId,id)?engine.byId[id]:null;
  if(!a)return false;
@@ -127,8 +149,7 @@ function renderFlow(){
   const list=elem('ol');
   for(const action of outcome.actions)list.append(elem('li',action));
   wrap.append(list);
-  area.append(wrap);
-
+  area.append(wrap,renderTreatment(a,step));
  }
  $('alg-back-step').disabled=!state.path.length;
  const trail=state.path.map(x=>{
