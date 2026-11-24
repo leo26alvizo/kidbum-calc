@@ -83,7 +83,8 @@ function harness(permanentFailure=false){
 (async()=>{
  const ok=harness(false);
  const assets=Array.from(ok.self.__testAssets);
- assert.ok(assets.length>=150&&assets.length<220,'Full offline bundle must remain complete');
+ assert.ok(assets.length>=150&&assets.length<230,'Full offline bundle must remain complete, including ten otoscopy assets');
+ assert.equal(assets.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).length,10,'All ten otoscopy assets are included in atomic offline installation');
  await ok.install();
  assert.equal(ok.getStats().installs,1,'New service worker only activates after complete install');
  assert.equal(ok.getStats().aborts,2,'One transient batch must be retried exactly once');
