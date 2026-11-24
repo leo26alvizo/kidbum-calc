@@ -9,10 +9,10 @@ const home=read('index.html'),ui=read('assets/enarm-ui-v01064.js');
 const enarm=read('enarm.html'),css=read('assets/enarm-v01064.css');
 const entry=read('assets/enarm-entry-v01064.css'),sw=read('sw.js');
 const publicVersion=read('release-check.js'),updater=read('assets/pwa-update-v01060.js');
-assert.equal(bank.caseCount,37);
-assert.equal(bank.questionCount,74);
+assert.equal(bank.caseCount,72);
+assert.equal(bank.questionCount,144);
 assert.equal(bank.areas.length,7);
-assert.equal(new Set(bank.cases.map(c=>c.id)).size,37,'No duplicate cases');
+assert.equal(new Set(bank.cases.map(c=>c.id)).size,72,'No duplicate cases');
 assert.ok(bank.disclaimer.includes('revisión clínica independiente pendiente'),'Editorial status remains honest');
 assert.ok(bank.disclaimer.includes('No son preguntas oficiales'),'No false affiliation');
 const areas=new Set(bank.areas),distribution=[0,0,0,0];
@@ -67,4 +67,4 @@ assert.match(css,/:focus-visible/);
 for(const forbidden of ['XMLHttpRequest','navigator.sendBeacon','fetch(','localStorage.clear(','window.location.reload(']){
  assert.ok(!ui.includes(forbidden),'ENARM UI must not perform networking or destructive storage actions: '+forbidden);
 }
-console.log('PASS ENARM 1.1: 37 original cases, 74 questions, seven areas, sources, local progress, linked same-size shortcut, privacy and offline integrity. Answer distribution: '+distribution.join('/'));
+console.log('PASS ENARM 1.1: 72 original cases, 144 questions, seven areas, sources, local progress, linked same-size shortcut, privacy and offline integrity. Answer distribution: '+distribution.join('/'));

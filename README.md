@@ -1,3 +1,7 @@
+## v0.10.90 · ENARM — 70 reactivos nuevos en casos clínicos
+
+35 casos educativos originales adicionales (5 por área), 72 casos y 144 reactivos clínicos en total. Conserva 238 preguntas directas y 61 visuales, historial local y Radar. Referencias temáticas; revisión clínica independiente y confirmación de vigencia de GPC pendientes. No son reactivos oficiales.
+
 ## v0.10.89 · Indicaciones y líneas terapéuticas generales
 
 Sección universal para entradas no antibacterianas: 32 escenarios nuevos, 144 vínculos nuevos antes de deduplicación con rutas previas, 120 IDs distintos, directorio por padecimiento y filtro de papel. Estados referencia, asociación editorial pendiente y sin asociación. No inferir indicación ni línea a partir de clase. Sin dosis nuevas, preserva seguridad y referencias existentes; revisión independiente pendiente.

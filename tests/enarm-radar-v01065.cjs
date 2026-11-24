@@ -15,10 +15,10 @@ for(const p of ['assets/enarm-bank-v01064.js','assets/enarm-radar-v01065.js','as
  new vm.Script(read(p),{filename:p});
 }
 assert.equal(bank.VERSION,'1.1.0');
-assert.equal(bank.caseCount,37);
-assert.equal(bank.questionCount,74);
+assert.equal(bank.caseCount,72);
+assert.equal(bank.questionCount,144);
 assert.equal(bank.areas.length,7);
-assert.equal(new Set(bank.cases.map(c=>c.id)).size,37);
+assert.equal(new Set(bank.cases.map(c=>c.id)).size,72);
 const additions=['mi-08','ped-06','go-06','cg-05','urg-05','mf-04','sp-03'];
 for(const id of additions){
  const c=bank.cases.find(x=>x.id===id);
@@ -108,4 +108,4 @@ assert.ok(empty.areas.every(a=>a.percent===null),'Empty history must not display
 const pharmaLink=home.indexOf('href="./pharma-pro.html" class="kb-resource-link"');
 const enarmLink=home.indexOf('href="./enarm.html" class="kb-resource-link kb-enarm-link"');
 assert.ok(pharmaLink>=0&&enarmLink>pharmaLink&&enarmLink-pharmaLink<200,'ENARM quick link remains right below Pharma Pro');
-console.log('PASS ENARM Radar 1.1: 37 cases/74 questions, six timed intervals, migrated progress, 7-area display, no fake scores, local due review and offline assets');
+console.log('PASS ENARM Radar 1.1: 72 cases/144 questions, six timed intervals, migrated progress, 7-area display, no fake scores, local due review and offline assets');
