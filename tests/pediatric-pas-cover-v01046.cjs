@@ -24,10 +24,10 @@ assert.match(html,/id="pas-results"/);
 assert.match(html,/href="#pas-results"/);
 const pos=part=>html.indexOf(part);
 const anchors=['<nav class="pas-topbar"','<header class="pas-hero pas-hero--surgical"','<div class="pas-alert-intro"',
- 'id="pas-calculator"','id="pas-patient-title"','id="pas-history-title"','id="pas-exam-title"',
- 'id="pas-labs-title"','id="pas-education-title"','class="pas-finish-strip"','</main>','<aside class="pas-sidebar"','id="pas-results"','id="pas-outcome"','<details class="pas-sources"'];
+ 'id="pas-calculator"','id="pas-history-title"','id="pas-exam-title"',
+ 'id="pas-labs-title"','class="pas-finish-strip"','</main>','<aside class="pas-sidebar"','id="pas-results"','id="pas-outcome"','<details class="pas-sources"'];
 for(let i=1;i<anchors.length;i++)assert.ok(pos(anchors[i])>pos(anchors[i-1]),'Wrong clinical reading order: '+anchors[i]);
-assert.ok(pos('id="pas-results"')>pos('id="pas-education-title"'), 'Result must come after all clinical inputs and education');
+assert.ok(pos('id="pas-results"')>pos('id="pas-labs-title"'), 'Result must come after all scoring inputs');
 assert.ok(pos('id="pas-outcome"')>pos('</main>'),'Score is no longer a pre-form sidebar');
 assert.doesNotMatch(html,/🟢 0–3 bajo|🟡 4–6 intermedio|🔴 7–10 alto/,'Traffic-light legend moved to result only');
 assert.match(html,/<span>🩺 Hallazgos clínicos<\/span>/);

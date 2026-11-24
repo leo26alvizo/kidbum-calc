@@ -90,3 +90,10 @@ html.dark .pas-finish-strip a{color:#062d30}
  .pas-outcome{padding:14px}
 }
 @media(prefers-reduced-motion:reduce){.pas-finish-strip a{scroll-behavior:auto}}
+
+/* PAS rápido: resultado neutral sin inferir elegibilidad ni ausencia de alarma. */
+.pas-outcome[data-band="score"]{--state:var(--accent);--state-bg:var(--soft)}
+.pas-questions>.pas-actions{justify-content:start;margin:0}
+.pas-questions>.pas-lab-note[hidden]{display:none}
+.pas-outcome .pas-dial{grid-row:2 / span 2}
+@media(min-width:901px){.pas-outcome .pas-risk-name{grid-row:2}.pas-outcome .pas-range{grid-row:3}}

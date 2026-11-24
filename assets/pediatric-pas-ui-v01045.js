@@ -4,10 +4,10 @@
 const api=window.KidBumPAS;
 const $=id=>document.getElementById(id);
 if(!api){const e=$('pas-risk-name');if(e)e.textContent='Motor PAS no disponible. Actualiza la aplicación con conexión.';return;}
-const states={answers:{},redFlags:{unstable:'unknown',peritonitis:'unknown'}};
+const states={answers:{}};
 for(const x of api.criteria)states.answers[x.key]='unknown';
-const groups=[...document.querySelectorAll('[data-criterion],[data-flag]')];
-const inputs=['pas-age','pas-duration','pas-temperature','pas-wbc','pas-anc','pas-percent'];
+const groups=[...document.querySelectorAll('[data-criterion]')];
+const inputs=['pas-temperature','pas-wbc','pas-anc','pas-percent'];
 const numeric=id=>$(id)?.value?.trim()||'';
 const chosen=(box,which)=>{
  for(const b of box.querySelectorAll('[data-value]')){
@@ -16,25 +16,16 @@ const chosen=(box,which)=>{
  }
 };
 function updateSelections(){
- for(const box of groups)chosen(box,box.dataset.criterion?states.answers[box.dataset.criterion]:states.redFlags[box.dataset.flag]);
+ for(const box of groups)chosen(box,states.answers[box.dataset.criterion]);
 }
 function assess(){
- const payload={ageYears:numeric('pas-age'),temperatureC:numeric('pas-temperature'),
+ const payload={temperatureC:numeric('pas-temperature'),
   wbcK:numeric('pas-wbc'),ancK:numeric('pas-anc'),neutrophilPercent:numeric('pas-percent'),
-  answers:{...states.answers},redFlags:{...states.redFlags}};
+  answers:{...states.answers}};
  return api.calculate(payload);
 }
 function make(tag,text,cls){
  const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;
-}
-function ageDescription(){
- const raw=numeric('pas-age'),age=Number(raw),note=$('pas-age-note');
- note.className='pas-warning-lab';
- if(!raw){note.textContent='🧒 Introduce la edad. PAS se desarrolló en niños de 4–15 años; menos de 4 años requieren valoración individual.';return;}
- if(!Number.isFinite(age)||age<0||age>=19){note.className+=' urgent';note.textContent='⚠ Edad fuera del alcance; revisa el dato.';return;}
- if(age<4){note.className+=' warning';note.textContent='🚨 Menor de 4 años: el PAS no debe usarse para excluir apendicitis, porque los síntomas pueden ser atípicos.';return;}
- if(age>=18){note.className+=' warning';note.textContent='⚠ Paciente de 18 años: considera protocolos de población adulta.';return;}
- note.textContent='✓ Edad dentro del uso pediátrico habitual. Derivación original 4–15 años; no equivale a diagnóstico.';
 }
 function labPreview(){
  const w=numeric('pas-wbc'),p=numeric('pas-percent'),a=numeric('pas-anc'),
@@ -53,51 +44,40 @@ function labPreview(){
  else el.textContent='Completa WBC y ANC o WBC con porcentaje de neutrófilos.';
 }
 function render(){
- ageDescription();labPreview();
- const out=assess(),card=$('pas-outcome'),alerts=$('pas-alerts'),recs=$('pas-recommend-list');
- alerts.replaceChildren();recs.replaceChildren();
+ labPreview();
+ const out=assess(),card=$('pas-outcome'),alerts=$('pas-alerts');
+ alerts.replaceChildren();
  if(!out.ok){
   card.dataset.band='urgent';card.style.setProperty('--angle','0deg');
   $('pas-points').textContent='—';$('pas-completeness').textContent='Revisar datos';
   $('pas-risk-name').textContent='⚠ Datos inconsistentes: corrige el formulario';
   $('pas-range').textContent='Sin puntaje calculable';
   const item=make('p',out.message,'pas-alert-item critical');alerts.append(item);
-  recs.append(make('li','Revisar unidades, temperatura, laboratorio y respuestas antes de continuar.'));
   $('pas-progress').setAttribute('aria-valuenow','0');$('pas-progress-fill').style.width='0%';
   return;
  }
- card.dataset.band=out.band;
+ card.dataset.band=out.complete?'score':'pending';
  card.style.setProperty('--angle',(out.complete?out.score/10*360:0)+'deg');
- $('pas-points').textContent=out.complete?String(out.score):out.urgent?'!':'—';
+ $('pas-points').textContent=out.complete?String(out.score):'—';
  $('pas-completeness').textContent=out.answered+' de 8 criterios';
- $('pas-risk-name').textContent=out.riskLabel;
- $('pas-range').textContent=out.complete?'PAS completo: '+out.score+'/10 · '+(out.urgent?'alerta clínica prevalece':out.ageValid?'clasificación de riesgo, NO diagnóstico':'edad fuera de validación'):
+ $('pas-risk-name').textContent=out.complete?'PAS completo':'Evaluación incompleta';
+ $('pas-range').textContent=out.complete?'Puntaje: '+out.score+'/10':
  'PAS parcial '+out.pointsKnown+' puntos conocidos · rango posible '+out.range[0]+'–'+out.range[1]+'/10';
  $('pas-progress').setAttribute('aria-valuenow',String(out.answered));
  $('pas-progress-fill').style.width=(out.answered/8*100)+'%';
- for(let i=0;i<out.warnings.length;i++){
-  const p=make('p',out.warnings[i],'pas-alert-item'+(out.urgent&&i===0?' critical':''));
-  alerts.append(p);
- }
- const duration=numeric('pas-duration');
- if(duration){
-  const d=Number(duration);
-  if(Number.isFinite(d)&&d>=0&&d<24)alerts.append(make('p','Dolor con menos de 24 horas de evolución: una presentación temprana puede tener PAS bajo aunque exista apendicitis.','pas-alert-item'));
-  if(!Number.isFinite(d)||d<0||d>720)alerts.append(make('p','Duración no válida; revisar el contexto clínico.','pas-alert-item'));
- }
- for(const item of out.recommendations)recs.append(make('li',item));
+
 }
 for(const box of groups){
  box.addEventListener('click',e=>{
   const b=e.target.closest('button[data-value]');if(!b||!box.contains(b))return;
-  const key=box.dataset.criterion||box.dataset.flag,value=b.dataset.value;
+  const key=box.dataset.criterion,value=b.dataset.value;
   if(box.dataset.criterion){
    if(key==='fever'&&numeric('pas-temperature')){
     // Do not silently retain a contradictory measured temperature.
     $('pas-temperature').value='';
    }
    states.answers[key]=value;
-  }else states.redFlags[key]=value;
+  }
   updateSelections();render();
  });
 }
@@ -115,25 +95,21 @@ function reset(){
  $('pas-example-note').hidden=true;
  for(const id of inputs)$(id).value='';
  for(const x of api.criteria)states.answers[x.key]='unknown';
- states.redFlags.unstable='unknown';states.redFlags.peritonitis='unknown';
- updateSelections();render();$('pas-age').focus({preventScroll:true});
+ updateSelections();render();groups[0]?.querySelector('button')?.focus({preventScroll:true});
 }
 $('pas-reset').addEventListener('click',reset);
 $('pas-example').addEventListener('click',()=>{
- const demo={'pas-age':'9','pas-duration':'18','pas-temperature':'38.4','pas-wbc':'12.5','pas-anc':'9.2','pas-percent':''};
+ const demo={'pas-temperature':'38.4','pas-wbc':'12.5','pas-anc':'9.2','pas-percent':''};
  for(const id of inputs)$(id).value=demo[id]??'';
  Object.assign(states.answers,{migration:'yes',anorexia:'yes',vomiting:'no',fever:'yes',rlq:'yes',movement:'no',wbc:'unknown',anc:'unknown'});
- Object.assign(states.redFlags,{unstable:'no',peritonitis:'no'});
  $('pas-example-note').hidden=false;updateSelections();render();
 });
 const report=()=>{
  const r=assess();
  if(!r.ok)return 'PAS pediátrico — CÁLCULO BLOQUEADO: '+r.message;
- const rows=['KidBum · PAS de Samuel (0–10)','Edad: '+(r.ageYears===null?'sin registrar':r.ageYears+' años'),
- 'Estado: '+r.riskLabel,'PAS: '+(r.complete?r.score+'/10':'INCOMPLETO · '+r.pointsKnown+' puntos conocidos; posible '+r.range[0]+'–'+r.range[1]+'/10'),
+ const rows=['KidBum · PAS de Samuel (0–10)','Solo puntaje; edad y signos de alarma no evaluados','PAS: '+(r.complete?r.score+'/10':'INCOMPLETO · '+r.pointsKnown+' puntos conocidos; posible '+r.range[0]+'–'+r.range[1]+'/10'),
  'Criterios evaluados: '+r.answered+'/8','ANC: '+(r.ancK===null?'sin dato':r.ancK+' ×10³/µL'+(r.ancDerived?' (derivado)':''))];
  for(const item of api.criteria)rows.push((r.values[item.key]==='yes'?'[+]':r.values[item.key]==='no'?'[-]':'[?]')+' '+item.label+' ('+item.points+' p)');
- rows.push('Alertas: '+(r.warnings.join(' | ')||'ninguna registrada'));
  rows.push('NO diagnostica, descarta ni establece conducta por sí solo. Revisión médica requerida.');
  return rows.join('\n');
 };

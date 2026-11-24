@@ -31,37 +31,17 @@
  <div class="pas-hero-copy">
   <span class="pas-eyebrow">PEDIATRÍA · DOLOR ABDOMINAL AGUDO</span>
   <h1>¿Apendicitis? <span>Valora con criterio.</span></h1>
-  <p>Escala PAS de Samuel: <strong>8 criterios · 10 puntos</strong>. Registra primero los datos y hallazgos clínicos; <strong>al final</strong> encontrarás el puntaje, el semáforo y la orientación para continuar la valoración.</p>
+  <p>Escala PAS de Samuel: <strong>8 criterios · 10 puntos</strong>. Responde únicamente los criterios puntuables. <strong>Resultado en tiempo real.</strong></p>
   <div class="pas-hero-tags"><span>🩺 Hallazgos clínicos</span><span>🧪 Leucocitos y ANC</span><span>📊 Resultado al final ↓</span></div>
  </div>
 </header>
-<div class="pas-alert-intro" role="note"><strong>⚠ Regla de seguridad:</strong> el PAS no diagnostica, descarta ni calcula un porcentaje de apendicitis. Ante choque, aspecto tóxico o peritonitis, prioriza la valoración urgente aunque la puntuación sea baja. <strong>El resultado solo es completo cuando se valoran los 8 componentes.</strong></div>
+<div class="pas-alert-intro" role="note"><strong>⚠ Regla de seguridad:</strong> PAS original en niños de 4–15 años. Esta calculadora solo suma puntos; no verifica edad ni signos de alarma, no diagnostica ni descarta apendicitis. Ante inestabilidad o peritonitis, valoración urgente sin esperar el puntaje.</div>
 <div class="pas-body-grid">
 <main class="pas-questions" id="pas-calculator">
- <section class="pas-section" aria-labelledby="pas-patient-title">
-  <div class="pas-section-heading"><span class="pas-step-icon indigo">01</span><div><div class="pas-overline">CONTEXTO</div><h2 id="pas-patient-title">Paciente y señales de alarma</h2><p>Estos datos NO suman puntos, pero pueden cambiar por completo la conducta.</p></div></div>
-  <div class="pas-actions"><button type="button" id="pas-example">↗ Cargar ejemplo ficticio</button></div>
-  <p id="pas-example-note" class="pas-lab-note" role="status" hidden>Ejemplo exclusivamente docente. No representa a un paciente real ni establece conducta.</p>
-  <div class="pas-two-col">
-   <label class="pas-field">Edad en años <small>Para meses utiliza decimales; p. ej., 3.5 años</small><input id="pas-age" type="number" min="0" max="18" step="any" inputmode="decimal" placeholder="Ej. 9"></label>
-   <label class="pas-field">Horas desde inicio del dolor <small>Opcional · no suma PAS</small><input id="pas-duration" type="number" min="0" max="720" step="any" inputmode="decimal" placeholder="Ej. 18"></label>
-  </div>
-  <div class="pas-warning-lab" id="pas-age-note" role="status">🧒 PAS desarrollado originalmente en niños de 4–15 años; en menores de 4 años no debe utilizarse para excluir apendicitis.</div>
-  <div class="pas-flag-cards" id="pas-red-flags">
-   <fieldset class="pas-choice-card pas-danger-question" data-flag="unstable">
-    <legend><span class="pas-question-icon">🚨</span> ¿Inestabilidad, hipoperfusión o aspecto tóxico?</legend>
-    <p>Choque, alteración del estado mental, hipoperfusión o sospecha de sepsis.</p>
-    <div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="unknown" aria-pressed="true">Sin valorar</button></div>
-   </fieldset>
-   <fieldset class="pas-choice-card pas-danger-question" data-flag="peritonitis">
-    <legend><span class="pas-question-icon">⚠️</span> ¿Signos clínicos de peritonitis?</legend>
-    <p>Abdomen rígido, defensa involuntaria o irritación peritoneal generalizada.</p>
-    <div class="pas-choice-row"><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="unknown" aria-pressed="true">Sin valorar</button></div>
-   </fieldset>
-  </div>
- </section>
+ <div class="pas-actions"><button type="button" id="pas-example">↗ Cargar ejemplo ficticio</button></div>
+ <p id="pas-example-note" class="pas-lab-note" role="status" hidden>Ejemplo exclusivamente docente. No representa a un paciente real.</p>
  <section class="pas-section" aria-labelledby="pas-history-title">
-  <div class="pas-section-heading"><span class="pas-step-icon teal">02</span><div><div class="pas-overline">HISTORIA Y SÍNTOMAS</div><h2 id="pas-history-title">¿Qué refiere el paciente?</h2><p>Marca Sí, No o Sin dato. No confundas «no explorado» con «negativo».</p></div></div>
+  <div class="pas-section-heading"><span class="pas-step-icon teal">01</span><div><div class="pas-overline">HISTORIA Y SÍNTOMAS</div><h2 id="pas-history-title">¿Qué refiere el paciente?</h2><p>Marca Sí, No o Sin dato. No confundas «no explorado» con «negativo».</p></div></div>
   <div class="pas-question-list" id="pas-history">
    <fieldset class="pas-choice-card" data-criterion="migration"><legend><span class="pas-question-icon">↘️</span> Dolor que migra a fosa ilíaca derecha <em>+1</em></legend><p>Desde región periumbilical o difusa hacia cuadrante inferior derecho.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
    <fieldset class="pas-choice-card" data-criterion="anorexia"><legend><span class="pas-question-icon">🍽️</span> Anorexia o falta de apetito <em>+1</em></legend><p>Disminución reciente del deseo de comer.</p><div class="pas-choice-row"><button type="button" data-value="yes" aria-pressed="false">Sí</button><button type="button" data-value="no" aria-pressed="false">No</button><button type="button" data-value="unknown" aria-pressed="true">Sin dato</button></div></fieldset>
@@ -74,7 +54,7 @@
   </div>
  </section>
  <section class="pas-section" aria-labelledby="pas-exam-title">
-  <div class="pas-section-heading"><span class="pas-step-icon purple">03</span><div><div class="pas-overline">EXPLORACIÓN</div><h2 id="pas-exam-title">Hallazgos abdominales</h2><p>Ambos hallazgos valen 2 puntos: aquí se concentran 4/10.</p></div></div>
+  <div class="pas-section-heading"><span class="pas-step-icon purple">02</span><div><div class="pas-overline">EXPLORACIÓN</div><h2 id="pas-exam-title">Hallazgos abdominales</h2><p>Ambos hallazgos valen 2 puntos: aquí se concentran 4/10.</p></div></div>
   <div class="pas-exam-layout">
    <div class="pas-abdomen" aria-hidden="true">
     <svg viewBox="0 0 180 185" role="img"><path d="M54 12Q52 37 30 49L18 129Q38 171 89 175Q142 171 161 129L148 49Q126 37 125 12" fill="#e6eee9" stroke="#7f9f99" stroke-width="3" stroke-linejoin="round"/><path d="M89 42V157M31 96H151" stroke="#b6c7c2" stroke-width="1.5" stroke-dasharray="5 5"/><circle cx="60" cy="126" r="19" fill="#ea6556" fill-opacity=".8"/><circle cx="60" cy="126" r="28" stroke="#e2574d" stroke-width="3" fill="none" stroke-dasharray="5 4"/><path d="M60 118v15M54 125h12" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
@@ -87,7 +67,7 @@
   </div>
  </section>
  <section class="pas-section" aria-labelledby="pas-labs-title">
-  <div class="pas-section-heading"><span class="pas-step-icon orange">04</span><div><div class="pas-overline">LABORATORIO</div><h2 id="pas-labs-title">Hemograma y neutrófilos absolutos</h2><p>Dos puntos posibles; sin BH/diferencial quedan como pendientes, no como cero.</p></div></div>
+  <div class="pas-section-heading"><span class="pas-step-icon orange">03</span><div><div class="pas-overline">LABORATORIO</div><h2 id="pas-labs-title">Hemograma y neutrófilos absolutos</h2><p>Dos puntos posibles; sin BH/diferencial quedan como pendientes, no como cero.</p></div></div>
   <div class="pas-two-col">
    <label class="pas-field">Leucocitos totales (WBC) <small>×10³/µL · ejemplo 12.5 = 12,500/µL</small><input id="pas-wbc" type="number" step="any" inputmode="decimal" placeholder="Ej. 12.5"></label>
    <label class="pas-field">Neutrófilos absolutos (ANC) <small>×10³/µL · ejemplo 9.2 = 9,200/µL</small><input id="pas-anc" type="number" step="any" inputmode="decimal" placeholder="Ej. 9.2"></label>
@@ -97,37 +77,26 @@
   <div class="pas-mini-labs"><span><b>+1</b> Leucocitos &gt;10 ×10³/µL</span><span><b>+1</b> ANC &gt;7.5 ×10³/µL</span></div>
   <p class="pas-lab-note">El PAS original utiliza <strong>ANC &gt;7500/µL</strong>. No sustituirlo por el porcentaje aislado. Si ANC medido y derivado discrepan, revisa las muestras antes de puntuar.</p>
  </section>
- <section class="pas-section pas-education" aria-labelledby="pas-education-title">
-  <div class="pas-section-heading"><span class="pas-step-icon indigo">+</span><div><div class="pas-overline">APOYO CLÍNICO</div><h2 id="pas-education-title">Qué considerar después del PAS</h2></div></div>
-  <div class="pas-education-grid">
-    <div><span>🔎</span><strong>Diagnósticos alternativos</strong><p>Gastroenteritis, adenitis mesentérica, estreñimiento, IVU/pielonefritis, torsión testicular u ovárica, embarazo ectópico cuando corresponda.</p></div>
-    <div><span>🩻</span><strong>Imagen inicial</strong><p>En sospecha pediátrica que amerita imagen, priorizar ultrasonido de FID según disponibilidad y calidad. Un apéndice no visualizado NO equivale automáticamente a negativo.</p></div>
-    <div><span>🔁</span><strong>Reevaluación</strong><p>Exploración abdominal seriada, evolución de síntomas, tolerancia oral y red flags. Instrucciones explícitas de retorno según valoración presencial.</p></div>
-    <div><span>📊</span><strong>Herramienta complementaria</strong><p>El <strong>pARC</strong> estima riesgo continuo y mostró mejor discriminación que PAS en población elegible (desde 5 años), pero exige sus propios datos.</p><a href="https://www.mdcalc.com/calc/10201/pediatric-appendicitis-risk-calculator-parc" target="_blank" rel="noopener noreferrer">Abrir pARC externo ↗</a></div>
-  </div>
- </section>
  <nav class="pas-finish-strip" aria-label="Continuar a la interpretación PAS">
-  <div><span>✓ ÚLTIMO PASO</span><strong>Revisa tu evaluación</strong><small>Al final: puntaje · semáforo · alertas · orientación clínica</small></div>
+  <div><span>✓ ÚLTIMO PASO</span><strong>Revisa tu evaluación</strong><small>Al final: puntaje de 0 a 10</small></div>
   <a href="#pas-results">Ver resultado PAS ↓</a>
  </nav>
 </main>
 <aside class="pas-sidebar" aria-labelledby="pas-outcome-title">
  <div class="pas-result-heading" id="pas-results">
-  <span class="pas-result-kicker">05 · DESPUÉS DE LOS DATOS DEL PACIENTE</span>
-  <h2 id="pas-outcome-title">Tu resultado PAS y semáforo</h2>
-  <p>Revisa aquí la puntuación calculada, los criterios faltantes, las alertas y los siguientes pasos. <strong>El color no reemplaza la valoración médica.</strong></p>
+  <span class="pas-result-kicker">04 · PUNTAJE</span>
+  <h2 id="pas-outcome-title">Resultado PAS</h2>
+  <p>Suma de los ocho criterios. No estima probabilidad ni determina conducta.</p>
  </div>
  <section class="pas-outcome kb-clinical-result" id="pas-outcome" data-band="pending">
   <div class="pas-outcome-top"><span class="pas-eyebrow">RESULTADO EN TIEMPO REAL</span><span id="pas-completeness">0 de 8</span></div>
   <div class="pas-dial" aria-hidden="true"><div class="pas-dial-center"><strong id="pas-points">—</strong><small>/ 10</small></div></div>
-  <div class="pas-traffic" aria-hidden="true"><div class="low"><span></span><b>0–3</b></div><div class="intermediate"><span></span><b>4–6</b></div><div class="high"><span></span><b>7–10</b></div></div>
-  <div id="pas-risk-name" class="pas-risk-name" role="status" aria-live="polite">Completa la valoración</div>
+  <div id="pas-risk-name" class="pas-risk-name" role="status" aria-live="polite">Evaluación incompleta</div>
   <p id="pas-range" class="pas-range">Sin datos todavía. No se asumen negativos.</p>
   <div class="pas-progress-track" role="progressbar" aria-label="Criterios PAS completos" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0" id="pas-progress"><span id="pas-progress-fill"></span></div>
   <div id="pas-alerts" class="pas-alert-list" role="status" aria-live="polite"></div>
-  <div class="pas-recommend"><h3>🧭 Orientación clínica</h3><ul id="pas-recommend-list"><li>Valora al paciente y registra los hallazgos para interpretar el PAS.</li></ul></div>
   <div class="pas-actions"><button type="button" id="pas-reset">↻ Reiniciar</button><button type="button" id="pas-copy">▤ Copiar resumen</button></div>
-  <small class="pas-score-disclaimer">El color nunca autoriza alta, cirugía, antibiótico ni tomografía por sí mismo.</small>
+  <small class="pas-score-disclaimer">Un puntaje bajo no descarta apendicitis ni autoriza alta. La valoración clínica es independiente.</small>
  </section>
 </aside>
 </div>
