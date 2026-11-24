@@ -383,8 +383,9 @@ async function main(){
     const errors=[];page.on('pageerror',err=>errors.push(err.message));
     await page.goto(base+'/enarm-visual.html',{waitUntil:'domcontentloaded'});
     await page.locator('#vis-image-mode').selectOption('clinical');
-    assert.match(await page.locator('#vis-count').innerText(),/7 preguntas disponibles/);
+    assert.match(await page.locator('#vis-count').innerText(),/37 preguntas disponibles/);
     await page.locator('#vis-cat').selectOption('Imagen torácica');
+    await page.evaluate(()=>{Math.random=()=>0.999999});
     await page.locator('#vis-start').click();
     const img=page.locator('#vis-clinical-img');
     await img.waitFor({state:'visible'});

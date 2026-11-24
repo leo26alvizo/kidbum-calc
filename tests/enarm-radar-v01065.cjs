@@ -29,12 +29,12 @@ for(const id of additions){
   assert.ok(q.why.length>=45);
  }
 }
-assert.match(page,/kidbum-app-version" content="0\.10\.71"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.71"/);
-assert.match(pharma,/kidbum-app-version" content="0\.10\.71"/);
-assert.match(release,/KidBumPublicRelease = '0\.10\.71'/);
-assert.match(updater,/const VERSION='0\.10\.71'/);
-assert.match(sw,/const RELEASE='0\.10\.71'/);
+assert.match(page,/kidbum-app-version" content="0\.10\.72"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.72"/);
+assert.match(pharma,/kidbum-app-version" content="0\.10\.72"/);
+assert.match(release,/KidBumPublicRelease = '0\.10\.72'/);
+assert.match(updater,/const VERSION='0\.10\.72'/);
+assert.match(sw,/const RELEASE='0\.10\.72'/);
 assert.match(sw,/enarm-v01064-radar-v01065/);
 for(const asset of ['assets/enarm-radar-v01065.js','assets/enarm-radar-v01065.css']){
  assert.ok(sw.includes("'./"+asset+"'"),'Missing offline asset '+asset);

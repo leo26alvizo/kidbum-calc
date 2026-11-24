@@ -122,7 +122,7 @@ assert.match(home,/data-urg-alg/);assert.match(home,/category==='Urgencias y Ter
 assert.match(home,/algoritmos-urgencias\.html/);
 assert.match(home,/const cards=algCard\+emergencyAlgCard/);
 assert.match(home,/data-ped-alg/,'Pediatric specialty tile must remain unaffected');
-assert.match(home,/kidbum-app-version" content="0\.10\.71"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.72"/);
 assert.match(page,/kidbum-app-version" content="0\.10\.56"/);
 assert.match(page,/40 rutas clínicas/);
 assert.match(page,/data-category="UCI y soporte"/);
