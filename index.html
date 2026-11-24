@@ -1979,7 +1979,7 @@ const integratedCalculators=[
 ];
 const countedCalculatorRegistry=[...defs,...externalCalculators,...diabetesTools,...integratedCalculators];
 const calculatorCount=(cat='Todas')=>countedCalculatorRegistry.filter(d=>cat==='Todas'||d.category===cat).length;
-const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología','Geriatría','Endocrinología y Diabetes','Oftalmología'];
+const categories=['Todas','Urgencias y Terapia Intensiva','Neurología y Raquimedular','Cardiología','Gastroenterología','Pediatría','Ginecología y obstetricia','Química clínica','Hemodinámica','Función renal','Escalas clínicas','Antropometría','Hepatología','Oftalmología','Geriatría','Endocrinología y Diabetes'];
 const main=document.getElementById('main-content');
 /* The meta tag is the single release-version source for sidebar, footer and About. */
 const APP_VERSION=document.querySelector('meta[name="kidbum-app-version"]')?.content||'desconocida';
