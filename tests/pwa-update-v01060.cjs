@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* PWA reliability: atomic constrained updates, retries, rollback and live recovery. */
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const sw=fs.readFileSync('sw.js','utf8');
@@ -9,12 +11,12 @@ const recovery=fs.readFileSync('actualizar.html','utf8');
 const marker=fs.readFileSync('release-check.js','utf8');
 const origin='https://leo26alvizo.github.io/kidbum-calc/';
 const normalized=x=>new URL(typeof x==='string'?x:x.url,origin).href;
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(pharma,/kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(pharma,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
 assert.match(home,/assets\/pwa-update-v01060\.js/);
 assert.match(home,/href="\.\/actualizar\.html"/);
 assert.match(home,/KidBumUpdater\?\.checkNow\(\)/);
-assert.match(marker,/KidBumPublicRelease = '0\.10\.75'/);
+assert.match(marker,new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
 assert.match(sw,/safe-update-v01060-r1/);
 assert.match(sw,/INSTALL_BATCH_SIZE=5/);
 assert.match(sw,/INSTALL_RETRIES=3/);

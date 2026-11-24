@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* KidBum ENARM 1.2: 210 standalone original direct theoretical questions.
  * Checks question integrity, educational safety and noninterference with cases. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
@@ -49,13 +51,13 @@ assert.ok(Math.max(...dist)-Math.min(...dist)<=1,'Balanced A-D correct options')
 const page=read('enarm-direct.html'),home=read('enarm.html'),main=read('index.html');
 const css=read('assets/enarm-direct-v01068.css'),ui=read('assets/enarm-direct-ui-v01068.js');
 const sw=read('sw.js');
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(page,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(main,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.75'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.75'/);
-assert.match(sw,/const RELEASE='0\.10\.75'/);
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(page,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(main,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('pharma-pro.html'),new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('release-check.js'),new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
+assert.match(read('assets/pwa-update-v01060.js'),new RegExp("const VERSION='"+releasePattern+"'"));
+assert.match(sw,new RegExp("const RELEASE='"+releasePattern+"'"));
 assert.match(sw,/direct-v01068/);
 assert.ok(home.includes('href="./enarm-direct.html"'),'Accessible ENARM direct mode entry');
 assert.match(home,/238 preguntas directas/);

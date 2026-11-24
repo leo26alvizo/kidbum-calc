@@ -7,7 +7,7 @@
  if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis,function(root){
  'use strict';
- const VERSION='0.10.75';
+ const VERSION='0.10.87';
  let seenRegistration=null,initiallyControlled=false,started=false,lastMessage='';
  const $=id=>root.document?.getElementById(id);
  function parseRelease(text){
@@ -70,7 +70,7 @@
   initiallyControlled=Boolean(root.navigator.serviceWorker.controller);
   root.navigator.serviceWorker.addEventListener('message',event=>{
    const info=event.data;
-   if(!info||info.type!=='KIDBUM_INSTALL_PROGRESS'||info.version!==VERSION)return;
+   if(!info||info.type!=='KIDBUM_INSTALL_PROGRESS'||typeof info.version!=='string'||!/^[0-9]+(?:\.[0-9]+){2}$/.test(info.version))return;
    if(info.status==='failed'){
     say('Falló una descarga. Se conserva la versión anterior; revisa tu conexión y prueba otra vez.','error');
     return;

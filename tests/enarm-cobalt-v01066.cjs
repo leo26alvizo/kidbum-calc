@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* KidBum ENARM 0.10.66: rich visual refresh must preserve clinical study logic. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const read=p=>fs.readFileSync(p,'utf8');
@@ -11,12 +13,12 @@ assert.equal(bank.caseCount,37);
 assert.equal(bank.questionCount,74);
 assert.equal(bank.areas.length,7);
 assert.equal(radar.INTERVALS.length,6);
-assert.match(enarm,/meta name="kidbum-app-version" content="0\.10\.75"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.75'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.75'/);
-assert.match(sw,/const RELEASE='0\.10\.75'/);
+assert.match(enarm,new RegExp("meta name=\"kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('pharma-pro.html'),new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('release-check.js'),new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
+assert.match(read('assets/pwa-update-v01060.js'),new RegExp("const VERSION='"+releasePattern+"'"));
+assert.match(sw,new RegExp("const RELEASE='"+releasePattern+"'"));
 assert.match(sw,/cobalt-v01066/,'Versioned atomic cache identity');
 for(const p of ['assets/enarm-cobalt-v01066.css','assets/enarm-hero-v01066.svg']){
  assert.ok(sw.includes("'./"+p+"'"),'New visuals must be precached for offline use: '+p);

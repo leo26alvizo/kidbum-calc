@@ -11,208 +11,307 @@ permissions:
 jobs:
   clinical-functional-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - name: Show Node version
         run: node --version
       - name: Orthopedics clinical algorithms — reachability and calculator links
+        if: ${{ !cancelled() }}
         run: node tests/ortopedia-algoritmos-v01082.cjs
       - name: Orthopedics bank — formula boundaries and missing data
+        if: ${{ !cancelled() }}
         run: node tests/ortopedia-v01080.cjs
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
+        if: ${{ !cancelled() }}
         run: node tests/oftalmologia-algoritmos-v01075.cjs
       - name: Pharma PRO Coral and Jade UI and preserved safeguards
+        if: ${{ !cancelled() }}
         run: node tests/pharma-coral-jade-v01086.cjs
       - name: Pharma PRO Coral and Jade — real mobile Chromium interaction checks
+        if: ${{ !cancelled() }}
         run: node tests/pharma-coral-jade-browser-v01086.cjs
       - name: Existing regression checks
+        if: ${{ !cancelled() }}
         run: node tests/regression.cjs
       - name: Pharma PRO v0.10.85 — hospital product-specific references and fail-closed gates
+        if: ${{ !cancelled() }}
         run: node tests/pharma-hospital-reference-v01085.cjs
       - name: Pharma PRO v0.10.84 — expanded catalog, clinical scenarios and safety crosslinks
+        if: ${{ !cancelled() }}
         run: node tests/pharma-expansion-v01084.cjs
       - name: Pharma Pro broad expansion - 1566 searchable entries, 29 groups, no new dosing claims
+        if: ${{ !cancelled() }}
         run: node tests/pharma-broad-index-v01058.cjs
       - name: Result clarity, safe copy, sources and real mobile / desktop checks
+        if: ${{ !cancelled() }}
         run: node tests/result-clarity-v01059.cjs
       - name: Lion Awakening cold-start safety and reduced-motion checks
+        if: ${{ !cancelled() }}
         run: node tests/lion-splash-v01062.cjs
       - name: Ultra Retina visual scope, vector icon and unchanged-image checks
+        if: ${{ !cancelled() }}
         run: node tests/ultra-retina-v01063.cjs
       - name: ENARM 1.0 · original cases, educational safety, local privacy and offline support
+        if: ${{ !cancelled() }}
         run: node tests/enarm-v01064.cjs
       - name: ENARM 1.1 · radar, spaced-repetition and legacy-progress integrity
+        if: ${{ !cancelled() }}
         run: node tests/enarm-radar-v01065.cjs
       - name: ENARM Cobalt UI · cover, local illustrations, accessible icons and unchanged scoring
+        if: ${{ !cancelled() }}
         run: node tests/enarm-cobalt-v01066.cjs
       - name: ENARM Ivory Heritage · parchment lion, champagne/charcoal contrast and stable quiz
+        if: ${{ !cancelled() }}
         run: node tests/enarm-ivory-v01067.cjs
       - name: ENARM direct · 210 conceptual and clinical knowledge questions, offline and isolated progress
+        if: ${{ !cancelled() }}
         run: node tests/enarm-direct-v01068.cjs
       - name: ENARM Visual and unified radar · new and legacy bank integrity
+        if: ${{ !cancelled() }}
         run: node tests/enarm-visual-radar-draft.cjs
       - name: Defensive functional audit
+        if: ${{ !cancelled() }}
         run: node tests/safety-audit.cjs
       - name: Analytics privacy and installation checks
+        if: ${{ !cancelled() }}
         run: node tests/analytics.cjs
       - name: Pediatric pharmacy placement and safety
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pharmacy.cjs
       - name: Pediatric infant age-specific references and day-zero prescribed-dose arithmetic
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-infant-pharma-v01044.cjs
       - name: Pediatric oral dose safety and arithmetic
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-drug-doses.cjs
       - name: PWA v0.10.60 reliable updates, atomic retry, rollback and recovery
+        if: ${{ !cancelled() }}
         run: node tests/pwa-update-v01060.cjs
       - name: Mobile data and offline startup
+        if: ${{ !cancelled() }}
         run: node tests/pwa-cellular.cjs
       - name: First-launch airplane mode for all indexed clinical tools
+        if: ${{ !cancelled() }}
         run: node tests/offline-110.cjs
       - name: APACHE II score and example audit
+        if: ${{ !cancelled() }}
         run: node tests/apache2.cjs
       - name: Renal and electrolyte calculations and safety
+        if: ${{ !cancelled() }}
         run: node tests/electrolytes.cjs
       - name: Adult urinary output and KDIGO threshold safety
+        if: ${{ !cancelled() }}
         run: node tests/urine-output-adult.cjs
       - name: Reference image — seven new clinical calculators
+        if: ${{ !cancelled() }}
         run: node tests/clinical-image-additions.cjs
       - name: SNNOOP10 headache flags and offline safety
+        if: ${{ !cancelled() }}
         run: node tests/snnoop10.cjs
       - name: Clinical documentation editor and local PDF safety
+        if: ${{ !cancelled() }}
         run: node tests/documentacion.cjs
       - name: Pediatric history eighteen sections and local PDF
+        if: ${{ !cancelled() }}
         run: node tests/historia-pediatria.cjs
       - name: Documentation theme inheritance and pediatric selectors
+        if: ${{ !cancelled() }}
         run: node tests/docs-theme-selectors.cjs
       - name: Pediatric mobile collapsible groups
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-mobile-groups.cjs
       - name: Oculomotor simulator navigation
+        if: ${{ !cancelled() }}
         run: node tests/ocular-simulator-link.cjs
       - name: Pharma Pro UX 2.0 source states, original clinical engines and offline support
+        if: ${{ !cancelled() }}
         run: node tests/pharma-ux-v01038.cjs
       - name: Real headless Chrome UX smoke test, safety gating and mobile layout
+        if: ${{ !cancelled() }}
         run: node tests/pharma-browser-ux-v01038.cjs
       - name: Pediatric visual triad clinical engine, sources, safety and offline
+        if: ${{ !cancelled() }}
         run: node tests/pediatria-rapid-v01039.cjs
       - name: Kramer neonatal objective-data support, AAP guardrails and offline safety
+        if: ${{ !cancelled() }}
         run: node tests/kramer-clinical-v01041.cjs
       - name: PAS pediatric appendicitis clinical score, missing-data, red-flags and PWA
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pas-v01045.cjs
       - name: PAS surgical cover integrity, layout ordering, mobile result placement and offline assets
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pas-cover-v01046.cjs
       - name: PAS cover photo and bottom-result layout in real Chromium mobile and desktop
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pas-layout-browser-v01046.cjs
       - name: PAS pediatric appendicitis real Chromium and mobile navigation
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pas-browser-v01045.cjs
       - name: Pediatric rapid tools in real headless Chromium
+        if: ${{ !cancelled() }}
         run: node tests/pediatria-rapid-browser-v01039.cjs
       - name: Pediatric algorithms graphs, safety gates and clinical source validation
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-v01051.cjs
       - name: Pediatric visual algorithms real mobile Chromium interaction checks
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-browser-v01051.cjs
       - name: Eight additional pediatric algorithms, zero unsafe decision paths
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-phase2-v01052.cjs
       - name: Phase II algorithms on real mobile Chromium with critical case coverage
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-phase2-browser-v01052.cjs
       - name: Sixteen more pediatric PALS, infection, neonatal and hospital algorithms
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-phase3-v01053.cjs
       - name: Phase III pediatric danger-first pathways in 390px Chromium mobile
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-algorithms-phase3-browser-v01053.cjs
       - name: Pediatric outcome-specific treatment links to real 643-drug Pharma Pro catalog
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pharma-bridge-v01054.cjs
       - name: Pediatric treatments and 122 outcomes in real mobile Chromium
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-pharma-bridge-browser-v01054.cjs
       - name: Twenty-nine pediatric drug dossiers with indication-scoped references and fail-closed pending doses
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-drug-references-v01055.cjs
       - name: Pediatric dose references in algorithms and Pharma Pro on real mobile Chromium
+        if: ${{ !cancelled() }}
         run: node tests/pediatric-drug-references-browser-v01055.cjs
       - name: Forty adult emergency and ICU algorithms with pharma links and strict safety graphs
+        if: ${{ !cancelled() }}
         run: node tests/urgencias-uci-algoritmos-v01056.cjs
       - name: Urgencias/UCI outcome routing and correct specialty placement in real Chromium
+        if: ${{ !cancelled() }}
         run: node tests/urgencias-uci-algoritmos-browser-v01056.cjs
       - name: Pharma Pro shared dark/light theme persistence and accessible toggle
+        if: ${{ !cancelled() }}
         run: node tests/pharma-theme-sync-v01037.cjs
       - name: Graphite Noir across 13 modules, WCAG contrasts, PWA and light-theme invariance
+        if: ${{ !cancelled() }}
         run: node tests/dark-graphite-v01036.cjs
       - name: Phone-first UI, safe-area, single-column forms and offline mobile styles
+        if: ${{ !cancelled() }}
         run: node tests/mobile-first-v01035.cjs
       - name: Mobile Inicio breadcrumb navigation
+        if: ${{ !cancelled() }}
         run: node tests/mobile-home-breadcrumb.cjs
       - name: Mobile search, recent tools, bookmarks, PWA status and accessibility
+        if: ${{ !cancelled() }}
         run: node tests/clinical-access-v01057.cjs
       - name: Mobile search and bookmarks in real 390px Chromium
+        if: ${{ !cancelled() }}
         run: node tests/clinical-access-browser-v01057.cjs
       - name: PWA refresh and home navigation
+        if: ${{ !cancelled() }}
         run: node tests/pwa-refresh-navigation.cjs
       - name: Clinical workspace premium UI safety
+        if: ${{ !cancelled() }}
         run: node tests/clinical-premium-ui.cjs
       - name: Adult Wallace rule of nines
+        if: ${{ !cancelled() }}
         run: node tests/wallace-adults.cjs
       - name: Wallace anatomical image hotspots
+        if: ${{ !cancelled() }}
         run: node tests/wallace-hotspots.cjs
       - name: Wallace anatomy image file integrity
+        if: ${{ !cancelled() }}
         run: node tests/wallace-image-integrity.cjs
       - name: Wallace enlarged anatomical views
+        if: ${{ !cancelled() }}
         run: node tests/wallace-expanded-anatomy.cjs
       - name: Wallace original image default and fallback
+        if: ${{ !cancelled() }}
         run: node tests/wallace-original-hd.cjs
       - name: Wallace card image and clean calculator
+        if: ${{ !cancelled() }}
         run: node tests/wallace-cover-clean.cjs
       - name: Cardiopulmonary score regression tests
+        if: ${{ !cancelled() }}
         run: node tests/cardioembolia-scores.cjs
       - name: Dynamic calculator catalog counts
+        if: ${{ !cancelled() }}
         run: node tests/catalog-counts.cjs
       - name: Verify every catalog category badge against real visible cards in Chromium
+        if: ${{ !cancelled() }}
         run: node tests/catalog-count-browser-v01047.cjs
       - name: Cardio scale card artwork
+        if: ${{ !cancelled() }}
         run: node tests/cardio-card-images.cjs
       - name: Card imagery and SNNOOP10 theme regressions
+        if: ${{ !cancelled() }}
         run: node tests/cardio-images-snnoop-theme.cjs
       - name: Capurro neonatal clinical and illustration tests
+        if: ${{ !cancelled() }}
         run: node tests/capurro-neonatal.cjs
       - name: ChatGPT analysis for standalone calculators
+        if: ${{ !cancelled() }}
         run: node tests/chatgpt-standalone-analysis.cjs
       - name: Twenty additional clinical scores and safety tests
+        if: ${{ !cancelled() }}
         run: node tests/expansion-20.cjs
       - name: Required fictitious clinical examples on all standalone tools
+        if: ${{ !cancelled() }}
         run: node tests/fictitious-examples-26.cjs
       - name: Geriatrics category portrait and navigation
+        if: ${{ !cancelled() }}
         run: node tests/geriatria-category-cover.cjs
       - name: Geriatrics functional, nutrition and frailty scales
+        if: ${{ !cancelled() }}
         run: node tests/geriatria-scales.cjs
       - name: Hepatology factor R and five companion clinical formulas
+        if: ${{ !cancelled() }}
         run: node tests/hepatologia-indices.cjs
       - name: Rapid Pharma Pro mobile UX and 15 verified treatment pathways
+        if: ${{ !cancelled() }}
         run: node tests/pharma-fast-ux.cjs
       - name: Pharma drug-diagnosis associations and PRONAM 2026 adult hypertension reference intervals
+        if: ${{ !cancelled() }}
         run: node tests/pharma-diagnoses-v01048.cjs
       - name: Product-specific FDA label selection, privacy and 643 medication coverage
+        if: ${{ !cancelled() }}
         run: node tests/pharma-official-label-v01049.cjs
       - name: Explicit diagnosis coverage for all 643 medicines and bidirectional catalog navigation
+        if: ${{ !cancelled() }}
         run: node tests/pharma-diagnosis-coverage-v01050.cjs
       - name: Verify pharma diagnosis links in Chrome
+        if: ${{ !cancelled() }}
         run: node tests/pharma-diagnosis-browser-v01050.cjs
       - name: Pharma Pro expansion 0.10.43 - 416 medication names and 205 diagnosis topics
+        if: ${{ !cancelled() }}
         run: node tests/pharma-massive-catalog-v01043.cjs
       - name: Pharma Pro 3.0 partial reconciliation, traceable high-risk label review and no-blanket-clearance safety
+        if: ${{ !cancelled() }}
         run: node tests/pharma-reconciliation-v01042.cjs
       - name: Pharma Pro 227-medication disease pathways and LASA evidence
+        if: ${{ !cancelled() }}
         run: node tests/pharma-indications-lasa.cjs
       - name: Three additional high-alert drug monographs and fail-closed eligibility
+        if: ${{ !cancelled() }}
         run: node tests/pharma-high-alert.cjs
       - name: Pharma Pro 2.0 · 40 prioritized meds, six source-audited safety-only dossiers, mobile and offline safeguards
+        if: ${{ !cancelled() }}
         run: node tests/pharma-pro-evidence-v01100.cjs
       - name: Pharmacy source-label audit, safety gating and six preparation reference cards
+        if: ${{ !cancelled() }}
         run: node tests/pharma-source-audit.cjs
       - name: Pharmacy source-verified limited monographs and safety-gated labeled dose references
+        if: ${{ !cancelled() }}
         run: node tests/pharma-monographs.cjs
       - name: Pharma Pro catalog, safety and adjacent homepage quick link
+        if: ${{ !cancelled() }}
         run: node tests/pharma-pro.cjs
       - name: Six Diabetes and Insulin Pro tools including DKA/HHS safety
+        if: ${{ !cancelled() }}
         run: node tests/diabetes-insulin-pro.cjs
       - name: Guardia Pro HIT, Padua and IMPROVE Bleeding scoring and safety
+        if: ${{ !cancelled() }}
         run: node tests/guardia-pro.cjs
       - name: Integrated arterial blood gas and engine reuse
+        if: ${{ !cancelled() }}
         run: node tests/guardia-gasometria.cjs
       - name: Capture pediatric visual tools in mobile and desktop for UX review
         if: always()

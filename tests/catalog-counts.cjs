@@ -52,6 +52,6 @@ assert.match(html,/const count=calculatorCount\(c\)/);
 assert.match(html,/data-gasometria-open/);
 assert.match(html,/data-ped-rapid/);
 assert.match(html,/Módulo farmacológico no puntuable; no se incluye en el recuento de calculadoras/);
-assert.match(html,/content="0\.10\.86"/);
+const version=fs.readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1];assert.ok(html.includes('name="kidbum-app-version" content="'+version+'"'));
 assert.match(sw,/catalog-count-audit-v01047/);
 console.log('PASS catalog: 100 core + 71 external + 6 diabetes + PAS + gasometry = 179 unique calculators; Pediatrics 35; Urgencias 21; specialty totals sum to 179. Pharma resources excluded.');

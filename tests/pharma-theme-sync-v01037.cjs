@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const ui=fs.readFileSync('assets/pharma-pro-ui.js','utf8');
 const from=ui.indexOf('/* One shared theme preference across ALL KidBum modules.');
@@ -41,9 +43,9 @@ x=run({});
 assert.equal(x.root.dark,false,'Default still light');
 assert.equal(x.memory.get('kidbum-theme'),'light','Global setting initialized consistently');
 const home=fs.readFileSync('index.html','utf8'),pharma=fs.readFileSync('pharma-pro.html','utf8'),sw=fs.readFileSync('sw.js','utf8');
-assert.match(home,/content="0\.10\.75"/);
-assert.match(pharma,/content="0\.10\.75"/);
-assert.match(pharma,/class="phone-brand">💊 Pharma Pro <small>v0\.10\.75 · Pharma Pro 2\.0<\/small>/,'Release banner shows the updated pediatric pharmacology interface');
+assert.match(home,new RegExp("content=\""+releasePattern+"\""));
+assert.match(pharma,new RegExp("content=\""+releasePattern+"\""));
+assert.match(pharma,new RegExp("class=\"phone-brand\">💊 Pharma Pro <small>v"+releasePattern+" · Pharma PRO 3\\.0<\\/small>"),'Release banner shows the updated pediatric pharmacology interface');
 assert.match(sw,/pharma-theme-sync-v01037/);
 assert.match(pharma,/assets\/dark-graphite-v01036\.css/);
 assert.match(pharma,/assets\/theme-chrome-v01036\.js/);

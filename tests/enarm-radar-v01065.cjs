@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* Radar 1.1 · offline clinical-training integrity and deterministic scheduling. */
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),vm=require('node:vm');
@@ -29,12 +31,12 @@ for(const id of additions){
   assert.ok(q.why.length>=45);
  }
 }
-assert.match(page,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(pharma,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(release,/KidBumPublicRelease = '0\.10\.75'/);
-assert.match(updater,/const VERSION='0\.10\.75'/);
-assert.match(sw,/const RELEASE='0\.10\.75'/);
+assert.match(page,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(pharma,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(release,new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
+assert.match(updater,new RegExp("const VERSION='"+releasePattern+"'"));
+assert.match(sw,new RegExp("const RELEASE='"+releasePattern+"'"));
 assert.match(sw,/enarm-v01064-radar-v01065/);
 for(const asset of ['assets/enarm-radar-v01065.js','assets/enarm-radar-v01065.css']){
  assert.ok(sw.includes("'./"+asset+"'"),'Missing offline asset '+asset);

@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* ENARM Ivory Heritage 0.10.67 — visual-only integrity and offline regression. */
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const read=p=>fs.readFileSync(p,'utf8');
@@ -11,12 +13,12 @@ assert.equal(bank.caseCount,37,'Case bank preserved');
 assert.equal(bank.questionCount,74,'Question count preserved');
 assert.equal(bank.areas.length,7,'Specialties preserved');
 assert.deepEqual(Array.from(radar.INTERVALS),[1,3,7,14,30,60],'Spaced repetition schedule unchanged');
-assert.match(html,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.75"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.75'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.75'/);
-assert.match(sw,/const RELEASE='0\.10\.75'/);
+assert.match(html,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('pharma-pro.html'),new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(read('release-check.js'),new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
+assert.match(read('assets/pwa-update-v01060.js'),new RegExp("const VERSION='"+releasePattern+"'"));
+assert.match(sw,new RegExp("const RELEASE='"+releasePattern+"'"));
 assert.match(sw,/cobalt-v01066-ivory-v01067/);
 for(const asset of ['assets/enarm-ivory-v01067.css','assets/enarm-hero-ivory-v01067.svg']){
  assert.ok(sw.includes("'./"+asset+"'"),'Offline PWA must precache '+asset);

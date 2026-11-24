@@ -1,13 +1,15 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const fs=require('node:fs'),assert=require('node:assert/strict'),vm=require('node:vm');
 const read=x=>fs.readFileSync(x,'utf8');
 const page=read('pharma-pro.html'),ui=read('assets/pharma-pro-ui.js'),css=read('assets/pharma-pro-ux-v01038.css'),sw=read('sw.js');
 new vm.Script(ui);
 assert.ok(page.includes('assets/pharma-pro-ux-v01038.css'));
-assert.match(page,/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(page,new RegExp("<meta name=\"kidbum-app-version\" content=\""+releasePattern+"\""));
 assert.match(page,/id="pharma-scope"/);
 assert.match(page,/No utilizar para prescribir automáticamente/);
-assert.match(read('index.html'),/<meta name="kidbum-app-version" content="0\.10\.75"/);
+assert.match(read('index.html'),new RegExp("<meta name=\"kidbum-app-version\" content=\""+releasePattern+"\""));
 assert.ok(sw.includes("'./assets/pharma-pro-ux-v01038.css'"));
 assert.ok(sw.includes('-pharma-ux-v01038'));
 assert.match(ui,/function pharmaCoverage\(med\)/);
@@ -25,7 +27,7 @@ assert.ok(css.includes('#browse .eyebrow,#detail .eyebrow'));
 assert.match(css,/html\.dark/);
 assert.match(css,/@media\(max-width:740px\)/);
 const scripts=[...page.matchAll(/<script src="\.\/([^"]+)"><\/script>/g)].map(m=>m[1]);
-assert.equal(scripts.length,21,'Pharma Pro retains prior scripts and adds two separate documentary safety review modules');
+assert.equal(scripts.length,25,'Pharma Pro retains prior scripts and adds two separate documentary safety review modules');
 assert.ok(scripts.includes('assets/pharma-pro-evidence-v01100.js')&&scripts.includes('assets/pharma-pro-evidence-ui-v01100.js'));
 assert.ok(scripts.indexOf('assets/pharma-pro-evidence-v01100.js')<scripts.indexOf('assets/pharma-pro-evidence-ui-v01100.js'));
 assert.ok(scripts.indexOf('assets/pharma-pro-evidence-ui-v01100.js')<scripts.indexOf('assets/pharma-pro-ui.js'));
@@ -33,7 +35,7 @@ assert.ok(scripts.indexOf('assets/pharma-pro-core.js')<scripts.indexOf('assets/p
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-v01055.js')<scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js'));
 assert.ok(scripts.indexOf('assets/pediatric-drug-references-ui-v01055.js')<scripts.indexOf('assets/pharma-pro-ui.js'));
 
-assert.equal(scripts.at(-1),'assets/pharma-pro-quick-ui.js');
+assert.ok(scripts.indexOf('assets/pharma-pro-quick-ui.js')<scripts.indexOf('assets/pharma-clinical-edition-v01086.js'));assert.equal(scripts.at(-1),'assets/pharma-clinical-edition-v01086.js');
 for(const path of scripts)assert.ok(sw.includes("'./"+path+"'"));
 assert.ok(fs.existsSync('assets/pharma-pro-monographs.js'));
 console.log('Pharma UX 2.0 candidate structure and offline regression PASS');

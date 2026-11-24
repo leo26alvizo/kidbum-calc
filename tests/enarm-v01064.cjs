@@ -1,4 +1,6 @@
 'use strict';
+
+const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 /* KidBum ENARM 1.0: static integrity and educational safety regression. */
 const assert=require('node:assert/strict'),fs=require('node:fs');
 const bank=require('../assets/enarm-bank-v01064.js');
@@ -34,12 +36,12 @@ assert.match(enarm,/assets\/enarm-bank-v01064\.js/);
 assert.match(enarm,/assets\/enarm-ui-v01064\.js/);
 assert.match(enarm,/assets\/enarm-v01064\.css/);
 assert.match(enarm,/id="enarm-app"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(enarm,/kidbum-app-version" content="0\.10\.75"/);
-assert.match(publicVersion,/KidBumPublicRelease = '0\.10\.75'/);
-assert.match(updater,/const VERSION='0\.10\.75'/);
-assert.match(sw,/const RELEASE='0\.10\.75'/);
-assert.match(sw,/enarm-v01064-radar-v01065-cobalt-v01066-ivory-v01067-direct-v01068-enarm-visual-radar-v01069-clinical-images-v01070-centor-v01071-enarm-visual-expansion-v01072-otoscopy-v01073-ophthalmology-v01074-ophthalmology-algorithms-v01075'/,'Atomic offline cache identifier must include ENARM 1.1');
+assert.match(home,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(enarm,new RegExp("kidbum-app-version\" content=\""+releasePattern+"\""));
+assert.match(publicVersion,new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
+assert.match(updater,new RegExp("const VERSION='"+releasePattern+"'"));
+assert.match(sw,new RegExp("const RELEASE='"+releasePattern+"'"));
+assert.match(sw,/enarm-v01064-radar-v01065-cobalt-v01066-ivory-v01067-direct-v01068-enarm-visual-radar-v01069-clinical-images-v01070-centor-v01071-enarm-visual-expansion-v01072-otoscopy-v01073-ophthalmology-v01074-ophthalmology-algorithms-v01075/,'Atomic offline cache identifier must include ENARM 1.1');
 for(const file of ['enarm.html','assets/enarm-entry-v01064.css','assets/enarm-v01064.css','assets/enarm-bank-v01064.js','assets/enarm-ui-v01064.js']){
  assert.ok(sw.includes("'./"+file+"'"),'Offline precache must include '+file);
 }

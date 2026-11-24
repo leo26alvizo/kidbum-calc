@@ -1,3 +1,7 @@
+## v0.10.87 · Sincronización de publicación y controles de calidad
+
+Alinea metadatos de páginas versionadas, marcador público, caché y versión de respaldo del actualizador. Mantiene instalación atómica, reintentos y recuperación; permite reflejar progreso de una versión nueva durante su instalación. Actualiza pruebas antiguas de versión sin modificar fórmulas o datos farmacológicos. Las verificaciones clínicas independientes y de registro mexicano siguen pendientes.
+
 ## v0.10.86 · Pharma PRO 3.0 — Coral & Jade
 
 Rediseño de presentación: coral/vino, jade y cian; modo claro/oscuro, portada compacta, contadores dinámicos, accesos rápidos, grupos, navegación inferior, comparador descriptivo por grupo, historial temporal sin almacenamiento, central de referencias IV por producto, acceso pediátrico, Guardia/Estudio y navegación de fichas. Sin cambios en motores clínicos, medicamentos, posologías o verificaciones; no implica validación independiente. Caché actualizada.
