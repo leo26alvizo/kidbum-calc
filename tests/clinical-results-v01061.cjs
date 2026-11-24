@@ -538,7 +538,7 @@ async function main(){
     await page.locator('[data-choice-index="2"]').click();assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
     await page.goto(base+'/algoritmos-neurologia.html#cauda',{waitUntil:'domcontentloaded'});await page.locator('[data-choice-index="0"]').click();assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
     await page.goto(base+'/algoritmos-neurologia.html#mscc',{waitUntil:'domcontentloaded'});await page.locator('[data-choice-index="0"]').click();
-    const popup=context.waitForEvent('page');await page.locator('.neuro-pharma-item a').click();const med=await popup;await med.waitForLoadState('domcontentloaded');assert.match(med.url(),/pharma-pro\.html#dexametasona$/);await med.close();
+    const popup=context.waitForEvent('page');await page.locator('.neuro-pharma-item a').click();const med=await popup;await med.waitForURL(/pharma-pro\.html#dexametasona$/,{waitUntil:'domcontentloaded',timeout:20000});assert.match(med.url(),/pharma-pro\.html#dexametasona$/);await med.locator('#detail h2').filter({hasText:/Dexametasona/i}).first().waitFor({state:'attached'});assert.match(await med.locator('#detail').innerText(),/Dexametasona/i);assert.equal(await page.locator('.neuro-pharma-item').count(),1);await med.close();
     await noHorizontalOverflow(page,'Neuro Pharma');
    }finally{await context.close()}
   });
