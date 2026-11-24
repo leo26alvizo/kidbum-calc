@@ -108,6 +108,8 @@ function renderRail(){
  for(let i=0;i<max;i++)rail.append(elem('span',undefined,i<completed?'active':''));
  rail.setAttribute('aria-label','Avance: '+Math.min(state.path.length+1,max)+' de '+max+' etapas aproximadas');
 }
+function renderPharma(id,outcome){const p=root.KidBumNeuroPharmaBridge?.get(id,outcome);if(!p||(!p.drugs.length&&!p.note))return null;const panel=elem('section',undefined,'neuro-pharma-panel');panel.append(elem('h3','💊 Pharma PRO · consulta contextual'),elem('p','No es prescripción. Validar indicación, dosis, presentación, vía, alergias, función renal/hepática, interacciones y monitorización. Alternativas no son combinaciones. No retrasar atención para consultar fichas.'));
+for(const d of p.drugs){const item=elem('article',undefined,'neuro-pharma-item');item.append(elem('strong',d.name),elem('small',d.role),elem('p',d.context));const a=elem('a','Consultar ficha en Pharma PRO →','alg-tool-link');a.href=d.href;a.target='_blank';a.rel='noopener noreferrer';item.append(a);panel.append(item);}if(p.note)panel.append(elem('p',p.note));return panel;}
 function renderFlow(){
  const a=engine.byId[state.active],step=engine.getStep(state.active,state.current);
  if(!a||!step)return;
@@ -137,6 +139,7 @@ function renderFlow(){
   for(const action of outcome.actions)list.append(elem('li',action));
   wrap.append(list);
   area.append(wrap);
+  const pharma=renderPharma(a.id,step.id);if(pharma)area.append(pharma);
  }
  $('alg-back-step').disabled=!state.path.length;
  const trail=state.path.map(x=>{

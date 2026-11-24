@@ -527,6 +527,21 @@ async function main(){
     await noHorizontalOverflow(page,'Neurología algoritmos');assert.deepEqual(errors,[]);
    }finally{await context.close()}
   });
+  await test('Neuro Pharma — contextual medication links and branch safety',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{const page=await context.newPage();
+    await page.goto(base+'/algoritmos-neurologia.html#status',{waitUntil:'domcontentloaded'});
+    assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
+    await page.locator('[data-choice-index="0"]').click();assert.equal(await page.locator('.neuro-pharma-item').count(),6);
+    assert.equal(await page.locator('.neuro-pharma-item a[href="./pharma-pro.html#lorazepam"]').count(),1);
+    await page.locator('#alg-back-step').click();assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
+    await page.locator('[data-choice-index="2"]').click();assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
+    await page.goto(base+'/algoritmos-neurologia.html#cauda',{waitUntil:'domcontentloaded'});await page.locator('[data-choice-index="0"]').click();assert.equal(await page.locator('.neuro-pharma-panel').count(),0);
+    await page.goto(base+'/algoritmos-neurologia.html#mscc',{waitUntil:'domcontentloaded'});await page.locator('[data-choice-index="0"]').click();
+    const popup=context.waitForEvent('page');await page.locator('.neuro-pharma-item a').click();const med=await popup;await med.waitForURL(/pharma-pro\.html#dexametasona$/,{waitUntil:'domcontentloaded',timeout:20000});assert.match(med.url(),/pharma-pro\.html#dexametasona$/);await med.locator('#detail h2').filter({hasText:/Dexametasona/i}).first().waitFor({state:'attached'});assert.match(await med.locator('#detail').innerText(),/Dexametasona/i);assert.equal(await page.locator('.neuro-pharma-item').count(),1);await med.close();
+    await noHorizontalOverflow(page,'Neuro Pharma');
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

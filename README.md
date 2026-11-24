@@ -1,3 +1,7 @@
+## v0.10.94 · Neurología ↔ Pharma PRO
+
+21 enlaces contextuales en ocho desenlaces de siete rutas, 16 principios activos con registro existente para adultos. Consulta en otra pestaña sin perder el algoritmo, advertencias y alternativas, sin dosis nuevas ni prescripción automática. No muestra medicamentos ante información insuficiente o diagnóstico diferencial. Guillain-Barré: falta ficha específica de inmunoglobulina humana IV; HSA: nimodipino solo en índice sin población verificada. AHA/ASA 2026, NICE NG128/217/240/234/220 y AAO-HNS Bell como referencias. Verificación de 64 desenlaces contra catálogo realizada; validación clínica independiente pendiente.
+
 ## v0.10.93 · Algoritmos de Neurología y Raquimedular
 
 16 rutas interactivas para adultos, con detección de urgencia, ramas de incertidumbre, evaluación dirigida, enlaces a escalas existentes y bibliografía. Portada de algoritmos proporcionada por el usuario, conservada byte a byte (WebP de 1536 × 1152), acceso completo pulsable y caché offline. Paleta anatómica fija basada en la imagen proporcionada: marfil, ocre, terracota, sepia y azul petróleo. No se generan imágenes. Se mantienen las 191 calculadoras y 20 herramientas neurológicas; los algoritmos no se cuentan como calculadoras. Validación clínica independiente pendiente.

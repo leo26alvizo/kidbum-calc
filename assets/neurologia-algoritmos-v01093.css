@@ -57,3 +57,5 @@ html.dark .alg-neuro .alg-tool-link{border-color:#527576}
 .neuro-cover-tile .neuro-cover-fallback{position:absolute;inset:12px;display:grid;place-items:center;text-align:center;font-weight:800;z-index:0;color:#314b4c}
 html.dark .neuro-cover-tile .neuro-cover-fallback{color:#fff4df}
 .alg-neuro .neuro-hero-photo.neuro-alg-cover{width:100%;max-width:680px;height:auto;aspect-ratio:4/3;object-fit:contain;object-position:center;filter:none;margin:16px 0 8px;border-radius:18px}
+
+.alg-neuro .neuro-pharma-panel{padding:16px;margin-top:14px;border:1px solid var(--p-line);border-left:4px solid #c16f42;border-radius:15px;background:var(--p-card);color:var(--p-ink)}.alg-neuro .neuro-pharma-panel h3{margin:0 0 8px;color:var(--p-teal)}.alg-neuro .neuro-pharma-panel p{font-size:13px;line-height:1.55;color:var(--p-muted)}.alg-neuro .neuro-pharma-item{display:grid;gap:6px;border:1px solid var(--p-line);border-radius:12px;padding:13px;margin-top:12px}.alg-neuro .neuro-pharma-item small{color:var(--p-teal);font-weight:750}.alg-neuro .neuro-pharma-item p{margin:0}.alg-neuro .neuro-pharma-item a{justify-self:start}
