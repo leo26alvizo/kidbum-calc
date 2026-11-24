@@ -77,7 +77,10 @@ for(const p of pages){
  }
 }
 const sourceSize=packed.reduce((n,p)=>n+fs.statSync(p).size,0);
-assert.ok(sourceSize<20*1024*1024,'Offline pack unexpectedly exceeds 20 MiB');
+const otoSize=packed.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).reduce((n,p)=>n+fs.statSync(p).size,0);
+assert.ok(sourceSize-otoSize<20*1024*1024,'Original offline pack exceeds 20 MiB');
+assert.ok(otoSize<2*1024*1024,'Otoscopic educational images exceed 2 MiB');
+assert.ok(sourceSize<22*1024*1024,'Expanded offline pack exceeds 22 MiB');
 assert.ok(sourceSize>8*1024*1024,'HD anatomical image was not bundled');
 assert.equal(packed.length,packedSet.size,'Offline pack must not contain duplicates');
 assert.ok(sw.includes('ignoreSearch:true'),'Versioned images require query-independent cache fallback');
