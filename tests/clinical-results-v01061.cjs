@@ -499,6 +499,34 @@ async function main(){
     await page.locator('header nav a').click();await page.waitForURL('**/index.html?especialidad=neurologia');assert.equal(await page.locator('[data-neuro-pro]').count(),12);
    }finally{await context.close()}
   });
+  await test('Neurología — 16 clinical pathways, palette, mobile and safe transitions',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{
+    const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+    await page.goto(base+'/index.html?especialidad=neurologia',{waitUntil:'domcontentloaded'});
+    await page.locator('[data-neuro-alg]').waitFor();
+    await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>img.decode());
+    assert.equal(await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>img.naturalWidth),1536);
+    assert.equal(await page.locator('[data-neuro-alg] .neuro-cover-art').evaluate(img=>getComputedStyle(img).objectFit),'contain');
+    assert.match(await page.locator('[data-neuro-alg]').evaluate(el=>getComputedStyle(el).backgroundImage),/255, 244, 223/);
+    await page.locator('[data-neuro-alg]').click();
+    await page.waitForURL('**/algoritmos-neurologia.html');
+    await page.locator('.neuro-alg-cover').evaluate(img=>img.decode());
+    assert.equal(await page.locator('.neuro-alg-cover').evaluate(img=>img.naturalWidth),1536);
+    assert.equal(await page.locator('.neuro-alg-cover').evaluate(img=>img.naturalHeight),1152);
+    assert.equal(await page.locator('[data-algo-id]').count(),16);
+    assert.equal(await page.locator('body.alg-neuro').evaluate(el=>getComputedStyle(el).getPropertyValue('--p-teal').trim()),'#314b4c');
+    await page.locator('[data-category="Raquimedular"]').click();assert.equal(await page.locator('[data-algo-id]').count(),4);
+    await page.locator('[data-algo-id="cauda"]').click();
+    await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('.alg-outcome').innerText(),/RM urgente/);
+    await page.locator('#alg-back-step').click();await page.locator('[data-choice-index="2"]').click();assert.match(await page.locator('.alg-outcome').innerText(),/Información insuficiente/);
+    await page.locator('#alg-restart').click();await page.locator('[data-choice-index="1"]').click();await page.locator('[data-choice-index="0"]').click();assert.match(await page.locator('.alg-outcome').innerText(),/RM/);
+    await page.locator('#alg-theme').click();
+    assert.equal(await page.locator('body.alg-neuro').evaluate(el=>getComputedStyle(el).getPropertyValue('--p-bg').trim()),'#211a16');
+    await page.locator('#alg-theme').click();
+    await noHorizontalOverflow(page,'Neurología algoritmos');assert.deepEqual(errors,[]);
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');

@@ -1,3 +1,7 @@
+## v0.10.93 · Algoritmos de Neurología y Raquimedular
+
+16 rutas interactivas para adultos, con detección de urgencia, ramas de incertidumbre, evaluación dirigida, enlaces a escalas existentes y bibliografía. Portada de algoritmos proporcionada por el usuario, conservada byte a byte (WebP de 1536 × 1152), acceso completo pulsable y caché offline. Paleta anatómica fija basada en la imagen proporcionada: marfil, ocre, terracota, sepia y azul petróleo. No se generan imágenes. Se mantienen las 191 calculadoras y 20 herramientas neurológicas; los algoritmos no se cuentan como calculadoras. Validación clínica independiente pendiente.
+
 ## v0.10.92 · Neurología y Raquimedular PRO
 
 12 herramientas nuevas: FOUR, mRS, Fisher modificada, WFNS, MRC sum, Hughes, Hoehn y Yahr modificada, Nurick, McCormick, PPC, cociente glucosa LCR/sangre, STESS. 20 herramientas en Neurología y 191 globales. Ejemplos ficticios, fuentes y alcance clínico por herramienta, sin datos preseleccionados, integración local y análisis voluntario con ChatGPT. Validación independiente pendiente.

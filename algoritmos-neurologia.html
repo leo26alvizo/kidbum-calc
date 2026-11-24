@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es" data-kb-page="neurologia-algoritmos">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff4df">
+<meta name="kidbum-app-version" content="0.10.93">
+<meta name="description" content="16 rutas clínicas interactivas de Neurología y Raquimedular para adultos.">
+<title>Algoritmos · Neurología y Raquimedular · KidBum</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css">
+<link rel="stylesheet" href="./assets/pediatria-farmaco-bridge-v01054.css">
+<link rel="stylesheet" href="./assets/urgencias-algoritmos-v01056.css">
+<link rel="stylesheet" href="./assets/neurologia-algoritmos-v01093.css">
+<script>
+try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kidbum-theme')===null&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}
+</script>
+<script src="./assets/theme-chrome-v01036.js" defer></script>
+<link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head>
+<body class="alg-peds alg-neuro">
+<header class="alg-header"><div class="alg-header-in">
+ <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html?especialidad=neurologia">← Neurología y Raquimedular · KidBum</a><span class="alg-version">v0.10.93 · offline</span></nav>
+ <div class="alg-kicker">🧠 KidBum · Neurociencias</div>
+ <h1>Algoritmos de<br>Neurología y Raquimedular.</h1>
+ <p class="alg-hero-text">Decisiones rápidas para adultos: detectar urgencias neurológicas, orientar estudios y escalamiento. No sustituyen la valoración presencial.</p>
+ <img class="neuro-hero-photo neuro-alg-cover" src="./assets/neurologia-algoritmos-portada.webp" alt="Neurología y Raquimedular · 16 algoritmos clínicos: EVC, epilepsia, cefalea, meningitis, neuromuscular, médula y columna." width="1536" height="1152" decoding="async"><div class="alg-hero-bottom"><span class="alg-hero-chip">🧠 16 rutas clínicas</span><span class="alg-hero-chip">📊 Escalas relacionadas</span><span class="alg-hero-chip">⚡ Modo Guardia</span><span class="alg-hero-chip">📖 Modo Estudio</span><span class="alg-hero-chip">📴 Sin conexión</span></div>
+</div></header>
+<main class="alg-main" id="alg-main">
+<div class="alg-alert" role="note"><span aria-hidden="true" style="font-size:22px">🚨</span><div><b>Prioridad: intervenir antes de navegar</b>En apnea, paro, shock, hipoxemia, déficit neurológico agudo, hemorragia masiva o deterioro: activar equipo de reanimación y ABCDE inmediatamente. El cuestionario no puede retrasar intervenciones.</div></div>
+<section class="alg-library" id="alg-library" aria-labelledby="alg-library-title">
+ <div class="alg-search">
+  <div><label for="alg-search-input">Buscar problema o síndrome</label><input type="search" id="alg-search-input" autocomplete="off" placeholder="Ej. EVC, cauda equina, cefalea…"></div>
+  <div class="alg-chips" id="alg-chips" role="group" aria-label="Filtrar rutas neurológicas"><button type="button" class="alg-chip" data-category="all" aria-pressed="true">Todas</button><button type="button" class="alg-chip" data-category="Vascular" aria-pressed="false">Vascular</button><button type="button" class="alg-chip" data-category="Cefalea y vértigo" aria-pressed="false">Cefalea y vértigo</button><button type="button" class="alg-chip" data-category="Epilepsia" aria-pressed="false">Epilepsia</button><button type="button" class="alg-chip" data-category="Neuroinfecciones" aria-pressed="false">Neuroinfecciones</button><button type="button" class="alg-chip" data-category="Neuromuscular" aria-pressed="false">Neuromuscular</button><button type="button" class="alg-chip" data-category="Neurocríticos" aria-pressed="false">Neurocríticos</button><button type="button" class="alg-chip" data-category="Raquimedular" aria-pressed="false">Raquimedular</button></div>
+ </div>
+ <div class="alg-section-intro"><h2 id="alg-library-title">Selecciona un problema neurológico</h2><span id="alg-count" class="alg-count" aria-live="polite"></span></div>
+ <div id="alg-grid" class="alg-grid"></div>
+ <div class="alg-safety-note">Cada ruta incluye decisiones, signos de alarma, evaluación dirigida y fuentes. Uso educativo en adultos; no es una orden médica ni una autorización de alta.</div>
+</section>
+<section class="alg-flow" id="alg-flow" aria-labelledby="alg-flow-title" hidden>
+ <div class="alg-flow-header">
+  <button type="button" id="alg-to-library" class="alg-flow-return">← Los 16 algoritmos</button>
+  <div class="alg-flow-heading"><span id="alg-flow-icon" aria-hidden="true">🚨</span><div><h2 id="alg-flow-title">Algoritmo</h2><p id="alg-flow-subtitle"></p></div></div>
+  <div class="alg-mode"><span>Visualización:</span><div><button type="button" id="alg-mode-guardia" aria-pressed="true">⚡ Guardia</button> <button type="button" id="alg-mode-estudio" aria-pressed="false">📖 Estudio</button></div></div>
+ </div>
+ <div id="alg-rail" class="alg-rail" role="img" aria-label="Progreso del algoritmo"></div>
+ <div id="alg-interaction" aria-live="polite" aria-atomic="true"></div>
+ <div id="alg-tools" class="alg-tools" aria-label="Herramientas relacionadas" hidden></div>
+ <div class="alg-actions"><button type="button" class="alg-secondary" id="alg-back-step">← Anterior</button><button type="button" class="alg-secondary" id="alg-restart">↺ Reiniciar</button><button type="button" class="alg-secondary" id="alg-theme">◐ Tema</button></div>
+ <p id="alg-trail" class="alg-trail"></p>
+ <details class="alg-evidence" id="alg-evidence"><summary>📚 Ámbito, exclusiones y fuentes</summary><div id="alg-evidence-content"></div></details>
+ <p class="alg-safety-note">Apoyo para razonamiento clínico del equipo, no sistema de prescripción. Las referencias internacionales y fichas enlazadas NO sustituyen protocolo del hospital, validación en México, supervisión especializada.</p>
+</section>
+</main>
+<footer class="alg-footer">KidBum · Neurología y Raquimedular v0.10.93 · 16 rutas para adultos · Sin almacenamiento de datos clínicos personales · Fuentes consultables.</footer>
+<script src="./assets/neurologia-algoritmos-core-v01093.js"></script>
+<script src="./assets/neurologia-algoritmos-ui-v01093.js"></script>
+
+</body></html>
