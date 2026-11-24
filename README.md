@@ -1,3 +1,7 @@
+## v0.10.79 · Oftalmología — Primer contacto
+
+Seis rutas nuevas: orzuelo/chalazión/blefaritis, ojo seco, abrasión/cuerpo extraño, hemorragia subconjuntival, dacriocistitis/obstrucción lagrimal y pterigión/pingüécula. 31 decisiones, 48 desenlaces propios; total 23 algoritmos y 126 desenlaces. Filtro Primer contacto incluye conjuntivitis. Iconos, fuentes, enlaces Pharma PRO condicionados, sin dosis nuevas. TFOS DEWS III 2025 y GPC mexicanas históricas identificadas. Revisión clínica independiente pendiente. Sincronización de versión de Pharma y corrección de prueba splash fijada a v0.10.75; prueba oftalmológica antes de otras regresiones.
+
 ## v0.10.78 · Conjuntivitis integral
 
 17 rutas oftalmológicas; conjuntivitis con 9 decisiones y 14 desenlaces, triaje de alarma, neonatos, lentes de contacto, inmunosupresión, ITS, herpes, persistencia y subtipos viral/bacteriano/alérgico. Enlaces a Pharma PRO condicionados al desenlace; sin nuevas dosis ni alta automática. Fuentes AAO 2024, CDC 2024/2021, revisión Cochrane e IMSS histórica (vigencia no confirmada). Revisión clínica independiente pendiente.

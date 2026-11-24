@@ -11,7 +11,7 @@ const elem=(tag,content,cls)=>{
  if(cls)el.className=cls;
  return el;
 };
-const ophthalmicIcons=Object.freeze({"ojo-rojo":"👁️","perdida-visual":"🌑","quemadura-quimica":"🧪","globo-abierto":"🛡️","glaucoma-agudo":"⏱️","queratitis":"🔬","uveitis":"🔥","retina":"⚡","occlusion-arterial":"🩸","arteritis":"🧠","celulitis-orbitaria":"🦠","compartimento-orbitario":"⚠️","endoftalmitis":"💉","diplopia":"👀","hifema":"💧","retinopatia-diabetica":"📈","conjuntivitis":"🌿"});
+const ophthalmicIcons=Object.freeze({"ojo-rojo":"👁️","perdida-visual":"🌑","quemadura-quimica":"🧪","globo-abierto":"🛡️","glaucoma-agudo":"⏱️","queratitis":"🔬","uveitis":"🔥","retina":"⚡","occlusion-arterial":"🩸","arteritis":"🧠","celulitis-orbitaria":"🦠","compartimento-orbitario":"⚠️","endoftalmitis":"💉","diplopia":"👀","hifema":"💧","retinopatia-diabetica":"📈","conjuntivitis":"🌿","orzuelo-chalazion-blefaritis":"🧿","ojo-seco":"🏜️","abrasion-corneal":"🩹","hemorragia-subconjuntival":"🟥","dacriocistitis-obstruccion-lagrimal":"🫧","pterigion-pinguecula":"☀️"});
 const iconFor=a=>Object.hasOwn(ophthalmicIcons,a.id)?ophthalmicIcons[a.id]:'👁️';
 const state={category:'all',query:'',active:null,current:null,path:[],mode:'guardia'};
 const categories=[...document.querySelectorAll('[data-category]')];

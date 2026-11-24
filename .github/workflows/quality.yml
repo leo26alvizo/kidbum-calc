@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Show Node version
         run: node --version
+      - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
+        run: node tests/oftalmologia-algoritmos-v01075.cjs
       - name: Existing regression checks
         run: node tests/regression.cjs
       - name: Pharma Pro broad expansion - 1566 searchable entries, 29 groups, no new dosing claims
@@ -112,8 +114,6 @@ jobs:
         run: node tests/pediatric-drug-references-v01055.cjs
       - name: Pediatric dose references in algorithms and Pharma Pro on real mobile Chromium
         run: node tests/pediatric-drug-references-browser-v01055.cjs
-      - name: Ophthalmology clinical routes and safety branches
-        run: node tests/oftalmologia-algoritmos-v01075.cjs
       - name: Forty adult emergency and ICU algorithms with pharma links and strict safety graphs
         run: node tests/urgencias-uci-algoritmos-v01056.cjs
       - name: Urgencias/UCI outcome routing and correct specialty placement in real Chromium
