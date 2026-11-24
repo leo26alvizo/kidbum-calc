@@ -1,3 +1,7 @@
+## v0.10.83 · Ortopedia ↔ Pharma PRO
+
+Acceso contextual en 28 desenlaces, 42 enlaces a 13 medicamentos distintos; todos los 73 desenlaces cuentan con contexto y acceso general. Precauciones por vía, alto riesgo, profilaxis antitetánica, analgesia, sedación monitorizada, tromboprofilaxis y antibióticos condicionados a evaluación; sin nuevas dosis ni prescripción. Índices de vacunas/inmunoglobulinas identificados como pendientes de cotejo. Lógica clínica y portada sin cambios; caché PWA actualizada. Revisión clínica independiente pendiente.
+
 ## v0.10.82 · Algoritmos de Ortopedia
 
 15 rutas interactivas, 36 decisiones y 73 desenlaces, con buscador, filtros, modos Guardia y Estudio, referencias, enlaces a las 25 herramientas existentes según tema y acceso general a Pharma PRO (sin prescripción ni dosis nuevas). Paleta café, rojo sangre y hueso; portada original conservada. Módulo no puntuable en el contador de calculadoras. Revisión clínica independiente pendiente.

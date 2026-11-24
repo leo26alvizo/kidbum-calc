@@ -30,3 +30,9 @@ html.dark .alg-orthopedics .alg-tile-tag{background:#493227;color:#f1d4bd;border
 html.dark .alg-orthopedics .alg-tile:hover{border-color:#f1ad91}
 html.dark .alg-orthopedics :focus-visible{outline-color:#f1ad91}
 @media(max-width:520px){.alg-orthopedics .alg-tile{padding:12px}.alg-orthopedics .alg-tile-icon{width:40px;height:40px;font-size:21px}.alg-orthopedics .alg-tile-tag{max-width:88px;font-size:9px}.alg-orthopedics .alg-hero-text{max-width:90%}.alg-orthopedics .ortho-hero-art{width:32%;opacity:.55}}
+
+/* Contextual pharmacy cards remain scoped to Ortopedia. */
+.alg-orthopedics .ortho-therapy .alg-therapy-branch,.alg-orthopedics .ortho-therapy .alg-rx-role{background:var(--p-soft);color:var(--p-teal);border-color:var(--p-line)}
+.alg-orthopedics .ortho-therapy .alg-rx-library{color:var(--p-teal);overflow-wrap:anywhere}
+.alg-orthopedics .ortho-therapy .alg-rx-link{background:#762830;color:#fff}
+.alg-orthopedics .ortho-therapy .alg-rx-link:hover{background:#58212a;color:#fff}

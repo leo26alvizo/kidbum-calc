@@ -52,9 +52,25 @@ function renderTools(id){
  panel.append(pharmaLink('Todas las escalas de Ortopedia ↗','./ortopedia.html','alg-tool-link'),pharmaLink('💊 Biblioteca Pharma PRO ↗','./pharma-pro.html','alg-tool-link'));panel.hidden=false;
 }
 function renderTreatment(a,step){
+ const plan=root.KidBumOrthopedicsPharmaBridge?.get(a.id,step.id);
  const section=elem('section',undefined,'alg-therapy ortho-therapy');
- section.append(elem('h3','💊 Farmacología · Pharma PRO'),elem('p','Consulta de referencia: confirmar indicación, vía, dosis, alergias, edad, embarazo, función renal/hepática y protocolo institucional. No es una prescripción. No retrasar la estabilización, antibiótico urgente indicado ni intervención quirúrgica por consultar la biblioteca.','alg-therapy-context'),pharmaLink('Abrir biblioteca Pharma PRO ↗','./pharma-pro.html','alg-rx-link'));
- return section;
+ const head=elem('div',undefined,'alg-therapy-head');
+ head.append(elem('h3','💊 Farmacología · Pharma PRO'),elem('span','Consulta por desenlace','alg-therapy-branch'));section.append(head);
+ section.append(elem('p',plan?.notes||'La selección terapéutica requiere valoración individual.','alg-therapy-context'));
+ section.append(elem('p','Las opciones no son un esquema completo ni una receta. No combinarlas automáticamente. La ficha de catálogo no valida indicación, vía, concentración, dosis ni registro mexicano para este desenlace.','alg-therapy-purpose'));
+ if(plan?.drugs.length){
+  const cards=elem('div',undefined,'alg-therapy-medications');
+  for(const m of plan.drugs){
+   const card=elem('article',undefined,'alg-therapy-med');
+   card.append(elem('span',m.role,'alg-rx-role'),elem('strong',m.name,'alg-rx-name'),elem('span',m.route,'alg-rx-tag'),elem('p',m.context,'alg-rx-context'));
+   if(m.high)card.append(elem('span','⚠ Alto riesgo · monitorización y protocolo institucional','alg-rx-warning'));
+   if(m.indexOnly)card.append(elem('span','Entrada de índice · cotejo clínico y regulatorio pendiente','alg-rx-warning'));
+   card.append(elem('span','Dosis no validada para esta ruta','alg-rx-tag'),pharmaLink('Abrir ficha en Pharma PRO ↗',m.href,'alg-rx-link'),pharmaLink('Fuente clínica: '+m.source[0],m.source[1],'alg-rx-library'));cards.append(card);
+  }section.append(cards);
+ }else section.append(elem('p','Sin selección contextual de medicamentos para este desenlace. Priorizar evaluación, escalamiento o intervención; la biblioteca general sigue disponible.','alg-therapy-no-drug'));
+ const details=elem('details',undefined,'alg-therapy-checklist');details.append(elem('summary','🛡️ Verificación farmacológica obligatoria'));
+ const ul=elem('ul');for(const t of ['Confirmar diagnóstico, indicación, edad, peso, alergias, embarazo, función renal/hepática, interacciones y riesgo hemorrágico.','Verificar presentación, vía, concentración, pauta, monitorización y producto autorizado en México. No extrapolar fichas adultas a niños ni formulaciones distintas.','No retrasar estabilización, antibiótico urgente indicado, reducción, descompresión o cirugía por consultar la biblioteca. Revisión clínica independiente pendiente.'])ul.append(elem('li',t));details.append(ul);section.append(details);
+ const foot=elem('div',undefined,'alg-therapy-footer');foot.append(pharmaLink('Biblioteca Pharma PRO completa ↗','./pharma-pro.html','alg-rx-library'));section.append(foot);return section;
 }
 function open(id){
  const a=Object.hasOwn(engine.byId,id)?engine.byId[id]:null;
