@@ -29,7 +29,7 @@
    return out;
   }catch{return Object.create(null)}
  }
- function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history))}catch{/* Remains in memory */}}
+ function persist(){try{localStorage.setItem(storageKey,JSON.stringify(history));window.dispatchEvent(new Event('kidbum-enarm-progress'))}catch{/* Remains in memory */}}
  const keyOf=(c,qi)=>c.id+'-'+qi;
  function isWeak(c){return c.questions.some((q,i)=>radar.weak(history[keyOf(c,i)]))}
  function counts(){
@@ -152,7 +152,7 @@
   root.querySelector('#en-reset').onclick=()=>{
    if(!window.confirm('¿Eliminar el registro local de aciertos y errores ENARM de este navegador?'))return;
    for(const k of Object.keys(history))delete history[k];
-   try{localStorage.removeItem(storageKey)}catch{}
+   try{localStorage.removeItem(storageKey);window.dispatchEvent(new Event('kidbum-enarm-progress'))}catch{}
    home();
   };
  }

@@ -20,12 +20,12 @@
  function loadHistory(){
   try{
    const raw=localStorage.getItem(KEY);
-   if(!raw||raw.length>135000)return Object.create(null);
+   if(!raw||raw.length>1000000)return Object.create(null);
    const value=JSON.parse(raw);
    if(!value||typeof value!=='object'||Array.isArray(value))return Object.create(null);
    const out=Object.create(null);
    const ids=new Set(bank.items.map(x=>x.id));
-   for(const [id,h] of Object.entries(value).slice(0,240)){
+   for(const [id,h] of Object.entries(value).slice(0,bank.items.length)){
     if(!ids.has(id)||!h||typeof h!=='object')continue;
     out[id]=radar.normalize(h);
    }
