@@ -383,7 +383,7 @@ async function main(){
     const errors=[];page.on('pageerror',err=>errors.push(err.message));
     await page.goto(base+'/enarm-visual.html',{waitUntil:'domcontentloaded'});
     await page.locator('#vis-image-mode').selectOption('clinical');
-    assert.match(await page.locator('#vis-count').innerText(),/37 preguntas disponibles/);
+    assert.match(await page.locator('#vis-count').innerText(),/57 preguntas disponibles/);
     await page.locator('#vis-cat').selectOption('Imagen torácica');
     await page.evaluate(()=>{Math.random=()=>0.999999});
     await page.locator('#vis-start').click();
@@ -417,6 +417,21 @@ async function main(){
     await page.locator('#f-alarm').selectOption('true');
     assert.match(await page.locator('#result-value').innerText(),/No evaluable/);
     await noHorizontalOverflow(page,'Centor');
+   }finally{await context.close()}
+  });
+  await test('ENARM Visual — otoscopy category, real images and feedback',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});
+   try{const page=await context.newPage();await page.goto(base+'/enarm-visual.html',{waitUntil:'domcontentloaded'});
+    await page.locator('#vis-cat').selectOption('Otoscopía');
+    assert.match(await page.locator('#vis-count').innerText(),/20 preguntas disponibles/);
+    await page.evaluate(()=>{Math.random=()=>0.999999});
+    await page.locator('#vis-start').click();
+    await page.waitForFunction(()=>document.querySelector('#vis-clinical-img')?.naturalWidth>0);
+    assert.match(await page.locator('#vis-clinical-img').getAttribute('src'),/oto-01\.jpg$/);
+    await page.locator('[data-opt="0"]').click();
+    assert.match(await page.locator('#vis-feedback').innerText(),/Correcto/);
+    assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('kidbum-enarm-visual-progress-v1'))['visual-045'].seen),1);
+    await noHorizontalOverflow(page,'ENARM otoscopy');
    }finally{await context.close()}
   });
  }finally{await browser.close();await stop()}

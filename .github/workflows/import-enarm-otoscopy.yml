@@ -1,0 +1,43 @@
+name: Import licensed otoscopy teaching images
+on:
+  push:
+    branches: [enarm-otoscopy-v01073]
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Import clinical photographs and verify offline pack
+        run: |
+          set -euo pipefail
+          python -m pip install Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib, urllib.parse, subprocess
+          rows=[["oto-01.jpg","TM_RIGHT_NORMAL.jpg"],["oto-02.jpg","Normal_Left_Tympanic_Membrane.jpg"],["oto-03.jpg","Normal_Tympanic_Membrane_Chorda_Tympani_Nerve_Visible.jpg"],["oto-04.jpg","Acute_Otitis_Media_Stage_of_Resolution.jpg"],["oto-05.jpg","Adult_Serous_Otitis_Media.jpg"],["oto-06.jpg","Traumatic_Perforation_of_the_Tympanic_Membrane.jpg"],["oto-07.jpg","Cholesteatoma_and_large_perforation_left_ear.jpg"],["oto-08.jpg","Attic_Cholesteatoma.jpg"],["oto-09.jpg","Tympanosclérose.jpg"],["oto-10.jpg","Central_ventilation_tube.jpg"]]
+          dest=Path('assets/enarm-clinical')
+          for file,name in rows:
+              digest=hashlib.md5(name.encode()).hexdigest()
+              url='https://upload.wikimedia.org/wikipedia/commons/'+digest[0]+'/'+digest[:2]+'/'+urllib.parse.quote(name)
+              p=Path('/tmp')/file
+              subprocess.run(['curl','--fail','--location','--retry','3','--max-time','90','--user-agent','KidBum educational app (github.com/leo26alvizo/kidbum-calc)',url,'-o',str(p)],check=True)
+              with Image.open(p) as im:
+                  im=im.convert('RGB')
+                  im.thumbnail((1200,1200),Image.Resampling.LANCZOS)
+                  im.save(dest/file,format='JPEG',quality=82,optimize=True,progressive=True,subsampling=0)
+                  print(file,im.size,(dest/file).stat().st_size)
+          PY
+          node tests/enarm-visual-radar-draft.cjs
+          node tests/offline-110.cjs
+      - name: Store local images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/enarm-clinical/oto-*.jpg
+          if ! git diff --cached --quiet; then
+            git commit -m "Vendor ten licensed otoscopy images"
+            git push origin HEAD:enarm-otoscopy-v01073
+          fi
