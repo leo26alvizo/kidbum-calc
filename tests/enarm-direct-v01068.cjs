@@ -97,7 +97,7 @@ const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Bibliote
 const shortcut='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
 assert.ok(main.includes(pharma+shortcut),'ENARM same-size shortcut under Pharma preserved');
 const previous=require('../assets/enarm-bank-v01064.js');
-assert.equal(previous.caseCount,37,'Case bank unchanged');
-assert.equal(previous.questionCount,74,'Existing 74 case questions unchanged');
+assert.equal(previous.caseCount,72,'Expanded case bank remains separate');
+assert.equal(previous.questionCount,144,'Expanded case questions remain separate');
 console.log('PASS 210 direct MCQ: 7 areas × 30, 6 categories × 35, A-D distribution='+dist.join('/'));
-console.log('PASS separate saved progress, offline bundle, filters, quiz logic and 37/74 original case preservation.');
+console.log('PASS separate saved progress, offline bundle, filters, quiz logic and 72/144 separate case bank.');

@@ -23,7 +23,7 @@ console.log('PASS 443 questions, preserved IDs and read-only radar aggregation')
 assert.equal(Object.keys(v.clinical).length,29);for(const a of Object.values(v.clinical)){assert.ok(a.credit&&a.license&&a.record.startsWith('https://'));const p='assets/enarm-clinical/'+a.file;assert.ok(sw.includes("'./"+p+"'"));const bytes=fs.readFileSync(p);assert.ok(bytes.length>1000&&bytes[0]===255&&bytes[1]===216,'Actual local JPEG '+p);}
 assert.match(fs.readFileSync('assets/enarm-visual-ui-draft.js','utf8'),/showModal\(/);
 
-assert.ok(v.items.every(q=>q.category!=='Epidemiología'));assert.equal(v.items.filter(q=>v.clinical[q.figure]).length,57);assert.equal(new Set(v.items.map(q=>q.id)).size,61);for(const id of ['visual-010','visual-011','visual-012'])assert.ok(!v.items.some(q=>q.id===id));const retired=a.aggregate(c,d,v,{visual:{'visual-010':{seen:3,right:2,wrong:1}}},r,1000);assert.equal(retired.unique,0);assert.equal(retired.total,373);
+assert.ok(v.items.every(q=>q.category!=='Epidemiología'));assert.equal(v.items.filter(q=>v.clinical[q.figure]).length,57);assert.equal(new Set(v.items.map(q=>q.id)).size,61);for(const id of ['visual-010','visual-011','visual-012'])assert.ok(!v.items.some(q=>q.id===id));const retired=a.aggregate(c,d,v,{visual:{'visual-010':{seen:3,right:2,wrong:1}}},r,1000);assert.equal(retired.unique,0);assert.equal(retired.total,443);
 
 assert.equal(new Set(v.items.map(q=>q.prompt)).size,61);for(const id of ['visual-033','visual-035','visual-037','visual-039','visual-041','visual-043'])assert.ok(v.clinical[v.items.find(q=>q.id===id).figure]);
 
