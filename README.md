@@ -1,3 +1,8 @@
+## v0.10.69 · ENARM Visual y Radar 2.0
+
+- 12 reactivos visuales, 8 ilustraciones sintéticas y 28 preguntas directas nuevas: 324 reactivos totales.
+- Radar unificado con datos reales; historiales locales sin migración. Revisión clínica independiente pendiente.
+
 # KidBum CALC 🩺
 
 **Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.**
