@@ -1,3 +1,7 @@
+## v0.10.74 · Oftalmología
+
+15 herramientas de refracción, agudeza visual, glaucoma, retina y trauma ocular, con referencias por instrumento. Portada original proporcionada por el usuario, archivo intacto. Total 154 herramientas. Uso educativo; revisión clínica independiente pendiente.
+
 ## v0.10.73 · ENARM Visual — Otoscopía
 
 - 20 reactivos nuevos y 10 fotografías otoscópicas reales con licencia individual: tres membranas normales, OMA, OME, perforación, colesteatoma, timpanosclerosis y tubo de ventilación.

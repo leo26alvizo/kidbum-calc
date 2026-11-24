@@ -86,14 +86,14 @@ vm.runInNewContext(scripts[0],ctx,{timeout:2000});
 /* These historical preservation tests predate two new APACHE II calculators.
    Check the original 68 separately AND verify both new IDs exist. */
 const clinicalIds=ctx.KidBumEngine.list;
-assert.equal(clinicalIds.length,85,'Total actual: 77 existing tools plus seven new scores and clinical references');
+assert.equal(clinicalIds.length,100,'Total actual: 77 existing tools plus seven new scores and clinical references');
 assert.ok(clinicalIds.includes('apache2')&&clinicalIds.includes('apache2quick'),'Both APACHE modes present');
 const newElectrolyteIds=['nadeficit','freewater','correctedca','osmgap','potassiumreview','bicarbdef'];
 for(const id of newElectrolyteIds)assert.ok(clinicalIds.includes(id),'New electrolyte engine must be present: '+id);
 assert.ok(clinicalIds.includes('urineoutputadult'),'Adult urine output must be available in renal section');
 const newClinicalImageIds=['sofa1','psiport','parklandburn','aldrete','apgar','devineibw','pedmathdose'];
 for(const id of newClinicalImageIds)assert.ok(clinicalIds.includes(id),'New reference present: '+id);
-const legacyCalculatorCount=clinicalIds.filter(id=>!['centor','apache2','apache2quick','urineoutputadult',...newElectrolyteIds,...newClinicalImageIds].includes(id)).length;
+const legacyCalculatorCount=clinicalIds.filter(id=>!id.startsWith('oph')&&!['centor','apache2','apache2quick','urineoutputadult',...newElectrolyteIds,...newClinicalImageIds].includes(id)).length;
 assert.equal(legacyCalculatorCount,68,'Original 68 calculator IDs preserved');
 
 const calc=(id,params)=>ctx.KidBumEngine.calculate(id,params);
@@ -755,4 +755,43 @@ if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(
  assert.match(run({...base,viral:'true'}).interpretation,/virales/i);
  assert.ok(clinicalIds.includes('centor'));
  console.log('PASS Centor/McIsaac: 48 combinations, age, missing data, alarms, viral and high risk');
+}
+
+// Ophthalmology: reference examples, invalid values and clinical boundaries.
+{
+ const run=(id,data)=>ctx.KidBumEngine.calculate(id,data);
+ const close=(id,data,value)=>assert.ok(Math.abs(run(id,data).value-value)<1e-8,id);
+ close('ophsnellen',{distance:'20',denominator:'40'},Math.log10(2));
+ close('ophsnellen',{distance:'6',denominator:'3'},-Math.log10(2));
+ close('ophlogmar',{logmar:'0.3'},10**(-.3));
+ close('ophse',{sphere:'-2',cylinder:'-1'},-2.5);
+ close('ophse',{sphere:'+2',cylinder:'-4'},0);
+ assert.ok(run('ophse',{sphere:'0x10',cylinder:'0'}).error);
+ assert.ok(run('ophse',{sphere:'',cylinder:'0'}).error);
+ assert.match(run('ophtranspose',{sphere:'-2',cylinder:'-1',axis:'90'}).display,/-3.00 \+1.00 × 180°/);
+ assert.match(run('ophtranspose',{sphere:'-3',cylinder:'1',axis:'180'}).display,/-2.00 -1.00 × 90°/);
+ assert.ok(run('ophtranspose',{sphere:'0',cylinder:'1',axis:'90.5'}).error);
+ close('ophvertex',{power:'-10',distance:'12'},-10/1.12);
+ assert.ok(run('ophvertex',{power:'40',distance:'25'}).error);
+ close('ophkerato',{flat:'7.8',steep:'7.6'},(337.5/7.8+337.5/7.6)/2);
+ assert.ok(run('ophkerato',{flat:'7.6',steep:'7.8'}).error);
+ close('ophprism',{angle:'45'},100);
+ close('ophiop',{baseline:'24',current:'18'},25);
+ close('ophiop',{baseline:'20',current:'24'},-20);
+ close('ophperf',{sbp:'120',dbp:'80',iop:'18'},2/3*(280/3)-18);
+ assert.ok(run('ophperf',{sbp:'80',dbp:'90',iop:'18'}).error);
+ assert.match(run('ophcup',{od:'.6',oi:'.4'}).interpretation,/≥0.2/);
+ const ots={va:'70',rupture:'true',endo:'false',perforating:'false',rd:'true',rapd:'true'};
+ close('ophots',ots,26);assert.match(run('ophots',ots).interpretation,/OTS 1/);
+ assert.ok(run('ophots',{...ots,perforating:'true'}).error);
+ const cas={pain:'true',gaze:'false',lidred:'false',conjred:'true',lidswell:'true',chemosis:'false',caruncle:'false'};
+ close('ophcas',cas,3);assert.match(run('ophcas',cas).interpretation,/activa/);
+ assert.ok(run('ophcas',{...cas,pain:''}).error);
+ const dr={view:'true',neo:'false',four:'false',two:'false',one:'false',other:'false',micro:'false'};
+ close('ophdr',dr,0);close('ophdr',{...dr,micro:'true'},1);close('ophdr',{...dr,other:'true'},2);close('ophdr',{...dr,two:'true'},3);close('ophdr',{...dr,neo:'true',four:'true'},4);assert.equal(run('ophdr',{...dr,view:'false'}).value,null);
+ close('ophhyphema',{grade:'0'},0);close('ophhyphema',{grade:'4'},4);assert.ok(run('ophhyphema',{grade:''}).error);
+ close('ophroper',{cornea:'3',limbus:'3'},3);assert.equal(run('ophroper',{cornea:'2',limbus:'4'}).value,null);
+ assert.equal(clinicalIds.filter(id=>id.startsWith('oph')).length,15);
+ const crypto=require('node:crypto');assert.equal(crypto.createHash('sha256').update(fs.readFileSync('assets/oftalmologia-portada-original.webp')).digest('hex'),'1364fb3b6766530b2bd5a28420a5b51b988d8eadfc30ae1866d1963ed9f8df03');
+ console.log('PASS 15 ophthalmology tools: signed inputs, boundary cases, clinical guards, original cover hash');
 }
