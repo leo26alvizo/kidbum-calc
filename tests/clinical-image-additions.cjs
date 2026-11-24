@@ -12,9 +12,9 @@ const defs=vm.runInNewContext(html.slice(html.indexOf('const dateInput='),html.i
 const a=html.indexOf('function validateClinicalInputs('),b=html.indexOf('function update(){',a);
 const guard=vm.runInNewContext(html.slice(a,b)+'\nvalidateClinicalInputs;',{}, {timeout:5000});
 const ids=['sofa1','psiport','parklandburn','aldrete','apgar','devineibw','pedmathdose'];
-assert.equal(e.list.length,84,'77 previous calculators plus seven new');
-assert.equal(defs.length,84,'All 84 cards visible');
-assert.equal(new Set(defs.map(d=>d.id)).size,84);
+assert.equal(e.list.length,85,'77 previous calculators plus seven new');
+assert.equal(defs.length,85,'All 85 cards visible');
+assert.equal(new Set(defs.map(d=>d.id)).size,85);
 const testData={};
 let count=0;
 function valid(id,modify,expected,word){
@@ -164,4 +164,4 @@ count++;
 invalid('pedmathdose',{weight:'20',dose:'10',times:'3',maxDose:'199.99',maxDay:'600'});
 invalid('pedmathdose',{weight:'20',dose:'10',times:'3',maxDose:'200',maxDay:'599.99'});
 
-console.log('Seven clinical image calculators PASSED: '+count+' independent boundary and safety cases; all 84 calculators retained.');
+console.log('Seven clinical image calculators PASSED: '+count+' independent boundary and safety cases; all 85 calculators retained.');
