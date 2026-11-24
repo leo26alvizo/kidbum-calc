@@ -1,0 +1,10 @@
+/* Uses shared clinical algorithm primitives. Original iris asset, unchanged. */
+.oph-alg-tile{background:linear-gradient(125deg,#152536,#254e64 65%,#43677c);border-color:#b49a61}
+.oph-alg-tile .urg-alg-tile-content b{color:#f6dfac}
+.oph-alg-tile .urg-alg-tile-content p{color:#eff7fb}
+.oph-alg-tile .urg-alg-tile-content strong{color:#193c50}
+.oph-alg-tile .urg-alg-tile-photo{filter:none;opacity:1;object-position:50%}
+body.alg-ophthalmology{--p-teal:#286078;--p-dark:#19384b;--p-soft:#eaf4f8;--p-bg:#f4f7f9;--p-line:#cbdde5}
+.alg-ophthalmology .alg-header{background:linear-gradient(110deg,#142b40 0%,#23475a 62%,#586a72 100%)}
+.alg-ophthalmology .alg-kicker{color:#f6dfac}
+html.dark body.alg-ophthalmology{--p-teal:#9bd5ed;--p-bg:#141a20;--p-card:#202832;--p-line:#45515c;--p-soft:#233641;--p-ink:#f5f4f5;--p-muted:#b5bdc4}

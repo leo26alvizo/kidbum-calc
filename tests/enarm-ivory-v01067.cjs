@@ -11,12 +11,12 @@ assert.equal(bank.caseCount,37,'Case bank preserved');
 assert.equal(bank.questionCount,74,'Question count preserved');
 assert.equal(bank.areas.length,7,'Specialties preserved');
 assert.deepEqual(Array.from(radar.INTERVALS),[1,3,7,14,30,60],'Spaced repetition schedule unchanged');
-assert.match(html,/kidbum-app-version" content="0\.10\.74"/);
-assert.match(home,/kidbum-app-version" content="0\.10\.74"/);
-assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.74"/);
-assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.74'/);
-assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.74'/);
-assert.match(sw,/const RELEASE='0\.10\.74'/);
+assert.match(html,/kidbum-app-version" content="0\.10\.75"/);
+assert.match(home,/kidbum-app-version" content="0\.10\.75"/);
+assert.match(read('pharma-pro.html'),/kidbum-app-version" content="0\.10\.75"/);
+assert.match(read('release-check.js'),/KidBumPublicRelease = '0\.10\.75'/);
+assert.match(read('assets/pwa-update-v01060.js'),/const VERSION='0\.10\.75'/);
+assert.match(sw,/const RELEASE='0\.10\.75'/);
 assert.match(sw,/cobalt-v01066-ivory-v01067/);
 for(const asset of ['assets/enarm-ivory-v01067.css','assets/enarm-hero-ivory-v01067.svg']){
  assert.ok(sw.includes("'./"+asset+"'"),'Offline PWA must precache '+asset);

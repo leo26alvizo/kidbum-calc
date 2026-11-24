@@ -47,7 +47,7 @@ const context={
 vm.runInNewContext(sw+'\nself.__offlineAssets=CORE_ASSETS;',context,{timeout:3000});
 const packed=Array.from(self.__offlineAssets);
 const packedSet=new Set(packed);
-const mustHave=[
+const mustHave=['algoritmos-oftalmologia.html','assets/oftalmologia-algoritmos-core-v01075.js','assets/oftalmologia-algoritmos-ui-v01075.js','assets/oftalmologia-algoritmos-v01075.css',
  'index.html','expansion-20.html','geriatria-escalas.html','hepatologia-indices.html','guardia-pro.html','escalas-cardioembolia.html',
  'capurro.html','wallace-adultos.html','snnoop10.html','pharma-pro.html','pediatria-evaluacion-rapida.html',
  'documentacion.html','historia-pediatria.html','atlas-gallery.html',
@@ -77,6 +77,7 @@ for(const p of pages){
  }
 }
 assert.ok(packedSet.has('./assets/oftalmologia-portada-original.webp'));
+for(const p of ["algoritmos-oftalmologia.html","assets/oftalmologia-algoritmos-core-v01075.js","assets/oftalmologia-algoritmos-ui-v01075.js","assets/oftalmologia-algoritmos-v01075.css"])assert.ok(packedSet.has('./'+p));
 const sourceSize=packed.reduce((n,p)=>n+fs.statSync(p).size,0);
 const otoSize=packed.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).reduce((n,p)=>n+fs.statSync(p).size,0);
 const eyeSize=fs.statSync('assets/oftalmologia-portada-original.webp').size;

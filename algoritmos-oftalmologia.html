@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es" data-kb-page="oftalmologia-algoritmos">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#11283a">
+<meta name="kidbum-app-version" content="0.10.75">
+<meta name="description" content="Algoritmos de Oftalmología: valoración inicial, urgencias visuales, trauma y retina.">
+<title>Algoritmos clínicos · Oftalmología · KidBum</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="stylesheet" href="./assets/pediatria-algoritmos-v01051.css">
+<link rel="stylesheet" href="./assets/pediatria-farmaco-bridge-v01054.css">
+<link rel="stylesheet" href="./assets/oftalmologia-algoritmos-v01075.css">
+<script>
+try{if(localStorage.getItem('kidbum-theme')==='dark'||(localStorage.getItem('kidbum-theme')===null&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}
+</script>
+<script src="./assets/theme-chrome-v01036.js" defer></script>
+<link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head>
+<body class="alg-peds alg-ophthalmology">
+<header class="alg-header"><div class="alg-header-in">
+ <nav class="alg-nav" aria-label="Navegación"><a class="alg-back" href="./index.html?especialidad=oftalmologia">← Oftalmología · KidBum</a><span class="alg-version">v0.10.75 · offline</span></nav>
+ <div class="alg-kicker">◉ KidBum · Oftalmología</div>
+ <h1>Algoritmos clínicos de<br>Oftalmología.</h1>
+ <p class="alg-hero-text">Valoración inicial, decisiones por hallazgos y criterios de referencia. Rutas para personal sanitario; la exploración y el tratamiento oportuno tienen prioridad.</p>
+ <div class="alg-hero-bottom"><span class="alg-hero-chip">16 rutas clínicas</span><span class="alg-hero-chip">⚡ Guardia</span><span class="alg-hero-chip">📖 Estudio</span><span class="alg-hero-chip">📴 Sin conexión</span></div>
+</div></header>
+<main class="alg-main" id="alg-main">
+<div class="alg-alert" role="note"><span aria-hidden="true">⚠</span><div><b>La atención precede al algoritmo</b>Pérdida visual súbita, exposición química, sospecha de globo abierto o deterioro sistémico: activar atención inmediata. No demorar irrigación de una exposición química aislada. No realizar tonometría ni ejercer presión ante posible globo abierto.</div></div>
+<section class="alg-library" id="alg-library" aria-labelledby="alg-library-title">
+ <div class="alg-search">
+  <div><label for="alg-search-input">Buscar problema o síndrome</label><input type="search" id="alg-search-input" autocomplete="off" placeholder="Ej. ojo rojo, retina, trauma…"></div>
+  <div class="alg-chips" id="alg-chips" role="group" aria-label="Filtrar rutas de Oftalmología"><button type="button" class="alg-chip" data-category="all" aria-pressed="true">Todas</button><button type="button" class="alg-chip" data-category="Segmento anterior" aria-pressed="false">Segmento anterior</button><button type="button" class="alg-chip" data-category="Retina y neurooftalmología" aria-pressed="false">Retina y neurooftalmología</button><button type="button" class="alg-chip" data-category="Trauma ocular" aria-pressed="false">Trauma ocular</button><button type="button" class="alg-chip" data-category="Órbita e infecciones" aria-pressed="false">Órbita e infecciones</button></div>
+ </div>
+ <div class="alg-section-intro"><h2 id="alg-library-title">Selecciona un problema ocular</h2><span id="alg-count" class="alg-count" aria-live="polite"></span></div>
+ <div id="alg-grid" class="alg-grid"></div>
+ <div class="alg-safety-note">Cada ruta incluye ámbito, hallazgos de alarma, incertidumbre y conducta. No autoriza alta ni prescripción. Revisión clínica independiente pendiente.</div>
+</section>
+<section class="alg-flow" id="alg-flow" aria-labelledby="alg-flow-title" hidden>
+ <div class="alg-flow-header">
+  <button type="button" id="alg-to-library" class="alg-flow-return">← Los 16 algoritmos</button>
+  <div class="alg-flow-heading"><span id="alg-flow-icon" aria-hidden="true">🚨</span><div><h2 id="alg-flow-title">Algoritmo</h2><p id="alg-flow-subtitle"></p></div></div>
+  <div class="alg-mode"><span>Visualización:</span><div><button type="button" id="alg-mode-guardia" aria-pressed="true">⚡ Guardia</button> <button type="button" id="alg-mode-estudio" aria-pressed="false">📖 Estudio</button></div></div>
+ </div>
+ <div id="alg-rail" class="alg-rail" role="img" aria-label="Progreso del algoritmo"></div>
+ <div id="alg-interaction" aria-live="polite" aria-atomic="true"></div>
+ <div id="alg-tools" class="alg-tools" aria-label="Herramientas relacionadas" hidden></div>
+ <div class="alg-actions"><button type="button" class="alg-secondary" id="alg-back-step">← Anterior</button><button type="button" class="alg-secondary" id="alg-restart">↺ Reiniciar</button><button type="button" class="alg-secondary" id="alg-theme">◐ Tema</button></div>
+ <p id="alg-trail" class="alg-trail"></p>
+ <details class="alg-evidence" id="alg-evidence"><summary>📚 Ámbito, exclusiones y fuentes</summary><div id="alg-evidence-content"></div></details>
+ <p class="alg-safety-note">Apoyo educativo. No sustituye exploración, protocolos hospitalarios ni supervisión especializada. No se guardan datos clínicos.</p>
+</section>
+</main>
+<footer class="alg-footer">KidBum · Oftalmología v0.10.75 · 16 rutas · Fuentes consultables · Revisión clínica independiente pendiente</footer>
+<script src="./assets/oftalmologia-algoritmos-core-v01075.js"></script>
+<script src="./assets/oftalmologia-algoritmos-ui-v01075.js"></script>
+</body></html>
