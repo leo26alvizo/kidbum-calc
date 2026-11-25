@@ -1,3 +1,7 @@
+## v0.10.95 · SAMPLE pediátrico
+
+Herramienta independiente de interrogatorio rápido: seis apartados, preguntas guía adaptadas a niños/cuidadores, ejemplo ficticio, limpieza y resumen copiable. Acceso desde tarjeta Pediatría y biblioteca/rutas de algoritmos pediátricos en pestaña separada, sin bloquear ABCDE. Campos sin datos predeterminados, desconocidos no inferidos como negativos, sin persistencia de datos clínicos. Se mantiene el recuento de 191 calculadoras porque SAMPLE no puntúa. Referencia OMS/CICR Basic Emergency Care (2018), capítulo ABCDE y SAMPLE. Pruebas de motor, navegación móvil y caché añadidas.
+
 ## v0.10.94 · Neurología ↔ Pharma PRO
 
 21 enlaces contextuales en ocho desenlaces de siete rutas, 16 principios activos con registro existente para adultos. Consulta en otra pestaña sin perder el algoritmo, advertencias y alternativas, sin dosis nuevas ni prescripción automática. No muestra medicamentos ante información insuficiente o diagnóstico diferencial. Guillain-Barré: falta ficha específica de inmunoglobulina humana IV; HSA: nimodipino solo en índice sin población verificada. AHA/ASA 2026, NICE NG128/217/240/234/220 y AAO-HNS Bell como referencias. Verificación de 64 desenlaces contra catálogo realizada; validación clínica independiente pendiente.
