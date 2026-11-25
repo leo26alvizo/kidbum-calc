@@ -542,6 +542,11 @@ async function main(){
     await noHorizontalOverflow(page,'Neuro Pharma');
    }finally{await context.close()}
   });
+  await test('SAMPLE pediátrico — rapid history, example and clear',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/index.html?especialidad=pediatria',{waitUntil:'domcontentloaded'});await page.locator('[data-ped-sample]').click();await page.waitForURL('**/pediatria-sample.html');assert.equal(await page.locator('#sample-fields textarea').count(),6);assert.equal(await page.locator('#sample-copy').isEnabled(),false);await page.locator('#sample-example').click();assert.match(await page.locator('#sample-summary').innerText(),/EJEMPLO FICTICIO/);assert.match(await page.locator('#sample-progress').innerText(),/6 de 6/);await page.locator('#sample-clear').click();assert.match(await page.locator('#sample-progress').innerText(),/0 de 6/);await page.locator('#sample-S').fill('Fiebre ficticia');assert.match(await page.locator('#sample-summary').innerText(),/Fiebre ficticia/);assert.match(await page.locator('#sample-summary').innerText(),/No documentado/);await noHorizontalOverflow(page,'SAMPLE');assert.deepEqual(errors,[]);
+   }finally{await context.close()}
+  });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}
  else console.log('All responsive clinical-results smoke tests passed');
