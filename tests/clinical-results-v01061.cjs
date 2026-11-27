@@ -554,8 +554,9 @@ async function main(){
    try{
     await context.addInitScript(()=>{try{Object.defineProperty(navigator,'connection',{configurable:true,value:{type:'cellular',effectiveType:'3g',saveData:true}})}catch(e){}});
     cellularFailure={path:'/assets/enarm-clinical/oto-10.jpg',remaining:4,requests:new Map()};
-    const page=await context.newPage();await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});
-    await page.waitForFunction(async()=>{const r=await navigator.serviceWorker.getRegistration();return !r?.installing&&!(r?.active)&&((await caches.keys()).some(x=>x.startsWith('kidbum-calc-')))},null,{timeout:90000});
+    const page=await context.newPage();await page.goto(base+'/actualizar.html',{waitUntil:'domcontentloaded'});
+    const result=await page.evaluate(async()=>{const reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});const w=reg.installing||reg.waiting||reg.active;if(!w)return 'missing';return await new Promise(resolve=>{const timer=setTimeout(()=>resolve('timeout'),90000);const check=()=>{if(w.state==='redundant'||w.state==='activated'){clearTimeout(timer);resolve(w.state)}};w.addEventListener('statechange',check);check()})});
+    assert.equal(result,'redundant','Worker must reject the interrupted candidate');
     assert.equal(cellularFailure.remaining,0,'Simulated outage exhausted all four retries');
     const previous='/assets/neurologia-farma-bridge-v01094.js',before=cellularFailure.requests.get(previous)||0;
     assert.ok(before>0,'Earlier resource downloaded before interruption');
