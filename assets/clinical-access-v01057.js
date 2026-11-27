@@ -87,7 +87,7 @@
   const set=message=>{node.textContent=message;node.dataset.connection=connected?'online':'offline';const side=document.getElementById('net-label');if(side)side.textContent=message;};
   if(!('serviceWorker'in navigator)||!('caches'in window)){set(connected?'Conexión detectada · modo offline no verificado':'Sin red · recursos offline no verificados');return;}
   caches.keys().then(async names=>{
-   const candidates=names.filter(n=>n.startsWith('kidbum-calc-')).reverse();
+   const candidates=navigator.serviceWorker.controller?names.filter(n=>n.startsWith('kidbum-calc-')).reverse():[];
    let ready=false;
    for(const name of candidates){
     const cache=await caches.open(name);

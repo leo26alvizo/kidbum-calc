@@ -9,11 +9,12 @@ const home=fs.readFileSync('index.html','utf8');
 const origin='https://leo26alvizo.github.io/kidbum-calc/';
 const normalize=req=>new URL(typeof req==='string'?req:req.url,origin).href;
 const entries=new Map();
-let networkCalls=0;
+let networkCalls=0,installing=true;
 const handlers={};
 class FakeResponse {
  constructor(path){this.body=path;this.ok=true;this.status=200;}
  clone(){return new FakeResponse(this.body);}
+ async arrayBuffer(){const b=fs.readFileSync(this.body);return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);}
 }
 const cache={
  async addAll(paths){
@@ -39,9 +40,9 @@ const self={
  addEventListener:(name,listener)=>{handlers[name]=listener;}
 };
 const context={
- self,URL,Request,AbortController,setTimeout,clearTimeout,
+ self,URL,Request,AbortController,TextEncoder,crypto:require('node:crypto').webcrypto,setTimeout,clearTimeout,
  caches:{open:async()=>cache,keys:async()=>['kidbum-calc-old'],delete:async()=>true},
- fetch:async()=>{networkCalls++;throw Error('No Wi-Fi, no cellular data');},
+ fetch:async req=>{if(installing){assert.equal(req.cache,'no-store');const p='./'+new URL(req.url).pathname.slice(new URL(origin).pathname.length);assert.ok(fs.existsSync(p));return new FakeResponse(p);}networkCalls++;throw Error('No Wi-Fi, no cellular data');},
  Response:{error:()=>({status:0,body:'unavailable'})}
 };
 vm.runInNewContext(sw+'\nself.__offlineAssets=CORE_ASSETS;',context,{timeout:3000});
@@ -104,7 +105,7 @@ async function navigate(path){
 (async()=>{
  const installs=[];
  handlers.install({waitUntil:p=>installs.push(p)});
- await Promise.all(installs);
+ await Promise.all(installs);installing=false;
  for(const p of mustHave)await navigate('./'+p);
  for(const p of pages)await navigate('./'+p);
  for(const match of external)await navigate(match[2].split('#')[0]);
