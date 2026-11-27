@@ -11,8 +11,9 @@ const events={};
 const keys=new Map();
 const resolved=x=>new URL(typeof x==='string'?x:x.url,origin).href;
 class FakeResponse{
- constructor(body,status=200){this.body=body;this.status=status;this.ok=status>=200&&status<300;}
- clone(){return new FakeResponse(this.body,this.status);}
+ constructor(body,status=200,bytes=null){this.body=body;this.status=status;this.ok=status>=200&&status<300;this.bytes=bytes;}
+ clone(){return new FakeResponse(this.body,this.status,this.bytes);}
+ async arrayBuffer(){const b=this.bytes||Buffer.from(this.body);return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength);}
 }
 const fakeCache={
  async addAll(list){
@@ -43,14 +44,14 @@ const caches={
  async delete(name){cacheNames.delete(name);return true;}
 };
 let networkCalls=0;
-let fetchImplementation=()=>Promise.reject(Error('Simulated cellular timeout'));
+let fetchImplementation=req=>{assert.equal(req.cache,'no-store');const p='./'+new URL(req.url).pathname.slice(new URL(origin).pathname.length);return Promise.resolve(new FakeResponse('cached:'+p,200,fs.readFileSync(p)));};
 const self={
  registration:{scope:origin},
  clients:{claim:async()=>true},
  skipWaiting:async()=>true,
  addEventListener:(type,handler)=>{events[type]=handler;}
 };
-const ctx={self,caches,URL,Request,AbortController,Response,
+const ctx={self,caches,URL,Request,AbortController,Response,TextEncoder,crypto:require('node:crypto').webcrypto,
  fetch:(req,options)=>{networkCalls++;return fetchImplementation(req,options);},
  setTimeout,clearTimeout};
 vm.runInNewContext(source,ctx,{timeout:3000});
@@ -58,12 +59,12 @@ assert.ok(events.install&&events.fetch&&events.activate,'SW handlers registered'
 const installWaits=[];
 events.install({waitUntil:x=>installWaits.push(x)});
 (async()=>{
- await Promise.all(installWaits);
+ await Promise.all(installWaits);networkCalls=0;fetchImplementation=()=>Promise.reject(Error('Simulated cellular timeout'));
  assert.ok(keys.has(origin+'index.html'),'App shell must be precached');
  assert.ok(keys.has(origin+'assets/startup-bundle.js'),'All clinical calculators must be precached');
  assert.ok(keys.has(origin+'assets/pediatric-pharma.js'),'Medication safety engine must be precached');
  assert.ok(keys.has(origin+'assets/medical-atlas.js'),'Atlas must be precached');
- assert.ok(source.includes('const NETWORK_DEADLINE_MS=6500'),'Network requests have finite wait');
+ assert.ok(source.includes('const NETWORK_DEADLINE_MS=45000'),'Network requests have finite wait');
 
  async function simulate(path,mode='navigate'){
   const evt={request:{url:new URL(path,origin).href,mode,method:'GET'},
@@ -108,7 +109,7 @@ events.install({waitUntil:x=>installWaits.push(x)});
  assert.ok(!html.includes("window.addEventListener('load',()=>{"),'Registration must not await slow images');
  assert.ok(html.includes("navigator.serviceWorker.register('./sw.js'"),'Service worker registers immediately');
  assert.ok(!html.includes('window.location.assign(url.toString())'),'Manual update must not force a network-dependent reload');
- assert.ok(fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('AbortController')&&fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('withDeadline(registration.update(),15000)'),
+ assert.ok(fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('AbortController')&&fs.readFileSync('assets/pwa-update-v01060.js','utf8').includes('withDeadline(registration.update(),60000)'),
  'Manual update must have bounded checks without forced reload');
  assert.ok(!source.includes('await fetch(req,{cache:'),'App navigation must not be network-first');
  console.log('Mobile-data and offline PWA tests PASSED (cached pages/clinical artwork/HD anatomy, optional lazy assets, update safety)');

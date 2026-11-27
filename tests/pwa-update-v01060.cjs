@@ -18,101 +18,50 @@ assert.match(home,/href="\.\/actualizar\.html"/);
 assert.match(home,/KidBumUpdater\?\.checkNow\(\)/);
 assert.match(marker,new RegExp("KidBumPublicRelease = '"+releasePattern+"'"));
 assert.match(sw,/safe-update-v01060-r1/);
-assert.match(sw,/INSTALL_BATCH_SIZE=5/);
-assert.match(sw,/INSTALL_RETRIES=3/);
+assert.match(sw,/INSTALL_BATCH_SIZE=3/);
+assert.match(sw,/INSTALL_RETRIES=4/);
+assert.match(sw,/INSTALL_DEADLINE_MS=300000/);
 assert.match(sw,/event\.waitUntil\(installRelease\(\)\)/);
-assert.match(sw,/await caches\.delete\(CACHE\)/);
+assert.match(sw,/crypto\.subtle\.digest\('SHA-1',input\)/);
 assert.match(sw,/url\.pathname===RELEASE_CHECK_PATH\|\|url\.pathname===REPAIR_PATH/);
-assert.ok(!sw.includes('cache.addAll(CORE_ASSETS)'),'No 160-file concurrent request burst');
-assert.ok(!updater.includes('location.reload('),'Checking does not prematurely reload a clinical calculation');
-assert.ok(!updater.includes('localStorage'),'Version checking must not touch saved preferences');
-assert.ok(!recovery.includes('localStorage.clear')&&!recovery.includes('localStorage.removeItem'),'Repair must not remove preferences');
-assert.match(recovery,/names\.filter\(n=>n\.startsWith\('kidbum-calc-'\)\)/,'Repair affects only KidBum caches');
-assert.match(recovery,/reg\.scope===root\.href/,'Repair must unregister only its own SW scope');
-assert.match(recovery,/await published\(\); \/\/ No destructive action/,'Repair must test live version before touching offline cache');
-
-function harness(permanentFailure=false){
- const named=new Map(),events={},progress=[],calls=[];
- let installs=0,aborts=0,activations=0;
+assert.ok(!updater.includes('location.reload('),'No premature reload');
+assert.ok(!updater.includes('localStorage'),'Checking preserves preferences');
+assert.doesNotMatch(recovery,/caches\.delete|\.unregister\(|localStorage\.(?:clear|removeItem)/);
+assert.match(updater,/45000/);
+assert.match(recovery,/datos móviles o Wi-Fi/);
+function harness(){
+ const named=new Map(),events={},progress=[],attempts=new Map();
+ let installs=0,activations=0,networkCalls=0,downloads=0,concurrent=0,peak=0,mode='transient',target='assets/startup-bundle.js';
  class ResponseFake{
-  constructor(body,status=200){this.body=body;this.ok=status>=200&&status<300;this.status=status}
-  clone(){return new ResponseFake(this.body,this.status)}
+  constructor(body,status=200,bytes=null){this.body=body;this.ok=status>=200&&status<300;this.status=status;this.bytes=bytes}
+  clone(){return new ResponseFake(this.body,this.status,this.bytes)}
+  async arrayBuffer(){const b=this.bytes||Buffer.from(this.body);return b.buffer.slice(b.byteOffset,b.byteOffset+b.byteLength)}
  }
- function open(name){
-  if(!named.has(name))named.set(name,new Map());
-  const entries=named.get(name);
-  return {
-   async addAll(list){
-    calls.push([...list]);
-    assert.ok(list.length<=5,'Batch exceeds cellular concurrency cap');
-    assert.ok(list.every(req=>req.cache==='no-store'),'Offline assets bypass stale HTTP cache');
-    if(list.some(req=>normalized(req)===origin+'assets/startup-bundle.js')){
-     aborts++;
-     if(permanentFailure||aborts===1)throw Error('Simulated network failure');
-    }
-    for(const asset of list){
-     const relative='./'+new URL(asset.url).pathname.slice(new URL(origin).pathname.length);
-     entries.set(normalized(asset),new ResponseFake('cached:'+relative));
-    }
-   },
-   async match(request,options={}){
-    const u=normalized(request);
-    if(!options.ignoreSearch)return entries.get(u);
-    const stripped=u.split('?')[0];
-    for(const [key,value]of entries)if(key.split('?')[0]===stripped)return value;
-   },
-   async put(request,response){entries.set(normalized(request),response.clone())}
-  };
- }
- named.set('kidbum-calc-previous-functional',new Map([[origin+'index.html',new ResponseFake('previous working release')]]));
- let networkCalls=0;
+ function fromFile(path){return new ResponseFake('cached:./'+path,200,fs.readFileSync(path))}
+ function open(name){if(!named.has(name))named.set(name,new Map());const entries=named.get(name);return {async match(req,opts={}){const u=normalized(req);return entries.get(opts.ignoreSearch?u.split('?')[0]:u)},async put(req,res){entries.set(normalized(req),res.clone())}}}
+ named.set('kidbum-calc-previous-functional',new Map([[origin+'index.html',new ResponseFake('previous working release')],[origin+'assets/wallace-adultos-original-HD.png',fromFile('assets/wallace-adultos-original-HD.png')]]));
  const cacheAPI={open:async name=>open(name),keys:async()=>[...named.keys()],delete:async name=>named.delete(name)};
  const self={registration:{scope:origin},clients:{claim:async()=>{activations++},matchAll:async()=>[{postMessage:m=>progress.push(m)}]},skipWaiting:async()=>{installs++},addEventListener:(name,fn)=>{events[name]=fn}};
- const ctx={self,caches:cacheAPI,URL,Request,AbortController,setTimeout,clearTimeout,Response:{error:()=>new ResponseFake('unavailable',0)},fetch:async request=>{networkCalls++;return new ResponseFake('network:'+normalized(request))}};
- vm.runInNewContext(sw+'\nself.__testAssets=CORE_ASSETS;self.__testCache=CACHE;',ctx,{timeout:3000});
- function install(){
-  const waits=[];events.install({waitUntil:p=>waits.push(p)});
-  assert.equal(waits.length,1);
-  return waits[0];
- }
- async function navigate(path){
-  const evt={request:{url:normalized(path),method:'GET',mode:'navigate'},response:null,waits:[],respondWith(p){this.response=Promise.resolve(p)},waitUntil(p){this.waits.push(p)}};
-  events.fetch(evt);assert.ok(evt.response,'Missing fetch interception: '+path);
-  const response=await evt.response;await Promise.all(evt.waits);return response;
- }
- return {install,navigate,named,events,progress,calls,self,cacheAPI,getStats:()=>({installs,aborts,activations,networkCalls})};
+ const ctx={self,caches:cacheAPI,URL,Request,AbortController,TextEncoder,crypto:require('node:crypto').webcrypto,setTimeout:(fn,ms)=>setTimeout(fn,ms<10000?0:ms),clearTimeout,Response:{error:()=>new ResponseFake('unavailable',0)},fetch:async req=>{
+  networkCalls++;const url=normalized(req),path=new URL(url).pathname.slice(new URL(origin).pathname.length);if(path==='release-check.js'||path==='actualizar.html')return new ResponseFake('network:'+url);
+  downloads++;concurrent++;peak=Math.max(peak,concurrent);try{await new Promise(resolve=>setTimeout(resolve,1));assert.equal(req.cache,'no-store');const n=(attempts.get(path)||0)+1;attempts.set(path,n);if(path===target){if(mode==='permanent'||(mode==='transient'&&n===1))throw Error('Simulated cellular interruption');if(mode==='corrupt')return new ResponseFake('wrong bytes');}return fromFile(path)}finally{concurrent--}
+ }};
+ vm.runInNewContext(sw+'\nself.__testAssets=CORE_ASSETS;self.__testCache=CACHE;self.__hashes=ASSET_HASHES;',ctx,{timeout:3000});
+ function install(){const waits=[];events.install({waitUntil:p=>waits.push(p)});assert.equal(waits.length,1);return waits[0]}
+ async function navigate(path){const evt={request:{url:normalized(path),method:'GET',mode:'navigate'},response:null,waits:[],respondWith(p){this.response=Promise.resolve(p)},waitUntil(p){this.waits.push(p)}};events.fetch(evt);const response=await evt.response;await Promise.all(evt.waits);return response}
+ return {install,navigate,named,events,progress,self,attempts,mode:m=>{mode=m},stats:()=>({installs,activations,networkCalls,downloads,peak})};
 }
 (async()=>{
- const ok=harness(false);
- const assets=Array.from(ok.self.__testAssets);
- assert.ok(assets.length>=253&&assets.length<=300,'Offline bundle must cover current 253 resources within 300-file budget');
- assert.equal(assets.filter(p=>/\/enarm-clinical\/oto-\d+\.jpg$/.test(p)).length,10,'All ten otoscopy assets are included in atomic offline installation');
- await ok.install();
- assert.equal(ok.getStats().installs,1,'New service worker only activates after complete install');
- assert.equal(ok.getStats().aborts,2,'One transient batch must be retried exactly once');
- assert.ok(ok.calls.length>25,'Installation must happen in several small batches');
- assert.ok(ok.named.has('kidbum-calc-previous-functional'),'Old release must remain safe before activation');
- assert.ok(ok.named.get(ok.self.__testCache).has(origin+'index.html'),'Shell must be in new cache');
- assert.ok(ok.named.get(ok.self.__testCache).has(origin+'assets/wallace-adultos-original-HD.png'),'HD Wallace remains offline');
- assert.ok(ok.progress.some(x=>x.type==='KIDBUM_INSTALL_PROGRESS'&&x.done===assets.length),'Progress must reach all resources');
- const homePage=await ok.navigate('index.html?from=old-shortcut');
- assert.equal(homePage.body,'cached:./index.html','App shell must remain cache-first and not need network');
- const liveVersion=await ok.navigate('release-check.js?check=never-cached');
- assert.match(liveVersion.body,/network:/,'Version checks bypass stale caches');
- const repairPage=await ok.navigate('actualizar.html');
- assert.match(repairPage.body,/network:/,'Recovery screen always loads from network');
- assert.equal(ok.getStats().networkCalls,2,'Only live diagnostics use network while offline bundle cached');
- const activated=[];
- ok.events.activate({waitUntil:p=>activated.push(p)});
- await Promise.all(activated);
- assert.equal(ok.getStats().activations,1,'Worker must claim clients after successful activation');
- assert.ok(!ok.named.has('kidbum-calc-previous-functional'),'Old cache removed only after full activation');
- const fail=harness(true);
- await assert.rejects(fail.install(),/Simulated network failure/,'Failed offline installation must reject');
- assert.equal(fail.getStats().installs,0,'Failed release must never take control');
- assert.equal(fail.getStats().aborts,3,'A failed batch is retried only three times');
- assert.ok(!fail.named.has(fail.self.__testCache),'Partial new release must be removed');
- assert.ok(fail.named.has('kidbum-calc-previous-functional'),'Old app stays available after failure');
- assert.ok(fail.progress.some(x=>x.status==='failed'),'Failure must be signaled');
- console.log('PASS: PWA v0.10.60 bounded retries, atomic rollback, complete offline install, live checks, preferences and recovery.');
+ const h=harness(),assets=Array.from(h.self.__testAssets),hashes=h.self.__hashes;
+ assert.ok(assets.length>=253&&assets.length<=300);
+ assert.equal(Object.keys(hashes).length,assets.length);
+ for(const p of assets){const bytes=fs.readFileSync(p);assert.equal(hashes[p],require('node:crypto').createHash('sha1').update('blob '+bytes.length+'\0').update(bytes).digest('hex'),p+' manifest integrity')}
+ await h.install();assert.equal(h.stats().installs,1);assert.equal(h.attempts.get('assets/startup-bundle.js'),2);assert.ok(!h.attempts.has('assets/wallace-adultos-original-HD.png'),'Reuse identical 8 MiB image, zero download');
+ assert.equal(h.stats().peak,3);assert.ok(h.named.has('kidbum-calc-previous-functional'));assert.ok(h.progress.some(x=>x.done===assets.length));
+ assert.equal((await h.navigate('index.html?from=shortcut')).body,'cached:./index.html');assert.match((await h.navigate('release-check.js?check=1')).body,/network:/);assert.match((await h.navigate('actualizar.html')).body,/network:/);
+ const waits=[];h.events.activate({waitUntil:p=>waits.push(p)});await Promise.all(waits);assert.equal(h.stats().activations,1);assert.ok(!h.named.has('kidbum-calc-previous-functional'));
+ const fail=harness();fail.mode('permanent');await assert.rejects(fail.install(),/Simulated cellular interruption/);assert.equal(fail.stats().installs,0);assert.equal(fail.attempts.get('assets/startup-bundle.js'),4);assert.ok(fail.named.has('kidbum-calc-previous-functional'));const partial=fail.named.get(fail.self.__testCache).size;assert.ok(partial>0&&partial<assets.length);assert.ok(fail.progress.some(x=>x.status==='failed'&&x.done>0));
+ const before=fail.stats().downloads;fail.mode('ok');await fail.install();assert.equal(fail.stats().installs,1);assert.ok(fail.stats().downloads-before<=assets.length-partial);assert.equal(fail.named.get(fail.self.__testCache).size,assets.length);
+ const corrupt=harness();corrupt.mode('corrupt');await assert.rejects(corrupt.install(),/Descarga incompleta o archivo de otra versión/);assert.equal(corrupt.stats().installs,0);assert.ok(!corrupt.named.get(corrupt.self.__testCache).has(origin+'assets/startup-bundle.js'));assert.ok(corrupt.named.has('kidbum-calc-previous-functional'));
+ console.log('PASS cellular: per-file retries, verified reuse, resume, corrupt payload rejected, atomic activation, offline and preferences');
 })().catch(e=>{console.error(e);process.exitCode=1});

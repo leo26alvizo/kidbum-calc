@@ -7,7 +7,7 @@
  if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis,function(root){
  'use strict';
- const VERSION='0.10.94';
+ const VERSION='0.10.96';
  let seenRegistration=null,initiallyControlled=false,started=false,lastMessage='';
  const $=id=>root.document?.getElementById(id);
  function parseRelease(text){
@@ -33,7 +33,7 @@
   if(root.navigator?.onLine===false)throw Error('Sin conexión a internet');
   const url=new URL('./release-check.js',root.location.href);
   url.searchParams.set('comprobar',String(Date.now())+'-'+Math.random().toString(36).slice(2));
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8500);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),45000);
   try{
    const response=await root.fetch(url.href,{cache:'no-store',signal:controller.signal});
    if(!response.ok)throw Error('HTTP '+response.status);
@@ -47,10 +47,10 @@
   worker.__kidbumWatched=true;
   function reflect(){
    const state=worker.state;
-   if(state==='installing')say('Descargando nueva versión. Puedes seguir usando la anterior mientras termina.');
+   if(state==='installing')say('Descargando con datos móviles o Wi-Fi. Puedes seguir usando la versión anterior mientras termina.');
    else if(state==='installed')say('Archivos descargados; esperando activación completa.');
    else if(state==='activating')say('Activando la nueva versión.');
-   else if(state==='redundant')say('La instalación no terminó. La copia anterior sigue disponible. Abre «Recuperar actualización» si persiste.','error');
+   else if(state==='redundant')say('La instalación no terminó. Se conservan los archivos verificados y la copia anterior. Pulsa Buscar actualización para continuar.','error');
   }
   worker.addEventListener('statechange',reflect);
   reflect();
@@ -72,10 +72,10 @@
    const info=event.data;
    if(!info||info.type!=='KIDBUM_INSTALL_PROGRESS'||typeof info.version!=='string'||!/^[0-9]+(?:\.[0-9]+){2}$/.test(info.version))return;
    if(info.status==='failed'){
-    say('Falló una descarga. Se conserva la versión anterior; revisa tu conexión y prueba otra vez.','error');
+    say('Descarga interrumpida. Los archivos verificados y la versión anterior se conservan; vuelve a intentar con datos móviles o Wi-Fi.','error');
     return;
    }
-   say('Preparando uso sin conexión: '+info.done+' de '+info.total+' archivos descargados.');
+   say('Preparando uso sin conexión: '+info.done+' de '+info.total+' archivos verificados (descargados o reutilizados).');
   });
   root.navigator.serviceWorker.addEventListener('controllerchange',()=>{
    if(initiallyControlled){
@@ -86,6 +86,7 @@
    }
   });
   root.navigator.serviceWorker.getRegistration().then(watch).catch(()=>{});
+  root.addEventListener?.('online',()=>{root.navigator.serviceWorker.getRegistration().then(reg=>{if(reg&&!reg.installing&&!reg.waiting)return reg.update();if(!reg)return root.navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(watch);}).catch(()=>{});});
  }
  async function checkNow(){
   const button=$('check-kidbum-update');
@@ -98,13 +99,13 @@
    if(!('serviceWorker'in root.navigator)){
     say('Publicada: v'+remote+'. Este navegador no admite actualizaciones offline.','error');return;
    }
-   const registration=await withDeadline(root.navigator.serviceWorker.getRegistration(),8000)
-    ||await withDeadline(root.navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}),12000);
+   const registration=await withDeadline(root.navigator.serviceWorker.getRegistration(),20000)
+    ||await withDeadline(root.navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}),45000);
    watch(registration);
-   await withDeadline(registration.update(),15000);
+   if(!registration.installing&&!registration.waiting)await withDeadline(registration.update(),60000);
    watchWorker(registration.installing);
    if(registration.installing||registration.waiting){
-    say('Publicada: v'+remote+' · Abierta: v'+local+'. Descargando o activando recursos; conserva abierta la app.');
+    say('Publicada: v'+remote+' · Abierta: v'+local+'. Verificando o descargando recursos; conserva abierta la app. Se reutilizan archivos idénticos.');
    }else if(remote!==local){
     say('Publicada: v'+remote+' · Abierta: v'+local+'. Si no aparece el aviso para recargar, usa «Recuperar actualización».','error');
    }else{

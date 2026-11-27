@@ -9,9 +9,11 @@ const { chromium } = require('playwright');
 
 const root=path.resolve(__dirname,'..');
 const mime={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webmanifest':'application/manifest+json','.svg':'image/svg+xml','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.webp':'image/webp','.json':'application/json'};
+let cellularFailure=null;
 function serverHandler(req,res){
  let pathname;
  try{pathname=decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname)}catch{res.writeHead(400).end();return}
+ if(cellularFailure){cellularFailure.requests.set(pathname,(cellularFailure.requests.get(pathname)||0)+1);if(pathname===cellularFailure.path&&cellularFailure.remaining>0){cellularFailure.remaining--;res.writeHead(503).end('Simulated cellular interruption');return;}}
  const abs=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
  if(abs!==root&&!abs.startsWith(root+path.sep)){res.writeHead(403).end();return}
  fs.stat(abs,(err,st)=>{
@@ -541,6 +543,30 @@ async function main(){
     const popup=context.waitForEvent('page');await page.locator('.neuro-pharma-item a').click();const med=await popup;await med.waitForURL(/pharma-pro\.html#dexametasona$/,{waitUntil:'domcontentloaded',timeout:20000});assert.match(med.url(),/pharma-pro\.html#dexametasona$/);await med.locator('#detail h2').filter({hasText:/Dexametasona/i}).first().waitFor({state:'attached'});assert.match(await med.locator('#detail').innerText(),/Dexametasona/i);assert.equal(await page.locator('.neuro-pharma-item').count(),1);await med.close();
     await noHorizontalOverflow(page,'Neuro Pharma');
    }finally{await context.close()}
+  });
+  await test('SAMPLE pediátrico — rapid history, example and clear',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
+   try{const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/index.html?especialidad=pediatria',{waitUntil:'domcontentloaded'});await page.locator('[data-ped-sample]').click();await page.waitForURL('**/pediatria-sample.html');assert.equal(await page.locator('#sample-fields textarea').count(),6);assert.equal(await page.locator('#sample-copy').isEnabled(),false);await page.locator('#sample-example').click();assert.match(await page.locator('#sample-summary').innerText(),/EJEMPLO FICTICIO/);assert.match(await page.locator('#sample-progress').innerText(),/6 de 6/);await page.locator('#sample-clear').click();assert.match(await page.locator('#sample-progress').innerText(),/0 de 6/);await page.locator('#sample-S').fill('Fiebre ficticia');assert.match(await page.locator('#sample-summary').innerText(),/Fiebre ficticia/);assert.match(await page.locator('#sample-summary').innerText(),/No documentado/);await noHorizontalOverflow(page,'SAMPLE');assert.deepEqual(errors,[]);
+   }finally{await context.close()}
+  });
+  await test('Cellular PWA — actual Chromium service worker resumes interrupted download and opens offline',async()=>{
+   const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'allow'});
+   try{
+    await context.addInitScript(()=>{try{Object.defineProperty(navigator,'connection',{configurable:true,value:{type:'cellular',effectiveType:'3g',saveData:true}})}catch(e){}});
+    cellularFailure={path:'/assets/enarm-clinical/oto-10.jpg',remaining:4,requests:new Map()};
+    const page=await context.newPage();await page.goto(base+'/actualizar.html',{waitUntil:'domcontentloaded'});
+    const result=await page.evaluate(async()=>{const reg=await navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'});const w=reg.installing||reg.waiting||reg.active;if(!w)return 'missing';return await new Promise(resolve=>{const timer=setTimeout(()=>resolve('timeout'),90000);const check=()=>{if(w.state==='redundant'||w.state==='activated'){clearTimeout(timer);resolve(w.state)}};w.addEventListener('statechange',check);check()})});
+    assert.equal(result,'redundant','Worker must reject the interrupted candidate');
+    assert.equal(cellularFailure.remaining,0,'Simulated outage exhausted all four retries');
+    const previous='/assets/neurologia-farma-bridge-v01094.js',before=cellularFailure.requests.get(previous)||0;
+    assert.ok(before>0,'Earlier resource downloaded before interruption');
+    await page.evaluate(()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}));
+    await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:120000});
+    assert.equal(cellularFailure.requests.get(previous),before,'Verified partial file reused, not downloaded again');
+    await context.setOffline(true);
+    await page.goto(base+'/pediatria-sample.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('#sample-fields textarea').count(),6);
+    await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.ok(await page.locator('[data-cat]').count());
+   }finally{cellularFailure=null;await context.close()}
   });
  }finally{await browser.close();await stop()}
  if(failures.length){console.error(failures.length+' tests failed');process.exitCode=1}

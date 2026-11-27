@@ -29,12 +29,12 @@ ol{padding-left:22px}
 <dl><dt>Publicada en internet</dt><dd id="public">Comprobando…</dd><dt>Control offline local</dt><dd id="local">Comprobando…</dd><dt>Conexión</dt><dd id="connection">Comprobando…</dd></dl>
 <div id="message" role="status" aria-live="polite">Abre esta página con conexión a internet para consultar la publicación.</div>
 <button id="check" type="button">↻ Comprobar e instalar actualización</button>
-<p class="note">La aplicación conservará la versión funcional anterior hasta que <strong>todos</strong> los módulos clínicos necesarios para offline se hayan descargado. No se interrumpirá ningún cálculo automáticamente.</p>
+<p class="note">La aplicación admite datos móviles y Wi-Fi. Conserva la versión anterior hasta verificar todos los módulos; reutiliza los archivos idénticos y continúa los intentos interrumpidos. No se interrumpirá ningún cálculo automáticamente.</p>
 </section>
 <section class="card" aria-labelledby="repair-title"><h2 id="repair-title">¿Sigue apareciendo una versión antigua?</h2>
-<ol><li>Cierra cualquier cálculo o formulario en curso.</li><li>Conéctate a una red estable.</li><li>Si el botón anterior no resuelve el problema, usa la reparación manual.</li></ol>
-<button type="button" class="outline" id="repair">Reparar archivos temporales de KidBum</button>
-<p class="note"><strong>Importante:</strong> la reparación retira únicamente el servicio offline de KidBum y sus cachés temporales en <em>este</em> navegador. No borra localStorage, favoritos ni ajustes; tampoco borra la caché de otros sitios. Necesitarás internet para volver a cargar todos los recursos antes de usarla sin conexión. No hacerlo durante la atención clínica.</p>
+<ol><li>Cierra cualquier cálculo o formulario en curso.</li><li>Activa datos móviles o Wi-Fi; ambos son compatibles.</li><li>Si el botón anterior no resuelve el problema, usa la reparación manual.</li></ol>
+<button type="button" class="outline" id="repair">Reintentar descarga sin borrar archivos</button>
+<p class="note"><strong>Importante:</strong> el reintento conserva tu versión funcional, favoritos y archivos verificados. No se borra el almacenamiento del navegador.</p>
 <p class="note">En iPhone, Safari y la aplicación de la pantalla de inicio pueden usar almacenes diferentes. Abre esta página desde la misma instancia que está desactualizada.</p>
 </section>
 <p><a href="./index.html">← Volver a KidBum</a></p>
@@ -45,13 +45,13 @@ ol{padding-left:22px}
  const root=new URL('./',location.href),$=id=>document.getElementById(id);
  const message=(s,kind='info')=>{$('message').textContent=s;$('message').dataset.kind=kind;};
  const online=()=>navigator.onLine!==false;
- function showNetwork(){$('connection').textContent=online()?'Con conexión':'Sin conexión';}
+ function showNetwork(){$('connection').textContent=online()?'Con conexión (datos móviles o Wi-Fi)':'Sin conexión';}
  window.addEventListener('online',showNetwork);window.addEventListener('offline',showNetwork);showNetwork();
  async function published(){
   if(!online())throw Error('No hay conexión a internet');
   const url=new URL('./release-check.js',root);
   url.searchParams.set('nocache',Date.now()+'-'+Math.random().toString(36).slice(2));
-  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),45000);
   try{
    const r=await fetch(url.href,{cache:'no-store',signal:controller.signal});
    if(!r.ok)throw Error('HTTP '+r.status);
@@ -80,11 +80,11 @@ ol{padding-left:22px}
     const w=reg.installing;
     message('Descargando versión v'+version+' sin interrumpir tu copia actual.');
     w?.addEventListener('statechange',()=>{
-     if(w.state==='redundant')message('La descarga falló. La versión previa sigue protegida. Puedes reintentar con otra conexión.','error');
+     if(w.state==='redundant')message('La descarga falló. La versión previa sigue protegida. Puedes reintentar con la misma conexión móvil; se conservan los archivos verificados.','error');
      if(w.state==='installed'||w.state==='activating')message('Archivos recibidos, activando la versión v'+version+'…');
     });
    },{once:true});
-   await reg.update();
+   if(!reg.installing&&!reg.waiting)await reg.update();
    await local();
    if(reg.installing||reg.waiting)message('Versión v'+version+' detectada. Continúa descargando: no borres los datos ni cierres la app.');
    else message('Comprobación solicitada. Si aún ves la versión antigua, vuelve a abrir KidBum o utiliza reparación manual.');
@@ -96,25 +96,7 @@ ol{padding-left:22px}
   message('Nueva versión instalada. Cierra cualquier cálculo y abre KidBum desde el enlace inferior.');
   local().catch(()=>{});
  });
- $('repair').addEventListener('click',async function(){
-  if(!online()){message('Necesitas conexión antes de reparar la caché. La versión offline anterior se conserva.','error');return;}
-  this.disabled=true;
-  message('Verificando acceso a la versión publicada antes de modificar archivos…');
-  try{
-   await published(); // No destructive action if the network is unavailable.
-   if('serviceWorker'in navigator){
-    const reg=await navigator.serviceWorker.getRegistration(root.href);
-    if(reg&&reg.scope===root.href)await reg.unregister();
-   }
-   if('caches'in window){
-    const names=await caches.keys();
-    await Promise.all(names.filter(n=>n.startsWith('kidbum-calc-')).map(n=>caches.delete(n)));
-   }
-   message('Se borraron solo archivos temporales. Abriendo la versión publicada con internet…');
-   const next=new URL('index.html',root);next.searchParams.set('recuperacion',String(Date.now()));
-   location.replace(next.href);
-  }catch(e){message('No se completó la reparación: '+(e.message||'almacenamiento bloqueado')+'. Intenta con una red estable.','error');this.disabled=false;}
- });
+ $('repair').addEventListener('click',check);
  Promise.all([published(),local()]).then(([version])=>message('Versión v'+version+' comprobada. Puedes instalarla sin borrar tus preferencias.'))
  .catch(e=>message('La comprobación automática no terminó ('+(e.message||'sin red')+'). La versión local se conserva.','error'));
 })();
