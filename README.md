@@ -1,3 +1,7 @@
+## v0.10.97 · Retiro de SAMPLE pediátrico
+
+Retirado a petición del usuario: acceso, página, scripts, enlaces de algoritmos, pruebas específicas y recursos offline. Se mantienen 191 calculadoras, 28 algoritmos pediátricos y el instalador reanudable por datos móviles. El historial de versiones se conserva.
+
 ## v0.10.96 · Instalación y actualización por datos móviles
 
 Descarga sin filtro de Wi-Fi, con tres archivos simultáneos, cuatro intentos por archivo, plazos ampliados y comprobación de integridad por identificador Git de cada recurso. Reutiliza archivos idénticos de cachés anteriores, conserva descargas parciales verificadas y activa solo cuando la versión completa coincide con el manifiesto. Recuperación sin borrar la aplicación anterior ni preferencias. Incluye SAMPLE pediátrico pendiente de v0.10.95, conservando el orden de accesos de Urgencias y Wallace. Las pruebas simulan fallos e interrupciones; no certifican una red celular o un dispositivo físico específico.

@@ -65,14 +65,14 @@ const CLINICAL_TOOLS=Object.freeze({
 });
 function renderTools(id){
  const panel=$('alg-tools');if(!panel)return;
- panel.replaceChildren();const items=[...(CLINICAL_TOOLS[id]||[]),['SAMPLE · interrogatorio tras ABCDE','./pediatria-sample.html']];
+ panel.replaceChildren();const items=CLINICAL_TOOLS[id]||[];
  panel.hidden=items.length===0;
  if(!items.length)return;
  panel.append(elem('strong','Herramientas relacionadas · no sustituyen la valoración','alg-tools-heading'));
  for(const [label,href] of items){
   const link=elem('a',label,'alg-tool-link');
   link.href=href;
-  if(href==='./pediatria-sample.html'||/^https:\/\//.test(href)){link.target='_blank';link.rel='noopener noreferrer';}
+  if(/^https:\/\//.test(href)){link.target='_blank';link.rel='noopener noreferrer';}
   panel.append(link);
  }
 }
