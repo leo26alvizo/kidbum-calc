@@ -544,9 +544,9 @@ async function main(){
     await noHorizontalOverflow(page,'Neuro Pharma');
    }finally{await context.close()}
   });
-  await test('SAMPLE pediátrico — rapid history, example and clear',async()=>{
+  await test('Pediatría — retired SAMPLE is absent; algorithms remain accessible',async()=>{
    const context=await browser.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
-   try{const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/index.html?especialidad=pediatria',{waitUntil:'domcontentloaded'});await page.locator('[data-ped-sample]').click();await page.waitForURL('**/pediatria-sample.html');assert.equal(await page.locator('#sample-fields textarea').count(),6);assert.equal(await page.locator('#sample-copy').isEnabled(),false);await page.locator('#sample-example').click();assert.match(await page.locator('#sample-summary').innerText(),/EJEMPLO FICTICIO/);assert.match(await page.locator('#sample-progress').innerText(),/6 de 6/);await page.locator('#sample-clear').click();assert.match(await page.locator('#sample-progress').innerText(),/0 de 6/);await page.locator('#sample-S').fill('Fiebre ficticia');assert.match(await page.locator('#sample-summary').innerText(),/Fiebre ficticia/);assert.match(await page.locator('#sample-summary').innerText(),/No documentado/);await noHorizontalOverflow(page,'SAMPLE');assert.deepEqual(errors,[]);
+   try{const page=await context.newPage();await page.goto(base+'/index.html?especialidad=pediatria',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-ped-sample]').count(),0);await page.locator('[data-ped-alg]').click();await page.waitForURL('**/algoritmos-pediatria.html');assert.equal(await page.locator('a[href*="pediatria-sample"]').count(),0);assert.equal(await page.locator('[data-algo-id]').count(),28);await page.locator('[data-algo-id]').first().click();assert.equal(await page.locator('a[href*="pediatria-sample"]').count(),0);
    }finally{await context.close()}
   });
   await test('Cellular PWA — actual Chromium service worker resumes interrupted download and opens offline',async()=>{
@@ -564,7 +564,7 @@ async function main(){
     await page.waitForFunction(()=>!!navigator.serviceWorker.controller,null,{timeout:120000});
     assert.equal(cellularFailure.requests.get(previous),before,'Verified partial file reused, not downloaded again');
     await context.setOffline(true);
-    await page.goto(base+'/pediatria-sample.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('#sample-fields textarea').count(),6);
+    await page.goto(base+'/algoritmos-pediatria.html',{waitUntil:'domcontentloaded'});assert.equal(await page.locator('[data-algo-id]').count(),28);
     await page.goto(base+'/index.html',{waitUntil:'domcontentloaded'});assert.ok(await page.locator('[data-cat]').count());
    }finally{cellularFailure=null;await context.close()}
   });
