@@ -1,3 +1,7 @@
+## v0.10.96 · Instalación y actualización por datos móviles
+
+Descarga sin filtro de Wi-Fi, con tres archivos simultáneos, cuatro intentos por archivo, plazos ampliados y comprobación de integridad por identificador Git de cada recurso. Reutiliza archivos idénticos de cachés anteriores, conserva descargas parciales verificadas y activa solo cuando la versión completa coincide con el manifiesto. Recuperación sin borrar la aplicación anterior ni preferencias. Incluye SAMPLE pediátrico pendiente de v0.10.95, conservando el orden de accesos de Urgencias y Wallace. Las pruebas simulan fallos e interrupciones; no certifican una red celular o un dispositivo físico específico.
+
 ## v0.10.95 · SAMPLE pediátrico
 
 Herramienta independiente de interrogatorio rápido: seis apartados, preguntas guía adaptadas a niños/cuidadores, ejemplo ficticio, limpieza y resumen copiable. Acceso desde tarjeta Pediatría y biblioteca/rutas de algoritmos pediátricos en pestaña separada, sin bloquear ABCDE. Campos sin datos predeterminados, desconocidos no inferidos como negativos, sin persistencia de datos clínicos. Se mantiene el recuento de 191 calculadoras porque SAMPLE no puntúa. Referencia OMS/CICR Basic Emergency Care (2018), capítulo ABCDE y SAMPLE. Pruebas de motor, navegación móvil y caché añadidas.
