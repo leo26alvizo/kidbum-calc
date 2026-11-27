@@ -46,7 +46,7 @@ for(const file of ['clinical-access-v01057.js','clinical-access-v01057.css','cli
  assert.match(html,new RegExp(file.replace(/\./g,'\\.')),'HTML does not reference '+file);
 }
 assert.match(sw,/clinical-access-v01057/,'Cache generation must invalidate previous release atomically');
-assert.match(sw,/cache\.addAll\(batch\)/,'Atomic bounded batch install preserved');
+assert.match(sw,/Promise\.allSettled\(batch\.map\(path=>downloadAsset\(cache,path,prior\)\)\)/,'Atomic bounded verified install preserved');assert.match(sw,/await self\.skipWaiting\(\)/);
 assert.match(sw,/if\(cached\)return cached/,'Cache-first clinical runtime retained');
 assert.match(html,/id="kb-access-slot"/,'Global access UI must be mounted');
 assert.match(html,/kidbum-favs/,'Original calculator bookmarks remain present');
