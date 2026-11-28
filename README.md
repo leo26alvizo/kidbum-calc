@@ -1,3 +1,7 @@
+# Actualización v0.11.3 · Pediatría BOARD: 16 áreas avanzadas
+
+87 reactivos totales, 39 avanzados, 18 fuentes específicas. Se incorporan 15 casos originales; cobertura avanzada de las 16 áreas. Revisión clínica independiente y validación psicométrica pendientes.
+
 # Actualización v0.11.2 · Pediatría BOARD: tema claro y oscuro completos
 
 Marfil y azul noche en toda la sección, incluyendo portada, modos, radar, bibliografía, examen y resultados. Preferencia local conservada y herencia inicial del tema general. Banco y motor clínico sin cambios.
