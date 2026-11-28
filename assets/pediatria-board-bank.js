@@ -2439,6 +2439,450 @@ window.KidBumPediatriaBoard=Object.freeze({
       "critical": false,
       "level": "board",
       "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB088",
+      "section": "Neonatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hemólisis neonatal",
+      "stem": "Recién nacido de 37 semanas con enfermedad hemolítica isoimmune (DAT positivo), 40 horas de vida. Se documentó bilirrubina total sérica 1.2 mg/dL por encima del umbral de exanguinotransfusión correspondiente a su edad y factores de riesgo. En UCIN, tras fototerapia intensiva y líquidos IV, la muestra inmediatamente previa a iniciar el recambio está 0.6 mg/dL por debajo del umbral de recambio, pero aún por encima del umbral de escalamiento. No hay hipertonía, arqueamiento, llanto agudo ni apnea recurrente. El equipo tiene sangre preparada.",
+      "prompt": "¿Cuál es la conducta más apropiada en este punto, de acuerdo con AAP 2022?",
+      "options": [
+        "Proceder al recambio por haber superado el umbral en la muestra inicial",
+        "Diferir el recambio con fototerapia intensiva y bilirrubina cada 2 h hasta quedar por debajo del umbral de escalamiento",
+        "Diferir el recambio con fototerapia y regresar a controles cada 6 h desde ahora",
+        "Iniciar inmunoglobulina IV como alternativa al seguimiento intensivo y diferir controles"
+      ],
+      "correct": 1,
+      "why": "La caída bajo el umbral permite diferir el procedimiento mientras continúa el tratamiento intensivo; sigue en zona de escalamiento, con medición cada dos horas y capacidad inmediata de recambio.",
+      "others": "La cifra previa justificó preparar el recambio, pero la guía permite reconsiderarlo si la bilirrubina cae bajo el umbral antes de comenzar y no hay encefalopatía intermedia o avanzada. El intervalo de seis horas no es apropiado mientras persista por encima del umbral de escalamiento. La inmunoglobulina es una opción en hemólisis isoimmune seleccionada, no sustituye fototerapia ni vigilancia estrecha y no debe demorar un recambio indicado.",
+      "rationales": [
+        "La cifra previa justificó preparar el recambio, pero la guía permite reconsiderarlo si la bilirrubina cae bajo el umbral antes de comenzar y no hay encefalopatía intermedia o avanzada.",
+        "La caída bajo el umbral permite diferir el procedimiento mientras continúa el tratamiento intensivo; sigue en zona de escalamiento, con medición cada dos horas y capacidad inmediata de recambio.",
+        "El intervalo de seis horas no es apropiado mientras persista por encima del umbral de escalamiento.",
+        "La inmunoglobulina es una opción en hemólisis isoimmune seleccionada, no sustituye fototerapia ni vigilancia estrecha y no debe demorar un recambio indicado."
+      ],
+      "source": {
+        "title": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-058859",
+        "locator": "KAS 23: reevaluación inmediatamente antes de exanguinotransfusión"
+      },
+      "reference": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks (2022), KAS 23: reevaluación inmediatamente antes de exanguinotransfusión",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar dos umbrales, tendencia y estado neurológico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB089",
+      "section": "Neonatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hemólisis neonatal",
+      "stem": "Recién nacida de 38 semanas, DAT positivo por incompatibilidad Rh, con fototerapia intensiva verificada desde hace cuatro horas. La bilirrubina total sigue aumentando y se encuentra a 1.1 mg/dL por debajo del umbral de exanguinotransfusión correspondiente. No tiene datos de encefalopatía aguda. Se inició escalamiento, líquidos IV y traslado a centro con capacidad de recambio, pero se anticipa una demora logística. Se discute la inmunoglobulina intravenosa.",
+      "prompt": "¿Cuál es la mejor interpretación de su papel según AAP 2022?",
+      "options": [
+        "Debe utilizarse de manera rutinaria en todo recién nacido DAT positivo antes de alcanzar escalamiento",
+        "Es preferible esperar a que supere el umbral de recambio antes de considerar inmunoglobulina",
+        "Puede considerarse como coadyuvante por hemólisis isoimmune, ascenso pese a fototerapia y dificultad para recambio oportuno; mantener preparación y vigilancia",
+        "Debe sustituir la exanguinotransfusión si posteriormente alcanza el umbral de recambio"
+      ],
+      "correct": 2,
+      "why": "El beneficio es incierto y existen efectos adversos posibles, pero la combinación de hemólisis, ascenso persistente y acceso difícil al recambio hace razonable discutirla sin sustituir el escalamiento.",
+      "others": "La positividad del DAT por sí sola no justifica inmunoglobulina; debe valorarse la intensidad de la hiperbilirrubinemia y su trayectoria. En este contexto ya se superó el umbral de escalamiento, situado dos mg/dL por debajo del de recambio; no es necesario esperar a cruzar este último para considerar la opción. El recambio sigue indicado si alcanza el umbral o aparecen signos neurológicos pertinentes; la inmunoglobulina no constituye reemplazo seguro.",
+      "rationales": [
+        "La positividad del DAT por sí sola no justifica inmunoglobulina; debe valorarse la intensidad de la hiperbilirrubinemia y su trayectoria.",
+        "En este contexto ya se superó el umbral de escalamiento, situado dos mg/dL por debajo del de recambio; no es necesario esperar a cruzar este último para considerar la opción.",
+        "El beneficio es incierto y existen efectos adversos posibles, pero la combinación de hemólisis, ascenso persistente y acceso difícil al recambio hace razonable discutirla sin sustituir el escalamiento.",
+        "El recambio sigue indicado si alcanza el umbral o aparecen signos neurológicos pertinentes; la inmunoglobulina no constituye reemplazo seguro."
+      ],
+      "source": {
+        "title": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-058859",
+        "locator": "KAS 17 y 21; FAQ de AAP sobre uso selectivo de IVIG"
+      },
+      "reference": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks (2022), KAS 17 y 21; FAQ de AAP sobre uso selectivo de IVIG",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Valorar beneficio incierto, tendencia y disponibilidad de terapia definitiva.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB090",
+      "section": "Urgencias y terapia intensiva",
+      "type": "visual",
+      "skill": "Interpretación",
+      "topic": "Acidosis durante tratamiento de CAD",
+      "stem": "Adolescente de 14 años en UCIP, 16 h tras iniciar tratamiento de CAD. Al ingreso: Na 133, Cl 100, HCO₃ 7 mmol/L, β-hidroxibutirato 6.5 mmol/L. Actual: Na 140, Cl 115, HCO₃ 15 mmol/L, pH venoso 7.29, β-hidroxibutirato 0.6 mmol/L, glucosa 172 mg/dL, K 4.1 mmol/L. Está despierto, tolera alimentos, perfusión normal y sin datos infecciosos. Cuenta con esquema de insulina subcutánea supervisado.",
+      "prompt": "¿Qué interpretación y conducta se ajustan mejor a ISPAD 2022?",
+      "options": [
+        "Persistencia de CAD: aumentar la infusión IV de insulina hasta HCO₃ mayor de 18 mmol/L, aunque la cetonemia esté normalizada",
+        "Acidosis láctica persistente: mantener el esquema de CAD hasta normalizar bicarbonato y administrar nueva expansión",
+        "Resolución de cetosis con acidosis hiperclorémica residual: considerar transición subcutánea con solapamiento conforme al protocolo",
+        "Acidosis hiperclorémica residual: administrar bicarbonato IV como requisito para transición"
+      ],
+      "correct": 2,
+      "why": "El cierre del anión gap, la cetonemia inferior a 1 y la recuperación clínica apoyan resolución de cetosis. La acidosis residual por cloro no debe por sí sola retrasar la transición, con solapamiento adecuado.",
+      "others": "El anión gap actual es 10 mmol/L (140−115−15) y la cetonemia ha descendido; el bicarbonato aislado puede confundir acidosis hiperclorémica con CAD persistente. No hay datos aportados de hipoperfusión ni de aumento del anión gap que apoyen lactato como explicación principal; no se justifica expansión por el bicarbonato aislado. La acidosis por cloro usualmente se resuelve sin bicarbonato; su uso no es requisito de transición y conlleva riesgos.",
+      "rationales": [
+        "El anión gap actual es 10 mmol/L (140−115−15) y la cetonemia ha descendido; el bicarbonato aislado puede confundir acidosis hiperclorémica con CAD persistente.",
+        "No hay datos aportados de hipoperfusión ni de aumento del anión gap que apoyen lactato como explicación principal; no se justifica expansión por el bicarbonato aislado.",
+        "El cierre del anión gap, la cetonemia inferior a 1 y la recuperación clínica apoyan resolución de cetosis. La acidosis residual por cloro no debe por sí sola retrasar la transición, con solapamiento adecuado.",
+        "La acidosis por cloro usualmente se resuelve sin bicarbonato; su uso no es requisito de transición y conlleva riesgos."
+      ],
+      "source": {
+        "title": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state",
+        "year": 2022,
+        "url": "https://doi.org/10.1111/pedi.13406",
+        "locator": "Secciones 6.4–6.6: resolución de cetosis, acidosis hiperclorémica y transición"
+      },
+      "reference": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state (2022), Secciones 6.4–6.6: resolución de cetosis, acidosis hiperclorémica y transición",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Interpretar evolución ácido-base y separar dos mecanismos de acidosis.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB091",
+      "section": "Urgencias y terapia intensiva",
+      "type": "caso",
+      "skill": "Complicaciones",
+      "topic": "Lesión cerebral asociada a CAD",
+      "stem": "Niña de 4 años con CAD grave y alto riesgo de lesión cerebral. A las cinco horas de hidratación e insulina, glucosa 264 mg/dL y K 4.0 mmol/L; pH mejoró de 6.98 a 7.12. Aparece cefalea intensa, vómito, Glasgow de 15 a 12 y descenso sostenido de FC de 142 a 98 lpm sin sueño ni mejoría circulatoria que lo explique. No tiene focalidad clara. UCIP dispone de solución hipertónica y TC.",
+      "prompt": "¿Qué secuencia de actuación es más apropiada?",
+      "options": [
+        "Administrar terapia hiperosmolar de inmediato, preservar perfusión y valorar neuroimagen después de iniciarla",
+        "Realizar TC urgente antes de terapia hiperosmolar para distinguir edema de trombosis cerebral",
+        "Reducir líquidos y esperar una nueva gasometría para decidir si se inicia tratamiento hiperosmolar",
+        "Ajustar primero insulina y dextrosa para disminuir la glucosa más lentamente y reservar terapia hiperosmolar si persiste Glasgow bajo"
+      ],
+      "correct": 0,
+      "why": "El deterioro neurológico junto con desaceleración cardíaca sostenida permite sospechar lesión cerebral clínicamente; iniciar tratamiento sin esperar imagen y mantener perfusión es prioritario.",
+      "others": "La imagen puede ser necesaria si se sospecha otra lesión tratable, pero no debe demorar el tratamiento de la lesión cerebral sintomática. Ajustar líquidos puede formar parte del manejo, pero la nueva gasometría no sustituye intervención inmediata ante signos neurológicos. La evolución de glucosa no explica por sí sola la combinación de signos; esperar respuesta a ajustes metabólicos retrasaría terapia urgente.",
+      "rationales": [
+        "El deterioro neurológico junto con desaceleración cardíaca sostenida permite sospechar lesión cerebral clínicamente; iniciar tratamiento sin esperar imagen y mantener perfusión es prioritario.",
+        "La imagen puede ser necesaria si se sospecha otra lesión tratable, pero no debe demorar el tratamiento de la lesión cerebral sintomática.",
+        "Ajustar líquidos puede formar parte del manejo, pero la nueva gasometría no sustituye intervención inmediata ante signos neurológicos.",
+        "La evolución de glucosa no explica por sí sola la combinación de signos; esperar respuesta a ajustes metabólicos retrasaría terapia urgente."
+      ],
+      "source": {
+        "title": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state",
+        "year": 2022,
+        "url": "https://doi.org/10.1111/pedi.13406",
+        "locator": "Sección 8.2.1: diagnóstico clínico y tratamiento de lesión cerebral"
+      },
+      "reference": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state (2022), Sección 8.2.1: diagnóstico clínico y tratamiento de lesión cerebral",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Priorizar deterioro neurológico sobre mejoría bioquímica aparente.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB092",
+      "section": "Endocrinología",
+      "type": "visual",
+      "skill": "Interpretación",
+      "topic": "Presentación mixta CAD/EHH",
+      "stem": "Adolescente de 15 años con obesidad, poliuria de dos semanas y deshidratación marcada. Glucosa 864 mg/dL, Na medido 150 mmol/L, pH 7.18, HCO₃ 11 mmol/L, β-hidroxibutirato 5.1 mmol/L. TA 88/50 mmHg, taquicardia y llenado capilar prolongado. Se dispone de atención intensiva pediátrica. Osmolalidad efectiva estimada = 2 × Na medido + glucosa/18.",
+      "prompt": "¿Qué enfoque integra mejor el fenotipo metabólico y la prioridad inicial?",
+      "options": [
+        "CAD convencional; utilizar únicamente el esquema habitual sin ajustar pérdidas osmóticas",
+        "EHH puro; diferir insulina hasta que la glucosa deje de disminuir con líquidos aun si persiste cetosis importante",
+        "CAD con hipernatremia aislada; corregir sodio rápidamente con líquidos hipotónicos antes de estabilizar circulación",
+        "CAD/EHH mixto; estabilizar circulación primero, ajustar reposición a las pérdidas e iniciar insulina tras bolos iniciales y estabilización, con vigilancia estrecha"
+      ],
+      "correct": 3,
+      "why": "El cuadro combina hiperosmolalidad y CAD. La reposición puede superar la habitual de CAD, con reevaluación frecuente; la insulina es necesaria tras estabilizar circulación y se vigilan K, fósforo y osmolalidad.",
+      "others": "La osmolalidad efectiva es 348 mOsm/kg y existe cetosis/acidosis; el enfoque convencional puede infraestimar necesidades circulatorias. La cetonemia y acidosis cumplen criterios de CAD, por lo que no corresponde extrapolar sin más la estrategia de EHH puro. La hipernatremia no justifica retrasar restauración circulatoria ni una caída osmótica rápida; requiere corrección vigilada.",
+      "rationales": [
+        "La osmolalidad efectiva es 348 mOsm/kg y existe cetosis/acidosis; el enfoque convencional puede infraestimar necesidades circulatorias.",
+        "La cetonemia y acidosis cumplen criterios de CAD, por lo que no corresponde extrapolar sin más la estrategia de EHH puro.",
+        "La hipernatremia no justifica retrasar restauración circulatoria ni una caída osmótica rápida; requiere corrección vigilada.",
+        "El cuadro combina hiperosmolalidad y CAD. La reposición puede superar la habitual de CAD, con reevaluación frecuente; la insulina es necesaria tras estabilizar circulación y se vigilan K, fósforo y osmolalidad."
+      ],
+      "source": {
+        "title": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state",
+        "year": 2022,
+        "url": "https://doi.org/10.1111/pedi.13406",
+        "locator": "Sección 10.3: presentación mixta CAD y EHH"
+      },
+      "reference": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state (2022), Sección 10.3: presentación mixta CAD y EHH",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Calcular osmolalidad e integrar hipoperfusión, cetosis y pérdidas.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB093",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Neutropenia febril e infección fúngica",
+      "stem": "Niño de 10 años con leucemia mieloide aguda en inducción, neutrófilos 40/mm³ y fiebre durante 110 h pese a betalactámico antipseudomónico adecuado. Sin trasplante hematopoyético ni profilaxis activa contra mohos. Hemocultivos repetidos negativos, TC pulmonar y ultrasonido abdominal sin lesiones; clínicamente estable. El hospital dispone de reevaluación especializada y estudios oportunos. El equipo acuerda explorar una estrategia antifúngica anticipada (preemptive).",
+      "prompt": "¿Qué conducta es congruente con la guía internacional pediátrica 2023 bajo esa estrategia?",
+      "options": [
+        "Iniciar caspofungina en todos los casos, ya que una estrategia anticipada nunca es admisible en alto riesgo",
+        "Diferir antifúngico mientras la evaluación permanezca negativa, con vigilancia y comienzo de tratamiento ante evidencia sugestiva de infección fúngica",
+        "Suspender el betalactámico y diferir antifúngico hasta documentar recuperación medular",
+        "Iniciar fluconazol como cobertura anticipada universal, independientemente de sospecha de mohos"
+      ],
+      "correct": 1,
+      "why": "El caso cumple los criterios de la recomendación condicional para estrategia anticipada; exige evaluación y capacidad de intervención oportuna, no simple espera.",
+      "others": "El tratamiento empírico es una alternativa válida, pero la guía permite un enfoque anticipado en pacientes seleccionados de alto riesgo sin trasplante ni profilaxis contra mohos. Persiste fiebre de alto riesgo, por lo que no cumple criterios de suspensión antibacteriana; la estrategia fúngica no sustituye ese manejo. Fluconazol no cubre mohos relevantes y la estrategia anticipada se basa en hallazgos diagnósticos, no en profilaxis universal.",
+      "rationales": [
+        "El tratamiento empírico es una alternativa válida, pero la guía permite un enfoque anticipado en pacientes seleccionados de alto riesgo sin trasplante ni profilaxis contra mohos.",
+        "El caso cumple los criterios de la recomendación condicional para estrategia anticipada; exige evaluación y capacidad de intervención oportuna, no simple espera.",
+        "Persiste fiebre de alto riesgo, por lo que no cumple criterios de suspensión antibacteriana; la estrategia fúngica no sustituye ese manejo.",
+        "Fluconazol no cubre mohos relevantes y la estrategia anticipada se basa en hallazgos diagnósticos, no en profilaxis universal."
+      ],
+      "source": {
+        "title": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update",
+        "year": 2023,
+        "url": "https://doi.org/10.1200/JCO.22.02224",
+        "locator": "C5: estrategia anticipada en alto riesgo sin trasplante ni profilaxis contra mohos"
+      },
+      "reference": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update (2023), C5: estrategia anticipada en alto riesgo sin trasplante ni profilaxis contra mohos",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Discriminar entre estrategias válidas según población, recursos y riesgo.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB094",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Neutropenia febril e infección fúngica",
+      "stem": "Adolescente de 13 años, día +45 de trasplante alogénico, bajo inmunosupresión por enfermedad injerto contra huésped y neutropenia prolongada. Continúa febril después de 100 h de antibacteriano de amplio espectro; cultivos negativos, sin tos, disnea, dolor facial ni rinorrea. Radiografía de tórax sin infiltrados y estabilidad hemodinámica. Se inicia evaluación de infección fúngica invasiva y se discute tratamiento antifúngico con infectología.",
+      "prompt": "¿Qué estrategia de imagen recomienda prioritariamente el consenso pediátrico 2023 en este contexto?",
+      "options": [
+        "TC de tórax pese a radiografía normal; considerar imagen abdominal según contexto y no indicar TC sinusal rutinaria sin síntomas",
+        "TC de senos paranasales y radiografía de tórax seriada; reservar TC torácica para síntomas respiratorios",
+        "TC torácica solo si el galactomanano sérico resulta positivo",
+        "Ultrasonido abdominal como único estudio inicial mientras no aparezcan signos respiratorios"
+      ],
+      "correct": 0,
+      "why": "El alto riesgo y fiebre prolongada justifican TC pulmonar incluso sin síntomas respiratorios; el estudio abdominal puede considerarse y la TC sinusal no se indica rutinariamente sin síntomas localizadores.",
+      "others": "La radiografía tiene sensibilidad limitada para lesiones pulmonares fúngicas; los senos paranasales no son la prioridad rutinaria sin manifestaciones locales. Un resultado sérico negativo no excluye infección fúngica y no debe condicionar el estudio pulmonar indicado. La imagen abdominal es complementaria; no sustituye la TC pulmonar recomendada.",
+      "rationales": [
+        "El alto riesgo y fiebre prolongada justifican TC pulmonar incluso sin síntomas respiratorios; el estudio abdominal puede considerarse y la TC sinusal no se indica rutinariamente sin síntomas localizadores.",
+        "La radiografía tiene sensibilidad limitada para lesiones pulmonares fúngicas; los senos paranasales no son la prioridad rutinaria sin manifestaciones locales.",
+        "Un resultado sérico negativo no excluye infección fúngica y no debe condicionar el estudio pulmonar indicado.",
+        "La imagen abdominal es complementaria; no sustituye la TC pulmonar recomendada."
+      ],
+      "source": {
+        "title": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update",
+        "year": 2023,
+        "url": "https://doi.org/10.1200/JCO.22.02224",
+        "locator": "C3a–C3c: imagen para fiebre prolongada y riesgo fúngico elevado"
+      },
+      "reference": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update (2023), C3a–C3c: imagen para fiebre prolongada y riesgo fúngico elevado",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar estado postrasplante, tiempo de fiebre y limitación de imagen inicial.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB095",
+      "section": "Nefro-urología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Síndrome nefrótico resistente a esteroides",
+      "stem": "Escolar de 7 años con síndrome nefrótico de primera presentación. Cociente proteína/creatinina en primera orina al diagnóstico 9.0 g/g, albúmina 1.6 g/dL. Tras cuatro semanas de prednisona estándar con adherencia documentada, el cociente es 0.9 g/g, albúmina 3.3 g/dL, edema resuelto y función renal normal. Nefrología verifica remisión parcial, sin remisión completa.",
+      "prompt": "¿Qué estrategia integra mejor la respuesta y la evaluación etiológica conforme a KDIGO 2025?",
+      "options": [
+        "Clasificar de inmediato como corticosensible tardío y comenzar esquema de recaídas",
+        "Considerar remisión parcial como resistencia irreversible y cambiar a inhibidor de calcineurina sin completar evaluación",
+        "Aprovechar el período de confirmación hasta la sexta semana, mantener vigilancia y avanzar estudio genético/biopsia según nefrología",
+        "Dar por terminada la inducción y observar sin evaluar etiología mientras no reaparezca edema"
+      ],
+      "correct": 2,
+      "why": "KDIGO distingue esta situación de falta absoluta de respuesta; debe completar evaluación, vigilar y reclasificar según alcance o no remisión completa a las seis semanas.",
+      "others": "La respuesta tardía corticosensible requiere remisión completa durante el período de confirmación; todavía no la ha alcanzado. La remisión parcial a las cuatro semanas permite un período adicional de confirmación y estudio de causas; no equivale a resistencia irreversible. La resolución del edema no prueba remisión completa; persiste proteinuria y requiere evaluación especializada.",
+      "rationales": [
+        "La respuesta tardía corticosensible requiere remisión completa durante el período de confirmación; todavía no la ha alcanzado.",
+        "La remisión parcial a las cuatro semanas permite un período adicional de confirmación y estudio de causas; no equivale a resistencia irreversible.",
+        "KDIGO distingue esta situación de falta absoluta de respuesta; debe completar evaluación, vigilar y reclasificar según alcance o no remisión completa a las seis semanas.",
+        "La resolución del edema no prueba remisión completa; persiste proteinuria y requiere evaluación especializada."
+      ],
+      "source": {
+        "title": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children",
+        "year": 2025,
+        "url": "https://kdigo.org/wp-content/uploads/2025/04/KDIGO-2025-Guideline-for-Nephrotic-Syndrome-in-Children.pdf",
+        "locator": "Figura 1 y sección 1.4: período de confirmación"
+      },
+      "reference": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children (2025), Figura 1 y sección 1.4: período de confirmación",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Interpretar respuesta parcial cuantificada y decidir tiempo de reclasificación.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB096",
+      "section": "Nefro-urología",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Resistencia a inhibidores de calcineurina",
+      "stem": "Niña de 9 años con síndrome nefrótico corticorresistente, biopsia compatible con glomeruloesclerosis focal y segmentaria, evaluación genética sin causa identificada. Ha recibido tacrolimus durante seis meses con adherencia confirmada, niveles adecuados y bloqueo del sistema renina-angiotensina tolerado. Cociente proteína/creatinina inicial 8.0 g/g y actual 5.4 g/g, albúmina 2.1 g/dL. No alcanza remisión parcial. Sin infección activa.",
+      "prompt": "¿Qué decisión corresponde discutir con nefrología según KDIGO 2025?",
+      "options": [
+        "Mantener tacrolimus hasta 12 meses porque toda respuesta completa puede tardar ese tiempo",
+        "Suspender tacrolimus por ausencia de respuesta parcial a seis meses y reevaluar alternativas especializadas o ensayos",
+        "Aumentar sistemáticamente tacrolimus por encima del rango de monitorización durante otros seis meses",
+        "Cambiar automáticamente a ciclofosfamida como tratamiento estándar tras resistencia a tacrolimus"
+      ],
+      "correct": 1,
+      "why": "La guía identifica resistencia al inhibidor en esta situación y recomienda suspenderlo; procede valorar opciones individualizadas, incluidos ensayos cuando existan.",
+      "others": "La posibilidad de respuesta completa tardía se refiere a quienes alcanzan respuesta parcial; no justifica continuar un inhibidor sin respuesta parcial tras seis meses adecuados. Aumentar por encima del rango sin justificación expone a nefrotoxicidad; adherencia y exposición ya se verificaron. La ciclofosfamida no es el estándar recomendado para síndrome nefrótico corticorresistente y no debe seleccionarse automáticamente.",
+      "rationales": [
+        "La posibilidad de respuesta completa tardía se refiere a quienes alcanzan respuesta parcial; no justifica continuar un inhibidor sin respuesta parcial tras seis meses adecuados.",
+        "La guía identifica resistencia al inhibidor en esta situación y recomienda suspenderlo; procede valorar opciones individualizadas, incluidos ensayos cuando existan.",
+        "Aumentar por encima del rango sin justificación expone a nefrotoxicidad; adherencia y exposición ya se verificaron.",
+        "La ciclofosfamida no es el estándar recomendado para síndrome nefrótico corticorresistente y no debe seleccionarse automáticamente."
+      ],
+      "source": {
+        "title": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children",
+        "year": 2025,
+        "url": "https://kdigo.org/wp-content/uploads/2025/04/KDIGO-2025-Guideline-for-Nephrotic-Syndrome-in-Children.pdf",
+        "locator": "Figura 4 y sección 1.4.1: ausencia de remisión parcial tras seis meses de CNI"
+      },
+      "reference": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children (2025), Figura 4 y sección 1.4.1: ausencia de remisión parcial tras seis meses de CNI",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir respuesta parcial, resistencia y toxicidad por escalamiento injustificado.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB097",
+      "section": "Nefro-urología",
+      "type": "directa",
+      "skill": "Farmacología",
+      "topic": "Toxicidad por inhibidores de calcineurina",
+      "stem": "Paciente de 12 años con síndrome nefrótico dependiente de glucocorticoides en remisión con ciclosporina. Creatinina basal 0.60 mg/dL; durante seguimiento ascendió a 0.84 y luego a 0.87 mg/dL. Se descartaron hipovolemia, obstrucción, infección y otras causas reversibles; la proteinuria continúa en remisión. El nivel valle está dentro del objetivo individual.",
+      "prompt": "¿Qué ajuste farmacológico corresponde considerar primero conforme a KDIGO 2025?",
+      "options": [
+        "Mantener dosis porque el valle está dentro de objetivo y la proteinuria en remisión",
+        "Cambiar inmediatamente a tacrolimus a exposición equivalente sin reevaluar función renal",
+        "Reducir ciclosporina y reevaluar creatinina; suspenderla si no mejora tras reducción",
+        "Aumentar el bloqueo renina-angiotensina para contrarrestar el aumento de creatinina"
+      ],
+      "correct": 2,
+      "why": "El incremento es 45% respecto a basal. La guía contempla reducir dosis ante aumento superior al 30% o progresivo y discontinuar si no desciende después de reducirla.",
+      "others": "Los niveles valle no excluyen nefrotoxicidad; el aumento de creatinina sobre basal es clínicamente relevante. Cambiar entre inhibidores de calcineurina no elimina necesariamente la toxicidad de clase y no es la primera medida indicada por esta guía. Intensificar bloqueo renina-angiotensina sin indicación puede empeorar función renal; no corrige la exposición al inhibidor.",
+      "rationales": [
+        "Los niveles valle no excluyen nefrotoxicidad; el aumento de creatinina sobre basal es clínicamente relevante.",
+        "Cambiar entre inhibidores de calcineurina no elimina necesariamente la toxicidad de clase y no es la primera medida indicada por esta guía.",
+        "El incremento es 45% respecto a basal. La guía contempla reducir dosis ante aumento superior al 30% o progresivo y discontinuar si no desciende después de reducirla.",
+        "Intensificar bloqueo renina-angiotensina sin indicación puede empeorar función renal; no corrige la exposición al inhibidor."
+      ],
+      "source": {
+        "title": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children",
+        "year": 2025,
+        "url": "https://kdigo.org/wp-content/uploads/2025/04/KDIGO-2025-Guideline-for-Nephrotic-Syndrome-in-Children.pdf",
+        "locator": "Figura 3: titulación individual y aumento de creatinina mayor del 30%"
+      },
+      "reference": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children (2025), Figura 3: titulación individual y aumento de creatinina mayor del 30%",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Calcular cambio relativo y ponderar eficacia frente a toxicidad.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB098",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Artritis bacteriana con cultivos negativos",
+      "stem": "Niño de 22 meses con cojera febril, derrame de rodilla y líquido sinovial con 38 000 leucocitos/mm³, predominio neutrofílico. PCR moderadamente elevada. Se obtuvo aspirado antes de antibiótico; tinción de Gram y cultivos habituales permanecen negativos a las 48 h. Mejora clínica parcial con tratamiento empírico. Se conservó líquido sinovial y hay acceso a pruebas moleculares. No existen datos epidemiológicos de tuberculosis o Lyme.",
+      "prompt": "¿Qué estudio adicional tiene mayor utilidad etiológica inmediata en esta edad?",
+      "options": [
+        "PCR dirigida a Kingella kingae en líquido sinovial conservado",
+        "Repetir exclusivamente hemocultivos tras 48 h de antibiótico y retirar evaluación del aspirado",
+        "Solicitar anticuerpos antinucleares como sustituto de pruebas microbiológicas",
+        "Realizar PCR de Kingella exclusivamente en exudado orofaríngeo e interpretar positividad como confirmación articular"
+      ],
+      "correct": 0,
+      "why": "Kingella es un patógeno fastidioso relevante entre 6 y 48 meses; la detección molecular en líquido articular puede identificarlo cuando cultivos ordinarios son negativos.",
+      "others": "Repetir hemocultivos puede ser pertinente ante nuevas indicaciones, pero no aprovecha la muestra del foco para detectar este patógeno fastidioso. Una etiología inflamatoria puede entrar en el diferencial si la evolución lo sugiere, pero ANA no sustituye la evaluación microbiológica del cuadro. La detección orofaríngea puede representar colonización; no confirma por sí sola etiología articular como una prueba positiva del líquido afectado.",
+      "rationales": [
+        "Kingella es un patógeno fastidioso relevante entre 6 y 48 meses; la detección molecular en líquido articular puede identificarlo cuando cultivos ordinarios son negativos.",
+        "Repetir hemocultivos puede ser pertinente ante nuevas indicaciones, pero no aprovecha la muestra del foco para detectar este patógeno fastidioso.",
+        "Una etiología inflamatoria puede entrar en el diferencial si la evolución lo sugiere, pero ANA no sustituye la evaluación microbiológica del cuadro.",
+        "La detección orofaríngea puede representar colonización; no confirma por sí sola etiología articular como una prueba positiva del líquido afectado."
+      ],
+      "source": {
+        "title": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics",
+        "year": 2023,
+        "url": "https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/",
+        "locator": "Sección III: pruebas moleculares de líquido sinovial y patógenos fastidiosos"
+      },
+      "reference": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics (2023), Sección III: pruebas moleculares de líquido sinovial y patógenos fastidiosos",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar edad, rendimiento microbiológico, sitio de muestra y evolución.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB099",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Artritis bacteriana complicada",
+      "stem": "Niño de 9 años con artritis bacteriana de cadera por S. aureus sensible a meticilina. Drenaje inicial y cefazolina IV a dosis revisada; a las 72 h persisten fiebre y dolor, PCR de 115 a 167 mg/L y hemocultivo de control positivo. La RM muestra absceso subperióstico femoral adyacente no drenado. El antibiograma sigue confirmando sensibilidad, sin reacción al fármaco.",
+      "prompt": "¿Qué modificación es prioritaria para abordar la mala respuesta?",
+      "options": [
+        "Sustituir cefazolina por vancomicina y mantener manejo conservador del absceso",
+        "Añadir cobertura antipseudomónica y esperar cinco días antes de reevaluar control del foco",
+        "Mantener antimicrobiano dirigido, reevaluar urgentemente con cirugía el drenaje del foco y ajustar duración por osteomielitis adyacente",
+        "Completar 10–14 días de tratamiento como artritis primaria, con transición oral al desaparecer la fiebre"
+      ],
+      "correct": 2,
+      "why": "La persistencia de bacteriemia y el absceso documentado obligan a reevaluar control del foco con el equipo quirúrgico; la osteomielitis modifica el curso respecto a artritis primaria.",
+      "others": "La persistencia puede explicarse por el foco no controlado; el aislamiento sigue siendo sensible y el caso no establece superioridad de vancomicina. La ampliación empírica no resuelve un absceso no drenado y no se apoya en la microbiología disponible. El curso corto corresponde a artritis primaria no complicada con respuesta rápida, condiciones que este niño no cumple.",
+      "rationales": [
+        "La persistencia puede explicarse por el foco no controlado; el aislamiento sigue siendo sensible y el caso no establece superioridad de vancomicina.",
+        "La ampliación empírica no resuelve un absceso no drenado y no se apoya en la microbiología disponible.",
+        "La persistencia de bacteriemia y el absceso documentado obligan a reevaluar control del foco con el equipo quirúrgico; la osteomielitis modifica el curso respecto a artritis primaria.",
+        "El curso corto corresponde a artritis primaria no complicada con respuesta rápida, condiciones que este niño no cumple."
+      ],
+      "source": {
+        "title": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics",
+        "year": 2023,
+        "url": "https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/",
+        "locator": "VI: respuesta insuficiente y procedimientos adicionales; XII: duración según extensión"
+      },
+      "reference": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics (2023), VI: respuesta insuficiente y procedimientos adicionales; XII: duración según extensión",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir fracaso por foco no controlado de fracaso por resistencia antimicrobiana.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
     }
   ]
 });
