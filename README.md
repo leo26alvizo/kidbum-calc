@@ -1,3 +1,7 @@
+# Actualización v0.11.8 · Pediatría BOARD: confianza y aprendizaje
+
+Seguro, Indeciso y No sé; radar de fortalezas y debilidades por área y tema, retroalimentación por confianza y repaso prioritario. Se conserva el historial previo sin reinterpretar sus registros de confianza no comparables. Banco y calificación intactos.
+
 # Actualización v0.11.7 · Pediatría BOARD UX Edition
 
 Portada compacta, navegación temprana, extensión y duración realistas, mapa de preguntas del simulador, revisión filtrada y mejoras táctiles. 52 reactivos activos, 87 en reserva y progreso local conservados. Validación clínica independiente y psicométrica pendientes.

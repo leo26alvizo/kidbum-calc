@@ -71,3 +71,9 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Conserva banco, claves, motor e historial; versión 0.11.7 sincronizada en marcadores y recursos offline. Navegación de secciones al inicio; portada compacta y aviso educativo visible con detalle desplegable.
 - Extensiones realistas, disponibilidad y duración aproximada por modalidad; el límite real sigue en el motor. Mapa de preguntas de simulador con respuestas guardadas/pendientes, navegación directa y confirmación de entrega con omisiones. La práctica enfoca la retroalimentación; resultados con filtros de todos, errores, omitidos y aciertos. No se muestran pistas ni corrección durante el examen.
 - Pruebas responsive y funcionales ampliadas; revisión visual humana y dispositivo físico pendientes. Sin cambios en contenido clínico ni afirmaciones de equivalencia psicométrica.
+
+## Confianza y aprendizaje · v0.11.8
+
+- Opciones visibles: Seguro, Indeciso y No sé. Se exige una opción de respuesta además de la confianza; No sé no altera la calificación de aciertos.
+- Clasificación del último intento por reactivo activo y de respuestas de la sesión: fortaleza observada (acierto seguro), acierto inseguro, brecha (No sé en cualquier resultado o error indeciso), error con alta confianza. Los registros históricos con código azar se conservan sin reinterpretarlos; se muestran como confianza anterior no comparable. El código dudoso se mantiene para compatibilidad.
+- No sé programa repaso inmediato incluso al acertar; errores de alta confianza y brechas disponibles se priorizan en repaso espaciado. No se infiere dominio ni se modifica la puntuación; las omisiones no se clasifican.
