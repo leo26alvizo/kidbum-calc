@@ -1,3 +1,7 @@
+# Actualización v0.11.0 · Pediatría BOARD Ivory Heritage
+
+Rediseño visual de Academy: portada azul noche y oro, escudo de la línea ENARM, siete modos ilustrados, examen marfil, controles de confianza accesibles y revisión editorial. Banco, claves, algoritmo y progreso conservados.
+
 # Actualización v0.10.99 · Pediatría BOARD: edición académica 0.3
 
 24 reactivos avanzados, 48 fundamentos; 11 áreas avanzadas y 11 fuentes clínicas específicas. Nuevos casos de neutropenia febril, artritis bacteriana, bronquiolitis, espasmos infantiles y otitis media. Revisión clínica independiente pendiente.

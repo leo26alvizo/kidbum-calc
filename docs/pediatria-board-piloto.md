@@ -24,3 +24,9 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Fuentes específicas: guía internacional de neutropenia febril 2023 (B3/B4/A6b), PIDS/IDSA 2023 (V/VI/XI/XII), NICE NG9 (actualización de oxígeno 2021), NICE NG217 (6.3.4–5), AAP otitis 2013 (KAS 3C/4B). Los reactivos fijan la guía de referencia; no se presenta una guía antigua como actualizada en 2026 ni como protocolo mexicano.
 - Contraste mexicano parcial: catálogo IMSS-032-08 localizado para bronquiolitis; su guía histórica no se usa para atribuir los umbrales NICE por edad. La estrategia IMSS de hora dorada para neutropenia febril (2026) corresponde al inicio del manejo, no a los criterios de suspensión de la guía internacional. Pendiente revisión sistemática de GPC mexicanas y vigencia local.
 - Sin cambios en identificadores o claves anteriores. Se explicita cobertura incompleta del nivel Consejo. No se acredita equivalencia con el examen real; revisión por especialistas y calibración pendientes.
+
+## Ivory Heritage · v0.11.0
+
+- Portada azul noche/oro con escudo extraído del arte heráldico ENARM y fotografía pediátrica preexistente. Siete modos, con recursos gráficos locales ya precargados; ningún contenido clínico nuevo.
+- Examen marfil con alternativa oscura, opciones de respuesta y radio de confianza accesibles, temporizador y retroalimentación intactos. Las métricas de portada se derivan del banco; radar de barras por competencia y área, sin puntuaciones inventadas. Accesos de sección reales (entrenamiento, progreso, bibliografía).
+- Sin cambios en banco, claves, motor de selección, repaso o clave de almacenamiento. Se añade prueba Chromium de navegación, ausencia de pistas/retroalimentación en examen, confianza, persistencia y temas. Comparación visual humana con maqueta y dispositivo físico pendiente.

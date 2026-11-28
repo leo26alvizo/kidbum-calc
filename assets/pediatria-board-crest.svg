@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="865 50 470 595" fill="none" aria-hidden="true"><defs>
+  <linearGradient id="parchment" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#FAF8F2"/><stop offset=".42" stop-color="#F4EEE2"/><stop offset="1" stop-color="#E8DCC6"/></linearGradient>
+  <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F8E9C3"/><stop offset=".19" stop-color="#D8BC7C"/><stop offset=".48" stop-color="#AF8548"/><stop offset=".75" stop-color="#E8CF95"/><stop offset="1" stop-color="#9B713E"/></linearGradient>
+  <linearGradient id="inner" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#32302C"/><stop offset=".64" stop-color="#171715"/><stop offset="1" stop-color="#3A352F"/></linearGradient>
+  <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFD"/><stop offset="1" stop-color="#E8DDC8"/></linearGradient>
+  <radialGradient id="aura"><stop stop-color="#D5B37A" stop-opacity=".23"/><stop offset=".64" stop-color="#D5B37A" stop-opacity=".07"/><stop offset="1" stop-color="#D5B37A" stop-opacity="0"/></radialGradient>
+  <pattern id="papergrain" width="31" height="31" patternUnits="userSpaceOnUse"><circle cx="5" cy="7" r=".7" fill="#705C42" opacity=".12"/><circle cx="26" cy="19" r=".5" fill="#705C42" opacity=".1"/><path d="M0 30L30 0" stroke="#8D7D65" stroke-width=".25" opacity=".065"/></pattern>
+  <clipPath id="cl"><rect width="1400" height="740" rx="26"/></clipPath>
+ </defs>
+  <path d="M1100 65C1205 114 1271 126 1322 131V320C1322 445 1258 555 1100 631C942 555 878 445 878 320V131C929 126 995 114 1100 65Z" fill="#BDA16C" opacity=".23" transform="translate(4 9)"/>
+  <path d="M1100 65C1205 114 1271 126 1322 131V320C1322 445 1258 555 1100 631C942 555 878 445 878 320V131C929 126 995 114 1100 65Z" fill="url(#inner)" stroke="url(#metal)" stroke-width="12"/>
+  <path d="M1100 84C1200 129 1254 145 1303 150V319C1303 433 1245 531 1100 606C955 531 897 433 897 319V150C946 145 1000 129 1100 84Z" stroke="#D9BE8D" stroke-opacity=".69" stroke-width="2.5"/>
+  <path d="M1100 98C1196 141 1243 153 1292 159V314C1292 427 1237 520 1100 592C963 520 908 427 908 314V159C957 153 1004 141 1100 98Z" stroke="#8A7350" stroke-opacity=".28" stroke-width="1.4"/>
+  <path d="m1100 104 7 14 16 2-12 11 3 16-14-8-14 8 3-16-12-11 16-2Z" fill="url(#metal)"/>
+  <!-- gold heraldic lion, adapted from the KidBum crest -->
+  <g transform="translate(904 152) scale(1.63)" stroke="url(#metal)" stroke-linecap="round" stroke-linejoin="round" fill="none">
+   <path d="M120 24 103 16 69 30 46 52 33 82 28 116 43 151 49 177 83 211 120 229M120 24 137 16 171 30 194 52 207 82 212 116 197 151 191 177 157 211 120 229" stroke-width="6.1"/>
+   <path d="M120 45 93 38 63 58 52 88 63 112 51 136 75 181 101 198 120 213M120 45 147 38 177 58 188 88 177 112 189 136 165 181 139 198 120 213" stroke-width="4.3"/>
+   <path d="M62 72 89 70 106 88 120 93 134 88 151 70 178 72M66 120 88 115 105 123 120 142 135 123 152 115 174 120" stroke-width="3.9"/>
+   <path d="M80 147 93 163 111 170 120 165 129 170 147 163 160 147M108 146 120 151 132 146M120 151V170L105 178M120 170 135 178M91 183 120 206 149 183" stroke-width="4"/>
+   <path d="M56 96 46 120 62 147M184 96 194 120 178 147M90 207 120 223 150 207" stroke-width="3" opacity=".84"/>
+   <path d="M81 119 91 116 99 119M159 119 149 116 141 119" stroke-width="5.2"/>
+  </g>
+  </svg>

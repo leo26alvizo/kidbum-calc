@@ -28,6 +28,9 @@ jobs:
         run: node tests/neurologia-algoritmos-v01093.cjs
       - name: Pediatría BOARD pilot — bank, scores and review
         run: node tests/pediatria-board.cjs
+      - name: Pediatría BOARD Ivory Heritage — mobile and desktop interaction
+        if: ${{ !cancelled() }}
+        run: node tests/pediatria-board-ivory-browser.cjs
       - name: SAMPLE pediatric history tool
         run: node tests/pediatria-sample-v01095.cjs
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
