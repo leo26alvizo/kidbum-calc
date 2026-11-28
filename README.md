@@ -1,3 +1,7 @@
+# Actualización v0.11.2 · Pediatría BOARD: tema claro y oscuro completos
+
+Marfil y azul noche en toda la sección, incluyendo portada, modos, radar, bibliografía, examen y resultados. Preferencia local conservada y herencia inicial del tema general. Banco y motor clínico sin cambios.
+
 # Actualización v0.11.1 · Pediatría: menú simplificado
 
 Se retira la tarjeta SAMPLE del menú y buscador principal. La herramienta permanece disponible desde los algoritmos pediátricos y conserva sus recursos offline.
