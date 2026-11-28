@@ -37,7 +37,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El retraso de absorción caracteriza la taquipnea transitoria; la hipertensión pulmonar y el meconio son otros mecanismos.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB002",
@@ -57,7 +59,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El píloro causa vómito no bilioso; la atresia suele manifestarse precozmente; Hirschsprung no complicado no explica bien la neumatosis.",
       "caseId": "NEC-01",
       "critical": false,
-      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB003",
@@ -77,7 +81,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La alimentación y laxantes pueden agravar el cuadro; el enema se usa en invaginación seleccionada, no en enterocolitis.",
       "caseId": "NEC-01",
       "critical": false,
-      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 1 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB004",
@@ -97,7 +103,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El potasio plasmático no refleja el total corporal y requiere vigilancia durante el manejo.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB005",
@@ -117,7 +125,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras complicaciones son crónicas o no explican el deterioro agudo.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB006",
@@ -137,7 +147,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La PA aislada no excluye choque; ni hipertensión ni bradicardia explican los datos.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 2 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB007",
@@ -157,7 +169,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "No es primariamente un mecanismo secretor, motor ni de ácido gástrico.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB008",
@@ -177,7 +191,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La ictericia indirecta no explica heces acólicas; hemoglobina y calcio no definen colestasis.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB009",
@@ -197,7 +213,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "B12 y folato suelen asociarse a macrocitosis; vitamina D no explica este patrón.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 3 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB010",
@@ -217,7 +235,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El TP aislado orienta a vía extrínseca; trombocitopenia no es el defecto primario.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB011",
@@ -237,7 +257,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "PTI y ferropenia aisladas no explican blastos ni el conjunto; hemofilia afecta coagulación.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB012",
@@ -257,7 +279,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros síndromes no explican el conjunto de alteraciones.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 4 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB013",
@@ -277,7 +301,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las demás opciones contradicen el mecanismo de conjugación.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB014",
@@ -297,7 +323,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Esperar resultados, ignorar contraindicaciones o enviar a casa aumenta el riesgo.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB015",
@@ -317,7 +345,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros diagnósticos requerirían datos adicionales; la aspiración suele tener inicio brusco o hallazgos focales.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 5 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB016",
@@ -337,7 +367,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras lesiones no son el determinante principal del cortocircuito de Fallot.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB017",
@@ -357,7 +389,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La estenosis limita flujo pulmonar; la arritmia fisiológica y dextrocardia aislada no explican el cuadro.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB018",
@@ -377,7 +411,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Ni la saturación preductal normal ni la anemia aislada descartan una lesión crítica.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 6 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB019",
@@ -397,7 +433,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las pérdidas de bicarbonato y acumulación de ácidos favorecen acidosis.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB020",
@@ -417,7 +455,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros estudios no son de primera línea para esta hipótesis.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB021",
@@ -437,7 +477,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La observación, antibióticos o punción no corrigen la isquemia.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 7 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB022",
@@ -457,7 +499,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los demás mecanismos no explican la alteración de barrera atópica.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB023",
@@ -477,7 +521,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Antihistamínicos y corticoides no sustituyen adrenalina; antibióticos no tratan anafilaxia.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB024",
@@ -497,7 +543,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "No implica transformación maligna ni los otros trastornos de forma inevitable.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 8 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB025",
@@ -517,7 +565,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras enzimas causan trastornos diferentes.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB026",
@@ -537,7 +587,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "La telarquia aislada no suele acelerar edad ósea; las otras opciones no explican el patrón.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB027",
@@ -557,7 +609,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "SIADH concentra orina y suele causar hiponatremia; polidipsia suele bajar osmolaridad plasmática.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 9 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB028",
@@ -577,7 +631,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros patrones no corresponden al defecto de acidificación renal.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB029",
@@ -597,7 +653,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Cambios mínimos suele dar proteinuria nefrótica; cistitis y diabetes insípida no explican hipertensión y C3 bajo.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB030",
@@ -617,7 +675,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El nefrítico se caracteriza más por hematuria e hipertensión; los otros no producen este patrón.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 10 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB031",
@@ -637,7 +697,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Fibrilina se relaciona con Marfan, colágeno I con osteogénesis imperfecta y alfa-1 antitripsina con enfermedad hepato-pulmonar.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB032",
@@ -657,7 +719,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las demás entidades no explican bien simultáneamente la alteración del sudor, malabsorción y clínica pulmonar.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB033",
@@ -677,7 +741,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los demás estudios no son evaluación estructural rutinaria indicada por este contexto.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 11 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB034",
@@ -697,7 +763,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Distrofina, CFTR y hemoglobina beta corresponden a otros trastornos.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB035",
@@ -717,7 +785,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras opciones no explican la limitación articular de cadera.",
       "caseId": null,
       "critical": true,
-      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB036",
@@ -737,7 +807,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Fisioterapia, esteroides o demora sin excluir infección son inadecuados.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 12 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB037",
@@ -757,7 +829,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Hipsarritmia orienta a espasmos infantiles; descargas focales a epilepsia focal.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB038",
@@ -777,7 +851,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros trastornos no explican bien regresión y agrupación típica.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB039",
@@ -797,7 +873,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las demás opciones no son complicaciones características de este síndrome.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 13 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB040",
@@ -817,7 +895,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras entidades afectan linfocitos B, IgA o complemento respectivamente.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB041",
@@ -837,7 +917,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras opciones no son complicaciones típicas de Kawasaki.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB042",
@@ -857,7 +939,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las demás no explican el patrón cutáneo-muscular característico.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 14 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB043",
@@ -877,7 +961,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Los otros mecanismos no son la causa de ambliopía por deprivación.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB044",
@@ -897,7 +983,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las afecciones superficiales propuestas no explican leucocoria verdadera.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB045",
@@ -917,7 +1005,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Esperar reduce oportunidades; antibióticos y oclusión bilateral permanente no son manejo apropiado.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 15 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB046",
@@ -937,7 +1027,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "El eritema aislado es inespecífico; los otros hallazgos no apoyan OMA.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB047",
@@ -957,7 +1049,9 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Asma y bronquiolitis afectan principalmente vías inferiores; otitis no explica estridor.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
     },
     {
       "id": "PB048",
@@ -977,7 +1071,429 @@ window.KidBumPediatriaBoard=Object.freeze({
       "others": "Las otras entidades no explican el conjunto posotitis.",
       "caseId": null,
       "critical": false,
-      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente."
+      "reference": "Guía CMCP, sección 16 · referencia temática; justificación clínica pendiente de revisión independiente.",
+      "level": "fundamentos",
+      "reviewStatus": "referencia temática; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB049",
+      "section": "Neonatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hiperbilirrubinemia",
+      "stem": "RN de 37 semanas, 51 h de vida, hemólisis isoimmune confirmada por DAT positivo. Bilirrubina sérica total 19.4 mg/dL pese a fototerapia intensiva. El nomograma AAP correspondiente a su edad y factores de riesgo establece un umbral de exanguinotransfusión de 21 mg/dL. Está despierto y sin signos de encefalopatía.",
+      "prompt": "Según AAP 2022, ¿cuál es la conducta más apropiada en este momento?",
+      "options": [
+        "Mantener fototerapia en alojamiento conjunto y repetir bilirrubina en 12 h",
+        "Escalar a atención intensiva neonatal, continuar fototerapia intensiva y preparar eventual exanguinotransfusión",
+        "Realizar exanguinotransfusión de inmediato solo por superar el umbral de escalamiento",
+        "Administrar inmunoglobulina IV y suspender fototerapia mientras se evalúa respuesta"
+      ],
+      "correct": 1,
+      "why": "El umbral de escalamiento es 2 mg/dL por debajo del umbral de recambio. Se requiere manejo intensivo y vigilancia estrecha, aun sin signos neurológicos.",
+      "others": "La cifra está a 1.6 mg/dL del umbral de recambio; el control diferido no es apropiado. El umbral de escalamiento no es idéntico al de recambio; sin encefalopatía ni cifra en el umbral de recambio, no basta este dato para indicar recambio inmediato. La inmunoglobulina puede considerarse en hemólisis isoimmune seleccionada, pero nunca sustituye el escalamiento ni la fototerapia intensiva.",
+      "rationales": [
+        "La cifra está a 1.6 mg/dL del umbral de recambio; el control diferido no es apropiado.",
+        "El umbral de escalamiento es 2 mg/dL por debajo del umbral de recambio. Se requiere manejo intensivo y vigilancia estrecha, aun sin signos neurológicos.",
+        "El umbral de escalamiento no es idéntico al de recambio; sin encefalopatía ni cifra en el umbral de recambio, no basta este dato para indicar recambio inmediato.",
+        "La inmunoglobulina puede considerarse en hemólisis isoimmune seleccionada, pero nunca sustituye el escalamiento ni la fototerapia intensiva."
+      ],
+      "source": {
+        "title": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-058859",
+        "locator": "KAS 17–23"
+      },
+      "reference": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks (2022), KAS 17–23",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB050",
+      "section": "Neonatología",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Hiperbilirrubinemia",
+      "stem": "RN de 38 semanas con DAT positivo que inició fototerapia durante la hospitalización de nacimiento a las 30 h. A las 68 h cumple criterios de suspensión de fototerapia. Come bien y está clínicamente estable.",
+      "prompt": "Según AAP 2022, ¿qué vigilancia de rebote es preferible?",
+      "options": [
+        "Bilirrubina sérica únicamente a las 48–72 h",
+        "Control clínico en 24 h sin bilirrubina si no se observa ictericia",
+        "Bilirrubina sérica a las 6–12 h y repetir al día siguiente",
+        "Bilirrubina transcutánea inmediatamente al retirar la fototerapia, sin controles posteriores"
+      ],
+      "correct": 2,
+      "why": "DAT positivo e inicio antes de 48 h identifican al RN para control sérico precoz y un segundo control al día siguiente.",
+      "others": "La hemólisis y el inicio precoz de fototerapia confieren riesgo de rebote; esperar 48–72 h omite el control temprano. La inspección clínica no sustituye el control sérico recomendado en este grupo. La medición transcutánea inmediatamente después de fototerapia puede subestimar la cifra; no sustituye el seguimiento indicado.",
+      "rationales": [
+        "La hemólisis y el inicio precoz de fototerapia confieren riesgo de rebote; esperar 48–72 h omite el control temprano.",
+        "La inspección clínica no sustituye el control sérico recomendado en este grupo.",
+        "DAT positivo e inicio antes de 48 h identifican al RN para control sérico precoz y un segundo control al día siguiente.",
+        "La medición transcutánea inmediatamente después de fototerapia puede subestimar la cifra; no sustituye el seguimiento indicado."
+      ],
+      "source": {
+        "title": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-058859",
+        "locator": "KAS 16"
+      },
+      "reference": "AAP. Management of Hyperbilirubinemia in the Newborn Infant ≥35 Weeks (2022), KAS 16",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB051",
+      "section": "Urgencias y terapia intensiva",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Cetoacidosis diabética",
+      "stem": "Adolescente de 12 años, debut de diabetes tipo 1, glucosa 468 mg/dL, pH venoso 7.09, bicarbonato 8 mmol/L, cetonemia 5.4 mmol/L, K 4.5 mmol/L. Tras iniciar cristaloide isotónico, lleva 20 min de hidratación, perfusión en mejoría, diuresis presente.",
+      "prompt": "Conforme a ISPAD 2022, ¿cuál es la estrategia de insulinoterapia inicial?",
+      "options": [
+        "Bolo IV de insulina y después infusión continua inmediata",
+        "Infusión IV de insulina sin bolo desde el momento de canalización",
+        "Insulina subcutánea basal como única estrategia durante la acidosis grave",
+        "Infusión IV de insulina sin bolo, después de al menos 1 h de iniciada la hidratación"
+      ],
+      "correct": 3,
+      "why": "La insulina IV continua se inicia una vez transcurrida al menos una hora de líquidos, sin bolo; se ajusta según gravedad y protocolo.",
+      "others": "El bolo inicial no es recomendado y puede agravar los cambios osmóticos y del potasio. El consenso establece un intervalo de al menos una hora desde el inicio de líquidos, aun si mejora la perfusión. La cetoacidosis grave requiere insulinoterapia apropiada y monitorizada; la basal aislada no corrige adecuadamente la cetogénesis.",
+      "rationales": [
+        "El bolo inicial no es recomendado y puede agravar los cambios osmóticos y del potasio.",
+        "El consenso establece un intervalo de al menos una hora desde el inicio de líquidos, aun si mejora la perfusión.",
+        "La cetoacidosis grave requiere insulinoterapia apropiada y monitorizada; la basal aislada no corrige adecuadamente la cetogénesis.",
+        "La insulina IV continua se inicia una vez transcurrida al menos una hora de líquidos, sin bolo; se ajusta según gravedad y protocolo."
+      ],
+      "source": {
+        "title": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state",
+        "year": 2022,
+        "url": "https://doi.org/10.1111/pedi.13406",
+        "locator": "Apartados de tratamiento con líquidos e insulina"
+      },
+      "reference": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state (2022), Apartados de tratamiento con líquidos e insulina",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB052",
+      "section": "Urgencias y terapia intensiva",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Cetoacidosis diabética",
+      "stem": "Niña de 9 años con cetoacidosis moderada, pH 7.17, glucosa 390 mg/dL y K 2.8 mmol/L antes de insulina. ECG con ondas U, función renal conservada y diuresis comprobada. Ya inició hidratación y cuenta con monitorización continua.",
+      "prompt": "¿Qué modificación del manejo reduce el riesgo inmediato de arritmia?",
+      "options": [
+        "Diferir insulina y corregir potasio con monitorización antes de iniciarla",
+        "Iniciar insulina a la mitad de la dosis y diferir potasio hasta glucosa <250 mg/dL",
+        "Iniciar insulina y reponer potasio solo si aparece una arritmia sostenida",
+        "Administrar bicarbonato para normalizar pH y empezar insulina simultáneamente"
+      ],
+      "correct": 0,
+      "why": "La hipopotasemia marcada requiere reponer potasio antes de insulina; esta desplaza K al interior celular y puede precipitar arritmias.",
+      "others": "Reducir la dosis no elimina el riesgo de empeorar una hipopotasemia significativa. Esperar una arritmia expone a un evento potencialmente fatal y retrasa la corrección del déficit. El bicarbonato no está indicado de rutina y puede agravar el descenso de potasio.",
+      "rationales": [
+        "La hipopotasemia marcada requiere reponer potasio antes de insulina; esta desplaza K al interior celular y puede precipitar arritmias.",
+        "Reducir la dosis no elimina el riesgo de empeorar una hipopotasemia significativa.",
+        "Esperar una arritmia expone a un evento potencialmente fatal y retrasa la corrección del déficit.",
+        "El bicarbonato no está indicado de rutina y puede agravar el descenso de potasio."
+      ],
+      "source": {
+        "title": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state",
+        "year": 2022,
+        "url": "https://doi.org/10.1111/pedi.13406",
+        "locator": "Apartado de reposición de potasio"
+      },
+      "reference": "ISPAD. Diabetic ketoacidosis and hyperglycemic hyperosmolar state (2022), Apartado de reposición de potasio",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB053",
+      "section": "Infectología y vacunología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Infecciones bacterianas en lactantes pequeños",
+      "stem": "Lactante de 17 días, nacido a término, previamente sano, temperatura rectal 38.3 °C en casa, exploración sin foco, buen estado general. No recibió antibióticos y no tiene datos clínicos que sugieran infección por herpes.",
+      "prompt": "Según el algoritmo AAP 2021 para lactantes febriles de 8–21 días, ¿cuál es la estrategia inicial?",
+      "options": [
+        "Uroanálisis y cultivo si positivo; alta sin antimicrobianos si el resultado es normal",
+        "Hemocultivo y marcadores inflamatorios; omitir LCR si la procalcitonina es baja",
+        "Evaluación de orina, sangre y LCR según protocolo, antimicrobianos parenterales y vigilancia hospitalaria",
+        "Obtener hemocultivo y observar en domicilio hasta disponer del resultado"
+      ],
+      "correct": 2,
+      "why": "La edad de 17 días sitúa al paciente en el grupo para estudio de infección bacteriana invasiva, tratamiento parenteral y observación hospitalaria.",
+      "others": "La corta edad impide utilizar un uroanálisis normal como criterio único de bajo riesgo. En esta franja de edad los marcadores no reemplazan la evaluación del LCR. La bacteriemia y meningitis pueden presentarse con buen aspecto; la observación domiciliaria aislada no es el esquema recomendado.",
+      "rationales": [
+        "La corta edad impide utilizar un uroanálisis normal como criterio único de bajo riesgo.",
+        "En esta franja de edad los marcadores no reemplazan la evaluación del LCR.",
+        "La edad de 17 días sitúa al paciente en el grupo para estudio de infección bacteriana invasiva, tratamiento parenteral y observación hospitalaria.",
+        "La bacteriemia y meningitis pueden presentarse con buen aspecto; la observación domiciliaria aislada no es el esquema recomendado."
+      ],
+      "source": {
+        "title": "AAP. Evaluation and Management of Well-Appearing Febrile Infants 8 to 60 Days Old",
+        "year": 2021,
+        "url": "https://doi.org/10.1542/peds.2021-052228",
+        "locator": "Algoritmo 8–21 días; KAS 1–7"
+      },
+      "reference": "AAP. Evaluation and Management of Well-Appearing Febrile Infants 8 to 60 Days Old (2021), Algoritmo 8–21 días; KAS 1–7",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB054",
+      "section": "Infectología y vacunología",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Infecciones bacterianas en lactantes pequeños",
+      "stem": "Lactante de 45 días, término, previamente sano, fiebre rectal de 38.2 °C, buen aspecto, sin foco clínico ni bronquiolitis. Uroanálisis negativo, procalcitonina 0.12 ng/mL y neutrófilos absolutos 2600/mm³. Hemocultivo obtenido. Familia con teléfono, transporte y reevaluación garantizada en 24 h.",
+      "prompt": "Según AAP 2021, ¿qué conducta es razonable?",
+      "options": [
+        "Punción lumbar obligatoria y antibiótico IV hasta negatividad de cultivos",
+        "Manejo ambulatorio sin antibiótico empírico ni punción lumbar, con vigilancia y reevaluación acordadas",
+        "Antibiótico oral empírico por 10 días pese a uroanálisis negativo",
+        "Hospitalización y repetir marcadores a las 48 h como requisito universal"
+      ],
+      "correct": 1,
+      "why": "El algoritmo permite manejo ambulatorio de lactantes seleccionados de 29–60 días con criterios de bajo riesgo y seguimiento fiable.",
+      "others": "Con uroanálisis y marcadores normales, en esta franja de edad no es obligatoria la punción lumbar ni la antibioterapia parenteral. No se ha documentado indicación de antibiótico oral y el uroanálisis es negativo. La hospitalización puede ser necesaria por otras razones, pero no es universal si cumple los criterios de seguimiento seguro.",
+      "rationales": [
+        "Con uroanálisis y marcadores normales, en esta franja de edad no es obligatoria la punción lumbar ni la antibioterapia parenteral.",
+        "El algoritmo permite manejo ambulatorio de lactantes seleccionados de 29–60 días con criterios de bajo riesgo y seguimiento fiable.",
+        "No se ha documentado indicación de antibiótico oral y el uroanálisis es negativo.",
+        "La hospitalización puede ser necesaria por otras razones, pero no es universal si cumple los criterios de seguimiento seguro."
+      ],
+      "source": {
+        "title": "AAP. Evaluation and Management of Well-Appearing Febrile Infants 8 to 60 Days Old",
+        "year": 2021,
+        "url": "https://doi.org/10.1542/peds.2021-052228",
+        "locator": "Algoritmo 29–60 días; KAS 15–20"
+      },
+      "reference": "AAP. Evaluation and Management of Well-Appearing Febrile Infants 8 to 60 Days Old (2021), Algoritmo 29–60 días; KAS 15–20",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB055",
+      "section": "Gastroenterología y nutrición",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Síndrome colestásico",
+      "stem": "Lactante de 24 días, término, alimentado al seno materno y con adecuada ganancia ponderal. Persiste tinte escleral amarillo; la madre muestra heces color crema muy pálidas. No se ha medido bilirrubina directa desde el nacimiento.",
+      "prompt": "¿Cuál es la siguiente prueba más útil para decidir referencia por posible colestasis?",
+      "options": [
+        "Bilirrubina transcutánea y reevaluación en dos semanas",
+        "Prueba de Coombs directa como único estudio inicial",
+        "Aminotransferasas sin fraccionamiento de bilirrubina",
+        "Bilirrubina sérica total y directa o conjugada"
+      ],
+      "correct": 3,
+      "why": "La ictericia persistente y heces pálidas entre las 2–4 semanas indican medir bilirrubina directa/conjugada para identificar colestasis.",
+      "others": "La medición transcutánea no distingue fracciones y la espera puede retrasar el diagnóstico de atresia biliar. El Coombs estudia hemólisis, pero no permite establecer colestasis. Las aminotransferasas pueden integrar el estudio posterior, pero no sustituyen la medición de bilirrubina directa o conjugada.",
+      "rationales": [
+        "La medición transcutánea no distingue fracciones y la espera puede retrasar el diagnóstico de atresia biliar.",
+        "El Coombs estudia hemólisis, pero no permite establecer colestasis.",
+        "Las aminotransferasas pueden integrar el estudio posterior, pero no sustituyen la medición de bilirrubina directa o conjugada.",
+        "La ictericia persistente y heces pálidas entre las 2–4 semanas indican medir bilirrubina directa/conjugada para identificar colestasis."
+      ],
+      "source": {
+        "title": "AAP. Identifying Infants With Biliary Atresia by 2–4 Weeks of Life",
+        "year": 2025,
+        "url": "https://doi.org/10.1542/peds.2024-070077",
+        "locator": "Estrategia de detección entre 2 y 4 semanas"
+      },
+      "reference": "AAP. Identifying Infants With Biliary Atresia by 2–4 Weeks of Life (2025), Estrategia de detección entre 2 y 4 semanas",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB056",
+      "section": "Gastroenterología y nutrición",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Síndrome colestásico",
+      "stem": "Lactante de 25 días con ictericia persistente; bilirrubina total 8.0 mg/dL, directa 1.3 mg/dL. Buen estado general y sin fiebre. Las heces conservan algo de pigmentación.",
+      "prompt": "Según el informe AAP 2025, ¿qué conducta es prioritaria?",
+      "options": [
+        "Consultar de forma urgente a gastroenterología pediátrica por posible colestasis",
+        "Repetir bilirrubina al cumplir dos meses porque la fracción directa es <20% del total",
+        "Suspender lactancia materna durante 48 h y reevaluar",
+        "Solicitar únicamente ultrasonido y cerrar el estudio si la vesícula se visualiza"
+      ],
+      "correct": 0,
+      "why": "A las 2–4 semanas una directa/conjugada de al menos 1 mg/dL amerita consulta urgente; el pigmento en heces no excluye atresia biliar.",
+      "others": "La razón directa/total no debe emplearse para descartar colestasis cuando la cifra absoluta cumple el criterio de referencia. La ictericia asociada a leche materna suele ser no conjugada; suspender la lactancia no resuelve el riesgo de colestasis. La visualización de la vesícula no excluye atresia biliar; el estudio no debe retrasar la referencia.",
+      "rationales": [
+        "A las 2–4 semanas una directa/conjugada de al menos 1 mg/dL amerita consulta urgente; el pigmento en heces no excluye atresia biliar.",
+        "La razón directa/total no debe emplearse para descartar colestasis cuando la cifra absoluta cumple el criterio de referencia.",
+        "La ictericia asociada a leche materna suele ser no conjugada; suspender la lactancia no resuelve el riesgo de colestasis.",
+        "La visualización de la vesícula no excluye atresia biliar; el estudio no debe retrasar la referencia."
+      ],
+      "source": {
+        "title": "AAP. Identifying Infants With Biliary Atresia by 2–4 Weeks of Life",
+        "year": 2025,
+        "url": "https://doi.org/10.1542/peds.2024-070077",
+        "locator": "Interpretación de bilirrubina directa/conjugada a las 2–4 semanas"
+      },
+      "reference": "AAP. Identifying Infants With Biliary Atresia by 2–4 Weeks of Life (2025), Interpretación de bilirrubina directa/conjugada a las 2–4 semanas",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB057",
+      "section": "Nefro-urología",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Síndrome nefrótico",
+      "stem": "Niño de 5 años con primer episodio de síndrome nefrótico idiopático, tratado con prednisona diaria a dosis estándar y adherencia corroborada. Al terminar la cuarta semana persiste proteinuria intensa sin remisión parcial. No hay infección intercurrente ni otra causa identificada.",
+      "prompt": "Según KDIGO 2025, ¿cómo se clasifica la respuesta?",
+      "options": [
+        "Síndrome nefrótico corticodependiente",
+        "Síndrome nefrótico corticorresistente",
+        "Síndrome nefrótico con recaídas frecuentes",
+        "Síndrome nefrótico corticosensible de respuesta tardía"
+      ],
+      "correct": 1,
+      "why": "No alcanzar remisión completa a las cuatro semanas, sin siquiera respuesta parcial, corresponde a corticorresistencia y requiere estudio especializado.",
+      "others": "La dependencia exige recaídas relacionadas con el tratamiento o su suspensión; aquí nunca hubo remisión. Las recaídas requieren remisión previa; no se describe ninguna. La respuesta tardía supone remisión completa entre las semanas 4 y 6 en el contexto de respuesta parcial previa; no se ha documentado.",
+      "rationales": [
+        "La dependencia exige recaídas relacionadas con el tratamiento o su suspensión; aquí nunca hubo remisión.",
+        "No alcanzar remisión completa a las cuatro semanas, sin siquiera respuesta parcial, corresponde a corticorresistencia y requiere estudio especializado.",
+        "Las recaídas requieren remisión previa; no se describe ninguna.",
+        "La respuesta tardía supone remisión completa entre las semanas 4 y 6 en el contexto de respuesta parcial previa; no se ha documentado."
+      ],
+      "source": {
+        "title": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children",
+        "year": 2025,
+        "url": "https://kdigo.org/wp-content/uploads/2025/04/KDIGO-2025-Guideline-for-Nephrotic-Syndrome-in-Children.pdf",
+        "locator": "Figura 1; definiciones"
+      },
+      "reference": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children (2025), Figura 1; definiciones",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB058",
+      "section": "Nefro-urología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Síndrome nefrótico",
+      "stem": "Niña de 7 años, síndrome nefrótico corticosensible, dos recaídas consecutivas durante la reducción de prednisolona a pesar de adherencia adecuada. Tiene toxicidad glucocorticoide importante. Actualmente está en remisión.",
+      "prompt": "Según KDIGO 2025, ¿qué estrategia de prevención de recaídas corresponde discutir con nefrología?",
+      "options": [
+        "Prolongar indefinidamente prednisolona a dosis altas como único tratamiento",
+        "Suspender inmunosupresión y vigilar sin estrategia preventiva",
+        "Seleccionar un fármaco ahorrador de glucocorticoides según perfil clínico y preferencias",
+        "Administrar pulsos mensuales de metilprednisolona de forma rutinaria sin evaluar alternativas"
+      ],
+      "correct": 2,
+      "why": "KDIGO recomienda ahorradores de glucocorticoides en corticodependencia y en recaídas frecuentes con toxicidad grave; la elección se individualiza.",
+      "others": "La corticodependencia y toxicidad favorecen reducir la exposición acumulada, no prolongar dosis altas como única estrategia. Sin prevención, la corticodependencia mantiene riesgo de recaídas; la guía recomienda una estrategia ahorradora. Los pulsos rutinarios no constituyen la recomendación preventiva para esta situación.",
+      "rationales": [
+        "La corticodependencia y toxicidad favorecen reducir la exposición acumulada, no prolongar dosis altas como única estrategia.",
+        "Sin prevención, la corticodependencia mantiene riesgo de recaídas; la guía recomienda una estrategia ahorradora.",
+        "KDIGO recomienda ahorradores de glucocorticoides en corticodependencia y en recaídas frecuentes con toxicidad grave; la elección se individualiza.",
+        "Los pulsos rutinarios no constituyen la recomendación preventiva para esta situación."
+      ],
+      "source": {
+        "title": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children",
+        "year": 2025,
+        "url": "https://kdigo.org/wp-content/uploads/2025/04/KDIGO-2025-Guideline-for-Nephrotic-Syndrome-in-Children.pdf",
+        "locator": "Recomendación 1.3.3.1"
+      },
+      "reference": "KDIGO. Clinical Practice Guideline for Nephrotic Syndrome in Children (2025), Recomendación 1.3.3.1",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB059",
+      "section": "Inmuno-reumatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Enfermedad de Kawasaki",
+      "stem": "Lactante de 4 meses con enfermedad de Kawasaki confirmada por equipo tratante. Ecocardiograma inicial: Z de coronaria derecha +3.1; no presenta choque. Se planea inmunoglobulina IV.",
+      "prompt": "Según la actualización AHA 2024, ¿qué estrategia antiinflamatoria inicial debe considerarse especialmente?",
+      "options": [
+        "Inmunoglobulina IV y ácido acetilsalicílico, sin considerar intensificación por la edad",
+        "Inmunoglobulina IV con tratamiento antiinflamatorio intensificado por alto riesgo, además del manejo antiagregante indicado",
+        "Corticoide como sustituto sistemático de inmunoglobulina IV",
+        "Diferir tratamiento antiinflamatorio hasta confirmar persistencia del aneurisma"
+      ],
+      "correct": 1,
+      "why": "Edad inferior a seis meses y Z coronario ≥2.5 son factores de alto riesgo; la actualización apoya considerar tratamiento dual inicial.",
+      "others": "El esquema estándar es importante, pero la edad y la lesión coronaria identifican un perfil de alto riesgo que amerita considerar intensificación. La intensificación se añade a la inmunoglobulina, no se sustituye sistemáticamente. El retraso favorece daño coronario; se actúa en fase aguda.",
+      "rationales": [
+        "El esquema estándar es importante, pero la edad y la lesión coronaria identifican un perfil de alto riesgo que amerita considerar intensificación.",
+        "Edad inferior a seis meses y Z coronario ≥2.5 son factores de alto riesgo; la actualización apoya considerar tratamiento dual inicial.",
+        "La intensificación se añade a la inmunoglobulina, no se sustituye sistemáticamente.",
+        "El retraso favorece daño coronario; se actúa en fase aguda."
+      ],
+      "source": {
+        "title": "AHA. Update on Diagnosis and Management of Kawasaki Disease",
+        "year": 2024,
+        "url": "https://doi.org/10.1161/CIR.0000000000001295",
+        "locator": "Apartado de pacientes de alto riesgo y tratamiento inicial"
+      },
+      "reference": "AHA. Update on Diagnosis and Management of Kawasaki Disease (2024), Apartado de pacientes de alto riesgo y tratamiento inicial",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB060",
+      "section": "Inmuno-reumatología",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Enfermedad de Kawasaki",
+      "stem": "Niño de 3 años tratado por Kawasaki. Ecocardiograma de seguimiento: arteria descendente anterior con Z +6.2 y diámetro absoluto de 4.5 mm. Se solicita clasificar la lesión para planificar seguimiento y tromboprofilaxis.",
+      "prompt": "Conforme a la clasificación AHA, ¿qué categoría corresponde a esa arteria?",
+      "options": [
+        "Dilatación coronaria sin aneurisma",
+        "Aneurisma pequeño",
+        "Aneurisma grande o gigante",
+        "Aneurisma mediano"
+      ],
+      "correct": 3,
+      "why": "Z entre 5 y menos de 10, con diámetro absoluto menor de 8 mm, define aneurisma mediano.",
+      "others": "La dilatación sin aneurisma corresponde a Z inferior a 2.5; no es el caso. El aneurisma pequeño tiene Z desde 2.5 y menor de 5. El aneurisma gigante corresponde a Z ≥10 o diámetro absoluto ≥8 mm; ninguno se cumple.",
+      "rationales": [
+        "La dilatación sin aneurisma corresponde a Z inferior a 2.5; no es el caso.",
+        "El aneurisma pequeño tiene Z desde 2.5 y menor de 5.",
+        "El aneurisma gigante corresponde a Z ≥10 o diámetro absoluto ≥8 mm; ninguno se cumple.",
+        "Z entre 5 y menos de 10, con diámetro absoluto menor de 8 mm, define aneurisma mediano."
+      ],
+      "source": {
+        "title": "AHA. Update on Diagnosis and Management of Kawasaki Disease",
+        "year": 2024,
+        "url": "https://doi.org/10.1161/CIR.0000000000001295",
+        "locator": "Tabla de clasificación de aneurismas por Z y diámetro"
+      },
+      "reference": "AHA. Update on Diagnosis and Management of Kawasaki Disease (2024), Tabla de clasificación de aneurismas por Z y diámetro",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
     }
   ]
 });
