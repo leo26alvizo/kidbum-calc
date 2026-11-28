@@ -1,3 +1,7 @@
+# Actualización v0.11.9 · Portada clínica y académica
+
+Nueva portada principal aprobada, con la fachada de la Escuela Militar de Medicina, crédito del creador y alcance clínico y académico. Proyecto independiente, sin afirmación de aval institucional. No se modifican las demás herramientas ni el historial.
+
 # Actualización v0.11.8 · Pediatría BOARD: confianza y aprendizaje
 
 Seguro, Indeciso y No sé; radar de fortalezas y debilidades por área y tema, retroalimentación por confianza y repaso prioritario. Se conserva el historial previo sin reinterpretar sus registros de confianza no comparables. Banco y calificación intactos.
