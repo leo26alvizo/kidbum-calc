@@ -796,3 +796,8 @@ if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(
  console.log('PASS 15 ophthalmology tools: signed inputs, boundary cases, clinical guards, original cover hash');
 }
 
+
+// Approved cover: retain its aspect ratio and clip only the tiny overscan.
+assert.match(html,/\.kb-approved-cover\.kb-cover-loaded\{[^}]*aspect-ratio:3\/2!important[^}]*overflow:hidden!important/);
+assert.match(html,/\.kb-cover-loaded \.kb-cover-image\{[^}]*object-fit:cover!important[^}]*transform:scale\(1\.025\)!important/);
+assert.ok(html.includes('src="./assets/kidbum-portada-emm.png"'));
