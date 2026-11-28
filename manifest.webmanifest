@@ -1,1 +1,26 @@
-{"name":"KidBum CALC — Herramientas clínicas","short_name":"KidBum CALC","description":"KidBum CALC, creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez. Calculadoras clínicas sin conexión y sin pagos adicionales.","start_url":"./index.html","scope":"./","display":"standalone","background_color":"#f5f8fa","theme_color":"#10243b","lang":"es-MX","icons":[{"src":"kidbum-icon-192-v081.png","sizes":"192x192","type":"image/png","purpose":"any"},{"src":"kidbum-icon-512-v081.png","sizes":"512x512","type":"image/png","purpose":"any"}],"id":"./index.html"}
+{
+  "name": "LEO MED — Clínica y Academia",
+  "short_name": "LEO MED",
+  "description": "LEO MED · Precisión clínica. Excelencia académica. Herramientas clínicas y formación médica.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f2e9",
+  "theme_color": "#0c1929",
+  "lang": "es-MX",
+  "icons": [
+    {
+      "src": "leo-med-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "leo-med-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "./index.html"
+}

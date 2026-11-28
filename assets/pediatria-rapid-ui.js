@@ -1,4 +1,4 @@
-/* KidBum Pediatría Rápida · visual interface v0.10.39
+/* LEO MED Pediatría Rápida · visual interface v0.10.39
  * Local processing only. The independent clinical engine owns every result.
  */
 (function(root){

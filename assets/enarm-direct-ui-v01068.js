@@ -1,4 +1,4 @@
-/* KidBum ENARM 1.2 · Preguntas directas.
+/* LEO MED ENARM 1.2 · Preguntas directas.
  * Original educational bank, not an official ENARM simulator or medical order.
  * All answers and history stay on this device. */
 (function(){
@@ -8,7 +8,7 @@
  const radar=window.KidBumENARMRadar;
  if(!root)return;
  if(!bank||bank.questionCount!==238||!radar){
-  root.textContent='No se pudo cargar el banco de preguntas directas. Actualiza KidBum e inténtalo de nuevo.';
+  root.textContent='No se pudo cargar el banco de preguntas directas. Actualiza LEO MED e inténtalo de nuevo.';
   return;
  }
  const KEY='kidbum-enarm-direct-progress-v1';

@@ -1,4 +1,4 @@
-/* KIDBUM Medical Atlas Editorial · visual-only illustration library.
+/* LEO MED Medical Atlas Editorial · visual-only illustration library.
  * Original vector scientific illustrations: educational visual aids, not diagnostic plates.
  * No network, no telemetry; every clinical ID maps to its own composition.
  */
