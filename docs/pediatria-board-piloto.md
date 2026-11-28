@@ -66,8 +66,8 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Referencias nuevas: IDSA/PIDS neumonía complicada 2026, ESPGHAN/ECCO colitis ulcerosa 2025 (dos partes), PALICC-2 2023, ASH ITP 2019, PIDS/IDSA osteomielitis 2021, BTF TCE grave 2019, ECCI CMV 2024, AAP CMV 2026, AAP hipotermia 2026, validación criterios MOGAD 2024, BSPED insuficiencia suprarrenal 2023. Se identificó la GPC mexicana SS-120-21 de NAC en catálogo oficial, sin atribuirle las recomendaciones IDSA/PIDS 2026. Contraste mexicano completo pendiente.
 - Cada reactivo incluye referencia trazable, competencia de integración y cuatro justificaciones; cinco claves por posición antes de aleatorización. Las recomendaciones condicionales no se presentan como obligaciones universales. Revisión clínica independiente y calibración psicométrica pendientes. El simulador no reproduce un examen oficial ni predice aprobación.
 
-## Refinamiento UX · candidato de desarrollo
+## Refinamiento UX · v0.11.7
 
-- Conserva banco, claves, motor, historial y versión pública 0.11.6 hasta integración y sincronización de una nueva versión. Navegación de secciones al inicio; portada compacta y aviso educativo visible con detalle desplegable.
+- Conserva banco, claves, motor e historial; versión 0.11.7 sincronizada en marcadores y recursos offline. Navegación de secciones al inicio; portada compacta y aviso educativo visible con detalle desplegable.
 - Extensiones realistas, disponibilidad y duración aproximada por modalidad; el límite real sigue en el motor. Mapa de preguntas de simulador con respuestas guardadas/pendientes, navegación directa y confirmación de entrega con omisiones. La práctica enfoca la retroalimentación; resultados con filtros de todos, errores, omitidos y aciertos. No se muestran pistas ni corrección durante el examen.
 - Pruebas responsive y funcionales ampliadas; revisión visual humana y dispositivo físico pendientes. Sin cambios en contenido clínico ni afirmaciones de equivalencia psicométrica.
