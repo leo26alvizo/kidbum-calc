@@ -1,3 +1,7 @@
+# Actualización v0.11.4 · Pediatría BOARD: estándar R3/especialista exclusivo
+
+12 reactivos nuevos activos en 6 áreas. 87 anteriores preservados en reserva junto con su historial, sin mezclarlos con las sesiones de especialista. Puerta editorial y pruebas de exclusión. Validación independiente pendiente.
+
 # Actualización v0.11.3 · Pediatría BOARD: 16 áreas avanzadas
 
 87 reactivos totales, 39 avanzados, 18 fuentes específicas. Se incorporan 15 casos originales; cobertura avanzada de las 16 áreas. Revisión clínica independiente y validación psicométrica pendientes.
