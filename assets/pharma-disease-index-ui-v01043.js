@@ -1,4 +1,4 @@
-/* LEO MED 0.10.43 · Disease taxonomy explorer, no therapeutic inference. */
+/* KidBum 0.10.43 · Disease taxonomy explorer, no therapeutic inference. */
 (function(root){
 'use strict';
 const source=root.KidBumPharmaExpansionIndex;

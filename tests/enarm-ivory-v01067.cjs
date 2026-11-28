@@ -66,6 +66,6 @@ assert.match(ui,/kidbum-enarm-progress-v1/,'Existing saved progress key unchange
 assert.match(ui,/radar\.record\(history\[step\.key\]/,'Spaced review engine unchanged');
 new vm.Script(ui,{filename:'assets/enarm-ui-v01064.js'});
 const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a>';
-const enarm='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 LEO MED ENARM · Casos clínicos →</a>';
+const enarm='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
 assert.ok(home.includes(pharma+enarm),'ENARM shortcut remains immediately below Pharma, same class/size');
 console.log('PASS ENARM Ivory Heritage v0.10.67: lion, gold/ivory/charcoal, WCAG support, offline, visual-only changes and 72/144 original cases.');

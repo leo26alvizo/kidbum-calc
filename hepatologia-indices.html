@@ -2,7 +2,7 @@
 <html lang="es" data-kb-page="hepatologia-indices">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#102f3a"><title>Hepatología · Índices hepáticos | LEO MED</title>
+<meta name="theme-color" content="#102f3a"><title>Hepatología · Índices hepáticos | KidBum CALC</title>
 <style>
 :root{color-scheme:light;--bg:#f0f4f5;--panel:#fff;--ink:#15333e;--soft:#516a75;--stroke:#ccdde0;--wash:#e6f3f1;--accent:#086c71;--accentText:#fff}
 html.dark{color-scheme:dark;--bg:#091c28;--panel:#122d3c;--ink:#e9f5f7;--soft:#b0cbd2;--stroke:#315565;--wash:#1a3c49;--accent:#7cdee0;--accentText:#132c37}
@@ -43,8 +43,8 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
 </style>
 <link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"><link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head>
 <body><main>
-<header><nav><a href="./index.html">← LEO MED</a><button type="button" id="theme">☀ Tema claro</button></nav>
-<div class="hero"><div class="hero-copy"><span class="eyebrow">LEO MED · PATRÓN BIOQUÍMICO Y EVALUACIÓN HEPÁTICA</span><h1>Índices hepáticos</h1><p>Factor R, AST/ALT, APRI, ALBI, Fatty Liver Index y NFS · fórmulas verificables, resultados locales</p></div></div>
+<header><nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<div class="hero"><div class="hero-copy"><span class="eyebrow">KIDBUM CALC · PATRÓN BIOQUÍMICO Y EVALUACIÓN HEPÁTICA</span><h1>Índices hepáticos</h1><p>Factor R, AST/ALT, APRI, ALBI, Fatty Liver Index y NFS · fórmulas verificables, resultados locales</p></div></div>
 </header>
 <section class="tools-nav"><label for="picker">Seleccionar escala</label><select id="picker" aria-label="Seleccionar escala geriátrica"></select><span class="count" id="position"></span></section>
 <div class="cols">
@@ -109,7 +109,7 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
  $('reset').onclick=()=>{values={};$('example-note').hidden=true;draw();render()};
  $('copy').onclick=async()=>{
   if(!last)return;
-  const summary='LEO MED · Hepatología\n'+active.title+'\nResultado: '+last.value+'\nInterpretación: '+last.interpretation+'\n'+last.detail+'\nPrecaución: '+active.warning+'\nEvaluación clínica y protocolo institucional imprescindibles.';
+  const summary='KidBum CALC · Hepatología\n'+active.title+'\nResultado: '+last.value+'\nInterpretación: '+last.interpretation+'\n'+last.detail+'\nPrecaución: '+active.warning+'\nEvaluación clínica y protocolo institucional imprescindibles.';
   try{await navigator.clipboard.writeText(summary);$('copy').textContent='✓ Copiado';}catch{$('copy').textContent='No se pudo copiar'}
  };
  const analysis=KidBumAnalysis.attach({mountId:'kb-ai-mount',getPayload:()=>last?({

@@ -173,7 +173,7 @@ function showDrug(id){
  const externalLabelsFull=window.KidBumPharmaExternalLabels?.render(med);
  if(externalLabelsFull)left.append(externalLabelsFull);
  
- if(hospitalReference){/* The product-specific gated reference is above. */}else if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de LEO MED NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
+ if(hospitalReference){/* The product-specific gated reference is above. */}else if(extended&&window.KidBumPharmaMonographUI){left.append(pharmaFold('Referencia posológica · verificaciones obligatorias',window.KidBumPharmaMonographUI.render(id)));}else{ const f3=elt('section',undefined,'fact');f3.append(elt('h3','Dosis, vía y ajuste renal/hepático'),p('Pendiente de validación por indicación, población, presentación y fuente. Consultar etiquetado mexicano y farmacia clínica. Las estimaciones Cockcroft–Gault / CKD-EPI de KidBum NO definen por sí solas el ajuste de este medicamento.'));left.append(pharmaFold('Dosis, vía y ajuste renal/hepático',f3));}
  if(!hospitalReference){const f4=elt('section',undefined,'fact');f4.append(elt('h3','Preparación intravenosa y compatibilidades'),p('NO se publica diluyente, concentración final, velocidad, estabilidad ni compatibilidad sin comprobación de formulación y protocolo institucional.'));left.append(pharmaFold('Preparación intravenosa y compatibilidades',f4));}
  const right=elt('aside');
  const safety=elt('section');safety.append(elt('h3','Alertas y documentación'));
@@ -279,7 +279,7 @@ function drawSources(){
 }
 function openTool(name){tool=name;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x.dataset.tool===name));if(name==='audit')drawAudit();else if(name==='interactions')drawInteractions();else drawSources();}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
-/* One shared theme preference across ALL LEO MED modules.
+/* One shared theme preference across ALL KidBum modules.
    Read the legacy Pharma preference only when no global choice exists. */
 const theme=$('theme');
 function applyPharmaTheme(dark){

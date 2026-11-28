@@ -1,4 +1,4 @@
-/* LEO MED 0.10.57 · Nonclinical access layer.
+/* KidBum 0.10.57 · Nonclinical access layer.
  * Stores only fixed tool keys (never patient information or form inputs).
  * All destinations must come from the local, reviewed tool registry.
  */

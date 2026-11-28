@@ -15,7 +15,7 @@ function render(host,engine,onBack,initialId){
  }
  function layout(){
   host.innerHTML='<button class="breadcrumb-back" type="button" id="db-leave">← Endocrinología y Diabetes</button>'+
-   '<section class="db-hero"><div class="db-overline">LEO MED · SEGURIDAD METABÓLICA</div><h1>Diabetes & Insulin Pro</h1><p>Hospital · consulta externa · urgencias diabéticas. Herramientas educativas y de verificación: nunca sustituyen indicaciones médicas, validación farmacológica ni protocolos institucionales.</p></section>'+
+   '<section class="db-hero"><div class="db-overline">KIDBUM · SEGURIDAD METABÓLICA</div><h1>Diabetes & Insulin Pro</h1><p>Hospital · consulta externa · urgencias diabéticas. Herramientas educativas y de verificación: nunca sustituyen indicaciones médicas, validación farmacológica ni protocolos institucionales.</p></section>'+
    '<p class="db-lead">Solo adultos no embarazados · procesamiento local · sin envío de datos ni almacenamiento de información clínica.</p>'+
    '<div id="db-view"></div>';
   host.querySelector('#db-leave').onclick=onBack;

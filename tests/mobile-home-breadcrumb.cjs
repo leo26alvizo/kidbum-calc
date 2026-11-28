@@ -1,6 +1,6 @@
 'use strict';const fs=require('node:fs'),assert=require('node:assert/strict');
 const page=fs.readFileSync('index.html','utf8');
-assert.match(page,/<button type="button" data-mobile-nav="home" aria-label="Ir al inicio de LEO MED"><svg[^>]*viewBox="0 0 24 24"/,'Bottom Inicio button uses an accessible house icon');
+assert.match(page,/<button type="button" data-mobile-nav="home" aria-label="Ir al inicio de KidBum"><svg[^>]*viewBox="0 0 24 24"/,'Bottom Inicio button uses an accessible house icon');
 assert.doesNotMatch(page,/data-mobile-nav="guard"/,'Remove Guardia from the lower mobile bar');
 assert.match(page,/if\(target==='home'\)\{category='Todas';search='';\}go\(target\)/,'Inicio must clear category and search filters before navigating');
 assert.match(page,/const target=b\.dataset\.nav\|\|b\.dataset\.mobileNav/,'New button must use the existing navigation handler');

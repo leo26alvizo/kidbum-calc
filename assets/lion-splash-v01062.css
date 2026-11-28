@@ -1,4 +1,4 @@
-/* LEO MED Lion Awakening · v0.10.62
+/* KidBum Lion Awakening · v0.10.62
  * Decorative first-launch splash, not a prerequisite for clinical calculations.
  * Standalone SVG/CSS; no video, network, timers for the clinical engine or
  * animation-driven clinical states. Keep readable content and reduced-motion. */
@@ -70,6 +70,3 @@
  .kb-lion-splash-skip{border:1px solid CanvasText;color:CanvasText;background:Canvas}
  .kb-lion-splash-mark .kb-lion-line{stroke:CanvasText}
 }
-
-/* Identidad LEO MED; conserva tiempos, omisión y reducción de movimiento. */
-.kb-lion-splash{background:#0c1929;color:#f6f2e9}.kb-lion-splash-mark .kb-lion-line{stroke:#d3b579}.kb-lion-splash-mark .kb-lion-line.kb-lion-teal{stroke:#f6f2e9}.kb-lion-splash-name{font-family:Georgia,serif;letter-spacing:.08em;color:#d3b579}.kb-lion-splash-name span{color:#f6f2e9;font-size:1em;letter-spacing:.08em;vertical-align:baseline;margin-left:0;font-weight:inherit}.kb-lion-splash-caption{color:#f6f2e9;letter-spacing:.1em;font-size:10px}

@@ -1,4 +1,4 @@
-/* LEO MED 0.10.41 | Kramer objective bilirubin panel (offline, no telemetry). */
+/* KidBum 0.10.41 | Kramer objective bilirubin panel (offline, no telemetry). */
 (function(root){
  'use strict';
  const engine=root.KidBumKramerClinical,section=document.getElementById('kramer');

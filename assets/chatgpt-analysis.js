@@ -1,5 +1,5 @@
 'use strict';
-/* LEO MED: shared, privacy-first ChatGPT analysis handoff for standalone calculators.
+/* KidBum CALC: shared, privacy-first ChatGPT analysis handoff for standalone calculators.
    Clinical inputs stay in the browser. Only an explicitly copied, non-identifying
    result summary is placed on the clipboard; never use query-string transmissions. */
 (function(){
@@ -18,7 +18,7 @@ function buildPrompt(payload,mode){
  if(!Object.prototype.hasOwnProperty.call(prompts,mode))throw Error('Modo de análisis inválido');
  if(!payload||!payload.title||!payload.result)throw Error('No hay un resultado válido para analizar');
  return [
-  'LEO MED — análisis clínico educativo',
+  'KidBum CALC — análisis clínico educativo',
   'Herramienta: '+payload.title,
   'Resultado calculado: '+payload.result,
   'Interpretación: '+(payload.interpretation||'No disponible'),

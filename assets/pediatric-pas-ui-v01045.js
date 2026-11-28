@@ -36,7 +36,7 @@ $('pas-example').addEventListener('click',()=>{
 });
 $('pas-copy').addEventListener('click',async()=>{
  const r=api.calculateQuick(answers);if(!r.complete)return;
- const rows=['LEO MED · PAS rápido '+r.score+'/10',demo?'EJEMPLO FICTICIO':'Criterios confirmados por el usuario','Edad y signos de alarma no evaluados',...api.criteria.map(c=>(r.values[c.key]==='yes'?'[+]':'[-]')+' '+c.label),'No diagnostica, descarta ni determina conducta.'];
+ const rows=['KidBum · PAS rápido '+r.score+'/10',demo?'EJEMPLO FICTICIO':'Criterios confirmados por el usuario','Edad y signos de alarma no evaluados',...api.criteria.map(c=>(r.values[c.key]==='yes'?'[+]':'[-]')+' '+c.label),'No diagnostica, descarta ni determina conducta.'];
  try{const txt=rows.join('\n');if(navigator.clipboard?.writeText)await navigator.clipboard.writeText(txt);else{const x=document.createElement('textarea');x.value=txt;x.style.position='fixed';x.style.opacity='0';document.body.append(x);try{x.select();if(!document.execCommand('copy'))throw Error('copy');}finally{x.remove();}}$('pas-copy').textContent='✓ Copiado';}catch(e){$('pas-copy').textContent='No se pudo copiar';}
 });
 const theme=$('pas-theme');function themeApply(dark){document.documentElement.classList.toggle('dark',dark);theme.textContent=dark?'☀':'◐';theme.setAttribute('aria-pressed',String(dark));theme.setAttribute('aria-label',dark?'Cambiar a modo claro':'Cambiar a modo oscuro');try{localStorage.setItem('kidbum-theme',dark?'dark':'light');}catch(e){}}

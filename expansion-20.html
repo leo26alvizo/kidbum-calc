@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es" data-kb-page="expansion-20"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0e4553"><title>20 nuevas calculadoras clínicas | LEO MED</title>
+<meta name="theme-color" content="#0e4553"><title>20 nuevas calculadoras clínicas | KidBum CALC</title>
 <style>
 :root{color-scheme:light;--bg:#edf3f4;--card:#fff;--ink:#133542;--muted:#59727c;--border:#cde0e3;--wash:#eaf6f4;--accent:#087d87;--accentText:#fff}
 html.dark{color-scheme:dark;--bg:#091b29;--card:#142c3e;--ink:#edf7fa;--muted:#b8d0dc;--border:#35576c;--wash:#1a3d4b;--accent:#7cdee2;--accentText:#112733}
@@ -40,11 +40,11 @@ p{margin:8px 0}p.muted,.hint{color:var(--muted);font-size:.9rem}
 @media(min-width:820px){.layout{grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr)}.wide{grid-column:1 / -1}}
 @media print{nav,.actions,#browse,#kb-ai-mount{display:none}section.panel{box-shadow:none;break-inside:avoid}}
 </style><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"><link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head><body><main>
-<nav><a href="./index.html">← LEO MED</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
 <div class="panel" id="browse"><label for="tool-picker" class="count">Herramienta clínica</label><select id="tool-picker" aria-label="Seleccionar calculadora"></select><span class="count" id="pos"></span></div>
 <header class="hero" id="hero"><div class="eyebrow" id="specialty"></div><h1 id="title">Calculadoras clínicas</h1><p id="subtitle"></p></header>
 <div class="layout"><section class="panel"><h2>01 / Hallazgos clínicos</h2><p class="hint" id="intro">Responde todos los parámetros medidos; no se presumen valores normales.</p><div id="variants" class="variants" role="group" aria-label="Variantes de la escala"></div><div id="fields"></div></section>
-<section class="panel kb-result-surface"><h2>02 / Resultado e interpretación</h2><div class="output" aria-live="polite" role="status"><div id="score" class="result-big">Completa la evaluación</div><p id="interpretation">Sin datos evaluados.</p><p id="detail"></p></div><div class="actions"><button type="button" class="secondary" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div><p id="example-note" class="hint" hidden>🧪 Caso totalmente ficticio para practicar. Los datos no pertenecen a ningún paciente real. Revisa las limitaciones del método antes de aplicarlo clínicamente.</p><div id="kb-ai-mount"></div><p class="notice" id="caution"></p><p class="hint">Referencia clínica: <a id="source" target="_blank" rel="noopener noreferrer">Ver metodología y criterios</a></p><p id="official-wrap" class="notice" hidden><strong>Cálculo oficial requerido:</strong> este asistente no fabrica porcentajes. <a id="official" target="_blank" rel="noopener noreferrer">Abrir fuente/calculadora original ↗</a>.</p><p class="hint">LEO MED ofrece apoyo educativo y de cálculo para personal médico. No sustituye valoración presencial, protocolos ni supervisión del equipo tratante.</p></section></div>
+<section class="panel kb-result-surface"><h2>02 / Resultado e interpretación</h2><div class="output" aria-live="polite" role="status"><div id="score" class="result-big">Completa la evaluación</div><p id="interpretation">Sin datos evaluados.</p><p id="detail"></p></div><div class="actions"><button type="button" class="secondary" id="example">↗ Cargar ejemplo ficticio</button><button type="button" class="secondary" id="reset">Limpiar</button><button type="button" class="primary" id="copy" disabled>Copiar resultado</button></div><p id="example-note" class="hint" hidden>🧪 Caso totalmente ficticio para practicar. Los datos no pertenecen a ningún paciente real. Revisa las limitaciones del método antes de aplicarlo clínicamente.</p><div id="kb-ai-mount"></div><p class="notice" id="caution"></p><p class="hint">Referencia clínica: <a id="source" target="_blank" rel="noopener noreferrer">Ver metodología y criterios</a></p><p id="official-wrap" class="notice" hidden><strong>Cálculo oficial requerido:</strong> este asistente no fabrica porcentajes. <a id="official" target="_blank" rel="noopener noreferrer">Abrir fuente/calculadora original ↗</a>.</p><p class="hint">KidBum ofrece apoyo educativo y de cálculo para personal médico. No sustituye valoración presencial, protocolos ni supervisión del equipo tratante.</p></section></div>
 </main>
 <script src="./assets/expansion-20.js"></script><script src="./assets/fictitious-examples.js"></script><script src="./assets/chatgpt-analysis.js"></script>
 <script>
@@ -55,7 +55,7 @@ function select(id){
  const t=tools.find(t=>t.id===id)||tools[0];active=t;variant=t.variants?Object.keys(t.variants)[0]:'';values={};answer=null;by('example-note').hidden=true;
  by('tool-picker').value=t.id;by('pos').textContent=(tools.indexOf(t)+1)+' / 20';
  by('title').textContent=t.title;by('subtitle').textContent=t.short;
- by('specialty').textContent=t.cat.toUpperCase()+' · LEO MED';
+ by('specialty').textContent=t.cat.toUpperCase()+' · KIDBUM CALC';
  by('hero').style.setProperty('--art',"url('./assets/"+t.image+"')");
  by('caution').textContent=t.warning;by('source').href=t.source;
  by('official-wrap').hidden=!t.official;if(t.official)by('official').href=t.official;

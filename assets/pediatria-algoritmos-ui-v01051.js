@@ -1,4 +1,4 @@
-/* LEO MED Pediatría 0.10.51 · local-only accessible flow UI */
+/* KidBum Pediatría 0.10.51 · local-only accessible flow UI */
 (function(root){
 'use strict';
 const engine=root.KidBumPediatricAlgorithms;
@@ -60,7 +60,7 @@ const CLINICAL_TOOLS=Object.freeze({
  'meningitis-pediatrica':[['📘 NICE NG240 · meningitis','https://www.nice.org.uk/guidance/ng240/chapter/Recommendations']],
  'reanimacion-neonatal':[['📋 Algoritmo neonatal original AHA/AAP','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/neonatal-resuscitation']],
  'apendicitis-pediatrica':[['📊 PAS · escala de apendicitis','./pediatria-pas.html']],
- 'trastornos-sodio':[['🧪 Herramientas de líquidos · LEO MED','./index.html']],
+ 'trastornos-sodio':[['🧪 Herramientas de líquidos · KidBum','./index.html']],
  'lesion-renal-aguda':[['📈 KDIGO · lesión renal aguda','./expansion-20.html#kdigo']]
 });
 function renderTools(id){

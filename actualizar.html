@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10273d">
-<title>Actualizar LEO MED · Centro de recuperación</title>
+<title>Actualizar KidBum · Centro de recuperación</title>
 <style>
 :root{color-scheme:light;--ink:#1a3349;--muted:#51687b;--line:#d5e3e9;--teal:#007c80;--bg:#f4f8fa}
 *{box-sizing:border-box}body{font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;color:var(--ink);background:var(--bg)}
@@ -22,8 +22,8 @@ ol{padding-left:22px}
 </style>
 </head>
 <body><main>
-<div class="tag">LEO MED · MANTENIMIENTO SEGURO</div>
-<h1>Actualizar o reparar LEO MED</h1>
+<div class="tag">KIDBUM · MANTENIMIENTO SEGURO</div>
+<h1>Actualizar o reparar KidBum</h1>
 <p class="muted">Revisa la versión publicada sin depender de la caché instalada. <strong>No se borra información clínica, favoritos ni preferencias</strong> de tu navegador.</p>
 <section class="card" aria-labelledby="versions"><h2 id="versions">Estado de tu instalación</h2>
 <dl><dt>Publicada en internet</dt><dd id="public">Comprobando…</dd><dt>Control offline local</dt><dd id="local">Comprobando…</dd><dt>Conexión</dt><dd id="connection">Comprobando…</dd></dl>
@@ -37,7 +37,7 @@ ol{padding-left:22px}
 <p class="note"><strong>Importante:</strong> el reintento conserva tu versión funcional, favoritos y archivos verificados. No se borra el almacenamiento del navegador.</p>
 <p class="note">En iPhone, Safari y la aplicación de la pantalla de inicio pueden usar almacenes diferentes. Abre esta página desde la misma instancia que está desactualizada.</p>
 </section>
-<p><a href="./index.html">← Volver a LEO MED</a></p>
+<p><a href="./index.html">← Volver a KidBum</a></p>
 </main>
 <script>
 (function(){
@@ -87,13 +87,13 @@ ol{padding-left:22px}
    if(!reg.installing&&!reg.waiting)await reg.update();
    await local();
    if(reg.installing||reg.waiting)message('Versión v'+version+' detectada. Continúa descargando: no borres los datos ni cierres la app.');
-   else message('Comprobación solicitada. Si aún ves la versión antigua, vuelve a abrir LEO MED o utiliza reparación manual.');
+   else message('Comprobación solicitada. Si aún ves la versión antigua, vuelve a abrir KidBum o utiliza reparación manual.');
   }catch(e){message('No se pudo comprobar: '+(e.message||'error de conexión')+'. La app anterior permanece disponible.','error');}
   finally{button.disabled=false;}
  }
  $('check').addEventListener('click',check);
  navigator.serviceWorker?.addEventListener('controllerchange',()=>{
-  message('Nueva versión instalada. Cierra cualquier cálculo y abre LEO MED desde el enlace inferior.');
+  message('Nueva versión instalada. Cierra cualquier cálculo y abre KidBum desde el enlace inferior.');
   local().catch(()=>{});
  });
  $('repair').addEventListener('click',check);

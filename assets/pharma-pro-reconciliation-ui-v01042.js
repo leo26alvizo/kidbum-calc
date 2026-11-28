@@ -62,7 +62,7 @@
    return;
   }
   result.append(mk('strong','Revisión parcial · NO acredita seguridad de la combinación','pharma-recon-alert'));
-  const p=mk('p',r.selectionCount+' entradas seleccionadas · '+r.uniqueCount+' principios activos distintos · '+r.reviewedPairs+' pares con alerta de interacción documentada · '+r.notReviewedPairs+' pares SIN evaluación de interacción en LEO MED.');
+  const p=mk('p',r.selectionCount+' entradas seleccionadas · '+r.uniqueCount+' principios activos distintos · '+r.reviewedPairs+' pares con alerta de interacción documentada · '+r.notReviewedPairs+' pares SIN evaluación de interacción en KidBum.');
   result.append(p);
   listed('Interacciones documentadas',r.pairs);
   listed('Duplicidades exactas',r.duplicates);

@@ -1,4 +1,4 @@
-/* LEO MED Ortopedia · navegación y referencias clínicas. */
+/* KidBum Ortopedia · navegación y referencias clínicas. */
 (function(root){
 'use strict';
 const engine=root.KidBumOrthopedicsAlgorithms;

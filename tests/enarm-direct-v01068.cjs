@@ -94,7 +94,7 @@ assert.match(css,/@media\(max-width:620px\)/);
 assert.match(css,/@media\(forced-colors:active\)/);
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a>';
-const shortcut='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 LEO MED ENARM · Casos clínicos →</a>';
+const shortcut='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
 assert.ok(main.includes(pharma+shortcut),'ENARM same-size shortcut under Pharma preserved');
 const previous=require('../assets/enarm-bank-v01064.js');
 assert.equal(previous.caseCount,72,'Expanded case bank remains separate');
