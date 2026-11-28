@@ -1,0 +1,73 @@
+/* Historias · Coral & Jade. Scoped presentation and navigation only. */
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]){--kb-bg:#f8f3f1;--kb-panel:#fffdfb;--kb-ink:#30242f;--kb-muted:#6b5260;--kb-line:#e5d4d3;--kb-accent:#8e3345;--kb-wash:#f5e8e5;--hc-jade:#276b58;--hc-mint:#e2f2e9;--hc-warn:#805019;--hc-warning:#fff4e4;--hc-focus:#247e90;color-scheme:light;background:var(--kb-bg);color:var(--kb-ink)}
+html.dark:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]){--kb-bg:#2b202d;--kb-panel:#392d3b;--kb-ink:#fff5f0;--kb-muted:#ddc4d0;--kb-line:#674956;--kb-accent:#ffc3b0;--kb-wash:#473444;--hc-jade:#a7e5d1;--hc-mint:#24443e;--hc-warn:#ffda9b;--hc-warning:#47372f;--hc-focus:#87dce5;color-scheme:dark;background:var(--kb-bg);color:var(--kb-ink)}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) body{background:var(--kb-bg);color:var(--kb-ink);font:15px/1.56 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.hc-main{width:min(1160px,100%);max-width:1160px;padding:18px 18px 85px;min-width:0}
+.hc-main :is(.kb-topline,.hc-top){display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 17px}
+.hc-main .hc-top a,.hc-main .kb-topline a{color:var(--kb-accent);font-weight:780;text-decoration:none;font-size:.85rem}
+.hc-top-brand{font-size:.78rem;font-weight:800;color:var(--kb-muted);text-align:center}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.kb-hero,.pediatric-hero){background:linear-gradient(132deg,#261b2d 0%,#712d44 54%,#a24450 100%);border:1px solid #c57977;border-radius:22px;padding:25px 30px;min-height:0;box-shadow:0 12px 28px #45202e24;margin:0 0 15px;isolation:isolate}
+.hc-main :is(.kb-hero,.pediatric-hero):after{border-color:#ffcfbc55;z-index:-1;pointer-events:none}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.kb-hero,.pediatric-hero) h1{font-size:clamp(27px,5vw,44px);font-weight:850;letter-spacing:-.035em;line-height:1.12;color:#fff5ef;margin:8px 0 10px}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.kb-hero,.pediatric-hero) :is(p,.kb-eyebrow,.overline){color:#ffe3d5}
+.hc-main .kb-status-line{margin-top:13px;gap:6px}
+.hc-main .kb-status-line span{font-size:11px;font-weight:700;padding:5px 9px;color:#fff5ef;background:#261b2d55;border-color:#ffd7ba66}
+.hc-nav{position:sticky;top:0;z-index:5;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:8px 0;background:var(--kb-bg);border-bottom:1px solid var(--kb-line);margin:0 0 14px}
+.hc-nav a{display:flex;align-items:center;justify-content:center;text-decoration:none;text-align:center;min-height:44px;border:1px solid var(--kb-line);border-radius:11px;background:var(--kb-panel);color:var(--kb-ink);font-size:.83rem;font-weight:800;padding:8px 4px}
+.hc-nav a:hover,.hc-nav a:focus-visible{background:var(--kb-wash);border-color:var(--kb-accent);color:var(--kb-ink)}
+.hc-main:has(#hc-servicios:target) .hc-nav a[href="#hc-servicios"],.hc-main:has(#hc-apartados:target) .hc-nav a[href="#hc-apartados"],.hc-main:has(#hc-editor:target) .hc-nav a[href="#hc-editor"],.hc-main:has(#hc-exportar:target) .hc-nav a[href="#hc-exportar"],.hc-main:not(:has(:target)) .hc-nav a:first-child{background:#8e3345;color:#fff;border-color:#8e3345}
+.hc-main [id^="hc-"]{scroll-margin-top:76px}
+.hc-main .kb-dashboard{grid-template-columns:minmax(0,1fr);gap:0}
+.hc-main .kb-side{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;order:0}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.card,.panel){background:var(--kb-panel);color:var(--kb-ink);border:1px solid var(--kb-line);border-radius:17px;padding:clamp(15px,2.5vw,23px);margin:0 0 14px;box-shadow:0 4px 12px #2b202d0c;min-width:0}
+.hc-main :is(.card,.panel) h2{margin:0 0 8px;font-size:clamp(19px,3vw,24px);line-height:1.25;color:var(--kb-ink);letter-spacing:-.02em}
+.hc-main :is(.kb-number,.hc-kicker){display:block;color:var(--kb-accent);font-size:10px;letter-spacing:.13em;font-weight:800;margin-bottom:7px;text-transform:uppercase}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.hint,.tip,.count,.status,.kb-guide,.kb-service-meta){color:var(--kb-muted)}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main .warning{background:var(--hc-warning);border-color:var(--kb-line);border-left:4px solid var(--hc-warn);box-shadow:none;font-size:.86rem;padding:13px 15px}
+.hc-main .warning p{margin:6px 0 0;color:var(--kb-ink)}
+.hc-main .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:12px 0}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main .service{min-width:0;min-height:110px;padding:13px;gap:8px;border-radius:13px;background:var(--kb-panel);color:var(--kb-ink);border:1px solid var(--kb-line);border-top:3px solid #a24450;box-shadow:none}
+html[data-kb-page="documentacion"] .hc-main .service[data-specialized="true"]{border-top-color:#276b58}
+html[data-kb-page="documentacion"] .hc-main .service[aria-pressed="true"]{background:var(--kb-wash);border-color:var(--kb-accent)}
+.hc-main .service:hover{transform:none;box-shadow:0 4px 12px #2b202d16;border-color:var(--kb-accent)}
+.hc-main .kb-service-symbol{background:#a24450;color:#fff3e9;width:34px;height:34px;font-size:12px;border-radius:9px}
+.hc-main .service[data-specialized="true"] .kb-service-symbol{background:#276b58;color:#d8fff0}
+.hc-main .kb-service-title{font-size:.88rem;overflow-wrap:anywhere}
+.hc-main .kb-service-meta{font-size:.73rem;line-height:1.3}
+.hc-main .kb-service-arrow{color:var(--kb-accent)}
+.hc-search{display:flex;align-items:center;gap:9px;border:1px solid var(--kb-line);background:var(--kb-panel);padding:6px 10px;border-radius:12px;margin:12px 0 5px}
+.hc-search span{color:var(--kb-accent);font-size:22px}
+.hc-search input{min-width:0;flex:1;width:100%;min-height:44px}
+.hc-search button{flex:none;min-width:44px}
+.hc-search-label{font-size:.81rem;font-weight:750}
+.hc-filter-count{font-size:.75rem;margin:4px 0;color:var(--kb-muted)}
+.hc-service-status{display:inline-flex;align-items:center;background:var(--hc-mint);color:var(--hc-jade);border-radius:9px;padding:7px 10px;font-size:.78rem;font-weight:750;margin:4px 0 8px}
+.hc-progress{display:grid;gap:6px;margin:12px 0 16px}
+.hc-progress progress{appearance:none;width:100%;height:8px;border:0;border-radius:99px;background:var(--kb-wash);overflow:hidden;accent-color:#276b58}
+.hc-progress progress::-webkit-progress-bar{background:var(--kb-wash);border-radius:99px}
+.hc-progress progress::-webkit-progress-value{background:#276b58;border-radius:99px}
+.hc-progress progress::-moz-progress-bar{background:#276b58;border-radius:99px}
+.hc-progress .status,.hc-progress .count{font-size:.78rem;font-weight:650}
+.hc-main .sections,.hc-main .tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.section-btn,.tabs button,.actions button,.hc-search button,.kb-theme-toggle){min-height:44px;border-radius:10px;border:1px solid var(--kb-line);background:var(--kb-panel);color:var(--kb-ink);font-weight:730;font-size:.81rem;line-height:1.35;padding:10px;white-space:normal}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.section-btn,.tabs button)[aria-current="step"],html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main .actions button.primary{background:#8e3345!important;color:#fff!important;border-color:#8e3345}
+.hc-main .actions button#clear-btn{color:var(--kb-accent);background:transparent}
+.hc-main .actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.hc-main :is(label,summary){color:var(--kb-ink);font-size:.9rem;font-weight:730}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(textarea,select,input){background:var(--kb-panel);color:var(--kb-ink);border:1px solid var(--kb-line);border-radius:10px;font:inherit;min-width:0}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(textarea,input)::placeholder{color:var(--kb-muted)}
+.hc-main textarea{min-height:85px}
+.hc-main select{min-height:44px}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main .clinical-subgroup{background:var(--kb-bg);border-color:var(--kb-line);border-radius:13px}
+.hc-main .clinical-subgroup summary{min-height:44px}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(button,a,input,select,textarea,summary):focus-visible{outline:3px solid var(--hc-focus);outline-offset:2px}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview){background:#fff;color:#183244;box-shadow:inset 0 0 0 1px #e5d4d3;margin-top:13px;color-scheme:light}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview) p{color:#243743}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview) h2{color:#143d57;background:transparent}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview) h3{color:#185b77;background:#e7f2f6}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview) strong{color:#123950}
+html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.paper,.preview) .meta{color:#425d6e}
+.hc-main footer{color:var(--kb-muted);border-top:1px solid var(--kb-line);padding-top:14px}
+@media(max-width:740px){.hc-main{padding:12px 13px 72px}.hc-main .hc-top-brand{display:none}html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) .hc-main :is(.kb-hero,.pediatric-hero){padding:19px 18px;border-radius:16px}.hc-main .services,.hc-main .tabs,.hc-main .sections{grid-template-columns:repeat(2,minmax(0,1fr))}.hc-main .kb-side{grid-template-columns:1fr}.hc-main .service{min-height:102px}.hc-main .actions button{flex:1 1 42%}.hc-main .preview,.hc-main .paper{padding:15px}.hc-main .kb-service-title{font-size:.82rem}}
+@media(max-width:360px){.hc-main{padding-inline:10px}.hc-nav a{font-size:.73rem}.hc-main .kb-service-meta{font-size:.69rem}}
+@media print{html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]),html:is([data-kb-page="documentacion"],[data-kb-page="historia-pediatria"]) body{background:white!important;color:black!important}.hc-main{display:none!important}.hc-nav{display:none!important}}

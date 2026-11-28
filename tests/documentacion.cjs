@@ -25,3 +25,9 @@ for(const term of ['Padecimiento actual','Antecedentes','Exploración','Análisi
 console.log('Clinical documentation MVP checks PASSED: routing, steps, print-PDF, privacy, XSS and offline.');
 
 assert.ok(!/localStorage\.(?:setItem|getItem)\((?!'kidbum-theme')/.test(html),'Only theme preference may use localStorage');
+
+const sharedStyle=fs.readFileSync('assets/historias-coral-jade-v01205.css','utf8');
+assert.match(html,/historias-coral-jade-v01205\.css/);
+assert.match(html,/id="hc-progress"/);assert.match(html,/id="hc-exportar"/);assert.match(html,/id="hc-editor"/);
+assert.match(sharedStyle,/#8e3345/);assert.match(sharedStyle,/#276b58/);assert.match(sw,/'\.\/assets\/historias-coral-jade-v01205\.css'/);
+assert.match(html,/id="hc-search"/);assert.match(html,/function filterServices\(/);assert.match(html,/id="hc-service-status"/);
