@@ -1,3 +1,7 @@
+# Actualización v0.11.1 · Pediatría: menú simplificado
+
+Se retira la tarjeta SAMPLE del menú y buscador principal. La herramienta permanece disponible desde los algoritmos pediátricos y conserva sus recursos offline.
+
 # Actualización v0.11.0 · Pediatría BOARD Ivory Heritage
 
 Rediseño visual de Academy: portada azul noche y oro, escudo de la línea ENARM, siete modos ilustrados, examen marfil, controles de confianza accesibles y revisión editorial. Banco, claves, algoritmo y progreso conservados.
