@@ -1,3 +1,7 @@
+# Actualización v0.11.6 · Pediatría BOARD: 52 reactivos R3
+
+20 nuevos casos, 29 fuentes activas, 16 áreas, 87 en reserva. Simulador de 50 preguntas y primer caso seriado activo de colitis ulcerosa grave. Validación independiente pendiente.
+
 # Actualización v0.11.5 · Pediatría BOARD R3: 32 reactivos en 16 áreas
 
 20 casos nuevos, 17 fuentes del banco activo, 87 reactivos anteriores en reserva. Simulador de 25 reactivos R3 disponible. Revisión independiente pendiente.

@@ -7,7 +7,7 @@
  if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis,function(root){
  'use strict';
- const VERSION='0.11.5';
+ const VERSION='0.11.6';
  let seenRegistration=null,initiallyControlled=false,started=false,lastMessage='';
  const $=id=>root.document?.getElementById(id);
  function parseRelease(text){

@@ -3623,6 +3623,746 @@ window.KidBumPediatriaBoard=Object.freeze({
       "standard": "r3-specialist-v1",
       "reasoning": "Elegir vía antimicrobiana según acceso al foco, complicaciones y seguridad ótica.",
       "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB120",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Empiema paraneumónico",
+      "stem": "Escolar de 7 años, previamente sano, con neumonía bacteriana y fiebre persistente tras 48 h de antibiótico. Requiere oxígeno y presenta derrame pleural purulento de tamaño moderado, con septos limitados en ultrasonido. Sin fístula broncopleural ni loculaciones extensas. El hospital tiene experiencia tanto en drenaje guiado como en cirugía toracoscópica.",
+      "prompt": "Según IDSA/PIDS 2026, ¿qué estrategia inicial de control del foco se favorece condicionalmente?",
+      "options": [
+        "Drenaje guiado mediante tubo pleural y fibrinolítico intrapleural",
+        "VATS primaria en todos los casos con septos, independientemente de extensión",
+        "Drenaje simple sin fibrinólisis como estrategia preferida aunque haya septos",
+        "Toracocentesis evacuadora intermitente con reevaluación diaria"
+      ],
+      "correct": 0,
+      "why": "La guía favorece inicialmente tubo y fibrinólisis en la mayoría de los empiemas que requieren drenaje, teniendo en cuenta invasividad y recursos.",
+      "others": "VATS es una opción válida en enfermedad extensa o refractaria; los septos limitados no obligan a elegirla como primera intervención. El drenaje simple puede ser útil en líquido libre, pero el abordaje sugerido para empiema incluye fibrinólisis. La aspiración intermitente no es la estrategia de drenaje continuo favorecida en este contexto.",
+      "rationales": [
+        "La guía favorece inicialmente tubo y fibrinólisis en la mayoría de los empiemas que requieren drenaje, teniendo en cuenta invasividad y recursos.",
+        "VATS es una opción válida en enfermedad extensa o refractaria; los septos limitados no obligan a elegirla como primera intervención.",
+        "El drenaje simple puede ser útil en líquido libre, pero el abordaje sugerido para empiema incluye fibrinólisis.",
+        "La aspiración intermitente no es la estrategia de drenaje continuo favorecida en este contexto."
+      ],
+      "source": {
+        "title": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion",
+        "year": 2026,
+        "url": "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-in-infants-and-children/",
+        "locator": "Pleural fluid drainage compared to surgical debridement"
+      },
+      "reference": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion (2026), Pleural fluid drainage compared to surgical debridement",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Seleccionar control del foco según anatomía, riesgo invasivo y certeza de la recomendación.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB121",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Fibrinólisis pleural pediátrica",
+      "stem": "Niña de 8 años con empiema asociado a neumonía. Se instaló tubo pleural de 10 Fr guiado por imagen, con posición adecuada y drenaje parcial; persisten tabiques susceptibles de fibrinólisis. No presenta sangrado activo ni contraindicaciones al fibrinolítico. El equipo plantea extrapolar el esquema combinado usado en pacientes adultos.",
+      "prompt": "Según la actualización pediátrica IDSA/PIDS 2026, ¿qué régimen intrapleural debe preferirse?",
+      "options": [
+        "tPA más DNasa de rutina, por evidencia de superioridad pediátrica",
+        "tPA sin adición rutinaria de DNasa",
+        "DNasa sola para evitar el riesgo hemorrágico de tPA",
+        "Cambiar primero a tubo de gran calibre y omitir fibrinólisis"
+      ],
+      "correct": 1,
+      "why": "La recomendación condicional favorece tPA solo frente a tPA más DNasa para este grupo; se vigila respuesta y seguridad.",
+      "others": "La evidencia pediátrica no demuestra el beneficio adicional que justificaría usar la combinación sistemáticamente. La DNasa sola no es la alternativa respaldada para fibrinólisis pleural pediátrica. El tubo pequeño puede permitir drenaje y fibrinólisis; su calibre no obliga a recambio antes del tratamiento.",
+      "rationales": [
+        "La evidencia pediátrica no demuestra el beneficio adicional que justificaría usar la combinación sistemáticamente.",
+        "La recomendación condicional favorece tPA solo frente a tPA más DNasa para este grupo; se vigila respuesta y seguridad.",
+        "La DNasa sola no es la alternativa respaldada para fibrinólisis pleural pediátrica.",
+        "El tubo pequeño puede permitir drenaje y fibrinólisis; su calibre no obliga a recambio antes del tratamiento."
+      ],
+      "source": {
+        "title": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion",
+        "year": 2026,
+        "url": "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-in-infants-and-children/",
+        "locator": "The Use of tPA and DNase or tPA Alone for Fibrinolysis"
+      },
+      "reference": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion (2026), The Use of tPA and DNase or tPA Alone for Fibrinolysis",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Evitar extrapolar una estrategia farmacológica de adultos cuando la evidencia pediátrica es distinta.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB122",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Empiema refractario",
+      "stem": "Niño de 10 años con empiema neumónico por neumococo sensible. Recibió antimicrobiano dirigido, tubo pequeño bien colocado y ciclo completo de fibrinólisis según protocolo. Continúa con dificultad respiratoria y fiebre; ultrasonido muestra una colección importante multiloculada no comunicada con el tubo. Cirugía y radiología revisan la imagen y confirman que no es accesible de forma segura con otro drenaje percutáneo.",
+      "prompt": "¿Cuál es la conducta de control del foco más razonable?",
+      "options": [
+        "Prolongar antibiótico sin nueva intervención hasta normalización de PCR",
+        "Cambiar a tubo de mayor calibre en la misma cavidad ya drenada",
+        "Valorar desbridamiento por VATS como rescate, manteniendo terapia antimicrobiana apropiada",
+        "Añadir DNasa por el tubo actual como alternativa a acceder a la colección"
+      ],
+      "correct": 2,
+      "why": "VATS es una alternativa de rescate en enfermedad refractaria o loculación extensa; la decisión corresponde al equipo multidisciplinario.",
+      "others": "La persistencia de una colección no drenada y compromiso respiratorio exige reevaluar control del foco, no solo duración antimicrobiana. Un tubo mayor en una cavidad distinta no resuelve las loculaciones no comunicantes. El fármaco administrado en una cavidad no comunicada no accede necesariamente al foco residual.",
+      "rationales": [
+        "La persistencia de una colección no drenada y compromiso respiratorio exige reevaluar control del foco, no solo duración antimicrobiana.",
+        "Un tubo mayor en una cavidad distinta no resuelve las loculaciones no comunicantes.",
+        "VATS es una alternativa de rescate en enfermedad refractaria o loculación extensa; la decisión corresponde al equipo multidisciplinario.",
+        "El fármaco administrado en una cavidad no comunicada no accede necesariamente al foco residual."
+      ],
+      "source": {
+        "title": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion",
+        "year": 2026,
+        "url": "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-in-infants-and-children/",
+        "locator": "Pleural fluid drainage compared to surgical debridement: refractory disease"
+      },
+      "reference": "IDSA/PIDS 2026 Guidelines for Community-Acquired Pneumonia in Children: parapneumonic effusion (2026), Pleural fluid drainage compared to surgical debridement: refractory disease",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir fracaso anatómico del drenaje de fracaso antimicrobiano.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB123",
+      "section": "Gastroenterología y nutrición",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Colitis ulcerosa aguda grave: día 3",
+      "stem": "Adolescente de 13 años con colitis ulcerosa extensa hospitalizado por exacerbación grave. En el día 3 de metilprednisolona IV el PUCAI permanece en 55, desde 75 al ingreso. Estudios iniciales de patógenos fecales y C. difficile negativos. No presenta dilatación colónica ni peritonismo; albúmina 2.4 g/dL. No ha recibido biológicos previamente.",
+      "prompt": "Según ESPGHAN/ECCO 2025, ¿qué decisión corresponde en este momento?",
+      "options": [
+        "Cambiar a prednisona oral porque el PUCAI disminuyó veinte puntos",
+        "Iniciar rescate obligatorio en ese instante sin completar evaluación infecciosa",
+        "Mantener el esquema actual hasta el día 7 antes de plantear otras opciones",
+        "Preparar rescate entre días 3–5, valorar cirugía y realizar sigmoidoscopia con biopsias para descartar CMV"
+      ],
+      "correct": 3,
+      "why": "El PUCAI por encima de 45 en día 3 orienta a preparar segunda línea. La ausencia de respuesta adecuada justifica evaluación mucosa para CMV y coordinación quirúrgica.",
+      "others": "La mejoría relativa no implica respuesta suficiente: la actividad absoluta continúa siendo elevada. La puntuación del día 3 exige planificación; no obliga por sí sola a iniciar rescate sin evaluación pertinente. Esperar hasta el día 7 sin preparar segunda línea retrasa decisiones ante alto riesgo de fracaso.",
+      "rationales": [
+        "La mejoría relativa no implica respuesta suficiente: la actividad absoluta continúa siendo elevada.",
+        "La puntuación del día 3 exige planificación; no obliga por sí sola a iniciar rescate sin evaluación pertinente.",
+        "Esperar hasta el día 7 sin preparar segunda línea retrasa decisiones ante alto riesgo de fracaso.",
+        "El PUCAI por encima de 45 en día 3 orienta a preparar segunda línea. La ausencia de respuesta adecuada justifica evaluación mucosa para CMV y coordinación quirúrgica."
+      ],
+      "source": {
+        "title": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 2: Acute severe colitis",
+        "year": 2025,
+        "url": "https://doi.org/10.1002/jpn3.70096",
+        "locator": "Predicción de respuesta a corticoide IV y evaluación de infecciones en día 3"
+      },
+      "reference": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 2: Acute severe colitis (2025), Predicción de respuesta a corticoide IV y evaluación de infecciones en día 3",
+      "caseId": "ASC-01",
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Usar el valor absoluto de actividad y la trayectoria para anticipar rescate.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB124",
+      "section": "Gastroenterología y nutrición",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Colitis ulcerosa aguda grave: día 5",
+      "stem": "El adolescente de 13 años con colitis ulcerosa extensa sigue hospitalizado en el día 5 de corticoide IV. PUCAI 65, albúmina 2.3 g/dL; no hay megacolon, hemorragia masiva ni peritonismo. Se descartaron C. difficile y colitis por CMV mediante evaluación apropiada. No ha recibido anti-TNF; se completó la evaluación previa a biológico y cirugía pediátrica participa.",
+      "prompt": "¿Qué decisión se ajusta a ESPGHAN/ECCO 2025?",
+      "options": [
+        "Iniciar terapia de segunda línea sin demorarla por un curso adicional de corticoide, con vigilancia quirúrgica",
+        "Esperar hasta el día 10 de corticoide porque no hay megacolon",
+        "Cambiar a corticoide oral y reservar rescate para un PUCAI superior a 75",
+        "Indicar colectomía inmediata como única opción válida por PUCAI de 65"
+      ],
+      "correct": 0,
+      "why": "En el día 5 una actividad de 65 o mayor apoya iniciar segunda línea; en un candidato adecuado puede considerarse infliximab, sin perder vigilancia de indicaciones quirúrgicas.",
+      "others": "No se requiere megacolon para reconocer fracaso del corticoide; prolongarlo sin rescate aumenta riesgos. La actividad grave persistente no justifica desescalamiento a vía oral; no se exige un valor superior a 75. La colectomía es una alternativa importante, pero no la única en un paciente estable sin indicación quirúrgica inmediata.",
+      "rationales": [
+        "En el día 5 una actividad de 65 o mayor apoya iniciar segunda línea; en un candidato adecuado puede considerarse infliximab, sin perder vigilancia de indicaciones quirúrgicas.",
+        "No se requiere megacolon para reconocer fracaso del corticoide; prolongarlo sin rescate aumenta riesgos.",
+        "La actividad grave persistente no justifica desescalamiento a vía oral; no se exige un valor superior a 75.",
+        "La colectomía es una alternativa importante, pero no la única en un paciente estable sin indicación quirúrgica inmediata."
+      ],
+      "source": {
+        "title": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 2: Acute severe colitis",
+        "year": 2025,
+        "url": "https://doi.org/10.1002/jpn3.70096",
+        "locator": "Inicio de segunda línea según PUCAI en día 5"
+      },
+      "reference": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 2: Acute severe colitis (2025), Inicio de segunda línea según PUCAI en día 5",
+      "caseId": "ASC-01",
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Identificar el momento en que la preparación de rescate pasa a intervención efectiva.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB125",
+      "section": "Gastroenterología y nutrición",
+      "type": "visual",
+      "skill": "Farmacología",
+      "topic": "Pérdida de respuesta a infliximab",
+      "stem": "Adolescente de 15 años con colitis ulcerosa que alcanzó remisión con infliximab y posteriormente presenta recaída clínica y endoscópica. Coprocultivos y evaluación de infección negativos. En dos muestras inmediatamente antes de infusión, infliximab indetectable con anticuerpos antifármaco persistentemente elevados; se confirmó adherencia. Sin indicación quirúrgica urgente.",
+      "prompt": "¿Qué interpretación justifica considerar otro anti-TNF, según ESPGHAN/ECCO 2025?",
+      "options": [
+        "Fracaso farmacodinámico primario; adalimumab sería ineficaz por definición",
+        "Pérdida secundaria inmunogénica; valorar cambio a adalimumab con monitorización especializada",
+        "Exposición excesiva al fármaco; reducir dosis y prolongar intervalo",
+        "Recaída no inflamatoria; continuar sin modificar tratamiento por anticuerpos positivos"
+      ],
+      "correct": 1,
+      "why": "El patrón apoya pérdida inmunogénica de exposición, situación en que otro anti-TNF puede ser considerado, según contexto y regulación.",
+      "others": "Existió respuesta inicial y ahora hay fármaco indetectable con anticuerpos persistentes, distinto de no respuesta primaria con exposición adecuada. La concentración indetectable no apoya sobreexposición; disminuir dosis podría empeorar el problema. Se documentó inflamación endoscópica; los anticuerpos persistentes explican una posible pérdida de eficacia.",
+      "rationales": [
+        "Existió respuesta inicial y ahora hay fármaco indetectable con anticuerpos persistentes, distinto de no respuesta primaria con exposición adecuada.",
+        "El patrón apoya pérdida inmunogénica de exposición, situación en que otro anti-TNF puede ser considerado, según contexto y regulación.",
+        "La concentración indetectable no apoya sobreexposición; disminuir dosis podría empeorar el problema.",
+        "Se documentó inflamación endoscópica; los anticuerpos persistentes explican una posible pérdida de eficacia."
+      ],
+      "source": {
+        "title": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 1: Ambulatory care",
+        "year": 2025,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12408984/",
+        "locator": "Sección 7.1 y figura 4: monitorización terapéutica de infliximab"
+      },
+      "reference": "ESPGHAN/ECCO Management of paediatric ulcerative colitis, part 1: Ambulatory care (2025), Sección 7.1 y figura 4: monitorización terapéutica de infliximab",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Diferenciar pérdida inmunogénica de fracaso farmacodinámico usando niveles y respuesta previa.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB126",
+      "section": "Urgencias y terapia intensiva",
+      "type": "visual",
+      "skill": "Interpretación",
+      "topic": "Ventilación protectora en SDRA pediátrico",
+      "stem": "Niño de 6 años con SDRA pediátrico ventilado en UCIP. Sin esfuerzo espontáneo durante mediciones estáticas: volumen corriente 8 mL/kg de peso predicho, PEEP total 10 cmH₂O, presión meseta 30 cmH₂O. PaCO₂ 48 mmHg, pH 7.31, oxigenación aceptable; sin hipertensión intracraneal ni disminución de distensibilidad de pared torácica.",
+      "prompt": "¿Qué ajuste responde mejor a las recomendaciones PALICC-2?",
+      "options": [
+        "Aumentar volumen corriente para normalizar PaCO₂ y mantener PEEP",
+        "Mantener volumen corriente y reducir PEEP a 5 para bajar presión meseta",
+        "Reducir volumen corriente y retitular soporte para disminuir presión meseta y de conducción, tolerando hipercapnia dentro de límites",
+        "Aumentar presión meseta hasta 35 si la saturación mejora"
+      ],
+      "correct": 2,
+      "why": "La presión de conducción es 20 cmH₂O y la meseta supera 28; se favorece reducir exposición a ambas, con valoración de ventilación y perfusión.",
+      "others": "La prioridad no es normalizar PaCO₂ a costa de aumentar estrés mecánico pulmonar. Reducir PEEP sin considerar reclutamiento puede empeorar oxigenación y distensibilidad; no garantiza disminuir presión de conducción. Sin indicación especial por pared torácica, una meseta mayor excede el objetivo sugerido y puede aumentar lesión inducida por ventilación.",
+      "rationales": [
+        "La prioridad no es normalizar PaCO₂ a costa de aumentar estrés mecánico pulmonar.",
+        "Reducir PEEP sin considerar reclutamiento puede empeorar oxigenación y distensibilidad; no garantiza disminuir presión de conducción.",
+        "La presión de conducción es 20 cmH₂O y la meseta supera 28; se favorece reducir exposición a ambas, con valoración de ventilación y perfusión.",
+        "Sin indicación especial por pared torácica, una meseta mayor excede el objetivo sugerido y puede aumentar lesión inducida por ventilación."
+      ],
+      "source": {
+        "title": "PALICC-2 Executive Summary of the Second International Guidelines for Pediatric ARDS",
+        "year": 2023,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9848214/",
+        "locator": "Recomendaciones de volumen corriente, presión meseta y driving pressure"
+      },
+      "reference": "PALICC-2 Executive Summary of the Second International Guidelines for Pediatric ARDS (2023), Recomendaciones de volumen corriente, presión meseta y driving pressure",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Calcular presión de conducción y priorizar protección pulmonar sobre normalización de CO₂.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB127",
+      "section": "Urgencias y terapia intensiva",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hipercapnia permisiva con lesión cerebral",
+      "stem": "Escolar de 11 años con SDRA secundario a aspiración tras traumatismo craneoencefálico grave. Monitor invasivo registra PIC de 24 mmHg; PaCO₂ 62 mmHg, pH 7.23. Presión meseta 27 y de conducción 14 cmH₂O; perfusión sistémica estable. El equipo intenta ajustar ventilación sin provocar lesión pulmonar.",
+      "prompt": "¿Qué razonamiento es apropiado según PALICC-2?",
+      "options": [
+        "Aceptar automáticamente PaCO₂ 62 porque pH ≥7.20 excluye contraindicaciones",
+        "Normalizar CO₂ aumentando de inmediato volumen corriente sin límites de presión",
+        "Inducir hiperventilación profunda sostenida como profilaxis en todo traumatismo",
+        "Reconocer la hipertensión intracraneal como excepción a hipercapnia permisiva y ajustar objetivos con neurointensivos preservando protección pulmonar"
+      ],
+      "correct": 3,
+      "why": "PALICC-2 identifica la hipertensión intracraneal como excepción. Se deben integrar CO₂, PIC y perfusión cerebral con mecánica pulmonar.",
+      "others": "El objetivo de pH no se aplica indiscriminadamente cuando existen condiciones que hacen peligrosa la hipercapnia. La corrección requiere estrategia individualizada; abandonar límites protectores puede lesionar el pulmón. La hiperventilación profunda profiláctica puede comprometer perfusión cerebral; no es la respuesta universal.",
+      "rationales": [
+        "El objetivo de pH no se aplica indiscriminadamente cuando existen condiciones que hacen peligrosa la hipercapnia.",
+        "La corrección requiere estrategia individualizada; abandonar límites protectores puede lesionar el pulmón.",
+        "La hiperventilación profunda profiláctica puede comprometer perfusión cerebral; no es la respuesta universal.",
+        "PALICC-2 identifica la hipertensión intracraneal como excepción. Se deben integrar CO₂, PIC y perfusión cerebral con mecánica pulmonar."
+      ],
+      "source": {
+        "title": "PALICC-2 Executive Summary of the Second International Guidelines for Pediatric ARDS",
+        "year": 2023,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9848214/",
+        "locator": "3.10.1: excepciones a la hipercapnia permisiva"
+      },
+      "reference": "PALICC-2 Executive Summary of the Second International Guidelines for Pediatric ARDS (2023), 3.10.1: excepciones a la hipercapnia permisiva",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Resolver conflicto entre objetivos neurocríticos y protección pulmonar.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB128",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Trombocitopenia inmune persistente",
+      "stem": "Niña de 10 años con trombocitopenia inmune de 11 meses. Plaquetas 13 000/mm³, epistaxis recurrente no mayor y ausencias escolares frecuentes. Respuestas breves a corticoides e inmunoglobulina IV; sin sangrado crítico. Se confirmó diagnóstico con hematología y la familia desea evitar inmunosupresión prolongada y cirugía.",
+      "prompt": "Según ASH 2019, ¿qué segunda línea favorece condicionalmente la guía?",
+      "options": [
+        "Agonista del receptor de trombopoyetina, individualizando elección y seguimiento",
+        "Rituximab como opción obligatoria antes de todo agonista de trombopoyetina",
+        "Esplenectomía inmediata como alternativa preferida en este momento",
+        "Corticoide diario prolongado como estrategia de mantenimiento"
+      ],
+      "correct": 0,
+      "why": "Los agonistas del receptor de trombopoyetina se favorecen frente a rituximab o esplenectomía en niños con sangrado no mayor o afectación de calidad de vida y fracaso inicial.",
+      "others": "Rituximab puede considerarse según preferencias y perfil clínico, pero no es el paso obligatorio que plantea la guía. La esplenectomía tiene riesgos permanentes y no es la opción preferida frente a agonistas en este escenario. Exposición crónica a corticoide añade toxicidad; se busca una alternativa de segunda línea.",
+      "rationales": [
+        "Los agonistas del receptor de trombopoyetina se favorecen frente a rituximab o esplenectomía en niños con sangrado no mayor o afectación de calidad de vida y fracaso inicial.",
+        "Rituximab puede considerarse según preferencias y perfil clínico, pero no es el paso obligatorio que plantea la guía.",
+        "La esplenectomía tiene riesgos permanentes y no es la opción preferida frente a agonistas en este escenario.",
+        "Exposición crónica a corticoide añade toxicidad; se busca una alternativa de segunda línea."
+      ],
+      "source": {
+        "title": "American Society of Hematology 2019 guidelines for immune thrombocytopenia",
+        "year": 2019,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963252/",
+        "locator": "Recomendaciones 19 y 20"
+      },
+      "reference": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (2019), Recomendaciones 19 y 20",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Elegir segunda línea considerando sangrado, calidad de vida, respuesta previa y preferencias.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB129",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Trombocitopenia inmune y decisión de ingreso",
+      "stem": "Escolar de 8 años con trombocitopenia inmune de nuevo diagnóstico; plaquetas 9 000/mm³, petequias y equimosis leves, sin epistaxis ni hemorragia mucosa. Hemoglobina y leucocitos normales, frotis revisado sin hallazgos atípicos, exploración sin adenopatías ni hepatoesplenomegalia. Familia comprende alarmas y hematología garantiza revisión en 24–72 h.",
+      "prompt": "Según ASH 2019, ¿qué enfoque es defendible pese a la cifra plaquetaria?",
+      "options": [
+        "Ingresar para inmunoglobulina IV obligatoria por plaquetas menores de 10 000/mm³",
+        "Manejo ambulatorio con observación, educación y seguimiento hematológico estrecho",
+        "Transfundir plaquetas profilácticamente antes del alta y programar control",
+        "Iniciar corticoide prolongado para llevar plaquetas al rango normal antes del egreso"
+      ],
+      "correct": 1,
+      "why": "La guía favorece manejo ambulatorio y observación en niños seleccionados con sangrado ausente o leve; debe existir diagnóstico razonablemente seguro y acceso a control.",
+      "others": "El recuento aislado no obliga a ingreso ni inmunoglobulina si solo hay manifestaciones cutáneas y condiciones seguras de seguimiento. La transfusión profiláctica por cifra aislada no es el manejo de una trombocitopenia inmune estable sin hemorragia grave. No se busca normalizar la cifra a costa de toxicidad; las manifestaciones y el contexto guían tratamiento.",
+      "rationales": [
+        "El recuento aislado no obliga a ingreso ni inmunoglobulina si solo hay manifestaciones cutáneas y condiciones seguras de seguimiento.",
+        "La guía favorece manejo ambulatorio y observación en niños seleccionados con sangrado ausente o leve; debe existir diagnóstico razonablemente seguro y acceso a control.",
+        "La transfusión profiláctica por cifra aislada no es el manejo de una trombocitopenia inmune estable sin hemorragia grave.",
+        "No se busca normalizar la cifra a costa de toxicidad; las manifestaciones y el contexto guían tratamiento."
+      ],
+      "source": {
+        "title": "American Society of Hematology 2019 guidelines for immune thrombocytopenia",
+        "year": 2019,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6963252/",
+        "locator": "Recomendaciones 10a y 11: ingreso y observación en ITP pediátrica"
+      },
+      "reference": "American Society of Hematology 2019 guidelines for immune thrombocytopenia (2019), Recomendaciones 10a y 11: ingreso y observación en ITP pediátrica",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Ponderar fenotipo hemorrágico y seguridad del seguimiento frente a un valor extremo de laboratorio.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB130",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Osteomielitis hematógena con bacteriemia transitoria",
+      "stem": "Niño de 8 años con osteomielitis tibial por S. aureus sensible a meticilina. Tras drenaje del foco y cuatro días de cefazolina IV está afebril, camina con menor dolor y PCR cayó de 115 a 22 mg/L. Hemocultivos de control negativos desde 48 h; sin evidencia de infección endovascular o focos secundarios. Tolera vía oral y hay antibiótico oral activo con seguimiento fiable.",
+      "prompt": "¿Qué estrategia de continuidad favorece PIDS/IDSA 2021?",
+      "options": [
+        "Completar todo el curso IV por el hemocultivo inicial positivo",
+        "Colocar acceso central para al menos dos semanas IV sin considerar respuesta",
+        "Transición a tratamiento oral activo, guiada por evolución clínica y vigilancia",
+        "Suspender todos los antibióticos al negativizar hemocultivo"
+      ],
+      "correct": 2,
+      "why": "La guía favorece transición oral cuando es factible y la respuesta es adecuada; la bacteriemia resuelta no impide esta opción.",
+      "others": "La bacteriemia transitoria no obliga a curso IV completo si se controló el foco y no hay sospecha endovascular. La duración IV no se fija únicamente por bacteriemia inicial; el acceso central agrega riesgos. La negativización de hemocultivo no demuestra erradicación de infección ósea; se completa un curso total apropiado.",
+      "rationales": [
+        "La bacteriemia transitoria no obliga a curso IV completo si se controló el foco y no hay sospecha endovascular.",
+        "La duración IV no se fija únicamente por bacteriemia inicial; el acceso central agrega riesgos.",
+        "La guía favorece transición oral cuando es factible y la respuesta es adecuada; la bacteriemia resuelta no impide esta opción.",
+        "La negativización de hemocultivo no demuestra erradicación de infección ósea; se completa un curso total apropiado."
+      ],
+      "source": {
+        "title": "PIDS/IDSA 2021 Acute Hematogenous Osteomyelitis in Pediatrics",
+        "year": 2021,
+        "url": "https://www.idsociety.org/practice-guideline/bone-and-joint-infections---osteomyelitis/",
+        "locator": "X: transición oral, consideración de bacteriemia por S. aureus"
+      },
+      "reference": "PIDS/IDSA 2021 Acute Hematogenous Osteomyelitis in Pediatrics (2021), X: transición oral, consideración de bacteriemia por S. aureus",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar control microbiológico y clínico para decidir vía sin extrapolar reglas de bacteriemia adulta.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB131",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Osteomielitis y bacteriemia persistente",
+      "stem": "Adolescente de 13 años con osteomielitis femoral por S. aureus, antibiótico activo y drenaje inicial. A las 72 h continúan hemocultivos positivos y fiebre; presenta nuevo edema de muslo, dolor y taquicardia. La exposición al fármaco está verificada y no hay una explicación microbiológica de resistencia.",
+      "prompt": "¿Qué estrategia diagnóstica es prioritaria además de mantener la evaluación hemodinámica?",
+      "options": [
+        "Interpretar bacteriemia persistente como curso esperado si el antibiograma es favorable",
+        "Cambiar antibiótico solo por fiebre sin reevaluar extensión",
+        "Solicitar PCR seriada como único estudio y diferir evaluación por imagen",
+        "Reevaluar control del foco e investigar trombosis venosa profunda y focos metastásicos con imagen dirigida"
+      ],
+      "correct": 3,
+      "why": "La guía destaca trombosis y focos ocultos como causas de persistencia; el nuevo edema refuerza la necesidad de imagen dirigida.",
+      "others": "La bacteriemia prolongada pese a tratamiento activo es una señal de posible foco no controlado o complicación. Un cambio empírico no sustituye búsqueda de absceso, trombosis u otro foco; el perfil de sensibilidad sigue siendo pertinente. La PCR apoya seguimiento, pero no identifica la causa anatómica de bacteriemia persistente.",
+      "rationales": [
+        "La bacteriemia prolongada pese a tratamiento activo es una señal de posible foco no controlado o complicación.",
+        "Un cambio empírico no sustituye búsqueda de absceso, trombosis u otro foco; el perfil de sensibilidad sigue siendo pertinente.",
+        "La PCR apoya seguimiento, pero no identifica la causa anatómica de bacteriemia persistente.",
+        "La guía destaca trombosis y focos ocultos como causas de persistencia; el nuevo edema refuerza la necesidad de imagen dirigida."
+      ],
+      "source": {
+        "title": "PIDS/IDSA 2021 Acute Hematogenous Osteomyelitis in Pediatrics",
+        "year": 2021,
+        "url": "https://www.idsociety.org/practice-guideline/bone-and-joint-infections---osteomyelitis/",
+        "locator": "Manejo de fracaso terapéutico y bacteriemia persistente"
+      },
+      "reference": "PIDS/IDSA 2021 Acute Hematogenous Osteomyelitis in Pediatrics (2021), Manejo de fracaso terapéutico y bacteriemia persistente",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Detectar complicación vascular y foco oculto cuando la sensibilidad antimicrobiana no explica la evolución.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB132",
+      "section": "Neurología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hipertensión intracraneal refractaria",
+      "stem": "Niño de 9 años con traumatismo craneal grave. Tras 18 h en UCIP, PIC de 28–30 mmHg sostenida pese a sedoanalgesia, medidas posturales y bolos de solución salina al 3%. Se descartó lesión expansiva nueva que requiera evacuación inmediata; existe acceso central y monitorización continua de sodio y perfusión. Equipo neurocrítico plantea rescate osmótico.",
+      "prompt": "¿Qué intervención contempla específicamente la Brain Trauma Foundation para PIC refractaria?",
+      "options": [
+        "Considerar bolo de solución salina hipertónica al 23.4% bajo protocolo experto y monitorización",
+        "Administrar solución hipertónica concentrada como mantenimiento sin monitorizar sodio",
+        "Sustituir toda terapia osmótica por hiperventilación profiláctica profunda",
+        "Repetir estudios de imagen hasta resolución espontánea antes de tratar PIC"
+      ],
+      "correct": 0,
+      "why": "La guía contempla bolos de solución al 23.4% para hipertensión intracraneal refractaria, con control de seguridad y reevaluación clínica.",
+      "others": "La solución de rescate no debe convertirse en mantenimiento sin vigilancia de sodio y otras complicaciones. La hiperventilación profiláctica no es reemplazo seguro de terapia dirigida; puede reducir perfusión cerebral. La investigación etiológica no sustituye intervención urgente cuando la PIC permanece elevada.",
+      "rationales": [
+        "La guía contempla bolos de solución al 23.4% para hipertensión intracraneal refractaria, con control de seguridad y reevaluación clínica.",
+        "La solución de rescate no debe convertirse en mantenimiento sin vigilancia de sodio y otras complicaciones.",
+        "La hiperventilación profiláctica no es reemplazo seguro de terapia dirigida; puede reducir perfusión cerebral.",
+        "La investigación etiológica no sustituye intervención urgente cuando la PIC permanece elevada."
+      ],
+      "source": {
+        "title": "Brain Trauma Foundation Guidelines for Pediatric Severe TBI, 3rd edition",
+        "year": 2019,
+        "url": "https://braintrauma.org/coma/guidelines/pediatric",
+        "locator": "Hyperosmolar therapy: refractory ICP"
+      },
+      "reference": "Brain Trauma Foundation Guidelines for Pediatric Severe TBI, 3rd edition (2019), Hyperosmolar therapy: refractory ICP",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Reconocer indicación de rescate osmótico y requisitos de administración segura.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB133",
+      "section": "Neurología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Control de temperatura en traumatismo craneal grave",
+      "stem": "Adolescente de 14 años con traumatismo craneal grave, normotermia, PIC controlada a 15 mmHg y perfusión cerebral adecuada. Se propone enfriamiento a 32–33 °C durante 48 horas para mejorar desenlaces neurológicos, aunque no presenta hipertensión intracraneal refractaria.",
+      "prompt": "¿Cuál es la mejor interpretación de la guía Brain Trauma Foundation?",
+      "options": [
+        "La hipotermia moderada profiláctica mejora desenlaces y debe aplicarse a todo TCE grave",
+        "No utilizar hipotermia profiláctica para mejorar desenlaces; puede considerarse para control de PIC en escenarios seleccionados",
+        "Utilizar hipotermia solo si el Glasgow es menor de 5, aunque PIC esté controlada",
+        "La hipotermia está contraindicada incluso como opción de rescate para PIC"
+      ],
+      "correct": 1,
+      "why": "La guía diferencia indicación profiláctica sin beneficio demostrado de uso selectivo para controlar PIC.",
+      "others": "Los estudios no respaldan la hipotermia profiláctica moderada para mejorar resultados generales. El Glasgow aislado no establece beneficio de hipotermia profiláctica en ausencia de PIC elevada. La guía contempla hipotermia moderada para control de PIC con cautela y protocolo especializado.",
+      "rationales": [
+        "Los estudios no respaldan la hipotermia profiláctica moderada para mejorar resultados generales.",
+        "La guía diferencia indicación profiláctica sin beneficio demostrado de uso selectivo para controlar PIC.",
+        "El Glasgow aislado no establece beneficio de hipotermia profiláctica en ausencia de PIC elevada.",
+        "La guía contempla hipotermia moderada para control de PIC con cautela y protocolo especializado."
+      ],
+      "source": {
+        "title": "Brain Trauma Foundation Guidelines for Pediatric Severe TBI, 3rd edition",
+        "year": 2019,
+        "url": "https://braintrauma.org/coma/guidelines/pediatric",
+        "locator": "Temperature control/hypothermia: nivel II para desenlaces y III para control de PIC"
+      },
+      "reference": "Brain Trauma Foundation Guidelines for Pediatric Severe TBI, 3rd edition (2019), Temperature control/hypothermia: nivel II para desenlaces y III para control de PIC",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Diferenciar una intervención de rescate de su utilización preventiva no respaldada.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB134",
+      "section": "Infectología y vacunología",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "CMV congénito de diagnóstico tardío",
+      "stem": "Lactante de 7 semanas con hipoacusia neurosensorial unilateral confirmada. PCR de CMV en orina positiva a los 46 días; no existe muestra de orina ni saliva de las primeras tres semanas. Se conserva tarjeta de sangre seca obtenida en el día 3 de vida; recibió leche materna desde nacimiento.",
+      "prompt": "¿Qué estrategia permite discriminar infección congénita de posnatal según ECCI 2024?",
+      "options": [
+        "Confirmar CMV congénito exclusivamente por PCR urinaria positiva a las siete semanas",
+        "Solicitar IgM actual; si es negativa descartar CMV congénito",
+        "Buscar ADN de CMV retrospectivamente en sangre seca neonatal; una prueba negativa no excluye infección congénita",
+        "Repetir PCR urinaria un mes después y clasificar como congénita si permanece positiva"
+      ],
+      "correct": 2,
+      "why": "La muestra obtenida en los primeros días puede demostrar infección presente al nacimiento; su sensibilidad imperfecta impide excluirla con un resultado negativo.",
+      "others": "Una muestra tardía detecta infección, pero no establece el momento de adquisición. La serología neonatal o posterior no es la herramienta apropiada para fechar la infección. La persistencia de excreción viral no permite distinguir de modo confiable adquisición prenatal de posnatal.",
+      "rationales": [
+        "Una muestra tardía detecta infección, pero no establece el momento de adquisición.",
+        "La serología neonatal o posterior no es la herramienta apropiada para fechar la infección.",
+        "La muestra obtenida en los primeros días puede demostrar infección presente al nacimiento; su sensibilidad imperfecta impide excluirla con un resultado negativo.",
+        "La persistencia de excreción viral no permite distinguir de modo confiable adquisición prenatal de posnatal."
+      ],
+      "source": {
+        "title": "ECCI Consensus recommendation for prenatal, neonatal and postnatal management of congenital CMV",
+        "year": 2024,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10999471/",
+        "locator": "Neonatal diagnosis: timing and dried blood spots"
+      },
+      "reference": "ECCI Consensus recommendation for prenatal, neonatal and postnatal management of congenital CMV (2024), Neonatal diagnosis: timing and dried blood spots",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir diagnóstico de infección del establecimiento de su cronología mediante muestra retrospectiva.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB135",
+      "section": "Otorrinolaringología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "CMV congénito e hipoacusia aislada",
+      "stem": "Lactante de 5 semanas con CMV congénito confirmado mediante PCR urinaria positiva en el día 10. Evaluación oftalmológica, neuroimagen, biometría y función hepática sin alteraciones; audiología confirma hipoacusia neurosensorial aislada. Función renal adecuada y acceso a infectología pediátrica y controles hematológicos. Familia solicita información sobre tratamiento antiviral.",
+      "prompt": "Conforme al informe clínico AAP 2026, ¿qué decisión puede ofrecerse de manera individualizada?",
+      "options": [
+        "No ofrecer antiviral en ningún caso de hipoacusia aislada, aunque se detecte temprano",
+        "Indicar seis meses obligatorios de valganciclovir por cualquier hipoacusia congénita",
+        "Esperar al año de vida para decidir tratamiento según progresión audiológica",
+        "Considerar valganciclovir oral durante seis semanas, iniciado dentro de la ventana descrita, con vigilancia y decisión compartida"
+      ],
+      "correct": 3,
+      "why": "La tabla de AAP 2026 permite ofrecer un curso de seis semanas para hipoacusia aislada en la ventana indicada, coordinado con especialistas y monitorización.",
+      "others": "El informe actualizado contempla ofrecer tratamiento en este fenotipo, aunque la decisión requiere valorar incertidumbre y toxicidad. El curso prolongado para determinados cuadros sintomáticos no se extrapola obligatoriamente a hipoacusia aislada. La opción descrita se refiere a inicio temprano, dentro de las primeras 13 semanas; esperar un año pierde esa ventana.",
+      "rationales": [
+        "El informe actualizado contempla ofrecer tratamiento en este fenotipo, aunque la decisión requiere valorar incertidumbre y toxicidad.",
+        "El curso prolongado para determinados cuadros sintomáticos no se extrapola obligatoriamente a hipoacusia aislada.",
+        "La opción descrita se refiere a inicio temprano, dentro de las primeras 13 semanas; esperar un año pierde esa ventana.",
+        "La tabla de AAP 2026 permite ofrecer un curso de seis semanas para hipoacusia aislada en la ventana indicada, coordinado con especialistas y monitorización."
+      ],
+      "source": {
+        "title": "AAP Care of the Infant With Congenital Cytomegalovirus Infection: Clinical Report",
+        "year": 2026,
+        "url": "https://doi.org/10.1542/peds.2026-078595",
+        "locator": "Tabla de tratamiento: cCMV with isolated sensorineural hearing loss"
+      },
+      "reference": "AAP Care of the Infant With Congenital Cytomegalovirus Infection: Clinical Report (2026), Tabla de tratamiento: cCMV with isolated sensorineural hearing loss",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Aplicar una recomendación reciente dependiente de fenotipo, edad y balance beneficio-toxicidad.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB136",
+      "section": "Neonatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hipotermia neonatal en prematuro tardío",
+      "stem": "Recién nacido de 34+2 semanas tras desprendimiento placentario, acidosis metabólica perinatal marcada y encefalopatía moderada a las dos horas de vida. El centro dispone de hipotermia terapéutica y neurovigilancia. Se discute trasladar directamente los criterios de hipotermia de recién nacidos a término al prematuro.",
+      "prompt": "Según el informe AAP 2026, ¿qué decisión es apropiada?",
+      "options": [
+        "No iniciar hipotermia de rutina a esta edad gestacional; brindar neurocuidados intensivos y evitar hipertermia",
+        "Aplicar hipotermia estándar porque edad menor de seis horas y encefalopatía moderada bastan",
+        "Aplicar hipotermia solo durante 24 h como régimen demostrado eficaz en 34 semanas",
+        "Esperar hasta las 12 horas y comenzar hipotermia si persiste encefalopatía"
+      ],
+      "correct": 0,
+      "why": "La evidencia reciente no demostró beneficio en 33–35 semanas y sugirió posible daño; a 34 semanas no se recomienda extrapolar hipotermia estándar.",
+      "others": "La edad gestacional modifica elegibilidad; cumplir ventana y gravedad no elimina esta limitación. No existe respaldo de eficacia para acortar el esquema a 24 h en este grupo como alternativa validada. Demorar no transforma al niño en candidato respaldado y se aparta de las ventanas estudiadas.",
+      "rationales": [
+        "La evidencia reciente no demostró beneficio en 33–35 semanas y sugirió posible daño; a 34 semanas no se recomienda extrapolar hipotermia estándar.",
+        "La edad gestacional modifica elegibilidad; cumplir ventana y gravedad no elimina esta limitación.",
+        "No existe respaldo de eficacia para acortar el esquema a 24 h en este grupo como alternativa validada.",
+        "Demorar no transforma al niño en candidato respaldado y se aparta de las ventanas estudiadas."
+      ],
+      "source": {
+        "title": "AAP Therapeutic Hypothermia for Neonatal Hypoxic-Ischemic Encephalopathy: Clinical Report",
+        "year": 2026,
+        "url": "https://doi.org/10.1542/peds.2025-073627",
+        "locator": "Recomendaciones por edad gestacional: ≥36 semanas; 35 semanas caso por caso"
+      },
+      "reference": "AAP Therapeutic Hypothermia for Neonatal Hypoxic-Ischemic Encephalopathy: Clinical Report (2026), Recomendaciones por edad gestacional: ≥36 semanas; 35 semanas caso por caso",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar edad gestacional, evidencia de beneficio y daño y elegibilidad para neuroprotección.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB137",
+      "section": "Neurología",
+      "type": "visual",
+      "skill": "Diagnóstico",
+      "topic": "MOGAD y neuritis óptica",
+      "stem": "Niña de 11 años con pérdida visual bilateral simultánea, dolor ocular y edema de papila. RM orbitaria demuestra realce de más de la mitad de la longitud de ambos nervios ópticos y realce perineural. AQP4-IgG negativo, MOG-IgG sérico de bajo título por ensayo celular validado. No se identifica una explicación alternativa tras evaluación especializada.",
+      "prompt": "¿Qué interpretación de los criterios internacionales 2023 es apropiada?",
+      "options": [
+        "El título bajo excluye MOGAD pese al fenotipo típico",
+        "El síndrome central, AQP4 negativo y las características de soporte permiten cumplir criterios de MOGAD pese al título bajo",
+        "El título bajo confirma MOGAD por sí solo, independientemente de clínica e imagen",
+        "La bilateralidad obliga a clasificar como NMOSD aunque AQP4 sea negativo y existan rasgos de MOGAD"
+      ],
+      "correct": 1,
+      "why": "La neuritis bilateral y el realce longitudinal/perineural son características de soporte, junto con AQP4 negativo y exclusión de diagnósticos alternativos.",
+      "others": "El título bajo exige evidencia adicional; no constituye exclusión automática. La positividad baja aislada puede ser inespecífica; no sustituye criterios clínicos y radiológicos. NMOSD permanece en el diferencial cuando corresponda, pero la bilateralidad no obliga a ese diagnóstico; aquí los criterios de MOGAD están respaldados.",
+      "rationales": [
+        "El título bajo exige evidencia adicional; no constituye exclusión automática.",
+        "La neuritis bilateral y el realce longitudinal/perineural son características de soporte, junto con AQP4 negativo y exclusión de diagnósticos alternativos.",
+        "La positividad baja aislada puede ser inespecífica; no sustituye criterios clínicos y radiológicos.",
+        "NMOSD permanece en el diferencial cuando corresponda, pero la bilateralidad no obliga a ese diagnóstico; aquí los criterios de MOGAD están respaldados."
+      ],
+      "source": {
+        "title": "Validation of the 2023 International Diagnostic Criteria for MOGAD in a Selected Cohort of Adults and Children",
+        "year": 2024,
+        "url": "https://doi.org/10.1212/WNL.0000000000209321",
+        "locator": "Tabla 1 y descripción de criterios MOGAD 2023 con resultado de bajo título"
+      },
+      "reference": "Validation of the 2023 International Diagnostic Criteria for MOGAD in a Selected Cohort of Adults and Children (2024), Tabla 1 y descripción de criterios MOGAD 2023 con resultado de bajo título",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Interpretar anticuerpos de baja positividad usando probabilidad preprueba y rasgos de soporte.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB138",
+      "section": "Endocrinología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Insuficiencia suprarrenal y absorción oral",
+      "stem": "Niño de 6 años con insuficiencia suprarrenal primaria en sustitución, gastroenteritis y vómitos repetidos. Recibió hidrocortisona de estrés por vía oral dos veces, pero vomitó en los siguientes diez minutos. Está alerta, TA en límite inferior normal y glucosa 67 mg/dL. La familia dispone de kit de emergencia y plan escrito.",
+      "prompt": "¿Qué escalamiento corresponde conforme a BSPED 2023?",
+      "options": [
+        "Continuar dosis orales cada hora hasta que retenga alguna, sin solicitar ayuda",
+        "Administrar antiemético y esperar hipotensión franca antes de terapia parenteral",
+        "Usar hidrocortisona de emergencia IM según plan y solicitar atención urgente para evaluación y corrección metabólica",
+        "Aumentar fludrocortisona oral como sustituto del glucocorticoide no absorbido"
+      ],
+      "correct": 2,
+      "why": "La imposibilidad de retener dosis de estrés indica hidrocortisona parenteral urgente y evaluación hospitalaria, con vigilancia de glucosa y perfusión.",
+      "others": "La absorción no es fiable en vómitos repetidos; insistir por vía oral puede retrasar la intervención. La crisis puede evolucionar antes de hipotensión franca; no debe esperarse al colapso. El mineralocorticoide no sustituye cortisol ni resuelve falta de absorción del glucocorticoide.",
+      "rationales": [
+        "La absorción no es fiable en vómitos repetidos; insistir por vía oral puede retrasar la intervención.",
+        "La crisis puede evolucionar antes de hipotensión franca; no debe esperarse al colapso.",
+        "La imposibilidad de retener dosis de estrés indica hidrocortisona parenteral urgente y evaluación hospitalaria, con vigilancia de glucosa y perfusión.",
+        "El mineralocorticoide no sustituye cortisol ni resuelve falta de absorción del glucocorticoide."
+      ],
+      "source": {
+        "title": "BSPED Emergency and perioperative management of adrenal insufficiency in children and young people",
+        "year": 2023,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10646833/",
+        "locator": "Sick day guidance: vómitos e imposibilidad de tolerar hidrocortisona oral"
+      },
+      "reference": "BSPED Emergency and perioperative management of adrenal insufficiency in children and young people (2023), Sick day guidance: vómitos e imposibilidad de tolerar hidrocortisona oral",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Reconocer fracaso de vía oral y actuar antes de la descompensación circulatoria.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB139",
+      "section": "Endocrinología",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Cobertura perioperatoria en insuficiencia suprarrenal",
+      "stem": "Adolescente de 13 años con insuficiencia suprarrenal central por cirugía hipofisaria previa. Recibe hidrocortisona habitual. Se programa laparotomía mayor bajo anestesia general, con ayuno y posible imposibilidad de vía oral en primeras 24 h. Electrolitos y glucosa normales; anestesia y endocrinología coordinan el procedimiento.",
+      "prompt": "¿Qué estrategia perioperatoria corresponde según BSPED 2023?",
+      "options": [
+        "Mantener únicamente hidrocortisona habitual oral hasta el momento de la cirugía",
+        "Administrar fludrocortisona adicional antes de inducción y omitir glucocorticoide IV",
+        "Administrar glucocorticoide solo si aparece hipotensión intraoperatoria refractaria",
+        "Planear hidrocortisona IV de estrés desde inducción, continuar cobertura parenteral y pasar a dosis orales de estrés cuando sea seguro"
+      ],
+      "correct": 3,
+      "why": "La guía recomienda cobertura parenteral desde inducción y durante estrés mayor, con transición guiada por recuperación y tolerancia oral.",
+      "others": "La cirugía mayor aumenta demanda de cortisol y el ayuno limita vía oral; el esquema habitual no cubre ese estrés. En insuficiencia central la aldosterona suele conservarse; el problema perioperatorio es déficit glucocorticoide. La cobertura debe ser preventiva, no esperar una crisis durante anestesia.",
+      "rationales": [
+        "La cirugía mayor aumenta demanda de cortisol y el ayuno limita vía oral; el esquema habitual no cubre ese estrés.",
+        "En insuficiencia central la aldosterona suele conservarse; el problema perioperatorio es déficit glucocorticoide.",
+        "La cobertura debe ser preventiva, no esperar una crisis durante anestesia.",
+        "La guía recomienda cobertura parenteral desde inducción y durante estrés mayor, con transición guiada por recuperación y tolerancia oral."
+      ],
+      "source": {
+        "title": "BSPED Emergency and perioperative management of adrenal insufficiency in children and young people",
+        "year": 2023,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10646833/",
+        "locator": "Perioperative management: major surgery"
+      },
+      "reference": "BSPED Emergency and perioperative management of adrenal insufficiency in children and young people (2023), Perioperative management: major surgery",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Anticipar necesidad hormonal y seleccionar vía y duración según estrés quirúrgico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
     }
   ]
 });
