@@ -30,3 +30,8 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Portada azul noche/oro con escudo extraído del arte heráldico ENARM y fotografía pediátrica preexistente. Siete modos, con recursos gráficos locales ya precargados; ningún contenido clínico nuevo.
 - Examen marfil con alternativa oscura, opciones de respuesta y radio de confianza accesibles, temporizador y retroalimentación intactos. Las métricas de portada se derivan del banco; radar de barras por competencia y área, sin puntuaciones inventadas. Accesos de sección reales (entrenamiento, progreso, bibliografía).
 - Sin cambios en banco, claves, motor de selección, repaso o clave de almacenamiento. Se añade prueba Chromium de navegación, ausencia de pistas/retroalimentación en examen, confianza, persistencia y temas. Comparación visual humana con maqueta y dispositivo físico pendiente.
+
+### Pulido de Ivory Heritage
+- Radar poligonal de cobertura real de 16 áreas, sin inventar aciertos ni mostrar dominio sin intentos; detalle textual disponible.
+- Recuento dinámico de disponibilidad por modalidad y área; botones sin reactivos deshabilitados. Bibliografía deduplicada a partir de las fuentes del banco avanzado y retroalimentación editorial por alternativa.
+- El banco y el motor permanecen byte a byte idénticos. Prueba de interacción ampliada para comprobar los nuevos estados.
