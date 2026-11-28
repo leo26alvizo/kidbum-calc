@@ -7,7 +7,7 @@
  const bank=window.KidBumENARMBank;
  const radar=window.KidBumENARMRadar;
  if(!root)return;
- if(!bank||!Array.isArray(bank.cases)||!radar){root.textContent='No se pudo cargar el banco educativo o el Radar. Actualiza los archivos de KidBum antes de estudiar.';return;}
+ if(!bank||!Array.isArray(bank.cases)||!radar){root.textContent='No se pudo cargar el banco educativo o el Radar. Actualiza los archivos de LEO MED antes de estudiar.';return;}
  const storageKey='kidbum-enarm-progress-v1';
  const alphabet='ABCD';
  const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));

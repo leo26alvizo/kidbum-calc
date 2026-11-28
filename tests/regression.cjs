@@ -1,5 +1,5 @@
 'use strict';
-// KidBum CALC — regression tests (no dependencies).
+// LEO MED — regression tests (no dependencies).
 // Run locally in repo root: node tests/regression.cjs
 const fs=require('node:fs');
 const vm=require('node:vm');
@@ -12,9 +12,9 @@ const releaseMatch=releaseSource.match(/KidBumPublicRelease = '([0-9]+\.[0-9]+\.
 assert.ok(releaseMatch,'Public release marker must expose a semantic version');
 assert.ok(html.includes('<meta name="kidbum-app-version" content="'+releaseMatch[1]+'" />'),'Release version is defined centrally');
 assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
-assert.match(html,/KidBum CALC <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
-assert.match(html,/KidBum CALC <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
-assert.ok(!html.includes('KidBum CALC 0.10.3'),'About must not show an obsolete release');
+assert.match(html,/LEO MED <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
+assert.match(html,/LEO MED <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
+assert.ok(!html.includes('LEO MED 0.10.3'),'About must not show an obsolete release');
 assert.ok(!html.includes('Descarga el archivo ZIP'),'Install guide must match the live hosted PWA');
 assert.match(html,/id="check-kidbum-update"/,'About offers an update action');
 assert.match(html,/window\.KidBumUpdater\?\.checkNow\(\)/,'Update action delegates to reliable update service');
@@ -726,7 +726,7 @@ t.push(...loadingFailureTests);
 
 const appleSupportTests=[
  ['Apple standalone mode meta',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-capable" content="yes" />'))],
- ['Apple standalone title',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-title" content="KidBum CALC" />'))],
+ ['Apple standalone title',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-title" content="LEO MED" />'))],
  ['Apple safe status bar',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-status-bar-style" content="default" />'))],
  ['Original iPhone home icon still selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./kidbum-icon-192-v081.png" />'))],
  ['Manifest standalone preserved',()=>assert.ok(manifest.display==='standalone')],

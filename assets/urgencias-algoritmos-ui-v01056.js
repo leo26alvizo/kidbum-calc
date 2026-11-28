@@ -47,16 +47,16 @@ const CLINICAL_TOOLS=Object.freeze({
  'bradicardia-adulto':[['📋 ACLS · bradicardia y pulso','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms']],
  'taquiarritmia-adulto':[['📋 ACLS · taquiarritmias','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/algorithms']],
  'post-paro':[['📋 AHA 2025 · post paro','https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/post-cardiac-arrest-care']],
- 'sepsis-choque':[['📈 SOFA · KidBum','./index.html'],['📘 SSC 2026','https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026']],
- 'sindrome-coronario':[['📊 HEART / GRACE · KidBum','./expansion-20.html#heart']],
- 'tromboembolia-pulmonar':[['📊 Wells / Ginebra / PESI · KidBum','./index.html']],
+ 'sepsis-choque':[['📈 SOFA · LEO MED','./index.html'],['📘 SSC 2026','https://sccm.org/clinical-resources/guidelines/guidelines/surviving-sepsis-campaign-international-guidelines-for-management-of-sepsis-and-septic-shock-2026']],
+ 'sindrome-coronario':[['📊 HEART / GRACE · LEO MED','./expansion-20.html#heart']],
+ 'tromboembolia-pulmonar':[['📊 Wells / Ginebra / PESI · LEO MED','./index.html']],
  'ictus-isquemico':[['📋 AHA/ASA 2026 · EVC','https://professional.heart.org/en/science-news/2026-guideline-for-the-early-management-of-patients-with-acute-ischemic-stroke']],
- 'hemorragia-intracerebral':[['📊 ICH Score · KidBum','./expansion-20.html#ich']],
+ 'hemorragia-intracerebral':[['📊 ICH Score · LEO MED','./expansion-20.html#ich']],
  'insuficiencia-respiratoria-adulto':[['🧪 Gasometría integrada','./index.html']],
  'sindrome-distres-respiratorio':[['📘 ATS · ventilación SDRA','https://academic.oup.com/ajrccm/article/209/1/24/8427573']],
  'hiperpotasemia-adulto':[['📘 UKKA · hiperpotasemia','https://guidelines.ukkidney.org/hyperkalaemia/']],
  'lesion-renal-aguda-adulto':[['📊 KDIGO · LRA','./expansion-20.html#kdigo']],
- 'hemorragia-digestiva-alta':[['📊 AIMS65 · KidBum','./expansion-20.html#aims65']],
+ 'hemorragia-digestiva-alta':[['📊 AIMS65 · LEO MED','./expansion-20.html#aims65']],
  'sedacion-analgesia-uci':[['📘 SCCM PADIS 2025','https://sccm.org/clinical-resources/guidelines/guidelines/focused-update-padis-guideline']]
 });
 function renderTools(id){

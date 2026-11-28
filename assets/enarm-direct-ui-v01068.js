@@ -8,7 +8,7 @@
  const radar=window.KidBumENARMRadar;
  if(!root)return;
  if(!bank||bank.questionCount!==238||!radar){
-  root.textContent='No se pudo cargar el banco de preguntas directas. Actualiza KidBum e inténtalo de nuevo.';
+  root.textContent='No se pudo cargar el banco de preguntas directas. Actualiza LEO MED e inténtalo de nuevo.';
   return;
  }
  const KEY='kidbum-enarm-direct-progress-v1';

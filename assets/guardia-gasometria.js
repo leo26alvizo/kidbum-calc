@@ -53,7 +53,7 @@ function evaluate(x,engine){
 }
 function render(host,engine,onBack){
  host.innerHTML='<button class="breadcrumb-back" type="button" id="gas-back">← Volver a Guardia</button>'+
- '<section class="guard-intro"><div class="eyebrow">KIDBUM · GUARDIA PRO</div><h1>Panel integral de gasometría</h1><p>Una captura, tres motores existentes. Sin diagnóstico ni prescripción automáticos.</p></section>'+
+ '<section class="guard-intro"><div class="eyebrow">LEO MED · GUARDIA PRO</div><h1>Panel integral de gasometría</h1><p>Una captura, tres motores existentes. Sin diagnóstico ni prescripción automáticos.</p></section>'+
  '<div class="calc-detail-grid"><section class="panel"><div class="panel-head"><h2>01 / Verifica y captura</h2><small>Sin valores predeterminados</small></div><div class="panel-body">'+
  '<form id="gas-form" autocomplete="off"><div class="field-grid">'+
  '<div class="field"><label for="gas-pop">Población</label><select class="control" id="gas-pop"><option value="">Seleccionar</option><option value="adult">Adulto ≥18 años confirmado</option><option value="other">No confirmado / pediátrico</option></select></div>'+
@@ -106,7 +106,7 @@ function render(host,engine,onBack){
  };
  $('gas-copy').onclick=async()=>{
   if(!last?.items)return;
-  const text='KidBum CALC · Gasometría\n'+last.items.join('\n')+'\nPrecauciones:\n'+last.warnings.join('\n')+'\nNo es prescripción ni diagnóstico definitivo.';
+  const text='LEO MED · Gasometría\n'+last.items.join('\n')+'\nPrecauciones:\n'+last.warnings.join('\n')+'\nNo es prescripción ni diagnóstico definitivo.';
   try{await navigator.clipboard.writeText(text);$('gas-copy').textContent='✓ Copiado'}catch{$('gas-copy').textContent='No disponible'}
  };
  update();

@@ -18,7 +18,7 @@ function buildPrompt(payload,mode){
  if(!Object.prototype.hasOwnProperty.call(prompts,mode))throw Error('Modo de análisis inválido');
  if(!payload||!payload.title||!payload.result)throw Error('No hay un resultado válido para analizar');
  return [
-  'KidBum CALC — análisis clínico educativo',
+  'LEO MED — análisis clínico educativo',
   'Herramienta: '+payload.title,
   'Resultado calculado: '+payload.result,
   'Interpretación: '+(payload.interpretation||'No disponible'),

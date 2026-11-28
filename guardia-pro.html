@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="es" data-kb-page="guardia-pro"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#102f3a"><title>Guardia Pro · Trombosis y sangrado | KidBum CALC</title>
+<meta name="theme-color" content="#102f3a"><title>Guardia Pro · Trombosis y sangrado | LEO MED</title>
 <style>
 :root{color-scheme:light;--bg:#eef4f5;--panel:#fff;--ink:#15333e;--soft:#516a75;--stroke:#cadde0;--wash:#e5f3f2;--accent:#086c71;--buttonText:#fff}
 html.dark{color-scheme:dark;--bg:#091c28;--panel:#122d3c;--ink:#e9f5f7;--soft:#b0cbd2;--stroke:#315565;--wash:#1a3c49;--accent:#7cdee0;--buttonText:#12313b}
@@ -20,8 +20,8 @@ output{display:block;background:var(--wash);border-radius:14px;padding:17px;marg
 @media(max-width:800px){.layout{grid-template-columns:1fr}.choose label{width:100%}.hero{min-height:160px}}
 @media print{nav,.choose,.buttons{display:none}.layout{display:block}.panel{break-inside:avoid;margin-bottom:10px}}
 </style><link rel="stylesheet" href="./assets/dark-graphite-v01036.css"><script defer src="./assets/theme-chrome-v01036.js"></script><link rel="stylesheet" href="./assets/result-clarity-v01059.css"><link rel="stylesheet" href="./assets/clinical-results-v01061.css"><link rel="stylesheet" href="./assets/ultra-retina-v01063.css" /></head><body><main>
-<nav><a href="./index.html">← KidBum CALC</a><button type="button" id="theme">☀ Tema claro</button></nav>
-<header class="hero"><div class="eyebrow">KIDBUM · GUARDIA PRO</div><h1>Trombosis y sangrado</h1><p>4Ts, Padua e IMPROVE Bleeding · resultados locales y sin prescripciones automáticas</p></header>
+<nav><a href="./index.html">← LEO MED</a><button type="button" id="theme">☀ Tema claro</button></nav>
+<header class="hero"><div class="eyebrow">LEO MED · GUARDIA PRO</div><h1>Trombosis y sangrado</h1><p>4Ts, Padua e IMPROVE Bleeding · resultados locales y sin prescripciones automáticas</p></header>
 <div class="choose"><label for="picker">Seleccionar herramienta</label><select id="picker"></select></div>
 <div class="layout">
 <section class="panel"><h2 id="title"></h2><p class="small" id="intro"></p><div id="fields"></div></section>
@@ -86,7 +86,7 @@ $('example').onclick=()=>{values={...kit.examples[active.id]};$('example-note').
 $('reset').onclick=()=>{values={};$('example-note').hidden=true;draw()};
 $('copy').onclick=async()=>{
  if(!result)return;
- const s='KidBum Guardia Pro — '+active.title+'\nDatos (no identificables):\n'+active.fields.map(f=>f.label+': '+(values[f.key]||'[PENDIENTE]')).join('\n')+'\nResultado: '+result.display+'\nInterpretación: '+result.interpretation+'\nComponentes: '+result.detail+'\nPrecauciones: '+active.warning+'\nReferencia: '+active.source+'\nNo constituye prescripción ni diagnóstico.';
+ const s='LEO MED Guardia Pro — '+active.title+'\nDatos (no identificables):\n'+active.fields.map(f=>f.label+': '+(values[f.key]||'[PENDIENTE]')).join('\n')+'\nResultado: '+result.display+'\nInterpretación: '+result.interpretation+'\nComponentes: '+result.detail+'\nPrecauciones: '+active.warning+'\nReferencia: '+active.source+'\nNo constituye prescripción ni diagnóstico.';
  try{await navigator.clipboard.writeText(s);$('copy').textContent='✓ Copiado'}catch{$('copy').textContent='Copia manual no disponible'}
 };
 select(decodeURIComponent(location.hash.slice(1)));

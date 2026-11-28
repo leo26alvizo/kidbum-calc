@@ -46,12 +46,12 @@ for(const file of ['enarm.html','assets/enarm-entry-v01064.css','assets/enarm-v0
  assert.ok(sw.includes("'./"+file+"'"),'Offline precache must include '+file);
 }
 const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a>';
-const newLink='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
+const newLink='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 LEO MED ENARM · Casos clínicos →</a>';
 assert.ok(home.includes(pharma+newLink),'ENARM access immediately below Pharma Pro with same button base class');
 assert.match(entry,/\.kb-resource-links:has\(\.kb-enarm-link\)/);
 assert.match(entry,/grid-template-columns:minmax\(0,1fr\)/);
 assert.match(entry,/width:100%/,'Both buttons should have equal width');
-assert.match(home,/id:'enarm',title:'KidBum ENARM/,'ENARM indexed by quick search');
+assert.match(home,/id:'enarm',title:'LEO MED ENARM/,'ENARM indexed by quick search');
 assert.match(ui,/kidbum-enarm-progress-v1/,'Private local progress');
 assert.match(ui,/localStorage\.setItem/);
 assert.match(ui,/session\.answers|s\.answers|answers:Array/,'Answers stored for session');
