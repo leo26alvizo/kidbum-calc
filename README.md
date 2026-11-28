@@ -1,3 +1,7 @@
+# Actualización v0.10.97 · Pediatría BOARD (piloto educativo)
+
+48 reactivos originales, 16 áreas del temario CMCP, práctica, simulación, radar y repaso espaciado. Sin aval del Consejo ni revisión clínica independiente. [Documentación](docs/pediatria-board-piloto.md).
+
 ## v0.10.96 · Instalación y actualización por datos móviles
 
 Descarga sin filtro de Wi-Fi, con tres archivos simultáneos, cuatro intentos por archivo, plazos ampliados y comprobación de integridad por identificador Git de cada recurso. Reutiliza archivos idénticos de cachés anteriores, conserva descargas parciales verificadas y activa solo cuando la versión completa coincide con el manifiesto. Recuperación sin borrar la aplicación anterior ni preferencias. Incluye SAMPLE pediátrico pendiente de v0.10.95, conservando el orden de accesos de Urgencias y Wallace. Las pruebas simulan fallos e interrupciones; no certifican una red celular o un dispositivo físico específico.

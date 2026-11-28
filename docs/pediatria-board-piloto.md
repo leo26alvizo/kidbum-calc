@@ -8,4 +8,4 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Radar por área y competencia, intentos reales, cobertura, confianza y repaso espaciado. Historial aislado en el dispositivo, sin datos de pacientes.
 - Interfaz responsive con tema claro/oscuro y recursos incorporados al manifiesto de integridad offline.
 - Fuente temática verificada; justificaciones originales y distractores todavía pendientes de revisión clínica independiente y referencias clínicas específicas. No se ha afirmado equivalencia con el examen.
-- Pendientes: ampliar a 300 reactivos, casos seriados adicionales, imágenes médicas con licencias verificadas, referencias específicas verificadas y revisión por pediatría, pruebas físicas y liberación de versión sincronizada. No desplegar la rama piloto hasta validar las pruebas y preparar la versión.
+- Pendientes: ampliar a 300 reactivos, casos seriados adicionales, imágenes médicas con licencias verificadas, referencias específicas verificadas y revisión por pediatría, pruebas físicas. Publicación piloto condicionada a pruebas automatizadas satisfactorias; revisión clínica independiente pendiente.
