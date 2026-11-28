@@ -20,13 +20,13 @@ assert.match(html,/id="check-kidbum-update"/,'About offers an update action');
 assert.match(html,/window\.KidBumUpdater\?\.checkNow\(\)/,'Update action delegates to reliable update service');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
-assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
-assert.equal(manifest.icons[1].src,'kidbum-icon-512-v081.png');
+assert.equal(manifest.icons[0].src,'obsidian-lion-192.png');
+assert.equal(manifest.icons[1].src,'obsidian-lion-512.png');
 for(const path of manifest.icons.map(x=>x.src)) {
  assert.ok(fs.existsSync(path),'Missing app icon: '+path);
  assert.ok(swSource.includes("'./"+path+"'"),'PWA must precache icon '+path);
 }
-assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original author image');
+assert.match(html,/obsidian-lion-192\.png/,'Browser icon must use the selected Obsidian Lion');
 assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
 assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
 assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
@@ -333,7 +333,7 @@ const neuroPhaseOneTests=[
  ['Glasgow 15 unmodified',()=>assert.equal(calc('gcs',{eye:'4',verbal:'5',motor:'6'}).value,15)],
  ['Glasgow NT no false total',()=>assert.equal(calc('gcs',{eye:'4',verbal:'NT',motor:'6'}).value,null)],
  ['No new cardiology calculators',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
- ['Original author and icon remain',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez')&&html.includes('kidbum-icon-192-v081.png'))]
+ ['Original author and selected icon',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez')&&html.includes('obsidian-lion-192.png'))]
 ];
 const abcBase={age:68,sbp:155,dbp:90,feature:'weakness',duration:'min10to59',diabetes:'false',resolved:'true'};
 neuroPhaseOneTests.push(
@@ -527,7 +527,7 @@ const neurologyPhotoTests=[
  ['Neurology new image cached offline',()=>assert.ok(swSource.includes("'./assets/neurologia-portada.jpg'"))],
  ['Old Escalas Clínicas image retained',()=>assert.ok(html.includes("c==='Escalas clínicas'?'<img")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
  ['All 58 previous calculators preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
- ['Existing original icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+ ['Selected icon retained',()=>assert.ok(html.includes('obsidian-lion-192.png'))]
 ];
 t.push(...neurologyPhotoTests);
 
@@ -540,7 +540,7 @@ const cardiologyTests=[
  ['Wells DVT appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellsdvt',title:'Wells para TVP',category:'Cardiología'"))],
  ['Wells PE appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellspe',title:'Wells para embolia pulmonar',category:'Cardiología'"))],
  ['Original cardiology photograph remains',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
- ['Existing original app icon remains',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))],
+ ['Selected app icon remains',()=>assert.ok(html.includes('obsidian-lion-192.png'))],
  ['Historical PCE 2013 reference visible',()=>assert.ok(html.includes('https://pmc.ncbi.nlm.nih.gov/articles/PMC4700825/'))],
  ['Current PREVENT 2026 replacement disclosed',()=>assert.ok(html.includes('https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia/top-things-to-know'))]
 ];
@@ -607,7 +607,7 @@ const phase1=[
 ['Mobile Inicio replaces Guardia navigation',()=>assert.ok(html.includes('data-mobile-nav="home"')&&!html.includes('data-mobile-nav="guard"'))],
 ['Guardia route',()=>assert.ok(html.includes("if(screen==='guard'){renderGuard();return;}"))],
 ['Guardia links',()=>assert.ok(html.includes('button.dataset.guardOpen'))],
-['Original icon',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+['Obsidian Lion icon',()=>assert.ok(html.includes('obsidian-lion-192.png'))]
 ];
 const pf={pao2:80,fio2:40,peep:'yes'};
 phase1.push(
@@ -690,7 +690,7 @@ const urgenciasOriginalTests=[
  ['Other clinical feature photos preserved',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"')&&html.includes('src="./assets/neurologia-portada.jpg"'))],
  ['Previous 68 calculators preserved',()=>assert.equal(legacyCalculatorCount,68)],
  ['Modo Guardia retained in desktop sidebar',()=>assert.ok(html.includes("['guard','✚','Modo Guardia']")&&html.includes("if(screen==='guard'){renderGuard();return;}"))],
- ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+ ['Selected app icon retained',()=>assert.ok(html.includes('obsidian-lion-192.png'))]
 ];
 t.push(...urgenciasOriginalTests);
 
@@ -728,13 +728,13 @@ const appleSupportTests=[
  ['Apple standalone mode meta',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-capable" content="yes" />'))],
  ['Apple standalone title',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-title" content="LEO MED" />'))],
  ['Apple safe status bar',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-status-bar-style" content="default" />'))],
- ['Original iPhone home icon still selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./kidbum-icon-192-v081.png" />'))],
+ ['Obsidian Lion iPhone home icon selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./obsidian-lion-192.png" />'))],
  ['Manifest standalone preserved',()=>assert.ok(manifest.display==='standalone')],
  ['iPhone install guide in About page',()=>assert.ok(html.includes('Instalar en iPhone o iPad (Safari)')&&html.includes('Agregar a Inicio'))],
  ['iOS app opened via Safari outside WhatsApp',()=>assert.ok(html.includes('navegador interno de WhatsApp'))],
  ['iOS safe area preserved',()=>assert.ok(html.includes('env(safe-area-inset-bottom)'))],
  ['No duplicate clinical tools',()=>assert.equal(legacyCalculatorCount,68)],
- ['Android clinical icon preserved',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
+ ['Android Obsidian Lion icon selected',()=>assert.ok(html.includes('obsidian-lion-192.png'))]
 ];
 t.push(...appleSupportTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
@@ -801,3 +801,7 @@ if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(
 assert.match(html,/\.kb-approved-cover\.kb-cover-loaded\{[^}]*aspect-ratio:3\/2!important[^}]*overflow:hidden!important/);
 assert.match(html,/\.kb-cover-loaded \.kb-cover-image\{[^}]*object-fit:cover!important[^}]*transform:scale\(1\.025\)!important/);
 assert.ok(html.includes('src="./assets/kidbum-portada-emm.png"'));
+
+// Obsidian Lion: exact selected geometry, opaque raster icons, and correct install sizes.
+for(const size of [192,512]){const png=require('node:fs').readFileSync('obsidian-lion-'+size+'.png');assert.equal(png.subarray(0,8).toString('hex'),'89504e470d0a1a0a');assert.equal(png.readUInt32BE(16),size);assert.equal(png.readUInt32BE(20),size);assert.equal(png[25],3);}
+assert.ok(require('node:fs').readFileSync('assets/obsidian-lion.svg','utf8').includes('90,22 58,31 34,55 25,92'));
