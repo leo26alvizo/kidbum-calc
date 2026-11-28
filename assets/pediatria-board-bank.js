@@ -1494,6 +1494,426 @@ window.KidBumPediatriaBoard=Object.freeze({
       "critical": false,
       "level": "board",
       "reviewStatus": "bibliografia-revisada; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB061",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Neutropenia febril",
+      "stem": "Niño de 8 años en quimioterapia de mantenimiento por leucemia linfoblástica aguda. Presentó neutropenia febril clasificada de bajo riesgo con una regla institucional validada. Recibió cefepima, lleva 30 horas afebril, está clínicamente bien, hemocultivos negativos a las 48 horas y sin foco documentado. Neutrófilos absolutos: 180/mm³, sin recuperación medular. Seguimiento estrecho garantizado por oncología.",
+      "prompt": "Según la actualización internacional de 2023, ¿qué estrategia es razonable considerar?",
+      "options": [
+        "Mantener cefepima hasta recuperación medular, sin contemplar excepciones",
+        "Considerar suspensión del antibacteriano empírico con seguimiento según protocolo",
+        "Cambiar obligatoriamente a una fluoroquinolona oral hasta normalizar neutrófilos",
+        "Añadir vancomicina y mantener ambos fármacos hasta negatividad de cultivos a siete días"
+      ],
+      "correct": 1,
+      "why": "La recomendación B4 permite considerar suspensión a las 48 horas con cultivos negativos, buen estado y al menos 24 horas afebril, aun sin recuperación medular. Es condicional.",
+      "others": "La recuperación medular no es requisito absoluto en pacientes seleccionados de bajo riesgo. No se exige transición a fluoroquinolona oral para cumplir B4; la decisión depende del protocolo local. No hay indicación microbiológica o clínica para ampliar cobertura en este escenario.",
+      "rationales": [
+        "La recuperación medular no es requisito absoluto en pacientes seleccionados de bajo riesgo.",
+        "La recomendación B4 permite considerar suspensión a las 48 horas con cultivos negativos, buen estado y al menos 24 horas afebril, aun sin recuperación medular. Es condicional.",
+        "No se exige transición a fluoroquinolona oral para cumplir B4; la decisión depende del protocolo local.",
+        "No hay indicación microbiológica o clínica para ampliar cobertura en este escenario."
+      ],
+      "source": {
+        "title": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update",
+        "year": 2023,
+        "url": "https://doi.org/10.1200/JCO.22.02224",
+        "locator": "B4, suspensión temprana en bajo riesgo"
+      },
+      "reference": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update (2023), B4, suspensión temprana en bajo riesgo",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB062",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Neutropenia febril",
+      "stem": "Escolar con leucemia mieloide aguda en inducción, neutropenia de alto riesgo. Lleva 36 horas de cefepima empírica. Persiste temperatura de 38.3 °C, sin foco, hemocultivos sin crecimiento hasta ahora, perfusión normal y sin deterioro respiratorio. No hay antecedente de colonización resistente ni nuevos datos clínicos.",
+      "prompt": "De acuerdo con la guía internacional 2023, ¿qué conducta es preferible respecto a la cobertura antibacteriana?",
+      "options": [
+        "Cambiar a meropenem por persistencia aislada de fiebre",
+        "Añadir vancomicina por el diagnóstico de leucemia mieloide aguda",
+        "Mantener el esquema y reevaluar de forma estrecha; ampliar si aparecen indicaciones clínicas o microbiológicas",
+        "Suspender cefepima a las 48 horas aunque continúe febril"
+      ],
+      "correct": 2,
+      "why": "A6b recomienda no ampliar solo por fiebre persistente si hay estabilidad; deben continuar vigilancia y evaluación de focos.",
+      "others": "La fiebre aislada en un paciente estable no justifica ampliar automáticamente a carbapenémico. La neoplasia por sí sola no establece una indicación de glucopéptido en este escenario. No cumple condiciones de defervescencia ni bajo riesgo para suspensión temprana.",
+      "rationales": [
+        "La fiebre aislada en un paciente estable no justifica ampliar automáticamente a carbapenémico.",
+        "La neoplasia por sí sola no establece una indicación de glucopéptido en este escenario.",
+        "A6b recomienda no ampliar solo por fiebre persistente si hay estabilidad; deben continuar vigilancia y evaluación de focos.",
+        "No cumple condiciones de defervescencia ni bajo riesgo para suspensión temprana."
+      ],
+      "source": {
+        "title": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update",
+        "year": 2023,
+        "url": "https://doi.org/10.1200/JCO.22.02224",
+        "locator": "A6b, fiebre persistente sin inestabilidad"
+      },
+      "reference": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update (2023), A6b, fiebre persistente sin inestabilidad",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB063",
+      "section": "Hemato-oncología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Neutropenia febril",
+      "stem": "Adolescente de 14 años en tratamiento por linfoma con neutropenia febril de alto riesgo. Tras 48 horas de antibiótico empírico, está clínicamente bien y afebril desde hace 28 horas. Cultivos negativos, sin foco documentado. El recuento de neutrófilos sigue en ascenso y oncología confirma recuperación medular.",
+      "prompt": "Según la guía internacional 2023, ¿qué conducta corresponde respecto al tratamiento antibacteriano empírico?",
+      "options": [
+        "Suspender el esquema con vigilancia y seguimiento del equipo tratante",
+        "Prolongar necesariamente siete días desde la última fiebre",
+        "Mantener antibiótico hasta que la cifra de neutrófilos alcance el rango normal del laboratorio",
+        "Cambiar obligatoriamente a tratamiento oral por 10 días"
+      ],
+      "correct": 0,
+      "why": "B3 recomienda suspensión con recuperación medular, cultivos negativos a 48 horas, estabilidad y al menos 24 horas sin fiebre.",
+      "others": "No se exige una duración fija de siete días cuando se cumplen las condiciones de B3. La evidencia de recuperación medular no equivale a exigir normalización completa del recuento. No existe foco que requiera completar diez días por vía oral.",
+      "rationales": [
+        "B3 recomienda suspensión con recuperación medular, cultivos negativos a 48 horas, estabilidad y al menos 24 horas sin fiebre.",
+        "No se exige una duración fija de siete días cuando se cumplen las condiciones de B3.",
+        "La evidencia de recuperación medular no equivale a exigir normalización completa del recuento.",
+        "No existe foco que requiera completar diez días por vía oral."
+      ],
+      "source": {
+        "title": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update",
+        "year": 2023,
+        "url": "https://doi.org/10.1200/JCO.22.02224",
+        "locator": "B3, suspensión con recuperación medular"
+      },
+      "reference": "Lehrnbecher et al. Guideline for the Management of Fever and Neutropenia in Pediatric Patients With Cancer and Hematopoietic Cell Transplantation Recipients: 2023 Update (2023), B3, suspensión con recuperación medular",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB064",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Artritis bacteriana aguda",
+      "stem": "Niño de 20 meses, previamente sano, con artritis bacteriana de rodilla presunta, líquido sinovial inflamatorio y cultivos pendientes. El equipo planea tratamiento empírico tras obtener muestras; el patrón local de resistencia requiere cobertura frente a S. aureus resistente a meticilina. No hay datos de osteomielitis adyacente.",
+      "prompt": "Además de S. aureus, ¿qué agente debe quedar cubierto por el esquema empírico debido a la edad, según PIDS/IDSA 2023?",
+      "options": [
+        "Streptococcus pneumoniae resistente a penicilina exclusivamente",
+        "Pseudomonas aeruginosa",
+        "Kingella kingae",
+        "Salmonella enterica"
+      ],
+      "correct": 2,
+      "why": "La recomendación V.2 sugiere actividad contra K. kingae en niños de 6 a 48 meses, además de la cobertura contra S. aureus.",
+      "others": "El neumococo puede ser causal, pero no es el microorganismo adicional destacado específicamente para niños de 6–48 meses. Pseudomonas requiere factores epidemiológicos particulares, ausentes en el caso. Salmonella adquiere relevancia especial en situaciones como drepanocitosis; no se describe ese contexto.",
+      "rationales": [
+        "El neumococo puede ser causal, pero no es el microorganismo adicional destacado específicamente para niños de 6–48 meses.",
+        "Pseudomonas requiere factores epidemiológicos particulares, ausentes en el caso.",
+        "La recomendación V.2 sugiere actividad contra K. kingae en niños de 6 a 48 meses, además de la cobertura contra S. aureus.",
+        "Salmonella adquiere relevancia especial en situaciones como drepanocitosis; no se describe ese contexto."
+      ],
+      "source": {
+        "title": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics",
+        "year": 2023,
+        "url": "https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/",
+        "locator": "V.2, cobertura empírica por edad"
+      },
+      "reference": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics (2023), V.2, cobertura empírica por edad",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB065",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Artritis bacteriana aguda",
+      "stem": "Niña de 9 años con artritis bacteriana de cadera por S. aureus sensible a meticilina. Se realizó drenaje inicial y recibió tratamiento IV activo. A las 72 horas continúa febril, PCR aumentó de 110 a 160 mg/L y persiste dolor importante. No se realizó resonancia previamente.",
+      "prompt": "Además de reevaluar control del foco, ¿qué estudio es preferible para buscar extensión no reconocida?",
+      "options": [
+        "Ultrasonido aislado de la articulación como único estudio de extensión ósea",
+        "Resonancia magnética de la región afectada",
+        "Radiografía simple de control como estudio definitivo de osteomielitis temprana",
+        "Tomografía computarizada como primera elección para edema medular"
+      ],
+      "correct": 1,
+      "why": "La respuesta deficiente a las 48–96 horas justifica considerar RM para detectar osteomielitis, abscesos o focos persistentes.",
+      "others": "El ultrasonido permite evaluar derrame, pero no es la mejor modalidad para caracterizar extensión medular y muscular. La radiografía es poco sensible para osteomielitis temprana y no excluye extensión. La RM es preferida para valorar médula ósea y partes blandas.",
+      "rationales": [
+        "El ultrasonido permite evaluar derrame, pero no es la mejor modalidad para caracterizar extensión medular y muscular.",
+        "La respuesta deficiente a las 48–96 horas justifica considerar RM para detectar osteomielitis, abscesos o focos persistentes.",
+        "La radiografía es poco sensible para osteomielitis temprana y no excluye extensión.",
+        "La RM es preferida para valorar médula ósea y partes blandas."
+      ],
+      "source": {
+        "title": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics",
+        "year": 2023,
+        "url": "https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/",
+        "locator": "VI.1 y II.3, mala respuesta y extensión"
+      },
+      "reference": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics (2023), VI.1 y II.3, mala respuesta y extensión",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB066",
+      "section": "Ortopedia",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Artritis bacteriana aguda",
+      "stem": "Niño de 6 años con artritis bacteriana primaria de rodilla por S. aureus sensible a meticilina. Drenaje adecuado; RM descarta osteomielitis adyacente. A los siete días está afebril, recuperó movilidad, PCR desciende sostenidamente y tolera un antibiótico oral activo. No hay complicaciones.",
+      "prompt": "Según PIDS/IDSA 2023, ¿qué duración total de tratamiento puede considerarse?",
+      "options": [
+        "5–7 días de tratamiento total",
+        "21–28 días intravenosos necesariamente",
+        "42 días de tratamiento total por tratarse de S. aureus",
+        "10–14 días de tratamiento total, con transición oral apropiada"
+      ],
+      "correct": 3,
+      "why": "XII.1 permite 10–14 días en artritis primaria por patógeno habitual, control adecuado y mejoría clínica y de PCR; XI.1 favorece transición oral.",
+      "others": "La guía contempla cursos de 10–14 días en respuesta rápida, no de 5–7 días totales. No exige prolongar tratamiento intravenoso cuando hay mejoría y una opción oral activa y tolerable. La duración prolongada puede corresponder a osteomielitis u otras complicaciones, excluidas aquí.",
+      "rationales": [
+        "La guía contempla cursos de 10–14 días en respuesta rápida, no de 5–7 días totales.",
+        "No exige prolongar tratamiento intravenoso cuando hay mejoría y una opción oral activa y tolerable.",
+        "La duración prolongada puede corresponder a osteomielitis u otras complicaciones, excluidas aquí.",
+        "XII.1 permite 10–14 días en artritis primaria por patógeno habitual, control adecuado y mejoría clínica y de PCR; XI.1 favorece transición oral."
+      ],
+      "source": {
+        "title": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics",
+        "year": 2023,
+        "url": "https://www.idsociety.org/practice-guideline/acute-bacterial-arthritis-in-pediatrics2/",
+        "locator": "XI.1 y XII.1, vía y duración"
+      },
+      "reference": "PIDS/IDSA. 2023 Guideline on Diagnosis and Management of Acute Bacterial Arthritis in Pediatrics (2023), XI.1 y XII.1, vía y duración",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB067",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Bronquiolitis",
+      "stem": "Lactante de 4 semanas, nacido a término, con primer cuadro de bronquiolitis. En observación hospitalaria, saturación persistente de 91% en aire ambiente, señal confiable y mediciones repetidas en calma. Toma 85% de sus alimentos habituales, sin apneas ni agotamiento. Sin comorbilidades.",
+      "prompt": "Según NICE NG9 actualizado en 2021, ¿qué decisión respecto al oxígeno corresponde?",
+      "options": [
+        "Iniciar oxígeno suplementario y reevaluar respuesta",
+        "No iniciar oxígeno mientras la saturación sea de al menos 90%, sin considerar edad",
+        "Iniciar CPAP por la cifra de saturación, independientemente del trabajo respiratorio",
+        "Esperar a que aparezca apnea antes de iniciar soporte"
+      ],
+      "correct": 0,
+      "why": "En menores de seis semanas, la guía establece un umbral de saturación persistente inferior a 92% para administrar oxígeno.",
+      "others": "El umbral inferior a 90% corresponde a niños de seis semanas o mayores sin condiciones subyacentes. CPAP se considera ante insuficiencia respiratoria inminente; no se indica automáticamente por esta cifra. La hipoxemia persistente por debajo del umbral etario requiere atención antes de una apnea.",
+      "rationales": [
+        "En menores de seis semanas, la guía establece un umbral de saturación persistente inferior a 92% para administrar oxígeno.",
+        "El umbral inferior a 90% corresponde a niños de seis semanas o mayores sin condiciones subyacentes.",
+        "CPAP se considera ante insuficiencia respiratoria inminente; no se indica automáticamente por esta cifra.",
+        "La hipoxemia persistente por debajo del umbral etario requiere atención antes de una apnea."
+      ],
+      "source": {
+        "title": "NICE NG9. Bronchiolitis in children: diagnosis and management (oxygen thresholds updated 2021)",
+        "year": 2021,
+        "url": "https://www.nice.org.uk/guidance/ng9/chapter/Recommendations",
+        "locator": "Recomendaciones de suplementación de oxígeno"
+      },
+      "reference": "NICE NG9. Bronchiolitis in children: diagnosis and management (oxygen thresholds updated 2021) (2021), Recomendaciones de suplementación de oxígeno",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB068",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Bronquiolitis",
+      "stem": "Lactante de 4 meses, sin enfermedades subyacentes, hospitalizado por bronquiolitis. Tras retirar oxígeno está estable y se alimenta adecuadamente. Durante cinco horas continuas en aire ambiente, incluido un período de sueño, mantiene saturaciones de 91–93%. Cuidadores entrenados, acceso a transporte y seguimiento.",
+      "prompt": "Según NICE NG9, ¿qué conclusión es más adecuada respecto al egreso?",
+      "options": [
+        "Debe permanecer ingresado hasta mantener SpO₂ ≥95% durante 24 horas",
+        "Puede considerarse egreso tras confirmar los demás criterios clínicos y familiares",
+        "Debe reiniciarse oxígeno nocturno por toda saturación inferior a 94%",
+        "Debe obtenerse radiografía normal antes de decidir el alta"
+      ],
+      "correct": 1,
+      "why": "Para mayores de seis semanas sin condiciones subyacentes, la guía acepta saturación en aire superior a 90% durante cuatro horas incluyendo sueño, junto a estabilidad e ingesta adecuada.",
+      "others": "La guía no exige esa meta ni esa duración en un lactante sin comorbilidades de esta edad. No se justifica reintroducir oxígeno automáticamente con las cifras descritas. No se recomienda radiografía rutinaria para decidir egreso de bronquiolitis no complicada.",
+      "rationales": [
+        "La guía no exige esa meta ni esa duración en un lactante sin comorbilidades de esta edad.",
+        "Para mayores de seis semanas sin condiciones subyacentes, la guía acepta saturación en aire superior a 90% durante cuatro horas incluyendo sueño, junto a estabilidad e ingesta adecuada.",
+        "No se justifica reintroducir oxígeno automáticamente con las cifras descritas.",
+        "No se recomienda radiografía rutinaria para decidir egreso de bronquiolitis no complicada."
+      ],
+      "source": {
+        "title": "NICE NG9. Bronchiolitis in children: diagnosis and management (oxygen thresholds updated 2021)",
+        "year": 2021,
+        "url": "https://www.nice.org.uk/guidance/ng9/chapter/Recommendations",
+        "locator": "1.5.1, criterios de egreso"
+      },
+      "reference": "NICE NG9. Bronchiolitis in children: diagnosis and management (oxygen thresholds updated 2021) (2021), 1.5.1, criterios de egreso",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB069",
+      "section": "Neurología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Espasmos epilépticos infantiles",
+      "stem": "Lactante de 5 meses con espasmos epilépticos infantiles confirmados por video-EEG, regresión del desarrollo y estudio etiológico en curso. No presenta datos de esclerosis tuberosa; se descartaron contraindicaciones o alto riesgo por esteroides. Evaluación por especialista en epilepsia pediátrica.",
+      "prompt": "Según NICE NG217, ¿qué estrategia inicial se recomienda?",
+      "options": [
+        "Levetiracetam como monoterapia",
+        "Vigabatrina como monoterapia en todos los casos",
+        "Prednisolona oral a dosis altas combinada con vigabatrina",
+        "Ácido valproico como primera elección universal"
+      ],
+      "correct": 2,
+      "why": "6.3.4 recomienda combinación de prednisolona a dosis altas y vigabatrina cuando no se debe a esclerosis tuberosa y no existe alto riesgo por esteroides.",
+      "others": "Levetiracetam no es el esquema de primera línea de NG217 para este síndrome. Vigabatrina sola es primera elección en esclerosis tuberosa o alternativa si el riesgo esteroideo es alto; esas condiciones no están presentes. Valproato no es primera elección universal en espasmos infantiles.",
+      "rationales": [
+        "Levetiracetam no es el esquema de primera línea de NG217 para este síndrome.",
+        "Vigabatrina sola es primera elección en esclerosis tuberosa o alternativa si el riesgo esteroideo es alto; esas condiciones no están presentes.",
+        "6.3.4 recomienda combinación de prednisolona a dosis altas y vigabatrina cuando no se debe a esclerosis tuberosa y no existe alto riesgo por esteroides.",
+        "Valproato no es primera elección universal en espasmos infantiles."
+      ],
+      "source": {
+        "title": "NICE NG217. Epilepsies in children, young people and adults",
+        "year": 2022,
+        "url": "https://www.nice.org.uk/guidance/ng217/chapter/6-Treating-childhood-onset-epilepsies",
+        "locator": "6.3.4, espasmos sin esclerosis tuberosa"
+      },
+      "reference": "NICE NG217. Epilepsies in children, young people and adults (2022), 6.3.4, espasmos sin esclerosis tuberosa",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB070",
+      "section": "Neurología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Espasmos epilépticos infantiles",
+      "stem": "Lactante de 6 meses con esclerosis tuberosa confirmada y espasmos epilépticos en salvas. Video-EEG compatible. No recibió tratamiento previo. Se organiza valoración oftalmológica y seguimiento por epileptología pediátrica.",
+      "prompt": "Según NICE NG217, ¿qué fármaco inicial se prefiere específicamente por la etiología?",
+      "options": [
+        "Vigabatrina",
+        "Prednisolona oral como monoterapia inicial",
+        "Levetiracetam",
+        "Topiramato"
+      ],
+      "correct": 0,
+      "why": "6.3.5 recomienda vigabatrina sola como primera línea cuando los espasmos se asocian a esclerosis tuberosa; si no funciona después de una semana, se añade prednisolona a dosis altas.",
+      "others": "La prednisolona puede añadirse ante respuesta insuficiente, pero no es la primera opción aislada recomendada para esta etiología. No es la primera elección específica para espasmos por esclerosis tuberosa. No es el esquema inicial preferido para este contexto.",
+      "rationales": [
+        "6.3.5 recomienda vigabatrina sola como primera línea cuando los espasmos se asocian a esclerosis tuberosa; si no funciona después de una semana, se añade prednisolona a dosis altas.",
+        "La prednisolona puede añadirse ante respuesta insuficiente, pero no es la primera opción aislada recomendada para esta etiología.",
+        "No es la primera elección específica para espasmos por esclerosis tuberosa.",
+        "No es el esquema inicial preferido para este contexto."
+      ],
+      "source": {
+        "title": "NICE NG217. Epilepsies in children, young people and adults",
+        "year": 2022,
+        "url": "https://www.nice.org.uk/guidance/ng217/chapter/6-Treating-childhood-onset-epilepsies",
+        "locator": "6.3.5, espasmos asociados a esclerosis tuberosa"
+      },
+      "reference": "NICE NG217. Epilepsies in children, young people and adults (2022), 6.3.5, espasmos asociados a esclerosis tuberosa",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB071",
+      "section": "Otorrinolaringología",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Otitis media aguda",
+      "stem": "Niño de 20 meses con fiebre de 39.2 °C, otalgia y abombamiento bilateral de membranas timpánicas; además presenta secreción conjuntival purulenta. No tiene alergia a penicilinas, tolera vía oral y no presenta complicaciones. Se decide iniciar antibiótico.",
+      "prompt": "Conforme a AAP 2013, ¿qué opción oral empírica es preferible?",
+      "options": [
+        "Amoxicilina sola",
+        "Amoxicilina con clavulanato",
+        "Azitromicina",
+        "Clindamicina"
+      ],
+      "correct": 1,
+      "why": "KAS 4B recomienda cobertura adicional de betalactamasa en otitis con conjuntivitis purulenta. Amoxicilina-clavulanato es la opción preferida sin alergia.",
+      "others": "La conjuntivitis purulenta concomitante orienta a necesidad de cobertura frente a productores de betalactamasa; amoxicilina sola no es la opción preferida. El macrólido no es la primera elección en un paciente que tolera betalactámicos y tiene este patrón. Clindamicina carece de cobertura confiable contra H. influenzae, relevante en este síndrome.",
+      "rationales": [
+        "La conjuntivitis purulenta concomitante orienta a necesidad de cobertura frente a productores de betalactamasa; amoxicilina sola no es la opción preferida.",
+        "KAS 4B recomienda cobertura adicional de betalactamasa en otitis con conjuntivitis purulenta. Amoxicilina-clavulanato es la opción preferida sin alergia.",
+        "El macrólido no es la primera elección en un paciente que tolera betalactámicos y tiene este patrón.",
+        "Clindamicina carece de cobertura confiable contra H. influenzae, relevante en este síndrome."
+      ],
+      "source": {
+        "title": "AAP. The Diagnosis and Management of Acute Otitis Media",
+        "year": 2013,
+        "url": "https://doi.org/10.1542/peds.2012-3488",
+        "locator": "KAS 4B, cobertura de betalactamasa"
+      },
+      "reference": "AAP. The Diagnosis and Management of Acute Otitis Media (2013), KAS 4B, cobertura de betalactamasa",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB072",
+      "section": "Otorrinolaringología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Otitis media aguda",
+      "stem": "Lactante de 18 meses con otitis media aguda unilateral confirmada por otoscopia. Otalgia leve de 18 horas, temperatura de 38 °C, sin otorrea ni comorbilidad. Familia prefiere evitar antibióticos si es seguro y garantiza reevaluación y acceso a tratamiento en 48–72 horas si no mejora.",
+      "prompt": "Según AAP 2013, ¿qué estrategia puede ofrecerse mediante decisión compartida?",
+      "options": [
+        "Antibioterapia inmediata obligatoria por tener menos de dos años",
+        "Observación sin analgesia y sin plan de reevaluación",
+        "Analgesia y observación estrecha con plan de inicio antibiótico ante empeoramiento o falta de mejoría",
+        "Antibiótico tópico como único tratamiento con membrana íntegra"
+      ],
+      "correct": 2,
+      "why": "KAS 3C admite observación con seguimiento fiable en otitis unilateral no grave de 6–23 meses, e iniciar antibiótico si empeora o no mejora en 48–72 horas.",
+      "others": "Entre 6 y 23 meses, la otitis unilateral no grave admite observación seleccionada; no es obligatorio tratar de inmediato a todos. La analgesia y un mecanismo de seguimiento son componentes indispensables. Las gotas antibióticas no constituyen tratamiento de la infección del oído medio con tímpano íntegro.",
+      "rationales": [
+        "Entre 6 y 23 meses, la otitis unilateral no grave admite observación seleccionada; no es obligatorio tratar de inmediato a todos.",
+        "La analgesia y un mecanismo de seguimiento son componentes indispensables.",
+        "KAS 3C admite observación con seguimiento fiable en otitis unilateral no grave de 6–23 meses, e iniciar antibiótico si empeora o no mejora en 48–72 horas.",
+        "Las gotas antibióticas no constituyen tratamiento de la infección del oído medio con tímpano íntegro."
+      ],
+      "source": {
+        "title": "AAP. The Diagnosis and Management of Acute Otitis Media",
+        "year": 2013,
+        "url": "https://doi.org/10.1542/peds.2012-3488",
+        "locator": "KAS 3C, observación en otitis unilateral no grave"
+      },
+      "reference": "AAP. The Diagnosis and Management of Acute Otitis Media (2013), KAS 3C, observación en otitis unilateral no grave",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
     }
   ]
 });

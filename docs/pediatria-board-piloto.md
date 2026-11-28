@@ -17,3 +17,10 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Cada reactivo avanzado tiene tema, competencia, cuatro justificaciones independientes, localizador de la recomendación y enlace. En simulación se ocultan pistas temáticas y retroalimentación hasta entregar.
 - Estándar editorial: viñeta suficiente, una mejor respuesta, alternativas homogéneas, evitar pistas y distractores absurdos, justificar cada opción; base metodológica https://www.nbme.org/institutions/nbme-item-writing-guide/.
 - No se ha confirmado el formato exacto, ponderación, preguntas o dificultad psicométrica del examen CMCP. Revisión clínica independiente, pilotaje y análisis de discriminación pendientes. No se afirma validez oficial. Las 48 preguntas iniciales se mantienen diferenciadas como fundamentos, no como reactivos de certificación.
+
+## Edición académica 0.3
+
+- 72 reactivos: 48 fundamentos y 24 avanzados en 11 de 16 áreas. Se añaden 12 casos originales: neutropenia febril (3), artritis bacteriana (3), bronquiolitis (2), espasmos infantiles (2) y otitis media (2).
+- Fuentes específicas: guía internacional de neutropenia febril 2023 (B3/B4/A6b), PIDS/IDSA 2023 (V/VI/XI/XII), NICE NG9 (actualización de oxígeno 2021), NICE NG217 (6.3.4–5), AAP otitis 2013 (KAS 3C/4B). Los reactivos fijan la guía de referencia; no se presenta una guía antigua como actualizada en 2026 ni como protocolo mexicano.
+- Contraste mexicano parcial: catálogo IMSS-032-08 localizado para bronquiolitis; su guía histórica no se usa para atribuir los umbrales NICE por edad. La estrategia IMSS de hora dorada para neutropenia febril (2026) corresponde al inicio del manejo, no a los criterios de suspensión de la guía internacional. Pendiente revisión sistemática de GPC mexicanas y vigencia local.
+- Sin cambios en identificadores o claves anteriores. Se explicita cobertura incompleta del nivel Consejo. No se acredita equivalencia con el examen real; revisión por especialistas y calibración pendientes.
