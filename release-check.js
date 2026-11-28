@@ -1,2 +1,2 @@
 /* Marker fetched as plain text; never executed or cached by the SW. */
-window.KidBumPublicRelease = '0.12.2';
+window.KidBumPublicRelease = '0.12.3';

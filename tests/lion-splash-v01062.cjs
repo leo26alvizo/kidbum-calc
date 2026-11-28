@@ -23,10 +23,10 @@ assert.match(home,/class="kb-lion-beam"/,'Premium horizontal headlight flare');
 assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
 assert.match(css,/\.kb-lion-splash\[hidden\]\{display:none!important\}/);
 assert.match(css,/@media\(forced-colors:active\)/);
-assert.match(css,/kb-lion-splash-hide 1\.34s/);
+assert.match(css,/kb-lion-splash-hide 2\.8s/);
 assert.match(css,/pointer-events:none;animation:kb-lion-splash-hide/,'Overlay cannot intercept clinical actions');
 assert.match(css,/pointer-events:auto;min-height:40px/,'Skip control remains interactive');
-assert.match(js,/timer=setTimeout\(finish,1390\)/,'Hard upper bound to dismiss');
+assert.match(js,/timer=setTimeout\(finish,2850\)/,'Hard upper bound to dismiss');
 assert.match(js,/sessionStorage\.setItem\('kb-lion-splash-seen-v01062','1'\)/);
 for(const unsafe of ['localStorage','fetch(','XMLHttpRequest','navigator.sendBeacon','location.reload(','eval(']){
  assert.ok(!js.includes(unsafe),'Splash must not use '+unsafe);
@@ -59,7 +59,7 @@ function makeHarness(opts={}){
 let h=makeHarness();
 assert.equal(h.splash.hidden,false,'First launch shows splash');
 assert.equal(h.saved.get('kb-lion-splash-seen-v01062'),'1');
-assert.equal([...h.timers.values()].some(t=>t.ms===1390),true,'Splash always auto-dismisses');
+assert.equal([...h.timers.values()].some(t=>t.ms===2850),true,'Splash always auto-dismisses');
 h.runTimers();assert.equal(h.splash.hidden,true,'Timeout never blocks the app');
 h=makeHarness({saved:h.saved});
 assert.equal(h.splash.hidden,true,'Same session must not repeat');
@@ -84,3 +84,5 @@ h.listeners.get('pointerdown')();
 h.runTimers();
 assert.equal(h.splash.hidden,true,'Any tap bypasses introduction');
 console.log('PASS v0.10.62 Lion Awakening — eye glints, offline precache, skip, max duration, once/session, accessibility, reduced motion, no clinical data.');
+
+assert.match(css,/kb-lion-orbit/);assert.match(css,/kb-lion-caption/);assert.match(css,/kb-lion-sweep/);assert.match(home,/LEO <span>MED<\/span>/);
