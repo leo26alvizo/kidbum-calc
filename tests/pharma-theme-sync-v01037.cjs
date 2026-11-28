@@ -3,7 +3,7 @@
 const releasePattern = require('node:fs').readFileSync('release-check.js','utf8').match(/KidBumPublicRelease\s*=\s*'([0-9.]+)'/)[1].replace(/\./g,'\\.');
 const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
 const ui=fs.readFileSync('assets/pharma-pro-ui.js','utf8');
-const from=ui.indexOf('/* One shared theme preference across ALL KidBum modules.');
+const from=ui.indexOf('/* One shared theme preference across ALL LEO MED modules.');
 const to=ui.indexOf('function fromHash()',from);
 assert.ok(from>0&&to>from,'Shared pharma theme handler exists');
 const handler=ui.slice(from,to);
