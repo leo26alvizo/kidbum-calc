@@ -38,3 +38,6 @@ html[data-theme=light] .radar-overview{background:#f5f0e5;border-color:#c9b58f;c
 html[data-theme=light] .board-tabs{background:#fffdf7;border-color:#c2ae87}html[data-theme=light] .board-tabs a{color:#15243a}html[data-theme=light] .board-tabs a:hover{color:#096b65}
 html[data-theme=light] .exam-progress{background:#ede4d1;color:#15243a}html[data-theme=light] .exam-progress button{color:#15243a;background:#fffdf7;border-color:#bcaa88}html[data-theme=light] .exam-progress .bar{background:#cfc6b6}html[data-theme=light] .exam-progress .bar span{background:#096b65}
 html[data-theme=light] .case-label{background:#eee3ce;color:#15243a;border-left-color:#a77934}
+
+/* Solid canvas beneath each gradient, including fallback rendering. */
+html[data-theme=light][data-board-view=home] body{background-color:#f3eee5}html[data-theme=dark][data-board-view=home] body{background-color:#06182c}
