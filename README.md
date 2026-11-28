@@ -1,3 +1,7 @@
+# Actualización v0.11.5 · Pediatría BOARD R3: 32 reactivos en 16 áreas
+
+20 casos nuevos, 17 fuentes del banco activo, 87 reactivos anteriores en reserva. Simulador de 25 reactivos R3 disponible. Revisión independiente pendiente.
+
 # Actualización v0.11.4 · Pediatría BOARD: estándar R3/especialista exclusivo
 
 12 reactivos nuevos activos en 6 áreas. 87 anteriores preservados en reserva junto con su historial, sin mezclarlos con las sesiones de especialista. Puerta editorial y pruebas de exclusión. Validación independiente pendiente.

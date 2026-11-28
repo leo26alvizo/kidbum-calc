@@ -2883,6 +2883,746 @@ window.KidBumPediatriaBoard=Object.freeze({
       "standard": "r3-specialist-v1",
       "reasoning": "Distinguir fracaso por foco no controlado de fracaso por resistencia antimicrobiana.",
       "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB100",
+      "section": "Gastroenterología y nutrición",
+      "type": "visual",
+      "skill": "Interpretación",
+      "topic": "Enfermedad celíaca con serología discordante",
+      "stem": "Niña de 9 años con talla baja, ferropenia refractaria y consumo habitual de gluten. IgA total normal; anticuerpos antitransglutaminasa IgA (tTG) de 78 U/mL (límite superior 10 U/mL), EMA-IgA positivo en una segunda muestra. HLA-DQ2 positivo. La familia solicita evitar endoscopia y comenzar dieta sin gluten.",
+      "prompt": "Según ESPGHAN 2020, ¿qué conducta permite establecer el diagnóstico con mayor rigor?",
+      "options": [
+        "Confirmar celiaquía sin biopsia por EMA positivo y HLA compatible",
+        "Mantener gluten hasta obtener biopsias de bulbo y duodeno distal, coordinadas con gastroenterología",
+        "Repetir tTG tras seis semanas de dieta sin gluten; confirmar si disminuye",
+        "Confirmar sin biopsia porque la clínica y la ferropenia sustituyen el umbral serológico"
+      ],
+      "correct": 1,
+      "why": "Se requieren al menos cuatro muestras distales y una del bulbo cuando el tTG positivo es inferior a diez veces el límite. Mantener exposición al gluten protege el rendimiento diagnóstico.",
+      "others": "El EMA y el HLA apoyan la sospecha, pero el tTG es 7.8 veces el límite superior, insuficiente para la vía sin biopsia. La retirada anticipada del gluten puede disminuir anticuerpos y cambios histológicos, haciendo más difícil confirmar el diagnóstico. La clínica no modifica el umbral requerido para la estrategia sin histología; el HLA compatible tampoco lo sustituye.",
+      "rationales": [
+        "El EMA y el HLA apoyan la sospecha, pero el tTG es 7.8 veces el límite superior, insuficiente para la vía sin biopsia.",
+        "Se requieren al menos cuatro muestras distales y una del bulbo cuando el tTG positivo es inferior a diez veces el límite. Mantener exposición al gluten protege el rendimiento diagnóstico.",
+        "La retirada anticipada del gluten puede disminuir anticuerpos y cambios histológicos, haciendo más difícil confirmar el diagnóstico.",
+        "La clínica no modifica el umbral requerido para la estrategia sin histología; el HLA compatible tampoco lo sustituye."
+      ],
+      "source": {
+        "title": "ESPGHAN Guidelines for Diagnosing Coeliac Disease",
+        "year": 2020,
+        "url": "https://doi.org/10.1097/MPG.0000000000002497",
+        "locator": "Algoritmo diagnóstico y muestreo duodenal con tTG-IgA <10× límite superior"
+      },
+      "reference": "ESPGHAN Guidelines for Diagnosing Coeliac Disease (2020), Algoritmo diagnóstico y muestreo duodenal con tTG-IgA <10× límite superior",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Calcular el múltiplo del límite normal e interpretar serología discordante con criterios de diagnóstico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB101",
+      "section": "Gastroenterología y nutrición",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Celiaquía potencial",
+      "stem": "Escolar de 11 años, asintomático, hermano de paciente con celiaquía. Mientras consume gluten, tTG-IgA 4.5 veces el límite superior, EMA-IgA positivo y concentración total de IgA normal. Endoscopia con una muestra de bulbo y cuatro distales bien orientadas, informadas Marsh 0–1. Segunda revisión por patólogo experto confirma ausencia de atrofia; no hay otra causa identificada de los anticuerpos.",
+      "prompt": "¿Cuál es la mejor clasificación y estrategia de seguimiento?",
+      "options": [
+        "Celiaquía descartada definitivamente; alta sin controles serológicos",
+        "Celiaquía confirmada con atrofia vellositaria; indicar dieta estricta de por vida por histología",
+        "Celiaquía potencial; seguimiento especializado de clínica y serología, reevaluando necesidad de biopsia",
+        "Falso positivo confirmado; repetir únicamente HLA-DQ2/DQ8 cada año"
+      ],
+      "correct": 2,
+      "why": "La combinación de autoanticuerpos específicos y cambios mínimos corresponde a celiaquía potencial tras revisar la calidad de las muestras. Se necesita seguimiento estrecho.",
+      "others": "La autoimunidad confirmada puede preceder a lesiones histológicas; la biopsia normal no excluye evolución futura. Marsh 0–1 no representa atrofia vellosa. La conducta debe individualizarse en lugar de afirmar enfermedad atrófica confirmada. El HLA es estable y no permite vigilar progresión histológica ni establecer que el resultado sea falso.",
+      "rationales": [
+        "La autoimunidad confirmada puede preceder a lesiones histológicas; la biopsia normal no excluye evolución futura.",
+        "Marsh 0–1 no representa atrofia vellosa. La conducta debe individualizarse en lugar de afirmar enfermedad atrófica confirmada.",
+        "La combinación de autoanticuerpos específicos y cambios mínimos corresponde a celiaquía potencial tras revisar la calidad de las muestras. Se necesita seguimiento estrecho.",
+        "El HLA es estable y no permite vigilar progresión histológica ni establecer que el resultado sea falso."
+      ],
+      "source": {
+        "title": "ESPGHAN Guidelines for Diagnosing Coeliac Disease",
+        "year": 2020,
+        "url": "https://doi.org/10.1097/MPG.0000000000002497",
+        "locator": "Resultados serológicos e histológicos discordantes; seguimiento de Marsh 0/I con autoimunidad"
+      },
+      "reference": "ESPGHAN Guidelines for Diagnosing Coeliac Disease (2020), Resultados serológicos e histológicos discordantes; seguimiento de Marsh 0/I con autoimunidad",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir predisposición, autoimunidad y lesión histológica sin cerrar prematuramente el diagnóstico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB102",
+      "section": "Infectología y vacunología",
+      "type": "visual",
+      "skill": "Tratamiento",
+      "topic": "Lactante febril con probable ITU",
+      "stem": "Lactante de 46 días, nacido a término, previamente sano, fiebre rectal de 38.4 °C, buen aspecto y alimentación conservada. Sin bronquiolitis ni foco cutáneo. Orina obtenida por cateterismo: esterasa positiva y 22 leucocitos/campo; urocultivo y hemocultivo en proceso. Procalcitonina 0.15 ng/mL, PCR 6 mg/L y neutrófilos absolutos 2500/mm³. Familia con transporte, comunicación y reevaluación asegurada en 24 h.",
+      "prompt": "Según AAP 2021, ¿cuál es la conducta apropiada tras valorar criterios de inclusión y seguimiento?",
+      "options": [
+        "Obtener LCR obligatoriamente por piuria e iniciar cefalosporina IV hospitalaria",
+        "Observar sin antibiótico hasta confirmar el urocultivo porque los marcadores son normales",
+        "Hospitalizar y tratar vía IV sin obtener LCR por tener menos de 60 días",
+        "Iniciar antimicrobiano oral adecuado para probable ITU; puede omitirse LCR y ofrecerse manejo ambulatorio estrecho"
+      ],
+      "correct": 3,
+      "why": "Cumple las condiciones de la estrategia oral y no requiere rutinariamente LCR. Reevaluar en 24 horas y actuar sobre resultados de cultivos es esencial.",
+      "others": "En el grupo de 29–60 días con marcadores normales, la orina positiva por sí sola no obliga a obtener LCR. El uroanálisis positivo con marcadores normales apoya tratamiento oral empírico mientras se revisa el cultivo; la ausencia de inflamación sistémica no excluye ITU. La edad por sí sola no obliga a vía IV en este grupo de bajo riesgo; la posibilidad de seguimiento es determinante.",
+      "rationales": [
+        "En el grupo de 29–60 días con marcadores normales, la orina positiva por sí sola no obliga a obtener LCR.",
+        "El uroanálisis positivo con marcadores normales apoya tratamiento oral empírico mientras se revisa el cultivo; la ausencia de inflamación sistémica no excluye ITU.",
+        "La edad por sí sola no obliga a vía IV en este grupo de bajo riesgo; la posibilidad de seguimiento es determinante.",
+        "Cumple las condiciones de la estrategia oral y no requiere rutinariamente LCR. Reevaluar en 24 horas y actuar sobre resultados de cultivos es esencial."
+      ],
+      "source": {
+        "title": "AAP Clinical Practice Guideline: Well-Appearing Febrile Infants 8 to 60 Days Old",
+        "year": 2021,
+        "url": "https://doi.org/10.1542/peds.2021-052228",
+        "locator": "KAS 15–20: lactantes 29–60 días, uroanálisis positivo y marcadores inflamatorios normales"
+      },
+      "reference": "AAP Clinical Practice Guideline: Well-Appearing Febrile Infants 8 to 60 Days Old (2021), KAS 15–20: lactantes 29–60 días, uroanálisis positivo y marcadores inflamatorios normales",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar edad, origen de muestra, marcadores y capacidad de seguimiento para elegir vía y lugar de tratamiento.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB103",
+      "section": "Infectología y vacunología",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Lactante febril con discordancia inflamatoria",
+      "stem": "Lactante de 25 días, nacido a las 39 semanas, sin antecedentes perinatales relevantes, fiebre rectal 38.2 °C y aspecto clínico conservado. Uroanálisis por cateterismo negativo; hemocultivo obtenido. Procalcitonina 0.82 ng/mL, PCR 8 mg/L y neutrófilos 3000/mm³. No ha recibido antibiótico y no presenta contraindicaciones a punción lumbar. Se encuentra en un hospital con vigilancia neonatal.",
+      "prompt": "Según AAP 2021, ¿qué decisión integra correctamente su edad y resultados?",
+      "options": [
+        "Obtener LCR y proporcionar antimicrobianos parenterales y vigilancia hospitalaria, ajustando a resultados",
+        "Omitir LCR y observar en domicilio porque dos marcadores y la orina son normales",
+        "Repetir procalcitonina en 24 h sin tratar para comprobar si persiste elevada",
+        "Tratar vía oral una bacteriemia presunta y reservar LCR para hemocultivo positivo"
+      ],
+      "correct": 0,
+      "why": "En el grupo de 22–28 días basta un marcador anormal para indicar estudio de LCR. La evaluación de meningitis y el tratamiento parenteral no se sustituyen por el buen aspecto.",
+      "others": "El grupo etario tiene riesgo significativo de infección invasiva y la procalcitonina anormal impide aplicar la vía de bajo riesgo. La discordancia entre marcadores no descarta infección bacteriana invasiva; posponer la evaluación no es la conducta indicada. La positividad del hemocultivo no debe ser requisito para estudiar LCR en un lactante de esta edad con marcador anormal.",
+      "rationales": [
+        "En el grupo de 22–28 días basta un marcador anormal para indicar estudio de LCR. La evaluación de meningitis y el tratamiento parenteral no se sustituyen por el buen aspecto.",
+        "El grupo etario tiene riesgo significativo de infección invasiva y la procalcitonina anormal impide aplicar la vía de bajo riesgo.",
+        "La discordancia entre marcadores no descarta infección bacteriana invasiva; posponer la evaluación no es la conducta indicada.",
+        "La positividad del hemocultivo no debe ser requisito para estudiar LCR en un lactante de esta edad con marcador anormal."
+      ],
+      "source": {
+        "title": "AAP Clinical Practice Guideline: Well-Appearing Febrile Infants 8 to 60 Days Old",
+        "year": 2021,
+        "url": "https://doi.org/10.1542/peds.2021-052228",
+        "locator": "KAS 10–13: lactantes 22–28 días con al menos un marcador inflamatorio anormal"
+      },
+      "reference": "AAP Clinical Practice Guideline: Well-Appearing Febrile Infants 8 to 60 Days Old (2021), KAS 10–13: lactantes 22–28 días con al menos un marcador inflamatorio anormal",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Reconocer que un único marcador anormal cambia la vía de evaluación invasiva en un grupo de edad específico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB104",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Apnea obstructiva residual tras adenoamigdalectomía",
+      "stem": "Niño de 9 años con obesidad grave, cinco meses después de adenoamigdalectomía. Persiste somnolencia y dificultad escolar; polisomnografía muestra índice obstructivo 14/h y nadir de SpO₂ 79%. Evaluación especializada de vía aérea no identifica sitio de obstrucción corregible de forma específica. No hay hipoventilación sostenida. Se inicia programa multidisciplinario de peso.",
+      "prompt": "Según ATS 2024, ¿qué estrategia es apropiada para la apnea residual mientras se aborda la obesidad?",
+      "options": [
+        "Esperar pérdida de peso antes de ofrecer soporte respiratorio, con nueva polisomnografía anual",
+        "Considerar CPAP con titulación y seguimiento de adherencia junto al manejo del peso",
+        "Indicar amigdalectomía lingual aunque no exista hipertrofia ni obstrucción localizada",
+        "Utilizar oxígeno nocturno como sustituto de tratamiento de la obstrucción"
+      ],
+      "correct": 1,
+      "why": "ATS contempla CPAP cuando no existe tratamiento anatómico específico, y recomienda considerar intervención de peso en obesidad. Son estrategias complementarias.",
+      "others": "El trastorno residual es grave; esperar a que el peso cambie deja sin tratar una obstrucción clínicamente significativa. La cirugía de amígdala lingual requiere correlación con una obstrucción anatómica demostrada; no se justifica por gravedad aislada. El oxígeno puede modificar saturación, pero no corrige colapso de vía aérea y no sustituye terapia dirigida de la apnea.",
+      "rationales": [
+        "El trastorno residual es grave; esperar a que el peso cambie deja sin tratar una obstrucción clínicamente significativa.",
+        "ATS contempla CPAP cuando no existe tratamiento anatómico específico, y recomienda considerar intervención de peso en obesidad. Son estrategias complementarias.",
+        "La cirugía de amígdala lingual requiere correlación con una obstrucción anatómica demostrada; no se justifica por gravedad aislada.",
+        "El oxígeno puede modificar saturación, pero no corrige colapso de vía aérea y no sustituye terapia dirigida de la apnea."
+      ],
+      "source": {
+        "title": "ATS: Management of Persistent Post-adenotonsillectomy Obstructive Sleep Apnea in Children",
+        "year": 2024,
+        "url": "https://doi.org/10.1164/rccm.202310-1857ST",
+        "locator": "Recomendaciones 1 y 3: CPAP y control ponderal en apnea persistente"
+      },
+      "reference": "ATS: Management of Persistent Post-adenotonsillectomy Obstructive Sleep Apnea in Children (2024), Recomendaciones 1 y 3: CPAP y control ponderal en apnea persistente",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar severidad polisomnográfica, anatomía y comorbilidad para elegir tratamiento combinado.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB105",
+      "section": "Cardio-pulmonar",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Apnea residual y obstrucción lingual",
+      "stem": "Adolescente de 12 años con trisomía 21, adenoamigdalectomía previa y apnea obstructiva persistente (índice obstructivo 18/h). No tolera CPAP pese a adaptación y apoyo especializado. Endoscopia bajo sueño inducido demuestra hipertrofia importante de amígdala lingual como sitio dominante; no hay recidiva adenoidea ni colapso supraglótico significativo. Familia desea explorar alternativas quirúrgicas.",
+      "prompt": "¿Qué opción anatómicamente dirigida puede discutirse conforme a ATS 2024?",
+      "options": [
+        "Adenoidectomía de revisión pese a ausencia de obstrucción adenoidea",
+        "Supraglotoplastia por el índice obstructivo elevado",
+        "Amigdalectomía lingual, con explicación de beneficios inciertos y riesgo de enfermedad residual",
+        "Expansión maxilar rápida como sustituto de toda cirugía sin demostrar constricción maxilar"
+      ],
+      "correct": 2,
+      "why": "La hipertrofia lingual es un blanco potencial de cirugía conforme a una recomendación condicional de muy baja certeza; requiere valoración especializada y reevaluación posterior.",
+      "others": "No existe evidencia en el caso de tejido adenoideo obstructivo; repetir esa intervención no aborda el sitio identificado. La supraglotoplastia se considera ante laringomalacia dependiente del sueño, no demostrada aquí. La expansión ortodóncica depende de características craneofaciales apropiadas y no sustituye una evaluación del sitio obstructivo demostrado.",
+      "rationales": [
+        "No existe evidencia en el caso de tejido adenoideo obstructivo; repetir esa intervención no aborda el sitio identificado.",
+        "La supraglotoplastia se considera ante laringomalacia dependiente del sueño, no demostrada aquí.",
+        "La hipertrofia lingual es un blanco potencial de cirugía conforme a una recomendación condicional de muy baja certeza; requiere valoración especializada y reevaluación posterior.",
+        "La expansión ortodóncica depende de características craneofaciales apropiadas y no sustituye una evaluación del sitio obstructivo demostrado."
+      ],
+      "source": {
+        "title": "ATS: Management of Persistent Post-adenotonsillectomy Obstructive Sleep Apnea in Children",
+        "year": 2024,
+        "url": "https://doi.org/10.1164/rccm.202310-1857ST",
+        "locator": "Recomendaciones 2, 4 y 5: tratamiento específico según sitio de obstrucción"
+      },
+      "reference": "ATS: Management of Persistent Post-adenotonsillectomy Obstructive Sleep Apnea in Children (2024), Recomendaciones 2, 4 y 5: tratamiento específico según sitio de obstrucción",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Seleccionar terapia de rescate por anatomía demostrada y reconocer la incertidumbre de la evidencia.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB106",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Invaginación ileocólica tras reducción parcial",
+      "stem": "Lactante de 13 meses con invaginación ileocólica confirmada. Tras reanimación, está estable, sin defensa ni signos de perforación. Primer enema neumático desplaza la cabeza desde colon transverso a válvula ileocecal, pero no se documenta reducción completa. Se mantiene perfusión mural al Doppler; cirugía pediátrica y radiología intervencionista disponibles.",
+      "prompt": "¿Qué conducta es razonable antes de proceder a cirugía, conforme a la revisión APSA?",
+      "options": [
+        "Indicar laparotomía inmediata por cualquier fracaso del primer enema",
+        "Repetir enema solo si aparece deterioro hemodinámico",
+        "Dar por resuelta la invaginación por el desplazamiento de la cabeza y reiniciar dieta",
+        "Considerar un segundo intento diferido de reducción bajo vigilancia, con disponibilidad quirúrgica"
+      ],
+      "correct": 3,
+      "why": "Los tres criterios —estabilidad, ausencia de peritonitis y reducción parcial previa— respaldan considerar un nuevo intento diferido con vigilancia.",
+      "others": "El fracaso parcial en un niño estable sin peritonitis no obliga a operar inmediatamente; un nuevo intento seleccionado puede evitar cirugía. La inestabilidad es una contraindicación para repetir reducción no quirúrgica y exige reevaluación urgente. El avance parcial no equivale a reducción completa; persiste riesgo de isquemia y recurrencia clínica.",
+      "rationales": [
+        "El fracaso parcial en un niño estable sin peritonitis no obliga a operar inmediatamente; un nuevo intento seleccionado puede evitar cirugía.",
+        "La inestabilidad es una contraindicación para repetir reducción no quirúrgica y exige reevaluación urgente.",
+        "El avance parcial no equivale a reducción completa; persiste riesgo de isquemia y recurrencia clínica.",
+        "Los tres criterios —estabilidad, ausencia de peritonitis y reducción parcial previa— respaldan considerar un nuevo intento diferido con vigilancia."
+      ],
+      "source": {
+        "title": "APSA Outcomes and Evidence-Based Practice Committee: Management of Intussusception in Children, systematic review",
+        "year": 2021,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7920908/",
+        "locator": "Pregunta 2: criterios para delayed repeat enema"
+      },
+      "reference": "APSA Outcomes and Evidence-Based Practice Committee: Management of Intussusception in Children, systematic review (2021), Pregunta 2: criterios para delayed repeat enema",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Diferenciar fracaso parcial susceptible de rescate de indicaciones de exploración urgente.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB107",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Invaginación con punto guía patológico",
+      "stem": "Escolar de 7 años con tercer episodio de invaginación ileocólica en tres meses, los dos anteriores reducidos por enema. En esta ocasión se consigue reducción completa y estabilidad clínica, pero una evaluación por imagen identifica una lesión intraluminal persistente que actúa como punto guía, confirmada por radiología y cirugía pediátricas. No hay peritonitis.",
+      "prompt": "¿Qué estrategia aborda mejor el riesgo de nuevos episodios?",
+      "options": [
+        "Planear evaluación y tratamiento quirúrgico del punto guía, individualizando el procedimiento según la lesión",
+        "Dar alta con el mismo plan que una primera invaginación idiopática sin lesión",
+        "Programar enemas profilácticos periódicos hasta que desaparezca el punto guía",
+        "Observar indefinidamente porque la reducción radiológica completa descarta necesidad de cirugía"
+      ],
+      "correct": 0,
+      "why": "La reducción resuelve el episodio, no elimina una lesión anatómica causante; la evaluación quirúrgica dirigida es apropiada.",
+      "others": "La edad, recurrencia y punto guía identificado distinguen este caso de una invaginación idiopática de lactante. Los enemas tratan episodios de invaginación; no eliminan un punto guía estructural ni son profilaxis programada. El éxito de la reducción no excluye la indicación quirúrgica cuando hay una causa patológica demostrada.",
+      "rationales": [
+        "La reducción resuelve el episodio, no elimina una lesión anatómica causante; la evaluación quirúrgica dirigida es apropiada.",
+        "La edad, recurrencia y punto guía identificado distinguen este caso de una invaginación idiopática de lactante.",
+        "Los enemas tratan episodios de invaginación; no eliminan un punto guía estructural ni son profilaxis programada.",
+        "El éxito de la reducción no excluye la indicación quirúrgica cuando hay una causa patológica demostrada."
+      ],
+      "source": {
+        "title": "APSA Outcomes and Evidence-Based Practice Committee: Management of Intussusception in Children, systematic review",
+        "year": 2021,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7920908/",
+        "locator": "Manejo de invaginación recurrente y puntos guía; estrategias quirúrgicas"
+      },
+      "reference": "APSA Outcomes and Evidence-Based Practice Committee: Management of Intussusception in Children, systematic review (2021), Manejo de invaginación recurrente y puntos guía; estrategias quirúrgicas",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Separar éxito técnico de la reducción de resolución etiológica en un escolar con recurrencias.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB108",
+      "section": "Alergia y dermatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Anafilaxia refractaria",
+      "stem": "Adolescente de 14 años con anafilaxia por alimento. Recibió dos dosis IM apropiadas de adrenalina separadas por cinco minutos y cristaloide isotónico; persiste hipotensión con mala perfusión y broncoespasmo, aunque mantiene pulso central. Acceso IV permeable, monitorización continua y personal de terapia intensiva a pie de cama.",
+      "prompt": "¿Qué escalamiento se ajusta a la revisión de evidencia RCUK 2021?",
+      "options": [
+        "Cambiar a noradrenalina como único vasopresor antes de intentar adrenalina en infusión",
+        "Establecer infusión IV titulada de adrenalina por personal experto, continuar reanimación y dosis IM mientras se prepara si siguen indicadas",
+        "Administrar bolo IV de adrenalina equivalente a la dosis IM por persistir hipotensión",
+        "Administrar corticoide IV y esperar su efecto antes de añadir soporte vasopresor"
+      ],
+      "correct": 1,
+      "why": "La persistencia de síntomas cardiovasculares o respiratorios tras dos dosis apropiadas justifica ayuda experta e infusión titulada, sin interrumpir medidas de reanimación.",
+      "others": "Otros vasopresores pueden considerarse ante refractariedad a la infusión, pero no sustituyen el escalamiento inicial con adrenalina. El bolo IV en un paciente con circulación espontánea aumenta el riesgo de sobredosis y arritmias; no equivale a una infusión controlada. Los corticoides no revierten de inmediato el choque ni deben retrasar adrenalina y reposición circulatoria.",
+      "rationales": [
+        "Otros vasopresores pueden considerarse ante refractariedad a la infusión, pero no sustituyen el escalamiento inicial con adrenalina.",
+        "La persistencia de síntomas cardiovasculares o respiratorios tras dos dosis apropiadas justifica ayuda experta e infusión titulada, sin interrumpir medidas de reanimación.",
+        "El bolo IV en un paciente con circulación espontánea aumenta el riesgo de sobredosis y arritmias; no equivale a una infusión controlada.",
+        "Los corticoides no revierten de inmediato el choque ni deben retrasar adrenalina y reposición circulatoria."
+      ],
+      "source": {
+        "title": "Dodd et al. Evidence update for the treatment of anaphylaxis (RCUK evidence review)",
+        "year": 2021,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8139870/",
+        "locator": "Manejo de anafilaxia refractaria después de dos dosis apropiadas"
+      },
+      "reference": "Dodd et al. Evidence update for the treatment of anaphylaxis (RCUK evidence review) (2021), Manejo de anafilaxia refractaria después de dos dosis apropiadas",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Reconocer fracaso de la primera línea y seleccionar escalamiento seguro según estado circulatorio.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB109",
+      "section": "Alergia y dermatología",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Riesgo de reacción bifásica",
+      "stem": "Niña de 12 años con asma grave, anafilaxia alimentaria con compromiso respiratorio intenso e hipotensión inicial. Requirió tres dosis de adrenalina IM y líquidos, con resolución completa a las 19:00. Permanece estable, cuenta con autoinyector y vive a 90 minutos del hospital. Se discute alta según estrategia de observación de RCUK 2021.",
+      "prompt": "¿Qué vigilancia mínima corresponde desde la resolución de síntomas según esa estrategia?",
+      "options": [
+        "Dos horas porque ya cuenta con autoinyector y está asintomática",
+        "Seis horas porque la respuesta fue completa antes de terminar la tercera dosis",
+        "Al menos doce horas de observación hospitalaria, con reevaluación de estabilidad y condiciones de egreso",
+        "Alta tras normalización de triptasa, independientemente del tiempo y gravedad"
+      ],
+      "correct": 2,
+      "why": "El esquema RCUK estratifica por gravedad y factores de riesgo. Este caso reúne varios criterios de observación al menos doce horas, sin sustituir juicio clínico.",
+      "others": "La vía rápida de dos horas se reserva para casos seleccionados de respuesta rápida a una sola dosis y condiciones seguras; no aplica aquí. Seis horas puede ser un umbral para otros perfiles, pero más de dos dosis, compromiso respiratorio grave y acceso difícil justifican observación más prolongada. La triptasa no excluye recurrencia bifásica ni determina por sí sola el momento del egreso.",
+      "rationales": [
+        "La vía rápida de dos horas se reserva para casos seleccionados de respuesta rápida a una sola dosis y condiciones seguras; no aplica aquí.",
+        "Seis horas puede ser un umbral para otros perfiles, pero más de dos dosis, compromiso respiratorio grave y acceso difícil justifican observación más prolongada.",
+        "El esquema RCUK estratifica por gravedad y factores de riesgo. Este caso reúne varios criterios de observación al menos doce horas, sin sustituir juicio clínico.",
+        "La triptasa no excluye recurrencia bifásica ni determina por sí sola el momento del egreso."
+      ],
+      "source": {
+        "title": "Dodd et al. Evidence update for the treatment of anaphylaxis (RCUK evidence review)",
+        "year": 2021,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8139870/",
+        "locator": "Tabla 5: observación después de anafilaxia según riesgo"
+      },
+      "reference": "Dodd et al. Evidence update for the treatment of anaphylaxis (RCUK evidence review) (2021), Tabla 5: observación después de anafilaxia según riesgo",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar gravedad, número de dosis, comorbilidad y acceso a atención para individualizar observación.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB110",
+      "section": "Genética",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Mielopatía cervical en trisomía 21",
+      "stem": "Niño de 10 años con síndrome de Down, nueva torpeza manual, marcha espástica y urgencia urinaria. Radiografía cervical neutra muestra desplazamiento atlantoaxoideo importante. Está consciente y sin compromiso ventilatorio. Un estudio radiográfico de tamizaje realizado años antes había sido normal.",
+      "prompt": "¿Qué conducta prioriza seguridad según la vigilancia de salud AAP 2022?",
+      "options": [
+        "Completar radiografías dinámicas de flexión y extensión para cuantificar el desplazamiento antes de referir",
+        "Repetir la radiografía neutra tras fisioterapia cervical para excluir artefacto posicional",
+        "Solicitar electromiografía y considerar neuropatía periférica antes de referir",
+        "Mantener precauciones cervicales, evitar estudios dinámicos adicionales y referir urgentemente a equipo quirúrgico especializado"
+      ],
+      "correct": 3,
+      "why": "La anomalía radiográfica concordante con síntomas requiere valoración rápida por neurocirugía u ortopedia pediátrica especializada, con protección cervical.",
+      "others": "Si la proyección neutra ya muestra una anomalía significativa, la guía indica no realizar radiografías adicionales antes de evaluación especializada. La movilización cervical puede agravar compresión medular; la imagen previa normal no protege de enfermedad posterior. La combinación de signos piramidales y esfinterianos sugiere mielopatía; la electromiografía no debe retrasar la atención.",
+      "rationales": [
+        "Si la proyección neutra ya muestra una anomalía significativa, la guía indica no realizar radiografías adicionales antes de evaluación especializada.",
+        "La movilización cervical puede agravar compresión medular; la imagen previa normal no protege de enfermedad posterior.",
+        "La combinación de signos piramidales y esfinterianos sugiere mielopatía; la electromiografía no debe retrasar la atención.",
+        "La anomalía radiográfica concordante con síntomas requiere valoración rápida por neurocirugía u ortopedia pediátrica especializada, con protección cervical."
+      ],
+      "source": {
+        "title": "AAP Health Supervision for Children and Adolescents With Down Syndrome",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-057010",
+        "locator": "Inestabilidad atlantoaxoidea sintomática; radiografía neutra anormal"
+      },
+      "reference": "AAP Health Supervision for Children and Adolescents With Down Syndrome (2022), Inestabilidad atlantoaxoidea sintomática; radiografía neutra anormal",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Reconocer mielopatía y evitar maniobras diagnósticas que pueden aumentar riesgo neurológico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB111",
+      "section": "Genética",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Anomalías congénitas y retraso del desarrollo sin diagnóstico",
+      "stem": "Niña de 4 años con retraso global grave, cardiopatía congénita corregida, malformación renal y rasgos dismórficos no específicos. Cariotipo y microarreglo cromosómico sin hallazgos causales; tamiz metabólico dirigido no revelador. No hay un síndrome clínico que justifique una prueba de gen único. Ambos padres están disponibles y desean diagnóstico etiológico.",
+      "prompt": "¿Qué estrategia genética es apropiada según ACMG 2021?",
+      "options": [
+        "Considerar secuenciación de exoma o genoma con consejo genético y estudio parental según disponibilidad",
+        "Repetir microarreglo cada seis meses hasta que aparezca una variante causal",
+        "Completar paneles secuenciales de cada órgano como requisito antes de considerar exoma",
+        "Realizar cariotipo de alta resolución como única prueba de segunda línea"
+      ],
+      "correct": 0,
+      "why": "ACMG recomienda considerar exoma/genoma como estudio de primera o segunda línea en anomalías congénitas o retraso intelectual/desarrollo; el análisis parental puede facilitar interpretación.",
+      "others": "Repetir la misma tecnología sin nueva indicación no es la estrategia recomendada para detectar variantes de secuencia. Una serie extensa de paneles no es requisito de ACMG y puede prolongar la búsqueda; el fenotipo multisistémico favorece evaluación genómica amplia. El cariotipo no identifica muchas variantes de secuencia y ya se obtuvo sin resultado causal.",
+      "rationales": [
+        "ACMG recomienda considerar exoma/genoma como estudio de primera o segunda línea en anomalías congénitas o retraso intelectual/desarrollo; el análisis parental puede facilitar interpretación.",
+        "Repetir la misma tecnología sin nueva indicación no es la estrategia recomendada para detectar variantes de secuencia.",
+        "Una serie extensa de paneles no es requisito de ACMG y puede prolongar la búsqueda; el fenotipo multisistémico favorece evaluación genómica amplia.",
+        "El cariotipo no identifica muchas variantes de secuencia y ya se obtuvo sin resultado causal."
+      ],
+      "source": {
+        "title": "ACMG: Exome and genome sequencing for pediatric patients with congenital anomalies or intellectual disability",
+        "year": 2021,
+        "url": "https://doi.org/10.1038/s41436-021-01242-6",
+        "locator": "Recomendación de ES/GS como prueba de primer o segundo nivel en CA/DD/ID"
+      },
+      "reference": "ACMG: Exome and genome sequencing for pediatric patients with congenital anomalies or intellectual disability (2021), Recomendación de ES/GS como prueba de primer o segundo nivel en CA/DD/ID",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Elegir tecnología genética según fenotipo, limitaciones de pruebas previas y rendimiento diagnóstico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB112",
+      "section": "Neurología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Espasmos epilépticos con esclerosis tuberosa",
+      "stem": "Lactante de 7 meses con esclerosis tuberosa confirmada e inicio reciente de espasmos epilépticos. Tras una semana de vigabatrina a dosis revisada por neurología, persisten racimos diarios y EEG anormal compatible con espasmos. Se comprobó adherencia, no hay infección activa ni contraindicación importante a corticoide.",
+      "prompt": "Según NICE NG217, ¿qué ajuste corresponde discutir de inmediato con neurología pediátrica?",
+      "options": [
+        "Sustituir vigabatrina por levetiracetam como monoterapia y reevaluar en un mes",
+        "Añadir prednisolona oral a dosis altas a vigabatrina con vigilancia especializada",
+        "Mantener vigabatrina sin cambios durante seis semanas antes de declarar respuesta insuficiente",
+        "Suspender vigabatrina e iniciar prednisolona sola por fracaso de la primera semana"
+      ],
+      "correct": 1,
+      "why": "NICE indica añadir prednisolona de dosis alta si vigabatrina resulta ineficaz tras una semana en espasmos relacionados con esclerosis tuberosa.",
+      "others": "Levetiracetam no es el rescate preferido por esta recomendación específica tras vigabatrina en esclerosis tuberosa. La persistencia de espasmos exige reevaluación temprana; retrasar semanas la intensificación no se ajusta al esquema. El ajuste indicado es añadir el glucocorticoide, no retirar automáticamente vigabatrina.",
+      "rationales": [
+        "Levetiracetam no es el rescate preferido por esta recomendación específica tras vigabatrina en esclerosis tuberosa.",
+        "NICE indica añadir prednisolona de dosis alta si vigabatrina resulta ineficaz tras una semana en espasmos relacionados con esclerosis tuberosa.",
+        "La persistencia de espasmos exige reevaluación temprana; retrasar semanas la intensificación no se ajusta al esquema.",
+        "El ajuste indicado es añadir el glucocorticoide, no retirar automáticamente vigabatrina."
+      ],
+      "source": {
+        "title": "NICE NG217: Epilepsies in children, young people and adults",
+        "year": 2022,
+        "url": "https://www.nice.org.uk/guidance/ng217/chapter/6-Treating-childhood-onset-epilepsies",
+        "locator": "6.3.5: tratamiento de espasmos asociados a esclerosis tuberosa"
+      },
+      "reference": "NICE NG217: Epilepsies in children, young people and adults (2022), 6.3.5: tratamiento de espasmos asociados a esclerosis tuberosa",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Aplicar una modificación terapéutica dependiente de etiología y tiempo de respuesta.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB113",
+      "section": "Neurología",
+      "type": "visual",
+      "skill": "Seguimiento",
+      "topic": "Respuesta electroclínica incompleta de espasmos infantiles",
+      "stem": "Lactante de 6 meses con espasmos infantiles sin esclerosis tuberosa, tratado con prednisolona de dosis alta y vigabatrina. Tras 14 días, los cuidadores no observan racimos desde hace cuatro días; sin embargo, EEG de sueño de control documenta espasmos electroclínicos sutiles persistentes. Adherencia verificada y evaluación terciaria disponible.",
+      "prompt": "¿Qué interpretación debe dirigir la conducta?",
+      "options": [
+        "Considerar remisión completa por ausencia de racimos percibidos y suspender ambos fármacos",
+        "Reducir tratamiento porque la anormalidad de EEG carece de relevancia sin reporte familiar",
+        "Considerar respuesta incompleta y discutir intensificación con neurólogo terciario según la persistencia clínica y electroencefalográfica",
+        "Esperar hasta el próximo EEG rutinario anual sin ajustar manejo porque el niño ya no tiene racimos visibles"
+      ],
+      "correct": 2,
+      "why": "NICE contempla EEG de sueño a las dos semanas y valoración especializada de ajustes si persisten espasmos; este resultado cambia la conducta.",
+      "others": "La remisión requiere valorar el componente clínico y electroencefalográfico; el relato familiar no excluye espasmos sutiles. Los eventos registrados muestran que la aparente mejoría no representa cese completo; no justifican reducción automática. La reevaluación debe ser temprana y orientada a detener los espasmos, no diferirse un año.",
+      "rationales": [
+        "La remisión requiere valorar el componente clínico y electroencefalográfico; el relato familiar no excluye espasmos sutiles.",
+        "Los eventos registrados muestran que la aparente mejoría no representa cese completo; no justifican reducción automática.",
+        "NICE contempla EEG de sueño a las dos semanas y valoración especializada de ajustes si persisten espasmos; este resultado cambia la conducta.",
+        "La reevaluación debe ser temprana y orientada a detener los espasmos, no diferirse un año."
+      ],
+      "source": {
+        "title": "NICE NG217: Epilepsies in children, young people and adults",
+        "year": 2022,
+        "url": "https://www.nice.org.uk/guidance/ng217/chapter/6-Treating-childhood-onset-epilepsies",
+        "locator": "6.3.2 y recomendaciones de seguimiento/ajuste ante persistencia de espasmos"
+      },
+      "reference": "NICE NG217: Epilepsies in children, young people and adults (2022), 6.3.2 y recomendaciones de seguimiento/ajuste ante persistencia de espasmos",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir respuesta clínica aparente de control electroclínico mediante estudio de seguimiento.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB114",
+      "section": "Inmuno-reumatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Kawasaki resistente a inmunoglobulina",
+      "stem": "Niño de 3 años con Kawasaki confirmado, tratado con inmunoglobulina IV y ácido acetilsalicílico. A 42 horas de terminar la primera infusión persiste fiebre de 39 °C y elevación de PCR. Reevaluación descarta otra infección o diagnóstico alternativo; no hay choque, hemólisis ni sobrecarga de volumen. Cardiología y reumatología discuten segundo tratamiento.",
+      "prompt": "Si se sigue específicamente la guía ACR/VF de Kawasaki 2021, ¿qué opción favorece condicionalmente?",
+      "options": [
+        "Cambiar a infliximab como única opción aceptable tras una primera infusión",
+        "Utilizar pulsos de glucocorticoide como sustituto obligatorio de una segunda inmunoglobulina",
+        "Esperar 72 horas adicionales sin terapia antiinflamatoria por ser fiebre esperada tras infusión",
+        "Considerar una segunda dosis de inmunoglobulina, individualizando riesgos y alternativas"
+      ],
+      "correct": 3,
+      "why": "ACR/VF favorece condicionalmente una segunda inmunoglobulina frente a glucocorticoides después de fiebre persistente tras el primer curso, sin afirmar superioridad universal.",
+      "others": "Infliximab es una opción en escenarios seleccionados, pero la recomendación citada no lo establece como única alternativa inicial de rescate. Los glucocorticoides pueden ser válidos según situación; esta guía favorece condicionalmente repetir inmunoglobulina en este escenario. La fiebre persistente más allá de 36 horas exige reevaluar resistencia y considerar rescate, no esperar de forma sistemática.",
+      "rationales": [
+        "Infliximab es una opción en escenarios seleccionados, pero la recomendación citada no lo establece como única alternativa inicial de rescate.",
+        "Los glucocorticoides pueden ser válidos según situación; esta guía favorece condicionalmente repetir inmunoglobulina en este escenario.",
+        "La fiebre persistente más allá de 36 horas exige reevaluar resistencia y considerar rescate, no esperar de forma sistemática.",
+        "ACR/VF favorece condicionalmente una segunda inmunoglobulina frente a glucocorticoides después de fiebre persistente tras el primer curso, sin afirmar superioridad universal."
+      ],
+      "source": {
+        "title": "ACR/Vasculitis Foundation Guideline for the Management of Kawasaki Disease (2021 guideline)",
+        "year": 2022,
+        "url": "https://doi.org/10.1002/acr.24838",
+        "locator": "Recomendación 7: fiebre persistente después de inmunoglobulina inicial"
+      },
+      "reference": "ACR/Vasculitis Foundation Guideline for the Management of Kawasaki Disease (2021 guideline) (2022), Recomendación 7: fiebre persistente después de inmunoglobulina inicial",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Distinguir recomendación condicional de tratamiento obligatorio y reconocer resistencia temporal.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB115",
+      "section": "Inmuno-reumatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "MIS-C refractario con rasgos de activación macrofágica",
+      "stem": "Escolar de 8 años con MIS-C, disfunción ventricular (FEVI 36%), choque tratado en UCIP y marcadores de activación macrofágica progresivos: ferritina 6200 ng/mL, trombocitopenia e hipofibrinogenemia. Recibió inmunoglobulina y glucocorticoides, pero persisten fiebre e inflamación; el equipo reevalúa infección activa y causas alternativas. Existe riesgo importante de sobrecarga hídrica.",
+      "prompt": "Según guía ACR versión 3, ¿qué intensificación es razonable discutir en este perfil?",
+      "options": [
+        "Considerar anakinra a dosis altas con monitorización multidisciplinaria, sin repetir rutinariamente inmunoglobulina",
+        "Repetir inmunoglobulina como rescate obligatorio aplicando el algoritmo de Kawasaki sin modificaciones",
+        "Suspender todo inmunomodulador y mantener únicamente antiagregación por riesgo de infección",
+        "Elegir infliximab como opción preferente precisamente por rasgos de activación macrofágica"
+      ],
+      "correct": 0,
+      "why": "La guía contempla anakinra en refractariedad a inmunoglobulina y glucocorticoides, especialmente con rasgos de activación macrofágica; exige evaluación individual y vigilancia.",
+      "others": "En MIS-C refractario la repetición de inmunoglobulina se desaconseja por sobrecarga y hemólisis; no se extrapola sin más el algoritmo de Kawasaki. El riesgo infeccioso requiere evaluación simultánea, pero no justifica suspender automáticamente la inmunomodulación ante inflamación grave persistente. La guía no favorece infliximab en pacientes con características de activación macrofágica; anakinra es una opción mejor respaldada para el perfil descrito.",
+      "rationales": [
+        "La guía contempla anakinra en refractariedad a inmunoglobulina y glucocorticoides, especialmente con rasgos de activación macrofágica; exige evaluación individual y vigilancia.",
+        "En MIS-C refractario la repetición de inmunoglobulina se desaconseja por sobrecarga y hemólisis; no se extrapola sin más el algoritmo de Kawasaki.",
+        "El riesgo infeccioso requiere evaluación simultánea, pero no justifica suspender automáticamente la inmunomodulación ante inflamación grave persistente.",
+        "La guía no favorece infliximab en pacientes con características de activación macrofágica; anakinra es una opción mejor respaldada para el perfil descrito."
+      ],
+      "source": {
+        "title": "ACR Clinical Guidance for MIS-C Associated With SARS-CoV-2, Version 3",
+        "year": 2022,
+        "url": "https://doi.org/10.1002/art.42062",
+        "locator": "Tabla de inmunomodulación y tratamiento de MIS-C refractario, versión 3"
+      },
+      "reference": "ACR Clinical Guidance for MIS-C Associated With SARS-CoV-2, Version 3 (2022), Tabla de inmunomodulación y tratamiento de MIS-C refractario, versión 3",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Discriminar rescate inmunomodulador entre síndromes inflamatorios con diferente perfil de riesgo.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB116",
+      "section": "Oftalmología",
+      "type": "visual",
+      "skill": "Interpretación",
+      "topic": "Retinopatía del prematuro: interpretación de zona y estadio",
+      "stem": "Prematuro nacido a las 26 semanas, ahora con 35 semanas de edad posmenstrual. Oftalmología describe proliferación fibrovascular extrarretiniana en zona I, estadio 3, sin enfermedad plus ni desprendimiento. El ojo contralateral muestra zona II, estadio 2, sin plus. El niño está estable y ambos ojos pueden valorarse por un especialista en retina pediátrica.",
+      "prompt": "¿Qué prioridad de manejo corresponde al ojo con zona I, estadio 3?",
+      "options": [
+        "Vigilancia habitual hasta que aparezca enfermedad plus, porque su ausencia excluye tratamiento",
+        "Considerarlo ROP tipo 1 y coordinar tratamiento oportuno con el equipo especializado",
+        "Clasificarlo como tipo 2 y vigilar sin tratamiento hasta superar 40 semanas",
+        "Esperar a que aparezca desprendimiento parcial para justificar terapia"
+      ],
+      "correct": 1,
+      "why": "El patrón zona I estadio 3 sin plus pertenece a ROP tipo 1 según ETROP y requiere tratamiento oportuno; la modalidad se decide con retina pediátrica.",
+      "others": "La localización en zona I cambia el riesgo; el estadio 3 en zona I puede indicar tratamiento aun sin plus. La categoría tipo 2 incluye otros patrones, como zona I estadio 1–2 sin plus; no este escenario. Esperar desprendimiento pierde la oportunidad de prevenir daño irreversible y no corresponde a criterios de tratamiento temprano.",
+      "rationales": [
+        "La localización en zona I cambia el riesgo; el estadio 3 en zona I puede indicar tratamiento aun sin plus.",
+        "El patrón zona I estadio 3 sin plus pertenece a ROP tipo 1 según ETROP y requiere tratamiento oportuno; la modalidad se decide con retina pediátrica.",
+        "La categoría tipo 2 incluye otros patrones, como zona I estadio 1–2 sin plus; no este escenario.",
+        "Esperar desprendimiento pierde la oportunidad de prevenir daño irreversible y no corresponde a criterios de tratamiento temprano."
+      ],
+      "source": {
+        "title": "AAP/AAO/AAPOS: Screening Examination of Premature Infants for Retinopathy of Prematurity",
+        "year": 2018,
+        "url": "https://doi.org/10.1542/peds.2018-3061",
+        "locator": "Criterios de tratamiento de ROP tipo 1 basados en ETROP"
+      },
+      "reference": "AAP/AAO/AAPOS: Screening Examination of Premature Infants for Retinopathy of Prematurity (2018), Criterios de tratamiento de ROP tipo 1 basados en ETROP",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Clasificar por combinación de zona, estadio y plus, no por un único dato.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB117",
+      "section": "Oftalmología",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Reactivación tardía de retinopatía del prematuro",
+      "stem": "Lactante nacido a las 24 semanas, tratado con anti-VEGF por ROP posterior. A las 49 semanas posmenstruales muestra regresión de proliferación y ausencia de plus, pero persiste retina periférica avascular. Se planea traslado a hospital regional; la familia interpreta que la mejoría permite finalizar controles. No hay laser previo.",
+      "prompt": "¿Qué decisión de transición asistencial reduce el riesgo de pérdida de seguimiento?",
+      "options": [
+        "Finalizar controles especializados por regresión de plus y esperar revisión visual al año",
+        "Aplicar calendario de egreso de tamizaje de un prematuro nunca tratado, sin considerar retina avascular",
+        "Concertar seguimiento oftalmológico antes del traslado, mantener vigilancia prolongada por riesgo de reactivación tardía y valorar retina residual",
+        "Repetir anti-VEGF profilácticamente antes del traslado como sustituto de controles"
+      ],
+      "correct": 2,
+      "why": "Debe garantizarse continuidad antes del traslado; la retina incompletamente vascularizada y la edad actual justifican seguimiento estrecho y decisiones especializadas.",
+      "others": "La regresión inicial tras anti-VEGF no excluye reactivación tardía, particularmente durante el período posmenstrual actual. El tratamiento anti-VEGF modifica la evolución natural y puede requerir vigilancia más prolongada que un tamizaje habitual. La repetición profiláctica sin indicación oftalmológica no sustituye controles y añade exposición terapéutica.",
+      "rationales": [
+        "La regresión inicial tras anti-VEGF no excluye reactivación tardía, particularmente durante el período posmenstrual actual.",
+        "El tratamiento anti-VEGF modifica la evolución natural y puede requerir vigilancia más prolongada que un tamizaje habitual.",
+        "Debe garantizarse continuidad antes del traslado; la retina incompletamente vascularizada y la edad actual justifican seguimiento estrecho y decisiones especializadas.",
+        "La repetición profiláctica sin indicación oftalmológica no sustituye controles y añade exposición terapéutica."
+      ],
+      "source": {
+        "title": "AAP/AAO/AAPOS: Screening Examination of Premature Infants for Retinopathy of Prematurity",
+        "year": 2018,
+        "url": "https://doi.org/10.1542/peds.2018-3061",
+        "locator": "Seguimiento posterior a anti-VEGF y continuidad antes de egreso/traslado"
+      },
+      "reference": "AAP/AAO/AAPOS: Screening Examination of Premature Infants for Retinopathy of Prematurity (2018), Seguimiento posterior a anti-VEGF y continuidad antes de egreso/traslado",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Integrar efecto del tratamiento, maduración retiniana y riesgo de reactivación durante una transición.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB118",
+      "section": "Otorrinolaringología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Otitis media con efusión en niño de alto riesgo",
+      "stem": "Niña de 3 años con paladar hendido reparado y retraso de lenguaje. Efusión bilateral documentada desde hace seis semanas, timpanogramas tipo B con volumen de conducto normal e hipoacusia conductiva confirmada. No tiene infección aguda. ORL y audiología discuten ventilación del oído medio antes de completar tres meses.",
+      "prompt": "Según AAO-HNSF 2022, ¿qué decisión es defendible en este caso?",
+      "options": [
+        "Requerir tres meses completos de efusión en todos los casos antes de considerar tubos",
+        "Indicar antibiótico sistémico prolongado para resolver efusión antes de discutir cirugía",
+        "Colocar tubos de larga duración como primera cirugía en forma obligatoria por paladar hendido",
+        "Considerar tubos por riesgo del desarrollo y efusión con alta probabilidad de persistencia, mediante decisión compartida"
+      ],
+      "correct": 3,
+      "why": "KAS 9 permite considerar tubos en niños de riesgo con efusión probablemente persistente; el tipo B y el impacto auditivo son elementos relevantes.",
+      "others": "En niños con riesgo del desarrollo, un timpanograma plano puede respaldar considerar tubos antes del plazo convencional de tres meses. La efusión sin infección aguda no se trata de forma rutinaria con antibiótico prolongado; no aborda el riesgo auditivo descrito. Los tubos prolongados no se recomiendan rutinariamente como primera intervención salvo necesidad específica de ventilación prolongada.",
+      "rationales": [
+        "En niños con riesgo del desarrollo, un timpanograma plano puede respaldar considerar tubos antes del plazo convencional de tres meses.",
+        "La efusión sin infección aguda no se trata de forma rutinaria con antibiótico prolongado; no aborda el riesgo auditivo descrito.",
+        "Los tubos prolongados no se recomiendan rutinariamente como primera intervención salvo necesidad específica de ventilación prolongada.",
+        "KAS 9 permite considerar tubos en niños de riesgo con efusión probablemente persistente; el tipo B y el impacto auditivo son elementos relevantes."
+      ],
+      "source": {
+        "title": "AAO-HNSF Clinical Practice Guideline: Tympanostomy Tubes in Children (Update)",
+        "year": 2022,
+        "url": "https://doi.org/10.1177/01945998211065662",
+        "locator": "KAS 8–10: niños de riesgo, efusión probablemente persistente y tipo de tubo"
+      },
+      "reference": "AAO-HNSF Clinical Practice Guideline: Tympanostomy Tubes in Children (Update) (2022), KAS 8–10: niños de riesgo, efusión probablemente persistente y tipo de tubo",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Aplicar una excepción por riesgo del desarrollo e interpretar timpanometría en contexto anatómico.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
+    },
+    {
+      "id": "PB119",
+      "section": "Otorrinolaringología",
+      "type": "caso",
+      "skill": "Farmacología",
+      "topic": "Otorrea aguda por tubo de ventilación",
+      "stem": "Niño de 5 años con tubos de ventilación permeables, colocado por efusión crónica. Presenta otorrea purulenta unilateral de 48 horas, dolor leve, afebril, sin celulitis periauricular, mastoidalgia ni inmunodeficiencia. El tubo está visible y permite administración local; no ha recibido antimicrobianos para este episodio.",
+      "prompt": "¿Cuál es la estrategia antimicrobiana inicial con mejor respaldo en esta otorrea no complicada?",
+      "options": [
+        "Gotas óticas antibióticas apropiadas para oído medio, sin antibiótico oral de rutina",
+        "Amoxicilina-clavulanato oral sin gotas por el origen en oído medio",
+        "Combinación rutinaria de gotas antibióticas y cefalosporina oral durante todo el episodio",
+        "Gotas de aminoglucósido como primera opción sin considerar exposición del oído medio"
+      ],
+      "correct": 0,
+      "why": "KAS 14 recomienda gotas antibióticas solas en otorrea aguda no complicada por tubos; debe utilizarse un preparado adecuado para membrana no íntegra.",
+      "others": "La vía oral sola no aprovecha el acceso directo al foco a través del tubo y no es la primera estrategia respaldada. La adición sistémica rutinaria aumenta exposición innecesaria; las complicaciones o circunstancias especiales podrían cambiar conducta. La comunicación con oído medio obliga a considerar ototoxicidad; no se elige un aminoglucósido rutinariamente ignorando ese riesgo.",
+      "rationales": [
+        "KAS 14 recomienda gotas antibióticas solas en otorrea aguda no complicada por tubos; debe utilizarse un preparado adecuado para membrana no íntegra.",
+        "La vía oral sola no aprovecha el acceso directo al foco a través del tubo y no es la primera estrategia respaldada.",
+        "La adición sistémica rutinaria aumenta exposición innecesaria; las complicaciones o circunstancias especiales podrían cambiar conducta.",
+        "La comunicación con oído medio obliga a considerar ototoxicidad; no se elige un aminoglucósido rutinariamente ignorando ese riesgo."
+      ],
+      "source": {
+        "title": "AAO-HNSF Clinical Practice Guideline: Tympanostomy Tubes in Children (Update)",
+        "year": 2022,
+        "url": "https://doi.org/10.1177/01945998211065662",
+        "locator": "KAS 14: otorrea aguda no complicada con tubos"
+      },
+      "reference": "AAO-HNSF Clinical Practice Guideline: Tympanostomy Tubes in Children (Update) (2022), KAS 14: otorrea aguda no complicada con tubos",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "standard": "r3-specialist-v1",
+      "reasoning": "Elegir vía antimicrobiana según acceso al foco, complicaciones y seguridad ótica.",
+      "reviewStatus": "diseñado para R3/especialista; revisión editorial y bibliográfica; validación clínica independiente y psicométrica pendientes"
     }
   ]
 });
