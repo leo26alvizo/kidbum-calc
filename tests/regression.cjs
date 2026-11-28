@@ -116,7 +116,7 @@ const t=[
 ['Invalid SBP',()=>assert.ok(calc('obshock',{hr:100,sbp:0}).error)],
 ['NEWS2 regression',()=>assert.equal(calc('news2',{rr:16,spo2:98,sbp:120,hr:70,temp:37,scale:'one',oxygen:'false',conscious:'alert'}).value,0)],
 ['Creator credit',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
-['Cover main title',()=>assert.ok(html.includes('atlas-hero-main">Calculadora Médica</span> <span class="atlas-hero-tagline">Integral</span>'))],
+['Cover main title',()=>assert.ok(html.includes('atlas-hero-main">Medicina clínica y formación</span> <span class="atlas-hero-tagline">académica</span>'))],
 ['Manifest creator',()=>assert.ok(manifest.description.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
 ['Creator across page',()=>assert.equal(html.split('Teniente Pasante de Medicina Leonardo Alvizo Velázquez').length-1,6)],
 ['ChatGPT handoff',()=>assert.ok(html.includes("window.location.assign('https://chatgpt.com/')"))],
@@ -795,3 +795,4 @@ if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(
  const crypto=require('node:crypto');assert.equal(crypto.createHash('sha256').update(fs.readFileSync('assets/oftalmologia-portada-original.webp')).digest('hex'),'1364fb3b6766530b2bd5a28420a5b51b988d8eadfc30ae1866d1963ed9f8df03');
  console.log('PASS 15 ophthalmology tools: signed inputs, boundary cases, clinical guards, original cover hash');
 }
+
