@@ -35,3 +35,6 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 - Radar poligonal de cobertura real de 16 áreas, sin inventar aciertos ni mostrar dominio sin intentos; detalle textual disponible.
 - Recuento dinámico de disponibilidad por modalidad y área; botones sin reactivos deshabilitados. Bibliografía deduplicada a partir de las fuentes del banco avanzado y retroalimentación editorial por alternativa.
 - El banco y el motor permanecen byte a byte idénticos. Prueba de interacción ampliada para comprobar los nuevos estados.
+
+### v0.11.2 · Tema completo
+- Se elimina el bloqueo de la portada en oscuro. Marfil y azul noche se aplican a toda la sección (inicio, tarjetas, radar, bibliografía, examen y resultados). Se conserva la selección local y se usa el tema general de KidBum si aún no hay preferencia del módulo. Las pruebas Chromium comprueban estilos calculados y persistencia, no solo el atributo del tema.
