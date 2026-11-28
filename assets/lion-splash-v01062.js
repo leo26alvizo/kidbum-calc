@@ -39,5 +39,5 @@
  document.addEventListener('keydown',onKey);
  window.addEventListener('pagehide',finish,{once:true});
  // Fixed upper bound: a slow/failed clinical script cannot trap the screen.
- timer=setTimeout(finish,1390);
+ timer=setTimeout(finish,2850);
 })();
