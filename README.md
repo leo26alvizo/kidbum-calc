@@ -1,3 +1,7 @@
+# Actualización v0.10.99 · Pediatría BOARD: edición académica 0.3
+
+24 reactivos avanzados, 48 fundamentos; 11 áreas avanzadas y 11 fuentes clínicas específicas. Nuevos casos de neutropenia febril, artritis bacteriana, bronquiolitis, espasmos infantiles y otitis media. Revisión clínica independiente pendiente.
+
 # Actualización v0.10.98 · Pediatría BOARD: edición académica 0.2
 
 12 reactivos avanzados con bibliografía específica y justificación de las cuatro alternativas; 48 fundamentos separados. Simulador avanzado independiente. Revisión clínica externa pendiente; material no oficial.
