@@ -26,6 +26,8 @@ jobs:
         run: node tests/neurologia-pro-v01092.cjs
       - name: Neurología clinical pathways and graph safety
         run: node tests/neurologia-algoritmos-v01093.cjs
+      - name: Pediatría BOARD pilot — bank, scores and review
+        run: node tests/pediatria-board.cjs
       - name: SAMPLE pediatric history tool
         run: node tests/pediatria-sample-v01095.cjs
       - name: Ophthalmology first-contact routes and Pharma PRO crosslinks
