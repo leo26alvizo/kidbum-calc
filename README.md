@@ -1,3 +1,7 @@
+# Actualización v0.10.98 · Pediatría BOARD: edición académica 0.2
+
+12 reactivos avanzados con bibliografía específica y justificación de las cuatro alternativas; 48 fundamentos separados. Simulador avanzado independiente. Revisión clínica externa pendiente; material no oficial.
+
 # Actualización v0.10.97 · Pediatría BOARD (piloto educativo)
 
 48 reactivos originales, 16 áreas del temario CMCP, práctica, simulación, radar y repaso espaciado. Sin aval del Consejo ni revisión clínica independiente. [Documentación](docs/pediatria-board-piloto.md).
