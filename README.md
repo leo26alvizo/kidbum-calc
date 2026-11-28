@@ -1,3 +1,7 @@
+# Actualización v0.11.7 · Pediatría BOARD UX Edition
+
+Portada compacta, navegación temprana, extensión y duración realistas, mapa de preguntas del simulador, revisión filtrada y mejoras táctiles. 52 reactivos activos, 87 en reserva y progreso local conservados. Validación clínica independiente y psicométrica pendientes.
+
 # Actualización v0.11.6 · Pediatría BOARD: 52 reactivos R3
 
 20 nuevos casos, 29 fuentes activas, 16 áreas, 87 en reserva. Simulador de 50 preguntas y primer caso seriado activo de colitis ulcerosa grave. Validación independiente pendiente.
