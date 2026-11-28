@@ -65,6 +65,6 @@ for(const forbidden of ['fetch(','XMLHttpRequest','localStorage.clear(','navigat
  assert.ok(!ui.includes(forbidden),'A visual refresh cannot add network or destructive data APIs: '+forbidden);
 }
 const pharma='<a href="./pharma-pro.html" class="kb-resource-link">💊 Biblioteca farmacológica · Pharma Pro →</a>';
-const shortcut='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 KidBum ENARM · Casos clínicos →</a>';
+const shortcut='<a href="./enarm.html" class="kb-resource-link kb-enarm-link">🎓 LEO MED ENARM · Casos clínicos →</a>';
 assert.ok(home.includes(pharma+shortcut),'Equal-size ENARM quick link remains below Pharma Pro');
 console.log('PASS v0.10.66: original lion vector portada, cobalt, 4 image-backed study cards, seven specialty icons, offline assets, safe history and stable study engine');

@@ -1,3 +1,7 @@
+# Actualización v0.12.0 · LEO MED Edition
+
+Nueva identidad: LEO MED — Precisión clínica. Excelencia académica. Marca de interfaz, iconos y portada editorial; se mantienen el origen, ID PWA, rutas, claves locales, motores clínicos y los recursos anteriores. La portada original se conserva en un apartado desplegable. Revisión visual física y disponibilidad comercial pendientes. Proyecto independiente, sin aval institucional implícito.
+
 # Actualización v0.11.9 · Portada clínica y académica
 
 Nueva portada principal aprobada, con la fachada de la Escuela Militar de Medicina, crédito del creador y alcance clínico y académico. Proyecto independiente, sin afirmación de aval institucional. No se modifican las demás herramientas ni el historial.

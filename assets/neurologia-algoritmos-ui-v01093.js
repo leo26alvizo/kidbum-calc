@@ -1,4 +1,4 @@
-/* KidBum Urgencias/UCI 0.10.56 · adult-only accessible rapid clinical flow */
+/* LEO MED Urgencias/UCI 0.10.56 · adult-only accessible rapid clinical flow */
 (function(root){
 'use strict';
 const engine=root.KidBumNeuroAlgorithms;
@@ -42,7 +42,7 @@ function showSection(active){
  $('alg-library').hidden=active;
  $('alg-flow').hidden=!active;
 }
-const CLINICAL_TOOLS=Object.freeze({"evc":[["NIHSS y escalas neurológicas","./index.html?especialidad=neurologia"]],"ait":[["ABCD² · KidBum","./index.html?especialidad=neurologia"]],"hsa":[["WFNS","./neurologia.html#neuro-wfns"],["Fisher modificada","./neurologia.html#neuro-mfisher"]],"status":[["STESS","./neurologia.html#neuro-stess"]],"meningitis":[["Glucosa LCR/sangre","./neurologia.html#neuro-csfratio"]],"gbs":[["MRC","./neurologia.html#neuro-mrc"],["Hughes","./neurologia.html#neuro-gbs"]],"tce":[["FOUR","./neurologia.html#neuro-four"],["PPC","./neurologia.html#neuro-cpp"]],"trauma-medular":[["TLICS","./ortopedia.html#ort-tlics"],["SLIC","./ortopedia.html#ort-slic"]],"mielopatia":[["Nurick","./neurologia.html#neuro-nurick"]]});
+const CLINICAL_TOOLS=Object.freeze({"evc":[["NIHSS y escalas neurológicas","./index.html?especialidad=neurologia"]],"ait":[["ABCD² · LEO MED","./index.html?especialidad=neurologia"]],"hsa":[["WFNS","./neurologia.html#neuro-wfns"],["Fisher modificada","./neurologia.html#neuro-mfisher"]],"status":[["STESS","./neurologia.html#neuro-stess"]],"meningitis":[["Glucosa LCR/sangre","./neurologia.html#neuro-csfratio"]],"gbs":[["MRC","./neurologia.html#neuro-mrc"],["Hughes","./neurologia.html#neuro-gbs"]],"tce":[["FOUR","./neurologia.html#neuro-four"],["PPC","./neurologia.html#neuro-cpp"]],"trauma-medular":[["TLICS","./ortopedia.html#ort-tlics"],["SLIC","./ortopedia.html#ort-slic"]],"mielopatia":[["Nurick","./neurologia.html#neuro-nurick"]]});
 function renderTools(id){
  const panel=$('alg-tools');if(!panel)return;
  panel.replaceChildren();const items=CLINICAL_TOOLS[id]||[];

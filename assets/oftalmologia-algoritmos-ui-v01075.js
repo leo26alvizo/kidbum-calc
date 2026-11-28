@@ -1,4 +1,4 @@
-/* KidBum Oftalmología · iconografía clínica local, sin cambios de decisiones. */
+/* LEO MED Oftalmología · iconografía clínica local, sin cambios de decisiones. */
 (function(root){
 'use strict';
 const engine=root.KidBumOphthalmologyAlgorithms;
