@@ -38,3 +38,10 @@ Material educativo original independiente, sin afiliación ni aval del CMCP.
 
 ### v0.11.2 · Tema completo
 - Se elimina el bloqueo de la portada en oscuro. Marfil y azul noche se aplican a toda la sección (inicio, tarjetas, radar, bibliografía, examen y resultados). Se conserva la selección local y se usa el tema general de KidBum si aún no hay preferencia del módulo. Las pruebas Chromium comprueban estilos calculados y persistencia, no solo el atributo del tema.
+
+## Edición académica 0.4 · v0.11.3
+
+- 87 reactivos: 48 fundamentos y 39 avanzados en las 16 áreas. PB073–PB087 son 15 viñetas originales, tres por área previamente sin nivel avanzado: cirugía, alergia/dermatología, endocrinología, genética, oftalmología. Se conservan las claves e identificadores anteriores.
+- Siete fuentes nuevas: IDSA 2024 (imagen en apendicitis), ensayo aleatorizado Lancet 2025 (interpretación de no inferioridad), NIAID 2017 (prevención de alergia a cacahuate), WAO 2020 (anafilaxia), Endocrine Society 2018 (HSC), AAP 2022 (síndrome de Down), AAO PPP 2022 actualizada 2024 (ambliopía). No se presenta la evidencia histórica como publicación reciente. El ensayo se pregunta explícitamente como interpretación de ese estudio, no como regla universal; WSES edición 2025 publicada en 2026 admite manejo no operatorio seleccionado.
+- Se localizó GPC mexicana IMSS-715-14 de hiperplasia suprarrenal congénita en catálogo institucional; no se verificó la vigencia ni se atribuyen a ella las recomendaciones internacionales. Contraste mexicano sistemático pendiente.
+- Revisión editorial de coherencia, pertinencia, clave y distractores; no constituye revisión clínica independiente, validación psicométrica ni reproducción de reactivos oficiales del CMCP. Cobertura temática completa no implica cobertura suficiente de todos los subtemas. Simulador puede ofrecer 25 reactivos avanzados por primera vez. Pruebas revisadas para 87/39/16 y 18 fuentes.

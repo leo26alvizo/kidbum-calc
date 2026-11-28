@@ -1914,6 +1914,531 @@ window.KidBumPediatriaBoard=Object.freeze({
       "critical": false,
       "level": "board",
       "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB073",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Apendicitis pediátrica",
+      "stem": "Escolar de 9 años con 18 horas de dolor que migró a fosa ilíaca derecha, anorexia, temperatura 37.9 °C y defensa localizada. Leucocitos 12 600/mm³, neutrófilos 78%. Está estable, sin peritonismo generalizado. La estratificación clínica institucional indica riesgo intermedio y se dispone de imagen pediátrica experta.",
+      "prompt": "Según IDSA 2024, ¿qué estudio debe solicitarse inicialmente?",
+      "options": [
+        "TC abdominopélvica con contraste IV",
+        "Ultrasonido abdominal dirigido a fosa ilíaca derecha",
+        "RM abdominopélvica como estudio inicial sistemático",
+        "Radiografía abdominal en dos proyecciones"
+      ],
+      "correct": 1,
+      "why": "El ultrasonido es la modalidad inicial sugerida en niños con sospecha de apendicitis; evita radiación y puede confirmar el diagnóstico.",
+      "others": "La TC puede ser apropiada tras un ultrasonido no concluyente, pero expone a radiación y no es la primera modalidad preferida en este escenario. La RM es útil como segunda modalidad cuando persiste la sospecha tras un ultrasonido indeterminado; no es la primera sugerida de rutina. La radiografía simple tiene rendimiento insuficiente para confirmar o excluir apendicitis.",
+      "rationales": [
+        "La TC puede ser apropiada tras un ultrasonido no concluyente, pero expone a radiación y no es la primera modalidad preferida en este escenario.",
+        "El ultrasonido es la modalidad inicial sugerida en niños con sospecha de apendicitis; evita radiación y puede confirmar el diagnóstico.",
+        "La RM es útil como segunda modalidad cuando persiste la sospecha tras un ultrasonido indeterminado; no es la primera sugerida de rutina.",
+        "La radiografía simple tiene rendimiento insuficiente para confirmar o excluir apendicitis."
+      ],
+      "source": {
+        "title": "IDSA 2024. Diagnostic Imaging of Suspected Acute Appendicitis",
+        "year": 2024,
+        "url": "https://www.idsociety.org/practice-guideline/intra-abdominal-infections/",
+        "locator": "Diagnóstico por imagen en niños: modalidad inicial"
+      },
+      "reference": "IDSA 2024. Diagnostic Imaging of Suspected Acute Appendicitis (2024), Diagnóstico por imagen en niños: modalidad inicial",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB074",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Apendicitis pediátrica",
+      "stem": "Niña de 11 años con 26 horas de dolor abdominal, ahora localizado en cuadrante inferior derecho. Ultrasonido inicial no visualiza el apéndice y es indeterminado. En reevaluación persisten dolor focal, defensa y neutrofilia; sin inestabilidad. Cirugía pediátrica valora el caso. Hay RM rápida sin sedación disponible de inmediato.",
+      "prompt": "Se requiere una segunda imagen que evite radiación ionizante. ¿Cuál es la mejor opción conforme a IDSA 2024?",
+      "options": [
+        "Repetir ultrasonido como única estrategia de imagen",
+        "TC abdominopélvica con contraste IV",
+        "RM abdominal y pélvica",
+        "Radiografía abdominal en bipedestación"
+      ],
+      "correct": 2,
+      "why": "La RM permite estudiar la apendicitis sin radiación; satisface la condición del caso y la recomendación condicional.",
+      "others": "Si persiste la sospecha, IDSA sugiere RM o TC en vez de otro ultrasonido; la observación clínica sigue siendo una opción según contexto. La TC es una alternativa apropiada tras ultrasonido indeterminado, pero utiliza radiación y aquí existe RM inmediata. La radiografía no caracteriza suficientemente el apéndice ni resuelve el ultrasonido equívoco.",
+      "rationales": [
+        "Si persiste la sospecha, IDSA sugiere RM o TC en vez de otro ultrasonido; la observación clínica sigue siendo una opción según contexto.",
+        "La TC es una alternativa apropiada tras ultrasonido indeterminado, pero utiliza radiación y aquí existe RM inmediata.",
+        "La RM permite estudiar la apendicitis sin radiación; satisface la condición del caso y la recomendación condicional.",
+        "La radiografía no caracteriza suficientemente el apéndice ni resuelve el ultrasonido equívoco."
+      ],
+      "source": {
+        "title": "IDSA 2024. Diagnostic Imaging of Suspected Acute Appendicitis",
+        "year": 2024,
+        "url": "https://www.idsociety.org/practice-guideline/intra-abdominal-infections/",
+        "locator": "Diagnóstico por imagen: ultrasonido equívoco con sospecha persistente"
+      },
+      "reference": "IDSA 2024. Diagnostic Imaging of Suspected Acute Appendicitis (2024), Diagnóstico por imagen: ultrasonido equívoco con sospecha persistente",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB075",
+      "section": "Cirugía pediátrica",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Apendicitis pediátrica y evidencia",
+      "stem": "Familia de un niño de 10 años con apendicitis presuntamente no perforada pregunta por los antibióticos frente a la cirugía. Se revisa el ensayo internacional de no inferioridad publicado en Lancet en 2025, en niños de 5–16 años: fracaso del tratamiento al año en 153/452 con antibióticos y 28/394 con apendicectomía; diferencia estimada 26.7 puntos porcentuales (IC 90% 22.4–30.9).",
+      "prompt": "¿Qué conclusión refleja mejor el resultado de este ensayo, sin extrapolarlo a todos los protocolos?",
+      "options": [
+        "El estudio apoya no inferioridad de los antibióticos porque la mayoría evitó cirugía",
+        "Ambas estrategias son equivalentes porque existe fracaso en los dos grupos",
+        "La diferencia corresponde a reducción relativa de riesgo de 26.7% con cirugía",
+        "La estrategia antibiótica no demostró no inferioridad y tuvo mayor fracaso al año"
+      ],
+      "correct": 3,
+      "why": "El ensayo encontró más fracaso con antibióticos y concluyó inferioridad frente a apendicectomía; la decisión individual requiere discutir selección y preferencias.",
+      "others": "Que muchos niños eviten cirugía no prueba no inferioridad; se debe evaluar la diferencia entre grupos frente al margen predefinido. La presencia de eventos en ambos grupos no implica equivalencia; las tasas fueron distintas. 26.7 puntos porcentuales es la diferencia absoluta estimada, no una reducción relativa del 26.7%.",
+      "rationales": [
+        "Que muchos niños eviten cirugía no prueba no inferioridad; se debe evaluar la diferencia entre grupos frente al margen predefinido.",
+        "La presencia de eventos en ambos grupos no implica equivalencia; las tasas fueron distintas.",
+        "26.7 puntos porcentuales es la diferencia absoluta estimada, no una reducción relativa del 26.7%.",
+        "El ensayo encontró más fracaso con antibióticos y concluyó inferioridad frente a apendicectomía; la decisión individual requiere discutir selección y preferencias."
+      ],
+      "source": {
+        "title": "St Peter et al. Appendicectomy versus antibiotics for acute uncomplicated appendicitis in children: randomised non-inferiority trial",
+        "year": 2025,
+        "url": "https://pubmed.ncbi.nlm.nih.gov/39826968/",
+        "locator": "Resultados y conclusión del ensayo de no inferioridad"
+      },
+      "reference": "St Peter et al. Appendicectomy versus antibiotics for acute uncomplicated appendicitis in children: randomised non-inferiority trial (2025), Resultados y conclusión del ensayo de no inferioridad",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB076",
+      "section": "Alergia y dermatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Prevención de alergia alimentaria",
+      "stem": "Lactante de 5 meses con dermatitis atópica grave que requiere tratamiento tópico frecuente. Tolera alimentos complementarios apropiados para su desarrollo; nunca ha ingerido cacahuate. IgE específica a cacahuate por ImmunoCAP: 0.12 kUA/L. No ha tenido reacciones alimentarias inmediatas.",
+      "prompt": "Con base en NIAID 2017, ¿qué estrategia de introducción del cacahuate es apropiada?",
+      "options": [
+        "Introducir pronto una preparación segura para la edad; considerar supervisión si existe preocupación",
+        "Diferir toda exposición hasta los 12 meses y repetir IgE",
+        "Realizar provocación hospitalaria obligatoria antes de toda introducción, por el eccema",
+        "Excluir cacahuate hasta que desaparezca completamente la dermatitis"
+      ],
+      "correct": 0,
+      "why": "En el grupo de alto riesgo, una IgE específica inferior a 0.35 kUA/L permite introducción temprana en forma apropiada; puede ofrecerse supervisión según preocupación clínica.",
+      "others": "Retrasar de rutina pierde la oportunidad de prevención temprana que plantea la guía. La prueba por debajo del umbral tiene buen valor predictivo negativo; la provocación hospitalaria no es requisito universal. La gravedad del eccema identifica riesgo y necesidad de evaluación temprana, no indica exclusión indefinida.",
+      "rationales": [
+        "En el grupo de alto riesgo, una IgE específica inferior a 0.35 kUA/L permite introducción temprana en forma apropiada; puede ofrecerse supervisión según preocupación clínica.",
+        "Retrasar de rutina pierde la oportunidad de prevención temprana que plantea la guía.",
+        "La prueba por debajo del umbral tiene buen valor predictivo negativo; la provocación hospitalaria no es requisito universal.",
+        "La gravedad del eccema identifica riesgo y necesidad de evaluación temprana, no indica exclusión indefinida."
+      ],
+      "source": {
+        "title": "NIAID. Addendum Guidelines for the Prevention of Peanut Allergy",
+        "year": 2017,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5226648/",
+        "locator": "Addendum 1, categoría A de IgE específica"
+      },
+      "reference": "NIAID. Addendum Guidelines for the Prevention of Peanut Allergy (2017), Addendum 1, categoría A de IgE específica",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB077",
+      "section": "Alergia y dermatología",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Prevención de alergia alimentaria",
+      "stem": "Lactante de 5 meses con eccema grave, listo para alimentación complementaria y sin exposición previa a cacahuate. La IgE específica por ImmunoCAP es 0.52 kUA/L. No hay historia de anafilaxia y la familia pregunta si el resultado confirma alergia.",
+      "prompt": "Conforme a NIAID 2017, ¿qué decisión corresponde?",
+      "options": [
+        "Introducción en domicilio sin evaluación adicional, porque el resultado es inferior a 1 kUA/L",
+        "Diagnosticar alergia al cacahuate e indicar exclusión permanente únicamente por la IgE",
+        "Referir a alergología para evaluación adicional antes de decidir la introducción",
+        "Solicitar un panel amplio de IgE a todos los alimentos y excluir los positivos"
+      ],
+      "correct": 2,
+      "why": "En la categoría B se indica valoración especializada; una prueba cutánea y, según resultado, una exposición supervisada pueden orientar la decisión.",
+      "others": "El umbral de derivación en esta vía de prevención es 0.35 kUA/L, no 1 kUA/L. Un resultado positivo a ese nivel no confirma alergia clínica por sí solo; puede representar sensibilización. Los paneles indiscriminados tienen bajo valor predictivo positivo y favorecen restricciones injustificadas.",
+      "rationales": [
+        "El umbral de derivación en esta vía de prevención es 0.35 kUA/L, no 1 kUA/L.",
+        "Un resultado positivo a ese nivel no confirma alergia clínica por sí solo; puede representar sensibilización.",
+        "En la categoría B se indica valoración especializada; una prueba cutánea y, según resultado, una exposición supervisada pueden orientar la decisión.",
+        "Los paneles indiscriminados tienen bajo valor predictivo positivo y favorecen restricciones injustificadas."
+      ],
+      "source": {
+        "title": "NIAID. Addendum Guidelines for the Prevention of Peanut Allergy",
+        "year": 2017,
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5226648/",
+        "locator": "Addendum 1, categoría B de IgE específica"
+      },
+      "reference": "NIAID. Addendum Guidelines for the Prevention of Peanut Allergy (2017), Addendum 1, categoría B de IgE específica",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB078",
+      "section": "Alergia y dermatología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Anafilaxia",
+      "stem": "Adolescente de 13 años con alergia conocida a nuez, que ingiere accidentalmente una porción. Diez minutos después desarrolla disfonía, estridor leve, tos y sibilancias. No presenta urticaria; TA 110/68 mmHg. Está consciente y el equipo inicia valoración ABCDE.",
+      "prompt": "¿Cuál es la intervención farmacológica prioritaria conforme a WAO 2020?",
+      "options": [
+        "Salbutamol inhalado y reevaluación antes de administrar adrenalina",
+        "Adrenalina intramuscular en muslo anterolateral",
+        "Antihistamínico H1 intravenoso seguido de adrenalina si aparece urticaria",
+        "Adrenalina intravenosa en bolo como primera vía por el estridor"
+      ],
+      "correct": 1,
+      "why": "El compromiso respiratorio agudo tras un alérgeno conocido basta para sospechar anafilaxia incluso sin lesiones cutáneas; la vía IM es primera línea.",
+      "others": "El broncodilatador puede complementar el tratamiento de broncoespasmo, pero no revierte todos los mecanismos de la anafilaxia. Un antihistamínico no trata el compromiso laríngeo ni debe retrasar adrenalina. El bolo IV aumenta riesgo de eventos cardiovasculares y errores; no es la vía inicial habitual en un paciente sin paro.",
+      "rationales": [
+        "El broncodilatador puede complementar el tratamiento de broncoespasmo, pero no revierte todos los mecanismos de la anafilaxia.",
+        "El compromiso respiratorio agudo tras un alérgeno conocido basta para sospechar anafilaxia incluso sin lesiones cutáneas; la vía IM es primera línea.",
+        "Un antihistamínico no trata el compromiso laríngeo ni debe retrasar adrenalina.",
+        "El bolo IV aumenta riesgo de eventos cardiovasculares y errores; no es la vía inicial habitual en un paciente sin paro."
+      ],
+      "source": {
+        "title": "World Allergy Organization Anaphylaxis Guidance 2020",
+        "year": 2020,
+        "url": "https://doi.org/10.1016/j.waojou.2020.100472",
+        "locator": "Criterios diagnósticos modificados y tratamiento agudo"
+      },
+      "reference": "World Allergy Organization Anaphylaxis Guidance 2020 (2020), Criterios diagnósticos modificados y tratamiento agudo",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB079",
+      "section": "Endocrinología",
+      "type": "caso",
+      "skill": "Diagnóstico",
+      "topic": "Hiperplasia suprarrenal congénita",
+      "stem": "Niña de 7 años con pubarquia progresiva, aceleración de crecimiento y edad ósea adelantada dos años. Sin signos de pubertad central. La 17-hidroxiprogesterona basal de las 07:30 h medida por LC-MS/MS es limítrofe para el método; no recibe glucocorticoides.",
+      "prompt": "¿Qué prueba discrimina mejor la deficiencia de 21-hidroxilasa de otros defectos enzimáticos, según Endocrine Society 2018?",
+      "options": [
+        "Estudio aislado de cariotipo",
+        "Perfil adrenocortical completo tras estimulación con cosintropina",
+        "Genotipificación CYP21A2 como sustituto obligatorio de la prueba dinámica",
+        "Repetición aislada de DHEA-S en seis meses"
+      ],
+      "correct": 1,
+      "why": "La recomendación 3.3 indica perfil completo poscosintropina ante 17-OHP limítrofe para caracterizar el defecto.",
+      "others": "El cariotipo no identifica el bloqueo de síntesis esteroidea responsable de este fenotipo. La genotipificación se reserva, entre otros contextos, para resultados dinámicos equívocos, imposibilidad de realizar la prueba o consejo genético. DHEA-S aislada no discrimina los defectos esteroidogénicos ni resuelve la sospecha actual.",
+      "rationales": [
+        "El cariotipo no identifica el bloqueo de síntesis esteroidea responsable de este fenotipo.",
+        "La recomendación 3.3 indica perfil completo poscosintropina ante 17-OHP limítrofe para caracterizar el defecto.",
+        "La genotipificación se reserva, entre otros contextos, para resultados dinámicos equívocos, imposibilidad de realizar la prueba o consejo genético.",
+        "DHEA-S aislada no discrimina los defectos esteroidogénicos ni resuelve la sospecha actual."
+      ],
+      "source": {
+        "title": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency",
+        "year": 2018,
+        "url": "https://www.endocrine.org/clinical-practice-guidelines/congenital-adrenal-hyperplasia-guideline-resources",
+        "locator": "3.2–3.4, diagnóstico después de la lactancia"
+      },
+      "reference": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency (2018), 3.2–3.4, diagnóstico después de la lactancia",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB080",
+      "section": "Endocrinología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hiperplasia suprarrenal congénita",
+      "stem": "Recién nacida de 18 días con hiperplasia suprarrenal congénita clásica perdedora de sal por deficiencia de 21-hidroxilasa. Tras estabilización hospitalaria, se normalizan perfusión, glucosa y electrolitos. El equipo prepara la terapia crónica y seguimiento por endocrinología.",
+      "prompt": "¿Qué combinación de mantenimiento se recomienda en esta etapa?",
+      "options": [
+        "Prednisolona y fludrocortisona, sin suplemento de sodio",
+        "Hidrocortisona sola con seguimiento de sodio",
+        "Hidrocortisona, fludrocortisona y suplemento de cloruro de sodio",
+        "Dexametasona y suplemento de sodio, sin mineralocorticoide"
+      ],
+      "correct": 2,
+      "why": "Las recomendaciones 4.1 y 4.3 incluyen hidrocortisona, fludrocortisona y sodio durante el periodo neonatal y lactancia temprana, con ajuste clínico y bioquímico.",
+      "others": "Se prefiere hidrocortisona en niños en crecimiento; en lactantes pequeños también se recomienda suplemento de sodio. La hidrocortisona sola no cubre adecuadamente la necesidad mineralocorticoide de esta forma perdedora de sal. Dexametasona crónica no es el glucocorticoide preferido en crecimiento y omitir fludrocortisona es inadecuado.",
+      "rationales": [
+        "Se prefiere hidrocortisona en niños en crecimiento; en lactantes pequeños también se recomienda suplemento de sodio.",
+        "La hidrocortisona sola no cubre adecuadamente la necesidad mineralocorticoide de esta forma perdedora de sal.",
+        "Las recomendaciones 4.1 y 4.3 incluyen hidrocortisona, fludrocortisona y sodio durante el periodo neonatal y lactancia temprana, con ajuste clínico y bioquímico.",
+        "Dexametasona crónica no es el glucocorticoide preferido en crecimiento y omitir fludrocortisona es inadecuado."
+      ],
+      "source": {
+        "title": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency",
+        "year": 2018,
+        "url": "https://www.endocrine.org/clinical-practice-guidelines/congenital-adrenal-hyperplasia-guideline-resources",
+        "locator": "4.1–4.3, mantenimiento de la forma clásica"
+      },
+      "reference": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency (2018), 4.1–4.3, mantenimiento de la forma clásica",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB081",
+      "section": "Endocrinología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Hiperplasia suprarrenal congénita",
+      "stem": "Escolar de 8 años con hiperplasia suprarrenal congénita clásica, tratado con hidrocortisona y fludrocortisona. Presenta infección respiratoria febril de 39 °C. Tolera vía oral, está bien perfundido y sin vómitos. La familia dispone de un plan escrito de dosis de estrés.",
+      "prompt": "¿Qué ajuste general corresponde según Endocrine Society 2018?",
+      "options": [
+        "Aumentar fludrocortisona y mantener hidrocortisona habitual",
+        "Duplicar ambos fármacos sistemáticamente durante cualquier infección",
+        "Mantener ambos sin cambios mientras no aparezca hipotensión",
+        "Incrementar hidrocortisona según el plan de estrés, sin aumentar rutinariamente fludrocortisona"
+      ],
+      "correct": 3,
+      "why": "Las recomendaciones 4.7 y 4.10 respaldan aumento de glucocorticoide en fiebre superior a 38.5 °C sin incrementar sistemáticamente mineralocorticoide; si no tolera vía oral requiere plan parenteral y valoración.",
+      "others": "El estrés febril incrementa la necesidad de glucocorticoide, no solo de mineralocorticoide. La guía recomienda incrementar glucocorticoide en enfermedad febril, no aumentar automáticamente mineralocorticoide. Esperar hipotensión puede permitir progresión hacia crisis suprarrenal; la fiebre descrita ya justifica el plan de estrés.",
+      "rationales": [
+        "El estrés febril incrementa la necesidad de glucocorticoide, no solo de mineralocorticoide.",
+        "La guía recomienda incrementar glucocorticoide en enfermedad febril, no aumentar automáticamente mineralocorticoide.",
+        "Esperar hipotensión puede permitir progresión hacia crisis suprarrenal; la fiebre descrita ya justifica el plan de estrés.",
+        "Las recomendaciones 4.7 y 4.10 respaldan aumento de glucocorticoide en fiebre superior a 38.5 °C sin incrementar sistemáticamente mineralocorticoide; si no tolera vía oral requiere plan parenteral y valoración."
+      ],
+      "source": {
+        "title": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency",
+        "year": 2018,
+        "url": "https://www.endocrine.org/clinical-practice-guidelines/congenital-adrenal-hyperplasia-guideline-resources",
+        "locator": "4.7–4.11, dosis de estrés y prevención de crisis"
+      },
+      "reference": "Endocrine Society. Congenital Adrenal Hyperplasia Due to Steroid 21-Hydroxylase Deficiency (2018), 4.7–4.11, dosis de estrés y prevención de crisis",
+      "caseId": null,
+      "critical": true,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB082",
+      "section": "Genética",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Síndrome de Down",
+      "stem": "Niña de 3 años y 8 meses con trisomía 21 confirmada. Sus padres niegan ronquido habitual, pausas respiratorias o somnolencia. No se ha realizado estudio de sueño previo; la exploración no muestra hipertrofia amigdalina evidente.",
+      "prompt": "Según la vigilancia de salud AAP 2022, ¿qué conducta es apropiada?",
+      "options": [
+        "Solicitar polisomnografía aunque el interrogatorio sea negativo",
+        "Diferir el estudio hasta que aparezca ronquido habitual",
+        "Solicitar únicamente oximetría nocturna como reemplazo definitivo de polisomnografía",
+        "Realizar polisomnografía solo si presenta obesidad o hipertrofia amigdalina"
+      ],
+      "correct": 0,
+      "why": "La historia negativa no excluye apnea obstructiva; la AAP recomienda estudio de sueño entre los 3 y 4 años para todos los niños con síndrome de Down.",
+      "others": "El interrogatorio familiar tiene correlación insuficiente con los resultados del estudio de sueño en esta población. La oximetría puede aportar información, pero no sustituye la polisomnografía recomendada para el tamizaje universal. El riesgo es inherente al síndrome y no se limita a quienes presentan esos factores.",
+      "rationales": [
+        "La historia negativa no excluye apnea obstructiva; la AAP recomienda estudio de sueño entre los 3 y 4 años para todos los niños con síndrome de Down.",
+        "El interrogatorio familiar tiene correlación insuficiente con los resultados del estudio de sueño en esta población.",
+        "La oximetría puede aportar información, pero no sustituye la polisomnografía recomendada para el tamizaje universal.",
+        "El riesgo es inherente al síndrome y no se limita a quienes presentan esos factores."
+      ],
+      "source": {
+        "title": "AAP. Health Supervision for Children and Adolescents With Down Syndrome",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-057010",
+        "locator": "Vigilancia de 1 a 5 años: apnea obstructiva del sueño"
+      },
+      "reference": "AAP. Health Supervision for Children and Adolescents With Down Syndrome (2022), Vigilancia de 1 a 5 años: apnea obstructiva del sueño",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB083",
+      "section": "Genética",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Síndrome de Down",
+      "stem": "Varón de 6 años con síndrome de Down que acude a control y desea iniciar actividades recreativas no competitivas. No presenta cervicalgia, cambios de marcha, debilidad, alteraciones esfinterianas ni signos de mielopatía. Exploración neurológica sin cambios respecto a controles anteriores.",
+      "prompt": "Conforme a AAP 2022, ¿qué enfoque de detección de inestabilidad atlantoaxoidea es apropiado en un niño asintomático?",
+      "options": [
+        "Radiografías cervicales de flexión y extensión anuales",
+        "Radiografía cervical lateral de tamizaje antes de cada anestesia",
+        "Vigilancia clínica de síntomas y precauciones cervicales; sin radiografías rutinarias",
+        "RM cervical anual como sustituto de radiografías"
+      ],
+      "correct": 2,
+      "why": "Se recomienda evaluación clínica dirigida y educar a cuidadores sobre síntomas de alarma; la imagen se indica ante síntomas o hallazgos pertinentes.",
+      "others": "La radiografía rutinaria en ausencia de síntomas no predice adecuadamente el desarrollo posterior de problemas cervicales. La recomendación enfatiza precauciones de posicionamiento durante procedimientos, no radiografías repetidas en asintomáticos. La RM anual de tamizaje no es una recomendación de vigilancia rutinaria.",
+      "rationales": [
+        "La radiografía rutinaria en ausencia de síntomas no predice adecuadamente el desarrollo posterior de problemas cervicales.",
+        "La recomendación enfatiza precauciones de posicionamiento durante procedimientos, no radiografías repetidas en asintomáticos.",
+        "Se recomienda evaluación clínica dirigida y educar a cuidadores sobre síntomas de alarma; la imagen se indica ante síntomas o hallazgos pertinentes.",
+        "La RM anual de tamizaje no es una recomendación de vigilancia rutinaria."
+      ],
+      "source": {
+        "title": "AAP. Health Supervision for Children and Adolescents With Down Syndrome",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-057010",
+        "locator": "Vigilancia cervical y evaluación de inestabilidad atlantoaxoidea"
+      },
+      "reference": "AAP. Health Supervision for Children and Adolescents With Down Syndrome (2022), Vigilancia cervical y evaluación de inestabilidad atlantoaxoidea",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB084",
+      "section": "Genética",
+      "type": "caso",
+      "skill": "Interpretación",
+      "topic": "Síndrome de Down",
+      "stem": "Niño de 4 años con trisomía 21, dieta restrictiva y cansancio leve. Biometría hemática: Hb 12.1 g/dL, VCM 94 fL. No ha recibido hierro. El pediatra desea completar la vigilancia anual de deficiencia de hierro sin basarse solo en el VCM.",
+      "prompt": "Según AAP 2022, ¿qué par de estudios complementa apropiadamente la biometría?",
+      "options": [
+        "Ferritina aislada sin considerar inflamación",
+        "Ferritina y proteína C reactiva",
+        "Reticulocitos y bilirrubina indirecta",
+        "Electroforesis de hemoglobina y haptoglobina"
+      ],
+      "correct": 1,
+      "why": "AAP recomienda desde el año de edad biometría con diferencial y ferritina más PCR, o hierro sérico más capacidad total de fijación de hierro.",
+      "others": "La ferritina puede elevarse con inflamación y ocultar deficiencia; interpretarla junto a PCR mejora el contexto. Estos estudios se orientan a hemólisis o respuesta medular, no son el par recomendado para tamizaje de hierro. La electroforesis y haptoglobina se reservan para preguntas diagnósticas específicas; no constituyen la vigilancia anual indicada.",
+      "rationales": [
+        "La ferritina puede elevarse con inflamación y ocultar deficiencia; interpretarla junto a PCR mejora el contexto.",
+        "AAP recomienda desde el año de edad biometría con diferencial y ferritina más PCR, o hierro sérico más capacidad total de fijación de hierro.",
+        "Estos estudios se orientan a hemólisis o respuesta medular, no son el par recomendado para tamizaje de hierro.",
+        "La electroforesis y haptoglobina se reservan para preguntas diagnósticas específicas; no constituyen la vigilancia anual indicada."
+      ],
+      "source": {
+        "title": "AAP. Health Supervision for Children and Adolescents With Down Syndrome",
+        "year": 2022,
+        "url": "https://doi.org/10.1542/peds.2022-057010",
+        "locator": "Vigilancia anual de anemia y deficiencia de hierro"
+      },
+      "reference": "AAP. Health Supervision for Children and Adolescents With Down Syndrome (2022), Vigilancia anual de anemia y deficiencia de hierro",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB085",
+      "section": "Oftalmología",
+      "type": "caso",
+      "skill": "Tratamiento",
+      "topic": "Ambliopía",
+      "stem": "Niño de 5 años con anisometropía corregida con lentes desde hace cuatro meses. Usa los lentes de manera constante. La agudeza visual corregida del ojo ambliope se estabilizó en 20/60 y la del otro ojo es 20/20. Sin patología orgánica. La familia prefiere iniciar oclusión bajo seguimiento oftalmológico.",
+      "prompt": "Según AAO PPP actualizada en 2024, ¿cuál es el esquema inicial de oclusión apropiado?",
+      "options": [
+        "Oclusión del ojo dominante durante todas las horas de vigilia",
+        "Oclusión del ojo dominante durante 6 horas diarias como requisito inicial",
+        "Oclusión del ojo dominante durante 2 horas diarias",
+        "Oclusión alternante de ambos ojos durante 2 horas diarias"
+      ],
+      "correct": 2,
+      "why": "Una agudeza de 20/60 corresponde a ambliopía moderada; después de corrección óptica, dos horas diarias constituyen una opción inicial respaldada.",
+      "others": "La oclusión a tiempo completo aumenta carga terapéutica sin beneficio demostrado frente a esquemas menos intensivos para ambliopía moderada. En ambliopía moderada, dos horas iniciales obtienen resultados comparables a seis; se puede intensificar si la respuesta es insuficiente. Ocluir alternadamente el ojo ambliope no cumple el objetivo de estimular su uso visual.",
+      "rationales": [
+        "La oclusión a tiempo completo aumenta carga terapéutica sin beneficio demostrado frente a esquemas menos intensivos para ambliopía moderada.",
+        "En ambliopía moderada, dos horas iniciales obtienen resultados comparables a seis; se puede intensificar si la respuesta es insuficiente.",
+        "Una agudeza de 20/60 corresponde a ambliopía moderada; después de corrección óptica, dos horas diarias constituyen una opción inicial respaldada.",
+        "Ocluir alternadamente el ojo ambliope no cumple el objetivo de estimular su uso visual."
+      ],
+      "source": {
+        "title": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024",
+        "year": 2024,
+        "url": "https://www.aao.org/education/preferred-practice-pattern/amblyopia-ppp-2022",
+        "locator": "Tratamiento: patching tras corrección refractiva"
+      },
+      "reference": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024 (2024), Tratamiento: patching tras corrección refractiva",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB086",
+      "section": "Oftalmología",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Ambliopía",
+      "stem": "Niña de 6 años con ambliopía anisometrópica y corrección óptica adecuada. Mejoró de 20/80 a 20/50 con oclusión del ojo dominante dos horas diarias. En dos controles sucesivos la agudeza permanece estable; adherencia confirmada, sin pérdida visual ni hallazgos orgánicos nuevos. Se desea continuar oclusión.",
+      "prompt": "¿Qué modificación es razonable para intentar mayor recuperación visual?",
+      "options": [
+        "Aumentar la oclusión del ojo dominante a seis horas diarias con seguimiento",
+        "Mantener indefinidamente dos horas sin nueva evaluación",
+        "Suspender lentes y mantener oclusión dos horas",
+        "Cambiar la oclusión al ojo ambliope para prevenir recaída"
+      ],
+      "correct": 0,
+      "why": "Ante meseta con adherencia, AAO contempla aumentar la oclusión de dos a seis horas; debe vigilarse la agudeza de ambos ojos.",
+      "others": "Continuar sin ajustar ni evaluar pierde una oportunidad terapéutica ante déficit residual y meseta confirmada. La corrección refractiva sigue siendo fundamental y no debe retirarse para intensificar la oclusión. Ocluir el ojo afectado contradice el objetivo del tratamiento.",
+      "rationales": [
+        "Ante meseta con adherencia, AAO contempla aumentar la oclusión de dos a seis horas; debe vigilarse la agudeza de ambos ojos.",
+        "Continuar sin ajustar ni evaluar pierde una oportunidad terapéutica ante déficit residual y meseta confirmada.",
+        "La corrección refractiva sigue siendo fundamental y no debe retirarse para intensificar la oclusión.",
+        "Ocluir el ojo afectado contradice el objetivo del tratamiento."
+      ],
+      "source": {
+        "title": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024",
+        "year": 2024,
+        "url": "https://www.aao.org/education/preferred-practice-pattern/amblyopia-ppp-2022",
+        "locator": "Seguimiento: ajuste del tratamiento ante respuesta insuficiente"
+      },
+      "reference": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024 (2024), Seguimiento: ajuste del tratamiento ante respuesta insuficiente",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
+    },
+    {
+      "id": "PB087",
+      "section": "Oftalmología",
+      "type": "caso",
+      "skill": "Seguimiento",
+      "topic": "Ambliopía",
+      "stem": "Niño de 7 años tratado con lentes y oclusión de seis horas al día por ambliopía. Ahora presenta agudeza visual simétrica 20/25 estable en controles sucesivos. El oftalmólogo considera retirar oclusión, manteniendo corrección óptica. Familia pregunta cómo reducir riesgo de recurrencia.",
+      "prompt": "Según AAO PPP actualizada en 2024, ¿qué estrategia es preferible?",
+      "options": [
+        "Suspender abruptamente oclusión y lentes",
+        "Suspender abruptamente la oclusión y dar de alta sin controles",
+        "Continuar seis horas indefinidamente aunque la visión sea estable",
+        "Reducir la oclusión a dos horas antes de suspenderla y vigilar recurrencia"
+      ],
+      "correct": 3,
+      "why": "La reducción gradual a dos horas antes de suspender y el seguimiento permiten disminuir el riesgo de recurrencia en este grupo.",
+      "others": "Retirar la corrección óptica puede reintroducir el estímulo visual desigual; no es parte de la retirada de oclusión descrita. En menores de ocho años tratados con seis o más horas, la retirada brusca se asocia con más recurrencia que reducción previa; se requieren controles. El tratamiento intensivo indefinido no es necesario una vez que se ha alcanzado una respuesta estable y se decide retirar.",
+      "rationales": [
+        "Retirar la corrección óptica puede reintroducir el estímulo visual desigual; no es parte de la retirada de oclusión descrita.",
+        "En menores de ocho años tratados con seis o más horas, la retirada brusca se asocia con más recurrencia que reducción previa; se requieren controles.",
+        "El tratamiento intensivo indefinido no es necesario una vez que se ha alcanzado una respuesta estable y se decide retirar.",
+        "La reducción gradual a dos horas antes de suspender y el seguimiento permiten disminuir el riesgo de recurrencia en este grupo."
+      ],
+      "source": {
+        "title": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024",
+        "year": 2024,
+        "url": "https://www.aao.org/education/preferred-practice-pattern/amblyopia-ppp-2022",
+        "locator": "Seguimiento: retirada de oclusión y recurrencia"
+      },
+      "reference": "AAO. Amblyopia Preferred Practice Pattern 2022, updated 2024 (2024), Seguimiento: retirada de oclusión y recurrencia",
+      "caseId": null,
+      "critical": false,
+      "level": "board",
+      "reviewStatus": "bibliografía contrastada con recomendación específica; revisión clínica independiente pendiente"
     }
   ]
 });
