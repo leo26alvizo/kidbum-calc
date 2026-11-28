@@ -1,4 +1,4 @@
-/* LEO MED ENARM 1.2 · Preguntas directas.
+/* KidBum ENARM 1.2 · Preguntas directas.
  * Original educational bank, not an official ENARM simulator or medical order.
  * All answers and history stay on this device. */
 (function(){

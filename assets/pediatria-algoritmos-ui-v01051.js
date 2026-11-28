@@ -1,4 +1,4 @@
-/* LEO MED Pediatría 0.10.51 · local-only accessible flow UI */
+/* KidBum Pediatría 0.10.51 · local-only accessible flow UI */
 (function(root){
 'use strict';
 const engine=root.KidBumPediatricAlgorithms;

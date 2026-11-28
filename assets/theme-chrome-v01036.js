@@ -1,5 +1,5 @@
-/* LEO MED v0.10.36: match Android browser/PWA system bars to the active
-   LEO MED theme. Never changes the light theme's original theme-color.
+/* KidBum v0.10.36: match Android browser/PWA system bars to the active
+   KidBum theme. Never changes the light theme's original theme-color.
    All clinical engines are unaffected. No storage, telemetry or network. */
 (function(){
  'use strict';

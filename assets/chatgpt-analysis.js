@@ -1,5 +1,5 @@
 'use strict';
-/* LEO MED: shared, privacy-first ChatGPT analysis handoff for standalone calculators.
+/* KidBum CALC: shared, privacy-first ChatGPT analysis handoff for standalone calculators.
    Clinical inputs stay in the browser. Only an explicitly copied, non-identifying
    result summary is placed on the clipboard; never use query-string transmissions. */
 (function(){

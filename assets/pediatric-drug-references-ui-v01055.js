@@ -1,4 +1,4 @@
-/* LEO MED · fichas farmacológicas pediátricas v0.10.55
+/* KidBum · fichas farmacológicas pediátricas v0.10.55
  * UI shared by algorithm outcomes and Pharma Pro detail; no treatment orders.
  */
 (function(root){

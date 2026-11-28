@@ -1,4 +1,4 @@
-/* LEO MED Urgencias/UCI 0.10.56 · adult-only accessible rapid clinical flow */
+/* KidBum Urgencias/UCI 0.10.56 · adult-only accessible rapid clinical flow */
 (function(root){
 'use strict';
 const engine=root.KidBumNeuroAlgorithms;

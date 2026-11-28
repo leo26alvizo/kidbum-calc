@@ -1,4 +1,4 @@
-/* LEO MED ENARM 1.1 · UI and local training logic · v0.10.66
+/* KidBum ENARM 1.1 · UI and local training logic · v0.10.66
  * Runs offline, no analytics/network requests, no patient data or prescriptions.
  * Timed mode is a PRACTICE timer, not an ENARM timing claim. */
 (function(){

@@ -11,7 +11,7 @@ const releaseSource=fs.readFileSync('release-check.js','utf8');
 const releaseMatch=releaseSource.match(/KidBumPublicRelease = '([0-9]+\.[0-9]+\.[0-9]+)'/);
 assert.ok(releaseMatch,'Public release marker must expose a semantic version');
 assert.ok(html.includes('<meta name="kidbum-app-version" content="'+releaseMatch[1]+'" />'),'Release version is defined centrally');
-assert.match(html,/Clínica y academia · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
+assert.match(html,/Clinical toolkit · v<span class="kidbum-version"><\/span>/,'Sidebar version comes from release metadata');
 assert.match(html,/LEO MED <b class="kidbum-version"><\/b>/,'Footer version comes from release metadata');
 assert.match(html,/LEO MED <strong>\$\{enc\(APP_VERSION\)\}<\/strong>/,'About version comes from release metadata');
 assert.ok(!html.includes('LEO MED 0.10.3'),'About must not show an obsolete release');
@@ -20,13 +20,13 @@ assert.match(html,/id="check-kidbum-update"/,'About offers an update action');
 assert.match(html,/window\.KidBumUpdater\?\.checkNow\(\)/,'Update action delegates to reliable update service');
 const swSource=fs.readFileSync('sw.js','utf8');
 const manifest=JSON.parse(fs.readFileSync('manifest.webmanifest','utf8'));
-assert.equal(manifest.icons[0].src,'leo-med-icon-192.png');
-assert.equal(manifest.icons[1].src,'leo-med-icon-512.png');
+assert.equal(manifest.icons[0].src,'kidbum-icon-192-v081.png');
+assert.equal(manifest.icons[1].src,'kidbum-icon-512-v081.png');
 for(const path of manifest.icons.map(x=>x.src)) {
  assert.ok(fs.existsSync(path),'Missing app icon: '+path);
  assert.ok(swSource.includes("'./"+path+"'"),'PWA must precache icon '+path);
 }
-assert.match(html,/leo-med-icon-192\.png/,'Browser icon must use LEO MED identity');
+assert.match(html,/kidbum-icon-192-v081\.png/,'Browser icon must be the original author image');
 assert.match(swSource,/const isShell=/,'App shell requests must be identified explicitly');
 assert.match(swSource,/const cached=await cache\.match\(key,\{ignoreSearch:isShell\}\)/,'Cached HTML and JS must be used before fetching');
 assert.match(swSource,/function fetchWithDeadline\(/,'Uncached network requests must have a timeout');
@@ -116,7 +116,7 @@ const t=[
 ['Invalid SBP',()=>assert.ok(calc('obshock',{hr:100,sbp:0}).error)],
 ['NEWS2 regression',()=>assert.equal(calc('news2',{rr:16,spo2:98,sbp:120,hr:70,temp:37,scale:'one',oxygen:'false',conscious:'alert'}).value,0)],
 ['Creator credit',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
-['Cover main title',()=>assert.ok(html.includes('<h1><span>LEO</span> MED</h1>'))],
+['Cover main title',()=>assert.ok(html.includes('atlas-hero-main">Medicina clínica y formación</span> <span class="atlas-hero-tagline">académica</span>'))],
 ['Manifest creator',()=>assert.ok(manifest.description.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez'))],
 ['Creator across page',()=>assert.equal(html.split('Teniente Pasante de Medicina Leonardo Alvizo Velázquez').length-1,6)],
 ['ChatGPT handoff',()=>assert.ok(html.includes("window.location.assign('https://chatgpt.com/')"))],
@@ -333,7 +333,7 @@ const neuroPhaseOneTests=[
  ['Glasgow 15 unmodified',()=>assert.equal(calc('gcs',{eye:'4',verbal:'5',motor:'6'}).value,15)],
  ['Glasgow NT no false total',()=>assert.equal(calc('gcs',{eye:'4',verbal:'NT',motor:'6'}).value,null)],
  ['No new cardiology calculators',()=>assert.equal(ctx.KidBumAdvanced.ids.length,3)],
- ['Original author and new icon',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez')&&html.includes('leo-med-icon-192.png'))]
+ ['Original author and icon remain',()=>assert.ok(html.includes('Teniente Pasante de Medicina Leonardo Alvizo Velázquez')&&html.includes('kidbum-icon-192-v081.png'))]
 ];
 const abcBase={age:68,sbp:155,dbp:90,feature:'weakness',duration:'min10to59',diabetes:'false',resolved:'true'};
 neuroPhaseOneTests.push(
@@ -527,7 +527,7 @@ const neurologyPhotoTests=[
  ['Neurology new image cached offline',()=>assert.ok(swSource.includes("'./assets/neurologia-portada.jpg'"))],
  ['Old Escalas Clínicas image retained',()=>assert.ok(html.includes("c==='Escalas clínicas'?'<img")&&html.includes('src="./assets/escalas-clinicas-portada.webp"'))],
  ['All 58 previous calculators preserved',()=>assert.equal((legacyCalculatorCount-ctx.KidBumCritical.ids.length-ctx.KidBumCriticalAdvanced.ids.length)-ctx.KidBumCardio.ids.length,58)],
- ['New icon selected',()=>assert.ok(html.includes('leo-med-icon-192.png'))]
+ ['Existing original icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...neurologyPhotoTests);
 
@@ -540,7 +540,7 @@ const cardiologyTests=[
  ['Wells DVT appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellsdvt',title:'Wells para TVP',category:'Cardiología'"))],
  ['Wells PE appears in Cardiología without duplication',()=>assert.ok(html.includes("id:'wellspe',title:'Wells para embolia pulmonar',category:'Cardiología'"))],
  ['Original cardiology photograph remains',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"'))],
- ['New app icon selected',()=>assert.ok(html.includes('leo-med-icon-192.png'))],
+ ['Existing original app icon remains',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))],
  ['Historical PCE 2013 reference visible',()=>assert.ok(html.includes('https://pmc.ncbi.nlm.nih.gov/articles/PMC4700825/'))],
  ['Current PREVENT 2026 replacement disclosed',()=>assert.ok(html.includes('https://professional.heart.org/en/science-news/2026-guideline-on-the-management-of-dyslipidemia/top-things-to-know'))]
 ];
@@ -607,7 +607,7 @@ const phase1=[
 ['Mobile Inicio replaces Guardia navigation',()=>assert.ok(html.includes('data-mobile-nav="home"')&&!html.includes('data-mobile-nav="guard"'))],
 ['Guardia route',()=>assert.ok(html.includes("if(screen==='guard'){renderGuard();return;}"))],
 ['Guardia links',()=>assert.ok(html.includes('button.dataset.guardOpen'))],
-['Original icon',()=>assert.ok(html.includes('leo-med-icon-192.png'))]
+['Original icon',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 const pf={pao2:80,fio2:40,peep:'yes'};
 phase1.push(
@@ -690,7 +690,7 @@ const urgenciasOriginalTests=[
  ['Other clinical feature photos preserved',()=>assert.ok(html.includes('src="./assets/cardiologia-portada.jpg"')&&html.includes('src="./assets/neurologia-portada.jpg"'))],
  ['Previous 68 calculators preserved',()=>assert.equal(legacyCalculatorCount,68)],
  ['Modo Guardia retained in desktop sidebar',()=>assert.ok(html.includes("['guard','✚','Modo Guardia']")&&html.includes("if(screen==='guard'){renderGuard();return;}"))],
- ['New app icon selected',()=>assert.ok(html.includes('leo-med-icon-192.png'))]
+ ['Original app icon retained',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...urgenciasOriginalTests);
 
@@ -728,13 +728,13 @@ const appleSupportTests=[
  ['Apple standalone mode meta',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-capable" content="yes" />'))],
  ['Apple standalone title',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-title" content="LEO MED" />'))],
  ['Apple safe status bar',()=>assert.ok(html.includes('<meta name="apple-mobile-web-app-status-bar-style" content="default" />'))],
- ['New iPhone home icon selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./leo-med-icon-192.png" />'))],
+ ['Original iPhone home icon still selected',()=>assert.ok(html.includes('<link rel="apple-touch-icon" sizes="192x192" href="./kidbum-icon-192-v081.png" />'))],
  ['Manifest standalone preserved',()=>assert.ok(manifest.display==='standalone')],
  ['iPhone install guide in About page',()=>assert.ok(html.includes('Instalar en iPhone o iPad (Safari)')&&html.includes('Agregar a Inicio'))],
  ['iOS app opened via Safari outside WhatsApp',()=>assert.ok(html.includes('navegador interno de WhatsApp'))],
  ['iOS safe area preserved',()=>assert.ok(html.includes('env(safe-area-inset-bottom)'))],
  ['No duplicate clinical tools',()=>assert.equal(legacyCalculatorCount,68)],
- ['Android clinical icon updated',()=>assert.ok(html.includes('leo-med-icon-192.png'))]
+ ['Android clinical icon preserved',()=>assert.ok(html.includes('kidbum-icon-192-v081.png'))]
 ];
 t.push(...appleSupportTests);
 let errors=0;for(const [name,fn] of t){try{fn();console.log('PASS',name)}catch(e){errors++;console.error('FAIL',name,e.message)}}
@@ -796,6 +796,3 @@ if(errors){console.error('Failed:',errors);process.exitCode=1;}else console.log(
  console.log('PASS 15 ophthalmology tools: signed inputs, boundary cases, clinical guards, original cover hash');
 }
 
-
-// LEO MED rebrand: preserve installation identity and original artwork.
-assert.equal(manifest.id,'./index.html');assert.equal(manifest.start_url,'./index.html');assert.equal(manifest.scope,'./');assert.equal(manifest.short_name,'LEO MED');assert.ok(html.includes('Precisión clínica. Excelencia académica.'));assert.ok(html.includes('assets/kidbum-portada-emm.png'));assert.ok(fs.existsSync('kidbum-icon-192-v081.png'));assert.ok(fs.existsSync('kidbum-icon-512-v081.png'));assert.ok(html.includes('class="lm-hubs"'));for(const [file,n] of [['leo-med-icon-192.png',192],['leo-med-icon-512.png',512]]){const b=fs.readFileSync(file);assert.equal(b.readUInt32BE(16),n);assert.equal(b.readUInt32BE(20),n);} 

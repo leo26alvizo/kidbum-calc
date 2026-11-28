@@ -279,7 +279,7 @@ function drawSources(){
 }
 function openTool(name){tool=name;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.toggle('active',x.dataset.tool===name));if(name==='audit')drawAudit();else if(name==='interactions')drawInteractions();else drawSources();}
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>openTool(b.dataset.tool));
-/* One shared theme preference across ALL LEO MED modules.
+/* One shared theme preference across ALL KidBum modules.
    Read the legacy Pharma preference only when no global choice exists. */
 const theme=$('theme');
 function applyPharmaTheme(dark){

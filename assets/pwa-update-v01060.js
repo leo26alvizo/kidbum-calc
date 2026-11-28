@@ -1,4 +1,4 @@
-/* LEO MED PWA update diagnostics. No personal data, clinical values or analytics.
+/* KidBum PWA update diagnostics. No personal data, clinical values or analytics.
    An update is ready only after the browser activates a complete service worker. */
 (function(root,factory){
  'use strict';
@@ -7,7 +7,7 @@
  if(typeof module==='object'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis,function(root){
  'use strict';
- const VERSION='0.12.0';
+ const VERSION='0.12.1';
  let seenRegistration=null,initiallyControlled=false,started=false,lastMessage='';
  const $=id=>root.document?.getElementById(id);
  function parseRelease(text){
