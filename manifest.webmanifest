@@ -1,7 +1,7 @@
 {
   "name": "LEO MED — Clínica y Academia",
   "short_name": "LEO MED",
-  "description": "LEO MED · Precisión clínica. Excelencia académica. Herramientas clínicas y formación médica.",
+  "description": "LEO MED · Precisión clínica. Excelencia académica. Herramientas clínicas y formación médica. Creada por Teniente Pasante de Medicina Leonardo Alvizo Velázquez.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
